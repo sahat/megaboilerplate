@@ -27,3 +27,64 @@ label span + i {
   background-color: transparent;
   border-color: #563d7c;
 }
+
+.bd-booticon {
+  display: block;
+  width: 9rem;
+  height: 9rem;
+  font-size: 6.5rem;
+  line-height: 9rem;
+  color: #fff;
+  text-align: center;
+  cursor: default;
+  background-color: #563d7c;
+  border-radius: 15%;
+}
+
+.bd-booticon.outline {
+  background-color: transparent;
+  border: 1px solid #cdbfe3;
+}
+
+.hero .bd-booticon {
+  margin: 0 auto 2rem;
+  color: #cdbfe3;
+  border-color: #cdbfe3;
+}
+
+/*Carbon Ads*/
+.carbon-container,
+#carbonads {
+  max-width: 400px;
+  height: 120px;
+  background-color: rgba(0, 0, 0, 0.25);
+  padding: 10px;
+  box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  margin: 30px auto 20px;
+}
+
+.carbon-container {
+  height: inherit;
+}
+
+.carbon-img {
+  float: left;
+  margin-right: 15px;
+}
+
+.carbon-text {
+  display: block;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #fff !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.25), 0 0 1px rgba(0, 0, 0, 0.5);
+  text-decoration: none !important;
+}
+
+.carbon-poweredby {
+  font-size: 75%;
+  color: rgba(255, 255, 255, 0.85) !important;
+  text-decoration: none !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.25), 0 0 1px rgba(0, 0, 0, 0.5);
+}
