@@ -3,7 +3,7 @@ import React from 'react';
 class Banner extends React.Component {
 
   componentDidMount() {
-    this.loadCarbonAds();
+    //this.loadCarbonAds();
   }
 
   loadCarbonAds() {
