@@ -5,8 +5,6 @@ var fs = require('fs-extra');
 var shortid = require('shortid');
 var archiver = require('archiver');
 var jsonfile = require('jsonfile');
-var del = require('del');
-var mkdirp = require('mkdirp');
 var commentParser = require('comment-parser');
 var Promise = require('bluebird');
 var path = require('path');
@@ -15,6 +13,8 @@ var bodyParser = require('body-parser');
 var webpack = require('webpack');
 var config = require('./webpack.config.dev');
 
+var remove = Promise.promisify(fs.remove);
+var mkdirs = Promise.promisify(fs.mkdirs);
 var copy = Promise.promisify(fs.copy);
 var readJson = Promise.promisify(fs.readJson);
 var writeJson = Promise.promisify(fs.writeJson);
@@ -35,10 +35,10 @@ app.use(require('webpack-hot-middleware')(compiler));
 
 
 app.post('/download', (req, res) => {
+  let framework = req.body.framework;
+  let appName = req.body.appName;
 
   prepare().then((uid) => {
-    let framework = req.body.framework;
-    let appName = req.body.appName;
     generateFramework(framework, appName, uid).then(() => {
 
     });
@@ -66,13 +66,12 @@ function generateFramework(framework, appName, uid) {
     switch (framework) {
       case 'express':
         let src = path.join(__dirname, 'modules', 'express');
-
         copy(src, dest).then(() => {
           let packageJson = path.join(dest, 'package.json');
           readJson(packageJson).then((packageObj) => {
             packageObj.name = appName;
             writeJson(packageJson, packageObj, { spaces: 2 }).then(() => {
-              console.log('done');
+              resolve();
             });
           });
         });
@@ -146,17 +145,25 @@ function generateZip(req, res) {
   });
 }
 
-function cleanup() {
-  del(['build/**/*']);
+function cleanup(uid) {
+  return new Promise((resolve, reject) => {
+    let location = path.join(__dirname, 'build', uid);
+    remove(location).then(() => {
+      resolve();
+    }).catch(() => {
+      reject();
+    });
+  });
 }
 
 function prepare() {
   return new Promise((resolve, reject) => {
     let uid = shortid.generate();
     let location = path.join(__dirname, 'build', uid);
-    mkdirp(location, (err) => {
-      if (err) { reject(err); }
-      else { resolve(uid); }
+    mkdirs(location).then(() => {
+      resolve(uid);
+    }).catch((err) => {
+      reject(err);
     });
   });
 }
