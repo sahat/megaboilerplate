@@ -43,7 +43,11 @@ app.post('/download', (req, res) => {
 
   prepare().then((uid) => {
     return generateFramework(framework, appName, uid).then(() => {
-      return generateTemplateEngine(templateEngine, framework, uid)
+      return generateTemplateEngine(templateEngine, framework, uid).then(() => {
+        return generateCssFramework().then(() => {
+
+        })
+      })
     });
   });
 
@@ -106,31 +110,7 @@ function generateTemplateEngine(templateEngine, framework, uid) {
   return new Promise(function(resolve, reject) {
     switch (templateEngine) {
       case 'jade':
-        if (framework === 'express') {
-          let jadeExpressModule = path.join(__dirname, 'modules', 'template-engine', 'jade-express.js');
-          let dest = path.join(__dirname, 'build', uid);
-          let appFile = path.join(dest, 'app.js');
-
-          return readFile(jadeExpressModule).then((data) => {
-            let jadeExpressModuleData = data.toString().split('\n').filter(Boolean);
-            return readFile(appFile).then((appFileData) => {
-              var array = appFileData.toString().split('\n');
-              array.forEach((element, index) => {
-                if (array[index].includes('EXPRESS_TEMPLATE_ENGINE_CONFIG')) {
-                  array[index] = jadeExpressModuleData.join('\n');
-                }
-              });
-              return writeFile(appFile, array.join('\n')).then(() => {
-                resolve();
-              });
-            });
-          });
-
-        } else if (framework === 'hapi') {
-
-        } else if (framework === 'sails') {
-
-        }
+        return generateJadeTemplateEngine(framework, uid);
         break;
       case 'handlebars':
         break;
@@ -144,6 +124,57 @@ function generateTemplateEngine(templateEngine, framework, uid) {
     }
   });
 }
+
+
+
+
+function generateJadeTemplateEngine(framework, uid) {
+  return new Promise((resolve, reject) => {
+    if (framework === 'express') {
+      let jadeExpress = path.join(__dirname, 'modules', 'template-engine', 'jade-express.js');
+      let dest = path.join(__dirname, 'build', uid);
+      let appFile = path.join(dest, 'app.js');
+
+      return Promise.join(readFile(jadeExpress), readFile(appFile), (jadeExpressData, appFileData) => {
+        appFileData = replaceCode(appFileData, 'EXPRESS_TEMPLATE_ENGINE_CONFIG', jadeExpressData);
+        return writeFile(appFile, appFileData).then(() => {
+          resolve();
+        });
+      });
+    } else if (framework === 'hapi') {
+
+    } else if (framework === 'sails') {
+
+    }
+  });
+}
+
+/**
+ *
+ * @param src {buffer} - where to replace
+ * @param subStr {string} - what to replace
+ * @param newSubStr {string} - replace it with this
+ * @returns {string}
+ */
+function replaceCode(src, subStr, newSubStr) {
+  let array = src.toString().split('\n');
+  array.forEach((element, index) => {
+    if (array[index].includes(subStr)) {
+      // Remove trailing blank lines
+      array[index] = newSubStr.toString().split('\n').filter(Boolean).join('\n');
+    }
+  });
+  return array.join('\n');
+}
+
+function generateCssFramework() {
+  return new Promise((resolve, reject) => {
+
+  });
+}
+
+
+
 
 function generateZip(req, res) {
   return new Promise(function(resolve, reject) {
