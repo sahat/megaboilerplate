@@ -62,17 +62,30 @@ app.listen(3000, 'localhost', function(err) {
 function generateFramework(framework, appName, uid) {
   return new Promise((resolve, reject) => {
     let dest = path.join(__dirname, 'build', uid);
-
     switch (framework) {
       case 'express':
         let src = path.join(__dirname, 'modules', 'express');
         copy(src, dest).then(() => {
-          let packageJson = path.join(dest, 'package.json');
-          readJson(packageJson).then((packageObj) => {
-            packageObj.name = appName;
-            writeJson(packageJson, packageObj, { spaces: 2 }).then(() => {
-              resolve();
+          let updatePackageJson = new Promise((resolve, reject) => {
+            let packageJson = path.join(dest, 'package.json');
+            readJson(packageJson).then((packageObj) => {
+              packageObj.name = appName;
+              writeJson(packageJson, packageObj, { spaces: 2 }).then(() => {
+                resolve();
+              });
             });
+          });
+          var createPublicDirs = new Promise((resolve, reject) => {
+            mkdirs(path.join(dest, 'public', 'images')).then(() => {
+              mkdirs(path.join(dest, 'public', 'javascripts')).then(() => {
+                mkdirs(path.join(dest, 'public', 'stylesheets')).then(() => {
+                  resolve();
+                });
+              });
+            })
+          });
+          Promise.all([updatePackageJson, createPublicDirs]).then(() => {
+            resolve();
           });
         });
         break;
