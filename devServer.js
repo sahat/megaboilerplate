@@ -13,6 +13,7 @@ var bodyParser = require('body-parser');
 var webpack = require('webpack');
 var config = require('./webpack.config.dev');
 
+var readFile = Promise.promisify(fs.readFile);
 var remove = Promise.promisify(fs.remove);
 var mkdirs = Promise.promisify(fs.mkdirs);
 var copy = Promise.promisify(fs.copy);
@@ -37,10 +38,11 @@ app.use(require('webpack-hot-middleware')(compiler));
 app.post('/download', (req, res) => {
   let framework = req.body.framework;
   let appName = req.body.appName;
+  let templateEngine = req.body.templateEngine;
 
   prepare().then((uid) => {
-    generateFramework(framework, appName, uid).then(() => {
-
+    return generateFramework(framework, appName, uid).then(() => {
+      return generateTemplateEngine(templateEngine, framework, uid)
     });
   });
 
@@ -65,26 +67,26 @@ function generateFramework(framework, appName, uid) {
     switch (framework) {
       case 'express':
         let src = path.join(__dirname, 'modules', 'express');
-        copy(src, dest).then(() => {
+        return copy(src, dest).then(() => {
           let updatePackageJson = new Promise((resolve, reject) => {
             let packageJson = path.join(dest, 'package.json');
-            readJson(packageJson).then((packageObj) => {
+            return readJson(packageJson).then((packageObj) => {
               packageObj.name = appName;
-              writeJson(packageJson, packageObj, { spaces: 2 }).then(() => {
+              return writeJson(packageJson, packageObj, { spaces: 2 }).then(() => {
                 resolve();
               });
             });
           });
           var createPublicDirs = new Promise((resolve, reject) => {
-            mkdirs(path.join(dest, 'public', 'images')).then(() => {
-              mkdirs(path.join(dest, 'public', 'javascripts')).then(() => {
-                mkdirs(path.join(dest, 'public', 'stylesheets')).then(() => {
+            return mkdirs(path.join(dest, 'public', 'images')).then(() => {
+              return mkdirs(path.join(dest, 'public', 'javascripts')).then(() => {
+                return mkdirs(path.join(dest, 'public', 'stylesheets')).then(() => {
                   resolve();
                 });
               });
             })
           });
-          Promise.all([updatePackageJson, createPublicDirs]).then(() => {
+          return Promise.all([updatePackageJson, createPublicDirs]).then(() => {
             resolve();
           });
         });
@@ -99,20 +101,25 @@ function generateFramework(framework, appName, uid) {
   });
 }
 
-function generateTemplateEngine(params) {
+function generateTemplateEngine(templateEngine, framework, uid) {
   return new Promise(function(resolve, reject) {
-    switch (params.templateEngine) {
+    switch (templateEngine) {
       case 'jade':
-        if (params.framework === 'express') {
-          fs.readFile(__dirname + '/modules/express/app.js', function (err, data) {
-            if (err) throw err;
+        if (framework === 'express') {
+          let dest = path.join(__dirname, 'build', uid);
+          let appFile = path.join(dest, 'app.js');
+          readFile(appFile).then((data) => {
             console.log(data);
           });
           // open app.js
           // parse comments
           // open template-engine/jade
-          var parsed = commentParser.parse(data);
-          console.log(parsed);
+          //var parsed = commentParser.parse(data);
+          //console.log(parsed);
+        } else if (framework === 'hapi') {
+
+        } else if (framework === 'sails') {
+
         }
         break;
       case 'handlebars':
@@ -120,9 +127,10 @@ function generateTemplateEngine(params) {
       case 'swig':
         break;
       case 'none':
+        resolve();
         break;
       default:
-        reject('Unsupported template engine');
+        reject('Unsupported Template Engine');
     }
   });
 }
@@ -173,7 +181,7 @@ function prepare() {
   return new Promise((resolve, reject) => {
     let uid = shortid.generate();
     let location = path.join(__dirname, 'build', uid);
-    mkdirs(location).then(() => {
+    return mkdirs(location).then(() => {
       resolve(uid);
     }).catch((err) => {
       reject(err);
