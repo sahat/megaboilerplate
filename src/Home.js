@@ -4,6 +4,7 @@ let haikunate = require('haikunator');
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {clone} from 'lodash';
 
 class Home extends React.Component {
   constructor(props) {
@@ -40,10 +41,13 @@ class Home extends React.Component {
     //  })
     //});
 
+    let data = clone(this.state);
+    data.appName = this.state.appName || haikunate({ tokenLength: 0 });
+
     $.ajax({
         url: '/download',
         method: 'POST',
-        data: this.state
+        data: data
       })
       .success((response, status, request) => {
         $(downloadBtn).removeAttr('disabled');
@@ -65,7 +69,7 @@ class Home extends React.Component {
 
   generateAppName() {
     let state = this.state;
-    state.appName = haikunate({tokenLength: 0});
+    state.appName = haikunate({ tokenLength: 0 });
     this.setState(state);
 
     this.refs.appNameInput.focus();
