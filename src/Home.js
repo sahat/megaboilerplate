@@ -4,7 +4,6 @@ let haikunate = require('haikunator');
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import generateZip from './utils/generateZip';
 
 class Home extends React.Component {
   constructor(props) {
@@ -21,7 +20,12 @@ class Home extends React.Component {
 
   clickDownload() {
     let downloadBtn = this.refs.downloadBtn;
-    $(downloadBtn).attr('disabled', 'disabled');
+    //$(downloadBtn).attr('disabled', 'disabled');
+
+
+    // Google Analytics event
+    //ga("send","event","Customize","Download","Customize and Download")
+
 
     //$.when(
     //  generateCSS(preamble),
@@ -146,14 +150,18 @@ class Home extends React.Component {
         <br/>
       
 
-        <label for="appNameInput">App Name (optional)</label>
-        <div className="input-group">
-          <input type="text" ref="appNameInput" className="form-control" value={this.state.appName} placeholder="App Name" autoFocus />
+        <div className="row">
+          <div className="col-sm-6">
+            <label htmlFor="appNameInput">App Name (optional)</label>
+            <div className="input-group">
+              <input type="text" ref="appNameInput" className="form-control" value={this.state.appName} placeholder="App Name" autoFocus />
           <span className="input-group-btn">
             <button className="btn btn-primary" type="button" onClick={this.generateAppName}>Generate</button>
           </span>
+            </div>
+            <div className="help-block">Leave blank and we'll choose one for you.</div>
+          </div>
         </div>
-        <div className="help-block">Leave blank and we'll choose one for you.</div>
 
       </div>
     ) : null;
@@ -161,6 +169,9 @@ class Home extends React.Component {
     let templateEngine = this.state.framework ? (
       <div className="fadeIn animated">
         <h3>Template Engine</h3>
+        <label className="radio-inline">
+          <input type="radio" name="templateEngineRadios" value="none" onChange={this.handleChange} /> None
+        </label>
         <label className="radio-inline">
           <input type="radio" name="templateEngineRadios" value="jade" onChange={this.handleChange} /> Jade
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." />
@@ -173,15 +184,17 @@ class Home extends React.Component {
           <input type="radio" name="templateEngineRadios" value="swig" onChange={this.handleChange} /> Swig
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." />
         </label>
-        <label className="radio-inline">
-          <input type="radio" name="templateEngineRadios" value="none" onChange={this.handleChange} /> None
-        </label>
       </div>
     ) : null;
 
     let cssFramework = this.state.templateEngine ? (
       <div className="fadeIn animated">
         <h3>CSS Framework</h3>
+        <div className="radio">
+          <label>
+            <input type="radio" name="cssFrameworkRadios" value="none" onChange={this.handleChange} /> None
+          </label>
+        </div>
         <div className="radio">
           <label>
             <input type="radio" name="cssFrameworkRadios" value="bootstrapCss" onChange={this.handleChange} /> Bootstrap (CSS)
@@ -214,7 +227,8 @@ class Home extends React.Component {
         </div>
         <div className="radio">
           <label>
-            <input type="radio" name="cssFrameworkRadios" value="none" onChange={this.handleChange} /> None
+            <input type="radio" name="cssFrameworkRadios" value="bourbonNeat" onChange={this.handleChange} /> Bourbon + Neat (Sass)
+            <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." />
           </label>
         </div>
       </div>
@@ -223,6 +237,9 @@ class Home extends React.Component {
     let cssPreprocessor = this.state.cssFramework === 'none' ? (
       <div className="fadeIn animated">
         <h3>CSS Preprocessor</h3>
+        <label className="radio-inline">
+          <input type="radio" name="cssPreprocessorRadios" value="none" onChange={this.handleChange} /> None
+        </label>
         <label className="radio-inline">
           <input type="radio" name="cssPreprocessorRadios" value="css" onChange={this.handleChange} /> CSS
         </label>
@@ -235,15 +252,15 @@ class Home extends React.Component {
         <label className="radio-inline">
           <input type="radio" name="cssPreprocessorRadios" value="postcss" onChange={this.handleChange} /> PostCSS
         </label>
-        <label className="radio-inline">
-          <input type="radio" name="cssPreprocessorRadios" value="none" onChange={this.handleChange} /> None
-        </label>
       </div>
     ) : null;
 
     let database = this.state.templateEngine ? (
       <div className="fadeIn animated">
         <h3>Database</h3>
+        <label className="radio-inline">
+          <input type="radio" name="databaseRadios" value="none" onChange={this.handleChange} /> None
+        </label>
         <label className="radio-inline">
           <input type="radio" name="databaseRadios" value="mongodb" onChange={this.handleChange} /> MongoDB
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
@@ -259,9 +276,6 @@ class Home extends React.Component {
         <label className="radio-inline">
           <input type="radio" name="databaseRadios" value="rethinkdb" onChange={this.handleChange} /> RethinkDB
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
-        </label>
-        <label className="radio-inline">
-          <input type="radio" name="databaseRadios" value="none" onChange={this.handleChange} /> None
         </label>
       </div>
     ) : null;
