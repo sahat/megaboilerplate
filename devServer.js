@@ -5,15 +5,16 @@ var fs = require('fs-extra');
 var shortid = require('shortid');
 var archiver = require('archiver');
 var jsonfile = require('jsonfile');
-var commentParser = require('comment-parser');
 var Promise = require('bluebird');
 var path = require('path');
 var express = require('express');
 var bodyParser = require('body-parser');
 var webpack = require('webpack');
 var config = require('./webpack.config.dev');
+var readline = require('readline');
 
 var readFile = Promise.promisify(fs.readFile);
+var writeFile = Promise.promisify(fs.writeFile);
 var remove = Promise.promisify(fs.remove);
 var mkdirs = Promise.promisify(fs.mkdirs);
 var copy = Promise.promisify(fs.copy);
@@ -106,16 +107,25 @@ function generateTemplateEngine(templateEngine, framework, uid) {
     switch (templateEngine) {
       case 'jade':
         if (framework === 'express') {
+          let jadeExpressModule = path.join(__dirname, 'modules', 'template-engine', 'jade-express.js');
           let dest = path.join(__dirname, 'build', uid);
           let appFile = path.join(dest, 'app.js');
-          readFile(appFile).then((data) => {
-            console.log(data);
+
+          return readFile(jadeExpressModule).then((data) => {
+            let jadeExpressModuleData = data.toString().split('\n').filter(Boolean);
+            return readFile(appFile).then((appFileData) => {
+              var array = appFileData.toString().split('\n');
+              array.forEach((element, index) => {
+                if (array[index].includes('EXPRESS_TEMPLATE_ENGINE_CONFIG')) {
+                  array[index] = jadeExpressModuleData.join('\n');
+                }
+              });
+              return writeFile(appFile, array.join('\n')).then(() => {
+                resolve();
+              });
+            });
           });
-          // open app.js
-          // parse comments
-          // open template-engine/jade
-          //var parsed = commentParser.parse(data);
-          //console.log(parsed);
+
         } else if (framework === 'hapi') {
 
         } else if (framework === 'sails') {
