@@ -6,9 +6,7 @@ var bodyParser = require('body-parser');
 
 var app = express();
 
-/** Express Template Engine
- * @type templateEngineSetup
- */
+// EXPRESS_TEMPLATE_ENGINE_CONFIG
 
 app.set('port', process.env.PORT || 3000);
 app.use(logger('dev'));
