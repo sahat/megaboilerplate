@@ -69,10 +69,16 @@ app.listen(3000, 'localhost', function(err) {
 function generateFramework(framework, appName, uid) {
   return new Promise((resolve, reject) => {
     let dest = path.join(__dirname, 'build', uid);
+
     switch (framework) {
       case 'express':
-        let src = path.join(__dirname, 'modules', 'express');
-        return copy(src, dest).then(() => {
+        let expressModule = path.join(__dirname, 'modules', 'express');
+
+        return copy(expressModule, dest).then(() => {
+          let images = path.join(dest, 'public', 'images');
+          let javascripts = path.join(dest, 'public', 'javascripts');
+          let stylesheets = path.join(dest, 'public', 'stylesheets');
+
           let updatePackageJson = new Promise((resolve, reject) => {
             let packageJson = path.join(dest, 'package.json');
             return readJson(packageJson).then((packageObj) => {
@@ -82,16 +88,12 @@ function generateFramework(framework, appName, uid) {
               });
             });
           });
-          var createPublicDirs = new Promise((resolve, reject) => {
-            return mkdirs(path.join(dest, 'public', 'images')).then(() => {
-              return mkdirs(path.join(dest, 'public', 'javascripts')).then(() => {
-                return mkdirs(path.join(dest, 'public', 'stylesheets')).then(() => {
-                  resolve();
-                });
-              });
-            })
-          });
-          return Promise.all([updatePackageJson, createPublicDirs]).then(() => {
+
+          return Promise.all([
+            updatePackageJson,
+            mkdirs(images),
+            mkdirs(javascripts),
+            mkdirs(stylesheets)]).then(() => {
             resolve();
           });
         });
