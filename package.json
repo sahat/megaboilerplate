@@ -55,6 +55,7 @@
     "fs-extra": "^0.26.2",
     "haikunator": "^1.0.1",
     "jsonfile": "^2.2.3",
+    "lodash": "^3.10.1",
     "react": "^0.14.0",
     "react-dom": "^0.14.3",
     "shortid": "^2.2.4"
