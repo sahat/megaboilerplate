@@ -125,23 +125,18 @@ function generateTemplateEngine(templateEngine, framework, uid) {
 
 
 function cleanupTemplateEngineString(framework, uid) {
-  return new Promise((resolve, reject) => {
-    if (framework === 'express') {
-      let dest = path.join(__dirname, 'build', uid);
-      let appFile = path.join(dest, 'app.js');
+  if (framework === 'express') {
+    let appFile = path.join(__dirname, 'build', uid, 'app.js');
 
-      return readFile(appFile).then((appFileData) => {
-        appFileData = removeCode(appFileData, 'EXPRESS_TEMPLATE_ENGINE_CONFIG');
-        return writeFile(appFile, appFileData).then(() => {
-          resolve();
-        });
-      });
-    } else if (framework === 'hapi') {
-      // TODO
-    } else if (framework === 'sails') {
-      // TODO
-    }
-  });
+    return readFile(appFile).then((appFileData) => {
+      appFileData = removeCode(appFileData, 'EXPRESS_TEMPLATE_ENGINE_CONFIG');
+      return writeFile(appFile, appFileData);
+    });
+  } else if (framework === 'hapi') {
+    // TODO
+  } else if (framework === 'sails') {
+    // TODO
+  }
 }
 
 function cleanupCssFrameworkString(templateEngine, uid) {
