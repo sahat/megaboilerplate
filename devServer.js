@@ -45,7 +45,6 @@ app.post('/download', (req, res) => {
   prepare().then((uid) => {
     return generateFramework(framework, appName, uid).then(() => {
       return generateTemplateEngine(templateEngine, framework, uid).then(() => {
-        console.log('yo')
         return generateCssFramework(cssFramework, uid).then(() => {
 
         })
@@ -174,8 +173,9 @@ function generateCssFramework(cssFramework, uid) {
       let bootstrapDir = path.join(__dirname, 'modules', 'css-framework', 'bootstrap');
       let publicDir = path.join(__dirname, 'build', uid, 'public');
       return Promise.all([
-        copy(path.join(bootstrapDir, 'css', 'bootstrap.css'), path.join(publicDir, 'stylesheets', 'bootstrap.css')),
-        copy(path.join(bootstrapDir, 'css', 'bootstrap.min.css'), path.join(publicDir, 'stylesheets', 'bootstrap.min.css')),
+        copy(path.join(bootstrapDir, 'main.css'), path.join(publicDir, 'stylesheets', 'main.css')),
+        copy(path.join(bootstrapDir, 'css', 'bootstrap.css'), path.join(publicDir, 'stylesheets', 'vendors', 'bootstrap.css')),
+        copy(path.join(bootstrapDir, 'css', 'bootstrap.min.css'), path.join(publicDir, 'stylesheets', 'vendors', 'bootstrap.min.css')),
         copy(path.join(bootstrapDir, 'js', 'bootstrap.js'), path.join(publicDir, 'javascripts', 'bootstrap.js')),
         copy(path.join(bootstrapDir, 'js', 'bootstrap.min.js'), path.join(publicDir, 'javascripts', 'bootstrap.min.js')),
         copy(path.join(bootstrapDir, 'fonts'), path.join(publicDir, 'fonts'))
@@ -194,7 +194,7 @@ function generateCssFramework(cssFramework, uid) {
     case 'none':
       break;
     default:
-      reject('Unsupported CSS Framework');
+      console.log('Unsupported CSS Framework');
   }
 }
 
