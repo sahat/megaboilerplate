@@ -191,9 +191,16 @@ class Home extends React.Component {
       </div>
     ) : null;
 
+    let cssFrameworkNoTemplateEngineAlert = ((this.state.cssFramework && this.state.cssFramework !== 'none') && this.state.templateEngine === 'none') ? (
+      <div className="alert alert-info fadeIn animated">
+        <strong>Important!</strong> You have not selected a template engine. CSS Framework files are still going to be generated, but you will be responsible for importing these files manually.
+      </div>
+    ) : null;
+
     let cssFramework = this.state.templateEngine ? (
       <div className="fadeIn animated">
         <h3>CSS Framework</h3>
+        {cssFrameworkNoTemplateEngineAlert}
         <div className="radio">
           <label>
             <input type="radio" name="cssFrameworkRadios" value="none" onChange={this.handleChange} /> None
