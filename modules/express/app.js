@@ -5,7 +5,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var app = express();
-
 // EXPRESS_TEMPLATE_ENGINE_CONFIG
 
 app.set('port', process.env.PORT || 3000);
@@ -19,6 +18,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
+    // TODO: replace if no template engine provided
+    // TODO: need to replace for other engines?
     res.render('error', {
       message: err.message,
       error: err
