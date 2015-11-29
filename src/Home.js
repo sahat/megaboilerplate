@@ -91,10 +91,20 @@ class Home extends React.Component {
         state.templateEngine = value;
         break;
       case 'cssFrameworkRadios':
+        if (value === 'none' || value.includes('Css')) {
+          delete state.cssPreprocessor;
+          delete state.cssBuildOptions;
+        }
         state.cssFramework = value;
         break;
       case 'cssPreprocessorRadios':
+        if (value === 'none' || value.includes('Css')) {
+          delete state.cssBuildOptions;
+        }
         state.cssPreprocessor = value;
+        break;
+      case 'cssBuildOptionsRadios':
+        state.cssBuildOptions = value;
         break;
       case 'databaseRadios':
         state.database = value;
@@ -266,6 +276,30 @@ class Home extends React.Component {
       </div>
     ) : null;
 
+    let cssBuildOptions = (this.state.cssPreprocessor === 'sass' ||
+    this.state.cssPreprocessor === 'less' ||
+    this.state.cssPreprocessor === 'postcss' ||
+    this.state.cssFramework === 'bootstrapLess' ||
+    this.state.cssFramework === 'bootstrapSass' ||
+    this.state.cssFramework === 'foundationSass' ||
+    this.state.cssFramework === 'bourbonNeat') ? (
+      <div className="fadeIn animated">
+        <h3>CSS Build Options</h3>
+        <label className="radio-inline">
+          <input type="radio" name="cssBuildOptionsRadios" value="middleware" onChange={this.handleChange} /> Middleware
+        </label>
+        <label className="radio-inline">
+          <input type="radio" name="cssBuildOptionsRadios" value="gulp" onChange={this.handleChange} /> Gulp
+        </label>
+        <label className="radio-inline">
+          <input type="radio" name="cssBuildOptionsRadios" value="webpack" onChange={this.handleChange} /> Webpack
+        </label>
+        <label className="radio-inline">
+          <input type="radio" name="cssBuildOptionsRadios" value="grunt" onChange={this.handleChange} /> Grunt
+        </label>
+      </div>
+    ) : null;
+
     let database = this.state.templateEngine ? (
       <div className="fadeIn animated">
         <h3>Database</h3>
@@ -412,6 +446,7 @@ class Home extends React.Component {
         {templateEngine}
         {cssFramework}
         {cssPreprocessor}
+        {cssBuildOptions}
         {database}
         {authentication}
         {jsFramework}
