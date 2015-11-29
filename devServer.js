@@ -144,6 +144,22 @@ function cleanupTemplateEngineString(framework, uid) {
   });
 }
 
+function cleanupCssFrameworkString(templateEngine, uid) {
+  // TODO: switch per framework
+  if (templateEngine === 'jade') {
+    let layoutFile = path.join(__dirname, 'build', uid, 'views', 'layout.jade');
+
+    return readFile(layoutFile).then((layoutData) => {
+      layoutData = removeCode(layoutData, 'CSS_FRAMEWORK_IMPORT');
+      return writeFile(layoutFile, layoutData);
+    });
+  } else if (templateEngine === 'handlebars') {
+    // TODO
+  } else if (templateEngine === 'swig') {
+    // TODO
+  }
+}
+
 function generateJadeTemplateEngine(framework, uid) {
   if (framework === 'express') {
     let jadeExpressFile = path.join(__dirname, 'modules', 'template-engine', 'jade', 'jade-express.js');
@@ -179,7 +195,7 @@ function generateBootstrapCss(templateEngine, uid) {
 
         return readFile(bootstrapCssJadeImportFile).then((bootstrapCssJadeImportData) => {
           return readFile(layoutFile).then((layoutFileData) => {
-            layoutFileData = replaceCode(layoutFileData, 'JADE_CSS_FRAMEWORK_IMPORT', bootstrapCssJadeImportData, { indentLevel: 2 });
+            layoutFileData = replaceCode(layoutFileData, 'CSS_FRAMEWORK_IMPORT', bootstrapCssJadeImportData, { indentLevel: 2 });
             return writeFile(layoutFile, layoutFileData);
           });
         });
@@ -202,10 +218,14 @@ function generateBootstrapCss(templateEngine, uid) {
     copy(path.join(jqueryDir, 'main.js'), path.join(publicDir, 'javascripts', 'main.js'))
   ]);
 }
+
 function generateCssFramework(cssFramework, templateEngine, uid) {
+  console.log('hi')
   // TODO: Sail.js assets dir instead of public
+  console.log(cssFramework, templateEngine, uid);
   switch (cssFramework) {
     case 'bootstrapCss':
+      console.log('hello from generate css')
       return generateBootstrapCss(templateEngine, uid);
       break;
     case 'bootstrapLess':
@@ -219,6 +239,7 @@ function generateCssFramework(cssFramework, templateEngine, uid) {
     case 'bourbonNeat':
       break;
     case 'none':
+      return cleanupCssFrameworkString(templateEngine, uid);
       break;
     default:
       console.log('Unsupported CSS Framework');
