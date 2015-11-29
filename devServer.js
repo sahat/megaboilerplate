@@ -40,11 +40,13 @@ app.post('/download', (req, res) => {
   let framework = req.body.framework;
   let appName = req.body.appName;
   let templateEngine = req.body.templateEngine;
+  let cssFramework = req.body.cssFramework;
 
   prepare().then((uid) => {
     return generateFramework(framework, appName, uid).then(() => {
       return generateTemplateEngine(templateEngine, framework, uid).then(() => {
-        return generateCssFramework().then(() => {
+        console.log('yo')
+        return generateCssFramework(cssFramework, uid).then(() => {
 
         })
       })
@@ -67,64 +69,59 @@ app.listen(3000, 'localhost', function(err) {
 });
 
 function generateFramework(framework, appName, uid) {
-  return new Promise((resolve, reject) => {
-    let dest = path.join(__dirname, 'build', uid);
+  let dest = path.join(__dirname, 'build', uid);
 
-    switch (framework) {
-      case 'express':
-        let expressModule = path.join(__dirname, 'modules', 'express');
+  switch (framework) {
+    case 'express':
+      let expressModule = path.join(__dirname, 'modules', 'express');
 
-        return copy(expressModule, dest).then(() => {
-          let images = path.join(dest, 'public', 'images');
-          let javascripts = path.join(dest, 'public', 'javascripts');
-          let stylesheets = path.join(dest, 'public', 'stylesheets');
+      return copy(expressModule, dest).then(() => {
+        let images = path.join(dest, 'public', 'images');
+        let javascripts = path.join(dest, 'public', 'javascripts');
+        let stylesheets = path.join(dest, 'public', 'stylesheets');
 
-          let updatePackageJson = new Promise((resolve, reject) => {
-            let packageJson = path.join(dest, 'package.json');
-            return readJson(packageJson).then((packageObj) => {
-              packageObj.name = appName;
-              return writeJson(packageJson, packageObj, { spaces: 2 }).then(() => {
-                resolve();
-              });
+        let updatePackageJson = new Promise((resolve, reject) => {
+          let packageJson = path.join(dest, 'package.json');
+          return readJson(packageJson).then((packageObj) => {
+            packageObj.name = appName;
+            return writeJson(packageJson, packageObj, { spaces: 2 }).then(() => {
+              resolve();
             });
           });
-
-          return Promise.all([
-            updatePackageJson,
-            mkdirs(images),
-            mkdirs(javascripts),
-            mkdirs(stylesheets)]).then(() => {
-            resolve();
-          });
         });
-        break;
-      case 'hapi':
-        break;
-      case 'sails':
-        break;
-      default:
-        reject('Unsupported Framework');
-    }
-  });
+
+        return Promise.all([
+          mkdirs(images),
+          mkdirs(javascripts),
+          mkdirs(stylesheets),
+          updatePackageJson
+        ]);
+      });
+      break;
+    case 'hapi':
+      break;
+    case 'sails':
+      break;
+    default:
+      break;
+  }
 }
 
 function generateTemplateEngine(templateEngine, framework, uid) {
-  return new Promise(function(resolve, reject) {
-    switch (templateEngine) {
-      case 'jade':
-        return generateJadeTemplateEngine(framework, uid);
-        break;
-      case 'handlebars':
-        break;
-      case 'swig':
-        break;
-      case 'none':
-        return cleanupTemplateEngineString(framework, uid);
-        break;
-      default:
-        reject('Unsupported Template Engine');
-    }
-  });
+  switch (templateEngine) {
+    case 'jade':
+      return generateJadeTemplateEngine(framework, uid);
+      break;
+    case 'handlebars':
+      break;
+    case 'swig':
+      break;
+    case 'none':
+      return cleanupTemplateEngineString(framework, uid);
+      break;
+    default:
+      break;
+  }
 }
 
 
@@ -149,29 +146,56 @@ function cleanupTemplateEngineString(framework, uid) {
 }
 
 function generateJadeTemplateEngine(framework, uid) {
-  return new Promise((resolve, reject) => {
-    if (framework === 'express') {
-      let jadeExpressFile = path.join(__dirname, 'modules', 'template-engine', 'jade', 'jade-express.js');
-      let jadeViewsDir = path.join(__dirname, 'modules', 'template-engine', 'jade', 'views');
-      let dest = path.join(__dirname, 'build', uid);
-      let appFile = path.join(dest, 'app.js');
+  if (framework === 'express') {
+    let jadeExpressFile = path.join(__dirname, 'modules', 'template-engine', 'jade', 'jade-express.js');
+    let jadeViewsDir = path.join(__dirname, 'modules', 'template-engine', 'jade', 'views');
+    let dest = path.join(__dirname, 'build', uid);
+    let appFile = path.join(dest, 'app.js');
 
-      return readFile(jadeExpressFile).then((jadeExpressData) => {
-        return readFile(appFile).then((appFileData) => {
-          appFileData = replaceCode(appFileData, 'EXPRESS_TEMPLATE_ENGINE_CONFIG', jadeExpressData, true);
-          return writeFile(appFile, appFileData).then(() => {
-            resolve();
-          });
-        })
-      }).then(() => {
-        return copy(jadeViewsDir, path.join(dest, 'views'))
+    return readFile(jadeExpressFile).then((jadeExpressData) => {
+      return readFile(appFile).then((appFileData) => {
+        appFileData = replaceCode(appFileData, 'EXPRESS_TEMPLATE_ENGINE_CONFIG', jadeExpressData, true);
+        return writeFile(appFile, appFileData);
       });
-    } else if (framework === 'hapi') {
-      // TODO
-    } else if (framework === 'sails') {
-      // TODO
-    }
-  });
+    }).then(() => {
+      return copy(jadeViewsDir, path.join(dest, 'views'))
+    });
+  } else if (framework === 'hapi') {
+    // TODO
+  } else if (framework === 'sails') {
+    // TODO
+  }
+}
+
+function generateCssFramework(cssFramework, uid) {
+  // TODO: Sail.js assets dir instead of public
+  switch (cssFramework) {
+    case 'bootstrapCss':
+      let bootstrapDir = path.join(__dirname, 'modules', 'css-framework', 'bootstrap');
+      let publicDir = path.join(__dirname, 'build', uid, 'public');
+      return Promise.all([
+        copy(path.join(bootstrapDir, 'css', 'bootstrap.css'), path.join(publicDir, 'stylesheets', 'bootstrap.css')),
+        copy(path.join(bootstrapDir, 'css', 'bootstrap.min.css'), path.join(publicDir, 'stylesheets', 'bootstrap.min.css')),
+        copy(path.join(bootstrapDir, 'js', 'bootstrap.js'), path.join(publicDir, 'javascripts', 'bootstrap.js')),
+        copy(path.join(bootstrapDir, 'js', 'bootstrap.min.js'), path.join(publicDir, 'javascripts', 'bootstrap.min.js')),
+        copy(path.join(bootstrapDir, 'fonts'), path.join(publicDir, 'fonts'))
+      ]);
+      break;
+    case 'bootstrapLess':
+      break;
+    case 'bootstrapSass':
+      break;
+    case 'foundationCss':
+      break;
+    case 'foundationSass':
+      break;
+    case 'bourbonNeat':
+      break;
+    case 'none':
+      break;
+    default:
+      reject('Unsupported CSS Framework');
+  }
 }
 
 /**
@@ -209,11 +233,6 @@ function removeCode(src, subStr) {
   return array.join('\n');
 }
 
-function generateCssFramework() {
-  return new Promise((resolve, reject) => {
-
-  });
-}
 
 
 
