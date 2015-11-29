@@ -149,31 +149,18 @@ function cleanupTemplateEngineString(framework, uid) {
 function generateJadeTemplateEngine(framework, uid) {
   return new Promise((resolve, reject) => {
     if (framework === 'express') {
-      let jadeExpress = path.join(__dirname, 'modules', 'template-engine', 'jade-express.js');
+      let jadeExpressFile = path.join(__dirname, 'modules', 'template-engine', 'jade', 'jade-express.js');
+      let jadeViewsDir = path.join(__dirname, 'modules', 'template-engine', 'jade', 'views');
       let dest = path.join(__dirname, 'build', uid);
       let appFile = path.join(dest, 'app.js');
 
-
-      //
-      //let viewsDir = path.join(dest, 'views');
-      ///*
-      //copy jade files
-      // */
-      //
-      //return mkdirs(viewsDir).then(() => {
-      //  resolve(uid);
-      //}).catch((err) => {
-      //  reject(err);
-      //});
-
-
-
-
-      return Promise.join(readFile(jadeExpress), readFile(appFile), (jadeExpressData, appFileData) => {
+      return Promise.join(readFile(jadeExpressFile), readFile(appFile), (jadeExpressData, appFileData) => {
         appFileData = replaceCode(appFileData, 'EXPRESS_TEMPLATE_ENGINE_CONFIG', jadeExpressData, true);
         return writeFile(appFile, appFileData).then(() => {
           resolve();
         });
+      }).then(() => {
+        copy(jadeViewsDir, path.join(dest, 'views'))
       });
 
 
