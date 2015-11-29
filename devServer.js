@@ -117,7 +117,7 @@ function generateTemplateEngine(templateEngine, framework, uid) {
       case 'swig':
         break;
       case 'none':
-        resolve();
+        return cleanupTemplateEngineString(framework, uid);
         break;
       default:
         reject('Unsupported Template Engine');
@@ -126,7 +126,25 @@ function generateTemplateEngine(templateEngine, framework, uid) {
 }
 
 
+function cleanupTemplateEngineString(framework, uid) {
+  return new Promise((resolve, reject) => {
+    if (framework === 'express') {
+      let dest = path.join(__dirname, 'build', uid);
+      let appFile = path.join(dest, 'app.js');
 
+      return readFile(appFile).then((appFileData) => {
+        appFileData = removeCode(appFileData, 'EXPRESS_TEMPLATE_ENGINE_CONFIG');
+        return writeFile(appFile, appFileData).then(() => {
+          resolve();
+        });
+      });
+    } else if (framework === 'hapi') {
+      // TODO
+    } else if (framework === 'sails') {
+      // TODO
+    }
+  });
+}
 
 function generateJadeTemplateEngine(framework, uid) {
   return new Promise((resolve, reject) => {
@@ -135,16 +153,35 @@ function generateJadeTemplateEngine(framework, uid) {
       let dest = path.join(__dirname, 'build', uid);
       let appFile = path.join(dest, 'app.js');
 
+
+      //
+      //let viewsDir = path.join(dest, 'views');
+      ///*
+      //copy jade files
+      // */
+      //
+      //return mkdirs(viewsDir).then(() => {
+      //  resolve(uid);
+      //}).catch((err) => {
+      //  reject(err);
+      //});
+
+
+
+
       return Promise.join(readFile(jadeExpress), readFile(appFile), (jadeExpressData, appFileData) => {
-        appFileData = replaceCode(appFileData, 'EXPRESS_TEMPLATE_ENGINE_CONFIG', jadeExpressData);
+        appFileData = replaceCode(appFileData, 'EXPRESS_TEMPLATE_ENGINE_CONFIG', jadeExpressData, true);
         return writeFile(appFile, appFileData).then(() => {
           resolve();
         });
       });
+
+
+
     } else if (framework === 'hapi') {
-
+      // TODO
     } else if (framework === 'sails') {
-
+      // TODO
     }
   });
 }
@@ -154,14 +191,31 @@ function generateJadeTemplateEngine(framework, uid) {
  * @param src {buffer} - where to replace
  * @param subStr {string} - what to replace
  * @param newSubStr {string} - replace it with this
+ * @param leadingBlankLine {boolean} - add blank line above
  * @returns {string}
  */
-function replaceCode(src, subStr, newSubStr) {
+function replaceCode(src, subStr, newSubStr, leadingBlankLine) {
   let array = src.toString().split('\n');
-  array.forEach((element, index) => {
-    if (array[index].includes(subStr)) {
-      // Remove trailing blank lines
-      array[index] = newSubStr.toString().split('\n').filter(Boolean).join('\n');
+  array.forEach((line, index) => {
+    if (line.includes(subStr)) {
+      let str = newSubStr.toString().split('\n').filter(Boolean).join('\n');
+      array[index] = leadingBlankLine ? '\n' + str : str;
+    }
+  });
+  return array.join('\n');
+}
+
+/**
+ *
+ * @param src {buffer} - where to remove
+ * @param subStr {string} - what to remove
+ * @returns {string}
+ */
+function removeCode(src, subStr) {
+  let array = src.toString().split('\n');
+  array.forEach((line, index) => {
+    if (line.includes(subStr)) {
+      array.splice(index, 1);
     }
   });
   return array.join('\n');
