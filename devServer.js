@@ -154,17 +154,16 @@ function generateJadeTemplateEngine(framework, uid) {
       let dest = path.join(__dirname, 'build', uid);
       let appFile = path.join(dest, 'app.js');
 
-      return Promise.join(readFile(jadeExpressFile), readFile(appFile), (jadeExpressData, appFileData) => {
-        appFileData = replaceCode(appFileData, 'EXPRESS_TEMPLATE_ENGINE_CONFIG', jadeExpressData, true);
-        return writeFile(appFile, appFileData).then(() => {
-          resolve();
-        });
+      return readFile(jadeExpressFile).then((jadeExpressData) => {
+        return readFile(appFile).then((appFileData) => {
+          appFileData = replaceCode(appFileData, 'EXPRESS_TEMPLATE_ENGINE_CONFIG', jadeExpressData, true);
+          return writeFile(appFile, appFileData).then(() => {
+            resolve();
+          });
+        })
       }).then(() => {
-        copy(jadeViewsDir, path.join(dest, 'views'))
+        return copy(jadeViewsDir, path.join(dest, 'views'))
       });
-
-
-
     } else if (framework === 'hapi') {
       // TODO
     } else if (framework === 'sails') {
