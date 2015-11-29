@@ -171,14 +171,19 @@ function generateCssFramework(cssFramework, uid) {
   switch (cssFramework) {
     case 'bootstrapCss':
       let bootstrapDir = path.join(__dirname, 'modules', 'css-framework', 'bootstrap');
+      let jqueryDir = path.join(__dirname, 'modules', 'js-framework', 'jquery');
       let publicDir = path.join(__dirname, 'build', uid, 'public');
+
       return Promise.all([
         copy(path.join(bootstrapDir, 'main.css'), path.join(publicDir, 'stylesheets', 'main.css')),
-        copy(path.join(bootstrapDir, 'css', 'bootstrap.css'), path.join(publicDir, 'stylesheets', 'vendors', 'bootstrap.css')),
-        copy(path.join(bootstrapDir, 'css', 'bootstrap.min.css'), path.join(publicDir, 'stylesheets', 'vendors', 'bootstrap.min.css')),
-        copy(path.join(bootstrapDir, 'js', 'bootstrap.js'), path.join(publicDir, 'javascripts', 'bootstrap.js')),
-        copy(path.join(bootstrapDir, 'js', 'bootstrap.min.js'), path.join(publicDir, 'javascripts', 'bootstrap.min.js')),
-        copy(path.join(bootstrapDir, 'fonts'), path.join(publicDir, 'fonts'))
+        copy(path.join(bootstrapDir, 'fonts'), path.join(publicDir, 'fonts')),
+        copy(path.join(bootstrapDir, 'css', 'bootstrap.css'), path.join(publicDir, 'stylesheets', 'vendor', 'bootstrap.css')),
+        copy(path.join(bootstrapDir, 'css', 'bootstrap.min.css'), path.join(publicDir, 'stylesheets', 'vendor', 'bootstrap.min.css')),
+        copy(path.join(bootstrapDir, 'js', 'bootstrap.js'), path.join(publicDir, 'javascripts', 'vendor', 'bootstrap.js')),
+        copy(path.join(bootstrapDir, 'js', 'bootstrap.min.js'), path.join(publicDir, 'javascripts', 'vendor', 'bootstrap.min.js')),
+        copy(path.join(jqueryDir, 'jquery.js'), path.join(publicDir, 'javascripts', 'vendor', 'jquery.js')),
+        copy(path.join(jqueryDir, 'jquery.min.js'), path.join(publicDir, 'javascripts', 'vendor', 'jquery.min.js')),
+        copy(path.join(jqueryDir, 'main.js'), path.join(publicDir, 'javascripts', 'main.js'))
       ]);
       break;
     case 'bootstrapLess':
