@@ -152,6 +152,8 @@ function cleanupCssFrameworkString(templateEngine, uid) {
     // TODO
   } else if (templateEngine === 'swig') {
     // TODO
+  } else {
+    return Promise.resolve();
   }
 }
 
@@ -183,21 +185,19 @@ function generateBootstrapCss(templateEngine, uid) {
   let publicDir = path.join(__dirname, 'build', uid, 'public');
 
   let addCssImports = function(templateEngine) {
-    return new Promise(function(resolve, reject) {
-      if (templateEngine === 'jade') {
-        let layoutFile = path.join(__dirname, 'build', uid, 'views', 'layout.jade');
-        let bootstrapCssJadeImportFile = path.join(__dirname, 'modules', 'css-framework', 'bootstrap', 'jade-import.jade');
+    if (templateEngine === 'jade') {
+      let layoutFile = path.join(__dirname, 'build', uid, 'views', 'layout.jade');
+      let bootstrapCssJadeImportFile = path.join(__dirname, 'modules', 'css-framework', 'bootstrap', 'jade-import.jade');
 
-        return readFile(bootstrapCssJadeImportFile).then((bootstrapCssJadeImportData) => {
-          return readFile(layoutFile).then((layoutFileData) => {
-            layoutFileData = replaceCode(layoutFileData, 'CSS_FRAMEWORK_IMPORT', bootstrapCssJadeImportData, { indentLevel: 2 });
-            return writeFile(layoutFile, layoutFileData);
-          });
+      return readFile(bootstrapCssJadeImportFile).then((bootstrapCssJadeImportData) => {
+        return readFile(layoutFile).then((layoutFileData) => {
+          layoutFileData = replaceCode(layoutFileData, 'CSS_FRAMEWORK_IMPORT', bootstrapCssJadeImportData, { indentLevel: 2 });
+          return writeFile(layoutFile, layoutFileData);
         });
-      } else {
-        resolve();
-      }
-    })
+      });
+    } else {
+      Promise.resolve();
+    }
   };
 
   return Promise.all([
@@ -220,7 +220,6 @@ function generateCssFramework(cssFramework, templateEngine, uid) {
   console.log(cssFramework, templateEngine, uid);
   switch (cssFramework) {
     case 'bootstrapCss':
-      console.log('hello from generate css')
       return generateBootstrapCss(templateEngine, uid);
       break;
     case 'bootstrapLess':
