@@ -175,7 +175,7 @@ function generateBootstrapCss(templateEngine, uid) {
     return new Promise(function(resolve, reject) {
       if (templateEngine === 'jade') {
         let layoutFile = path.join(__dirname, 'build', uid, 'views', 'layout.jade');
-        let bootstrapCssJadeImportFile = path.join(__dirname, 'modules', 'css-framework', 'bootstrap', 'bootstrap-css-jade.jade')
+        let bootstrapCssJadeImportFile = path.join(__dirname, 'modules', 'css-framework', 'bootstrap', 'jade-import.jade');
 
         return readFile(bootstrapCssJadeImportFile).then((bootstrapCssJadeImportData) => {
           return readFile(layoutFile).then((layoutFileData) => {
