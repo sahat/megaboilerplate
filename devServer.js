@@ -239,17 +239,33 @@ function replaceCode(src, subStr, newSubStr, opts) {
   array.forEach((line, index) => {
     if (line.includes(subStr)) {
       if (opts.indentLevel) {
-        let defaultIndentation = 2;
-        let indent = ' '.repeat(opts.indentLevel * defaultIndentation);
-        let newSubStrArray = newSubStr.toString().split('\n').filter(Boolean);
-        newSubStrArray.forEach((line, index) => {
-          newSubStrArray[index] = indent + line;
-        });
-        newSubStr = newSubStrArray.join('\n');
+        newSubStr = indentCode(newSubStr, opts.indentLevel);
       }
-      let str = newSubStr.toString().split('\n').filter(Boolean).join('\n');
-      array[index] = opts.leadingBlankLine ? '\n' + str : str;
+
+      newSubStr = newSubStr.toString().split('\n').filter(Boolean).join('\n');
+
+      if (opts.leadingBlankLine) {
+        newSubStr = '\n' + newSubStr;
+      }
+
+      array[index] = newSubStr;
     }
+  });
+  return array.join('\n');
+}
+
+/**
+ *
+ * @param subStr {string} - what to indent
+ * @param indentLevel {number} - how many levels to indent
+ * @returns {string}
+ */
+function indentCode(subStr, indentLevel) {
+  let defaultIndentation = 2;
+  let indent = ' '.repeat(indentLevel * defaultIndentation);
+  let array = subStr.toString().split('\n').filter(Boolean);
+  array.forEach((line, index) => {
+    array[index] = indent + line;
   });
   return array.join('\n');
 }
