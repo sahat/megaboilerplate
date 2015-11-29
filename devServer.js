@@ -45,7 +45,7 @@ app.post('/download', (req, res) => {
   prepare().then((uid) => {
     return generateFramework(framework, appName, uid).then(() => {
       return generateTemplateEngine(templateEngine, framework, uid).then(() => {
-        return generateCssFramework(cssFramework, uid).then(() => {
+        return generateCssFramework(cssFramework, templateEngine, uid).then(() => {
 
         })
       })
@@ -153,7 +153,7 @@ function generateJadeTemplateEngine(framework, uid) {
 
     return readFile(jadeExpressFile).then((jadeExpressData) => {
       return readFile(appFile).then((appFileData) => {
-        appFileData = replaceCode(appFileData, 'EXPRESS_TEMPLATE_ENGINE_CONFIG', jadeExpressData, true);
+        appFileData = replaceCode(appFileData, 'EXPRESS_TEMPLATE_ENGINE_CONFIG', jadeExpressData, { leadingBlankLine: true });
         return writeFile(appFile, appFileData);
       });
     }).then(() => {
@@ -166,25 +166,47 @@ function generateJadeTemplateEngine(framework, uid) {
   }
 }
 
-function generateCssFramework(cssFramework, uid) {
+function generateBootstrapCss(templateEngine, uid) {
+  let bootstrapDir = path.join(__dirname, 'modules', 'css-framework', 'bootstrap');
+  let jqueryDir = path.join(__dirname, 'modules', 'js-framework', 'jquery');
+  let publicDir = path.join(__dirname, 'build', uid, 'public');
+
+  let addCssImports = function(templateEngine) {
+    return new Promise(function(resolve, reject) {
+      if (templateEngine === 'jade') {
+        let layoutFile = path.join(__dirname, 'build', uid, 'views', 'layout.jade');
+        let bootstrapCssJadeImportFile = path.join(__dirname, 'modules', 'css-framework', 'bootstrap', 'bootstrap-css-jade.jade')
+
+        return readFile(bootstrapCssJadeImportFile).then((bootstrapCssJadeImportData) => {
+          return readFile(layoutFile).then((layoutFileData) => {
+            layoutFileData = replaceCode(layoutFileData, 'JADE_CSS_FRAMEWORK_IMPORT', bootstrapCssJadeImportData, { indentLevel: 2 });
+            return writeFile(layoutFile, layoutFileData);
+          });
+        });
+      } else {
+        resolve();
+      }
+    })
+  };
+
+  return Promise.all([
+    addCssImports(templateEngine),
+    copy(path.join(bootstrapDir, 'main.css'), path.join(publicDir, 'stylesheets', 'main.css')),
+    copy(path.join(bootstrapDir, 'fonts'), path.join(publicDir, 'fonts')),
+    copy(path.join(bootstrapDir, 'css', 'bootstrap.css'), path.join(publicDir, 'stylesheets', 'vendor', 'bootstrap.css')),
+    copy(path.join(bootstrapDir, 'css', 'bootstrap.min.css'), path.join(publicDir, 'stylesheets', 'vendor', 'bootstrap.min.css')),
+    copy(path.join(bootstrapDir, 'js', 'bootstrap.js'), path.join(publicDir, 'javascripts', 'vendor', 'bootstrap.js')),
+    copy(path.join(bootstrapDir, 'js', 'bootstrap.min.js'), path.join(publicDir, 'javascripts', 'vendor', 'bootstrap.min.js')),
+    copy(path.join(jqueryDir, 'jquery.js'), path.join(publicDir, 'javascripts', 'vendor', 'jquery.js')),
+    copy(path.join(jqueryDir, 'jquery.min.js'), path.join(publicDir, 'javascripts', 'vendor', 'jquery.min.js')),
+    copy(path.join(jqueryDir, 'main.js'), path.join(publicDir, 'javascripts', 'main.js'))
+  ]);
+}
+function generateCssFramework(cssFramework, templateEngine, uid) {
   // TODO: Sail.js assets dir instead of public
   switch (cssFramework) {
     case 'bootstrapCss':
-      let bootstrapDir = path.join(__dirname, 'modules', 'css-framework', 'bootstrap');
-      let jqueryDir = path.join(__dirname, 'modules', 'js-framework', 'jquery');
-      let publicDir = path.join(__dirname, 'build', uid, 'public');
-
-      return Promise.all([
-        copy(path.join(bootstrapDir, 'main.css'), path.join(publicDir, 'stylesheets', 'main.css')),
-        copy(path.join(bootstrapDir, 'fonts'), path.join(publicDir, 'fonts')),
-        copy(path.join(bootstrapDir, 'css', 'bootstrap.css'), path.join(publicDir, 'stylesheets', 'vendor', 'bootstrap.css')),
-        copy(path.join(bootstrapDir, 'css', 'bootstrap.min.css'), path.join(publicDir, 'stylesheets', 'vendor', 'bootstrap.min.css')),
-        copy(path.join(bootstrapDir, 'js', 'bootstrap.js'), path.join(publicDir, 'javascripts', 'vendor', 'bootstrap.js')),
-        copy(path.join(bootstrapDir, 'js', 'bootstrap.min.js'), path.join(publicDir, 'javascripts', 'vendor', 'bootstrap.min.js')),
-        copy(path.join(jqueryDir, 'jquery.js'), path.join(publicDir, 'javascripts', 'vendor', 'jquery.js')),
-        copy(path.join(jqueryDir, 'jquery.min.js'), path.join(publicDir, 'javascripts', 'vendor', 'jquery.min.js')),
-        copy(path.join(jqueryDir, 'main.js'), path.join(publicDir, 'javascripts', 'main.js'))
-      ]);
+      return generateBootstrapCss(templateEngine, uid);
       break;
     case 'bootstrapLess':
       break;
@@ -208,15 +230,25 @@ function generateCssFramework(cssFramework, uid) {
  * @param src {buffer} - where to replace
  * @param subStr {string} - what to replace
  * @param newSubStr {string} - replace it with this
- * @param leadingBlankLine {boolean} - add blank line above
+ * @param opts {object} - options
  * @returns {string}
  */
-function replaceCode(src, subStr, newSubStr, leadingBlankLine) {
+function replaceCode(src, subStr, newSubStr, opts) {
+  opts = opts || {};
   let array = src.toString().split('\n');
   array.forEach((line, index) => {
     if (line.includes(subStr)) {
+      if (opts.indentLevel) {
+        let defaultIndentation = 2;
+        let indent = ' '.repeat(opts.indentLevel * defaultIndentation);
+        let newSubStrArray = newSubStr.toString().split('\n').filter(Boolean);
+        newSubStrArray.forEach((line, index) => {
+          newSubStrArray[index] = indent + line;
+        });
+        newSubStr = newSubStrArray.join('\n');
+      }
       let str = newSubStr.toString().split('\n').filter(Boolean).join('\n');
-      array[index] = leadingBlankLine ? '\n' + str : str;
+      array[index] = opts.leadingBlankLine ? '\n' + str : str;
     }
   });
   return array.join('\n');
