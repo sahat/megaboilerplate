@@ -41,14 +41,17 @@ app.post('/download', (req, res) => {
   let appName = req.body.appName;
   let templateEngine = req.body.templateEngine;
   let cssFramework = req.body.cssFramework;
+  let cssPreprocessor = req.body.cssPreprocessor;
 
+  // Promise Pyramid of Doom ™
   prepare().then((uid) => {
     return generateFramework(framework, appName, uid).then(() => {
       return generateTemplateEngine(templateEngine, framework, uid).then(() => {
         return generateCssFramework(cssFramework, templateEngine, uid).then(() => {
-
-        })
-      })
+          return generateCssPreprocessor(cssPreprocessor, cssFramework, templateEngine, uid).then(() => {
+          });
+        });
+      });
     });
   });
 
@@ -179,29 +182,13 @@ function generateJadeTemplateEngine(framework, uid) {
   }
 }
 
-function generateBootstrapCss(templateEngine, uid) {
+function generateBootstrapCss(cssFramework, templateEngine, uid) {
   let bootstrapDir = path.join(__dirname, 'modules', 'css-framework', 'bootstrap');
   let jqueryDir = path.join(__dirname, 'modules', 'js-framework', 'jquery');
   let publicDir = path.join(__dirname, 'build', uid, 'public');
 
-  let addCssImports = function(templateEngine) {
-    if (templateEngine === 'jade') {
-      let layoutFile = path.join(__dirname, 'build', uid, 'views', 'layout.jade');
-      let bootstrapCssJadeImportFile = path.join(__dirname, 'modules', 'css-framework', 'bootstrap', 'jade-import.jade');
-
-      return readFile(bootstrapCssJadeImportFile).then((bootstrapCssJadeImportData) => {
-        return readFile(layoutFile).then((layoutFileData) => {
-          layoutFileData = replaceCode(layoutFileData, 'CSS_FRAMEWORK_IMPORT', bootstrapCssJadeImportData, { indentLevel: 2 });
-          return writeFile(layoutFile, layoutFileData);
-        });
-      });
-    } else {
-      Promise.resolve();
-    }
-  };
-
   return Promise.all([
-    addCssImports(templateEngine),
+    addCssImports(cssFramework, templateEngine, uid),
     copy(path.join(bootstrapDir, 'main.css'), path.join(publicDir, 'stylesheets', 'main.css')),
     copy(path.join(bootstrapDir, 'fonts'), path.join(publicDir, 'fonts')),
     copy(path.join(bootstrapDir, 'css', 'bootstrap.css'), path.join(publicDir, 'stylesheets', 'vendor', 'bootstrap.css')),
@@ -215,28 +202,106 @@ function generateBootstrapCss(templateEngine, uid) {
 }
 
 function generateCssFramework(cssFramework, templateEngine, uid) {
-  console.log('hi')
   // TODO: Sail.js assets dir instead of public
   console.log(cssFramework, templateEngine, uid);
   switch (cssFramework) {
     case 'bootstrapCss':
-      return generateBootstrapCss(templateEngine, uid);
+      return generateBootstrapCss(cssFramework, templateEngine, uid);
       break;
     case 'bootstrapLess':
+      // TODO
       break;
     case 'bootstrapSass':
+      // TODO
       break;
     case 'foundationCss':
+      // TODO
       break;
     case 'foundationSass':
+      // TODO
       break;
     case 'bourbonNeat':
+      // TODO
       break;
     case 'none':
       return cleanupCssFrameworkString(templateEngine, uid);
       break;
     default:
       console.log('Unsupported CSS Framework');
+  }
+}
+
+function generatePlainCssPreprocessor(uid) {
+  return copy(
+    path.join(__dirname, 'modules', 'css-preprocessor', 'main.css'),
+    path.join(__dirname, 'build', uid, 'public', 'stylesheets', 'main.css')
+  );
+}
+
+function generateCssPreprocessor(cssPreprocessor, cssFramework, templateEngine, uid) {
+  switch (cssPreprocessor) {
+    case 'css':
+      return generatePlainCssPreprocessor(uid);
+      break;
+    case 'sass':
+      // TODO
+      break;
+    case 'less':
+      // TODO
+      break;
+    case 'postcss':
+      // TODO
+      break;
+    case 'none':
+      return Promise.resolve();
+      break;
+    default:
+      console.log('Unsupported CSS Framework');
+  }
+}
+
+function addCssImports(cssFramework, templateEngine, uid) {
+  if (templateEngine === 'jade') {
+    let layoutFile = path.join(__dirname, 'build', uid, 'views', 'layout.jade');
+    let cssImport;
+
+    switch (cssFramework) {
+      case 'bootstrapCss':
+        cssImport = path.join(__dirname, 'modules', 'css-framework', 'bootstrap', 'jade-import.jade');
+        break;
+      case 'bootstrapLess':
+        // TODO
+        break;
+      case 'bootstrapSass':
+        // TODO
+        break;
+      case 'foundationCss':
+        // TODO
+        break;
+      case 'foundationSass':
+        // TODO
+        break;
+      case 'bourbonNeat':
+        // TODO
+        break;
+      case 'none':
+        break;
+      default:
+        break;
+    }
+
+    return readFile(cssImport).then((cssImportData) => {
+      return readFile(layoutFile).then((layoutData) => {
+        layoutData = replaceCode(layoutData, 'CSS_FRAMEWORK_IMPORT', cssImportData, { indentLevel: 2 });
+        return writeFile(layoutFile, layoutData);
+      });
+    });
+  } else if (templateEngine === 'handlebars') {
+    // TODO
+  } else if (templateEngine === 'swig') {
+    // TODO
+  } else {
+    Promise.resolve();
   }
 }
 
