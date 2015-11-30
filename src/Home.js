@@ -361,6 +361,14 @@ class Home extends React.Component {
       </div>
     ) : null;
 
+    let authenticationPasswordReset = (this.state.database && this.state.authentication.has('email')) ? (
+      <div className="checkbox">
+        <label>
+          <input type="checkbox" name="authenticationCheckboxes" value="passwordReset" onChange={this.handleChange} checked={this.state.authentication.has('passwordReset')} disabled={this.state.database === 'none'} /> Password Reset
+        </label>
+      </div>
+    ) : null;
+
     let authentication = this.state.database ? (
       <div className="fadeIn animated">
         <h3>Authentication</h3>
@@ -380,6 +388,7 @@ class Home extends React.Component {
         <label className="radio-inline">
           <input type="checkbox" name="authenticationCheckboxes" value="twitter" onChange={this.handleChange} checked={this.state.authentication.has('twitter')} disabled={this.state.database === 'none'} /> Twitter
         </label>
+        {authenticationPasswordReset}
       </div>
     ) : null;
 
