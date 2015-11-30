@@ -346,35 +346,30 @@ function addPackageDependencies(dependencies, params, isDev) {
 
 function generateMongodbDatabase(params) {
 
+  switch (params.framework) {
+    case 'express':
+      let appFile = path.join(__dirname, 'build', params.uid, 'app.js');
+      let mongooseRequireFile = path.join(__dirname, 'modules', 'database', 'mongodb', 'mongoose-require.js');
+      let mongooseConnectFile = path.join(__dirname, 'modules', 'database', 'mongodb', 'mongoose-connect.js');
 
-  addPackageDependencies(packages.mongodb, params);
+      return replaceCode(appFile, 'DATABASE_REQUIRE', mongooseRequireFile)
+        .then(() => {
+          return replaceCode(appFile, 'DATABASE_CONNECTION', mongooseConnectFile, { leadingBlankLine: true });
+        })
+        .then(() => {
+          return addPackageDependencies(packages.mongodb, params);
+        });
 
-
-  //switch (params.framework) {
-  //  case 'express':
-  //    let jadeExpressFile = path.join(__dirname, 'modules', 'template-engine', 'jade', 'jade-express.js');
-  //    let appFile = path.join(__dirname, 'build', params.uid, 'app.js');
-  //
-  //
-  //
-  //    return replaceCode(appFile, 'EXPRESS_TEMPLATE_ENGINE_CONFIG', jadeExpressFile, { leadingBlankLine: true })
-  //      .then(() => {
-  //        let src = path.join(__dirname, 'modules', 'template-engine', 'jade', 'views');
-  //        let dest = path.join(__dirname, 'build', params.uid, 'views');
-  //        return copy(src, dest);
-  //      });
-  //    break;
-  //  case 'hapi':
-  //    // TODO: not implemented
-  //    break;
-  //  case 'sails':
-  //    // TODO: not implemented
-  //    break;
-  //  default:
-  //    return Promise.reject('Unsupported Framework');
-  //}
-
-
+      break;
+    case 'hapi':
+      // TODO: not implemented
+      break;
+    case 'sails':
+      // TODO: not implemented
+      break;
+    default:
+      return Promise.reject('Unsupported Framework');
+  }
 }
 
 function generateDatabase(params) {

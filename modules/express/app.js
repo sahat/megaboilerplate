@@ -3,8 +3,10 @@ var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+// DATABASE_REQUIRE
 
 var app = express();
+// DATABASE_CONNECTION
 // EXPRESS_TEMPLATE_ENGINE_CONFIG
 
 app.set('port', process.env.PORT || 3000);
