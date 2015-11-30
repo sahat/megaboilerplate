@@ -1,6 +1,8 @@
 /* global JSZip saveAs */
 
 let haikunate = require('haikunator');
+let url = require('url');
+
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -12,7 +14,13 @@ class Home extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.clickDownload = this.clickDownload.bind(this);
     this.generateAppName = this.generateAppName.bind(this);
-    this.state = {};
+
+    let query = url.parse(location.href, true).query;
+
+    this.state = {
+      platform: query.platform || null,
+      framework: query.framework || null
+    };
   }
 
   componentDidUpdate() {
@@ -142,7 +150,7 @@ class Home extends React.Component {
       <div>
         <h3>Platform</h3>
         <label className="radio-inline">
-          <input type="radio" name="platformRadios" value="node" onChange={this.handleChange} /> Node.js
+          <input type="radio" name="platformRadios" value="node" onChange={this.handleChange} defaultChecked={this.state.platform === 'node'} /> Node.js
         </label>
       </div>
     );
@@ -151,18 +159,18 @@ class Home extends React.Component {
       <div className="fadeIn animated">
         <h3>Framework</h3>
         <label className="radio-inline">
-          <input type="radio" name="frameworkRadios" value="express" onChange={this.handleChange} /> Express
+          <input type="radio" name="frameworkRadios" value="express" onChange={this.handleChange} defaultChecked={this.state.framework === 'express'} /> Express
         </label>
         <label className="radio-inline">
-          <input type="radio" name="frameworkRadios" value="hapi" onChange={this.handleChange} /> Hapi
+          <input type="radio" name="frameworkRadios" value="hapi" onChange={this.handleChange} defaultChecked={this.state.framework === 'hapi'} /> Hapi
         </label>
         <label className="radio-inline">
-          <input type="radio" name="frameworkRadios" value="sails" onChange={this.handleChange} /> Sails.js
+          <input type="radio" name="frameworkRadios" value="sails" onChange={this.handleChange} defaultChecked={this.state.framework === 'sails'} /> Sails.js
         </label>
 
         <br/>
         <br/>
-      
+
 
         <div className="row">
           <div className="col-sm-6">
@@ -184,18 +192,18 @@ class Home extends React.Component {
       <div className="fadeIn animated">
         <h3>Template Engine</h3>
         <label className="radio-inline">
-          <input type="radio" name="templateEngineRadios" value="none" onChange={this.handleChange} /> None
+          <input type="radio" name="templateEngineRadios" value="none" onChange={this.handleChange} defaultChecked={this.state.templateEngine === 'none'} /> None
         </label>
         <label className="radio-inline">
-          <input type="radio" name="templateEngineRadios" value="jade" onChange={this.handleChange} /> Jade
+          <input type="radio" name="templateEngineRadios" value="jade" onChange={this.handleChange} defaultChecked={this.state.templateEngine === 'jade'} /> Jade
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." />
         </label>
         <label className="radio-inline">
-          <input type="radio" name="templateEngineRadios" value="handlebars" onChange={this.handleChange} /> Handlebars
+          <input type="radio" name="templateEngineRadios" value="handlebars" onChange={this.handleChange} defaultChecked={this.state.templateEngine === 'handlebars'} /> Handlebars
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." />
         </label>
         <label className="radio-inline">
-          <input type="radio" name="templateEngineRadios" value="swig" onChange={this.handleChange} /> Swig
+          <input type="radio" name="templateEngineRadios" value="swig" onChange={this.handleChange} defaultChecked={this.state.templateEngine === 'swig'} /> Swig
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." />
         </label>
       </div>
@@ -203,7 +211,7 @@ class Home extends React.Component {
 
     let cssFrameworkNoTemplateEngineAlert = ((this.state.cssFramework && this.state.cssFramework !== 'none') && this.state.templateEngine === 'none') ? (
       <div className="alert alert-info fadeIn animated">
-        <strong>Important!</strong> You have not selected a template engine. CSS Framework files are still going to be generated, but you will be responsible for importing these files manually.
+        <strong>Important!</strong> You have NOT selected a template engine. CSS Framework files are still going to be generated, but you will be responsible for importing these files manually.
       </div>
     ) : null;
 
@@ -213,42 +221,42 @@ class Home extends React.Component {
         {cssFrameworkNoTemplateEngineAlert}
         <div className="radio">
           <label>
-            <input type="radio" name="cssFrameworkRadios" value="none" onChange={this.handleChange} /> None
+            <input type="radio" name="cssFrameworkRadios" value="none" onChange={this.handleChange} defaultChecked={this.state.cssFramework === 'none'} /> None
           </label>
         </div>
         <div className="radio">
           <label>
-            <input type="radio" name="cssFrameworkRadios" value="bootstrapCss" onChange={this.handleChange} /> Bootstrap (CSS)
+            <input type="radio" name="cssFrameworkRadios" value="bootstrapCss" onChange={this.handleChange} defaultChecked={this.state.cssFramework === 'bootstrapCss'} /> Bootstrap (CSS)
             <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." />
           </label>
         </div>
         <div className="radio">
           <label>
-            <input type="radio" name="cssFrameworkRadios" value="bootstrapLess" onChange={this.handleChange} /> Bootstrap (LESS)
+            <input type="radio" name="cssFrameworkRadios" value="bootstrapLess" onChange={this.handleChange} defaultChecked={this.state.cssFramework === 'bootstrapLess'} /> Bootstrap (LESS)
             <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." />
           </label>
         </div>
         <div className="radio">
           <label>
-            <input type="radio" name="cssFrameworkRadios" value="bootstrapSass" onChange={this.handleChange} /> Bootstrap (Sass)
+            <input type="radio" name="cssFrameworkRadios" value="bootstrapSass" onChange={this.handleChange} defaultChecked={this.state.cssFramework === 'bootstrapSass'} /> Bootstrap (Sass)
             <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." />
           </label>
         </div>
         <div className="radio">
           <label>
-            <input type="radio" name="cssFrameworkRadios" value="foundationCss" onChange={this.handleChange} /> Foundation (CSS)
+            <input type="radio" name="cssFrameworkRadios" value="foundationCss" onChange={this.handleChange} defaultChecked={this.state.cssFramework === 'foundationCss'} /> Foundation (CSS)
             <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." />
           </label>
         </div>
         <div className="radio">
           <label>
-            <input type="radio" name="cssFrameworkRadios" value="foundationSass" onChange={this.handleChange} /> Foundation (Sass)
+            <input type="radio" name="cssFrameworkRadios" value="foundationSass" onChange={this.handleChange} defaultChecked={this.state.cssFramework === 'foundationSass'} /> Foundation (Sass)
             <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." />
           </label>
         </div>
         <div className="radio">
           <label>
-            <input type="radio" name="cssFrameworkRadios" value="bourbonNeat" onChange={this.handleChange} /> Bourbon + Neat (Sass)
+            <input type="radio" name="cssFrameworkRadios" value="bourbonNeat" onChange={this.handleChange} defaultChecked={this.state.cssFramework === 'bourbonNeat'} /> Bourbon + Neat (Sass)
             <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." />
           </label>
         </div>
@@ -259,19 +267,16 @@ class Home extends React.Component {
       <div className="fadeIn animated">
         <h3>CSS Preprocessor</h3>
         <label className="radio-inline">
-          <input type="radio" name="cssPreprocessorRadios" value="none" onChange={this.handleChange} /> None
+          <input type="radio" name="cssPreprocessorRadios" value="css" onChange={this.handleChange} defaultChecked={this.state.cssPreprocessor === 'css'} /> CSS
         </label>
         <label className="radio-inline">
-          <input type="radio" name="cssPreprocessorRadios" value="css" onChange={this.handleChange} /> CSS
+          <input type="radio" name="cssPreprocessorRadios" value="sass" onChange={this.handleChange} defaultChecked={this.state.cssPreprocessor === 'sass'} /> Sass
         </label>
         <label className="radio-inline">
-          <input type="radio" name="cssPreprocessorRadios" value="sass" onChange={this.handleChange} /> Sass
+          <input type="radio" name="cssPreprocessorRadios" value="less" onChange={this.handleChange} defaultChecked={this.state.cssPreprocessor === 'less'} /> LESS
         </label>
         <label className="radio-inline">
-          <input type="radio" name="cssPreprocessorRadios" value="less" onChange={this.handleChange} /> LESS
-        </label>
-        <label className="radio-inline">
-          <input type="radio" name="cssPreprocessorRadios" value="postcss" onChange={this.handleChange} /> PostCSS
+          <input type="radio" name="cssPreprocessorRadios" value="postcss" onChange={this.handleChange} defaultChecked={this.state.cssPreprocessor === 'postcss'} /> PostCSS
         </label>
       </div>
     ) : null;
@@ -286,16 +291,16 @@ class Home extends React.Component {
       <div className="fadeIn animated">
         <h3>CSS Build Options</h3>
         <label className="radio-inline">
-          <input type="radio" name="cssBuildOptionsRadios" value="middleware" onChange={this.handleChange} /> Middleware
+          <input type="radio" name="cssBuildOptionsRadios" value="middleware" onChange={this.handleChange} defaultChecked={this.state.cssBuildOptions === 'middleware'} /> Middleware
         </label>
         <label className="radio-inline">
-          <input type="radio" name="cssBuildOptionsRadios" value="gulp" onChange={this.handleChange} /> Gulp
+          <input type="radio" name="cssBuildOptionsRadios" value="gulp" onChange={this.handleChange} defaultChecked={this.state.cssBuildOptions === 'gulp'} /> Gulp
         </label>
         <label className="radio-inline">
-          <input type="radio" name="cssBuildOptionsRadios" value="webpack" onChange={this.handleChange} /> Webpack
+          <input type="radio" name="cssBuildOptionsRadios" value="webpack" onChange={this.handleChange} defaultChecked={this.state.cssBuildOptions === 'webpack'} /> Webpack
         </label>
         <label className="radio-inline">
-          <input type="radio" name="cssBuildOptionsRadios" value="grunt" onChange={this.handleChange} /> Grunt
+          <input type="radio" name="cssBuildOptionsRadios" value="grunt" onChange={this.handleChange} defaultChecked={this.state.cssBuildOptions === 'grunt'} /> Grunt
         </label>
       </div>
     ) : null;
@@ -304,22 +309,22 @@ class Home extends React.Component {
       <div className="fadeIn animated">
         <h3>Database</h3>
         <label className="radio-inline">
-          <input type="radio" name="databaseRadios" value="none" onChange={this.handleChange} /> None
+          <input type="radio" name="databaseRadios" value="none" onChange={this.handleChange} defaultChecked={this.state.database === 'none'} /> None
         </label>
         <label className="radio-inline">
-          <input type="radio" name="databaseRadios" value="mongodb" onChange={this.handleChange} /> MongoDB
+          <input type="radio" name="databaseRadios" value="mongodb" onChange={this.handleChange} defaultChecked={this.state.database === 'mongodb'} /> MongoDB
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
         <label className="radio-inline">
-          <input type="radio" name="databaseRadios" value="mysql" onChange={this.handleChange} /> MySQL
+          <input type="radio" name="databaseRadios" value="mysql" onChange={this.handleChange} defaultChecked={this.state.database === 'mysql'} /> MySQL
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
         <label className="radio-inline">
-          <input type="radio" name="databaseRadios" value="postgresql" onChange={this.handleChange} /> PostgreSQL
+          <input type="radio" name="databaseRadios" value="postgresql" onChange={this.handleChange} defaultChecked={this.state.database === 'postgresql'} /> PostgreSQL
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
         <label className="radio-inline">
-          <input type="radio" name="databaseRadios" value="rethinkdb" onChange={this.handleChange} /> RethinkDB
+          <input type="radio" name="databaseRadios" value="rethinkdb" onChange={this.handleChange} defaultChecked={this.state.database === 'rethinkdb'} /> RethinkDB
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
       </div>
@@ -329,16 +334,16 @@ class Home extends React.Component {
       <div className="fadeIn animated">
         <h3>Authentication</h3>
         <label className="checkbox-inline">
-          <input type="checkbox" name="authenticationCheckboxes" value="email" onChange={this.handleChange} /> Email / Password
+          <input type="checkbox" name="authenticationCheckboxes" value="email" onChange={this.handleChange} defaultChecked={this.state.authentication === 'email'} /> Email / Password
         </label>
         <label className="radio-inline">
-          <input type="checkbox" name="authenticationCheckboxes" value="facebook" onChange={this.handleChange} /> Facebook
+          <input type="checkbox" name="authenticationCheckboxes" value="facebook" onChange={this.handleChange} defaultChecked={this.state.authentication === 'facebook'} /> Facebook
         </label>
         <label className="radio-inline">
-          <input type="checkbox" name="authenticationCheckboxes" value="google" onChange={this.handleChange} /> Google
+          <input type="checkbox" name="authenticationCheckboxes" value="google" onChange={this.handleChange} defaultChecked={this.state.authentication === 'google'} /> Google
         </label>
         <label className="radio-inline">
-          <input type="checkbox" name="authenticationCheckboxes" value="twitter" onChange={this.handleChange} /> Twitter
+          <input type="checkbox" name="authenticationCheckboxes" value="twitter" onChange={this.handleChange} defaultChecked={this.state.authentication === 'twitter'} /> Twitter
         </label>
       </div>
     ) : null;
@@ -347,18 +352,18 @@ class Home extends React.Component {
       <div className="fadeIn animated">
         <h3>JavaScript Framework</h3>
         <label className="radio-inline">
-          <input type="radio" name="jsFrameworkRadios" value="none" onChange={this.handleChange} /> None
+          <input type="radio" name="jsFrameworkRadios" value="none" onChange={this.handleChange} defaultChecked={this.state.jsFramework === 'none'} /> None
         </label>
         <label className="radio-inline">
-          <input type="radio" name="jsFrameworkRadios" value="jquery" onChange={this.handleChange} /> jQuery
+          <input type="radio" name="jsFrameworkRadios" value="jquery" onChange={this.handleChange} defaultChecked={this.state.jsFramework === 'jquery'} /> jQuery
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
         <label className="radio-inline">
-          <input type="radio" name="jsFrameworkRadios" value="react" onChange={this.handleChange} /> React
+          <input type="radio" name="jsFrameworkRadios" value="react" onChange={this.handleChange} defaultChecked={this.state.jsFramework === 'react'} /> React
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
         <label className="radio-inline">
-          <input type="radio" name="jsFrameworkRadios" value="angular" onChange={this.handleChange} /> AngularJS
+          <input type="radio" name="jsFrameworkRadios" value="angular" onChange={this.handleChange} defaultChecked={this.state.jsFramework === 'angular'} /> AngularJS
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
       </div>
@@ -368,23 +373,23 @@ class Home extends React.Component {
       <div className="fadeIn animated">
         <h3>React Features</h3>
         <label className="checkbox-inline">
-          <input type="checkbox" name="reactOptionsCheckboxes" value="fluxAlt" onChange={this.handleChange} /> Flux (Alt)
+          <input type="checkbox" name="reactOptionsCheckboxes" value="fluxAlt" onChange={this.handleChange} defaultChecked={this.state.reactOptions === 'fluxAlt'} /> Flux (Alt)
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
         <label className="checkbox-inline">
-          <input type="checkbox" name="reactOptionsCheckboxes" value="fluxRedux" onChange={this.handleChange} /> Flux (Redux)
+          <input type="checkbox" name="reactOptionsCheckboxes" value="fluxRedux" onChange={this.handleChange} defaultChecked={this.state.reactOptions === 'fluxRedux'} /> Flux (Redux)
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
         <label className="radio-inline">
-          <input type="checkbox" name="reactOptionsCheckboxes" value="reactRouter" onChange={this.handleChange} /> React Router
+          <input type="checkbox" name="reactOptionsCheckboxes" value="reactRouter" onChange={this.handleChange} defaultChecked={this.state.reactOptions === 'reactRouter'} /> React Router
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
         <label className="radio-inline">
-          <input type="checkbox" name="reactOptionsCheckboxes" value="graphql" onChange={this.handleChange} /> GraphQL + Relay
+          <input type="checkbox" name="reactOptionsCheckboxes" value="graphql" onChange={this.handleChange} defaultChecked={this.state.reactOptions === 'graphql'} /> GraphQL + Relay
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
         <label className="radio-inline">
-          <input type="checkbox" name="reactOptionsCheckboxes" value="es6" onChange={this.handleChange} /> ES6
+          <input type="checkbox" name="reactOptionsCheckboxes" value="es6" onChange={this.handleChange} defaultChecked={this.state.reactOptions === 'es6'} /> ES6
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
       </div>
@@ -394,15 +399,15 @@ class Home extends React.Component {
       <div className="fadeIn animated">
         <h3>React Build System</h3>
         <label className="radio-inline">
-          <input type="radio" name="reactBuildSystemRadios" value="browserify" onChange={this.handleChange} /> Browserify
+          <input type="radio" name="reactBuildSystemRadios" value="browserify" onChange={this.handleChange} defaultChecked={this.state.reactBuildSystem === 'browserify'} /> Browserify / Gulp
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
         <label className="radio-inline">
-          <input type="radio" name="reactBuildSystemRadios" value="webpack" onChange={this.handleChange} /> Webpack
+          <input type="radio" name="reactBuildSystemRadios" value="webpack" onChange={this.handleChange} defaultChecked={this.state.reactBuildSystem === 'webpack'} /> Webpack
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
         <label className="radio-inline">
-          <input type="radio" name="reactBuildSystemRadios" value="none" onChange={this.handleChange} /> None
+          <input type="radio" name="reactBuildSystemRadios" value="none" onChange={this.handleChange} defaultChecked={this.state.reactBuildSystem === 'none'} /> None
         </label>
       </div>
     ) : null;
