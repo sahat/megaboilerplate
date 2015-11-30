@@ -15,17 +15,20 @@ module.exports = {
     }
   },
   authentication: {
+    common: {
+      passport: '^0.3.2'
+    },
     email: {
-
+      'passport-local': '^1.0.0'
     },
     facebook: {
-
+      'passport-facebook': '^2.0.0'
     },
     google: {
-
+      'passport-google-oauth': '^0.2.0'
     },
     twitter: {
-
+      'passport-twitter': '^1.0.3'
     }
   }
 };

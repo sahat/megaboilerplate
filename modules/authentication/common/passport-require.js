@@ -1,0 +1,1 @@
+var passport = require('passport');

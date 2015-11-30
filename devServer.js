@@ -23,7 +23,6 @@ var copy = Promise.promisify(fs.copy);
 var readJson = Promise.promisify(fs.readJson);
 var writeJson = Promise.promisify(fs.writeJson);
 
-
 var app = express();
 var compiler = webpack(config);
 
@@ -405,43 +404,113 @@ function generateDatabase(params) {
 }
 
 
-function generateAuthentication(params) {
+function generateEmailAuthentication(params) {
   return new Promise((resolve, reject) => {
-    switch (params.authentication) {
-      case 'mongodb':
-        return generateMongodbDatabase(params).then(() => {
+    if (_.includes(params.authentication, 'email')) {
+      switch (params.framework) {
+        case 'express':
+          let appFile = path.join(__dirname, 'build', params.uid, 'app.js');
+          let passportRequireFile = path.join(__dirname, 'modules', 'authentication', 'email', 'passport-require.js');
+          let passportStrategyFile = path.join(__dirname, 'modules', 'authentication', 'email', 'passport-strategy.js');
+          let passportRoutesFile = path.join(__dirname, 'modules', 'authentication', 'email', 'passport-routes.js');
           resolve(params);
-        });
-        break;
-      case 'mysql':
-        // TODO: not implemented
-        reject();
-        break;
-      case 'postgresql':
-        // TODO: not implemented
-        reject();
-        break;
-      case 'rethinkdb':
-        // TODO: not implemented
-        reject();
-        break;
-      case 'none':
-        resolve(params);
-        break;
-      default:
-        reject('Unsupported Database');
+          break;
+        case 'hapi':
+          // TODO: not implemented
+          return Promise.resolve();
+          break;
+        case 'sails':
+          // TODO: not implemented
+          return Promise.resolve();
+          break;
+        default:
+          return Promise.reject('Unsupported Framework');
+      }
+    } else {
+      resolve(params);
     }
   });
 }
 
+function generateCommonAuthentication(params) {
+  return new Promise((resolve, reject) => {
+    switch (params.framework) {
+      case 'express':
+        let appFile = path.join(__dirname, 'build', params.uid, 'app.js');
+        let passportRequireFile = path.join(__dirname, 'modules', 'authentication', 'common', 'passport-require.js');
+        let passportMiddlewareFile = path.join(__dirname, 'modules', 'authentication', 'common', 'passport-middleware.js');
+        let passportSerializersFile = path.join(__dirname, 'modules', 'authentication', 'common', 'passport-serializers.js');
 
+        let pkg = packages.authentication.common;
+
+        return addPackageDependencies(pkg, params)
+          .then(() => {
+            return replaceCode(appFile, 'AUTHENTICATION_REQUIRE', passportRequireFile)
+              .then(() => {
+                return replaceCode(appFile, 'AUTHENTICATION_MIDDLEWARE', passportMiddlewareFile)
+                  .then(() => {
+                    return replaceCode(appFile, 'AUTHENTICATION_SERIALIZERS', passportSerializersFile, { leadingBlankLine: true })
+                      .then(() => {
+                        resolve(params);
+                      });
+                  });
+              });
+          });
+        break;
+      case 'hapi':
+        // TODO: not implemented
+        return Promise.resolve();
+        break;
+      case 'sails':
+        // TODO: not implemented
+        return Promise.resolve();
+        break;
+      default:
+        return Promise.reject('Unsupported Framework');
+    }
+  });
+}
+
+function generateFacebookAuthentication(params) {
+  return new Promise((resolve, reject) => {
+    // TODO
+    resolve(params);
+  });
+}
+function generateGoogleAuthentication(params) {
+  return new Promise((resolve, reject) => {
+    // TODO
+    resolve(params);
+  });
+}
+
+function generateTwitterAuthentication(params) {
+  return new Promise((resolve, reject) => {
+    // TODO
+    resolve(params);
+  });
+}
+
+function generateAuthentication(params) {
+  return new Promise((resolve, reject) => {
+    if (_.includes(params.authentication, 'none')) {
+      resolve(params);
+    } else {
+      return generateCommonAuthentication(params)
+        .then(generateEmailAuthentication)
+        .then(generateFacebookAuthentication)
+        .then(generateGoogleAuthentication)
+        .then(generateTwitterAuthentication);
+    }
+  });
+}
 
 /**
  *
  * @param srcFile {buffer} - where to replace
  * @param subStr {string} - what to replace
  * @param newSrcFile {string} - replace it with this
- * @param opts {object} - options
+ * @param [opts] {object} - options
  * @returns {string}
  */
 function replaceCode(srcFile, subStr, newSrcFile, opts) {
