@@ -82,21 +82,19 @@ function generateFramework(framework, appName, uid) {
         let javascripts = path.join(dest, 'public', 'javascripts');
         let stylesheets = path.join(dest, 'public', 'stylesheets');
 
-        let updatePackageJson = new Promise((resolve, reject) => {
+        let updatePackageJson = function() {
           let packageJson = path.join(dest, 'package.json');
           return readJson(packageJson).then((packageObj) => {
             packageObj.name = appName;
-            return writeJson(packageJson, packageObj, { spaces: 2 }).then(() => {
-              resolve();
-            });
+            return writeJson(packageJson, packageObj, { spaces: 2 });
           });
-        });
+        };
 
         return Promise.all([
+          updatePackageJson,
           mkdirs(images),
           mkdirs(javascripts),
-          mkdirs(stylesheets),
-          updatePackageJson
+          mkdirs(stylesheets)
         ]);
       });
       break;
@@ -162,18 +160,12 @@ function cleanupCssFrameworkString(templateEngine, uid) {
 
 function generateJadeTemplateEngine(framework, uid) {
   if (framework === 'express') {
-    let jadeExpressFile = path.join(__dirname, 'modules', 'template-engine', 'jade', 'jade-express.js');
     let jadeViewsDir = path.join(__dirname, 'modules', 'template-engine', 'jade', 'views');
-    let dest = path.join(__dirname, 'build', uid);
-    let appFile = path.join(dest, 'app.js');
+    let jadeExpressFile = path.join(__dirname, 'modules', 'template-engine', 'jade', 'jade-express.js');
+    let appFile = path.join(__dirname, 'build', uid, 'app.js');
 
-    return readFile(jadeExpressFile).then((jadeExpressData) => {
-      return readFile(appFile).then((appFileData) => {
-        appFileData = replaceCode(appFileData, 'EXPRESS_TEMPLATE_ENGINE_CONFIG', jadeExpressData, { leadingBlankLine: true });
-        return writeFile(appFile, appFileData);
-      });
-    }).then(() => {
-      return copy(jadeViewsDir, path.join(dest, 'views'))
+    return replaceCode(appFile, 'EXPRESS_TEMPLATE_ENGINE_CONFIG', jadeExpressFile, { leadingBlankLine: true }).then(() => {
+      return copy(jadeViewsDir, path.join(__dirname, 'build', uid, 'views'));
     });
   } else if (framework === 'hapi') {
     // TODO
@@ -227,7 +219,7 @@ function generateCssFramework(cssFramework, templateEngine, uid) {
       return cleanupCssFrameworkString(templateEngine, uid);
       break;
     default:
-      console.log('Unsupported CSS Framework');
+      return Promise.reject('Unsupported CSS Framework');
   }
 }
 
@@ -252,22 +244,19 @@ function generateCssPreprocessor(cssPreprocessor, cssFramework, templateEngine, 
     case 'postcss':
       // TODO
       break;
-    case 'none':
-      return Promise.resolve();
-      break;
     default:
-      console.log('Unsupported CSS Framework');
+      return Promise.resolve();
   }
 }
 
 function addCssImports(cssFramework, templateEngine, uid) {
   if (templateEngine === 'jade') {
     let layoutFile = path.join(__dirname, 'build', uid, 'views', 'layout.jade');
-    let cssImport;
+    let cssImportFile;
 
     switch (cssFramework) {
       case 'bootstrapCss':
-        cssImport = path.join(__dirname, 'modules', 'css-framework', 'bootstrap', 'jade-import.jade');
+        cssImportFile = path.join(__dirname, 'modules', 'css-framework', 'bootstrap', 'jade-import.jade');
         break;
       case 'bootstrapLess':
         // TODO
@@ -290,12 +279,7 @@ function addCssImports(cssFramework, templateEngine, uid) {
         break;
     }
 
-    return readFile(cssImport).then((cssImportData) => {
-      return readFile(layoutFile).then((layoutData) => {
-        layoutData = replaceCode(layoutData, 'CSS_FRAMEWORK_IMPORT', cssImportData, { indentLevel: 2 });
-        return writeFile(layoutFile, layoutData);
-      });
-    });
+    return replaceCode(layoutFile, 'CSS_FRAMEWORK_IMPORT', cssImportFile, { indentLevel: 2 });
   } else if (templateEngine === 'handlebars') {
     // TODO
   } else if (templateEngine === 'swig') {
@@ -307,31 +291,39 @@ function addCssImports(cssFramework, templateEngine, uid) {
 
 /**
  *
- * @param src {buffer} - where to replace
+ * @param srcFile {buffer} - where to replace
  * @param subStr {string} - what to replace
- * @param newSubStr {string} - replace it with this
+ * @param newSrcFile {string} - replace it with this
  * @param opts {object} - options
  * @returns {string}
  */
-function replaceCode(src, subStr, newSubStr, opts) {
-  opts = opts || {};
-  let array = src.toString().split('\n');
-  array.forEach((line, index) => {
-    if (line.includes(subStr)) {
-      if (opts.indentLevel) {
-        newSubStr = indentCode(newSubStr, opts.indentLevel);
-      }
+function replaceCode(srcFile, subStr, newSrcFile, opts) {
+  return readFile(srcFile).then((srcData) => {
+    return readFile(newSrcFile).then((newSrcData) => {
+      opts = opts || {};
+      let array = srcData.toString().split('\n');
 
-      newSubStr = newSubStr.toString().split('\n').filter(Boolean).join('\n');
+      array.forEach((line, index) => {
+        if (line.includes(subStr)) {
+          if (opts.indentLevel) {
+            newSrcData = indentCode(newSrcData, opts.indentLevel);
+          }
 
-      if (opts.leadingBlankLine) {
-        newSubStr = '\n' + newSubStr;
-      }
+          newSrcData = newSrcData.toString().split('\n').filter(Boolean).join('\n');
 
-      array[index] = newSubStr;
-    }
+          if (opts.leadingBlankLine) {
+            newSrcData = '\n' + newSrcData;
+          }
+
+          array[index] = newSrcData;
+        }
+      });
+
+      srcData = array.join('\n');
+
+      return writeFile(srcFile, srcData);
+    });
   });
-  return array.join('\n');
 }
 
 /**
