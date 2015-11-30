@@ -47,7 +47,8 @@ app.post('/download', (req, res) => {
     .then(generateTemplateEngine)
     .then(generateCssFramework)
     .then(generateCssPreprocessor)
-    .then(generateDatabase);
+    .then(generateDatabase)
+    .then(generateAuthentication);
 
 });
 
@@ -357,15 +358,17 @@ function generateMongodbDatabase(params) {
           return replaceCode(appFile, 'DATABASE_CONNECTION', mongooseConnectFile, { leadingBlankLine: true });
         })
         .then(() => {
-          return addPackageDependencies(packages.mongodb, params);
+          let pkg = packages.database.mongodb;
+          return addPackageDependencies(pkg, params);
         });
-
       break;
     case 'hapi':
       // TODO: not implemented
+      return Promise.resolve();
       break;
     case 'sails':
       // TODO: not implemented
+      return Promise.resolve();
       break;
     default:
       return Promise.reject('Unsupported Framework');
@@ -400,6 +403,38 @@ function generateDatabase(params) {
     }
   });
 }
+
+
+function generateAuthentication(params) {
+  return new Promise((resolve, reject) => {
+    switch (params.authentication) {
+      case 'mongodb':
+        return generateMongodbDatabase(params).then(() => {
+          resolve(params);
+        });
+        break;
+      case 'mysql':
+        // TODO: not implemented
+        reject();
+        break;
+      case 'postgresql':
+        // TODO: not implemented
+        reject();
+        break;
+      case 'rethinkdb':
+        // TODO: not implemented
+        reject();
+        break;
+      case 'none':
+        resolve(params);
+        break;
+      default:
+        reject('Unsupported Database');
+    }
+  });
+}
+
+
 
 /**
  *
