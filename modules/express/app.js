@@ -1,9 +1,11 @@
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
+var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 // DATABASE_REQUIRE
+// AUTHENTICATION_REQUIRE
 
 var app = express();
 // DATABASE_CONNECTION
@@ -14,6 +16,8 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(session({ secret: 'keyboard cat' }));
+// AUTHENTICATION_MIDDLEWARE
 app.use(express.static(path.join(__dirname, 'public')));
 
 // development error handler
