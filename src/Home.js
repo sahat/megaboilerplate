@@ -67,7 +67,7 @@ class Home extends React.Component {
     $.ajax({
         url: '/download',
         method: 'POST',
-        dataType: 'json',
+        contentType: 'application/json; charset=utf-8',
         data: JSON.stringify(data)
       })
       .success((response, status, request) => {
