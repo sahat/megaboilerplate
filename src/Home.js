@@ -6,7 +6,7 @@ let url = require('url');
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {clone} from 'lodash';
+import {isArray, clone} from 'lodash';
 
 class Home extends React.Component {
   constructor(props) {
@@ -27,7 +27,7 @@ class Home extends React.Component {
       cssPreprocessor: query.cssPreprocessor || null,
       cssBuildOptions: query.cssBuildOptions || null,
       database: query.database || null,
-      authentication: query.authentication || new Set(),
+      authentication: isArray(query.authentication) ? new Set(query.authentication) : new Set(Array(query.authentication)),
       jsFramework: query.jsFramework || null,
       reactOptions: query.reactOptions || null,
       reactBuildSystem: query.reactBuildSystem || null
@@ -370,7 +370,8 @@ class Home extends React.Component {
 
     let jsFramework = this.state.authentication ? (
       <div className="fadeIn animated">
-        <h3>JavaScript Framework</h3>
+        <h3>JavaScript Framework <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Technically both jQuery and React are considered libraries, not frameworks." /></h3>
+
         <label className="radio-inline">
           <input type="radio" name="jsFrameworkRadios" value="none" onChange={this.handleChange} defaultChecked={this.state.jsFramework === 'none'} /> None
         </label>
