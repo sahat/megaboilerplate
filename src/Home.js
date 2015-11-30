@@ -141,6 +141,8 @@ class Home extends React.Component {
         if (isChecked) {
           if (value === 'none') {
             state.authentication.clear();
+          } else {
+            state.authentication.delete('none');
           }
           state.authentication.add(value);
         } else {
@@ -366,16 +368,16 @@ class Home extends React.Component {
           <input type="checkbox" name="authenticationCheckboxes" value="none" onChange={this.handleChange} checked={this.state.authentication.has('none')} disabled={this.state.database === 'none'} /> None
         </label>
         <label className="checkbox-inline">
-          <input type="checkbox" name="authenticationCheckboxes" value="email" onChange={this.handleChange} checked={this.state.authentication.has('email')} disabled={this.state.authentication.has('none')} /> Email / Password
+          <input type="checkbox" name="authenticationCheckboxes" value="email" onChange={this.handleChange} checked={this.state.authentication.has('email')} disabled={this.state.database === 'none'} /> Email / Password
         </label>
         <label className="radio-inline">
-          <input type="checkbox" name="authenticationCheckboxes" value="facebook" onChange={this.handleChange} checked={this.state.authentication.has('facebook')} disabled={this.state.authentication.has('none')} /> Facebook
+          <input type="checkbox" name="authenticationCheckboxes" value="facebook" onChange={this.handleChange} checked={this.state.authentication.has('facebook')} disabled={this.state.database === 'none'} /> Facebook
         </label>
         <label className="radio-inline">
-          <input type="checkbox" name="authenticationCheckboxes" value="google" onChange={this.handleChange} checked={this.state.authentication.has('google')} disabled={this.state.authentication.has('none')} /> Google
+          <input type="checkbox" name="authenticationCheckboxes" value="google" onChange={this.handleChange} checked={this.state.authentication.has('google')} disabled={this.state.database === 'none'} /> Google
         </label>
         <label className="radio-inline">
-          <input type="checkbox" name="authenticationCheckboxes" value="twitter" onChange={this.handleChange} checked={this.state.authentication.has('twitter')} disabled={this.state.authentication.has('none')} /> Twitter
+          <input type="checkbox" name="authenticationCheckboxes" value="twitter" onChange={this.handleChange} checked={this.state.authentication.has('twitter')} disabled={this.state.database === 'none'} /> Twitter
         </label>
       </div>
     ) : null;
