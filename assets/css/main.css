@@ -18,6 +18,18 @@
   color: #fff;
 }
 
+.hero-arrow {
+  width: 47px;
+  height: 32px;
+  vertical-align: baseline;
+  margin-right: 2px;
+}
+
+.hero-arrow-container {
+  left: 90px;
+  position: relative;
+}
+
 body {
   padding-bottom: 100px;
 }
