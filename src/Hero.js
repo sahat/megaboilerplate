@@ -21,7 +21,11 @@ class Banner extends React.Component {
         <div className="container">
           <span className="text-center bd-booticon outline">B</span>
           <h1>Mega Boilerplate</h1>
-          <p className="lead">Clean, simple, easy to use, hand-crafted project starters.</p>
+          <p className="lead">
+            Clean, simple and easy to use hand-crafted project starters.
+            <br />
+            Inspired by <a href="https://github.com/sahat/hackathon-starter">Hackathon Starter</a>.
+          </p>
           <iframe src="https://ghbtns.com/github-btn.html?user=sahat&repo=satellizer&type=star&count=true" frameBorder="0" scrolling="0" width="100px" height="20px"></iframe>
           <iframe src="https://ghbtns.com/github-btn.html?user=sahat&type=follow&count=true" frameBorder="0" scrolling="0" width="170px" height="20px"></iframe>
           <div ref="carbonAds"></div>
