@@ -28,9 +28,9 @@ class Banner extends React.Component {
           </p>
           <iframe src="https://ghbtns.com/github-btn.html?user=sahat&repo=satellizer&type=star&count=true" frameBorder="0" scrolling="0" width="100px" height="20px"></iframe>
           <iframe src="https://ghbtns.com/github-btn.html?user=sahat&type=follow&count=true" frameBorder="0" scrolling="0" width="170px" height="20px"></iframe>
-          <div className="hero-arrow-container">
-            <img className="hero-arrow" src="/img/arrow.png" alt="Arrow"/>
-            <span>Don't forget to star it on GitHub if you liked this project!</span>
+          <div>
+            <img className="hero-arrow hidden-xs" src="/img/arrow.png" alt="Arrow"/>
+            <span>Don't forget to <i className="ion-star"></i> on GitHub if you liked this project!</span>
           </div>
           <div ref="carbonAds"></div>
         </div>
