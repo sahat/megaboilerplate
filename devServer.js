@@ -159,18 +159,25 @@ function cleanupCssFrameworkString(templateEngine, uid) {
 }
 
 function generateJadeTemplateEngine(framework, uid) {
-  if (framework === 'express') {
-    let jadeViewsDir = path.join(__dirname, 'modules', 'template-engine', 'jade', 'views');
-    let jadeExpressFile = path.join(__dirname, 'modules', 'template-engine', 'jade', 'jade-express.js');
-    let appFile = path.join(__dirname, 'build', uid, 'app.js');
+  switch (framework) {
+    case 'express':
+      let jadeExpressFile = path.join(__dirname, 'modules', 'template-engine', 'jade', 'jade-express.js');
+      let appFile = path.join(__dirname, 'build', uid, 'app.js');
 
-    return replaceCode(appFile, 'EXPRESS_TEMPLATE_ENGINE_CONFIG', jadeExpressFile, { leadingBlankLine: true }).then(() => {
-      return copy(jadeViewsDir, path.join(__dirname, 'build', uid, 'views'));
-    });
-  } else if (framework === 'hapi') {
-    // TODO
-  } else if (framework === 'sails') {
-    // TODO
+      return replaceCode(appFile, 'EXPRESS_TEMPLATE_ENGINE_CONFIG', jadeExpressFile, { leadingBlankLine: true })
+        .then(copy(
+          path.join(__dirname, 'modules', 'template-engine', 'jade', 'views'),
+          path.join(__dirname, 'build', uid, 'views')
+        ));
+      break;
+    case 'hapi':
+      // TODO
+      break;
+    case 'sails':
+      // TODO
+      break;
+    default:
+      return Promise.reject('Unsupported Framework');
   }
 }
 
