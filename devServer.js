@@ -324,19 +324,31 @@ function addCssImports(params) {
   }
 }
 
+function addPackageDependencies(dependencies, params, isDev) {
+  let packageJson = path.join(__dirname, 'build', params.uid, 'package.json');
+
+  return readJson(packageJson).then((packageObj) => {
+
+    for (var key in dependencies) {
+      if (dependencies.hasOwnProperty(key)) {
+        if (isDev) {
+          packageObj.devDependencies = packageObj.devDependencies || {};
+          packageObj.devDependencies[key] = dependencies[key];
+        } else {
+          packageObj.dependencies[key] = dependencies[key];
+        }
+      }
+    }
+
+    return writeJson(packageJson, packageObj, { spaces: 2 });
+  });
+}
+
 function generateMongodbDatabase(params) {
 
-  let updatePackageJson = function() {
-    let packageJson = path.join(__dirname, 'build', params.uid, 'package.json');
-    return readJson(packageJson).then((packageObj) => {
-      _.forEach(packages.mongodb, (value, key) => {
-        packageObj.dependencies[key] = value;
-      });
-      return writeJson(packageJson, packageObj, { spaces: 2 });
-    });
-  };
 
-  return updatePackageJson();
+  addPackageDependencies(packages.mongodb, params);
+
 
   //switch (params.framework) {
   //  case 'express':
