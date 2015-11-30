@@ -14,6 +14,7 @@ class Home extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.clickDownload = this.clickDownload.bind(this);
     this.generateAppName = this.generateAppName.bind(this);
+    this.handleAppNameChange = this.handleAppNameChange.bind(this);
 
     let query = url.parse(location.href, true).query;
 
@@ -89,8 +90,15 @@ class Home extends React.Component {
     let state = this.state;
     state.appName = haikunate({ tokenLength: 0 });
     this.setState(state);
+    console.log(state)
 
     this.refs.appNameInput.focus();
+  }
+
+  handleAppNameChange(e) {
+    let state = this.state;
+    state.appName = e.target.value;
+    this.setState(state);
   }
 
   handleChange(e) {
@@ -155,7 +163,7 @@ class Home extends React.Component {
   }
 
   render() {
-
+    console.log('state', this.state);
     let platform = (
       <div>
         <h3>Platform</h3>
@@ -181,12 +189,11 @@ class Home extends React.Component {
         <br/>
         <br/>
 
-
         <div className="row">
           <div className="col-sm-6">
             <label htmlFor="appNameInput">App Name (optional)</label>
             <div className="input-group">
-              <input type="text" ref="appNameInput" className="form-control" defaultValue={this.state.appName} placeholder="App Name" autoFocus />
+              <input type="text" ref="appNameInput" className="form-control" onChange={this.handleAppNameChange} value={this.state.appName} placeholder="App Name" autoFocus />
           <span className="input-group-btn">
             <button className="btn btn-primary" type="button" onClick={this.generateAppName}>Generate</button>
           </span>
