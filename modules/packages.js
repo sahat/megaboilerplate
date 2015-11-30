@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   mongodb: {
     mongoose: '^4.2.8'
   },

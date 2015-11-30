@@ -13,6 +13,8 @@ var webpack = require('webpack');
 var config = require('./webpack.config.dev');
 var readline = require('readline');
 
+var packages = require ('./modules/packages');
+
 var readFile = Promise.promisify(fs.readFile);
 var writeFile = Promise.promisify(fs.writeFile);
 var remove = Promise.promisify(fs.remove);
@@ -20,6 +22,7 @@ var mkdirs = Promise.promisify(fs.mkdirs);
 var copy = Promise.promisify(fs.copy);
 var readJson = Promise.promisify(fs.readJson);
 var writeJson = Promise.promisify(fs.writeJson);
+
 
 var app = express();
 var compiler = webpack(config);
@@ -321,11 +324,54 @@ function addCssImports(params) {
   }
 }
 
+function generateMongodbDatabase(params) {
+
+  let updatePackageJson = function() {
+    let packageJson = path.join(__dirname, 'build', params.uid, 'package.json');
+    return readJson(packageJson).then((packageObj) => {
+      _.forEach(packages.mongodb, (value, key) => {
+        packageObj.dependencies[key] = value;
+      });
+      return writeJson(packageJson, packageObj, { spaces: 2 });
+    });
+  };
+
+  return updatePackageJson();
+
+  //switch (params.framework) {
+  //  case 'express':
+  //    let jadeExpressFile = path.join(__dirname, 'modules', 'template-engine', 'jade', 'jade-express.js');
+  //    let appFile = path.join(__dirname, 'build', params.uid, 'app.js');
+  //
+  //
+  //
+  //    return replaceCode(appFile, 'EXPRESS_TEMPLATE_ENGINE_CONFIG', jadeExpressFile, { leadingBlankLine: true })
+  //      .then(() => {
+  //        let src = path.join(__dirname, 'modules', 'template-engine', 'jade', 'views');
+  //        let dest = path.join(__dirname, 'build', params.uid, 'views');
+  //        return copy(src, dest);
+  //      });
+  //    break;
+  //  case 'hapi':
+  //    // TODO: not implemented
+  //    break;
+  //  case 'sails':
+  //    // TODO: not implemented
+  //    break;
+  //  default:
+  //    return Promise.reject('Unsupported Framework');
+  //}
+
+
+}
+
 function generateDatabase(params) {
   return new Promise((resolve, reject) => {
     switch (params.database) {
       case 'mongodb':
-        resolve(params);
+        return generateMongodbDatabase(params).then(() => {
+          resolve(params);
+        });
         break;
       case 'mysql':
         // TODO: not implemented
