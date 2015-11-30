@@ -130,6 +130,10 @@ class Home extends React.Component {
         state.cssBuildOptions = value;
         break;
       case 'databaseRadios':
+        if (value === 'none') {
+          state.authentication.clear();
+          state.authentication.add('none');
+        }
         state.database = value;
         break;
       case 'authenticationCheckboxes':
@@ -347,11 +351,19 @@ class Home extends React.Component {
       </div>
     ) : null;
 
+
+    let authenticationAlert = (this.state.database === 'none') ? (
+      <div className="alert alert-info">
+        <strong>Important!</strong> To enable authentication you must choose one of the databases above.
+      </div>
+    ) : null;
+
     let authentication = this.state.database ? (
       <div className="fadeIn animated">
         <h3>Authentication</h3>
+        {authenticationAlert}
         <label className="checkbox-inline">
-          <input type="checkbox" name="authenticationCheckboxes" value="none" onChange={this.handleChange} checked={this.state.authentication.has('none')} /> None
+          <input type="checkbox" name="authenticationCheckboxes" value="none" onChange={this.handleChange} checked={this.state.authentication.has('none')} disabled={this.state.database === 'none'} /> None
         </label>
         <label className="checkbox-inline">
           <input type="checkbox" name="authenticationCheckboxes" value="email" onChange={this.handleChange} checked={this.state.authentication.has('email')} disabled={this.state.authentication.has('none')} /> Email / Password
@@ -370,7 +382,7 @@ class Home extends React.Component {
 
     let jsFramework = this.state.authentication ? (
       <div className="fadeIn animated">
-        <h3>JavaScript Framework <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Technically both jQuery and React are considered libraries, not frameworks." /></h3>
+        <h3>JavaScript Framework <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Technically, both jQuery and React are considered libraries, not frameworks." /></h3>
 
         <label className="radio-inline">
           <input type="radio" name="jsFrameworkRadios" value="none" onChange={this.handleChange} defaultChecked={this.state.jsFramework === 'none'} /> None
