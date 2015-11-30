@@ -62,16 +62,17 @@ class Home extends React.Component {
 
     let data = clone(this.state);
     data.appName = this.state.appName || haikunate({ tokenLength: 0 });
+    data.authentication = Array.from(data.authentication);
 
     $.ajax({
         url: '/download',
         method: 'POST',
-        data: data
+        dataType: 'json',
+        data: JSON.stringify(data)
       })
       .success((response, status, request) => {
         $(downloadBtn).removeAttr('disabled');
 
-        console.log(this.state);
         var disp = request.getResponseHeader('Content-Disposition');
         if (disp && disp.search('attachment') != -1) {
           var form = $('<form method="POST" action="/download">');
