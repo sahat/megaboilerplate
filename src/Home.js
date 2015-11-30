@@ -19,7 +19,17 @@ class Home extends React.Component {
 
     this.state = {
       platform: query.platform || null,
-      framework: query.framework || null
+      framework: query.framework || null,
+      appName: query.appName || null,
+      templateEngine: query.templateEngine || null,
+      cssFramework: query.cssFramework || null,
+      cssPreprocessor: query.cssPreprocessor || null,
+      cssBuildOptions: query.cssBuildOptions || null,
+      database: query.database || null,
+      authentication: query.authentication || null,
+      jsFramework: query.jsFramework || null,
+      reactOptions: query.reactOptions || null,
+      reactBuildSystem: query.reactBuildSystem || null
     };
   }
 
@@ -176,7 +186,7 @@ class Home extends React.Component {
           <div className="col-sm-6">
             <label htmlFor="appNameInput">App Name (optional)</label>
             <div className="input-group">
-              <input type="text" ref="appNameInput" className="form-control" value={this.state.appName} placeholder="App Name" autoFocus />
+              <input type="text" ref="appNameInput" className="form-control" defaultValue={this.state.appName} placeholder="App Name" autoFocus />
           <span className="input-group-btn">
             <button className="btn btn-primary" type="button" onClick={this.generateAppName}>Generate</button>
           </span>
