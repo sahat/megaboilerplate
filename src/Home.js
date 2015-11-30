@@ -27,7 +27,7 @@ class Home extends React.Component {
       cssPreprocessor: query.cssPreprocessor || null,
       cssBuildOptions: query.cssBuildOptions || null,
       database: query.database || null,
-      authentication: query.authentication || null,
+      authentication: query.authentication || new Set(),
       jsFramework: query.jsFramework || null,
       reactOptions: query.reactOptions || null,
       reactBuildSystem: query.reactBuildSystem || null
@@ -83,15 +83,12 @@ class Home extends React.Component {
           form.submit();
         }
       });
-    console.log('State', this.state);
   }
 
   generateAppName() {
     let state = this.state;
     state.appName = haikunate({ tokenLength: 0 });
     this.setState(state);
-    console.log(state)
-
     this.refs.appNameInput.focus();
   }
 
@@ -138,6 +135,9 @@ class Home extends React.Component {
       case 'authenticationCheckboxes':
         state.authentication = state.authentication || new Set();
         if (isChecked) {
+          if (value === 'none') {
+            state.authentication.clear();
+          }
           state.authentication.add(value);
         } else {
           state.authentication.delete(value);
@@ -351,16 +351,19 @@ class Home extends React.Component {
       <div className="fadeIn animated">
         <h3>Authentication</h3>
         <label className="checkbox-inline">
-          <input type="checkbox" name="authenticationCheckboxes" value="email" onChange={this.handleChange} defaultChecked={this.state.authentication === 'email'} /> Email / Password
+          <input type="checkbox" name="authenticationCheckboxes" value="none" onChange={this.handleChange} defaultChecked={this.state.authentication.has('none')} /> None
+        </label>
+        <label className="checkbox-inline">
+          <input type="checkbox" name="authenticationCheckboxes" value="email" onChange={this.handleChange} defaultChecked={this.state.authentication.has('email')} disabled={this.state.authentication.has('none')} /> Email / Password
         </label>
         <label className="radio-inline">
-          <input type="checkbox" name="authenticationCheckboxes" value="facebook" onChange={this.handleChange} defaultChecked={this.state.authentication === 'facebook'} /> Facebook
+          <input type="checkbox" name="authenticationCheckboxes" value="facebook" onChange={this.handleChange} defaultChecked={this.state.authentication.has('facebook')} disabled={this.state.authentication.has('none')} /> Facebook
         </label>
         <label className="radio-inline">
-          <input type="checkbox" name="authenticationCheckboxes" value="google" onChange={this.handleChange} defaultChecked={this.state.authentication === 'google'} /> Google
+          <input type="checkbox" name="authenticationCheckboxes" value="google" onChange={this.handleChange} defaultChecked={this.state.authentication.has('google')} disabled={this.state.authentication.has('none')} /> Google
         </label>
         <label className="radio-inline">
-          <input type="checkbox" name="authenticationCheckboxes" value="twitter" onChange={this.handleChange} defaultChecked={this.state.authentication === 'twitter'} /> Twitter
+          <input type="checkbox" name="authenticationCheckboxes" value="twitter" onChange={this.handleChange} defaultChecked={this.state.authentication.has('twitter')} disabled={this.state.authentication.has('none')} /> Twitter
         </label>
       </div>
     ) : null;
