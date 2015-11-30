@@ -37,23 +37,14 @@ app.use(require('webpack-hot-middleware')(compiler));
 
 
 app.post('/download', (req, res) => {
-  let framework = req.body.framework;
-  let appName = req.body.appName;
-  let templateEngine = req.body.templateEngine;
-  let cssFramework = req.body.cssFramework;
-  let cssPreprocessor = req.body.cssPreprocessor;
+  let params = req.body;
 
-  // Promise Pyramid of Doom ™
-  prepare().then((uid) => {
-    return generateFramework(framework, appName, uid).then(() => {
-      return generateTemplateEngine(templateEngine, framework, uid).then(() => {
-        return generateCssFramework(cssFramework, templateEngine, uid).then(() => {
-          return generateCssPreprocessor(cssPreprocessor, cssFramework, templateEngine, uid).then(() => {
-          });
-        });
-      });
-    });
-  });
+  prepare(params)
+    .then(generateFramework)
+    .then(generateTemplateEngine)
+    .then(generateCssFramework)
+    .then(generateCssPreprocessor)
+    .then(generateDatabase);
 
 });
 
@@ -70,124 +61,142 @@ app.listen(3000, 'localhost', function(err) {
   console.log('Listening at http://localhost:3000');
 });
 
-function generateFramework(framework, appName, uid) {
-  let dest = path.join(__dirname, 'build', uid);
+function generateFramework(params) {
+  return new Promise((resolve, reject) => {
+    let dest = path.join(__dirname, 'build', params.uid);
 
-  switch (framework) {
-    case 'express':
-      let expressModule = path.join(__dirname, 'modules', 'express');
+    switch (params.framework) {
+      case 'express':
+        let expressModule = path.join(__dirname, 'modules', 'express');
 
-      return copy(expressModule, dest).then(() => {
-        let images = path.join(dest, 'public', 'images');
-        let javascripts = path.join(dest, 'public', 'javascripts');
-        let stylesheets = path.join(dest, 'public', 'stylesheets');
+        return copy(expressModule, dest).then(() => {
+          let images = path.join(dest, 'public', 'images');
+          let javascripts = path.join(dest, 'public', 'javascripts');
+          let stylesheets = path.join(dest, 'public', 'stylesheets');
 
-        let updatePackageJson = function() {
-          let packageJson = path.join(dest, 'package.json');
-          return readJson(packageJson).then((packageObj) => {
-            packageObj.name = appName;
-            return writeJson(packageJson, packageObj, { spaces: 2 });
+          let updatePackageJson = function() {
+            let packageJson = path.join(dest, 'package.json');
+            return readJson(packageJson).then((packageObj) => {
+              packageObj.name = params.appName;
+              return writeJson(packageJson, packageObj, { spaces: 2 });
+            });
+          };
+
+          return Promise.all([
+            updatePackageJson,
+            mkdirs(images),
+            mkdirs(javascripts),
+            mkdirs(stylesheets)
+          ]).then(() => {
+            resolve(params);
           });
-        };
-
-        return Promise.all([
-          updatePackageJson,
-          mkdirs(images),
-          mkdirs(javascripts),
-          mkdirs(stylesheets)
-        ]);
-      });
-      break;
-    case 'hapi':
-      break;
-    case 'sails':
-      break;
-    default:
-      break;
-  }
+        });
+        break;
+      case 'hapi':
+        // TODO
+        return Promise.reject();
+        break;
+      case 'sails':
+        // TODO
+        return Promise.reject();
+        break;
+      default:
+        return Promise.reject('Unsupported Framework');
+        break;
+    }
+  });
 }
 
-function generateTemplateEngine(templateEngine, framework, uid) {
-  switch (templateEngine) {
-    case 'jade':
-      return generateJadeTemplateEngine(framework, uid);
-      break;
-    case 'handlebars':
-      break;
-    case 'swig':
-      break;
-    case 'none':
-      return cleanupTemplateEngineString(framework, uid);
-      break;
-    default:
-      break;
-  }
+function generateTemplateEngine(params) {
+  return new Promise((resolve, reject) => {
+    switch (params.templateEngine) {
+      case 'jade':
+        return generateJadeTemplateEngine(params).then(() => {
+          resolve(params);
+        });
+        break;
+      case 'handlebars':
+        // TODO: Not implemented
+        return Promise.reject();
+        break;
+      case 'swig':
+        // TODO: Not implemented
+        return Promise.reject();
+        break;
+      case 'none':
+        return cleanupTemplateEngineString(params);
+        break;
+      default:
+        return Promise.reject('Unsupported Template Engine');
+    }
+  });
 }
 
 
-function cleanupTemplateEngineString(framework, uid) {
-  if (framework === 'express') {
-    let appFile = path.join(__dirname, 'build', uid, 'app.js');
+function cleanupTemplateEngineString(params) {
+  if (params.framework === 'express') {
+    let appFile = path.join(__dirname, 'build', params.uid, 'app.js');
 
     return readFile(appFile).then((appFileData) => {
       appFileData = removeCode(appFileData, 'EXPRESS_TEMPLATE_ENGINE_CONFIG');
       return writeFile(appFile, appFileData);
     });
-  } else if (framework === 'hapi') {
-    // TODO
-  } else if (framework === 'sails') {
-    // TODO
+  } else if (params.framework === 'hapi') {
+    // TODO: not implemented
+  } else if (params.framework === 'sails') {
+    // TODO: not implemented
   }
 }
 
-function cleanupCssFrameworkString(templateEngine, uid) {
+function cleanupCssFrameworkString(params) {
   // TODO: switch per framework
-  if (templateEngine === 'jade') {
-    let layoutFile = path.join(__dirname, 'build', uid, 'views', 'layout.jade');
+  if (params.templateEngine === 'jade') {
+    let layoutFile = path.join(__dirname, 'build', params.uid, 'views', 'layout.jade');
 
     return readFile(layoutFile).then((layoutData) => {
       layoutData = removeCode(layoutData, 'CSS_FRAMEWORK_IMPORT');
       return writeFile(layoutFile, layoutData);
     });
-  } else if (templateEngine === 'handlebars') {
-    // TODO
-  } else if (templateEngine === 'swig') {
-    // TODO
+  } else if (params.templateEngine === 'handlebars') {
+    // TODO: not implemented
+  } else if (params.templateEngine === 'swig') {
+    // TODO: not implemented
   } else {
     return Promise.resolve();
   }
 }
 
-function generateJadeTemplateEngine(framework, uid) {
-  switch (framework) {
+function generateJadeTemplateEngine(params) {
+  switch (params.framework) {
     case 'express':
       let jadeExpressFile = path.join(__dirname, 'modules', 'template-engine', 'jade', 'jade-express.js');
-      let appFile = path.join(__dirname, 'build', uid, 'app.js');
+      let appFile = path.join(__dirname, 'build', params.uid, 'app.js');
 
       return replaceCode(appFile, 'EXPRESS_TEMPLATE_ENGINE_CONFIG', jadeExpressFile, { leadingBlankLine: true })
-        .then(copy(
-          path.join(__dirname, 'modules', 'template-engine', 'jade', 'views'),
-          path.join(__dirname, 'build', uid, 'views')
-        ));
+        .then(() => {
+          let src = path.join(__dirname, 'modules', 'template-engine', 'jade', 'views');
+          let dest = path.join(__dirname, 'build', params.uid, 'views');
+          return copy(src, dest);
+        });
       break;
     case 'hapi':
-      // TODO
+      // TODO: not implemented
       break;
     case 'sails':
-      // TODO
+      // TODO: not implemented
       break;
     default:
       return Promise.reject('Unsupported Framework');
   }
 }
 
-function generateBootstrapCss(cssFramework, templateEngine, uid) {
+function generateBootstrapCss(params) {
   let bootstrapDir = path.join(__dirname, 'modules', 'css-framework', 'bootstrap');
   let jqueryDir = path.join(__dirname, 'modules', 'js-framework', 'jquery');
-  let publicDir = path.join(__dirname, 'build', uid, 'public');
+  let publicDir = path.join(__dirname, 'build', params.uid, 'public');
 
   return Promise.all([
-    addCssImports(cssFramework, templateEngine, uid),
+    addCssImports(params),
     copy(path.join(bootstrapDir, 'main.css'), path.join(publicDir, 'stylesheets', 'main.css')),
     copy(path.join(bootstrapDir, 'fonts'), path.join(publicDir, 'fonts')),
     copy(path.join(bootstrapDir, 'css', 'bootstrap.css'), path.join(publicDir, 'stylesheets', 'vendor', 'bootstrap.css')),
@@ -200,100 +209,143 @@ function generateBootstrapCss(cssFramework, templateEngine, uid) {
   ]);
 }
 
-function generateCssFramework(cssFramework, templateEngine, uid) {
-  // TODO: Sail.js assets dir instead of public
-  console.log(cssFramework, templateEngine, uid);
-  switch (cssFramework) {
-    case 'bootstrapCss':
-      return generateBootstrapCss(cssFramework, templateEngine, uid);
-      break;
-    case 'bootstrapLess':
-      // TODO
-      break;
-    case 'bootstrapSass':
-      // TODO
-      break;
-    case 'foundationCss':
-      // TODO
-      break;
-    case 'foundationSass':
-      // TODO
-      break;
-    case 'bourbonNeat':
-      // TODO
-      break;
-    case 'none':
-      return cleanupCssFrameworkString(templateEngine, uid);
-      break;
-    default:
-      return Promise.reject('Unsupported CSS Framework');
-  }
+function generateCssFramework(params) {
+  return new Promise((resolve, reject) => {
+    // TODO: Sail.js assets dir instead of public
+    switch (params.cssFramework) {
+      case 'bootstrapCss':
+        return generateBootstrapCss(params).then(() => {
+          resolve(params);
+        });
+        break;
+      case 'bootstrapLess':
+        // TODO: not implemented
+        reject();
+        break;
+      case 'bootstrapSass':
+        // TODO: not implemented
+        reject();
+        break;
+      case 'foundationCss':
+        // TODO: not implemented
+        reject();
+        break;
+      case 'foundationSass':
+        // TODO: not implemented
+        reject();
+        break;
+      case 'bourbonNeat':
+        // TODO: not implemented
+        reject();
+        break;
+      case 'none':
+        return cleanupCssFrameworkString(params).then(() => {
+          resolve(params);
+        });
+        break;
+      default:
+        reject('Unsupported CSS Framework');
+    }
+  });
 }
 
-function generatePlainCssPreprocessor(uid) {
-  return copy(
-    path.join(__dirname, 'modules', 'css-preprocessor', 'main.css'),
-    path.join(__dirname, 'build', uid, 'public', 'stylesheets', 'main.css')
-  );
+function generatePlainCssPreprocessor(params) {
+  let src = path.join(__dirname, 'modules', 'css-preprocessor', 'main.css');
+  let dest = path.join(__dirname, 'build', params.uid, 'public', 'stylesheets', 'main.css');
+  return copy(src, dest);
 }
 
-function generateCssPreprocessor(cssPreprocessor, cssFramework, templateEngine, uid) {
-  switch (cssPreprocessor) {
-    case 'css':
-      return generatePlainCssPreprocessor(uid);
-      break;
-    case 'sass':
-      // TODO
-      break;
-    case 'less':
-      // TODO
-      break;
-    case 'postcss':
-      // TODO
-      break;
-    default:
-      return Promise.resolve();
-  }
+function generateCssPreprocessor(params) {
+  return new Promise((resolve, reject) => {
+    switch (params.cssPreprocessor) {
+      case 'css':
+        return generatePlainCssPreprocessor(params).then(() => {
+          resolve(params);
+        });
+        break;
+      case 'sass':
+        // TODO: not implemented
+        resolve(params);
+        break;
+      case 'less':
+        // TODO: not implemented
+        resolve(params);
+        break;
+      case 'postcss':
+        // TODO: not implemented
+        resolve(params);
+        break;
+      default:
+        resolve(params);
+    }
+  });
 }
 
-function addCssImports(cssFramework, templateEngine, uid) {
-  if (templateEngine === 'jade') {
-    let layoutFile = path.join(__dirname, 'build', uid, 'views', 'layout.jade');
+function addCssImports(params) {
+  if (params.templateEngine === 'jade') {
+    let layoutFile = path.join(__dirname, 'build', params.uid, 'views', 'layout.jade');
     let cssImportFile;
 
-    switch (cssFramework) {
+    switch (params.cssFramework) {
       case 'bootstrapCss':
         cssImportFile = path.join(__dirname, 'modules', 'css-framework', 'bootstrap', 'jade-import.jade');
         break;
       case 'bootstrapLess':
-        // TODO
+        // TODO: not implemented
         break;
       case 'bootstrapSass':
-        // TODO
+        // TODO: not implemented
         break;
       case 'foundationCss':
-        // TODO
+        // TODO: not implemented
         break;
       case 'foundationSass':
-        // TODO
+        // TODO: not implemented
         break;
       case 'bourbonNeat':
-        // TODO
+        // TODO: not implemented
         break;
       case 'none':
+        // TODO: not implemented
         break;
       default:
         break;
     }
-
     return replaceCode(layoutFile, 'CSS_FRAMEWORK_IMPORT', cssImportFile, { indentLevel: 2 });
-  } else if (templateEngine === 'handlebars') {
+  } else if (params.templateEngine === 'handlebars') {
     // TODO
-  } else if (templateEngine === 'swig') {
+  } else if (params.templateEngine === 'swig') {
     // TODO
   } else {
     Promise.resolve();
   }
+}
+
+function generateDatabase(params) {
+  return new Promise((resolve, reject) => {
+    switch (params.database) {
+      case 'mongodb':
+        resolve(params);
+        break;
+      case 'mysql':
+        // TODO: not implemented
+        reject();
+        break;
+      case 'postgresql':
+        // TODO: not implemented
+        reject();
+        break;
+      case 'rethinkdb':
+        // TODO: not implemented
+        reject();
+        break;
+      case 'none':
+        resolve(params);
+        break;
+      default:
+        reject('Unsupported Database');
+    }
+  });
 }
 
 /**
@@ -400,25 +452,19 @@ function generateZip(req, res) {
   });
 }
 
-function cleanup(uid) {
+function cleanup(params) {
   return new Promise((resolve, reject) => {
-    let location = path.join(__dirname, 'build', uid);
-    remove(location).then(() => {
-      resolve();
-    }).catch(() => {
-      reject();
-    });
+    let location = path.join(__dirname, 'build', params.uid);
+    return remove(location);
   });
 }
 
-function prepare() {
+function prepare(params) {
   return new Promise((resolve, reject) => {
-    let uid = shortid.generate();
-    let location = path.join(__dirname, 'build', uid);
+    params.uid = shortid.generate();
+    let location = path.join(__dirname, 'build', params.uid);
     return mkdirs(location).then(() => {
-      resolve(uid);
-    }).catch((err) => {
-      reject(err);
+      resolve(params);
     });
   });
 }
