@@ -403,16 +403,51 @@ function generateDatabase(params) {
   });
 }
 
+function cleanupEmailAuthenticationString(params) {
+  if (params.framework === 'express') {
+    let appFile = path.join(__dirname, 'build', params.uid, 'app.js');
+
+    return readFile(appFile).then((appFileData) => {
+      appFileData = removeCode(appFileData, 'EXPRESS_TEMPLATE_ENGINE_CONFIG');
+      return writeFile(appFile, appFileData);
+    });
+  } else if (params.framework === 'hapi') {
+    // TODO: not implemented
+  } else if (params.framework === 'sails') {
+    // TODO: not implemented
+  }
+}
 
 function generateEmailAuthentication(params) {
   return new Promise((resolve, reject) => {
-    if (_.includes(params.authentication, 'email')) {
       switch (params.framework) {
         case 'express':
-          let appFile = path.join(__dirname, 'build', params.uid, 'app.js');
-          let passportRequireFile = path.join(__dirname, 'modules', 'authentication', 'email', 'passport-require.js');
-          let passportStrategyFile = path.join(__dirname, 'modules', 'authentication', 'email', 'passport-strategy.js');
-          let passportRoutesFile = path.join(__dirname, 'modules', 'authentication', 'email', 'passport-routes.js');
+          let config = path.join(__dirname, 'build', params.uid, 'config', 'passport.js');
+          let require = path.join(__dirname, 'modules', 'authentication', 'email', 'passport-require.js');
+          let strategy = path.join(__dirname, 'modules', 'authentication', 'email', 'passport-strategy.js');
+          let routes = path.join(__dirname, 'modules', 'authentication', 'email', 'passport-routes.js');
+
+          if (params.authentication.indexOf('email') > -1) {
+
+            let updatePassportFile = new Promise((resolve, reject) => {
+                return replaceCode(config, 'PASSPORT_LOCAL_REQUIRE', require).then(() => {
+                  return replaceCode(config, 'PASSPORT_LOCAL_STRATEGY', strategy);
+                });
+            });
+
+            return Promise.all([
+              addPackageDependencies(packages.authentication.email, params),
+              updatePassportFile
+            ]).then(() => {
+              resolve(params);
+            });
+          } else {
+            return readFile(config).then((passportConfigData) => {
+              passportConfigData = removeCode(passportConfigData, 'PASSPORT_LOCAL_REQUIRE');
+              return writeFile(config, passportConfigData);
+            });
+          }
+
           resolve(params);
           break;
         case 'hapi':
@@ -426,9 +461,7 @@ function generateEmailAuthentication(params) {
         default:
           return Promise.reject('Unsupported Framework');
       }
-    } else {
-      resolve(params);
-    }
+
   });
 }
 
@@ -443,8 +476,6 @@ function generateCommonAuthentication(params) {
         let passportSerializerFile = path.join(__dirname, 'modules', 'authentication', 'common', 'passport-serializer.js');
         let passportDeserializerFile = path.join(__dirname, 'modules', 'authentication', 'common', 'passport-deserializer.js');
         let passportUserModelFile = path.join(__dirname, 'modules', 'authentication', 'common', 'passport-user-model.js');
-
-        let pkg = packages.authentication.common;
 
         let updateAppFile = new Promise((resolve, reject) => {
           return replaceCode(appFile, 'PASSPORT_REQUIRE', passportRequireFile).then(() => {
@@ -468,10 +499,12 @@ function generateCommonAuthentication(params) {
         });
 
         return Promise.all([
-          addPackageDependencies(pkg, params),
+          addPackageDependencies(packages.authentication.common, params),
           updateAppFile,
           createAndUpdatePassportFile
-        ]);
+        ]).then(() => {
+          resolve(params);
+        });
         break;
       case 'hapi':
         // TODO: not implemented
