@@ -437,25 +437,41 @@ function generateCommonAuthentication(params) {
     switch (params.framework) {
       case 'express':
         let appFile = path.join(__dirname, 'build', params.uid, 'app.js');
+        let passportConfigModuleFile = path.join(__dirname, 'modules', 'authentication', 'common', 'passport-config.js');
         let passportRequireFile = path.join(__dirname, 'modules', 'authentication', 'common', 'passport-require.js');
         let passportMiddlewareFile = path.join(__dirname, 'modules', 'authentication', 'common', 'passport-middleware.js');
-        let passportSerializersFile = path.join(__dirname, 'modules', 'authentication', 'common', 'passport-serializers.js');
+        let passportSerializerFile = path.join(__dirname, 'modules', 'authentication', 'common', 'passport-serializer.js');
+        let passportDeserializerFile = path.join(__dirname, 'modules', 'authentication', 'common', 'passport-deserializer.js');
+        let passportUserModelFile = path.join(__dirname, 'modules', 'authentication', 'common', 'passport-user-model.js');
 
         let pkg = packages.authentication.common;
 
-        return addPackageDependencies(pkg, params)
-          .then(() => {
-            return replaceCode(appFile, 'AUTHENTICATION_REQUIRE', passportRequireFile)
-              .then(() => {
-                return replaceCode(appFile, 'AUTHENTICATION_MIDDLEWARE', passportMiddlewareFile)
-                  .then(() => {
-                    return replaceCode(appFile, 'AUTHENTICATION_SERIALIZERS', passportSerializersFile, { leadingBlankLine: true })
-                      .then(() => {
-                        resolve(params);
-                      });
-                  });
-              });
+        let updateAppFile = new Promise((resolve, reject) => {
+          return replaceCode(appFile, 'PASSPORT_REQUIRE', passportRequireFile).then(() => {
+            return replaceCode(appFile, 'PASSPORT_MIDDLEWARE', passportMiddlewareFile).then(() => {
+              resolve();
+            });
           });
+        });
+
+        let createAndUpdatePassportFile = new Promise((resolve, reject) => {
+          let passportConfigFile = path.join(__dirname, 'build', params.uid, 'config', 'passport.js');
+          return copy(passportConfigModuleFile, passportConfigFile).then(() => {
+            return replaceCode(passportConfigFile, 'PASSPORT_USER_MODEL', passportUserModelFile).then(() => {
+              return replaceCode(passportConfigFile, 'PASSPORT_SERIALIZER', passportSerializerFile, { leadingBlankLine: true }).then(() => {
+                return replaceCode(passportConfigFile, 'PASSPORT_DESERIALIZER', passportDeserializerFile, { leadingBlankLine: true }).then(() => {
+                  resolve();
+                });
+              });
+            });
+          });
+        });
+
+        return Promise.all([
+          addPackageDependencies(pkg, params),
+          updateAppFile,
+          createAndUpdatePassportFile
+        ]);
         break;
       case 'hapi':
         // TODO: not implemented

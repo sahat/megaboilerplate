@@ -5,7 +5,7 @@ var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 // DATABASE_REQUIRE
-// AUTHENTICATION_REQUIRE
+// PASSPORT_REQUIRE
 
 var app = express();
 // DATABASE_CONNECTION
@@ -21,7 +21,7 @@ app.use(session({
   resave: true,
   saveUninitialized: true
 }));
-// AUTHENTICATION_MIDDLEWARE
+// PASSPORT_MIDDLEWARE
 app.use(express.static(path.join(__dirname, 'public')));
 
 // development error handler
