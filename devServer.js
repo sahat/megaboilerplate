@@ -318,7 +318,7 @@ function addCssImports(params) {
   }
 }
 
-function addPackageDependencies(dependencies, params, isDev) {
+function addDependencies(dependencies, params, isDev) {
   let packageJson = path.join(__dirname, 'build', params.uid, 'package.json');
 
   return readJson(packageJson).then((packageObj) => {
@@ -352,7 +352,7 @@ function generateMongodbDatabase(params) {
         })
         .then(() => {
           let pkg = packages.database.mongodb;
-          return addPackageDependencies(pkg, params);
+          return addDependencies(pkg, params);
         });
       break;
     case 'hapi':
@@ -409,50 +409,6 @@ function cleanupEmailAuthenticationString(params) {
   }
 }
 
-function generateEmailAuthentication(params) {
-  return new Promise((resolve, reject) => {
-      switch (params.framework) {
-        case 'express':
-          let config = path.join(__dirname, 'build', params.uid, 'config', 'passport.js');
-          let require = path.join(__dirname, 'modules', 'authentication', 'email', 'passport-require.js');
-          let strategy = path.join(__dirname, 'modules', 'authentication', 'email', 'passport-strategy.js');
-          let routes = path.join(__dirname, 'modules', 'authentication', 'email', 'passport-routes.js');
-
-          if (params.authentication.indexOf('email') > -1) {
-
-            let updatePassportFile = new Promise((resolve, reject) => {
-                return replaceCode(config, 'PASSPORT_LOCAL_REQUIRE', require).then(() => {
-                  return replaceCode(config, 'PASSPORT_LOCAL_STRATEGY', strategy);
-                });
-            });
-
-            return Promise.all([
-              addPackageDependencies(packages.authentication.email, params),
-              updatePassportFile
-            ]).then(() => {
-              resolve(params);
-            });
-          } else {
-            return removeCode(config, 'PASSPORT_LOCAL_REQUIRE');
-          }
-
-          resolve(params);
-          break;
-        case 'hapi':
-          // TODO: not implemented
-          return Promise.resolve();
-          break;
-        case 'sails':
-          // TODO: not implemented
-          return Promise.resolve();
-          break;
-        default:
-          return Promise.reject('Unsupported Framework');
-      }
-
-  });
-}
-
 function generateCommonAuthentication(params) {
   return new Promise((resolve, reject) => {
    if (params.authentication.indexOf('none') > -1) {
@@ -497,7 +453,7 @@ function generateCommonAuthentication(params) {
          });
 
          return Promise.all([
-           addPackageDependencies(packages.authentication.common, params),
+           addDependencies(packages.authentication.common, params),
            updateAppFile,
            createAndUpdatePassportFile
          ]).then(() => {
@@ -519,10 +475,14 @@ function generateCommonAuthentication(params) {
   });
 }
 
-function generateFacebookAuthentication(params) {
+function generateEmailAuthenticationExpress(params) {
   return new Promise((resolve, reject) => {
-    // TODO
-    if (params.authentication.indexOf('facebook') > -1) {
+    let config = path.join(__dirname, 'build', params.uid, 'config', 'passport.js');
+    let require = path.join(__dirname, 'modules', 'authentication', 'email', 'passport-require.js');
+    let strategy = path.join(__dirname, 'modules', 'authentication', 'email', 'passport-strategy.js');
+    let routes = path.join(__dirname, 'modules', 'authentication', 'email', 'passport-routes.js');
+
+    if (params.authentication.indexOf('email') > -1) {
 
       let updatePassportFile = new Promise((resolve, reject) => {
         return replaceCode(config, 'PASSPORT_LOCAL_REQUIRE', require).then(() => {
@@ -531,18 +491,75 @@ function generateFacebookAuthentication(params) {
       });
 
       return Promise.all([
-        addPackageDependencies(packages.authentication.email, params),
+        addDependencies(packages.authentication.email, params),
         updatePassportFile
       ]).then(() => {
         resolve(params);
       });
     } else {
-      return removeCode(config, 'PASSPORT_FACEBOOK_REQUIRE').then(() => {
-        return removeCode(config, 'PASSPORT_FACEBOOK_STRATEGY')
+      return removeCode(config, 'PASSPORT_LOCAL_REQUIRE').then(() => {
+        return removeCode(config, 'PASSPORT_LOCAL_STRATEGY').then(() => {
+          resolve(params);
+        });
       });
     }
   });
 }
+function generateEmailAuthentication(params) {
+  switch (params.framework) {
+    case 'express':
+      return generateEmailAuthenticationExpress(params);
+      break;
+    case 'hapi':
+      // TODO: not implemented
+      return Promise.resolve();
+      break;
+    case 'sails':
+      // TODO: not implemented
+      return Promise.resolve();
+      break;
+    default:
+      return Promise.reject('Unsupported Framework');
+  }
+}
+
+function generateFacebookAuthenticationExpress(params) {
+  return new Promise((resolve, reject) => {
+    let config = path.join(__dirname, 'build', params.uid, 'config', 'passport.js');
+    let require = path.join(__dirname, 'modules', 'authentication', 'email', 'passport-require.js');
+    let strategy = path.join(__dirname, 'modules', 'authentication', 'email', 'passport-strategy.js');
+    let routes = path.join(__dirname, 'modules', 'authentication', 'email', 'passport-routes.js');
+
+    if (params.authentication.indexOf('facebook') > -1) {
+      // TODO
+    } else {
+      return removeCode(config, 'PASSPORT_FACEBOOK_REQUIRE').then(() => {
+        return removeCode(config, 'PASSPORT_FACEBOOK_STRATEGY').then(() => {
+          resolve(params);
+        })
+      });
+    }
+  });
+}
+
+function generateFacebookAuthentication(params) {
+    switch (params.framework) {
+      case 'express':
+       return generateFacebookAuthenticationExpress(params);
+        break;
+      case 'hapi':
+        // TODO: not implemented
+        return Promise.resolve();
+        break;
+      case 'sails':
+        // TODO: not implemented
+        return Promise.resolve();
+        break;
+      default:
+        return Promise.reject('Unsupported Framework');
+    }
+}
+
 function generateGoogleAuthentication(params) {
   return new Promise((resolve, reject) => {
     // TODO
@@ -555,7 +572,7 @@ function generateGoogleAuthentication(params) {
       });
 
       return Promise.all([
-        addPackageDependencies(packages.authentication.email, params),
+        addDependencies(packages.authentication.email, params),
         updatePassportFile
       ]).then(() => {
         resolve(params);
@@ -578,7 +595,7 @@ function generateTwitterAuthentication(params) {
       });
 
       return Promise.all([
-        addPackageDependencies(packages.authentication.email, params),
+        addDependencies(packages.authentication.email, params),
         updatePassportFile
       ]).then(() => {
         resolve(params);
