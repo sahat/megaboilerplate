@@ -55,7 +55,7 @@ app.get('*', function(req, res) {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-app.listen(3000, 'localhost', function(err) {
+app.listen(4000, 'localhost', function(err) {
   if (err) {
     console.log(err);
     return;
@@ -140,10 +140,7 @@ function cleanupTemplateEngineString(params) {
   if (params.framework === 'express') {
     let appFile = path.join(__dirname, 'build', params.uid, 'app.js');
 
-    return readFile(appFile).then((appFileData) => {
-      appFileData = removeCode(appFileData, 'EXPRESS_TEMPLATE_ENGINE_CONFIG');
-      return writeFile(appFile, appFileData);
-    });
+    return removeCode(appFile, 'EXPRESS_TEMPLATE_ENGINE_CONFIG');
   } else if (params.framework === 'hapi') {
     // TODO: not implemented
   } else if (params.framework === 'sails') {
@@ -156,10 +153,7 @@ function cleanupCssFrameworkString(params) {
   if (params.templateEngine === 'jade') {
     let layoutFile = path.join(__dirname, 'build', params.uid, 'views', 'layout.jade');
 
-    return readFile(layoutFile).then((layoutData) => {
-      layoutData = removeCode(layoutData, 'CSS_FRAMEWORK_IMPORT');
-      return writeFile(layoutFile, layoutData);
-    });
+    return removeCode(layoutFile, 'CSS_FRAMEWORK_IMPORT');
   } else if (params.templateEngine === 'handlebars') {
     // TODO: not implemented
   } else if (params.templateEngine === 'swig') {
@@ -407,10 +401,7 @@ function cleanupEmailAuthenticationString(params) {
   if (params.framework === 'express') {
     let appFile = path.join(__dirname, 'build', params.uid, 'app.js');
 
-    return readFile(appFile).then((appFileData) => {
-      appFileData = removeCode(appFileData, 'EXPRESS_TEMPLATE_ENGINE_CONFIG');
-      return writeFile(appFile, appFileData);
-    });
+    return removeCode(appFile, 'EXPRESS_TEMPLATE_ENGINE_CONFIG');
   } else if (params.framework === 'hapi') {
     // TODO: not implemented
   } else if (params.framework === 'sails') {
@@ -442,10 +433,7 @@ function generateEmailAuthentication(params) {
               resolve(params);
             });
           } else {
-            return readFile(config).then((passportConfigData) => {
-              passportConfigData = removeCode(passportConfigData, 'PASSPORT_LOCAL_REQUIRE');
-              return writeFile(config, passportConfigData);
-            });
+            return removeCode(config, 'PASSPORT_LOCAL_REQUIRE');
           }
 
           resolve(params);
@@ -523,20 +511,68 @@ function generateCommonAuthentication(params) {
 function generateFacebookAuthentication(params) {
   return new Promise((resolve, reject) => {
     // TODO
-    resolve(params);
+    if (params.authentication.indexOf('facebook') > -1) {
+
+      let updatePassportFile = new Promise((resolve, reject) => {
+        return replaceCode(config, 'PASSPORT_LOCAL_REQUIRE', require).then(() => {
+          return replaceCode(config, 'PASSPORT_LOCAL_STRATEGY', strategy);
+        });
+      });
+
+      return Promise.all([
+        addPackageDependencies(packages.authentication.email, params),
+        updatePassportFile
+      ]).then(() => {
+        resolve(params);
+      });
+    } else {
+      return removeCode(config, 'PASSPORT_FACEBOOK_REQUIRE');
+    }
   });
 }
 function generateGoogleAuthentication(params) {
   return new Promise((resolve, reject) => {
     // TODO
-    resolve(params);
+    if (params.authentication.indexOf('google') > -1) {
+
+      let updatePassportFile = new Promise((resolve, reject) => {
+        return replaceCode(config, 'PASSPORT_LOCAL_REQUIRE', require).then(() => {
+          return replaceCode(config, 'PASSPORT_LOCAL_STRATEGY', strategy);
+        });
+      });
+
+      return Promise.all([
+        addPackageDependencies(packages.authentication.email, params),
+        updatePassportFile
+      ]).then(() => {
+        resolve(params);
+      });
+    } else {
+      return removeCode(config, 'PASSPORT_GOOGLE_REQUIRE');
+    }
   });
 }
 
 function generateTwitterAuthentication(params) {
   return new Promise((resolve, reject) => {
     // TODO
-    resolve(params);
+    if (params.authentication.indexOf('twitter') > -1) {
+
+      let updatePassportFile = new Promise((resolve, reject) => {
+        return replaceCode(config, 'PASSPORT_LOCAL_REQUIRE', require).then(() => {
+          return replaceCode(config, 'PASSPORT_LOCAL_STRATEGY', strategy);
+        });
+      });
+
+      return Promise.all([
+        addPackageDependencies(packages.authentication.email, params),
+        updatePassportFile
+      ]).then(() => {
+        resolve(params);
+      });
+    } else {
+      return removeCode(config, 'PASSPORT_TWITTER_REQUIRE')
+    }
   });
 }
 
@@ -593,6 +629,26 @@ function replaceCode(srcFile, subStr, newSrcFile, opts) {
 
 /**
  *
+ * @param srcFile {buffer} - where to remove
+ * @param subStr {string} - what to remove
+ * @returns {string}
+ */
+function removeCode(srcFile, subStr) {
+  return readFile(srcFile).then((srcData) => {
+    let array = srcData.toString().split('\n');
+    array.forEach((line, index) => {
+      if (line.includes(subStr)) {
+        array.splice(index, 1);
+      }
+    });
+    srcData = array.join('\n');
+    return writeFile(srcFile, srcData);
+  });
+}
+
+
+/**
+ *
  * @param subStr {string} - what to indent
  * @param indentLevel {number} - how many levels to indent
  * @returns {string}
@@ -607,21 +663,6 @@ function indentCode(subStr, indentLevel) {
   return array.join('\n');
 }
 
-/**
- *
- * @param src {buffer} - where to remove
- * @param subStr {string} - what to remove
- * @returns {string}
- */
-function removeCode(src, subStr) {
-  let array = src.toString().split('\n');
-  array.forEach((line, index) => {
-    if (line.includes(subStr)) {
-      array.splice(index, 1);
-    }
-  });
-  return array.join('\n');
-}
 
 
 
