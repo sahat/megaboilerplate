@@ -455,56 +455,67 @@ function generateEmailAuthentication(params) {
 
 function generateCommonAuthentication(params) {
   return new Promise((resolve, reject) => {
-    switch (params.framework) {
-      case 'express':
-        let appFile = path.join(__dirname, 'build', params.uid, 'app.js');
-        let passportConfigModuleFile = path.join(__dirname, 'modules', 'authentication', 'common', 'passport-config.js');
-        let passportRequireFile = path.join(__dirname, 'modules', 'authentication', 'common', 'passport-require.js');
-        let passportMiddlewareFile = path.join(__dirname, 'modules', 'authentication', 'common', 'passport-middleware.js');
-        let passportSerializerFile = path.join(__dirname, 'modules', 'authentication', 'common', 'passport-serializer.js');
-        let passportDeserializerFile = path.join(__dirname, 'modules', 'authentication', 'common', 'passport-deserializer.js');
-        let passportUserModelFile = path.join(__dirname, 'modules', 'authentication', 'common', 'passport-user-model.js');
+   if (params.authentication.indexOf('none') > -1) {
+     let appFile = path.join(__dirname, 'build', params.uid, 'app.js');
 
-        let updateAppFile = new Promise((resolve, reject) => {
-          return replaceCode(appFile, 'PASSPORT_REQUIRE', passportRequireFile).then(() => {
-            return replaceCode(appFile, 'PASSPORT_MIDDLEWARE', passportMiddlewareFile).then(() => {
-              resolve();
-            });
-          });
-        });
+     return removeCode(appFile, 'PASSPORT_REQUIRE').then(() => {
+       return removeCode(appFile, 'PASSPORT_MIDDLEWARE').then(() => {
+         resolve(params);
+       });
+     });
 
-        let createAndUpdatePassportFile = new Promise((resolve, reject) => {
-          let passportConfigFile = path.join(__dirname, 'build', params.uid, 'config', 'passport.js');
-          return copy(passportConfigModuleFile, passportConfigFile).then(() => {
-            return replaceCode(passportConfigFile, 'PASSPORT_USER_MODEL', passportUserModelFile).then(() => {
-              return replaceCode(passportConfigFile, 'PASSPORT_SERIALIZER', passportSerializerFile, { leadingBlankLine: true }).then(() => {
-                return replaceCode(passportConfigFile, 'PASSPORT_DESERIALIZER', passportDeserializerFile, { leadingBlankLine: true }).then(() => {
-                  resolve();
-                });
-              });
-            });
-          });
-        });
+   } else {
+     switch (params.framework) {
+       case 'express':
+         let appFile = path.join(__dirname, 'build', params.uid, 'app.js');
+         let passportConfigModuleFile = path.join(__dirname, 'modules', 'authentication', 'common', 'passport-config.js');
+         let passportRequireFile = path.join(__dirname, 'modules', 'authentication', 'common', 'passport-require.js');
+         let passportMiddlewareFile = path.join(__dirname, 'modules', 'authentication', 'common', 'passport-middleware.js');
+         let passportSerializerFile = path.join(__dirname, 'modules', 'authentication', 'common', 'passport-serializer.js');
+         let passportDeserializerFile = path.join(__dirname, 'modules', 'authentication', 'common', 'passport-deserializer.js');
+         let passportUserModelFile = path.join(__dirname, 'modules', 'authentication', 'common', 'passport-user-model.js');
 
-        return Promise.all([
-          addPackageDependencies(packages.authentication.common, params),
-          updateAppFile,
-          createAndUpdatePassportFile
-        ]).then(() => {
-          resolve(params);
-        });
-        break;
-      case 'hapi':
-        // TODO: not implemented
-        return Promise.resolve();
-        break;
-      case 'sails':
-        // TODO: not implemented
-        return Promise.resolve();
-        break;
-      default:
-        return Promise.reject('Unsupported Framework');
-    }
+         let updateAppFile = new Promise((resolve, reject) => {
+           return replaceCode(appFile, 'PASSPORT_REQUIRE', passportRequireFile).then(() => {
+             return replaceCode(appFile, 'PASSPORT_MIDDLEWARE', passportMiddlewareFile).then(() => {
+               resolve();
+             });
+           });
+         });
+
+         let createAndUpdatePassportFile = new Promise((resolve, reject) => {
+           let passportConfigFile = path.join(__dirname, 'build', params.uid, 'config', 'passport.js');
+           return copy(passportConfigModuleFile, passportConfigFile).then(() => {
+             return replaceCode(passportConfigFile, 'PASSPORT_USER_MODEL', passportUserModelFile).then(() => {
+               return replaceCode(passportConfigFile, 'PASSPORT_SERIALIZER', passportSerializerFile, { leadingBlankLine: true }).then(() => {
+                 return replaceCode(passportConfigFile, 'PASSPORT_DESERIALIZER', passportDeserializerFile, { leadingBlankLine: true }).then(() => {
+                   resolve();
+                 });
+               });
+             });
+           });
+         });
+
+         return Promise.all([
+           addPackageDependencies(packages.authentication.common, params),
+           updateAppFile,
+           createAndUpdatePassportFile
+         ]).then(() => {
+           resolve(params);
+         });
+         break;
+       case 'hapi':
+         // TODO: not implemented
+         return Promise.resolve();
+         break;
+       case 'sails':
+         // TODO: not implemented
+         return Promise.resolve();
+         break;
+       default:
+         return Promise.reject('Unsupported Framework');
+     }
+   }
   });
 }
 
@@ -526,7 +537,9 @@ function generateFacebookAuthentication(params) {
         resolve(params);
       });
     } else {
-      return removeCode(config, 'PASSPORT_FACEBOOK_REQUIRE');
+      return removeCode(config, 'PASSPORT_FACEBOOK_REQUIRE').then(() => {
+        return removeCode(config, 'PASSPORT_FACEBOOK_STRATEGY')
+      });
     }
   });
 }
@@ -577,17 +590,11 @@ function generateTwitterAuthentication(params) {
 }
 
 function generateAuthentication(params) {
-  return new Promise((resolve, reject) => {
-    if (_.includes(params.authentication, 'none')) {
-      resolve(params);
-    } else {
-      return generateCommonAuthentication(params)
-        .then(generateEmailAuthentication)
-        .then(generateFacebookAuthentication)
-        .then(generateGoogleAuthentication)
-        .then(generateTwitterAuthentication);
-    }
-  });
+  return generateCommonAuthentication(params)
+    .then(generateEmailAuthentication)
+    .then(generateFacebookAuthentication)
+    .then(generateGoogleAuthentication)
+    .then(generateTwitterAuthentication);
 }
 
 /**
