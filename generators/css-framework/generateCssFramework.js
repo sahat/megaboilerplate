@@ -1,5 +1,5 @@
 let generateBootstrapCss = require('./generateBootstrapCss');
-let cleanupCssFrameworkString = require('./cleanupCssFrameworkString');
+let cleanupCssFrameworkString = require('./cleanupCssFrameworkStrings');
 
 async function generateCssFramework(params) {
   switch (params.cssFramework) {
