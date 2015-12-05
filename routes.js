@@ -1,7 +1,7 @@
 let prepare = require('./utils/prepare');
-let generateFramework = require('./generators/framework');
-let generateTemplateEngine = require('./generators/template-engine');
-let generateCssFramework = require('./generators/css-framework');
+let generateFramework = require('./generators/framework/generateFramework');
+let generateTemplateEngine = require('./generators/template-engine/generateTemplateEngine');
+let generateCssFramework = require('./generators/css-framework/generateCssFramework');
 
 async function download(req, res) {
   let params = await prepare(req.body);

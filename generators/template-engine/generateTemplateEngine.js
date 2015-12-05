@@ -1,5 +1,5 @@
-let generateJadeTemplateEngine = require('../../generators/template-engine/jade');
-let cleanupTemplateEngineString = require('../../generators/template-engine/cleanup');
+let generateJadeTemplateEngine = require('../../generators/template-engine/generateJadeTemplateEngine');
+let cleanupTemplateEngineString = require('../../generators/template-engine/cleanupTemplateEngineString');
 
 async function generateTemplateEngine(params) {
   switch (params.templateEngine) {

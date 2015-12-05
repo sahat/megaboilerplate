@@ -2,10 +2,16 @@ var fs = require('fs-extra');
 var path = require('path');
 var Promise = require('bluebird');
 
+Promise.config({
+  warnings: false
+});
+
 var mkdirs = Promise.promisify(fs.mkdirs);
 var copy = Promise.promisify(fs.copy);
 var readJson = Promise.promisify(fs.readJson);
 var writeJson = Promise.promisify(fs.writeJson);
+
+
 
 async function generateFrameworkExpress(params) {
   let root = path.dirname(require.main.filename);

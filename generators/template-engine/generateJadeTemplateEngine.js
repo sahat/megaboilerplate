@@ -4,7 +4,7 @@ var Promise = require('bluebird');
 
 var copy = Promise.promisify(fs.copy);
 
-let replaceCode = require('../../../utils/replaceCode');
+let replaceCode = require('../../utils/replaceCode');
 
 async function generateJadeTemplateEngine(params) {
   switch (params.framework) {

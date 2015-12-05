@@ -1,4 +1,4 @@
-let generateFrameworkExpress = require('../../generators/framework/express');
+let generateFrameworkExpress = require('../../generators/framework/generateFrameworkExpress');
 
 async function generateFramework(params) {
   switch (params.framework) {
