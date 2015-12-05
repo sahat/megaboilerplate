@@ -5,7 +5,9 @@
     "start": "node devServer.js"
   },
   "devDependencies": {
+    "babel-eslint": "^5.0.0-beta4",
     "eslint": "^1.10.3",
+    "eslint-plugin-react": "^3.11.2",
     "webpack": "^1.12.9",
     "webpack-dev-middleware": "^1.4.0",
     "webpack-hot-middleware": "^2.6.0"
