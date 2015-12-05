@@ -1,32 +1,22 @@
 import React from 'react';
 
 class Header extends React.Component {
-    render() {
-        return (
-            <div>
-                <header id="header" className="alt">
-                    <h1><a href="index.html">Solid State</a></h1>
-                    <nav>
-                        <a href="#menu">Menu</a>
-                    </nav>
-                </header>
-
-                <nav id="menu">
-                    <div className="inner">
-                        <h2>Menu</h2>
-                        <ul className="links">
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="generic.html">Generic</a></li>
-                            <li><a href="elements.html">Elements</a></li>
-                            <li><a href="#">Log In</a></li>
-                            <li><a href="#">Sign Up</a></li>
-                        </ul>
-                        <a href="#" className="close">Close</a>
-                    </div>
-                </nav>
-            </div>
-        );
-    }
+  render() {
+    return (
+      <nav className="navbar navbar-default">
+        <div className="container-fluid">
+          <div id="navbar" className="navbar-collapse collapse">
+            <ul className="nav navbar-nav">
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Philosophy</a></li>
+              <li><a href="#">Contributing</a></li>
+              <li><a href="#">Trending</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    );
+  }
 }
 
 export default Header;

@@ -1,4 +1,5 @@
 import React from 'react';
+import Header from './Header';
 
 class Banner extends React.Component {
 
@@ -18,6 +19,7 @@ class Banner extends React.Component {
   render() {
     return (
       <div className="hero">
+        <Header />
         <div className="container">
           <span className="text-center bd-booticon outline">B</span>
           <h1>Mega Boilerplate</h1>
