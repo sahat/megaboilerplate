@@ -1,36 +1,24 @@
-var fs = require('fs-extra');
 var path = require('path');
 var Promise = require('bluebird');
-
-Promise.config({
-  warnings: false
-});
-
-var mkdirs = Promise.promisify(fs.mkdirs);
-var copy = Promise.promisify(fs.copy);
-var readJson = Promise.promisify(fs.readJson);
-var writeJson = Promise.promisify(fs.writeJson);
-
-
+let fs = Promise.promisifyAll(require('fs-extra'));
 
 async function generateFrameworkExpress(params) {
-  let root = path.dirname(require.main.filename);
-  let build = path.join(root, 'build', params.uuid);
-  let express = path.join(root, 'modules', 'express');
+  let build = path.join(__base, 'build', params.uuid);
+  let express = path.join(__base, 'modules', 'express');
 
   // Copy initial Express files
-  await copy(express, build);
+  await fs.copy(express, build);
 
   // Update package.json app name
   let packageJson = path.join(build, 'package.json');
-  let packageObj = await readJson(packageJson);
+  let packageObj = await fs.readJson(packageJson);
   packageObj.name = params.appName;
-  await writeJson(packageJson, packageObj, { spaces: 2 });
+  await fs.writeJson(packageJson, packageObj, { spaces: 2 });
 
   // Create public dirs
-  await mkdirs(path.join(build, 'public', 'images'));
-  await mkdirs(path.join(build, 'public', 'javascripts'));
-  await mkdirs(path.join(build, 'public', 'stylesheets'));
+  await fs.mkdirs(path.join(build, 'public', 'images'));
+  await fs.mkdirs(path.join(build, 'public', 'javascripts'));
+  await fs.mkdirs(path.join(build, 'public', 'stylesheets'));
 }
 
 module.exports = generateFrameworkExpress;
