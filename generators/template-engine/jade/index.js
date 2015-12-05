@@ -2,10 +2,7 @@ var fs = require('fs-extra');
 var path = require('path');
 var Promise = require('bluebird');
 
-var mkdirs = Promise.promisify(fs.mkdirs);
 var copy = Promise.promisify(fs.copy);
-var readJson = Promise.promisify(fs.readJson);
-var writeJson = Promise.promisify(fs.writeJson);
 
 let replaceCode = require('../../../utils/replaceCode');
 
@@ -13,24 +10,26 @@ async function generateJadeTemplateEngine(params) {
   switch (params.framework) {
     case 'express':
       let root = path.dirname(require.main.filename);
-      let jadeExpressFile = path.join(root, 'modules', 'template-engine', 'jade', 'jade-express.js');
-      let appFile = path.join(root, 'build', params.uuid, 'app.js');
+      let viewEngine = path.join(root, 'modules', 'template-engine', 'jade', 'jade-express.js');
+      let app = path.join(root, 'build', params.uuid, 'app.js');
 
-      await replaceCode(appFile, 'EXPRESS_TEMPLATE_ENGINE_CONFIG', jadeExpressFile, { leadingBlankLine: true });
+      // Set "views dir" and "view engine"
+      await replaceCode(app, 'EXPRESS_TEMPLATE_ENGINE_CONFIG', viewEngine, { leadingBlankLine: true });
 
-      let src = path.join(root, 'modules', 'template-engine', 'jade', 'views');
-      let dest = path.join(root, 'build', params.uuid, 'views');
-
-      await copy(src, dest);
+      // Copy initial Jade templates
+      await copy(
+        path.join(root, 'modules', 'template-engine', 'jade', 'views'),
+        path.join(root, 'build', params.uuid, 'views')
+      );
       break;
     case 'hapi':
-      // TODO: not implemented
+      // TODO
       break;
     case 'sails':
-      // TODO: not implemented
+      // TODO
       break;
     default:
-      return Promise.reject('Unsupported Framework');
+      // TODO
   }
 }
 
