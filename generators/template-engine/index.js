@@ -20,4 +20,4 @@ async function generateTemplateEngine(params) {
   }
 }
 
-module.exports = generateJadeTemplateEngine;
+module.exports = generateTemplateEngine;

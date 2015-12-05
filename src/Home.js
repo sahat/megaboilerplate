@@ -507,6 +507,8 @@ class Home extends React.Component {
         {download}
         <br/>
         <a className="twitter-share-button" href="https://twitter.com/intent/tweet">Tweet</a>&nbsp;
+        <a className="twitter-follow-button" href="https://twitter.com/EvNowAndForever" data-show-count="false">
+          Follow @EvNowAndForever</a>
       </div>
     );
   }
