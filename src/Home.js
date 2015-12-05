@@ -27,11 +27,16 @@ class Home extends React.Component {
       cssPreprocessor: query.cssPreprocessor || null,
       cssBuildOptions: query.cssBuildOptions || null,
       database: query.database || null,
-      authentication: isArray(query.authentication) ? new Set(query.authentication) : new Set(Array(query.authentication)),
       jsFramework: query.jsFramework || null,
       reactOptions: query.reactOptions || null,
       reactBuildSystem: query.reactBuildSystem || null
     };
+
+    if (query.authentication) {
+      this.state.authentication = isArray(query.authentication) ? new Set(query.authentication) : new Set(Array(query.authentication));
+    } else {
+      this.state.authentication = new Set();
+    }
   }
 
   componentDidUpdate() {
@@ -370,12 +375,13 @@ class Home extends React.Component {
       </div>
     ) : null;
 
+    console.log(state.authentication.size);
     let authentication = state.database ? (
       <div className="fadeIn animated">
         <h3>Authentication</h3>
         {authenticationAlert}
         <label className="checkbox-inline">
-          <input type="checkbox" name="authenticationCheckboxes" value="none" onChange={this.handleChange} checked={state.authentication.has('none')} disabled={state.database === 'none'} /> None
+          <input type="checkbox" name="authenticationCheckboxes" value="none" onChange={this.handleChange} checked={state.authentication.size === 0} disabled={state.database === 'none'} /> None
         </label>
         <label className="checkbox-inline">
           <input type="checkbox" name="authenticationCheckboxes" value="email" onChange={this.handleChange} checked={state.authentication.has('email')} disabled={state.database === 'none'} /> Email / Password
