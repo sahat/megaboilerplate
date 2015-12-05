@@ -1,15 +1,20 @@
 let prepare = require('./utils/prepare');
 let generateFramework = require('./generators/framework');
 let generateTemplateEngine = require('./generators/template-engine');
+let generateCssFramework = require('./generators/css-framework');
 
-exports.download = async function(req, res) {
+async function download(req, res) {
   let params = await prepare(req.body);
 
   await generateFramework(params);
   await generateTemplateEngine(params);
-  //await generateCssFramework;
+  await generateCssFramework(params);
   //await generateCssPreprocessor;
   //await generateDatabase;
   //await generateAuthentication;
   res.end();
+}
+
+module.exports = {
+  download: download
 };
