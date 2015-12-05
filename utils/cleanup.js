@@ -1,9 +1,10 @@
 let path = require('path');
+let fs = require('fs-extra');
 let Promise = require('bluebird');
-let fs = Promise.promisifyAll(require('fs-extra'));
+let remove = Promise.promisify(fs.remove);
 
 async function cleanup(params) {
-  await fs.remove(path.join(__base, 'build', params.uuid));
+  await remove(path.join(__base, 'build', params.uuid));
 }
 
 module.exports = cleanup;

@@ -1,10 +1,9 @@
-var fs = require('fs-extra');
-var path = require('path');
-var Promise = require('bluebird');
-var shortid = require('shortid');
-
-var readFile = Promise.promisify(fs.readFile);
-var writeFile = Promise.promisify(fs.writeFile);
+let path = require('path');
+let shortid = require('shortid');
+let fs = require('fs-extra');
+let Promise = require('bluebird');
+let readFile = Promise.promisify(fs.readFile);
+let writeFile = Promise.promisify(fs.writeFile);
 
 /**
  *

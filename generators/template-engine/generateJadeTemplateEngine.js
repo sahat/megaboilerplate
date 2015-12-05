@@ -1,6 +1,7 @@
 let path = require('path');
+let fs = require('fs-extra');
 let Promise = require('bluebird');
-let fs = Promise.promisifyAll(require('fs-extra'));
+let copy = Promise.promisify(fs.copy);
 let replaceCode = require('../../utils/replaceCode');
 
 async function generateJadeTemplateEngine(params) {

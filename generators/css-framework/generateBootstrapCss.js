@@ -1,6 +1,7 @@
 let path = require('path');
+let fs = require('fs-extra');
 let Promise = require('bluebird');
-let fs = Promise.promisifyAll(require('fs-extra'));
+let copy = Promise.promisify(fs.copy);
 let replaceCode = require('../../utils/replaceCode');
 
 async function generateBootstrapCss(params) {
@@ -26,14 +27,14 @@ async function generateBootstrapCss(params) {
   }
 
   // Copy Bootstrap files
-  await fs.copy(path.join(bootstrapDir, 'main.css'), path.join(publicDir, 'stylesheets', 'main.css'));
-  await fs.copy(path.join(bootstrapDir, 'fonts'), path.join(publicDir, 'fonts'));
-  await fs.copy(path.join(bootstrapDir, 'css', 'bootstrap.css'), path.join(publicDir, 'stylesheets', 'vendor', 'bootstrap.css'));
-  await fs.copy(path.join(bootstrapDir, 'css', 'bootstrap.min.css'), path.join(publicDir, 'stylesheets', 'vendor', 'bootstrap.min.css'));
-  await fs.copy(path.join(bootstrapDir, 'js', 'bootstrap.js'), path.join(publicDir, 'javascripts', 'vendor', 'bootstrap.js'));
-  await fs.copy(path.join(bootstrapDir, 'js', 'bootstrap.min.js'), path.join(publicDir, 'javascripts', 'vendor', 'bootstrap.min.js'));
-  await fs.copy(path.join(jqueryDir, 'jquery.js'), path.join(publicDir, 'javascripts', 'vendor', 'jquery.js'));
-  await fs.copy(path.join(jqueryDir, 'jquery.min.js'), path.join(publicDir, 'javascripts', 'vendor', 'jquery.min.js'));
+  await copy(path.join(bootstrapDir, 'main.css'), path.join(publicDir, 'stylesheets', 'main.css'));
+  await copy(path.join(bootstrapDir, 'fonts'), path.join(publicDir, 'fonts'));
+  await copy(path.join(bootstrapDir, 'css', 'bootstrap.css'), path.join(publicDir, 'stylesheets', 'vendor', 'bootstrap.css'));
+  await copy(path.join(bootstrapDir, 'css', 'bootstrap.min.css'), path.join(publicDir, 'stylesheets', 'vendor', 'bootstrap.min.css'));
+  await copy(path.join(bootstrapDir, 'js', 'bootstrap.js'), path.join(publicDir, 'javascripts', 'vendor', 'bootstrap.js'));
+  await copy(path.join(bootstrapDir, 'js', 'bootstrap.min.js'), path.join(publicDir, 'javascripts', 'vendor', 'bootstrap.min.js'));
+  await copy(path.join(jqueryDir, 'jquery.js'), path.join(publicDir, 'javascripts', 'vendor', 'jquery.js'));
+  await copy(path.join(jqueryDir, 'jquery.min.js'), path.join(publicDir, 'javascripts', 'vendor', 'jquery.min.js'));
 }
 
 module.exports = generateBootstrapCss;

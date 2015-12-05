@@ -1,6 +1,4 @@
 let path = require('path');
-let Promise = require('bluebird');
-let fs = Promise.promisifyAll(require('fs-extra'));
 let replaceCode = require('../../utils/replaceCode');
 let addDependencies = require('../../utils/addDependencies');
 let packages = require('../../modules/packages');
