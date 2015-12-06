@@ -2,10 +2,9 @@ let path = require('path');
 let fs = require('fs-extra');
 let Promise = require('bluebird');
 let copy = Promise.promisify(fs.copy);
-let readFile = Promise.promisify(fs.readFile);
-let outputFile = Promise.promisify(fs.outputFile);
 let mkdirs = Promise.promisify(fs.mkdirs);
-let _ = require('underscore');
+let readJson = Promise.promisify(fs.readJson);
+let writeJson = Promise.promisify(fs.writeJson);
 
 async function generateFrameworkExpress(params) {
   let build = path.join(__base, 'build', params.uuid);
@@ -16,9 +15,9 @@ async function generateFrameworkExpress(params) {
 
   // Update package.json app name
   let packageJson = path.join(build, 'package.json');
-  let pkg = await readFile(packageJson);
-  let template = _.template(pkg.toString());
-  await outputFile(path.join(build, 'package.json'), template({ name: params.appName }));
+  let packageObj = await readJson(packageJson);
+  packageObj.name = params.appName;
+  await writeJson(packageJson, packageObj, { spaces: 2 });
 
   // Create public dirs
   await mkdirs(path.join(build, 'public', 'images'));
