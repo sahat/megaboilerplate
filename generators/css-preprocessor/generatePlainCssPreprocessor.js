@@ -4,11 +4,15 @@ let Promise = require('bluebird');
 let copy = Promise.promisify(fs.copy);
 
 async function generatePlainCssPreprocessor(params) {
+  let cssPreprocessorModule = path.join(__base, 'modules', 'css-preprocessor');
+  let normalizeCss = path.join(cssPreprocessorModule, 'normalize.css');
+  let mainCss = path.join(cssPreprocessorModule, 'main.css');
+
   switch (params.framework) {
     case 'express':
-      let src = path.join(__base, 'modules', 'css-preprocessor', 'main.css');
-      let dest = path.join(__base, 'build', params.uuid, 'public', 'stylesheets', 'main.css');
-      await copy(src, dest);
+      let cssDir = path.join(__base, 'build', params.uuid, 'public', 'stylesheets');
+      await copy(normalizeCss, path.join(cssDir, 'normalize.css'));
+      await copy(mainCss, path.join(cssDir, 'main.css'));
       break;
     case 'hapi':
       // TODO
