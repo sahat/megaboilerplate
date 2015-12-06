@@ -148,9 +148,8 @@ class Home extends React.Component {
           if (value === 'none') {
             state.authentication.clear();
           } else {
-            state.authentication.delete('none');
+            state.authentication.add(value);
           }
-          state.authentication.add(value);
         } else {
           state.authentication.delete(value);
         }
@@ -496,6 +495,8 @@ class Home extends React.Component {
 
     return (
       <div className="container">
+        <br/>
+        <button className="btn btn-primary btn-lg">Don't Make Me Think ™</button>
         <h2>Let's get started.</h2>
 
         {platform}
