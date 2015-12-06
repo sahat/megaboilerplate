@@ -1,10 +1,7 @@
 let generateJsFrameworkJquery = require('./generateJsFrameworkJquery');
-
+let generateJsFrameworkNone = require('./generateJsFrameworkNone');
 async function generateJsFramework(params) {
   switch (params.jsFramework) {
-    case 'jquery':
-      await generateJsFrameworkJquery(params);
-      break;
     case 'react':
       // TODO
       break;
@@ -12,7 +9,7 @@ async function generateJsFramework(params) {
       // TODO
       break;
     case 'none':
-      // TODO
+      await generateJsFrameworkNone(params);
       break;
     default:
       // TODO
