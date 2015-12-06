@@ -7,15 +7,15 @@ let removeCode = require('../../utils/removeCode');
 let addDependencies = require('../../utils/addDependencies');
 
 async function generateJsFrameworkNone(params) {
+  let mainJs = path.join(__base, 'modules', 'js-framework', 'none', 'main.js');
+
   switch (params.framework) {
     case 'express':
       let layout = path.join(__base, 'build', params.uuid, 'views', 'layout.jade');
+      let mainJsImport = path.join(__base, 'modules', 'js-framework', 'none', 'express-jade-import.jade');
 
-      await addTemplateImports(params, layout);
-      await copy(
-        path.join(__base, 'modules', 'js-framework', 'none', 'main.js'),
-        path.join(__base, 'build', params.uuid, 'public', 'javascripts', 'main.js')
-      );
+      await addTemplateImport(params, layout, mainJsImport);
+      await copy(mainJs, path.join(__base, 'build', params.uuid, 'public', 'javascripts', 'main.js'));
       break;
     case 'hapi':
       // TODO
@@ -28,11 +28,10 @@ async function generateJsFrameworkNone(params) {
   }
 }
 
-async function addTemplateImports(params, layout) {
+async function addTemplateImport(params, layout, templateImport) {
   switch (params.templateEngine) {
     case 'jade':
-      let mainJsImport = path.join(__base, 'modules', 'js-framework', 'none', 'express-jade-import.jade');
-      await replaceCode(layout, 'JS_FRAMEWORK_IMPORT', mainJsImport, { indentLevel: 2 });
+      await replaceCode(layout, 'JS_FRAMEWORK_IMPORT', templateImport, { indentLevel: 2 });
       break;
     case 'handlebars':
       // TODO
