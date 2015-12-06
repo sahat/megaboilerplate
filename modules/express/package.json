@@ -1,5 +1,5 @@
 {
-  "name": "my-app-name",
+  "name": "<%= name %>",
   "version": "0.0.0",
   "description": "My app description",
   "scripts": {
