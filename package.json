@@ -2,6 +2,8 @@
   "name": "boilerplate",
   "version": "1.0.0",
   "scripts": {
+    "build:webpack": "NODE_ENV=production webpack --config webpack.config.prod.js",
+    "build": "npm run clean && npm run build:webpack",
     "start": "node devServer.js"
   },
   "devDependencies": {
@@ -14,7 +16,6 @@
   },
   "dependencies": {
     "archiver": "^0.20.0",
-    "express": "^4.13.3",
     "babel-core": "^6.3.13",
     "babel-loader": "^6.2.0",
     "babel-polyfill": "^6.3.14",
@@ -23,11 +24,15 @@
     "babel-preset-stage-0": "^6.3.13",
     "bluebird": "^3.0.6",
     "body-parser": "^1.14.1",
+    "express": "^4.13.3",
     "fs-extra": "^0.26.2",
     "haikunator": "^1.0.1",
+    "history": "^1.13.1",
     "lodash": "^3.10.1",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
-    "shortid": "^2.2.4"
+    "react-router": "^1.0.0",
+    "shortid": "^2.2.4",
+    "underscore": "^1.8.3"
   }
 }
