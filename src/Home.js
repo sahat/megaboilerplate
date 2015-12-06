@@ -400,14 +400,9 @@ class Home extends React.Component {
 
     let jsFramework = state.authentication ? (
       <div className="fadeIn animated">
-        <h3>JavaScript Framework <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Technically, both jQuery and React are considered libraries, not frameworks." /></h3>
-
+        <h3>JavaScript Framework</h3>
         <label className="radio-inline">
           <input type="radio" name="jsFrameworkRadios" value="none" onChange={this.handleChange} defaultChecked={state.jsFramework === 'none'} /> None
-        </label>
-        <label className="radio-inline">
-          <input type="radio" name="jsFrameworkRadios" value="jquery" onChange={this.handleChange} defaultChecked={state.jsFramework === 'jquery'} /> jQuery
-          <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
         <label className="radio-inline">
           <input type="radio" name="jsFrameworkRadios" value="react" onChange={this.handleChange} defaultChecked={state.jsFramework === 'react'} /> React
