@@ -9,7 +9,7 @@ var bodyParser = require('body-parser');
 
 var app = express();
 // DATABASE_CONNECTION
-// EXPRESS_TEMPLATE_ENGINE_CONFIG
+// TEMPLATE_ENGINE
 
 app.set('port', process.env.PORT || 3000);
 app.use(logger('dev'));

@@ -8,7 +8,7 @@ let writeJson = Promise.promisify(fs.writeJson);
 
 async function generateFrameworkExpress(params) {
   let build = path.join(__base, 'build', params.uuid);
-  let express = path.join(__base, 'modules', 'express');
+  let express = path.join(__base, 'modules', 'framework', 'express');
 
   // Copy initial Express files
   await copy(express, build);
