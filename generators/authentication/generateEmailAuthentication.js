@@ -1,4 +1,4 @@
-
+let generateEmailAuthenticationExpress = require('./generateEmailAuthenticationExpress');
 
 function generateEmailAuthentication(params) {
   switch (params.framework) {
