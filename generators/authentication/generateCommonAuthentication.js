@@ -1,13 +1,10 @@
 let path = require('path');
 let removeCode = require('../../utils/removeCode');
 let generateCommonAuthenticationExpress = require('./generateCommonAuthenticationExpress');
+let cleanupAuthentication = require('./cleanupAuthentication');
 
 async function generateCommonAuthentication(params) {
-  if (params.authentication.includes('none')) {
-    let app = path.join(__base, 'build', params.uuid, 'app.js');
-    await removeCode(app, 'PASSPORT_REQUIRE');
-    await removeCode(app, 'PASSPORT_MIDDLEWARE');
-  } else {
+  if (params.authentication.length) {
     switch (params.framework) {
       case 'express':
         await generateCommonAuthenticationExpress(params);
@@ -19,8 +16,10 @@ async function generateCommonAuthentication(params) {
         // TODO
         break;
       default:
-        // TODO
+      // TODO
     }
+  } else {
+    await cleanupAuthentication(params);
   }
 }
 
