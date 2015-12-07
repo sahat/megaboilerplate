@@ -1,5 +1,5 @@
-let generateJsFrameworkJquery = require('./generateJsFrameworkJquery');
 let generateJsFrameworkNone = require('./generateJsFrameworkNone');
+
 async function generateJsFramework(params) {
   switch (params.jsFramework) {
     case 'react':

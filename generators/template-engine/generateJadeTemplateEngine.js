@@ -11,7 +11,7 @@ async function generateJadeTemplateEngine(params) {
       let app = path.join(__base, 'build', params.uuid, 'app.js');
 
       // Set "views dir" and "view engine"
-      await replaceCode(app, 'EXPRESS_TEMPLATE_ENGINE_CONFIG', viewEngine, { leadingBlankLine: true });
+      await replaceCode(app, 'TEMPLATE_ENGINE', viewEngine, { leadingBlankLine: true });
 
       // Copy initial Jade templates
       await copy(
