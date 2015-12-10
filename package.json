@@ -29,6 +29,7 @@
     "archiver": "^0.20.0",
     "bluebird": "^3.0.6",
     "body-parser": "^1.14.1",
+    "classnames": "^2.2.1",
     "express": "^4.13.3",
     "fs-extra": "^0.26.2",
     "haikunator": "^1.0.1",
