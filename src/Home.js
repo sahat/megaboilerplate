@@ -2,7 +2,7 @@
 
 let haikunate = require('haikunator');
 let url = require('url');
-
+let cx = require('classnames');
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -468,17 +468,17 @@ class Home extends React.Component {
         <h3>Theme</h3>
         <div className="row">
           <div className="col-xs-6 col-md-3">
-            <a className="thumbnail" onClick={this.handleThemeClick.bind(this, 'theme1')}>
+            <a className={cx("thumbnail", { 'active': this.state.theme === 'theme1' })} onClick={this.handleThemeClick.bind(this, 'theme1')}>
               <img src="http://foundry.mediumra.re/img/chooser/fashion.png" />
             </a>
           </div>
-          <div className="col-xs-6 col-md-3" onClick={this.handleThemeClick.bind(this, 'theme2')}>
-            <a className="thumbnail">
+          <div className="col-xs-6 col-md-3">
+            <a className={cx("thumbnail", { 'active': this.state.theme === 'theme2' })} onClick={this.handleThemeClick.bind(this, 'theme2')}>
               <img src="http://foundry.mediumra.re/img/chooser/classic.png" />
             </a>
           </div>
-          <div className="col-xs-6 col-md-3" onClick={this.handleThemeClick.bind(this, 'theme3')}>
-            <a className="thumbnail">
+          <div className="col-xs-6 col-md-3">
+            <a className={cx("thumbnail", { 'active': this.state.theme === 'theme3' })} onClick={this.handleThemeClick.bind(this, 'theme3')}>
               <img src="http://foundry.mediumra.re/img/chooser/winery.png" />
             </a>
           </div>
