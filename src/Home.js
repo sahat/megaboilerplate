@@ -173,6 +173,12 @@ class Home extends React.Component {
     this.setState(state);
   }
 
+  handleThemeClick(theme) {
+    let state = this.state;
+    state.theme = theme;
+    this.setState(state);
+  }
+
   render() {
     let state = this.state;
 
@@ -374,7 +380,6 @@ class Home extends React.Component {
       </div>
     ) : null;
 
-    console.log(state.authentication.size);
     let authentication = state.database ? (
       <div className="fadeIn animated">
         <h3>Authentication</h3>
@@ -398,7 +403,7 @@ class Home extends React.Component {
       </div>
     ) : null;
 
-    let jsFramework = state.authentication ? (
+    let jsFramework = state.authentication.size ? (
       <div className="fadeIn animated">
         <h3>JavaScript Framework</h3>
         <label className="radio-inline">
@@ -463,17 +468,17 @@ class Home extends React.Component {
         <h3>Theme</h3>
         <div className="row">
           <div className="col-xs-6 col-md-3">
-            <a href="#" className="thumbnail">
+            <a className="thumbnail" onClick={this.handleThemeClick.bind(this, 'theme1')}>
               <img src="http://foundry.mediumra.re/img/chooser/fashion.png" />
             </a>
           </div>
-          <div className="col-xs-6 col-md-3">
-            <a href="#" className="thumbnail">
+          <div className="col-xs-6 col-md-3" onClick={this.handleThemeClick.bind(this, 'theme2')}>
+            <a className="thumbnail">
               <img src="http://foundry.mediumra.re/img/chooser/classic.png" />
             </a>
           </div>
-          <div className="col-xs-6 col-md-3">
-            <a href="#" className="thumbnail">
+          <div className="col-xs-6 col-md-3" onClick={this.handleThemeClick.bind(this, 'theme3')}>
+            <a className="thumbnail">
               <img src="http://foundry.mediumra.re/img/chooser/winery.png" />
             </a>
           </div>
