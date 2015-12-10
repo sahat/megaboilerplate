@@ -188,6 +188,9 @@ class Home extends React.Component {
         <label className="radio-inline">
           <input type="radio" name="platformRadios" value="node" onChange={this.handleChange} defaultChecked={state.platform === 'node'} /> Node.js
         </label>
+        <label className="radio-inline">
+          <input type="radio" name="platformRadios" value="ruby" onChange={this.handleChange} defaultChecked={state.platform === 'ruby'} /> Ruby <span className="label label-danger">Experimental</span>
+        </label>
       </div>
     );
 
@@ -486,12 +489,12 @@ class Home extends React.Component {
       </div>
     ) : null;
 
-    let download = (
+    let download = this.state.theme ? (
       <div>
         <br/>
         <button ref="downloadBtn" className="btn btn-lg btn-primary btn-outline" onClick={this.clickDownload}>Compile and Download</button>
       </div>
-    );
+    ) : null;
 
     return (
       <div className="container">
