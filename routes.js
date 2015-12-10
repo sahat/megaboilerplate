@@ -5,16 +5,22 @@ let generateCssFramework = require('./generators/css-framework/generateCssFramew
 let generateCssPreprocessor = require('./generators/css-preprocessor/generateCssPreprocessor');
 let generateDatabase = require('./generators/database/generateDatabase');
 let generateAuthentication = require('./generators/authentication/generateAuthentication');
+let generateJsFramework = require('./generators/js-framework/generateJsFramework');
 
 async function download(req, res) {
   let params = await prepare(req.body);
-
+try {
   await generateFramework(params);
   await generateTemplateEngine(params);
   await generateCssFramework(params);
   await generateCssPreprocessor(params);
   await generateDatabase(params);
-  await generateAuthentication(params);
+  //await generateAuthentication(params);
+  await generateJsFramework(params);
+} catch (e) {
+  console.log(e);
+}
+
 
   res.end();
 }
