@@ -12,26 +12,13 @@ async function generateEmailAuthenticationExpress(params) {
   let strategy = path.join(__base, 'modules', 'authentication', 'email', 'passport-strategy.js');
   let routes = path.join(__base, 'modules', 'authentication', 'email', 'passport-routes.js');
 
-  if (params.authentication.indexOf('email') > -1) {
-
-    let updatePassportFile = new Promise((resolve, reject) => {
-      return replaceCode(config, 'PASSPORT_LOCAL_REQUIRE', require).then(() => {
-        return replaceCode(config, 'PASSPORT_LOCAL_STRATEGY', strategy);
-      });
-    });
-
-    return Promise.all([
-      addDependencies(packages.authentication.email, params),
-      updatePassportFile
-    ]).then(() => {
-      resolve(params);
-    });
+  if (params.authentication.includes('email')) {
+    await addDependencies(packages.authentication.email, params);
+    await replaceCode(config, 'PASSPORT_LOCAL_REQUIRE', require);
+    await replaceCode(config, 'PASSPORT_LOCAL_STRATEGY', strategy);
   } else {
-    return removeCode(config, 'PASSPORT_LOCAL_REQUIRE').then(() => {
-      return removeCode(config, 'PASSPORT_LOCAL_STRATEGY').then(() => {
-        resolve(params);
-      });
-    });
+    await removeCode(config, 'PASSPORT_LOCAL_REQUIRE');
+    await removeCode(config, 'PASSPORT_LOCAL_STRATEGY');
   }
 }
 
