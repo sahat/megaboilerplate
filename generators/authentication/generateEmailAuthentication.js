@@ -6,27 +6,13 @@ function generateEmailAuthentication(params) {
       return generateEmailAuthenticationExpress(params);
       break;
     case 'hapi':
-      // TODO: not implemented
-      return Promise.resolve();
+      // TODO
       break;
     case 'sails':
-      // TODO: not implemented
-      return Promise.resolve();
+      // TODO
       break;
     default:
       return Promise.reject('Unsupported Framework');
-  }
-}
-
-function cleanupEmailAuthenticationString(params) {
-  if (params.framework === 'express') {
-    let appFile = path.join(__dirname, 'build', params.uuid, 'app.js');
-
-    return removeCode(appFile, 'EXPRESS_TEMPLATE_ENGINE_CONFIG');
-  } else if (params.framework === 'hapi') {
-    // TODO: not implemented
-  } else if (params.framework === 'sails') {
-    // TODO: not implemented
   }
 }
 
