@@ -185,21 +185,24 @@ class Home extends React.Component {
     let platform = (
       <div>
         <h3>Platform</h3>
-        <label className="radio-inline">
-          <input type="radio" name="platformRadios" value="node" onChange={this.handleChange} defaultChecked={state.platform === 'node'} /> Node.js
-        </label>
-        <label className="radio-inline">
-          <input type="radio" name="platformRadios" value="ruby" onChange={this.handleChange} defaultChecked={state.platform === 'ruby'} /> Ruby <span className="label label-danger">Experimental</span>
-        </label>
+        <div className="radio radio-success radio-inline">
+          <input type="radio" id="nodeRadio" name="platformRadios" value="node" onChange={this.handleChange} defaultChecked={state.platform === 'node'} />
+          <label htmlFor="nodeRadio">Node.js</label>
+        </div>
+        <div className="radio radio-success radio-inline">
+          <input type="radio" id="rubyRadio" name="platformRadios" value="ruby" onChange={this.handleChange} defaultChecked={state.platform === 'ruby'} />
+          <label htmlFor="rubyRadio">Ruby <span className="label label-danger">Experimental</span></label>
+        </div>
       </div>
     );
 
     let framework = state.platform ? (
       <div className="fadeIn animated">
         <h3>Framework</h3>
-        <label className="radio-inline">
-          <input type="radio" name="frameworkRadios" value="express" onChange={this.handleChange} defaultChecked={state.framework === 'express'} /> Express
-        </label>
+        <div className="radio radio-success radio-inline">
+          <input type="radio" id="expressRadio" name="frameworkRadios" value="express" onChange={this.handleChange} defaultChecked={state.framework === 'express'} />
+          <label htmlFor="expressRadio">Express</label>
+        </div>
         <label className="radio-inline">
           <input type="radio" name="frameworkRadios" value="hapi" onChange={this.handleChange} defaultChecked={state.framework === 'hapi'} /> Hapi
         </label>
@@ -492,7 +495,7 @@ class Home extends React.Component {
     let download = this.state.theme ? (
       <div>
         <br/>
-        <button ref="downloadBtn" className="btn btn-lg btn-primary btn-outline" onClick={this.clickDownload}>Compile and Download</button>
+        <button ref="downloadBtn" className="btn btn-block btn-mega" onClick={this.clickDownload}>Compile and Download</button>
       </div>
     ) : null;
 

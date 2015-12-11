@@ -151,3 +151,33 @@ label span + i {
 .label-danger {
   background-color: #c74443;
 }
+
+/*Radios*/
+.radio input[type="radio"]:focus + label::before {
+  outline: none;
+}
+
+.radio label::after {
+  transition: all .15s ease;
+}
+
+/*Buttons*/
+
+.btn-mega {
+  height: 50px;
+  line-height: 48px;
+  border: 2px solid #47b475;
+  background: #47b475;
+  color: #fff;
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 1px;
+  border-radius: 0;
+  padding: 0;
+}
+
+.btn-mega:hover,
+.btn-mega:focus {
+  color: #fff;
+}
