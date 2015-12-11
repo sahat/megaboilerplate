@@ -4,14 +4,16 @@ var logger = require('morgan');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-// DATABASE_REQUIRE
-// PASSPORT_REQUIRE
+//= DATABASE_REQUIRE
+//= PASSPORT_REQUIRE
+//= SASS_MIDDLEWARE_REQUIRE
 
 var app = express();
-// DATABASE_CONNECTION
-// TEMPLATE_ENGINE
+//= DATABASE_CONNECTION
+//= TEMPLATE_ENGINE
 
 app.set('port', process.env.PORT || 3000);
+//= SASS_MIDDLEWARE
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -21,7 +23,7 @@ app.use(session({
   resave: true,
   saveUninitialized: true
 }));
-// PASSPORT_MIDDLEWARE
+//= PASSPORT_MIDDLEWARE
 app.use(express.static(path.join(__dirname, 'public')));
 
 // development error handler
