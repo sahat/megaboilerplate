@@ -1,4 +1,6 @@
 let generatePlainCssPreprocessor = require('./generatePlainCssPreprocessor');
+let generateSassPreprocessor = require('./generateSassPreprocessor');
+let generateLessPreprocessor = require('./generateLessPreprocessor');
 
 async function generateCssPreprocessor(params) {
   switch (params.cssPreprocessor) {
@@ -6,10 +8,10 @@ async function generateCssPreprocessor(params) {
       await generatePlainCssPreprocessor(params);
       break;
     case 'sass':
-      // TODO
+      await generateSassPreprocessor(params);
       break;
     case 'less':
-      // TODO
+      await generateLessPreprocessor(params);
       break;
     case 'postcss':
       // TODO
