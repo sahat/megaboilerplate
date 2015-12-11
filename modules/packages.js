@@ -30,5 +30,49 @@ module.exports = {
     twitter: {
       'passport-twitter': '^1.0.3'
     }
+  },
+  cssBuildOptions: {
+    sass: {
+      middleware: {
+        'node-sass-middleware': '^0.9.7'
+      },
+      gulp: {
+
+      },
+      grunt: {
+
+      },
+      webpack: {
+
+      }
+    },
+    less: {
+      middleware: {
+        'less-middleware': 'latest'
+      },
+      gulp: {
+
+      },
+      grunt: {
+
+      },
+      webpack: {
+
+      }
+    },
+    postcss: {
+      middleware: {
+
+      },
+      gulp: {
+
+      },
+      grunt: {
+
+      },
+      webpack: {
+
+      }
+    }
   }
 };
