@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import Hero from './Hero';
 import Home from './Home';
 
-export class App extends Component {
+export default class App extends Component {
   render() {
     return (
       <div>
         <Hero />
-        <Home />
+        {this.props.children}
       </div>
     );
   }

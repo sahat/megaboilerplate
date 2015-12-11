@@ -1,4 +1,5 @@
 import React from 'react';
+import { Router, Route, Link } from 'react-router'
 
 class Header extends React.Component {
   render() {
@@ -7,10 +8,10 @@ class Header extends React.Component {
         <div className="container-fluid">
           <div id="navbar" className="navbar-collapse collapse">
             <ul className="nav navbar-nav">
-              <li><a href="#">Home</a></li>
-              <li><a href="#">Philosophy</a></li>
-              <li><a href="#">Contributing</a></li>
-              <li><a href="#">Trending</a></li>
+              <li><Link to="/">Home</Link></li>
+              <li><Link to="/philosophy">Philosophy</Link></li>
+              <li><Link to="/contributing">Contributing</Link></li>
+              <li><Link to="/trending">Trending</Link></li>
             </ul>
           </div>
         </div>

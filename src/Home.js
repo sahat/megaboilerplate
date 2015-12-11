@@ -343,7 +343,7 @@ class Home extends React.Component {
       </div>
     ) : null;
 
-    let database = state.templateEngine ? (
+    let database = state.cssFramework ? (
       <div className="fadeIn animated">
         <h3>Database</h3>
         <label className="radio-inline">
@@ -406,7 +406,7 @@ class Home extends React.Component {
       </div>
     ) : null;
 
-    let jsFramework = state.authentication.size ? (
+    let jsFramework = state.database ? (
       <div className="fadeIn animated">
         <h3>JavaScript Framework</h3>
         <label className="radio-inline">
