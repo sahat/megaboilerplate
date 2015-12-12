@@ -1,7 +1,7 @@
 let generateMiddlewareBuildOptions = require('./generateMiddlewareBuildOptions');
 
 async function generateCssPreprocessor(params) {
-  switch (params.cssPreprocessor) {
+  switch (params.cssBuildOptions) {
     case 'middleware':
       await generateMiddlewareBuildOptions(params);
       break;

@@ -12,9 +12,9 @@ async function generateMiddlewareBuildOptions(params) {
     case 'express':
       let app = path.join(__base, 'build', params.uuid, 'app.js');
       if (params.cssPreprocessor === 'sass') {
-        generateSassMiddleware(app);
+        generateSassMiddleware(params, app);
       } else if (params.cssPreprocessor === 'less') {
-        generateLessMiddleware(app);
+        generateLessMiddleware(params, app);
       } else if (params.cssPreprocessor === 'postcss') {
         // TODO
       }
@@ -30,7 +30,7 @@ async function generateMiddlewareBuildOptions(params) {
   }
 }
 
-async function generateSassMiddleware(app) {
+async function generateSassMiddleware(params, app) {
   let sassMiddlewareRequire = path.join(__base, 'modules', 'css-preprocessor', 'sass-middleware-require.js');
   let sassMiddleware = path.join(__base, 'modules', 'css-preprocessor', 'sass-middleware.js');
 
@@ -39,7 +39,7 @@ async function generateSassMiddleware(app) {
   await replaceCode(app, 'SASS_MIDDLEWARE', sassMiddleware);
 }
 
-async function generateLessMiddleware(app) {
+async function generateLessMiddleware(params, app) {
   let lessMiddlewareRequire = path.join(__base, 'modules', 'css-preprocessor', 'less-middleware-require.js');
   let lessMiddleware = path.join(__base, 'modules', 'css-preprocessor', 'less-middleware.js');
 
