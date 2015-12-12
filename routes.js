@@ -3,6 +3,7 @@ let generateFramework = require('./generators/framework/generateFramework');
 let generateTemplateEngine = require('./generators/template-engine/generateTemplateEngine');
 let generateCssFramework = require('./generators/css-framework/generateCssFramework');
 let generateCssPreprocessor = require('./generators/css-preprocessor/generateCssPreprocessor');
+let generateCssBuildOptions = require('./generators/css-build-options/generateCssBuildOptions');
 let generateDatabase = require('./generators/database/generateDatabase');
 let generateAuthentication = require('./generators/authentication/generateAuthentication');
 let generateJsFramework = require('./generators/js-framework/generateJsFramework');
@@ -14,11 +15,12 @@ try {
   await generateTemplateEngine(params);
   await generateCssFramework(params);
   await generateCssPreprocessor(params);
+  await generateCssBuildOptions(params);
   await generateDatabase(params);
   //await generateAuthentication(params);
   await generateJsFramework(params);
 } catch (e) {
-  console.log(e);
+  throw Error(e);
 }
 
 
