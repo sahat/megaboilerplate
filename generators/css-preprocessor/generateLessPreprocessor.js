@@ -3,7 +3,7 @@ let fs = require('fs-extra');
 let Promise = require('bluebird');
 let copy = Promise.promisify(fs.copy);
 
-async function generateSassPreprocessor(params) {
+async function generateLessPreprocessor(params) {
   let build = path.join(__base, 'build', params.uuid);
   let mainLess = path.join(__base, 'modules', 'css-preprocessor', 'main.less');
 
@@ -22,4 +22,4 @@ async function generateSassPreprocessor(params) {
   }
 }
 
-module.exports = generateSassPreprocessor;
+module.exports = generateLessPreprocessor;
