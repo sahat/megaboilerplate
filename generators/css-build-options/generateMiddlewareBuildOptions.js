@@ -31,8 +31,8 @@ async function generateMiddlewareBuildOptions(params) {
 }
 
 async function generateSassMiddleware(params, app) {
-  let sassMiddlewareRequire = path.join(__base, 'modules', 'css-preprocessor', 'sass-middleware-require.js');
-  let sassMiddleware = path.join(__base, 'modules', 'css-preprocessor', 'sass-middleware.js');
+  let sassMiddlewareRequire = path.join(__base, 'modules', 'css-build-options', 'sass-middleware-require.js');
+  let sassMiddleware = path.join(__base, 'modules', 'css-build-options', 'sass-middleware.js');
 
   await addDependencies(packages.cssBuildOptions.sass.middleware, params);
   await replaceCode(app, 'SASS_MIDDLEWARE_REQUIRE', sassMiddlewareRequire);
@@ -40,8 +40,8 @@ async function generateSassMiddleware(params, app) {
 }
 
 async function generateLessMiddleware(params, app) {
-  let lessMiddlewareRequire = path.join(__base, 'modules', 'css-preprocessor', 'less-middleware-require.js');
-  let lessMiddleware = path.join(__base, 'modules', 'css-preprocessor', 'less-middleware.js');
+  let lessMiddlewareRequire = path.join(__base, 'modules', 'css-build-options', 'less-middleware-require.js');
+  let lessMiddleware = path.join(__base, 'modules', 'css-build-options', 'less-middleware.js');
 
   await addDependencies(packages.cssBuildOptions.less.middleware, params);
   await replaceCode(app, 'LESS_MIDDLEWARE_REQUIRE', lessMiddlewareRequire);
