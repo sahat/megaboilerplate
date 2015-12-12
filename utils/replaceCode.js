@@ -21,7 +21,9 @@ async function replaceCode(srcFile, subStr, newSrcFile, opts) {
 
   let array = srcData.toString().split('\n');
   array.forEach((line, index) => {
-    if (line.includes(subStr)) {
+    let re = new RegExp(subStr + '$');
+    let isMatch = line.match(re) && line.match(re).length;
+    if (isMatch) {
       if (opts.indentLevel) {
         newSrcData = indentCode(newSrcData, opts.indentLevel);
       }
