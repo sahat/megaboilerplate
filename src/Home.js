@@ -37,6 +37,13 @@ class Home extends React.Component {
     } else {
       this.state.authentication = new Set();
     }
+
+    if (query.reactOptions) {
+      this.state.reactOptions = isArray(query.reactOptions) ? new Set(query.reactOptions) : new Set(Array(query.reactOptions));
+    } else {
+      this.state.reactOptions = new Set();
+    }
+
   }
 
   componentDidUpdate() {
@@ -430,23 +437,23 @@ class Home extends React.Component {
       <div className="fadeIn animated">
         <h3>React Features</h3>
         <label className="checkbox-inline">
-          <input type="checkbox" name="reactOptionsCheckboxes" value="fluxAlt" onChange={this.handleChange} defaultChecked={state.reactOptions === 'fluxAlt'} /> Flux (Alt)
+          <input type="checkbox" name="reactOptionsCheckboxes" value="fluxAlt" onChange={this.handleChange} checked={state.reactOptions.has('fluxAlt')} /> Flux (Alt)
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
         <label className="checkbox-inline">
-          <input type="checkbox" name="reactOptionsCheckboxes" value="fluxRedux" onChange={this.handleChange} defaultChecked={state.reactOptions === 'fluxRedux'} /> Flux (Redux)
+          <input type="checkbox" name="reactOptionsCheckboxes" value="fluxRedux" onChange={this.handleChange} checked={state.reactOptions.has('fluxRedux')} /> Flux (Redux)
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
         <label className="radio-inline">
-          <input type="checkbox" name="reactOptionsCheckboxes" value="reactRouter" onChange={this.handleChange} defaultChecked={state.reactOptions === 'reactRouter'} /> React Router
+          <input type="checkbox" name="reactOptionsCheckboxes" value="reactRouter" onChange={this.handleChange} checked={state.reactOptions.has('reactRouter')} /> React Router
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
         <label className="radio-inline">
-          <input type="checkbox" name="reactOptionsCheckboxes" value="graphql" onChange={this.handleChange} defaultChecked={state.reactOptions === 'graphql'} /> GraphQL + Relay
+          <input type="checkbox" name="reactOptionsCheckboxes" value="graphql" onChange={this.handleChange} checked={state.reactOptions.has('graphql')} /> GraphQL + Relay
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
         <label className="radio-inline">
-          <input type="checkbox" name="reactOptionsCheckboxes" value="es6" onChange={this.handleChange} defaultChecked={state.reactOptions === 'es6'} /> ES6
+          <input type="checkbox" name="reactOptionsCheckboxes" value="es6" onChange={this.handleChange} checked={state.reactOptions.has('es6')} /> ES6
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
       </div>
@@ -492,12 +499,12 @@ class Home extends React.Component {
       </div>
     ) : null;
 
-    let download = this.state.theme ? (
+    let download = (
       <div>
         <br/>
         <button ref="downloadBtn" className="btn btn-block btn-mega" onClick={this.clickDownload}>Compile and Download</button>
       </div>
-    ) : null;
+    );
 
     return (
       <div className="container">
