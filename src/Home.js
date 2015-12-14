@@ -253,15 +253,14 @@ class Home extends React.Component {
           <input type="radio" name="templateEngineRadios" value="none" onChange={this.handleChange} defaultChecked={state.templateEngine === 'none'} /> None
         </label>
         <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/jade-logo.svg" alt="Jade Logo"/>
           <input type="radio" name="templateEngineRadios" value="jade" onChange={this.handleChange} defaultChecked={state.templateEngine === 'jade'} /> Jade
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." />
         </label>
         <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/handlebars-logo.svg" alt="Handlebars Logo"/>
+
           <input type="radio" name="templateEngineRadios" value="handlebars" onChange={this.handleChange} defaultChecked={state.templateEngine === 'handlebars'} /> Handlebars
-          <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." />
-        </label>
-        <label className="radio-inline">
-          <input type="radio" name="templateEngineRadios" value="swig" onChange={this.handleChange} defaultChecked={state.templateEngine === 'swig'} /> Swig
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." />
         </label>
       </div>
