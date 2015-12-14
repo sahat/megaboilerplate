@@ -192,14 +192,19 @@ class Home extends React.Component {
     let platform = (
       <div>
         <h3>Platform</h3>
-        <div className="radio radio-success radio-inline">
-          <input type="radio" id="nodeRadio" name="platformRadios" value="node" onChange={this.handleChange} defaultChecked={state.platform === 'node'} />
-          <label htmlFor="nodeRadio">Node.js</label>
-        </div>
-        <div className="radio radio-success radio-inline">
-          <input type="radio" id="rubyRadio" name="platformRadios" value="ruby" onChange={this.handleChange} defaultChecked={state.platform === 'ruby'} />
-          <label htmlFor="rubyRadio">Ruby <span className="label label-danger">Experimental</span></label>
-        </div>
+        <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/node-logo.svg" alt="Node.js Logo"/>
+
+          <input type="radio" id="nodeRadio" name="platformRadios" value="node" onChange={this.handleChange} defaultChecked={state.platform === 'node'} /> Node.js
+        </label>
+        <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/ruby-logo.svg" alt="Ruby Logo"/>
+
+          <input type="radio" id="rubyRadio" name="platformRadios" value="ruby" onChange={this.handleChange} defaultChecked={state.platform === 'ruby'} /> Ruby
+        </label>
+
+
+
       </div>
     );
 
@@ -212,7 +217,7 @@ class Home extends React.Component {
             <span className="express-logo">Express</span>
             <input type="radio" id="expressRadio" name="frameworkRadios" value="express" onChange={this.handleChange} checked={state.framework === 'express'} /> Express
           </label>
-          <label className={cx('btn', { active: state.framework === 'hapi' })}>
+          <label className={cx('btn', { active: state.framework === 'hapi' })} onChange={this.handleChange}>
             <img className="btn-logo" src="/img/svg/hapi-logo.png" alt="Hapi Logo"/>
             <input type="radio" name="frameworkRadios" value="hapi" onChange={this.handleChange} checked={state.framework === 'hapi'} /> Hapi
           </label>
