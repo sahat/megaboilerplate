@@ -208,11 +208,12 @@ label span + i {
   font-size: 32px;
   font-weight: 100;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  line-height: 60px;
+  margin-top: 10px;
+  line-height: 50px;
 }
 
 .btn-logo {
   height: 60px;
-  width: auto;
+  max-width: 140px;
   display: block;
 }
