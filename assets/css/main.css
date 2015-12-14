@@ -128,7 +128,14 @@ label span + i {
   text-transform: uppercase;
   font-weight: 600;
   letter-spacing: 1px;
+  border-bottom: 1px solid transparent;
+  margin-bottom: -1px;
   transition: .2s all;
+}
+
+.navbar-default .navbar-nav > li > a.active {
+  border-bottom: 1px solid #fff;
+  margin-bottom: -1px;
 }
 
 .navbar-default .navbar-nav > li > a:hover,
@@ -210,10 +217,25 @@ label span + i {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin-top: 10px;
   line-height: 50px;
+  letter-spacing: 1px;
+  -webkit-font-smoothing: initial;
 }
 
 .btn-logo {
   height: 60px;
   max-width: 140px;
   display: block;
+  padding-bottom: 10px;
+}
+
+.radio-inline {
+  text-align: center;
+  font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  line-height: 24px;
+  border-radius: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  transition: all 0.3s ease;
 }
