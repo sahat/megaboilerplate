@@ -206,16 +206,21 @@ class Home extends React.Component {
     let framework = state.platform ? (
       <div className="fadeIn animated">
         <h3>Framework</h3>
-        <div className="radio radio-success radio-inline">
-          <input type="radio" id="expressRadio" name="frameworkRadios" value="express" onChange={this.handleChange} defaultChecked={state.framework === 'express'} />
-          <label htmlFor="expressRadio">Express</label>
+
+        <div className="btn-group" data-toggle="buttons">
+          <label className={cx('btn', { active: state.framework === 'express' })}>
+            <span className="express-logo">Express</span>
+            <input type="radio" id="expressRadio" name="frameworkRadios" value="express" onChange={this.handleChange} checked={state.framework === 'express'} /> Express
+          </label>
+          <label className={cx('btn', { active: state.framework === 'hapi' })}>
+            <img className="btn-logo" src="/img/svg/hapi-logo.png" alt="Hapi Logo"/>
+            <input type="radio" name="frameworkRadios" value="hapi" onChange={this.handleChange} checked={state.framework === 'hapi'} /> Hapi
+          </label>
+          <label className={cx('btn', { active: state.framework === 'sails' })}>
+            <img className="btn-logo" src="/img/svg/sails-logo.png" alt="Sails.js Logo"/>
+            <input type="radio" name="frameworkRadios" value="sails" onChange={this.handleChange} checked={state.framework === 'sails'} /> Sails.js
+          </label>
         </div>
-        <label className="radio-inline">
-          <input type="radio" name="frameworkRadios" value="hapi" onChange={this.handleChange} defaultChecked={state.framework === 'hapi'} /> Hapi
-        </label>
-        <label className="radio-inline">
-          <input type="radio" name="frameworkRadios" value="sails" onChange={this.handleChange} defaultChecked={state.framework === 'sails'} /> Sails.js
-        </label>
 
         <br/>
         <br/>
