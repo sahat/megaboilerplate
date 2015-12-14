@@ -1,9 +1,10 @@
 let generateJsFrameworkNone = require('./generateJsFrameworkNone');
+let generateJsFrameworkReact = require('./generateJsFrameworkReact');
 
 async function generateJsFramework(params) {
   switch (params.jsFramework) {
     case 'react':
-      // TODO
+      await generateJsFrameworkReact(params);
       break;
     case 'angular':
       // TODO
