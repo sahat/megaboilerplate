@@ -212,20 +212,20 @@ class Home extends React.Component {
       <div className="fadeIn animated">
         <h3>Framework</h3>
 
-        <div className="btn-group" data-toggle="buttons">
-          <label className={cx('btn', { active: state.framework === 'express' })}>
-            <span className="express-logo">Express</span>
-            <input type="radio" id="expressRadio" name="frameworkRadios" value="express" onChange={this.handleChange} checked={state.framework === 'express'} /> Express
-          </label>
-          <label className={cx('btn', { active: state.framework === 'hapi' })} onChange={this.handleChange}>
-            <img className="btn-logo" src="/img/svg/hapi-logo.png" alt="Hapi Logo"/>
-            <input type="radio" name="frameworkRadios" value="hapi" onChange={this.handleChange} checked={state.framework === 'hapi'} /> Hapi
-          </label>
-          <label className={cx('btn', { active: state.framework === 'sails' })}>
-            <img className="btn-logo" src="/img/svg/sails-logo.png" alt="Sails.js Logo"/>
-            <input type="radio" name="frameworkRadios" value="sails" onChange={this.handleChange} checked={state.framework === 'sails'} /> Sails.js
-          </label>
-        </div>
+        <label className="radio-inline">
+          <span className="express-logo">Express</span>
+          <input type="radio" id="expressRadio" name="frameworkRadios" value="express" onChange={this.handleChange} defaultChecked={state.framework === 'express'} />
+          <label htmlFor="expressRadio">Express</label>
+        </label>
+        <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/hapi-logo.png" alt="Hapi Logo"/>
+          <input type="radio" name="frameworkRadios" value="hapi" onChange={this.handleChange} defaultChecked={state.framework === 'hapi'} /> Hapi
+        </label>
+        <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/sails-logo.png" alt="Sails.js Logo"/>
+          <input type="radio" name="frameworkRadios" value="sails" onChange={this.handleChange} defaultChecked={state.framework === 'sails'} /> Sails.js
+        </label>
+
 
         <br/>
         <br/>
@@ -250,6 +250,7 @@ class Home extends React.Component {
       <div className="fadeIn animated">
         <h3>Template Engine</h3>
         <label className="radio-inline">
+          <span className="btn-logo"></span>
           <input type="radio" name="templateEngineRadios" value="none" onChange={this.handleChange} defaultChecked={state.templateEngine === 'none'} /> None
         </label>
         <label className="radio-inline">
@@ -278,41 +279,54 @@ class Home extends React.Component {
         {cssFrameworkNoTemplateEngineAlert}
         <div className="radio">
           <label>
+            <span className="btn-logo"></span>
             <input type="radio" name="cssFrameworkRadios" value="none" onChange={this.handleChange} defaultChecked={state.cssFramework === 'none'} /> None
           </label>
         </div>
         <div className="radio">
           <label>
+            <img className="btn-logo" src="/img/svg/bootstrap-logo.svg" alt="Bootstrap Logo"/>
+
             <input type="radio" name="cssFrameworkRadios" value="bootstrapCss" onChange={this.handleChange} defaultChecked={state.cssFramework === 'bootstrapCss'} /> Bootstrap (CSS)
             <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." />
           </label>
         </div>
         <div className="radio">
           <label>
+            <img className="btn-logo" src="/img/svg/bootstrap-logo.svg" alt="Bootstrap Logo"/>
+
             <input type="radio" name="cssFrameworkRadios" value="bootstrapLess" onChange={this.handleChange} defaultChecked={state.cssFramework === 'bootstrapLess'} /> Bootstrap (LESS)
             <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." />
           </label>
         </div>
         <div className="radio">
           <label>
+            <img className="btn-logo" src="/img/svg/bootstrap-logo.svg" alt="Bootstrap Logo"/>
+
             <input type="radio" name="cssFrameworkRadios" value="bootstrapSass" onChange={this.handleChange} defaultChecked={state.cssFramework === 'bootstrapSass'} /> Bootstrap (Sass)
             <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." />
           </label>
         </div>
         <div className="radio">
           <label>
+            <img className="btn-logo" src="/img/svg/foundation-logo.svg" alt="Foundation Logo"/>
+
             <input type="radio" name="cssFrameworkRadios" value="foundationCss" onChange={this.handleChange} defaultChecked={state.cssFramework === 'foundationCss'} /> Foundation (CSS)
             <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." />
           </label>
         </div>
         <div className="radio">
           <label>
+            <img className="btn-logo" src="/img/svg/foundation-logo.svg" alt="Foundation Logo"/>
+
             <input type="radio" name="cssFrameworkRadios" value="foundationSass" onChange={this.handleChange} defaultChecked={state.cssFramework === 'foundationSass'} /> Foundation (Sass)
             <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." />
           </label>
         </div>
         <div className="radio">
           <label>
+            <img className="btn-logo" src="/img/svg/bourbon-logo.svg" alt="Bourbon + Neat Logo"/>
+
             <input type="radio" name="cssFrameworkRadios" value="bourbonNeat" onChange={this.handleChange} defaultChecked={state.cssFramework === 'bourbonNeat'} /> Bourbon + Neat (Sass)
             <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." />
           </label>
@@ -324,15 +338,23 @@ class Home extends React.Component {
       <div className="fadeIn animated">
         <h3>CSS Preprocessor</h3>
         <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/css3-logo.svg" alt="CSS Logo"/>
+
           <input type="radio" name="cssPreprocessorRadios" value="css" onChange={this.handleChange} defaultChecked={state.cssPreprocessor === 'css'} /> CSS
         </label>
         <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/sass-logo.svg" alt="Sass Logo"/>
+
           <input type="radio" name="cssPreprocessorRadios" value="sass" onChange={this.handleChange} defaultChecked={state.cssPreprocessor === 'sass'} /> Sass
         </label>
         <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/less-logo.svg" alt="LESS Logo"/>
+
           <input type="radio" name="cssPreprocessorRadios" value="less" onChange={this.handleChange} defaultChecked={state.cssPreprocessor === 'less'} /> LESS
         </label>
         <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/postcss-logo.png" alt="PostCSS Logo"/>
+
           <input type="radio" name="cssPreprocessorRadios" value="postcss" onChange={this.handleChange} defaultChecked={state.cssPreprocessor === 'postcss'} /> PostCSS
         </label>
       </div>
@@ -348,15 +370,20 @@ class Home extends React.Component {
       <div className="fadeIn animated">
         <h3>CSS Build Options</h3>
         <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/npm-logo.svg" alt="Middleware Logo"/>
           <input type="radio" name="cssBuildOptionsRadios" value="middleware" onChange={this.handleChange} defaultChecked={state.cssBuildOptions === 'middleware'} /> Middleware
         </label>
         <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/gulp-logo.png" alt="Gulp Logo"/>
           <input type="radio" name="cssBuildOptionsRadios" value="gulp" onChange={this.handleChange} defaultChecked={state.cssBuildOptions === 'gulp'} /> Gulp
         </label>
         <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/webpack-logo.svg" alt="Webpack Logo"/>
+
           <input type="radio" name="cssBuildOptionsRadios" value="webpack" onChange={this.handleChange} defaultChecked={state.cssBuildOptions === 'webpack'} /> Webpack
         </label>
         <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/grunt-logo.svg" alt="Grunt Logo"/>
           <input type="radio" name="cssBuildOptionsRadios" value="grunt" onChange={this.handleChange} defaultChecked={state.cssBuildOptions === 'grunt'} /> Grunt
         </label>
       </div>
@@ -366,21 +393,30 @@ class Home extends React.Component {
       <div className="fadeIn animated">
         <h3>Database</h3>
         <label className="radio-inline">
+          <span className="btn-logo"></span>
           <input type="radio" name="databaseRadios" value="none" onChange={this.handleChange} defaultChecked={state.database === 'none'} /> None
         </label>
         <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/mongodb-logo.svg"></img>
+
           <input type="radio" name="databaseRadios" value="mongodb" onChange={this.handleChange} defaultChecked={state.database === 'mongodb'} /> MongoDB
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
         <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/mysql-logo.svg"></img>
+
           <input type="radio" name="databaseRadios" value="mysql" onChange={this.handleChange} defaultChecked={state.database === 'mysql'} /> MySQL
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
         <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/postgresql-logo.svg"></img>
+
           <input type="radio" name="databaseRadios" value="postgresql" onChange={this.handleChange} defaultChecked={state.database === 'postgresql'} /> PostgreSQL
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
         <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/rethinkdb-logo.svg"></img>
+
           <input type="radio" name="databaseRadios" value="rethinkdb" onChange={this.handleChange} defaultChecked={state.database === 'rethinkdb'} /> RethinkDB
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
@@ -407,18 +443,27 @@ class Home extends React.Component {
         <h3>Authentication</h3>
         {authenticationAlert}
         <label className="checkbox-inline">
+          <span className="btn-logo"></span>
           <input type="checkbox" name="authenticationCheckboxes" value="none" onChange={this.handleChange} checked={state.authentication.size === 0} disabled={state.database === 'none'} /> None
         </label>
         <label className="checkbox-inline">
+          <img className="btn-logo" src="/img/svg/passportjs-logo.svg"></img>
+
           <input type="checkbox" name="authenticationCheckboxes" value="email" onChange={this.handleChange} checked={state.authentication.has('email')} disabled={state.database === 'none'} /> Email / Password
         </label>
         <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/facebook-logo.svg"></img>
+
           <input type="checkbox" name="authenticationCheckboxes" value="facebook" onChange={this.handleChange} checked={state.authentication.has('facebook')} disabled={state.database === 'none'} /> Facebook
         </label>
         <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/google-logo.svg"></img>
+
           <input type="checkbox" name="authenticationCheckboxes" value="google" onChange={this.handleChange} checked={state.authentication.has('google')} disabled={state.database === 'none'} /> Google
         </label>
         <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/twitter-logo.svg"></img>
+
           <input type="checkbox" name="authenticationCheckboxes" value="twitter" onChange={this.handleChange} checked={state.authentication.has('twitter')} disabled={state.database === 'none'} /> Twitter
         </label>
         {authenticationPasswordReset}
@@ -429,13 +474,16 @@ class Home extends React.Component {
       <div className="fadeIn animated">
         <h3>JavaScript Framework</h3>
         <label className="radio-inline">
+          <span className="btn-logo"></span>
           <input type="radio" name="jsFrameworkRadios" value="none" onChange={this.handleChange} defaultChecked={state.jsFramework === 'none'} /> None
         </label>
         <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/react-logo.svg"></img>
           <input type="radio" name="jsFrameworkRadios" value="react" onChange={this.handleChange} defaultChecked={state.jsFramework === 'react'} /> React
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
         <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/angularjs-logo.png"></img>
           <input type="radio" name="jsFrameworkRadios" value="angular" onChange={this.handleChange} defaultChecked={state.jsFramework === 'angular'} /> AngularJS
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
@@ -446,22 +494,30 @@ class Home extends React.Component {
       <div className="fadeIn animated">
         <h3>React Features</h3>
         <label className="checkbox-inline">
+          <img className="btn-logo" src="/img/svg/alt-logo.png"></img>
           <input type="checkbox" name="reactOptionsCheckboxes" value="fluxAlt" onChange={this.handleChange} checked={state.reactOptions.has('fluxAlt')} /> Flux (Alt)
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
         <label className="checkbox-inline">
+          <img className="btn-logo" src="/img/svg/flux-logo.svg"></img>
           <input type="checkbox" name="reactOptionsCheckboxes" value="fluxRedux" onChange={this.handleChange} checked={state.reactOptions.has('fluxRedux')} /> Flux (Redux)
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
         <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/react-router-logo.png"></img>
+
           <input type="checkbox" name="reactOptionsCheckboxes" value="reactRouter" onChange={this.handleChange} checked={state.reactOptions.has('reactRouter')} /> React Router
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
         <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/relay-logo.svg"></img>
+
           <input type="checkbox" name="reactOptionsCheckboxes" value="graphql" onChange={this.handleChange} checked={state.reactOptions.has('graphql')} /> GraphQL + Relay
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
         <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/babel-logo.png"></img>
+
           <input type="checkbox" name="reactOptionsCheckboxes" value="es6" onChange={this.handleChange} checked={state.reactOptions.has('es6')} /> ES6
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
@@ -472,14 +528,19 @@ class Home extends React.Component {
       <div className="fadeIn animated">
         <h3>React Build System</h3>
         <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/browserify-logo.svg"></img>
+
           <input type="radio" name="reactBuildSystemRadios" value="browserify" onChange={this.handleChange} defaultChecked={state.reactBuildSystem === 'browserify'} /> Browserify / Gulp
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
         <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/webpack-logo.svg"></img>
+
           <input type="radio" name="reactBuildSystemRadios" value="webpack" onChange={this.handleChange} defaultChecked={state.reactBuildSystem === 'webpack'} /> Webpack
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
         <label className="radio-inline">
+          <span className="btn-logo"></span>
           <input type="radio" name="reactBuildSystemRadios" value="none" onChange={this.handleChange} defaultChecked={state.reactBuildSystem === 'none'} /> None
         </label>
       </div>
