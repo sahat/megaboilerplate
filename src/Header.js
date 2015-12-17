@@ -8,10 +8,10 @@ class Header extends React.Component {
         <div className="container-fluid">
           <div id="navbar" className="navbar-collapse collapse">
             <ul className="nav navbar-nav">
-              <li><Link to="/">Home</Link></li>
-              <li><Link to="/philosophy">Philosophy</Link></li>
-              <li><Link to="/contributing">Contributing</Link></li>
-              <li><Link to="/trending">Trending</Link></li>
+              <li><Link to="/" activeClassName="active">Home</Link></li>
+              <li><Link to="/philosophy" activeClassName="active">Philosophy</Link></li>
+              <li><Link to="/contributing" activeClassName="active">Contributing</Link></li>
+              <li><Link to="/trending" activeClassName="active">Trending</Link></li>
             </ul>
           </div>
         </div>
