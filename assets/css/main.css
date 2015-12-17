@@ -237,10 +237,13 @@ label span + i {
   letter-spacing: 1px;
   border-radius: 0;
   padding: 0;
+  transition: all .2s ease;
 }
 
 .btn-mega:hover,
 .btn-mega:focus {
+  border-color: #398e5C;
+  background: #398e5c;
   color: #fff;
 }
 
