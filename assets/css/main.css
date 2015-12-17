@@ -226,8 +226,11 @@ label span + i {
   max-width: 140px;
   display: block;
   padding-bottom: 10px;
+  margin: 0 auto;
 }
 
+.radio > label,
+.checkbox-inline,
 .radio-inline {
   text-align: center;
   font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -238,4 +241,11 @@ label span + i {
   letter-spacing: 1px;
   font-weight: 700;
   transition: all 0.3s ease;
+}
+
+
+section {
+  /*padding-top: 50px;*/
+  padding-bottom: 50px;
+
 }
