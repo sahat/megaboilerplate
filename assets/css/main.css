@@ -1,9 +1,39 @@
 body {
+  font-size: 13px;
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   padding-bottom: 100px;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  color: #282828;
+}
+
+h3 {
+  font-size: 32px;
+  line-height: 40px;
+  margin-bottom: 40px;
+}
+
+h6 {
+  font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  line-height: 24px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 0 0 24px 0;
+  width: 100%;
 }
 
 .hero {
@@ -229,17 +259,16 @@ label span + i {
   margin: 0 auto;
 }
 
+.btn-logo.small {
+  height: 40px;
+}
+
 .radio > label,
 .checkbox-inline,
 .radio-inline {
   text-align: center;
-  font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 12px;
   line-height: 24px;
   border-radius: 0;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 700;
   transition: all 0.3s ease;
 }
 
@@ -248,4 +277,13 @@ section {
   /*padding-top: 50px;*/
   padding-bottom: 50px;
 
+}
+
+.subcategory {
+  font-weight: 400;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  line-height: 24px;
+  margin-top: 24px;
+  margin-bottom: 24px;
 }

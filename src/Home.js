@@ -246,30 +246,29 @@ class Home extends React.Component {
         <h6>Template Engine</h6>
         <hr/>
         <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/none.png" />
-          <input type="radio" name="templateEngineRadios" value="none" onChange={this.handleChange} defaultChecked={state.templateEngine === 'none'} /> None
-        </label>
-        <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/jade-logo.svg" alt="Jade Logo"/>
           <input type="radio" name="templateEngineRadios" value="jade" onChange={this.handleChange} defaultChecked={state.templateEngine === 'jade'} /> Jade
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." />
         </label>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/handlebars-logo.svg" alt="Handlebars Logo"/>
-
           <input type="radio" name="templateEngineRadios" value="handlebars" onChange={this.handleChange} defaultChecked={state.templateEngine === 'handlebars'} /> Handlebars
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." />
         </label>
+        <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/none.png" />
+          <input type="radio" name="templateEngineRadios" value="none" onChange={this.handleChange} defaultChecked={state.templateEngine === 'none'} /> None
+        </label>
       </section>
     ) : null;
-1
-    let cssFrameworkNoTemplateEngineAlert = ((state.cssFramework && state.cssFramework !== 'none') && state.templateEngine === 'none') ? (
+
+    let cssFrameworkNoTemplateEngineAlert = (state.cssFramework && state.cssFramework !== 'none' && state.templateEngine === 'none') ? (
       <div className="alert alert-info fadeIn animated">
         <strong>Important!</strong> You have NOT selected a template engine. CSS Framework files are still going to be generated, but you will be responsible for importing these files manually.
       </div>
     ) : null;
 
-    let cssFrameworkOptions = (
+    let cssFrameworkOptions = state.cssFramework && state.cssFramework !== 'none' ? (
       <div>
         <h5 className="subcategory">Framework Options</h5>
         <label className="radio-inline">
@@ -285,7 +284,7 @@ class Home extends React.Component {
           <input type="radio" name="cssFrameworkOptionsRadios" value="sass" onChange={this.handleChange} defaultChecked={state.cssFramework === 'bootstrapSass'} /> Sass
         </label>
       </div>
-    );
+    ) : null;
 
     let cssFramework = state.templateEngine ? (
       <section className="fadeIn animated">
