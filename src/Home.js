@@ -48,6 +48,9 @@ class Home extends React.Component {
 
   componentDidUpdate() {
     $(ReactDOM.findDOMNode(this)).find('[data-toggle="popover"]').popover({ trigger: 'hover' });
+
+
+
   }
 
   clickDownload() {
@@ -191,7 +194,7 @@ class Home extends React.Component {
 
     let platform = (
       <section>
-        <h6>Platform</h6>
+        <h6><img className="category-icon" src="/img/svg/platform.png" alt=""/>Platform</h6>
         <hr/>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/node-logo.svg" alt="Node.js Logo"/>
@@ -206,8 +209,12 @@ class Home extends React.Component {
 
     let framework = state.platform ? (
       <section className="fadeIn animated">
-        <h6>Framework</h6>
+        <h6><img className="category-icon" src="/img/svg/framework.png" alt=""/>Framework</h6>
         <hr/>
+        <a href="#">
+          <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" /> Help Me Choose
+        </a>
+        <br/>
         <label className="radio-inline">
           <span className="express-logo">Express</span>
           <input type="radio" id="expressRadio" name="frameworkRadios" value="express" onChange={this.handleChange} defaultChecked={state.framework === 'express'} />
@@ -243,7 +250,7 @@ class Home extends React.Component {
 
     let templateEngine = state.framework ? (
       <section className="fadeIn animated">
-        <h6>Template Engine</h6>
+        <h6><img className="category-icon" src="/img/svg/template-engine.png" alt=""/>Template Engine</h6>
         <hr/>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/jade-logo.svg" alt="Jade Logo"/>
@@ -288,7 +295,7 @@ class Home extends React.Component {
 
     let cssFramework = state.templateEngine ? (
       <section className="fadeIn animated">
-        <h6>CSS Framework</h6>
+        <h6><img className="category-icon" src="/img/svg/css-framework.png" alt=""/>CSS Framework</h6>
         <hr/>
         {cssFrameworkNoTemplateEngineAlert}
         <label className="radio-inline">
@@ -318,7 +325,8 @@ class Home extends React.Component {
 
     let cssPreprocessor = state.cssFramework === 'none' ? (
       <section className="fadeIn animated">
-        <h3>CSS Preprocessor</h3>
+        <h6><img className="category-icon" src="/img/svg/css-preprocessor4.png" alt=""/>CSS Preprocessor</h6>
+        <hr/>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/css3-logo.svg" alt="CSS Logo"/>
 
@@ -350,7 +358,8 @@ class Home extends React.Component {
     state.cssFramework === 'foundationSass' ||
     state.cssFramework === 'bourbonNeat') ? (
       <section className="fadeIn animated">
-        <h3>CSS Build Options</h3>
+        <h6><img className="category-icon" src="/img/svg/css-build-options2.png" alt=""/>CSS Build Options</h6>
+        <hr/>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/npm-logo.svg" alt="Middleware Logo"/>
           <input type="radio" name="cssBuildOptionsRadios" value="middleware" onChange={this.handleChange} defaultChecked={state.cssBuildOptions === 'middleware'} /> Middleware
@@ -373,7 +382,8 @@ class Home extends React.Component {
 
     let database = state.cssFramework ? (
       <section className="fadeIn animated">
-        <h3>Database</h3>
+        <h6><img className="category-icon" src="/img/svg/database.png" alt=""/>Database</h6>
+        <hr/>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/none.png" alt="None Icon" />
           <input type="radio" name="databaseRadios" value="none" onChange={this.handleChange} defaultChecked={state.database === 'none'} /> None
@@ -414,7 +424,8 @@ class Home extends React.Component {
 
     let authentication = state.database ? (
       <section className="fadeIn animated">
-        <h3>Authentication</h3>
+        <h6><img className="category-icon" src="/img/svg/authentication.png" alt=""/>Authentication</h6>
+        <hr/>
         {authenticationAlert}
         <label className="checkbox-inline">
           <img className="btn-logo" src="/img/svg/none.png" alt="None Icon" />
@@ -445,7 +456,8 @@ class Home extends React.Component {
 
     let jsFramework = state.database ? (
       <section className="fadeIn animated">
-        <h3>JavaScript Framework</h3>
+        <h6><img className="category-icon" src="/img/svg/js-framework.png" alt=""/>JavaScript Framework</h6>
+        <hr/>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/none.png" alt="None Icon" />
           <input type="radio" name="jsFrameworkRadios" value="none" onChange={this.handleChange} defaultChecked={state.jsFramework === 'none'} /> None
@@ -521,7 +533,8 @@ class Home extends React.Component {
 
     let theme = state.jsFramework ? (
       <section className="fadeIn animated">
-        <h3>Theme</h3>
+        <h6><img className="category-icon" src="/img/svg/theme3.png" alt=""/>Theme</h6>
+        <hr/>
         <div className="row">
           <div className="col-xs-6 col-md-3">
             <a className={cx("thumbnail", { 'active': this.state.theme === 'theme1' })} onClick={this.handleThemeClick.bind(this, 'theme1')}>
