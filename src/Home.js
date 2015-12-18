@@ -325,7 +325,7 @@ class Home extends React.Component {
 
     let cssPreprocessor = state.cssFramework === 'none' ? (
       <section className="fadeIn animated">
-        <h6><img className="category-icon" src="/img/svg/css-preprocessor4.png" alt=""/>CSS Preprocessor</h6>
+        <h6><img className="category-icon" src="/img/svg/css-preprocessor.png" alt=""/>CSS Preprocessor</h6>
         <hr/>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/css3-logo.svg" alt="CSS Logo"/>
@@ -454,6 +454,60 @@ class Home extends React.Component {
       </section>
     ) : null;
 
+    let reactOptions = state.jsFramework === 'react' ? (
+      <div className="fadeIn animated">
+        <h5 className="subcategory">React Features</h5>
+        <label className="checkbox-inline">
+          <img className="btn-logo" src="/img/svg/alt-logo.png" />
+          <input type="checkbox" name="reactOptionsCheckboxes" value="fluxAlt" onChange={this.handleChange} checked={state.reactOptions.has('fluxAlt')} /> Flux (Alt)
+          <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
+        </label>
+        <label className="checkbox-inline">
+          <img className="btn-logo" src="/img/svg/flux-logo.svg" />
+          <input type="checkbox" name="reactOptionsCheckboxes" value="fluxRedux" onChange={this.handleChange} checked={state.reactOptions.has('fluxRedux')} /> Flux (Redux)
+          <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
+        </label>
+        <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/react-router-logo.png" />
+
+          <input type="checkbox" name="reactOptionsCheckboxes" value="reactRouter" onChange={this.handleChange} checked={state.reactOptions.has('reactRouter')} /> React Router
+          <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
+        </label>
+        <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/relay-logo.svg" />
+
+          <input type="checkbox" name="reactOptionsCheckboxes" value="graphql" onChange={this.handleChange} checked={state.reactOptions.has('graphql')} /> GraphQL + Relay
+          <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
+        </label>
+        <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/babel-logo.png" />
+
+          <input type="checkbox" name="reactOptionsCheckboxes" value="es6" onChange={this.handleChange} checked={state.reactOptions.has('es6')} /> ES6
+          <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
+        </label>
+      </div>
+    ) : null;
+
+    let reactBuildSystem = state.jsFramework === 'react' ? (
+      <div className="fadeIn animated">
+        <h5 className="subcategory">React Build System</h5>
+        <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/browserify-logo.svg" />
+          <input type="radio" name="reactBuildSystemRadios" value="browserify" onChange={this.handleChange} defaultChecked={state.reactBuildSystem === 'browserify'} /> Browserify / Gulp
+          <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
+        </label>
+        <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/webpack-logo.svg" />
+          <input type="radio" name="reactBuildSystemRadios" value="webpack" onChange={this.handleChange} defaultChecked={state.reactBuildSystem === 'webpack'} /> Webpack
+          <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
+        </label>
+        <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/none.png" alt="None Icon" />
+          <input type="radio" name="reactBuildSystemRadios" value="none" onChange={this.handleChange} defaultChecked={state.reactBuildSystem === 'none'} /> None
+        </label>
+      </div>
+    ) : null;
+
     let jsFramework = state.database ? (
       <section className="fadeIn animated">
         <h6><img className="category-icon" src="/img/svg/js-framework.png" alt=""/>JavaScript Framework</h6>
@@ -472,68 +526,16 @@ class Home extends React.Component {
           <input type="radio" name="jsFrameworkRadios" value="angular" onChange={this.handleChange} defaultChecked={state.jsFramework === 'angular'} /> AngularJS
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
+
+        {reactOptions}
+        {reactBuildSystem}
       </section>
     ) : null;
 
-    let reactOptions = state.jsFramework === 'react' ? (
-      <section className="fadeIn animated">
-        <h3>React Features</h3>
-        <label className="checkbox-inline">
-          <img className="btn-logo" src="/img/svg/alt-logo.png"></img>
-          <input type="checkbox" name="reactOptionsCheckboxes" value="fluxAlt" onChange={this.handleChange} checked={state.reactOptions.has('fluxAlt')} /> Flux (Alt)
-          <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
-        </label>
-        <label className="checkbox-inline">
-          <img className="btn-logo" src="/img/svg/flux-logo.svg"></img>
-          <input type="checkbox" name="reactOptionsCheckboxes" value="fluxRedux" onChange={this.handleChange} checked={state.reactOptions.has('fluxRedux')} /> Flux (Redux)
-          <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
-        </label>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/react-router-logo.png"></img>
-
-          <input type="checkbox" name="reactOptionsCheckboxes" value="reactRouter" onChange={this.handleChange} checked={state.reactOptions.has('reactRouter')} /> React Router
-          <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
-        </label>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/relay-logo.svg"></img>
-
-          <input type="checkbox" name="reactOptionsCheckboxes" value="graphql" onChange={this.handleChange} checked={state.reactOptions.has('graphql')} /> GraphQL + Relay
-          <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
-        </label>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/babel-logo.png"></img>
-
-          <input type="checkbox" name="reactOptionsCheckboxes" value="es6" onChange={this.handleChange} checked={state.reactOptions.has('es6')} /> ES6
-          <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
-        </label>
-      </section>
-    ) : null;
-
-    let reactBuildSystem = state.jsFramework === 'react' ? (
-      <section className="fadeIn animated">
-        <h3>React Build System</h3>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/browserify-logo.svg"></img>
-
-          <input type="radio" name="reactBuildSystemRadios" value="browserify" onChange={this.handleChange} defaultChecked={state.reactBuildSystem === 'browserify'} /> Browserify / Gulp
-          <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
-        </label>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/webpack-logo.svg"></img>
-
-          <input type="radio" name="reactBuildSystemRadios" value="webpack" onChange={this.handleChange} defaultChecked={state.reactBuildSystem === 'webpack'} /> Webpack
-          <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
-        </label>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/none.png" alt="None Icon" />
-          <input type="radio" name="reactBuildSystemRadios" value="none" onChange={this.handleChange} defaultChecked={state.reactBuildSystem === 'none'} /> None
-        </label>
-      </section>
-    ) : null;
 
     let theme = state.jsFramework ? (
       <section className="fadeIn animated">
-        <h6><img className="category-icon" src="/img/svg/theme3.png" alt=""/>Theme</h6>
+        <h6><img className="category-icon" src="/img/svg/theme.png" alt=""/>Theme</h6>
         <hr/>
         <div className="row">
           <div className="col-xs-6 col-md-3">
@@ -575,8 +577,6 @@ class Home extends React.Component {
         {database}
         {authentication}
         {jsFramework}
-        {reactOptions}
-        {reactBuildSystem}
         {theme}
         {download}
         <br/>
