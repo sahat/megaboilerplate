@@ -255,12 +255,10 @@ class Home extends React.Component {
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/jade-logo.svg" alt="Jade Logo"/>
           <input type="radio" name="templateEngineRadios" value="jade" onChange={this.handleChange} defaultChecked={state.templateEngine === 'jade'} /> Jade
-          <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." />
         </label>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/handlebars-logo.svg" alt="Handlebars Logo"/>
           <input type="radio" name="templateEngineRadios" value="handlebars" onChange={this.handleChange} defaultChecked={state.templateEngine === 'handlebars'} /> Handlebars
-          <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." />
         </label>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/none.png" />
@@ -305,18 +303,14 @@ class Home extends React.Component {
         <label className="radio-inline">
             <img className="btn-logo" src="/img/svg/bootstrap-logo.svg" alt="Bootstrap Logo"/>
             <input type="radio" name="cssFrameworkRadios" value="bootstrap" onChange={this.handleChange} defaultChecked={state.cssFramework === 'bootstrap'} /> Bootstrap
-            <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." />
         </label>
         <label className="radio-inline">
             <img className="btn-logo" src="/img/svg/foundation-logo.svg" alt="Foundation Logo"/>
-
             <input type="radio" name="cssFrameworkRadios" value="foundation" onChange={this.handleChange} defaultChecked={state.cssFramework === 'foundation'} /> Foundation
-            <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." />
         </label>
         <label className="radio-inline">
             <img className="btn-logo" src="/img/svg/bourbon-logo.svg" alt="Bourbon Neat Logo"/>
             <input type="radio" name="cssFrameworkRadios" value="bourbonNeat" onChange={this.handleChange} defaultChecked={state.cssFramework === 'bourbonNeat'} /> Bourbon Neat
-            <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." />
         </label>
 
         {cssFrameworkOptions}
@@ -389,25 +383,25 @@ class Home extends React.Component {
           <input type="radio" name="databaseRadios" value="none" onChange={this.handleChange} defaultChecked={state.database === 'none'} /> None
         </label>
         <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/mongodb-logo.svg"></img>
+          <img className="btn-logo" src="/img/svg/mongodb-logo.svg" />
 
           <input type="radio" name="databaseRadios" value="mongodb" onChange={this.handleChange} defaultChecked={state.database === 'mongodb'} /> MongoDB
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
         <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/mysql-logo.svg"></img>
+          <img className="btn-logo" src="/img/svg/mysql-logo.svg" />
 
           <input type="radio" name="databaseRadios" value="mysql" onChange={this.handleChange} defaultChecked={state.database === 'mysql'} /> MySQL
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
         <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/postgresql-logo.svg"></img>
+          <img className="btn-logo" src="/img/svg/postgresql-logo.svg" />
 
           <input type="radio" name="databaseRadios" value="postgresql" onChange={this.handleChange} defaultChecked={state.database === 'postgresql'} /> PostgreSQL
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
         <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/rethinkdb-logo.svg"></img>
+          <img className="btn-logo" src="/img/svg/rethinkdb-logo.svg" />
 
           <input type="radio" name="databaseRadios" value="rethinkdb" onChange={this.handleChange} defaultChecked={state.database === 'rethinkdb'} /> RethinkDB
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
@@ -432,23 +426,19 @@ class Home extends React.Component {
           <input type="checkbox" name="authenticationCheckboxes" value="none" onChange={this.handleChange} checked={state.authentication.size === 0} disabled={state.database === 'none'} /> None
         </label>
         <label className="checkbox-inline">
-          <img className="btn-logo" src="/img/svg/passportjs-logo.svg"></img>
-
+          <img className="btn-logo" src="/img/svg/passportjs-logo.svg" />
           <input type="checkbox" name="authenticationCheckboxes" value="email" onChange={this.handleChange} checked={state.authentication.has('email')} disabled={state.database === 'none'} /> Email / Password
         </label>
         <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/facebook-logo.svg"></img>
-
+          <img className="btn-logo" src="/img/svg/facebook-logo.svg" />
           <input type="checkbox" name="authenticationCheckboxes" value="facebook" onChange={this.handleChange} checked={state.authentication.has('facebook')} disabled={state.database === 'none'} /> Facebook
         </label>
         <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/google-logo.svg"></img>
-
+          <img className="btn-logo" src="/img/svg/google-logo.svg" />
           <input type="checkbox" name="authenticationCheckboxes" value="google" onChange={this.handleChange} checked={state.authentication.has('google')} disabled={state.database === 'none'} /> Google
         </label>
         <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/twitter-logo.svg"></img>
-
+          <img className="btn-logo" src="/img/svg/twitter-logo.svg" />
           <input type="checkbox" name="authenticationCheckboxes" value="twitter" onChange={this.handleChange} checked={state.authentication.has('twitter')} disabled={state.database === 'none'} /> Twitter
         </label>
       </section>
@@ -517,12 +507,12 @@ class Home extends React.Component {
           <input type="radio" name="jsFrameworkRadios" value="none" onChange={this.handleChange} defaultChecked={state.jsFramework === 'none'} /> None
         </label>
         <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/react-logo.svg"></img>
+          <img className="btn-logo" src="/img/svg/react-logo.svg" />
           <input type="radio" name="jsFrameworkRadios" value="react" onChange={this.handleChange} defaultChecked={state.jsFramework === 'react'} /> React
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
         <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/angularjs-logo.png"></img>
+          <img className="btn-logo" src="/img/svg/angularjs-logo.png" />
           <input type="radio" name="jsFrameworkRadios" value="angular" onChange={this.handleChange} defaultChecked={state.jsFramework === 'angular'} /> AngularJS
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
