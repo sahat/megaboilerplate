@@ -6,7 +6,6 @@ let readFile = Promise.promisify(fs.readFile);
 let writeFile = Promise.promisify(fs.writeFile);
 
 /**
- *
  * @param srcFile {buffer} - where to remove
  * @param subStr {string} - what to remove
  * @returns {string}
@@ -16,9 +15,10 @@ async function removeCode(srcFile, subStr) {
   let array = srcData.toString().split('\n');
   array.forEach((line, index) => {
     if (line.includes(subStr)) {
-      array.splice(index, 1);
+      array[index] = null;
     }
   });
+  array = array.filter((value) => { return value !== null; });
   srcData = array.join('\n');
   await writeFile(srcFile, srcData);
 }
