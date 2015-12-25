@@ -7,23 +7,24 @@ let generateCssBuildOptions = require('./generators/css-build-options/generateCs
 let generateDatabase = require('./generators/database/generateDatabase');
 let generateAuthentication = require('./generators/authentication/generateAuthentication');
 let generateJsFramework = require('./generators/js-framework/generateJsFramework');
+//let cleanup = require('./utils/cleanup');
+let removeComments = require('./utils/removeComments');
 
 async function download(req, res) {
   let params = await prepare(req.body);
-try {
-  await generateFramework(params);
-  await generateTemplateEngine(params);
-  await generateCssFramework(params);
-  await generateCssPreprocessor(params);
-  await generateCssBuildOptions(params);
-  await generateDatabase(params);
-  //await generateAuthentication(params);
-  await generateJsFramework(params);
-} catch (e) {
-  throw Error(e);
-}
-
-
+  try {
+    await generateFramework(params);
+    await generateTemplateEngine(params);
+    await generateCssFramework(params);
+    await generateCssPreprocessor(params);
+    await generateCssBuildOptions(params);
+    await generateDatabase(params);
+    await generateAuthentication(params);
+    await generateJsFramework(params);
+    await removeComments(params);
+  } catch (e) {
+    throw Error(e);
+  }
   res.end();
 }
 
