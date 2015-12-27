@@ -13,7 +13,6 @@ async function generateTemplateEngine(params) {
       // TODO: Not implemented
       break;
     case 'none':
-      await cleanupTemplateEngineString(params);
       break;
     default:
       // TODO

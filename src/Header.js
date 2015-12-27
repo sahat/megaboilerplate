@@ -14,9 +14,11 @@ class Header extends React.Component {
               <li><Link to="/trending" activeClassName="active">Trending</Link></li>
             </ul>
             <ul className="nav navbar-nav navbar-right">
-              <li><Link to="https://github.com/sahat/boilerplate" className="navbar-icon">
-                <i className="ion-social-github" />
-              </Link></li>
+              <li>
+                <Link to="https://github.com/sahat/boilerplate" className="navbar-icon">
+                  <i className="ion-social-github"/>
+                </Link>
+              </li>
             </ul>
           </div>
         </div>

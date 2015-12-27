@@ -22,7 +22,6 @@ async function generateCssFramework(params) {
       // TODO
       break;
     case 'none':
-      await generateCssFrameworkNone(params);
       break;
     default:
       // TODO

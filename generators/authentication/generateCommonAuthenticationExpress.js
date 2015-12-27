@@ -17,9 +17,11 @@ async function generateCommonAuthenticationExpress(params) {
   let passportDeserializer = path.join(__base, 'modules', 'authentication', 'common', 'passport-deserializer.js');
   let passportUserModel = path.join(__base, 'modules', 'authentication', 'common', 'passport-user-model.js');
 
+  // Passport middleware
   await replaceCode(app, 'PASSPORT_REQUIRE', passportRequire);
   await replaceCode(app, 'PASSPORT_MIDDLEWARE', passportMiddleware);
 
+  // Passport config file
   await copy(passportConfigModule, passportConfigFile);
   await replaceCode(passportConfigFile, 'PASSPORT_USER_MODEL', passportUserModel);
   await replaceCode(passportConfigFile, 'PASSPORT_SERIALIZER', passportSerializer, { leadingBlankLine: true });

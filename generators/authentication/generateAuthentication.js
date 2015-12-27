@@ -12,8 +12,6 @@ async function generateAuthentication(params) {
     await generateFacebookAuthentication(params);
     await generateGoogleAuthentication(params);
     await generateTwitterAuthentication(params);
-  } else {
-    await cleanupAuthentication(params);
   }
 }
 
