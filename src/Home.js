@@ -178,6 +178,9 @@ class Home extends React.Component {
       case 'reactBuildSystemRadios':
         state.reactBuildSystem = value;
         break;
+      case 'deploymentRadios':
+        state.deployment = value;
+        break;
     }
 
     this.setState(state);
@@ -547,6 +550,25 @@ class Home extends React.Component {
       </section>
     ) : null;
 
+    let deployment = state.theme ? (
+      <section className="fadeIn animated">
+        <h6><img className="category-icon" src="/img/svg/deployment.svg" alt=""/>Deployment</h6>
+        <hr/>
+        <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/heroku-logo.svg" alt="Heroku Logo"/>
+          <input type="radio" name="deploymentRadios" value="heroku" onChange={this.handleChange} defaultChecked={state.deployment === 'heroku'} /> Heroku
+        </label>
+        <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/azure-logo.svg" alt="Azure Logo"/>
+          <input type="radio" name="deploymentRadios" value="azure" onChange={this.handleChange} defaultChecked={state.deployment === 'azure'} /> Microsoft Azure
+        </label>
+        <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/none.png" />
+          <input type="radio" name="deploymentRadios" value="none" onChange={this.handleChange} defaultChecked={state.deployment === 'none'} /> None
+        </label>
+      </section>
+    ) : null;
+
     let download = (
       <div>
         <br/>
@@ -568,6 +590,7 @@ class Home extends React.Component {
         {authentication}
         {jsFramework}
         {theme}
+        {deployment}
         {download}
         <br/>
         <a className="twitter-share-button" href="https://twitter.com/intent/tweet">Tweet</a>&nbsp;
