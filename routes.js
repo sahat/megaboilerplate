@@ -8,7 +8,7 @@ let generateDatabase = require('./generators/database/generateDatabase');
 let generateAuthentication = require('./generators/authentication/generateAuthentication');
 let generateJsFramework = require('./generators/js-framework/generateJsFramework');
 //let cleanup = require('./utils/cleanup');
-let removeComments = require('./utils/removeComments');
+let walkAndRemoveComments = require('./utils/walkAndRemoveComments');
 
 async function download(req, res) {
   let params = await prepare(req.body);
@@ -21,7 +21,7 @@ async function download(req, res) {
     await generateDatabase(params);
     await generateAuthentication(params);
     await generateJsFramework(params);
-    await removeComments(params);
+    await walkAndRemoveComments(params);
   } catch (e) {
     throw Error(e);
   }
