@@ -4,7 +4,11 @@ let Promise = require('bluebird');
 let removeCode = require('./removeCode');
 let stat = Promise.promisify(fs.stat);
 
-function removeComments(params) {
+/**
+ * Traverse files and remove placeholder comments
+ * @param params
+ */
+function walkAndRemoveComments(params) {
   let build = path.join(__base, 'build', params.uuid);
 
   return new Promise((resolve, reject) => {
@@ -25,4 +29,4 @@ function removeComments(params) {
   });
 }
 
-module.exports = removeComments;
+module.exports = walkAndRemoveComments;
