@@ -462,6 +462,11 @@ canvas {
 
 /*Headings Styles*/
 
+.node h6 {
+  background-color: #83cd29;
+  border-color: transparent;
+}
+
 .express h6 {
   color: #fff;
   background-color: #000;
