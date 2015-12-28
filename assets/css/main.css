@@ -275,7 +275,7 @@ label span + i {
 }
 
 .btn-logo {
-  height: 60px;
+  max-height: 60px;
   max-width: 140px;
   display: block;
   padding-bottom: 10px;
@@ -292,6 +292,7 @@ label span + i {
   text-align: center;
   line-height: 24px;
   border-radius: 0;
+  vertical-align: baseline;
   transition: all 0.3s ease;
 }
 

@@ -250,6 +250,10 @@ class Home extends React.Component {
           <img className="btn-logo" src="/img/svg/sails-logo.png" alt="Sails.js Logo"/>
           <input type="radio" name="frameworkRadios" value="sails" onChange={this.handleChange} defaultChecked={state.framework === 'sails'} /> Sails.js
         </label>
+        <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/meteor-logo.png" alt="Meteor Logo"/>
+          <input type="radio" name="frameworkRadios" value="meteor" onChange={this.handleChange} defaultChecked={state.framework === 'meteor'} /> Meteor
+        </label>
 
         <br/>
         <br/>
