@@ -7,6 +7,7 @@ class InlineSvg extends React.Component {
     let styles = {
       display: 'inline-block',
       width: this.props.width,
+      height: this.props.height,
       verticalAlign: 'middle',
       lineHeight: 0
     };
@@ -15,7 +16,8 @@ class InlineSvg extends React.Component {
 }
 
 InlineSvg.defaultProps = {
-  width: '28px'
+  width: '28px',
+  height: '28px'
 };
 
 export default InlineSvg;
