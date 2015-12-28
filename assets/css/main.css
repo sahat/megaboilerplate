@@ -65,6 +65,13 @@ hr {
   margin-left: 155px;
 }
 
+.hero-logo {
+  text-align: center;
+  height: 75px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
 label span + i {
   color: #4F8EF7;
   margin-left: 4px;
@@ -309,3 +316,21 @@ section {
   margin-right: 8px;
 }
 
+/*Footer*/
+
+footer {
+  background-color: #292929;
+  padding: 96px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/*Slideshow*/
+.slick-slide img {
+  display: inline-block;
+}
+
+.slick-slider {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
