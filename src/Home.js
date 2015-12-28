@@ -218,15 +218,14 @@ class Home extends React.Component {
     let state = this.state;
 
     let platform = (
-      <section>
-        <h6><img className="category-icon" src="/img/svg/platform.png" alt=""/>Platform</h6>
+      <section className={cx('fadeIn', 'animated', state.platform)}>
+        <h6><InlineSvg name="platform" width="18px" height="20px"/> {state.platform || 'Platform'}</h6>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/node-logo.svg" alt="Node.js Logo"/>
           <input type="radio" id="nodeRadio" name="platformRadios" value="node" onChange={this.handleChange} defaultChecked={state.platform === 'node'} /> Node.js
         </label>
         <div className="row">
           <div className="col-sm-6">
-
             <ul className="nav nav-stacked" id="platformAccordion">
               <li>
                 <a data-toggle="collapse" data-parent="#platformAccordion" href="#platformCollapse1">
@@ -248,7 +247,7 @@ class Home extends React.Component {
 
     let framework = state.platform ? (
       <section className={cx('fadeIn', 'animated', state.framework)}>
-        <h6><InlineSvg name="framework" width="20px" height="20px"/> Framework</h6>
+        <h6><InlineSvg name="framework" width="18px" height="20px"/> {state.framework || 'Framework'}</h6>
         <br/>
         <label className="radio-inline">
           <span className="express-logo">Express</span>
@@ -286,7 +285,7 @@ class Home extends React.Component {
         <div className="row">
           <div className="col-sm-6">
 
-            <ul className="nav nav-stacked" id="frameoworkAccordion">
+            <ul className="nav nav-stacked" id="frameworkAccordion">
               <li>
                 <a data-toggle="collapse" data-parent="#frameworkAccordion" href="#frameworkCollapse1">
                   <i className="ion-help-circled"/>
@@ -307,7 +306,7 @@ class Home extends React.Component {
 
     let templateEngine = state.framework ? (
       <section className={cx('fadeIn', 'animated', state.templateEngine)}>
-        <h6><InlineSvg name="template-engine"/> Template Engine</h6>
+        <h6><InlineSvg name="template-engine"/> {state.templateEngine === 'none' ? 'Template Engine' : state.templateEngine}</h6>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/jade-logo.svg" height="60" alt="Jade Logo"/>
           <input type="radio" name="templateEngineRadios" value="jade" onChange={this.handleChange} checked={state.templateEngine === 'jade'}/> Jade
