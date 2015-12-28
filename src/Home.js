@@ -147,8 +147,6 @@ class Home extends React.Component {
         break;
       case 'templateEngineRadios':
         state.templateEngine = value;
-        state.templateEngineHeadingColor = headingColor;
-        state.templateEngineHeadingBg = headingBg;
         break;
       case 'cssFrameworkRadios':
         if (value === 'none' || value.includes('Css')) {
@@ -309,23 +307,22 @@ class Home extends React.Component {
 
     let templateEngine = state.framework ? (
       <section className={cx('fadeIn', 'animated', state.templateEngine)}>
-        <h6><InlineSvg name="template-engine" /> Template Engine</h6>
-
+        <h6><InlineSvg name="template-engine"/> Template Engine</h6>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/jade-logo.svg" height="60" alt="Jade Logo"/>
-          <input type="radio" name="templateEngineRadios" value="jade" onChange={this.handleChange} checked={state.templateEngine === 'jade'} /> Jade
+          <input type="radio" name="templateEngineRadios" value="jade" onChange={this.handleChange} checked={state.templateEngine === 'jade'}/> Jade
         </label>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/handlebars-logo.svg" alt="Handlebars Logo"/>
-          <input type="radio" name="templateEngineRadios" value="handlebars" data-bg="radial-gradient(top center, #f7931e, #f15a24 750px)" onChange={this.handleChange} checked={state.templateEngine === 'handlebars'} /> Handlebars
+          <input type="radio" name="templateEngineRadios" value="handlebars" onChange={this.handleChange} checked={state.templateEngine === 'handlebars'}/> Handlebars
         </label>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/nunjucks-logo.png" alt="Nunjucks Logo"/>
-          <input type="radio" name="templateEngineRadios" value="nunjucks" onChange={this.handleChange} checked={state.templateEngine === 'nunjucks'} /> Nunjucks
+          <input type="radio" name="templateEngineRadios" value="nunjucks" onChange={this.handleChange} checked={state.templateEngine === 'nunjucks'}/> Nunjucks
         </label>
         <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/none.png" />
-          <input type="radio" name="templateEngineRadios" value="none" onChange={this.handleChange} checked={state.templateEngine === 'none'} /> None
+          <img className="btn-logo" src="/img/svg/none.png"/>
+          <input type="radio" name="templateEngineRadios" value="none" onChange={this.handleChange} checked={state.templateEngine === 'none'}/> None
         </label>
 
         <div className="row">
