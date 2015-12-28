@@ -357,7 +357,7 @@ section .panel {
   font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 11px;
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 700.nav-stacked;
   letter-spacing: 1px;
 }
 
@@ -372,11 +372,11 @@ section .panel {
 .nav-stacked > li + li {
   margin-top: 0;
 }
-.nav > li > a {
+.nav-stacked > li > a {
   padding: 8px 0;
 }
 
-.nav > li a > i[class^="ion"] {
+.nav-stacked > li a > i[class^="ion"] {
   margin-right: 5px;
 }
 
@@ -385,7 +385,7 @@ section .panel {
   background-color: #f5f5f5;
 }
 
-.nav > li > a:hover,
-.nav > li > a:focus {
+.nav-stacked > li > a:hover,
+.nav-stacked > li > a:focus {
   background-color: transparent;
 }
