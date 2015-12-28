@@ -26,7 +26,8 @@ h6 {
   text-transform: uppercase;
   letter-spacing: 2px;
   font-weight: 700;
-  margin-bottom: 12px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #ccc;
 }
 
 hr {
@@ -391,6 +392,7 @@ section .panel {
   background-color: transparent;
 }
 
+/*Connected Dots*/
 canvas {
   position: absolute;
   width: 100%;
@@ -399,4 +401,73 @@ canvas {
   right: 0;
   bottom: 0;
   left: 0;
+}
+
+/*Paper stacks*/
+.stack-container {
+  position: relative;
+  width: 100px;
+}
+.paper {
+  display: block;
+  width: 90px;
+  height: 90px;
+  position: absolute;
+  top: -120px;
+  border-radius: 8px;
+  -webkit-transform: rotate(-28deg) skewX(48deg);
+  transform: rotate(-28deg) skewX(48deg);
+  box-shadow: -12px 8px 20px 0px rgba(0, 0, 0, 0.4);
+  border-bottom: 5px solid #031f63;
+  border-left: 7px solid #031f63;
+  opacity: 0;
+  -webkit-transition: all 400ms ease;
+  transition: all 400ms ease;
+}
+.paper.stacked {
+  opacity: 1;
+}
+
+.bottom {
+  background-color: #28ace2;
+  background-image: -webkit-linear-gradient(bottom, #28ace2, #177da7);
+  background-image: linear-gradient(to top, #28ace2, #177da7);
+  border-color: #167aa2;
+}
+.bottom.stacked {
+  top: 140px;
+}
+
+.middle {
+  background-color: #1ad28f;
+  background-image: -webkit-linear-gradient(bottom, #1ad28f, #128e61);
+  background-image: linear-gradient(to top, #1ad28f, #128e61);
+  border-color: #11895e;
+}
+.middle.stacked {
+  top: 110px;
+}
+
+.top {
+  background-image: -webkit-linear-gradient(bottom, #ffffff, #d9d9d9);
+  background-image: linear-gradient(to top, #ffffff, #d9d9d9);
+  border-color: #d6d6d6;
+}
+.top.stacked {
+  top: 80px;
+}
+
+
+/*Headings Styles*/
+
+.handlebars h6 {
+  color: #fff;
+  background-color: #f7931e;
+  background-image: url(http://handlebarsjs.com/images/noise.png), radial-gradient(at top center, #f7931e, #f15a24 750px);
+  border-color: transparent;
+}
+
+.handlebars svg {
+  color: #fff;
+  fill: currentColor;
 }
