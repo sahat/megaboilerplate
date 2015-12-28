@@ -873,6 +873,10 @@ class Home extends React.Component {
           <input type="radio" name="deploymentRadios" value="azure" onChange={this.handleChange} defaultChecked={state.deployment === 'azure'} /> Microsoft Azure
         </label>
         <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/bluemix-logo.svg" alt="IBM Bluemix Logo"/>
+          <input type="radio" name="deploymentRadios" value="bluemix" onChange={this.handleChange} defaultChecked={state.deployment === 'bluemix'} /> IBM Bluemix
+        </label>
+        <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/none.png" />
           <input type="radio" name="deploymentRadios" value="none" onChange={this.handleChange} defaultChecked={state.deployment === 'none'} /> None
         </label>
