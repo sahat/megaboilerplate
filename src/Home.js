@@ -299,7 +299,7 @@ class Home extends React.Component {
         <hr/>
 
         <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/jade-logo.svg" alt="Jade Logo"/>
+          <img className="btn-logo" src="/img/svg/jade-logo.svg" height="60" alt="Jade Logo"/>
           <input type="radio" name="templateEngineRadios" value="jade" onChange={this.handleChange} defaultChecked={state.templateEngine === 'jade'} /> Jade
         </label>
         <label className="radio-inline">
@@ -423,22 +423,29 @@ class Home extends React.Component {
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/css3-logo.svg" alt="CSS Logo"/>
 
-          <input type="radio" name="cssPreprocessorRadios" value="css" onChange={this.handleChange} defaultChecked={state.cssPreprocessor === 'css'} /> CSS
+          <input type="radio" name="cssPreprocessorRadios" value="css" onChange={this.handleChange} checked={state.cssPreprocessor === 'css'} /> CSS
         </label>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/sass-logo.svg" alt="Sass Logo"/>
 
-          <input type="radio" name="cssPreprocessorRadios" value="sass" onChange={this.handleChange} defaultChecked={state.cssPreprocessor === 'sass'} /> Sass
+          <input type="radio" name="cssPreprocessorRadios" value="sass" onChange={this.handleChange} checked={state.cssPreprocessor === 'sass'} /> Sass
         </label>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/less-logo.svg" alt="LESS Logo"/>
 
-          <input type="radio" name="cssPreprocessorRadios" value="less" onChange={this.handleChange} defaultChecked={state.cssPreprocessor === 'less'} /> LESS
+          <input type="radio" name="cssPreprocessorRadios" value="less" onChange={this.handleChange} checked={state.cssPreprocessor === 'less'} /> LESS
         </label>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/postcss-logo.png" alt="PostCSS Logo"/>
-
-          <input type="radio" name="cssPreprocessorRadios" value="postcss" onChange={this.handleChange} defaultChecked={state.cssPreprocessor === 'postcss'} /> PostCSS
+          <input type="radio" name="cssPreprocessorRadios" value="postcss" onChange={this.handleChange} checked={state.cssPreprocessor === 'postcss'} /> PostCSS
+        </label>
+        <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/stylus-logo.svg" alt="Stylus Logo"/>
+          <input type="radio" name="cssPreprocessorRadios" value="stylus" onChange={this.handleChange} checked={state.cssPreprocessor === 'stylus'} /> Stylus
+        </label>
+        <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/cssnext-logo.svg" height="60" alt="cssnext Logo"/>
+          <input type="radio" name="cssPreprocessorRadios" value="cssnext" onChange={this.handleChange} checked={state.cssPreprocessor === 'cssnext'} /> cssnext
         </label>
       </section>
     ) : null;
@@ -527,7 +534,7 @@ class Home extends React.Component {
 
     let authenticationAlert = (state.database === 'none') ? (
       <div className="alert alert-info">
-        <strong>Important!</strong> To enable authentication you must choose one of the databases above.
+        <strong>Important!</strong> To enable authentication you must choose a database.
       </div>
     ) : null;
 
