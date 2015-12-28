@@ -28,6 +28,8 @@ h6 {
   font-weight: 700;
   margin-bottom: 24px;
   border-bottom: 1px solid #ccc;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 hr {
@@ -459,6 +461,51 @@ canvas {
 
 
 /*Headings Styles*/
+
+.express h6 {
+  color: #fff;
+  background-color: #000;
+  border-color: transparent;
+}
+
+.express svg {
+  color: #fff;
+  fill: currentColor;
+}
+
+.hapi h6 {
+  color: #3c3b30;
+  background-color: #f6941e;
+  border-color: transparent;
+}
+
+.hapi svg {
+  color: #3c3b30;
+  fill: currentColor;
+}
+
+.sails h6 {
+  color: #fff;
+  background-color: #41bac2;
+  background-image: linear-gradient(135deg, #41bac2 0, #0b8fa2 100%);
+  border-color: transparent;
+}
+
+.sails svg {
+  color: #fff;
+  fill: currentColor;
+}
+
+.meteor h6 {
+  color: #fff;
+  background-color: #de4f4f;
+  border-color: transparent;
+}
+
+.meteor svg {
+  color: #fff;
+  fill: currentColor;
+}
 
 .handlebars h6 {
   color: #fff;

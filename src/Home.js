@@ -247,8 +247,8 @@ class Home extends React.Component {
     );
 
     let framework = state.platform ? (
-      <section className="fadeIn animated">
-        <h6><img className="category-icon" src="/img/svg/framework.png" alt=""/>Framework</h6>
+      <section className={cx('fadeIn', 'animated', state.framework)}>
+        <h6><InlineSvg name="framework" width="20px" height="20px"/> Framework</h6>
         <br/>
         <label className="radio-inline">
           <span className="express-logo">Express</span>
