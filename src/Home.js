@@ -24,6 +24,7 @@ class Home extends React.Component {
       appName: query.appName || null,
       templateEngine: query.templateEngine || null,
       cssFramework: query.cssFramework || null,
+      cssFrameworkOptions: query.cssFrameworkOptions || 'css',
       cssPreprocessor: query.cssPreprocessor || null,
       cssBuildOptions: query.cssBuildOptions || null,
       database: query.database || null,
@@ -136,6 +137,9 @@ class Home extends React.Component {
         }
         state.cssFramework = value;
         break;
+      case 'cssFrameworkOptionsRadios':
+        state.cssFrameworkOptions = value;
+        break;
       case 'cssPreprocessorRadios':
         if (value === 'none' || value.includes('Css')) {
           delete state.cssBuildOptions;
@@ -220,8 +224,7 @@ class Home extends React.Component {
         <br/>
         <label className="radio-inline">
           <span className="express-logo">Express</span>
-          <input type="radio" id="expressRadio" name="frameworkRadios" value="express" onChange={this.handleChange} defaultChecked={state.framework === 'express'} />
-          <label htmlFor="expressRadio">Express</label>
+          <input type="radio" id="expressRadio" name="frameworkRadios" value="express" onChange={this.handleChange} defaultChecked={state.framework === 'express'} /> Express
         </label>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/hapi-logo.png" alt="Hapi Logo"/>
@@ -248,6 +251,12 @@ class Home extends React.Component {
           </div>
         </div>
 
+        <div className="row">
+          <div className="col-sm-6">
+            Which framework is right for me?
+          </div>
+        </div>
+
       </section>
     ) : null;
 
@@ -255,6 +264,10 @@ class Home extends React.Component {
       <section className="fadeIn animated">
         <h6><img className="category-icon" src="/img/svg/template-engine.png" alt=""/>Template Engine</h6>
         <hr/>
+
+        <div className="alert alert-info">
+          <strong>Tip:</strong> Select <strong>None</strong> if you are building an API server or a single-page application.
+        </div>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/jade-logo.svg" alt="Jade Logo"/>
           <input type="radio" name="templateEngineRadios" value="jade" onChange={this.handleChange} defaultChecked={state.templateEngine === 'jade'} /> Jade
@@ -267,6 +280,16 @@ class Home extends React.Component {
           <img className="btn-logo" src="/img/svg/none.png" />
           <input type="radio" name="templateEngineRadios" value="none" onChange={this.handleChange} defaultChecked={state.templateEngine === 'none'} /> None
         </label>
+
+        <div className="row">
+          <div className="col-sm-6">
+            <ul>
+              <li>Do I need a template engine?</li>
+              <li>Jade vs Handlebars</li>
+            </ul>
+          </div>
+        </div>
+
       </section>
     ) : null;
 
@@ -281,16 +304,24 @@ class Home extends React.Component {
         <h5 className="subcategory">Framework Options</h5>
         <label className="radio-inline">
           <img className="btn-logo small" src="/img/svg/css3-logo.svg" alt="CSS Logo"/>
-          <input type="radio" name="cssFrameworkOptionsRadios" value="css" onChange={this.handleChange} defaultChecked={state.cssFramework === 'bootstrapLess'} /> CSS
+          <input type="radio" name="cssFrameworkOptionsRadios" value="css" onChange={this.handleChange} checked={state.cssFrameworkOptions === 'css'} /> CSS
         </label>
         <label className="radio-inline">
           <img className="btn-logo small" src="/img/svg/less-logo.svg" alt="LESS Logo"/>
-          <input type="radio" name="cssFrameworkOptionsRadios" value="less" onChange={this.handleChange} defaultChecked={state.cssFramework === 'bootstrapLess'} /> LESS
+          <input type="radio" name="cssFrameworkOptionsRadios" value="less" onChange={this.handleChange} checked={state.cssFrameworkOptions === 'less'} /> LESS
         </label>
         <label className="radio-inline">
           <img className="btn-logo small" src="/img/svg/sass-logo.svg" alt="Sass Logo"/>
-          <input type="radio" name="cssFrameworkOptionsRadios" value="sass" onChange={this.handleChange} defaultChecked={state.cssFramework === 'bootstrapSass'} /> Sass
+          <input type="radio" name="cssFrameworkOptionsRadios" value="sass" onChange={this.handleChange} checked={state.cssFrameworkOptions === 'sass'} /> Sass
         </label>
+
+        <div className="row">
+          <div className="col-sm-6">
+            <ul>
+              <li>What's the difference between CSS, LESS and Sass?</li>
+            </ul>
+          </div>
+        </div>
       </div>
     ) : null;
 
@@ -315,6 +346,16 @@ class Home extends React.Component {
             <img className="btn-logo" src="/img/svg/bourbon-logo.svg" alt="Bourbon Neat Logo"/>
             <input type="radio" name="cssFrameworkRadios" value="bourbonNeat" onChange={this.handleChange} defaultChecked={state.cssFramework === 'bourbonNeat'} /> Bourbon Neat
         </label>
+
+        <div className="row">
+          <div className="col-sm-6">
+            <ul>
+              <li>Should I use CSS framework?</li>
+              <li>Which CSS framework is the best?</li>
+              <li>Bootstrap vs Foundation vs Bourbon Neat</li>
+            </ul>
+          </div>
+        </div>
 
         {cssFrameworkOptions}
       </section>
@@ -350,10 +391,8 @@ class Home extends React.Component {
     let cssBuildOptions = (state.cssPreprocessor === 'sass' ||
     state.cssPreprocessor === 'less' ||
     state.cssPreprocessor === 'postcss' ||
-    state.cssFramework === 'bootstrapLess' ||
-    state.cssFramework === 'bootstrapSass' ||
-    state.cssFramework === 'foundationSass' ||
-    state.cssFramework === 'bourbonNeat') ? (
+    state.cssFrameworkOptions === 'less' ||
+    state.cssFrameworkOptions === 'sass') ? (
       <section className="fadeIn animated">
         <h6><img className="category-icon" src="/img/svg/css-build-options2.png" alt=""/>CSS Build Options</h6>
         <hr/>
@@ -374,6 +413,14 @@ class Home extends React.Component {
           <img className="btn-logo" src="/img/svg/grunt-logo.svg" alt="Grunt Logo"/>
           <input type="radio" name="cssBuildOptionsRadios" value="grunt" onChange={this.handleChange} defaultChecked={state.cssBuildOptions === 'grunt'} /> Grunt
         </label>
+
+        <div className="row">
+          <div className="col-sm-6">
+            <ul>
+              <li>Help me choose the build tool</li>
+            </ul>
+          </div>
+        </div>
       </section>
     ) : null;
 
@@ -409,6 +456,16 @@ class Home extends React.Component {
           <input type="radio" name="databaseRadios" value="rethinkdb" onChange={this.handleChange} defaultChecked={state.database === 'rethinkdb'} /> RethinkDB
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
+
+        <div className="row">
+          <div className="col-sm-6">
+            <ul>
+              <li>Do I need a database?</li>
+              <li>Database comparison</li>
+            </ul>
+          </div>
+        </div>
+
       </section>
     ) : null;
 
@@ -444,6 +501,14 @@ class Home extends React.Component {
           <img className="btn-logo" src="/img/svg/twitter-logo.svg" />
           <input type="checkbox" name="authenticationCheckboxes" value="twitter" onChange={this.handleChange} checked={state.authentication.has('twitter')} disabled={state.database === 'none'} /> Twitter
         </label>
+
+        <div className="row">
+          <div className="col-sm-6">
+            <ul>
+              <li>Is "Forgot Password" <feature></feature> included?</li>
+            </ul>
+          </div>
+        </div>
       </section>
     ) : null;
 
@@ -519,6 +584,15 @@ class Home extends React.Component {
           <input type="radio" name="jsFrameworkRadios" value="angular" onChange={this.handleChange} defaultChecked={state.jsFramework === 'angular'} /> AngularJS
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
+
+        <div className="row">
+          <div className="col-sm-6">
+            <ul>
+              <li>Should I use JavaScript Framework?</li>
+              <li>React vs Angular</li>
+            </ul>
+          </div>
+        </div>
 
         {reactOptions}
         {reactBuildSystem}
