@@ -236,7 +236,7 @@ class Home extends React.Component {
                 </a>
                 <div id="platformCollapse1" className="collapse">
                   <div className="panel-collapse">
-                    Currently <strong>Node.js</strong> is the only supported platform. However, adding support for <strong>Ruby</strong>, <strong>Python</strong>, <strong>PHP</strong>, <strong>C#</strong> and other languages should not be too difficult. I will consider adding support for other languages based on the feedback and user demand.
+                    Currently <strong>Node.js</strong> is the only supported platform. However, adding support for <strong>Ruby</strong>, <strong>Python</strong>, <strong>PHP</strong>, <strong>C#</strong> and other languages is going to be tedious, but not too difficult. I will consider adding support for other languages based on the feedback and user demand.
                   </div>
                 </div>
               </li>
@@ -314,15 +314,19 @@ class Home extends React.Component {
 
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/jade-logo.svg" height="60" alt="Jade Logo"/>
-          <input type="radio" name="templateEngineRadios" value="jade" onChange={this.handleChange} defaultChecked={state.templateEngine === 'jade'} /> Jade
+          <input type="radio" name="templateEngineRadios" value="jade" onChange={this.handleChange} checked={state.templateEngine === 'jade'} /> Jade
         </label>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/handlebars-logo.svg" alt="Handlebars Logo"/>
-          <input type="radio" name="templateEngineRadios" value="handlebars" onChange={this.handleChange} defaultChecked={state.templateEngine === 'handlebars'} /> Handlebars
+          <input type="radio" name="templateEngineRadios" value="handlebars" onChange={this.handleChange} checked={state.templateEngine === 'handlebars'} /> Handlebars
+        </label>
+        <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/nunjucks-logo.png" alt="Nunjucks Logo"/>
+          <input type="radio" name="templateEngineRadios" value="nunjucks" onChange={this.handleChange} checked={state.templateEngine === 'nunjucks'} /> Nunjucks
         </label>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/none.png" />
-          <input type="radio" name="templateEngineRadios" value="none" onChange={this.handleChange} defaultChecked={state.templateEngine === 'none'} /> None
+          <input type="radio" name="templateEngineRadios" value="none" onChange={this.handleChange} checked={state.templateEngine === 'none'} /> None
         </label>
 
         <div className="row">
