@@ -203,14 +203,33 @@ class Home extends React.Component {
       <section>
         <h6><img className="category-icon" src="/img/svg/platform.png" alt=""/>Platform</h6>
         <hr/>
+
+
+
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/node-logo.svg" alt="Node.js Logo"/>
           <input type="radio" id="nodeRadio" name="platformRadios" value="node" onChange={this.handleChange} defaultChecked={state.platform === 'node'} /> Node.js
         </label>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/ruby-logo.svg" alt="Ruby Logo"/>
-          <input type="radio" id="rubyRadio" name="platformRadios" value="ruby" onChange={this.handleChange} defaultChecked={state.platform === 'ruby'} /> Ruby
-        </label>
+
+        <div className="row">
+          <div className="col-sm-6">
+
+            <ul className="nav nav-stacked" id="platformAccordion">
+              <li>
+                <a data-toggle="collapse" data-parent="#platformAccordion" href="#platformCollapse1">
+                  <i className="ion-help-circled"/>
+                  Support for other languages?
+                </a>
+                <div id="platformCollapse1" className="collapse">
+                  <div className="panel-collapse">
+                    Currently <strong>Node.js</strong> is the only supported platform. However, adding support for <strong>Ruby</strong>, <strong>Python</strong>, <strong>PHP</strong>, <strong>C#</strong> and other languages should not be too difficult. I will consider adding support for other languages based on the feedback and user demand.
+                  </div>
+                </div>
+              </li>
+            </ul>
+
+          </div>
+        </div>
       </section>
     );
 
@@ -218,9 +237,6 @@ class Home extends React.Component {
       <section className="fadeIn animated">
         <h6><img className="category-icon" src="/img/svg/framework.png" alt=""/>Framework</h6>
         <hr/>
-        <a href="#">
-          <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" /> Help Me Choose
-        </a>
         <br/>
         <label className="radio-inline">
           <span className="express-logo">Express</span>
@@ -253,7 +269,20 @@ class Home extends React.Component {
 
         <div className="row">
           <div className="col-sm-6">
-            Which framework is right for me?
+
+            <ul className="nav nav-stacked" id="frameoworkAccordion">
+              <li>
+                <a data-toggle="collapse" data-parent="#frameworkAccordion" href="#frameworkCollapse1">
+                  <i className="ion-help-circled"/>
+                  Which framework is right for me?
+                </a>
+                <div id="frameworkCollapse1" className=" collapse">
+                  <div className="panel-collapse">
+                    lorem ipsum dolor
+                  </div>
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
 
@@ -265,9 +294,6 @@ class Home extends React.Component {
         <h6><img className="category-icon" src="/img/svg/template-engine.png" alt=""/>Template Engine</h6>
         <hr/>
 
-        <div className="alert alert-info">
-          <strong>Tip:</strong> Select <strong>None</strong> if you are building an API server or a single-page application.
-        </div>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/jade-logo.svg" alt="Jade Logo"/>
           <input type="radio" name="templateEngineRadios" value="jade" onChange={this.handleChange} defaultChecked={state.templateEngine === 'jade'} /> Jade
@@ -283,10 +309,35 @@ class Home extends React.Component {
 
         <div className="row">
           <div className="col-sm-6">
-            <ul>
-              <li>Do I need a template engine?</li>
-              <li>Jade vs Handlebars</li>
+
+            <ul className="nav nav-stacked" id="templateEngineAccordion">
+              <li>
+                <a data-toggle="collapse" data-parent="#templateEngineAccordion" href="#templateEngineCollapse1">
+                  <i className="ion-help-circled" />Do I need a template engine?
+                </a>
+                <div id="templateEngineCollapse1" className="collapse">
+                  <div className="panel-collapse">
+                    Select <strong>None</strong> if you are building an API server or a single-page application.
+                  </div>
+                </div>
+              </li>
+
+              <li>
+                <a data-toggle="collapse" data-parent="#accordion" href="#templateEngineCollapse2">
+                  <i className="ion-help-circled" />Jade vs Handlebars
+                </a>
+                <div id="templateEngineCollapse2" className="panel-collapse collapse">
+                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf
+                  moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
+                  Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda
+                  shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
+                  proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim
+                  aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                </div>
+              </li>
             </ul>
+
+
           </div>
         </div>
 
