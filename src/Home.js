@@ -224,6 +224,11 @@ class Home extends React.Component {
           <img className="btn-logo" src="/img/svg/node-logo.svg" alt="Node.js Logo"/>
           <input type="radio" id="nodeRadio" name="platformRadios" value="node" onChange={this.handleChange} defaultChecked={state.platform === 'node'} /> Node.js
         </label>
+        <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/html5-logo.svg" alt="HTML5 Logo"/>
+          <input type="radio" id="nodeRadio" name="platformRadios" value="html5" onChange={this.handleChange} defaultChecked={state.platform === 'html5'} /> Static Site
+        </label>
+
         <div className="row">
           <div className="col-sm-6">
             <ul className="nav nav-stacked" id="platformAccordion">

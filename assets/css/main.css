@@ -467,6 +467,17 @@ canvas {
   border-color: transparent;
 }
 
+.html5 h6 {
+  color: #fff;
+  background-color: #e64c18;
+  border-color: transparent;
+}
+
+.html5 svg {
+  color: #fff;
+  fill: currentColor;
+}
+
 .express h6 {
   color: #fff;
   background-color: #000;
