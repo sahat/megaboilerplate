@@ -8,7 +8,7 @@ class InlineSvg extends React.Component {
       display: 'inline-block',
       width: this.props.width,
       verticalAlign: 'middle',
-      lineHeight: 'initial'
+      lineHeight: 0
     };
     return <div style={styles} dangerouslySetInnerHTML={{__html: svg}} />;
   }
