@@ -471,3 +471,25 @@ canvas {
   color: #fff;
   fill: currentColor;
 }
+
+.jade h6 {
+  color: #fff;
+  background-color: #448B6F;
+  border-color: transparent;
+}
+
+.jade svg {
+  color: #fff;
+  fill: currentColor;
+}
+
+.nunjucks h6 {
+  color: #fff;
+  background-color: #1e4514;
+  border-color: transparent;
+}
+
+.nunjucks svg {
+  color: #fff;
+  fill: currentColor;
+}
