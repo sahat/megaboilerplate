@@ -49,9 +49,23 @@ class Home extends React.Component {
 
   componentDidUpdate() {
     $(ReactDOM.findDOMNode(this)).find('[data-toggle="popover"]').popover({ trigger: 'hover' });
+  }
 
+  componentDidMount() {
+    function stack() {
+      var boxes = $('.paper');
+      $.each(boxes, function(i, v){
+        var self = this;
+        setTimeout(function(){
+          $(self).addClass('stacked');
+        },i * 300);
+      });
+      setTimeout(function(){
+        $('.btn').text('Unstack \'Em');
+      }, 900);
+    }
 
-
+    stack();
   }
 
   clickDownload() {
@@ -691,17 +705,36 @@ class Home extends React.Component {
         <h6><img className="category-icon" src="/img/svg/deployment.svg" alt=""/>Deployment</h6>
         <hr/>
         <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/heroku-logo.svg" alt="Heroku Logo"/>
+          <img className="btn-logo" src="/img/svg/heroku-logo.svg" height="60" alt="Heroku Logo"/>
           <input type="radio" name="deploymentRadios" value="heroku" onChange={this.handleChange} defaultChecked={state.deployment === 'heroku'} /> Heroku
         </label>
         <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/azure-logo.svg" alt="Azure Logo"/>
+          <img className="btn-logo" src="/img/svg/azure-logo.svg" height="60" alt="Azure Logo"/>
           <input type="radio" name="deploymentRadios" value="azure" onChange={this.handleChange} defaultChecked={state.deployment === 'azure'} /> Microsoft Azure
         </label>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/none.png" />
           <input type="radio" name="deploymentRadios" value="none" onChange={this.handleChange} defaultChecked={state.deployment === 'none'} /> None
         </label>
+      </section>
+    ) : null;
+
+    let summary = state.deployment ? (
+      <section>
+        <h6><img className="category-icon" src="/img/svg/deployment.svg" alt=""/>Summary</h6>
+        <hr/>
+        <ul>
+          <li>Platform <span className="label label-success">{state.platform}</span></li>
+          <li>Framework <span className="label label-success">{state.framework}</span></li>
+          <li>Template Engine <span className="label label-success">{state.templateEngine}</span></li>
+          <li>Framework <span className="label label-success">{state.cssFramework === 'none' ? state.cssFramework : state.cssFramework + ' (' + state.cssFrameworkOptions + ')'}</span></li>
+          <li>CSS Preprocessor <span className="label label-success">{state.cssPreprocessor || state.cssFrameworkOptions}</span></li>
+          <li>Database <span className="label label-success">{state.database}</span></li>
+          <li>Authentication <span className="label label-success">{Array.from(state.authentication).join(', ')}</span></li>
+          <li>JS Framework <span className="label label-success">{state.jsFramework}</span></li>
+          <li>Theme <span className="label label-success">{state.theme}</span></li>
+          <li>Deployment <span className="label label-success">{state.deployment}</span></li>
+        </ul>
       </section>
     ) : null;
 
@@ -715,7 +748,6 @@ class Home extends React.Component {
     return (
       <div className="container">
         <br/>
-
         {platform}
         {framework}
         {templateEngine}
@@ -727,6 +759,7 @@ class Home extends React.Component {
         {jsFramework}
         {theme}
         {deployment}
+        {summary}
         {download}
         <br/>
         <a className="twitter-share-button" href="https://twitter.com/intent/tweet">Tweet</a>&nbsp;
