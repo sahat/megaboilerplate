@@ -8,6 +8,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {isArray, clone} from 'lodash';
 
+import InlineSvg from './InlineSvg';
+
 class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -132,6 +134,8 @@ class Home extends React.Component {
   handleChange(e) {
     let name = e.target.name;
     let value = e.target.value;
+    let headingColor = e.target.dataset.color;
+    let headingBg = e.target.dataset.bg;
     let isChecked = e.target.checked;
     let state = this.state;
     switch (name) {
@@ -143,6 +147,8 @@ class Home extends React.Component {
         break;
       case 'templateEngineRadios':
         state.templateEngine = value;
+        state.templateEngineHeadingColor = headingColor;
+        state.templateEngineHeadingBg = headingBg;
         break;
       case 'cssFrameworkRadios':
         if (value === 'none' || value.includes('Css')) {
@@ -216,15 +222,10 @@ class Home extends React.Component {
     let platform = (
       <section>
         <h6><img className="category-icon" src="/img/svg/platform.png" alt=""/>Platform</h6>
-        <hr/>
-
-
-
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/node-logo.svg" alt="Node.js Logo"/>
           <input type="radio" id="nodeRadio" name="platformRadios" value="node" onChange={this.handleChange} defaultChecked={state.platform === 'node'} /> Node.js
         </label>
-
         <div className="row">
           <div className="col-sm-6">
 
@@ -250,7 +251,6 @@ class Home extends React.Component {
     let framework = state.platform ? (
       <section className="fadeIn animated">
         <h6><img className="category-icon" src="/img/svg/framework.png" alt=""/>Framework</h6>
-        <hr/>
         <br/>
         <label className="radio-inline">
           <span className="express-logo">Express</span>
@@ -308,9 +308,8 @@ class Home extends React.Component {
     ) : null;
 
     let templateEngine = state.framework ? (
-      <section className="fadeIn animated">
-        <h6><img className="category-icon" src="/img/svg/template-engine.png" alt=""/>Template Engine</h6>
-        <hr/>
+      <section className={cx('fadeIn', 'animated', state.templateEngine)}>
+        <h6><InlineSvg name="template-engine" /> Template Engine</h6>
 
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/jade-logo.svg" height="60" alt="Jade Logo"/>
@@ -318,7 +317,7 @@ class Home extends React.Component {
         </label>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/handlebars-logo.svg" alt="Handlebars Logo"/>
-          <input type="radio" name="templateEngineRadios" value="handlebars" onChange={this.handleChange} checked={state.templateEngine === 'handlebars'} /> Handlebars
+          <input type="radio" name="templateEngineRadios" value="handlebars" data-bg="radial-gradient(top center, #f7931e, #f15a24 750px)" onChange={this.handleChange} checked={state.templateEngine === 'handlebars'} /> Handlebars
         </label>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/nunjucks-logo.png" alt="Nunjucks Logo"/>
@@ -401,7 +400,6 @@ class Home extends React.Component {
     let cssFramework = state.templateEngine ? (
       <section className="fadeIn animated">
         <h6><img className="category-icon" src="/img/svg/css-framework.png" alt=""/>CSS Framework</h6>
-        <hr/>
         {cssFrameworkNoTemplateEngineAlert}
         <label className="radio-inline">
             <img className="btn-logo" src="/img/svg/none.png" />
@@ -437,7 +435,6 @@ class Home extends React.Component {
     let cssPreprocessor = state.cssFramework === 'none' ? (
       <section className="fadeIn animated">
         <h6><img className="category-icon" src="/img/svg/css-preprocessor.png" alt=""/>CSS Preprocessor</h6>
-        <hr/>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/css3-logo.svg" alt="CSS Logo"/>
 
@@ -475,7 +472,6 @@ class Home extends React.Component {
     state.cssFrameworkOptions === 'sass') ? (
       <section className="fadeIn animated">
         <h6><img className="category-icon" src="/img/svg/css-build-options2.png" alt=""/>CSS Build Options</h6>
-        <hr/>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/npm-logo.svg" alt="Middleware Logo"/>
           <input type="radio" name="cssBuildOptionsRadios" value="middleware" onChange={this.handleChange} defaultChecked={state.cssBuildOptions === 'middleware'} /> Middleware
@@ -507,7 +503,6 @@ class Home extends React.Component {
     let database = state.cssFramework ? (
       <section className="fadeIn animated">
         <h6><img className="category-icon" src="/img/svg/database.png" alt=""/>Database</h6>
-        <hr/>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/none.png" alt="None Icon" />
           <input type="radio" name="databaseRadios" value="none" onChange={this.handleChange} defaultChecked={state.database === 'none'} /> None
@@ -559,7 +554,6 @@ class Home extends React.Component {
     let authentication = state.database ? (
       <section className="fadeIn animated">
         <h6><img className="category-icon" src="/img/svg/authentication.png" alt=""/>Authentication</h6>
-        <hr/>
         {authenticationAlert}
         <label className="checkbox-inline">
           <img className="btn-logo" src="/img/svg/none.png" alt="None Icon" />
@@ -649,7 +643,6 @@ class Home extends React.Component {
     let jsFramework = state.database ? (
       <section className="fadeIn animated">
         <h6><img className="category-icon" src="/img/svg/js-framework.png" alt=""/>JavaScript Framework</h6>
-        <hr/>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/none.png" alt="None Icon" />
           <input type="radio" name="jsFrameworkRadios" value="none" onChange={this.handleChange} defaultChecked={state.jsFramework === 'none'} /> None
@@ -683,7 +676,6 @@ class Home extends React.Component {
     let theme = state.jsFramework ? (
       <section className="fadeIn animated">
         <h6><img className="category-icon" src="/img/svg/theme.png" alt=""/>Theme</h6>
-        <hr/>
         <div className="row">
           <div className="col-xs-6 col-md-3">
             <a className={cx("thumbnail", { 'active': this.state.theme === 'theme1' })} onClick={this.handleThemeClick.bind(this, 'theme1')}>
@@ -707,7 +699,6 @@ class Home extends React.Component {
     let deployment = state.theme ? (
       <section className="fadeIn animated">
         <h6><img className="category-icon" src="/img/svg/deployment.svg" alt=""/>Deployment</h6>
-        <hr/>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/heroku-logo.svg" height="60" alt="Heroku Logo"/>
           <input type="radio" name="deploymentRadios" value="heroku" onChange={this.handleChange} defaultChecked={state.deployment === 'heroku'} /> Heroku
@@ -726,7 +717,6 @@ class Home extends React.Component {
     let summary = state.deployment ? (
       <section>
         <h6><img className="category-icon" src="/img/svg/deployment.svg" alt=""/>Summary</h6>
-        <hr/>
         <ul>
           <li>Platform <span className="label label-success">{state.platform}</span></li>
           <li>Framework <span className="label label-success">{state.framework}</span></li>
