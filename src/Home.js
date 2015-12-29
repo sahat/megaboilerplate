@@ -48,63 +48,31 @@ class Home extends React.Component {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.clickDownload = this.clickDownload.bind(this);
-    this.generateAppName = this.generateAppName.bind(this);
     this.handleAppNameChange = this.handleAppNameChange.bind(this);
 
-    let query = url.parse(location.href, true).query;
-
     this.state = {
-      platform: query.platform || null,
-      framework: query.framework || null,
-      appName: query.appName || null,
-      templateEngine: query.templateEngine || null,
-      cssFramework: query.cssFramework || null,
-      cssFrameworkOptions: query.cssFrameworkOptions || 'css',
-      cssPreprocessor: query.cssPreprocessor || null,
-      cssBuildOptions: query.cssBuildOptions || null,
-      database: query.database || null,
-      jsFramework: query.jsFramework || null,
-      reactOptions: query.reactOptions || null,
-      reactBuildSystem: query.reactBuildSystem || null
+      platform: null,
+      framework: null,
+      appName: null,
+      templateEngine: null,
+      cssFramework: null,
+      cssPreprocessor: null,
+      cssBuildOptions: null,
+      database: null,
+      authentication: null,
+      jsFramework: null,
+      reactOptions: null,
+      reactBuildSystem: null,
+      deployment: null
     };
-
-    if (query.authentication) {
-      this.state.authentication = isArray(query.authentication) ? new Set(query.authentication) : new Set(Array(query.authentication));
-    } else {
-      this.state.authentication = new Set();
-    }
-
-    if (query.reactOptions) {
-      this.state.reactOptions = isArray(query.reactOptions) ? new Set(query.reactOptions) : new Set(Array(query.reactOptions));
-    } else {
-      this.state.reactOptions = new Set();
-    }
-
   }
 
   componentDidUpdate() {
     $(ReactDOM.findDOMNode(this)).find('[data-toggle="popover"]').popover({ trigger: 'hover' });
   }
 
-  componentDidMount() {
-    function stack() {
-      var boxes = $('.paper');
-      $.each(boxes, function(i, v){
-        var self = this;
-        setTimeout(function(){
-          $(self).addClass('stacked');
-        },i * 300);
-      });
-      setTimeout(function(){
-        $('.btn').text('Unstack \'Em');
-      }, 900);
-    }
-
-    stack();
-  }
-
   clickDownload() {
-    console.log(this.state);
+    let state = this.state;
     let downloadBtn = this.refs.downloadBtn;
     //$(downloadBtn).attr('disabled', 'disabled');
 
@@ -126,8 +94,8 @@ class Home extends React.Component {
     //  })
     //});
 
-    let data = clone(this.state);
-    data.appName = this.state.appName || haikunate({ tokenLength: 0 });
+    let data = clone(state);
+    data.appName = haikunate({ tokenLength: 0 });
     data.authentication = Array.from(data.authentication);
 
     $.ajax({
@@ -142,7 +110,7 @@ class Home extends React.Component {
         var disp = request.getResponseHeader('Content-Disposition');
         if (disp && disp.search('attachment') != -1) {
           var form = $('<form method="POST" action="/download">');
-          $.each(this.state, function(k, v) {
+          $.each(data, function(k, v) {
             form.append($('<input type="hidden" name="' + k +
               '" value="' + v + '">'));
           });
@@ -150,13 +118,6 @@ class Home extends React.Component {
           form.submit();
         }
       });
-  }
-
-  generateAppName() {
-    let state = this.state;
-    state.appName = haikunate({ tokenLength: 0 });
-    this.setState(state);
-    this.refs.appNameInput.focus();
   }
 
   handleAppNameChange(e) {
@@ -307,22 +268,6 @@ class Home extends React.Component {
           <img className="btn-logo" src="/img/svg/meteor-logo.png" alt="Meteor Logo"/>
           <input type="radio" name="frameworkRadios" value="meteor" onChange={this.handleChange} defaultChecked={state.framework === 'meteor'} /> Meteor
         </label>
-
-        <br/>
-        <br/>
-
-        <div className="row">
-          <div className="col-sm-6">
-            <label htmlFor="appNameInput">App Name (optional)</label>
-            <div className="input-group">
-              <input type="text" ref="appNameInput" className="form-control" onChange={this.handleAppNameChange} value={state.appName} placeholder="App Name" autoFocus />
-          <span className="input-group-btn">
-            <button className="btn btn-primary" type="button" onClick={this.generateAppName}>Generate</button>
-          </span>
-            </div>
-            <div className="help-block">Leave blank and we'll choose one for you.</div>
-          </div>
-        </div>
 
         <div className="row">
           <div className="col-sm-6">
@@ -718,23 +663,23 @@ class Home extends React.Component {
       <div>
         <label className="checkbox-inline">
           <img className="btn-logo" src="/img/svg/none.png" alt="None Icon" />
-          <input type="checkbox" name="authenticationCheckboxes" value="none" onChange={this.handleChange} checked={state.authentication.size === 0} disabled={state.database === 'none'} /> None
+          <input type="checkbox" name="authenticationCheckboxes" value="none" onChange={this.handleChange} checked={state.authentication && state.authentication.size === 0} disabled={state.database === 'none'} /> None
         </label>
         <label className="checkbox-inline">
           <img className="btn-logo" src="/img/svg/passportjs-logo.svg" height="60" />
-          <input type="checkbox" name="authenticationCheckboxes" value="email" onChange={this.handleChange} checked={state.authentication.has('email')} disabled={state.database === 'none'} /> Email / Password
+          <input type="checkbox" name="authenticationCheckboxes" value="email" onChange={this.handleChange} checked={state.authentication && state.authentication.has('email')} disabled={state.database === 'none'} /> Email / Password
         </label>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/facebook-logo.svg" />
-          <input type="checkbox" name="authenticationCheckboxes" value="facebook" onChange={this.handleChange} checked={state.authentication.has('facebook')} disabled={state.database === 'none'} /> Facebook
+          <input type="checkbox" name="authenticationCheckboxes" value="facebook" onChange={this.handleChange} checked={state.authentication && state.authentication.has('facebook')} disabled={state.database === 'none'} /> Facebook
         </label>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/google-logo.svg" />
-          <input type="checkbox" name="authenticationCheckboxes" value="google" onChange={this.handleChange} checked={state.authentication.has('google')} disabled={state.database === 'none'} /> Google
+          <input type="checkbox" name="authenticationCheckboxes" value="google" onChange={this.handleChange} checked={state.authentication && state.authentication.has('google')} disabled={state.database === 'none'} /> Google
         </label>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/twitter-logo.svg" />
-          <input type="checkbox" name="authenticationCheckboxes" value="twitter" onChange={this.handleChange} checked={state.authentication.has('twitter')} disabled={state.database === 'none'} /> Twitter
+          <input type="checkbox" name="authenticationCheckboxes" value="twitter" onChange={this.handleChange} checked={state.authentication && state.authentication.has('twitter')} disabled={state.database === 'none'} /> Twitter
         </label>
 
         <div className="row">
