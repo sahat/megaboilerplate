@@ -11,28 +11,22 @@ import {isArray, forOwn, clone} from 'lodash';
 import InlineSvg from './InlineSvg';
 
 const dependencies = {
+  python: {
+    framework: [],
+    templateEngine: [],
+    cssFramework: [],
+    cssPreprocessor: []
+  },
+
   node: {
     framework: ['express', 'hapi', 'sails', 'meteor'],
     templateEngine: ['jade', 'handlebars', 'nunjucks', 'none'],
     cssFramework: ['bootstrap', 'foundation', 'bourbonNeat'],
-    cssFrameworkOptions: ['css', 'less', 'sass'],
-    cssPreprocessor: ['css', 'less', 'sass'],
+    cssPreprocessor: ['css', 'less', 'sass']
 
   },
-  html5: {
-    framework: null,
-    templateEngine: null,
-    appName: null,
-    cssFramework: ['bootstrap', 'foundation', 'bourbonNeat'],
-    cssFrameworkOptions: ['css'],
-    cssPreprocessor: ['css'],
-    cssBuildOptions: null,
-    database: null,
-    jsFramework: ['react', 'angular', 'none'],
-    reactOptions: null,
-    reactBuildSystem: null,
-    deployment: null
-  },
+
+
 
   css: ['none', 'bootstrap', 'foundation', 'bourbonNeat'],
   sass: ['none', 'bootstrap', 'foundation', 'bourbonNeat'],
@@ -204,14 +198,17 @@ class Home extends React.Component {
     }
 
     //// Cleanup
-    //forOwn(dependencies[state.platform], function (value, key) {
-    //  if (!isArray(dependencies[state.platform][key])) {
-    //    state[key] = null;
-    //  }
-    //});
+    forOwn(dependencies[state.platform], function (value, key) {
+      let subCategory = dependencies[state.platform][key];
 
-
-    console.log(state);
+      if (isArray(subCategory)) {
+        if (!subCategory.includes(state[key])) {
+          state[key] = null;
+        }
+      } else {
+        state[key] = null;
+      }
+    });
 
     this.setState(state);
   }
@@ -230,7 +227,11 @@ class Home extends React.Component {
         <h6><InlineSvg name="platform" width="18px" height="20px"/> {state.platform || 'Platform'}</h6>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/node-logo.svg" alt="Node.js Logo"/>
-          <input type="radio" id="nodeRadio" name="platformRadios" value="node" onChange={this.handleChange} defaultChecked={state.platform === 'node'} /> Node.js
+          <input type="radio" id="nodeRadio" name="platformRadios" value="node" onChange={this.handleChange} checked={state.platform === 'node'} /> Node.js
+        </label>
+        <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/python-logo.svg" alt="Python Logo"/>
+          <input type="radio" id="nodeRadio" name="platformRadios" value="python" onChange={this.handleChange} checked={state.platform === 'python'} /> Python
         </label>
         <ul className="nav nav-stacked" id="platformAccordion">
           <li>
@@ -248,68 +249,65 @@ class Home extends React.Component {
       </section>
     );
 
-    let framework = state.platform && isArray(dependencies[state.platform].framework) ? (
-      <section className={cx('fadeIn', 'animated', state.framework)}>
-        <h6><InlineSvg name="framework" width="18px" height="20px"/> {state.framework || 'Framework'}</h6>
-        <br/>
+    let nodeFrameworks = state.platform === 'node' ? (
+      <div>
         <label className="radio-inline">
           <span className="express-logo">Express</span>
-          <input type="radio" id="expressRadio" name="frameworkRadios" value="express" onChange={this.handleChange} defaultChecked={state.framework === 'express'} /> Express
+          <input type="radio" id="expressRadio" name="frameworkRadios" value="express" onChange={this.handleChange} checked={state.framework === 'express'} /> Express
         </label>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/hapi-logo.png" alt="Hapi Logo"/>
-          <input type="radio" name="frameworkRadios" value="hapi" onChange={this.handleChange} defaultChecked={state.framework === 'hapi'} /> Hapi
+          <input type="radio" name="frameworkRadios" value="hapi" onChange={this.handleChange} checked={state.framework === 'hapi'} /> Hapi
         </label>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/sails-logo.png" alt="Sails.js Logo"/>
-          <input type="radio" name="frameworkRadios" value="sails" onChange={this.handleChange} defaultChecked={state.framework === 'sails'} /> Sails.js
+          <input type="radio" name="frameworkRadios" value="sails" onChange={this.handleChange} checked={state.framework === 'sails'} /> Sails.js
         </label>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/meteor-logo.png" alt="Meteor Logo"/>
-          <input type="radio" name="frameworkRadios" value="meteor" onChange={this.handleChange} defaultChecked={state.framework === 'meteor'} /> Meteor
+          <input type="radio" name="frameworkRadios" value="meteor" onChange={this.handleChange} checked={state.framework === 'meteor'} /> Meteor
         </label>
-
-        <div className="row">
-          <div className="col-sm-6">
-
-            <ul className="nav nav-stacked" id="frameworkAccordion">
-              <li>
-                <a data-toggle="collapse" data-parent="#frameworkAccordion" href="#frameworkCollapse1">
-                  <i className="ion-help-circled"/>
-                  Which framework is right for me?
-                </a>
-                <div id="frameworkCollapse1" className=" collapse">
-                  <div className="panel-collapse">
-                    lorem ipsum dolor
-                  </div>
-                </div>
-              </li>
-              <li>
-                <a data-toggle="collapse" data-parent="#frameworkAccordion" href="#frameworkCollapse1">
-                  <i className="ion-help-circled"/>
-                  Hapi vs Express?
-                </a>
-                <div id="frameworkCollapse1" className=" collapse">
-                  <div className="panel-collapse">
-                    lorem ipsum dolor
-                  </div>
-                </div>
-              </li>
-              <li>
-                <a data-toggle="collapse" data-parent="#frameworkAccordion" href="#frameworkCollapse1">
-                  <i className="ion-help-circled"/>
-                  Should I use Meteor or Sails.js for real-time apps?
-                </a>
-                <div id="frameworkCollapse1" className=" collapse">
-                  <div className="panel-collapse">
-                    lorem ipsum dolor
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-
+        <ul className="nav nav-stacked" id="frameworkAccordion">
+          <li>
+            <a data-toggle="collapse" data-parent="#frameworkAccordion" href="#frameworkCollapse1">
+              <i className="ion-help-circled"/>
+              Which framework is right for me?
+            </a>
+            <div id="frameworkCollapse1" className=" collapse">
+              <div className="panel-collapse">
+                lorem ipsum dolor
+              </div>
+            </div>
+          </li>
+          <li>
+            <a data-toggle="collapse" data-parent="#frameworkAccordion" href="#frameworkCollapse1">
+              <i className="ion-help-circled"/>
+              Hapi vs Express?
+            </a>
+            <div id="frameworkCollapse1" className=" collapse">
+              <div className="panel-collapse">
+                lorem ipsum dolor
+              </div>
+            </div>
+          </li>
+          <li>
+            <a data-toggle="collapse" data-parent="#frameworkAccordion" href="#frameworkCollapse1">
+              <i className="ion-help-circled"/>
+              Should I use Meteor or Sails.js for real-time apps?
+            </a>
+            <div id="frameworkCollapse1" className=" collapse">
+              <div className="panel-collapse">
+                lorem ipsum dolor
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    ): null;
+    let framework = state.platform && isArray(dependencies[state.platform].framework) ? (
+      <section className={cx('fadeIn', 'animated', state.framework)}>
+        <h6><InlineSvg name="framework" width="18px" height="20px"/> {state.framework || 'Framework'}</h6>
+        {nodeFrameworks}
       </section>
     ) : null;
 
@@ -904,12 +902,12 @@ class Home extends React.Component {
       </section>
     ) : null;
 
-    let download = (
+    let download = state.deployment ? (
       <div>
         <br/>
         <button ref="downloadBtn" className="btn btn-block btn-mega" onClick={this.clickDownload}>Compile and Download</button>
       </div>
-    );
+    ) : null;
 
     return (
       <div className="container">
