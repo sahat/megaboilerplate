@@ -134,8 +134,6 @@ class Home extends React.Component {
   handleChange(e) {
     let name = e.target.name;
     let value = e.target.value;
-    let headingColor = e.target.dataset.color;
-    let headingBg = e.target.dataset.bg;
     let isChecked = e.target.checked;
     let state = this.state;
     switch (name) {
@@ -250,7 +248,7 @@ class Home extends React.Component {
       </section>
     );
 
-    let framework = state.platform ? (
+    let framework = state.platform && state.platform === 'node' ? (
       <section className={cx('fadeIn', 'animated', state.framework)}>
         <h6><InlineSvg name="framework" width="18px" height="20px"/> {state.framework || 'Framework'}</h6>
         <br/>
