@@ -193,6 +193,10 @@ label span + i {
   font-size: 250%;
 }
 
+.nav-stacked {
+  margin-top: 5px;
+}
+
 
 
 /** Labels **/
@@ -464,6 +468,11 @@ canvas {
 
 .node h6 {
   background-color: #83cd29;
+  border-color: transparent;
+}
+
+.python h6 {
+  background-color: #ffd344;
   border-color: transparent;
 }
 
