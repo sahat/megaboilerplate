@@ -6,9 +6,42 @@ let cx = require('classnames');
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {isArray, clone} from 'lodash';
+import {isArray, forOwn, clone} from 'lodash';
 
 import InlineSvg from './InlineSvg';
+
+const dependencies = {
+  node: {
+    framework: ['express', 'hapi', 'sails', 'meteor'],
+    templateEngine: ['jade', 'handlebars', 'nunjucks', 'none'],
+    cssFramework: ['bootstrap', 'foundation', 'bourbonNeat'],
+    cssFrameworkOptions: ['css', 'less', 'sass'],
+    cssPreprocessor: ['css', 'less', 'sass'],
+
+  },
+  html5: {
+    framework: null,
+    templateEngine: null,
+    appName: null,
+    cssFramework: ['bootstrap', 'foundation', 'bourbonNeat'],
+    cssFrameworkOptions: ['css'],
+    cssPreprocessor: ['css'],
+    cssBuildOptions: null,
+    database: null,
+    jsFramework: ['react', 'angular', 'none'],
+    reactOptions: null,
+    reactBuildSystem: null,
+    deployment: null
+  },
+
+  css: ['none', 'bootstrap', 'foundation', 'bourbonNeat'],
+  sass: ['none', 'bootstrap', 'foundation', 'bourbonNeat'],
+  less: ['none', 'bootstrap'],
+  stylus: ['none'],
+  cssnext: ['none'],
+
+  cssBuildOptions: ['less', 'sass', 'stylus', 'cssnext']
+};
 
 class Home extends React.Component {
   constructor(props) {
@@ -71,6 +104,7 @@ class Home extends React.Component {
   }
 
   clickDownload() {
+    console.log(this.state);
     let downloadBtn = this.refs.downloadBtn;
     //$(downloadBtn).attr('disabled', 'disabled');
 
@@ -140,24 +174,29 @@ class Home extends React.Component {
       case 'platformRadios':
         state.platform = value;
         break;
+
       case 'frameworkRadios':
-        state.framework = value;
-        break;
-      case 'templateEngineRadios':
-        state.templateEngine = value;
-        break;
-      case 'cssFrameworkRadios':
-        if (value === 'none' || value.includes('Css')) {
-          delete state.cssPreprocessor;
-          delete state.cssBuildOptions;
+        if (dependencies[state.platform].framework.includes(value)) {
+          state.framework = value;
+        } else {
+          state.framework = null;
         }
+        break;
+
+      case 'templateEngineRadios':
+        if (dependencies[state.platform].templateEngine.includes(value)) {
+          state.templateEngine = value;
+        } else {
+          state.templateEngine = null;
+        }
+        break;
+
+      case 'cssFrameworkRadios':
         state.cssFramework = value;
         break;
-      case 'cssFrameworkOptionsRadios':
-        state.cssFrameworkOptions = value;
-        break;
+
       case 'cssPreprocessorRadios':
-        if (value === 'none' || value.includes('Css')) {
+        if (value === 'none') {
           delete state.cssBuildOptions;
         }
         state.cssPreprocessor = value;
@@ -203,6 +242,16 @@ class Home extends React.Component {
         break;
     }
 
+    //// Cleanup
+    //forOwn(dependencies[state.platform], function (value, key) {
+    //  if (!isArray(dependencies[state.platform][key])) {
+    //    state[key] = null;
+    //  }
+    //});
+
+
+    console.log(state);
+
     this.setState(state);
   }
 
@@ -222,33 +271,23 @@ class Home extends React.Component {
           <img className="btn-logo" src="/img/svg/node-logo.svg" alt="Node.js Logo"/>
           <input type="radio" id="nodeRadio" name="platformRadios" value="node" onChange={this.handleChange} defaultChecked={state.platform === 'node'} /> Node.js
         </label>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/html5-logo.svg" alt="HTML5 Logo"/>
-          <input type="radio" id="nodeRadio" name="platformRadios" value="html5" onChange={this.handleChange} defaultChecked={state.platform === 'html5'} /> Static Site
-        </label>
-
-        <div className="row">
-          <div className="col-sm-6">
-            <ul className="nav nav-stacked" id="platformAccordion">
-              <li>
-                <a data-toggle="collapse" data-parent="#platformAccordion" href="#platformCollapse1">
-                  <i className="ion-help-circled"/>
-                  Support for other languages?
-                </a>
-                <div id="platformCollapse1" className="collapse">
-                  <div className="panel-collapse">
-                    Currently <strong>Node.js</strong> is the only supported platform. Adding support for <strong>Ruby</strong>, <strong>Python</strong>, <strong>PHP</strong>, <strong>C#</strong> and other languages is going to be tedious, but shouldn't be too difficult. GitHub contributions and pull requests are welcome!
-                  </div>
-                </div>
-              </li>
-            </ul>
-
-          </div>
-        </div>
+        <ul className="nav nav-stacked" id="platformAccordion">
+          <li>
+            <a data-toggle="collapse" data-parent="#platformAccordion" href="#platformCollapse1">
+              <i className="ion-help-circled"/>
+              Support for other languages?
+            </a>
+            <div id="platformCollapse1" className="collapse">
+              <div className="panel-collapse">
+                Currently <strong>Node.js</strong> is the only supported platform. Adding support for <strong>Ruby</strong>, <strong>Python</strong>, <strong>PHP</strong>, <strong>C#</strong> and other languages might be tedious, but not difficult. GitHub contributions and pull requests are welcome!
+              </div>
+            </div>
+          </li>
+        </ul>
       </section>
     );
 
-    let framework = state.platform && state.platform === 'node' ? (
+    let framework = state.platform && isArray(dependencies[state.platform].framework) ? (
       <section className={cx('fadeIn', 'animated', state.framework)}>
         <h6><InlineSvg name="framework" width="18px" height="20px"/> {state.framework || 'Framework'}</h6>
         <br/>
@@ -329,7 +368,7 @@ class Home extends React.Component {
       </section>
     ) : null;
 
-    let templateEngine = state.framework && state.platform === 'node' ? (
+    let templateEngine = state.framework && isArray(dependencies[state.platform].templateEngine) ? (
       <section className={cx('fadeIn', 'animated', state.templateEngine)}>
         <h6><InlineSvg name="template-engine"/> {!state.templateEngine || state.templateEngine === 'none' ? 'Template Engine' : state.templateEngine}</h6>
         <label className="radio-inline">
@@ -490,40 +529,50 @@ class Home extends React.Component {
           </div>
         </div>
 
-        {cssFrameworkOptions}
       </section>
     ) : null;
 
-    let cssPreprocessor = state.cssFramework === 'none' ? (
+    let cssRadio = dependencies.css.includes(state.cssFramework) ? (
+      <label className="radio-inline">
+        <img className="btn-logo" src="/img/svg/css3-logo.svg" alt="CSS Logo"/>
+        <input type="radio" name="cssPreprocessorRadios" value="css" onChange={this.handleChange} checked={state.cssPreprocessor === 'css'} /> None / CSS
+      </label>
+    ) : null;
+    let sassRadio = dependencies.sass.includes(state.cssFramework) ? (
+      <label className="radio-inline">
+        <img className="btn-logo" src="/img/svg/sass-logo.svg" alt="Sass Logo"/>
+
+        <input type="radio" name="cssPreprocessorRadios" value="sass" onChange={this.handleChange} checked={state.cssPreprocessor === 'sass'} /> Sass
+      </label>
+    ) : null;
+    let lessRadio = dependencies.less.includes(state.cssFramework) ? (
+      <label className="radio-inline">
+        <img className="btn-logo" src="/img/svg/less-logo.svg" alt="LESS Logo"/>
+
+        <input type="radio" name="cssPreprocessorRadios" value="less" onChange={this.handleChange} checked={state.cssPreprocessor === 'less'} /> LESS
+      </label>
+    ) : null;
+    let cssnextRadio = dependencies.cssnext.includes(state.cssFramework) ? (
+      <label className="radio-inline">
+        <img className="btn-logo" src="/img/svg/cssnext-logo.svg" height="60" alt="cssnext Logo"/>
+        <input type="radio" name="cssPreprocessorRadios" value="cssnext" onChange={this.handleChange} checked={state.cssPreprocessor === 'cssnext'} /> cssnext
+      </label>
+    ) : null;
+    let stylusRadio = dependencies.stylus.includes(state.cssFramework) ? (
+      <label className="radio-inline">
+        <img className="btn-logo" src="/img/svg/stylus-logo.svg" alt="Stylus Logo"/>
+        <input type="radio" name="cssPreprocessorRadios" value="stylus" onChange={this.handleChange} checked={state.cssPreprocessor === 'stylus'} /> Stylus
+      </label>
+    ) : null;
+
+    let cssPreprocessor = state.cssFramework ? (
       <section className="fadeIn animated">
         <h6><img className="category-icon" src="/img/svg/css-preprocessor.png" alt=""/>CSS Preprocessor</h6>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/css3-logo.svg" alt="CSS Logo"/>
-
-          <input type="radio" name="cssPreprocessorRadios" value="css" onChange={this.handleChange} checked={state.cssPreprocessor === 'css'} /> CSS
-        </label>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/sass-logo.svg" alt="Sass Logo"/>
-
-          <input type="radio" name="cssPreprocessorRadios" value="sass" onChange={this.handleChange} checked={state.cssPreprocessor === 'sass'} /> Sass
-        </label>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/less-logo.svg" alt="LESS Logo"/>
-
-          <input type="radio" name="cssPreprocessorRadios" value="less" onChange={this.handleChange} checked={state.cssPreprocessor === 'less'} /> LESS
-        </label>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/postcss-logo.png" alt="PostCSS Logo"/>
-          <input type="radio" name="cssPreprocessorRadios" value="postcss" onChange={this.handleChange} checked={state.cssPreprocessor === 'postcss'} /> PostCSS
-        </label>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/stylus-logo.svg" alt="Stylus Logo"/>
-          <input type="radio" name="cssPreprocessorRadios" value="stylus" onChange={this.handleChange} checked={state.cssPreprocessor === 'stylus'} /> Stylus
-        </label>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/cssnext-logo.svg" height="60" alt="cssnext Logo"/>
-          <input type="radio" name="cssPreprocessorRadios" value="cssnext" onChange={this.handleChange} checked={state.cssPreprocessor === 'cssnext'} /> cssnext
-        </label>
+        {cssRadio}
+        {sassRadio}
+        {lessRadio}
+        {stylusRadio}
+        {cssnextRadio}
 
         <div className="row">
           <div className="col-sm-6">
@@ -545,11 +594,7 @@ class Home extends React.Component {
       </section>
     ) : null;
 
-    let cssBuildOptions = (state.cssPreprocessor === 'sass' ||
-    state.cssPreprocessor === 'less' ||
-    state.cssPreprocessor === 'postcss' ||
-    state.cssFrameworkOptions === 'less' ||
-    state.cssFrameworkOptions === 'sass') ? (
+    let cssBuildOptions = dependencies.cssBuildOptions.includes(state.cssPreprocessor) ? (
       <section className="fadeIn animated">
         <h6><img className="category-icon" src="/img/svg/css-build-options2.png" alt=""/>CSS Build Options</h6>
         <label className="radio-inline">
@@ -665,17 +710,12 @@ class Home extends React.Component {
       </section>
     ) : null;
 
-
-    let authenticationAlert = (state.database === 'none') ? (
+    let authenticationCheckboxes = state.database === 'none' ? (
       <div className="alert alert-info">
         <strong>Important!</strong> To enable authentication you must choose a database.
       </div>
-    ) : null;
-
-    let authentication = state.database ? (
-      <section className="fadeIn animated">
-        <h6><img className="category-icon" src="/img/svg/authentication.png" alt=""/>Authentication</h6>
-        {authenticationAlert}
+    ) : (
+      <div>
         <label className="checkbox-inline">
           <img className="btn-logo" src="/img/svg/none.png" alt="None Icon" />
           <input type="checkbox" name="authenticationCheckboxes" value="none" onChange={this.handleChange} checked={state.authentication.size === 0} disabled={state.database === 'none'} /> None
@@ -714,6 +754,12 @@ class Home extends React.Component {
             </ul>
           </div>
         </div>
+      </div>
+    );
+    let authentication = state.database ? (
+      <section className="fadeIn animated">
+        <h6><img className="category-icon" src="/img/svg/authentication.png" alt=""/>Authentication</h6>
+        {authenticationCheckboxes}
       </section>
     ) : null;
 
