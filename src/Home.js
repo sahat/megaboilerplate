@@ -329,7 +329,7 @@ class Home extends React.Component {
       </section>
     ) : null;
 
-    let templateEngine = state.framework ? (
+    let templateEngine = state.framework && state.platform === 'node' ? (
       <section className={cx('fadeIn', 'animated', state.templateEngine)}>
         <h6><InlineSvg name="template-engine"/> {!state.templateEngine || state.templateEngine === 'none' ? 'Template Engine' : state.templateEngine}</h6>
         <label className="radio-inline">
