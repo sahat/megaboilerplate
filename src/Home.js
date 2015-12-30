@@ -705,7 +705,7 @@ class Home extends React.Component {
 
     let theme = state.jsFramework ? (
       <section className="fadeIn animated">
-        <h6><img className="category-icon" src="/img/svg/theme.png" alt=""/>Theme</h6>
+        <h6><InlineSvg name="theme" width="16px" height="18px"/> Theme</h6>
         <div className="row">
           <div className="col-xs-6 col-md-3">
             <a className={cx("thumbnail", { 'active': this.state.theme === 'theme1' })} onClick={this.handleThemeClick.bind(this, 'theme1')}>
