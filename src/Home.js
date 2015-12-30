@@ -377,7 +377,6 @@ class Home extends React.Component {
     ) : null;
 
 
-
     let cssRadio = (
       <label className="radio-inline">
         <img className="btn-logo" src="/img/svg/css3-logo.svg" alt="CSS Logo"/>
@@ -414,36 +413,14 @@ class Home extends React.Component {
       </label>
     ) : null;
 
-    let cssPreprocessor = state.cssFramework ? (
-      <section className={cx('fadeIn', 'animated', state.cssPreprocessor)}>
-        <h6><InlineSvg name="css-preprocessor" width="16px" height="18px"/> {!state.cssPreprocessor || state.cssPreprocessor === 'css' ? 'CSS Preprocessor' : state.cssPreprocessor}</h6>
+    const SASS = state.cssPreprocessor === 'sass';
+    const LESS = state.cssPreprocessor === 'less';
+    const STYLUS = state.cssPreprocessor === 'stylus';
+    const CSSNEXT = state.cssPreprocessor === 'cssnext';
 
-        {cssRadio}
-        {sassRadio}
-        {lessRadio}
-        {stylusRadio}
-        {cssnextRadio}
-
-        <ul className="nav nav-stacked">
-          <li>
-            <a data-toggle="collapse" href="#cssPreprocessorCollapse1">
-              <i className="ion-help-circled" /> CSS Preprocessor Comparison
-            </a>
-            <div id="cssPreprocessorCollapse1" className="collapse">
-              <div className="panel-collapse">
-                Select <strong>None</strong> if you are building an API server or a single-page application.
-              </div>
-            </div>
-          </li>
-        </ul>
-      </section>
-    ) : null;
-
-    let cssBuildOptions = state.cssPreprocessor ? (
+    let cssBuildOptions = (SASS || LESS || STYLUS || CSSNEXT) ? (
       <section className="fadeIn animated">
-        <h6><InlineSvg name="css-framework" width="16px" height="18px"/> {!state.cssFramework || state.cssFramework === 'none' ? 'CSS Framework' : state.cssFramework}</h6>
-
-        <h6><img className="category-icon" src="/img/svg/css-build-options2.png" alt=""/>CSS Build Options</h6>
+        <h5 className="subcategory">CSS Build Options</h5>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/npm-logo.svg" alt="Middleware Logo"/>
           <input type="radio" name="cssBuildOptionsRadios" value="middleware" onChange={this.handleChange} defaultChecked={state.cssBuildOptions === 'middleware'} /> Middleware
@@ -468,7 +445,7 @@ class Home extends React.Component {
             </a>
             <div id="cssBuildOptionsCollapse1" className="collapse">
               <div className="panel-collapse">
-                Select <strong>None</strong> if you are building an API server or a single-page application.
+                Lorem ipsum
               </div>
             </div>
           </li>
@@ -478,13 +455,41 @@ class Home extends React.Component {
             </a>
             <div id="cssBuildOptionsCollapse2" className="collapse">
               <div className="panel-collapse">
-                Select <strong>None</strong> if you are building an API server or a single-page application.
+                Lorem ipsum
               </div>
             </div>
           </li>
         </ul>
       </section>
     ) : null;
+
+    let cssPreprocessor = state.cssFramework ? (
+      <section className={cx('fadeIn', 'animated', state.cssPreprocessor)}>
+        <h6><InlineSvg name="css-preprocessor" width="16px" height="18px"/> {!state.cssPreprocessor || state.cssPreprocessor === 'css' ? 'CSS Preprocessor' : state.cssPreprocessor}</h6>
+        {cssRadio}
+        {sassRadio}
+        {lessRadio}
+        {stylusRadio}
+        {cssnextRadio}
+
+        <ul className="nav nav-stacked">
+          <li>
+            <a data-toggle="collapse" href="#cssPreprocessorCollapse1">
+              <i className="ion-help-circled" /> CSS Preprocessor Comparison
+            </a>
+            <div id="cssPreprocessorCollapse1" className="collapse">
+              <div className="panel-collapse">
+                Select <strong>None</strong> if you are building an API server or a single-page application.
+              </div>
+            </div>
+          </li>
+        </ul>
+
+        {cssBuildOptions}
+      </section>
+    ) : null;
+
+
 
     let database = state.cssPreprocessor ? (
       <section className="fadeIn animated">
@@ -791,7 +796,6 @@ class Home extends React.Component {
         {templateEngine}
         {cssFramework}
         {cssPreprocessor}
-        {cssBuildOptions}
         {database}
         {authentication}
         {jsFramework}
