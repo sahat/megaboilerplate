@@ -579,7 +579,7 @@ canvas {
 
 .foundation h6 {
   color: #fff;
-  background-color: #e05800;
+  background-color: #777;
   border-color: transparent;
 }
 
@@ -735,13 +735,13 @@ canvas {
 
 
 .bluemix h6 {
-  color: #2D3F4A;
+  color: #fff;
   background: #00a391;
   border-color: transparent;
 }
 
 .bluemix svg {
-  color: #2D3F4A;
+  color: #fff;
   fill: currentColor;
 }
 
