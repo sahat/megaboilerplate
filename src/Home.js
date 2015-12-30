@@ -189,11 +189,11 @@ class Home extends React.Component {
           <img className="btn-logo" src="/img/svg/python-logo.svg" alt="Python Logo"/>
           <input type="radio" id="nodeRadio" name="platformRadios" value="python" onChange={this.handleChange} checked={state.platform === 'python'} /> Python
         </label>
-        <ul className="nav nav-stacked" id="platformAccordion">
+
+        <ul className="nav nav-stacked">
           <li>
-            <a data-toggle="collapse" data-parent="#platformAccordion" href="#platformCollapse1">
-              <i className="ion-help-circled"/>
-              Support for other languages?
+            <a data-toggle="collapse" href="#platformCollapse1">
+              <i className="ion-help-circled"/> Support for other languages?
             </a>
             <div id="platformCollapse1" className="collapse">
               <div className="panel-collapse">
@@ -223,35 +223,33 @@ class Home extends React.Component {
           <img className="btn-logo" src="/img/svg/meteor-logo.png" alt="Meteor Logo"/>
           <input type="radio" name="frameworkRadios" value="meteor" onChange={this.handleChange} checked={state.framework === 'meteor'} /> Meteor
         </label>
-        <ul className="nav nav-stacked" id="frameworkAccordion">
+
+        <ul className="nav nav-stacked">
           <li>
-            <a data-toggle="collapse" data-parent="#frameworkAccordion" href="#frameworkCollapse1">
-              <i className="ion-help-circled"/>
-              Which framework is right for me?
+            <a data-toggle="collapse" href="#frameworkCollapse1">
+              <i className="ion-help-circled"/> Which framework is right for me?
             </a>
-            <div id="frameworkCollapse1" className=" collapse">
+            <div id="frameworkCollapse1" className="collapse">
               <div className="panel-collapse">
                 lorem ipsum dolor
               </div>
             </div>
           </li>
           <li>
-            <a data-toggle="collapse" data-parent="#frameworkAccordion" href="#frameworkCollapse1">
-              <i className="ion-help-circled"/>
-              Hapi vs Express?
+            <a data-toggle="collapse" href="#frameworkCollapse2">
+              <i className="ion-help-circled"/> Hapi vs Express?
             </a>
-            <div id="frameworkCollapse1" className=" collapse">
+            <div id="frameworkCollapse2" className="collapse">
               <div className="panel-collapse">
                 lorem ipsum dolor
               </div>
             </div>
           </li>
           <li>
-            <a data-toggle="collapse" data-parent="#frameworkAccordion" href="#frameworkCollapse1">
-              <i className="ion-help-circled"/>
-              Should I use Meteor or Sails.js for real-time apps?
+            <a data-toggle="collapse" href="#frameworkCollapse3">
+              <i className="ion-help-circled"/> Should I use Meteor or Sails.js for real-time apps?
             </a>
-            <div id="frameworkCollapse1" className=" collapse">
+            <div id="frameworkCollapse3" className="collapse">
               <div className="panel-collapse">
                 lorem ipsum dolor
               </div>
@@ -286,34 +284,34 @@ class Home extends React.Component {
           <img className="btn-logo" src="/img/svg/none.png"/>
           <input type="radio" name="templateEngineRadios" value="none" onChange={this.handleChange} checked={state.templateEngine === 'none'}/> None
         </label>
-        <ul className="nav nav-stacked" id="templateEngineAccordion">
-          <li>
-            <a data-toggle="collapse" data-parent="#templateEngineAccordion" href="#templateEngineCollapse1">
-              <i className="ion-help-circled" />What's a template engine?
-            </a>
-            <div id="templateEngineCollapse1" className="collapse">
-              <div className="panel-collapse">
-                Select <strong>None</strong> if you are building an API server or a single-page application.
-              </div>
-            </div>
-          </li>
-          <li>
-            <a data-toggle="collapse" data-parent="#templateEngineAccordion" href="#templateEngineCollapse1">
-              <i className="ion-help-circled" />When should I use a template engine?
-            </a>
-            <div id="templateEngineCollapse1" className="collapse">
-              <div className="panel-collapse">
-                Select <strong>None</strong> if you are building an API server or a single-page application.
-              </div>
-            </div>
-          </li>
 
+        <ul className="nav nav-stacked">
           <li>
-            <a data-toggle="collapse" data-parent="#accordion" href="#templateEngineCollapse2">
-              <i className="ion-help-circled" />Jade vs Handlebars vs Nunjucks?
+            <a data-toggle="collapse" href="#templateEngineCollapse1">
+              <i className="ion-help-circled"/> What's a template engine?
             </a>
-            <div id="templateEngineCollapse2" className="panel-collapse collapse">
-              Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf
+            <div id="templateEngineCollapse1" className="collapse">
+              <div className="panel-collapse">
+                Lorem ipsum
+              </div>
+            </div>
+          </li>
+          <li>
+            <a data-toggle="collapse" href="#templateEngineCollapse2">
+              <i className="ion-help-circled"/> When should I use a template engine?
+            </a>
+            <div id="templateEngineCollapse2" className="collapse">
+              <div className="panel-collapse">
+                Select <strong>None</strong> if you are building an API server or a single-page application.
+              </div>
+            </div>
+          </li>
+          <li>
+            <a data-toggle="collapse" href="#templateEngineCollapse3">
+              <i className="ion-help-circled"/> Jade vs Handlebars vs Nunjucks?
+            </a>
+            <div id="templateEngineCollapse3" className="panel-collapse collapse">
+              Lorem ipsum
             </div>
           </li>
         </ul>
@@ -351,26 +349,25 @@ class Home extends React.Component {
             <img className="btn-logo" src="/img/svg/bourbon-logo.svg" alt="Bourbon Neat Logo"/>
             <input type="radio" name="cssFrameworkRadios" value="bourbonNeat" onChange={this.handleChange} checked={BOURBON_NEAT} /> Bourbon Neat
         </label>
-        <ul className="nav nav-stacked" id="templateEngineAccordion">
+
+        <ul className="nav nav-stacked">
           <li>
-            <a data-toggle="collapse" data-parent="#templateEngineAccordion" href="#templateEngineCollapse1">
-              <i className="ion-help-circled" />
-              Should I use a CSS Framework?
+            <a data-toggle="collapse" href="#cssFrameworkCollapse1">
+              <i className="ion-help-circled" /> Should I use a CSS Framework?
             </a>
-            <div id="templateEngineCollapse1" className="collapse">
+            <div id="cssFrameworkCollapse1" className="collapse">
               <div className="panel-collapse">
-                Select <strong>None</strong> if you are building an API server or a single-page application.
+                Lorem ipsum.
               </div>
             </div>
           </li>
           <li>
-            <a data-toggle="collapse" data-parent="#templateEngineAccordion" href="#templateEngineCollapse1">
-              <i className="ion-help-circled" />
-              Which CSS framework is the best?
+            <a data-toggle="collapse" href="#cssFrameworkCollapse2">
+              <i className="ion-help-circled" /> Which CSS framework is the best?
             </a>
-            <div id="templateEngineCollapse1" className="collapse">
+            <div id="cssFrameworkCollapse2" className="collapse">
               <div className="panel-collapse">
-                Select <strong>None</strong> if you are building an API server or a single-page application.
+                Lorem ipsum.
               </div>
             </div>
           </li>
@@ -424,13 +421,13 @@ class Home extends React.Component {
         {lessRadio}
         {stylusRadio}
         {cssnextRadio}
-        <ul className="nav nav-stacked" id="templateEngineAccordion">
+
+        <ul className="nav nav-stacked">
           <li>
-            <a data-toggle="collapse" data-parent="#templateEngineAccordion" href="#templateEngineCollapse1">
-              <i className="ion-help-circled" />
-              CSS Preprocessor Comparison
+            <a data-toggle="collapse" href="#cssPreprocessorCollapse1">
+              <i className="ion-help-circled" /> CSS Preprocessor Comparison
             </a>
-            <div id="templateEngineCollapse1" className="collapse">
+            <div id="cssPreprocessorCollapse1" className="collapse">
               <div className="panel-collapse">
                 Select <strong>None</strong> if you are building an API server or a single-page application.
               </div>
@@ -453,7 +450,6 @@ class Home extends React.Component {
         </label>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/webpack-logo.svg" alt="Webpack Logo"/>
-
           <input type="radio" name="cssBuildOptionsRadios" value="webpack" onChange={this.handleChange} defaultChecked={state.cssBuildOptions === 'webpack'} /> Webpack
         </label>
         <label className="radio-inline">
@@ -461,34 +457,28 @@ class Home extends React.Component {
           <input type="radio" name="cssBuildOptionsRadios" value="grunt" onChange={this.handleChange} defaultChecked={state.cssBuildOptions === 'grunt'} /> Grunt
         </label>
 
-        <div className="row">
-          <div className="col-sm-6">
-            <ul className="nav nav-stacked" id="templateEngineAccordion">
-              <li>
-                <a data-toggle="collapse" data-parent="#templateEngineAccordion" href="#templateEngineCollapse1">
-                  <i className="ion-help-circled" />
-                  Gulp vs Webpack vs Grunt?
-                </a>
-                <div id="templateEngineCollapse1" className="collapse">
-                  <div className="panel-collapse">
-                    Select <strong>None</strong> if you are building an API server or a single-page application.
-                  </div>
-                </div>
-              </li>
-              <li>
-                <a data-toggle="collapse" data-parent="#templateEngineAccordion" href="#templateEngineCollapse1">
-                  <i className="ion-help-circled" />
-                  Should I use middleware?
-                </a>
-                <div id="templateEngineCollapse1" className="collapse">
-                  <div className="panel-collapse">
-                    Select <strong>None</strong> if you are building an API server or a single-page application.
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
+        <ul className="nav nav-stacked">
+          <li>
+            <a data-toggle="collapse" href="#cssBuildOptionsCollapse1">
+              <i className="ion-help-circled"/> Gulp vs Webpack vs Grunt?
+            </a>
+            <div id="cssBuildOptionsCollapse1" className="collapse">
+              <div className="panel-collapse">
+                Select <strong>None</strong> if you are building an API server or a single-page application.
+              </div>
+            </div>
+          </li>
+          <li>
+            <a data-toggle="collapse" href="#cssBuildOptionsCollapse2">
+              <i className="ion-help-circled"/> Should I use middleware?
+            </a>
+            <div id="cssBuildOptionsCollapse2" className="collapse">
+              <div className="panel-collapse">
+                Select <strong>None</strong> if you are building an API server or a single-page application.
+              </div>
+            </div>
+          </li>
+        </ul>
       </section>
     ) : null;
 
@@ -497,62 +487,51 @@ class Home extends React.Component {
         <h6><img className="category-icon" src="/img/svg/database.png" alt=""/>Database</h6>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/none.png" alt="None Icon" />
-          <input type="radio" name="databaseRadios" value="none" onChange={this.handleChange} defaultChecked={state.database === 'none'} /> None
+          <input type="radio" name="databaseRadios" value="none" onChange={this.handleChange} checked={state.database === 'none'} /> None
         </label>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/mongodb-logo.svg" />
-
-          <input type="radio" name="databaseRadios" value="mongodb" onChange={this.handleChange} defaultChecked={state.database === 'mongodb'} /> MongoDB
+          <input type="radio" name="databaseRadios" value="mongodb" onChange={this.handleChange} checked={state.database === 'mongodb'} /> MongoDB
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/mysql-logo.svg" />
-
-          <input type="radio" name="databaseRadios" value="mysql" onChange={this.handleChange} defaultChecked={state.database === 'mysql'} /> MySQL
+          <input type="radio" name="databaseRadios" value="mysql" onChange={this.handleChange} checked={state.database === 'mysql'} /> MySQL
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/postgresql-logo.svg" />
-
-          <input type="radio" name="databaseRadios" value="postgresql" onChange={this.handleChange} defaultChecked={state.database === 'postgresql'} /> PostgreSQL
+          <input type="radio" name="databaseRadios" value="postgresql" onChange={this.handleChange} checked={state.database === 'postgresql'} /> PostgreSQL
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/rethinkdb-logo.svg" />
-
-          <input type="radio" name="databaseRadios" value="rethinkdb" onChange={this.handleChange} defaultChecked={state.database === 'rethinkdb'} /> RethinkDB
+          <input type="radio" name="databaseRadios" value="rethinkdb" onChange={this.handleChange} checked={state.database === 'rethinkdb'} /> RethinkDB
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
 
-        <div className="row">
-          <div className="col-sm-6">
-            <ul className="nav nav-stacked" id="templateEngineAccordion">
-              <li>
-                <a data-toggle="collapse" data-parent="#templateEngineAccordion" href="#templateEngineCollapse1">
-                  <i className="ion-help-circled" />
-                  Do I need a database?
-                </a>
-                <div id="templateEngineCollapse1" className="collapse">
-                  <div className="panel-collapse">
-                    Select <strong>None</strong> if you are building an API server or a single-page application.
-                  </div>
-                </div>
-              </li>
-              <li>
-                <a data-toggle="collapse" data-parent="#templateEngineAccordion" href="#templateEngineCollapse1">
-                  <i className="ion-help-circled" />
-                  Database Comparison
-                </a>
-                <div id="templateEngineCollapse1" className="collapse">
-                  <div className="panel-collapse">
-                    Select <strong>None</strong> if you are building an API server or a single-page application.
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-
+        <ul className="nav nav-stacked">
+          <li>
+            <a data-toggle="collapse" href="#databaseCollapse1">
+              <i className="ion-help-circled" /> Do I need a database?
+            </a>
+            <div id="databaseCollapse1" className="collapse">
+              <div className="panel-collapse">
+                Select <strong>None</strong> if you are building an API server or a single-page application.
+              </div>
+            </div>
+          </li>
+          <li>
+            <a data-toggle="collapse" href="#databaseCollapse2">
+              <i className="ion-help-circled" /> Database Comparison
+            </a>
+            <div id="databaseCollapse2" className="collapse">
+              <div className="panel-collapse">
+                Select <strong>None</strong> if you are building an API server or a single-page application.
+              </div>
+            </div>
+          </li>
+        </ul>
       </section>
     ) : null;
 
@@ -583,23 +562,18 @@ class Home extends React.Component {
           <input type="checkbox" name="authenticationCheckboxes" value="twitter" onChange={this.handleChange} checked={state.authentication && state.authentication.has('twitter')} disabled={state.database === 'none'} /> Twitter
         </label>
 
-        <div className="row">
-          <div className="col-sm-6">
-            <ul className="nav nav-stacked" id="templateEngineAccordion">
-              <li>
-                <a data-toggle="collapse" data-parent="#templateEngineAccordion" href="#templateEngineCollapse1">
-                  <i className="ion-help-circled" />
-                  Is "Forgot Password" included?
-                </a>
-                <div id="templateEngineCollapse1" className="collapse">
-                  <div className="panel-collapse">
-                    Select <strong>None</strong> if you are building an API server or a single-page application.
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
+        <ul className="nav nav-stacked">
+          <li>
+            <a data-toggle="collapse" href="#authenticationCollapse1">
+              <i className="ion-help-circled" /> Is "Forgot Password" included?
+            </a>
+            <div id="authenticationCollapse1" className="collapse">
+              <div className="panel-collapse">
+                Select <strong>None</strong> if you are building an API server or a single-page application.
+              </div>
+            </div>
+          </li>
+        </ul>
       </div>
     );
     let authentication = state.database ? (
@@ -624,19 +598,16 @@ class Home extends React.Component {
         </label>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/react-router-logo.png" />
-
           <input type="checkbox" name="reactOptionsCheckboxes" value="reactRouter" onChange={this.handleChange} checked={state.reactOptions && state.reactOptions.has('reactRouter')} /> React Router
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/relay-logo.svg" />
-
           <input type="checkbox" name="reactOptionsCheckboxes" value="graphql" onChange={this.handleChange} checked={state.reactOptions && state.reactOptions.has('graphql')} /> GraphQL + Relay
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/babel-logo.png" />
-
           <input type="checkbox" name="reactOptionsCheckboxes" value="es6" onChange={this.handleChange} checked={state.reactOptions && state.reactOptions.has('es6')} /> ES6
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
@@ -681,46 +652,38 @@ class Home extends React.Component {
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
 
-        <div className="row">
-          <div className="col-sm-6">
-            <ul className="nav nav-stacked" id="templateEngineAccordion">
-              <li>
-                <a data-toggle="collapse" data-parent="#templateEngineAccordion" href="#templateEngineCollapse1">
-                  <i className="ion-help-circled" />
-                  Should I use a client-side JavaScript Framework?
-                </a>
-                <div id="templateEngineCollapse1" className="collapse">
-                  <div className="panel-collapse">
-                    Select <strong>None</strong> if you are building an API server or a single-page application.
-                  </div>
-                </div>
-              </li>
-
-              <li>
-                <a data-toggle="collapse" data-parent="#templateEngineAccordion" href="#templateEngineCollapse1">
-                  <i className="ion-help-circled" />
-                  Single Page Application: Advantages and Disadvantages
-                </a>
-                <div id="templateEngineCollapse1" className="collapse">
-                  <div className="panel-collapse">
-                    Select <strong>None</strong> if you are building an API server or a single-page application.
-                  </div>
-                </div>
-              </li>
-              <li>
-                <a data-toggle="collapse" data-parent="#templateEngineAccordion" href="#templateEngineCollapse1">
-                  <i className="ion-help-circled" />
-                  React vs Angular?
-                </a>
-                <div id="templateEngineCollapse1" className="collapse">
-                  <div className="panel-collapse">
-                    Select <strong>None</strong> if you are building an API server or a single-page application.
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
+        <ul className="nav nav-stacked">
+          <li>
+            <a data-toggle="collapse" href="#jsFrameworkCollapse1">
+              <i className="ion-help-circled"/> Should I use a client-side JavaScript Framework?
+            </a>
+            <div id="jsFrameworkCollapse1" className="collapse">
+              <div className="panel-collapse">
+                Select <strong>None</strong> if you are building an API server or a single-page application.
+              </div>
+            </div>
+          </li>
+          <li>
+            <a data-toggle="collapse" href="#jsFrameworkCollapse2">
+              <i className="ion-help-circled"/> Single Page Application: Advantages and Disadvantages
+            </a>
+            <div id="jsFrameworkCollapse2" className="collapse">
+              <div className="panel-collapse">
+                Select <strong>None</strong> if you are building an API server or a single-page application.
+              </div>
+            </div>
+          </li>
+          <li>
+            <a data-toggle="collapse" href="#jsFrameworkCollapse3">
+              <i className="ion-help-circled"/> React vs Angular?
+            </a>
+            <div id="jsFrameworkCollapse3" className="collapse">
+              <div className="panel-collapse">
+                Select <strong>None</strong> if you are building an API server or a single-page application.
+              </div>
+            </div>
+          </li>
+        </ul>
 
         {reactOptions}
         {reactBuildSystem}
@@ -771,13 +734,12 @@ class Home extends React.Component {
           <input type="radio" name="deploymentRadios" value="none" onChange={this.handleChange} defaultChecked={state.deployment === 'none'} /> None
         </label>
 
-        <ul className="nav nav-stacked" id="templateEngineAccordion">
+        <ul className="nav nav-stacked">
           <li>
-            <a data-toggle="collapse" data-parent="#templateEngineAccordion" href="#templateEngineCollapse1">
-              <i className="ion-help-circled" />
-              Pricing Comparison
+            <a data-toggle="collapse" href="#deploymentCollapse1">
+              <i className="ion-help-circled"/> Pricing Comparison
             </a>
-            <div id="templateEngineCollapse1" className="collapse">
+            <div id="deploymentCollapse1" className="collapse">
               <div className="panel-collapse">
                 Select <strong>None</strong> if you are building an API server or a single-page application.
               </div>
