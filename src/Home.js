@@ -11,6 +11,7 @@ import { createHistory, useQueries } from 'history';
 
 import InlineSvg from './InlineSvg';
 
+import Platform from './sections/Platform';
 
 class Home extends React.Component {
   constructor(props) {
@@ -178,32 +179,7 @@ class Home extends React.Component {
 
     const NODEJS = state.platform === 'node';
 
-    let platform = (
-      <section className={cx('fadeIn', 'animated', state.platform)}>
-        <h6><InlineSvg name="platform" width="18px" height="20px"/> {state.platform || 'Platform'}</h6>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/node-logo.svg" alt="Node.js Logo"/>
-          <input type="radio" id="nodeRadio" name="platformRadios" value="node" onChange={this.handleChange} checked={state.platform === 'node'} /> Node.js
-        </label>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/python-logo.svg" alt="Python Logo"/>
-          <input type="radio" id="nodeRadio" name="platformRadios" value="python" onChange={this.handleChange} checked={state.platform === 'python'} /> Python
-        </label>
-
-        <ul className="nav nav-stacked">
-          <li>
-            <a data-toggle="collapse" href="#platformCollapse1">
-              <i className="ion-help-circled"/> Support for other languages?
-            </a>
-            <div id="platformCollapse1" className="collapse">
-              <div className="panel-collapse">
-                Currently <strong>Node.js</strong> is the only supported platform. Adding support for <strong>Ruby</strong>, <strong>Python</strong>, <strong>PHP</strong>, <strong>C#</strong> is on the roadmap, but no ETA yet. GitHub contributions and pull requests are welcome!
-              </div>
-            </div>
-          </li>
-        </ul>
-      </section>
-    );
+    let platform = <Platform platform={state.platform} handleChange={this.handleChange} />;
 
     let nodeFrameworks = NODEJS ? (
       <div>
