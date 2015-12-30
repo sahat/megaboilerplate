@@ -197,7 +197,7 @@ class Home extends React.Component {
             </a>
             <div id="platformCollapse1" className="collapse">
               <div className="panel-collapse">
-                Currently <strong>Node.js</strong> is the only supported platform. Adding support for <strong>Ruby</strong>, <strong>Python</strong>, <strong>PHP</strong>, <strong>C#</strong> and other languages might be tedious, but not difficult. GitHub contributions and pull requests are welcome!
+                Currently <strong>Node.js</strong> is the only supported platform. Adding support for <strong>Ruby</strong>, <strong>Python</strong>, <strong>PHP</strong>, <strong>C#</strong> is on the roadmap, but no ETA yet. GitHub contributions and pull requests are welcome!
               </div>
             </div>
           </li>
@@ -557,8 +557,8 @@ class Home extends React.Component {
           <input type="checkbox" name="authenticationCheckboxes" value="none" onChange={this.handleChange} checked={state.authentication && state.authentication.size === 0} disabled={state.database === 'none'} /> None
         </label>
         <label className="checkbox-inline">
-          <img className="btn-logo" src="/img/svg/passportjs-logo.svg" height="60" />
-          <input type="checkbox" name="authenticationCheckboxes" value="email" onChange={this.handleChange} checked={state.authentication && state.authentication.has('email')} disabled={state.database === 'none'} /> Email / Password
+          <img className="btn-logo" src="/img/svg/email-logo.svg" height="60" />
+          <input type="checkbox" name="authenticationCheckboxes" value="email" onChange={this.handleChange} checked={state.authentication && state.authentication.has('email')} disabled={state.database === 'none'} /> Email & Password
         </label>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/facebook-logo.svg" />
@@ -580,7 +580,7 @@ class Home extends React.Component {
             </a>
             <div id="authenticationCollapse1" className="collapse">
               <div className="panel-collapse">
-                Select <strong>None</strong> if you are building an API server or a single-page application.
+                Test.
               </div>
             </div>
           </li>
@@ -666,7 +666,7 @@ class Home extends React.Component {
         <ul className="nav nav-stacked">
           <li>
             <a data-toggle="collapse" href="#jsFrameworkCollapse1">
-              <i className="ion-help-circled"/> Should I use a client-side JavaScript Framework?
+              <i className="ion-help-circled"/> Should I use a client-side JavaScript Framework at all?
             </a>
             <div id="jsFrameworkCollapse1" className="collapse">
               <div className="panel-collapse">
