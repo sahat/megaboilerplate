@@ -614,30 +614,30 @@ class Home extends React.Component {
         <h5 className="subcategory">React Features</h5>
         <label className="checkbox-inline">
           <img className="btn-logo" src="/img/svg/alt-logo.png" />
-          <input type="checkbox" name="reactOptionsCheckboxes" value="fluxAlt" onChange={this.handleChange} checked={state.reactOptions.has('fluxAlt')} /> Flux (Alt)
+          <input type="checkbox" name="reactOptionsCheckboxes" value="fluxAlt" onChange={this.handleChange} checked={state.reactOptions && state.reactOptions.has('fluxAlt')} /> Flux (Alt)
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
         <label className="checkbox-inline">
           <img className="btn-logo" src="/img/svg/flux-logo.svg" />
-          <input type="checkbox" name="reactOptionsCheckboxes" value="fluxRedux" onChange={this.handleChange} checked={state.reactOptions.has('fluxRedux')} /> Flux (Redux)
+          <input type="checkbox" name="reactOptionsCheckboxes" value="fluxRedux" onChange={this.handleChange} checked={state.reactOptions && state.reactOptions.has('fluxRedux')} /> Flux (Redux)
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/react-router-logo.png" />
 
-          <input type="checkbox" name="reactOptionsCheckboxes" value="reactRouter" onChange={this.handleChange} checked={state.reactOptions.has('reactRouter')} /> React Router
+          <input type="checkbox" name="reactOptionsCheckboxes" value="reactRouter" onChange={this.handleChange} checked={state.reactOptions && state.reactOptions.has('reactRouter')} /> React Router
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/relay-logo.svg" />
 
-          <input type="checkbox" name="reactOptionsCheckboxes" value="graphql" onChange={this.handleChange} checked={state.reactOptions.has('graphql')} /> GraphQL + Relay
+          <input type="checkbox" name="reactOptionsCheckboxes" value="graphql" onChange={this.handleChange} checked={state.reactOptions && state.reactOptions.has('graphql')} /> GraphQL + Relay
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/babel-logo.png" />
 
-          <input type="checkbox" name="reactOptionsCheckboxes" value="es6" onChange={this.handleChange} checked={state.reactOptions.has('es6')} /> ES6
+          <input type="checkbox" name="reactOptionsCheckboxes" value="es6" onChange={this.handleChange} checked={state.reactOptions && state.reactOptions.has('es6')} /> ES6
           <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
         </label>
       </div>
