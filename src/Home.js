@@ -766,6 +766,39 @@ class Home extends React.Component {
     let summary = state.deployment ? (
       <section>
         <h6><InlineSvg name="summary" width="16px" height="18px"/> Summary</h6>
+        <div className="stack-outline container">
+          <div className="row">
+            <div className="col-sm-4 stack">{state.platform}</div>
+            <div className="col-sm-4 stack">{state.framework}</div>
+            <div className="col-sm-4 stack">{state.database}</div>
+          </div>
+
+          <div className="row">
+            <div className="col-sm-3 stack">{state.authentication}</div>
+          </div>
+
+          <div className="row">
+            <div className="col-sm-4 col-sm-offset-4 stack">{state.templateEngine}</div>
+          </div>
+
+          <div className="row">
+            <div className="col-sm-6 stack">{state.cssFramework}</div>
+            <div className="col-sm-6 stack">{state.cssPreprocessor}</div>
+          </div>
+          <div className="row">
+          </div>
+
+          <div className="row">
+          </div>
+
+          <div className="row">
+            <div className="col-sm-3 stack">{state.jsFramework}</div>
+          </div>
+
+          <div className="row">
+            <div className="col-sm-4 col-sm-offset-8 stack">{state.deployment}</div>
+          </div>
+        </div>
         <ul>
           <li>Platform <span className="label label-success">{state.platform}</span></li>
           <li>Framework <span className="label label-success">{state.framework}</span></li>
@@ -779,8 +812,7 @@ class Home extends React.Component {
           <li>Deployment <span className="label label-success">{state.deployment}</span></li>
         </ul>
 
-        <h6>Unique Url</h6>
-        <input className="form-control" type="text" value={'?' + base64State} />
+
       </section>
     ) : null;
 
@@ -804,7 +836,8 @@ class Home extends React.Component {
         {jsFramework}
         {theme}
         {deployment}
-        {summary}
+        <h6><InlineSvg name="link" width="16px" height="18px"/> Reference Url</h6>
+        <input className="form-control" type="text" value={`${location.origin}?state=${base64State}`} disabled />
         {download}
         <br/>
         <a className="twitter-share-button" href="https://twitter.com/intent/tweet">Tweet</a>&nbsp;
