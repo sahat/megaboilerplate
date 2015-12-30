@@ -818,6 +818,8 @@ class Home extends React.Component {
 
     let download = state.deployment ? (
       <div>
+        <h6><InlineSvg name="link" width="16px" height="18px"/> Reference Url</h6>
+        <input className="form-control" type="text" value={`${location.origin}?state=${base64State}`} disabled />
         <br/>
         <button ref="downloadBtn" className="btn btn-block btn-mega" onClick={this.clickDownload}>Compile and Download</button>
       </div>
@@ -836,8 +838,6 @@ class Home extends React.Component {
         {jsFramework}
         {theme}
         {deployment}
-        <h6><InlineSvg name="link" width="16px" height="18px"/> Reference Url</h6>
-        <input className="form-control" type="text" value={`${location.origin}?state=${base64State}`} disabled />
         {download}
         <br/>
         <a className="twitter-share-button" href="https://twitter.com/intent/tweet">Tweet</a>&nbsp;
