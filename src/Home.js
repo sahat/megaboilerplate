@@ -493,8 +493,9 @@ class Home extends React.Component {
 
 
     let database = state.cssPreprocessor ? (
-      <section className="fadeIn animated">
-        <h6><img className="category-icon" src="/img/svg/database.png" alt=""/>Database</h6>
+      <section className={cx('fadeIn', 'animated', state.database)}>
+        <h6><InlineSvg name="database" width="16px" height="18px"/> {!state.database || state.database === 'none' ? 'Database' : state.database}</h6>
+
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/none.png" alt="None Icon" />
           <input type="radio" name="databaseRadios" value="none" onChange={this.handleChange} checked={state.database === 'none'} /> None

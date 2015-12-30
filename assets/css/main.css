@@ -611,13 +611,13 @@ canvas {
 }
 
 .less h6 {
-  color: #b9c8e0;
+  color: #fff;
   background-color: #1d365d;
   border-color: transparent;
 }
 
 .less svg {
-  color: #b9c8e0;
+  color: #fff;
   fill: currentColor;
 }
 
@@ -642,3 +642,51 @@ canvas {
   color: #fff;
   fill: currentColor;
 }
+
+.mongodb h6 {
+  color: #fff;
+  background-color: #69b241;
+  border-color: transparent;
+}
+
+.mongodb svg {
+  color: #fff;
+  fill: currentColor;
+}
+
+
+.mysql h6 {
+  color: #fff;
+  background-color: #f59620;
+  border-color: transparent;
+}
+
+.mysql svg {
+  color: #fff;
+  fill: currentColor;
+}
+
+.postgresql h6 {
+  color: #fff;
+  background-color: #0085b0;
+  border-color: transparent;
+}
+
+.postgresql svg {
+  color: #fff;
+  fill: currentColor;
+}
+
+
+.rethinkdb h6 {
+  color: #fff;
+  background: linear-gradient(to bottom, #214753 0%, #1a5161 50%, #1c5064 81%, #1d4f5f 100%);
+  border-color: transparent;
+}
+
+.rethinkdb svg {
+  color: #fff;
+  fill: currentColor;
+}
+
+
