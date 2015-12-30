@@ -415,8 +415,9 @@ class Home extends React.Component {
     ) : null;
 
     let cssPreprocessor = state.cssFramework ? (
-      <section className="fadeIn animated">
-        <h6><img className="category-icon" src="/img/svg/css-preprocessor.png" alt=""/>CSS Preprocessor</h6>
+      <section className={cx('fadeIn', 'animated', state.cssPreprocessor)}>
+        <h6><InlineSvg name="css-preprocessor" width="16px" height="18px"/> {!state.cssPreprocessor || state.cssPreprocessor === 'css' ? 'CSS Preprocessor' : state.cssPreprocessor}</h6>
+
         {cssRadio}
         {sassRadio}
         {lessRadio}
@@ -440,6 +441,8 @@ class Home extends React.Component {
 
     let cssBuildOptions = state.cssPreprocessor ? (
       <section className="fadeIn animated">
+        <h6><InlineSvg name="css-framework" width="16px" height="18px"/> {!state.cssFramework || state.cssFramework === 'none' ? 'CSS Framework' : state.cssFramework}</h6>
+
         <h6><img className="category-icon" src="/img/svg/css-build-options2.png" alt=""/>CSS Build Options</h6>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/npm-logo.svg" alt="Middleware Logo"/>

@@ -589,11 +589,56 @@ canvas {
 }
 
 .bourbonNeat h6 {
+  color: #fff;
   background: #53aee0 linear-gradient(#53aee0, #3da4dc);
   border-color: transparent;
 }
 
 .bourbonNeat svg {
+  color: #fff;
+  fill: currentColor;
+}
+
+.sass h6 {
+  color: #fff;
+  background-color: #c6538c;
+  border-color: transparent;
+}
+
+.sass svg {
+  color: #fff;
+  fill: currentColor;
+}
+
+.less h6 {
+  color: #b9c8e0;
+  background-color: #1d365d;
+  border-color: transparent;
+}
+
+.less svg {
+  color: #b9c8e0;
+  fill: currentColor;
+}
+
+.stylus h6 {
+  color: #fff;
+  background-color: #ff6347;
+  border-color: transparent;
+}
+
+.stylus svg {
+  color: #fff;
+  fill: currentColor;
+}
+
+.cssnext h6 {
+  color: #fff;
+  background: linear-gradient(160deg, rgba(115, 64, 196, .9), rgba(49, 142, 223, .9));
+  border-color: transparent;
+}
+
+.cssnext svg {
   color: #fff;
   fill: currentColor;
 }
