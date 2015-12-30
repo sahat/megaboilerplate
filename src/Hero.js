@@ -185,9 +185,9 @@ class Banner extends React.Component {
 
           <h1>Mega Boilerplate</h1>
           <p className="lead">
-            Simple and easy to use hand-crafted project starters.
+            Simple and easy to use hand-crafted starter kits.
             <br />
-            Inspired by <a href="https://github.com/sahat/hackathon-starter">Hackathon Starter</a>.
+            <a href="#">View Demo</a>
           </p>
           <iframe src="https://ghbtns.com/github-btn.html?user=sahat&repo=satellizer&type=star&count=true" frameBorder="0" scrolling="0" width="100px" height="20px"></iframe>
           <iframe src="https://ghbtns.com/github-btn.html?user=sahat&type=follow&count=true" frameBorder="0" scrolling="0" width="170px" height="20px"></iframe>
