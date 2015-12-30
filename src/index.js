@@ -1,20 +1,9 @@
 import React from 'react';
-import {render} from 'react-dom';
-import { Router, Route } from 'react-router';
-import App from './App';
-import Home from './Home';
-import Philosophy from './Philosophy';
-import Contributing from './Contributing';
-import Trending from './Trending';
+import Router from 'react-router';
+import ReactDOM from 'react-dom';
+import createBrowserHistory from 'history/lib/createBrowserHistory';
+import routes from './routes';
 
+let history = createBrowserHistory();
 
-render((
-  <Router>
-    <Route component={App}>
-      <Route path="/" component={Home}/>
-      <Route path="/philosophy" component={Philosophy}/>
-      <Route path="/contributing" component={Contributing}/>
-      <Route path="/trending" component={Trending}/>
-    </Route>
-  </Router>
-), document.getElementById('root'));
+ReactDOM.render(<Router history={history}>{routes}</Router>, document.getElementById('root'));
