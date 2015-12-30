@@ -421,10 +421,7 @@ class Home extends React.Component {
     let cssBuildOptions = (SASS || LESS || STYLUS || CSSNEXT) ? (
       <section className="fadeIn animated">
         <h5 className="subcategory">CSS Build Options</h5>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/npm-logo.svg" alt="Middleware Logo"/>
-          <input type="radio" name="cssBuildOptionsRadios" value="middleware" onChange={this.handleChange} defaultChecked={state.cssBuildOptions === 'middleware'} /> Middleware
-        </label>
+
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/gulp-logo.png" alt="Gulp Logo"/>
           <input type="radio" name="cssBuildOptionsRadios" value="gulp" onChange={this.handleChange} defaultChecked={state.cssBuildOptions === 'gulp'} /> Gulp
@@ -436,6 +433,10 @@ class Home extends React.Component {
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/grunt-logo.svg" alt="Grunt Logo"/>
           <input type="radio" name="cssBuildOptionsRadios" value="grunt" onChange={this.handleChange} defaultChecked={state.cssBuildOptions === 'grunt'} /> Grunt
+        </label>
+        <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/middleware-logo.svg" alt="Middleware Logo"/>
+          <input type="radio" name="cssBuildOptionsRadios" value="middleware" onChange={this.handleChange} defaultChecked={state.cssBuildOptions === 'middleware'} /> Middleware
         </label>
 
         <ul className="nav nav-stacked">
