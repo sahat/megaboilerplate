@@ -3,66 +3,29 @@
 let haikunate = require('haikunator');
 let url = require('url');
 let cx = require('classnames');
-
+let base64url = require('base64-url');
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {isArray, forOwn, clone} from 'lodash';
+import { createHistory, useQueries } from 'history';
 
 import InlineSvg from './InlineSvg';
 
-const dependencies = {
-  python: {
-    framework: [],
-    templateEngine: [],
-    cssFramework: [],
-    cssPreprocessor: []
-  },
-
-  node: {
-    framework: ['express', 'hapi', 'sails', 'meteor'],
-    templateEngine: ['jade', 'handlebars', 'nunjucks', 'none'],
-    cssFramework: ['bootstrap', 'foundation', 'bourbonNeat'],
-    cssPreprocessor: ['css', 'less', 'sass']
-
-  },
-
-
-
-  css: ['none', 'bootstrap', 'foundation', 'bourbonNeat'],
-  sass: ['none', 'bootstrap', 'foundation', 'bourbonNeat'],
-  less: ['none', 'bootstrap'],
-  stylus: ['none'],
-  cssnext: ['none'],
-
-  cssBuildOptions: ['less', 'sass', 'stylus', 'cssnext']
-};
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {};
     this.handleChange = this.handleChange.bind(this);
     this.clickDownload = this.clickDownload.bind(this);
-    this.handleAppNameChange = this.handleAppNameChange.bind(this);
-
-    this.state = {
-      platform: null,
-      framework: null,
-      appName: null,
-      templateEngine: null,
-      cssFramework: null,
-      cssPreprocessor: null,
-      cssBuildOptions: null,
-      database: null,
-      authentication: null,
-      jsFramework: null,
-      reactOptions: null,
-      reactBuildSystem: null,
-      deployment: null
-    };
   }
 
   componentDidUpdate() {
     $(ReactDOM.findDOMNode(this)).find('[data-toggle="popover"]').popover({ trigger: 'hover' });
+  }
+
+  componentDidMount() {
+
   }
 
   clickDownload() {
@@ -114,58 +77,58 @@ class Home extends React.Component {
       });
   }
 
-  handleAppNameChange(e) {
-    let state = this.state;
-    state.appName = e.target.value;
-    this.setState(state);
-  }
-
   handleChange(e) {
     let name = e.target.name;
     let value = e.target.value;
     let isChecked = e.target.checked;
-    let state = this.state;
+    let state = clone(this.state);
+
     switch (name) {
       case 'platformRadios':
+        // Reset everything
+        for (let key in state) {
+          if (state.hasOwnProperty(key) ) {
+            state[key] = null;
+          }
+        }
         state.platform = value;
         break;
 
       case 'frameworkRadios':
-        if (dependencies[state.platform].framework.includes(value)) {
-          state.framework = value;
-        } else {
-          state.framework = null;
-        }
+        state.framework = value;
         break;
 
       case 'templateEngineRadios':
-        if (dependencies[state.platform].templateEngine.includes(value)) {
-          state.templateEngine = value;
-        } else {
-          state.templateEngine = null;
-        }
+        state.templateEngine = value;
         break;
 
       case 'cssFrameworkRadios':
+        // Reset CSS Preprocessor and CSS Build Options
+        state.cssPreprocessor = null;
+        state.cssBuildOptions = null;
         state.cssFramework = value;
         break;
 
       case 'cssPreprocessorRadios':
-        if (value === 'none') {
-          delete state.cssBuildOptions;
+        // Clear CSS Build Options for plain vanilla CSS
+        if (value === 'css') {
+          state.cssBuildOptions = null;
         }
         state.cssPreprocessor = value;
         break;
+
       case 'cssBuildOptionsRadios':
         state.cssBuildOptions = value;
         break;
+
       case 'databaseRadios':
-        if (value === 'none') {
+        if (value === 'none' && state.authentication) {
           state.authentication.clear();
           state.authentication.add('none');
         }
         state.database = value;
         break;
+
       case 'authenticationCheckboxes':
         state.authentication = state.authentication || new Set();
         if (isChecked) {
@@ -178,9 +141,11 @@ class Home extends React.Component {
           state.authentication.delete(value);
         }
         break;
+
       case 'jsFrameworkRadios':
         state.jsFramework = value;
         break;
+
       case 'reactOptionsCheckboxes':
         state.reactOptions = state.reactOptions || new Set();
         if (isChecked) {
@@ -189,28 +154,17 @@ class Home extends React.Component {
           state.reactOptions.delete(value);
         }
         break;
+
       case 'reactBuildSystemRadios':
         state.reactBuildSystem = value;
         break;
+
       case 'deploymentRadios':
         state.deployment = value;
         break;
     }
 
-    //// Cleanup
-    forOwn(dependencies[state.platform], function (value, key) {
-      let subCategory = dependencies[state.platform][key];
-
-      if (isArray(subCategory)) {
-        if (!subCategory.includes(state[key])) {
-          state[key] = null;
-        }
-      } else {
-        state[key] = null;
-      }
-    });
-
-    this.setState(state);
+   this.setState(state);
   }
 
   handleThemeClick(theme) {
@@ -221,6 +175,8 @@ class Home extends React.Component {
 
   render() {
     let state = this.state;
+
+    const NODEJS = state.platform === 'node';
 
     let platform = (
       <section className={cx('fadeIn', 'animated', state.platform)}>
@@ -249,7 +205,7 @@ class Home extends React.Component {
       </section>
     );
 
-    let nodeFrameworks = state.platform === 'node' ? (
+    let nodeFrameworks = NODEJS ? (
       <div>
         <label className="radio-inline">
           <span className="express-logo">Express</span>
@@ -304,16 +260,16 @@ class Home extends React.Component {
         </ul>
       </div>
     ): null;
-    let framework = state.platform && isArray(dependencies[state.platform].framework) ? (
+
+    let framework = state.platform ? (
       <section className={cx('fadeIn', 'animated', state.framework)}>
         <h6><InlineSvg name="framework" width="18px" height="20px"/> {state.framework || 'Framework'}</h6>
         {nodeFrameworks}
       </section>
     ) : null;
 
-    let templateEngine = state.framework && isArray(dependencies[state.platform].templateEngine) ? (
-      <section className={cx('fadeIn', 'animated', state.templateEngine)}>
-        <h6><InlineSvg name="template-engine"/> {!state.templateEngine || state.templateEngine === 'none' ? 'Template Engine' : state.templateEngine}</h6>
+    let nodeTemplateEngines = NODEJS ? (
+      <div>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/jade-logo.svg" height="60" alt="Jade Logo"/>
           <input type="radio" name="templateEngineRadios" value="jade" onChange={this.handleChange} checked={state.templateEngine === 'jade'}/> Jade
@@ -330,178 +286,130 @@ class Home extends React.Component {
           <img className="btn-logo" src="/img/svg/none.png"/>
           <input type="radio" name="templateEngineRadios" value="none" onChange={this.handleChange} checked={state.templateEngine === 'none'}/> None
         </label>
+        <ul className="nav nav-stacked" id="templateEngineAccordion">
+          <li>
+            <a data-toggle="collapse" data-parent="#templateEngineAccordion" href="#templateEngineCollapse1">
+              <i className="ion-help-circled" />What's a template engine?
+            </a>
+            <div id="templateEngineCollapse1" className="collapse">
+              <div className="panel-collapse">
+                Select <strong>None</strong> if you are building an API server or a single-page application.
+              </div>
+            </div>
+          </li>
+          <li>
+            <a data-toggle="collapse" data-parent="#templateEngineAccordion" href="#templateEngineCollapse1">
+              <i className="ion-help-circled" />When should I use a template engine?
+            </a>
+            <div id="templateEngineCollapse1" className="collapse">
+              <div className="panel-collapse">
+                Select <strong>None</strong> if you are building an API server or a single-page application.
+              </div>
+            </div>
+          </li>
 
-        <div className="row">
-          <div className="col-sm-6">
+          <li>
+            <a data-toggle="collapse" data-parent="#accordion" href="#templateEngineCollapse2">
+              <i className="ion-help-circled" />Jade vs Handlebars vs Nunjucks?
+            </a>
+            <div id="templateEngineCollapse2" className="panel-collapse collapse">
+              Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf
+            </div>
+          </li>
+        </ul>
+      </div>
+    ) : null;
 
-            <ul className="nav nav-stacked" id="templateEngineAccordion">
-              <li>
-                <a data-toggle="collapse" data-parent="#templateEngineAccordion" href="#templateEngineCollapse1">
-                  <i className="ion-help-circled" />What's a template engine?
-                </a>
-                <div id="templateEngineCollapse1" className="collapse">
-                  <div className="panel-collapse">
-                    Select <strong>None</strong> if you are building an API server or a single-page application.
-                  </div>
-                </div>
-              </li>
-              <li>
-                <a data-toggle="collapse" data-parent="#templateEngineAccordion" href="#templateEngineCollapse1">
-                  <i className="ion-help-circled" />When should I use a template engine?
-                </a>
-                <div id="templateEngineCollapse1" className="collapse">
-                  <div className="panel-collapse">
-                    Select <strong>None</strong> if you are building an API server or a single-page application.
-                  </div>
-                </div>
-              </li>
-
-              <li>
-                <a data-toggle="collapse" data-parent="#accordion" href="#templateEngineCollapse2">
-                  <i className="ion-help-circled" />Jade vs Handlebars vs Nunjucks?
-                </a>
-                <div id="templateEngineCollapse2" className="panel-collapse collapse">
-                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf
-                  moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
-                  Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda
-                  shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
-                  proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim
-                  aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                </div>
-              </li>
-            </ul>
-
-
-          </div>
-        </div>
-
+    let templateEngine = state.framework ? (
+      <section className={cx('fadeIn', 'animated', state.templateEngine)}>
+        <h6><InlineSvg name="template-engine"/> {!state.templateEngine || state.templateEngine === 'none' ? 'Template Engine' : state.templateEngine}</h6>
+        {nodeTemplateEngines}
       </section>
     ) : null;
 
-    let cssFrameworkNoTemplateEngineAlert = (state.cssFramework && state.cssFramework !== 'none' && state.templateEngine === 'none') ? (
-      <div className="alert alert-info fadeIn animated">
-        <strong>Important!</strong> You have NOT selected a template engine. CSS Framework files are still going to be generated, but you will be responsible for importing these files manually.
-      </div>
-    ) : null;
-
-    let cssFrameworkOptions = state.cssFramework && state.cssFramework !== 'none' ? (
-      <div>
-        <h5 className="subcategory">Framework Options</h5>
-        <label className="radio-inline">
-          <img className="btn-logo small" src="/img/svg/css3-logo.svg" alt="CSS Logo"/>
-          <input type="radio" name="cssFrameworkOptionsRadios" value="css" onChange={this.handleChange} checked={state.cssFrameworkOptions === 'css'} /> CSS
-        </label>
-        <label className="radio-inline">
-          <img className="btn-logo small" src="/img/svg/less-logo.svg" alt="LESS Logo"/>
-          <input type="radio" name="cssFrameworkOptionsRadios" value="less" onChange={this.handleChange} checked={state.cssFrameworkOptions === 'less'} /> LESS
-        </label>
-        <label className="radio-inline">
-          <img className="btn-logo small" src="/img/svg/sass-logo.svg" alt="Sass Logo"/>
-          <input type="radio" name="cssFrameworkOptionsRadios" value="sass" onChange={this.handleChange} checked={state.cssFrameworkOptions === 'sass'} /> Sass
-        </label>
-
-        <div className="row">
-          <div className="col-sm-6">
-            <ul className="nav nav-stacked" id="templateEngineAccordion">
-              <li>
-                <a data-toggle="collapse" data-parent="#templateEngineAccordion" href="#templateEngineCollapse1">
-                  <i className="ion-help-circled" />
-                  What's the difference between CSS, LESS and Sass?
-                </a>
-                <div id="templateEngineCollapse1" className="collapse">
-                  <div className="panel-collapse">
-                    Select <strong>None</strong> if you are building an API server or a single-page application.
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    ) : null;
+    const NO_CSS_FRAMEWORK = state.cssFramework === 'none';
+    const BOOTSTRAP = state.cssFramework === 'bootstrap';
+    const FOUNDATION = state.cssFramework === 'foundation';
+    const BOURBON_NEAT = state.cssFramework === 'bourbonNeat';
 
     let cssFramework = state.templateEngine ? (
       <section className="fadeIn animated">
         <h6><img className="category-icon" src="/img/svg/css-framework.png" alt=""/>CSS Framework</h6>
-        {cssFrameworkNoTemplateEngineAlert}
         <label className="radio-inline">
             <img className="btn-logo" src="/img/svg/none.png" />
-            <input type="radio" name="cssFrameworkRadios" value="none" onChange={this.handleChange} defaultChecked={state.cssFramework === 'none'} /> None
+            <input type="radio" name="cssFrameworkRadios" value="none" onChange={this.handleChange} checked={NO_CSS_FRAMEWORK} /> None
         </label>
         <label className="radio-inline">
             <img className="btn-logo" src="/img/svg/bootstrap-logo.svg" alt="Bootstrap Logo"/>
-            <input type="radio" name="cssFrameworkRadios" value="bootstrap" onChange={this.handleChange} defaultChecked={state.cssFramework === 'bootstrap'} /> Bootstrap
+            <input type="radio" name="cssFrameworkRadios" value="bootstrap" onChange={this.handleChange} checked={BOOTSTRAP} /> Bootstrap
         </label>
         <label className="radio-inline">
             <img className="btn-logo" src="/img/svg/foundation-logo.svg" alt="Foundation Logo"/>
-            <input type="radio" name="cssFrameworkRadios" value="foundation" onChange={this.handleChange} defaultChecked={state.cssFramework === 'foundation'} /> Foundation
+            <input type="radio" name="cssFrameworkRadios" value="foundation" onChange={this.handleChange} checked={FOUNDATION} /> Foundation
         </label>
         <label className="radio-inline">
             <img className="btn-logo" src="/img/svg/bourbon-logo.svg" alt="Bourbon Neat Logo"/>
-            <input type="radio" name="cssFrameworkRadios" value="bourbonNeat" onChange={this.handleChange} defaultChecked={state.cssFramework === 'bourbonNeat'} /> Bourbon Neat
+            <input type="radio" name="cssFrameworkRadios" value="bourbonNeat" onChange={this.handleChange} checked={BOURBON_NEAT} /> Bourbon Neat
         </label>
-
-
-
-        <div className="row">
-          <div className="col-sm-6">
-            <ul className="nav nav-stacked" id="templateEngineAccordion">
-              <li>
-                <a data-toggle="collapse" data-parent="#templateEngineAccordion" href="#templateEngineCollapse1">
-                  <i className="ion-help-circled" />
-                  Should I use a CSS Framework?
-                </a>
-                <div id="templateEngineCollapse1" className="collapse">
-                  <div className="panel-collapse">
-                    Select <strong>None</strong> if you are building an API server or a single-page application.
-                  </div>
-                </div>
-              </li>
-              <li>
-                <a data-toggle="collapse" data-parent="#templateEngineAccordion" href="#templateEngineCollapse1">
-                  <i className="ion-help-circled" />
-                  Which CSS framework is the best?
-                </a>
-                <div id="templateEngineCollapse1" className="collapse">
-                  <div className="panel-collapse">
-                    Select <strong>None</strong> if you are building an API server or a single-page application.
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-
+        <ul className="nav nav-stacked" id="templateEngineAccordion">
+          <li>
+            <a data-toggle="collapse" data-parent="#templateEngineAccordion" href="#templateEngineCollapse1">
+              <i className="ion-help-circled" />
+              Should I use a CSS Framework?
+            </a>
+            <div id="templateEngineCollapse1" className="collapse">
+              <div className="panel-collapse">
+                Select <strong>None</strong> if you are building an API server or a single-page application.
+              </div>
+            </div>
+          </li>
+          <li>
+            <a data-toggle="collapse" data-parent="#templateEngineAccordion" href="#templateEngineCollapse1">
+              <i className="ion-help-circled" />
+              Which CSS framework is the best?
+            </a>
+            <div id="templateEngineCollapse1" className="collapse">
+              <div className="panel-collapse">
+                Select <strong>None</strong> if you are building an API server or a single-page application.
+              </div>
+            </div>
+          </li>
+        </ul>
       </section>
     ) : null;
 
-    let cssRadio = dependencies.css.includes(state.cssFramework) ? (
+
+
+    let cssRadio = (
       <label className="radio-inline">
         <img className="btn-logo" src="/img/svg/css3-logo.svg" alt="CSS Logo"/>
         <input type="radio" name="cssPreprocessorRadios" value="css" onChange={this.handleChange} checked={state.cssPreprocessor === 'css'} /> None / CSS
       </label>
-    ) : null;
-    let sassRadio = dependencies.sass.includes(state.cssFramework) ? (
+    );
+
+    let sassRadio = (NO_CSS_FRAMEWORK || BOOTSTRAP || FOUNDATION || BOURBON_NEAT) ? (
       <label className="radio-inline">
         <img className="btn-logo" src="/img/svg/sass-logo.svg" alt="Sass Logo"/>
-
         <input type="radio" name="cssPreprocessorRadios" value="sass" onChange={this.handleChange} checked={state.cssPreprocessor === 'sass'} /> Sass
       </label>
     ) : null;
-    let lessRadio = dependencies.less.includes(state.cssFramework) ? (
+
+    let lessRadio = (NO_CSS_FRAMEWORK || BOOTSTRAP) ? (
       <label className="radio-inline">
         <img className="btn-logo" src="/img/svg/less-logo.svg" alt="LESS Logo"/>
 
         <input type="radio" name="cssPreprocessorRadios" value="less" onChange={this.handleChange} checked={state.cssPreprocessor === 'less'} /> LESS
       </label>
     ) : null;
-    let cssnextRadio = dependencies.cssnext.includes(state.cssFramework) ? (
+
+    let cssnextRadio = (NO_CSS_FRAMEWORK) ? (
       <label className="radio-inline">
         <img className="btn-logo" src="/img/svg/cssnext-logo.svg" height="60" alt="cssnext Logo"/>
         <input type="radio" name="cssPreprocessorRadios" value="cssnext" onChange={this.handleChange} checked={state.cssPreprocessor === 'cssnext'} /> cssnext
       </label>
     ) : null;
-    let stylusRadio = dependencies.stylus.includes(state.cssFramework) ? (
+
+    let stylusRadio = (NO_CSS_FRAMEWORK) ? (
       <label className="radio-inline">
         <img className="btn-logo" src="/img/svg/stylus-logo.svg" alt="Stylus Logo"/>
         <input type="radio" name="cssPreprocessorRadios" value="stylus" onChange={this.handleChange} checked={state.cssPreprocessor === 'stylus'} /> Stylus
@@ -516,28 +424,23 @@ class Home extends React.Component {
         {lessRadio}
         {stylusRadio}
         {cssnextRadio}
-
-        <div className="row">
-          <div className="col-sm-6">
-            <ul className="nav nav-stacked" id="templateEngineAccordion">
-              <li>
-                <a data-toggle="collapse" data-parent="#templateEngineAccordion" href="#templateEngineCollapse1">
-                  <i className="ion-help-circled" />
-                  CSS Preprocessor Comparison
-                </a>
-                <div id="templateEngineCollapse1" className="collapse">
-                  <div className="panel-collapse">
-                    Select <strong>None</strong> if you are building an API server or a single-page application.
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
+        <ul className="nav nav-stacked" id="templateEngineAccordion">
+          <li>
+            <a data-toggle="collapse" data-parent="#templateEngineAccordion" href="#templateEngineCollapse1">
+              <i className="ion-help-circled" />
+              CSS Preprocessor Comparison
+            </a>
+            <div id="templateEngineCollapse1" className="collapse">
+              <div className="panel-collapse">
+                Select <strong>None</strong> if you are building an API server or a single-page application.
+              </div>
+            </div>
+          </li>
+        </ul>
       </section>
     ) : null;
 
-    let cssBuildOptions = dependencies.cssBuildOptions.includes(state.cssPreprocessor) ? (
+    let cssBuildOptions = state.cssPreprocessor ? (
       <section className="fadeIn animated">
         <h6><img className="category-icon" src="/img/svg/css-build-options2.png" alt=""/>CSS Build Options</h6>
         <label className="radio-inline">
@@ -589,7 +492,7 @@ class Home extends React.Component {
       </section>
     ) : null;
 
-    let database = state.cssFramework ? (
+    let database = state.cssPreprocessor ? (
       <section className="fadeIn animated">
         <h6><img className="category-icon" src="/img/svg/database.png" alt=""/>Database</h6>
         <label className="radio-inline">
@@ -760,7 +663,7 @@ class Home extends React.Component {
       </div>
     ) : null;
 
-    let jsFramework = state.database ? (
+    let jsFramework = (state.authentication || state.database === 'none') ? (
       <section className="fadeIn animated">
         <h6><img className="category-icon" src="/img/svg/js-framework.png" alt=""/>JavaScript Framework</h6>
         <label className="radio-inline">
@@ -884,6 +787,8 @@ class Home extends React.Component {
       </section>
     ) : null;
 
+    let base64State = base64url.encode(JSON.stringify(state));
+
     let summary = state.deployment ? (
       <section>
         <h6><img className="category-icon" src="/img/svg/deployment.svg" alt=""/>Summary</h6>
@@ -899,6 +804,9 @@ class Home extends React.Component {
           <li>Theme <span className="label label-success">{state.theme}</span></li>
           <li>Deployment <span className="label label-success">{state.deployment}</span></li>
         </ul>
+
+        <h6>Unique Url</h6>
+        <input className="form-control" type="text" value={'?' + base64State} />
       </section>
     ) : null;
 
