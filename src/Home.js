@@ -589,7 +589,7 @@ class Home extends React.Component {
     );
     let authentication = state.database ? (
       <section className="fadeIn animated">
-        <h6><img className="category-icon" src="/img/svg/authentication.png" alt=""/>Authentication</h6>
+        <h6><InlineSvg name="authentication" width="16px" height="18px"/> Authentication</h6>
         {authenticationCheckboxes}
       </section>
     ) : null;
@@ -646,8 +646,9 @@ class Home extends React.Component {
     ) : null;
 
     let jsFramework = (state.authentication || state.database === 'none') ? (
-      <section className="fadeIn animated">
-        <h6><img className="category-icon" src="/img/svg/js-framework.png" alt=""/>JavaScript Framework</h6>
+      <section className={cx('fadeIn', 'animated', state.jsFramework)}>
+        <h6><InlineSvg name="js-framework" width="16px" height="18px"/> {!state.jsFramework || state.jsFramework === 'none' ? 'JavaScript Framework' : state.jsFramework}</h6>
+
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/none.png" alt="None Icon" />
           <input type="radio" name="jsFrameworkRadios" value="none" onChange={this.handleChange} defaultChecked={state.jsFramework === 'none'} /> None

@@ -689,4 +689,26 @@ canvas {
   fill: currentColor;
 }
 
+.react h6 {
+  color: #61dafb;
+  background-color: #2d2d2d;
+  border-color: transparent;
+}
+
+.react svg {
+  color: #61dafb;
+  fill: currentColor;
+}
+
+.angular h6 {
+  color: #fff;
+  background: #1976d2;
+  border-color: transparent;
+}
+
+.angular svg {
+  color: #fff;
+  fill: currentColor;
+}
+
 
