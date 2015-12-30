@@ -565,3 +565,35 @@ canvas {
   color: #fff;
   fill: currentColor;
 }
+
+.bootstrap h6 {
+  color: #fff;
+  background: #6f5499 linear-gradient(135deg, #271b38, #563d7c, #7952b3);
+  border-color: transparent;
+}
+
+.bootstrap svg {
+  color: #fff;
+  fill: currentColor;
+}
+
+.foundation h6 {
+  color: #fff;
+  background-color: #e05800;
+  border-color: transparent;
+}
+
+.foundation svg {
+  color: #fff;
+  fill: currentColor;
+}
+
+.bourbonNeat h6 {
+  background: #53aee0 linear-gradient(#53aee0, #3da4dc);
+  border-color: transparent;
+}
+
+.bourbonNeat svg {
+  color: #fff;
+  fill: currentColor;
+}

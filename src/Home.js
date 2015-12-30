@@ -261,7 +261,7 @@ class Home extends React.Component {
 
     let framework = state.platform ? (
       <section className={cx('fadeIn', 'animated', state.framework)}>
-        <h6><InlineSvg name="framework" width="18px" height="20px"/> {state.framework || 'Framework'}</h6>
+        <h6><InlineSvg name="framework" width="16px" height="18px"/> {state.framework || 'Framework'}</h6>
         {nodeFrameworks}
       </section>
     ) : null;
@@ -320,7 +320,7 @@ class Home extends React.Component {
 
     let templateEngine = state.framework ? (
       <section className={cx('fadeIn', 'animated', state.templateEngine)}>
-        <h6><InlineSvg name="template-engine"/> {!state.templateEngine || state.templateEngine === 'none' ? 'Template Engine' : state.templateEngine}</h6>
+        <h6><InlineSvg name="template-engine" width="24px" height="26px"/> {!state.templateEngine || state.templateEngine === 'none' ? 'Template Engine' : state.templateEngine}</h6>
         {nodeTemplateEngines}
       </section>
     ) : null;
@@ -331,8 +331,9 @@ class Home extends React.Component {
     const BOURBON_NEAT = state.cssFramework === 'bourbonNeat';
 
     let cssFramework = state.templateEngine ? (
-      <section className="fadeIn animated">
-        <h6><img className="category-icon" src="/img/svg/css-framework.png" alt=""/>CSS Framework</h6>
+      <section className={cx('fadeIn', 'animated', state.cssFramework)}>
+        <h6><InlineSvg name="css-framework" width="16px" height="18px"/> {!state.cssFramework || state.cssFramework === 'none' ? 'CSS Framework' : state.cssFramework}</h6>
+
         <label className="radio-inline">
             <img className="btn-logo" src="/img/svg/none.png" />
             <input type="radio" name="cssFrameworkRadios" value="none" onChange={this.handleChange} checked={NO_CSS_FRAMEWORK} /> None
@@ -342,7 +343,7 @@ class Home extends React.Component {
             <input type="radio" name="cssFrameworkRadios" value="bootstrap" onChange={this.handleChange} checked={BOOTSTRAP} /> Bootstrap
         </label>
         <label className="radio-inline">
-            <img className="btn-logo" src="/img/svg/foundation-logo.svg" alt="Foundation Logo"/>
+            <img className="btn-logo" src="/img/svg/foundation-logo.png" alt="Foundation Logo"/>
             <input type="radio" name="cssFrameworkRadios" value="foundation" onChange={this.handleChange} checked={FOUNDATION} /> Foundation
         </label>
         <label className="radio-inline">
