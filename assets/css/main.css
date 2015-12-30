@@ -711,4 +711,38 @@ canvas {
   fill: currentColor;
 }
 
+.heroku h6 {
+  color: #fff;
+  background: #430098;
+  border-color: transparent;
+}
+
+.heroku svg {
+  color: #fff;
+  fill: currentColor;
+}
+
+.azure h6 {
+  color: #fff;
+  background: #00adef;
+  border-color: transparent;
+}
+
+.azure svg {
+  color: #fff;
+  fill: currentColor;
+}
+
+
+.bluemix h6 {
+  color: #2D3F4A;
+  background: #00a391;
+  border-color: transparent;
+}
+
+.bluemix svg {
+  color: #2D3F4A;
+  fill: currentColor;
+}
+
 

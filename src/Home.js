@@ -705,7 +705,7 @@ class Home extends React.Component {
 
     let theme = state.jsFramework ? (
       <section className="fadeIn animated">
-        <h6><InlineSvg name="theme" width="16px" height="18px"/> Theme</h6>
+        <h6><InlineSvg name="theme" width="16px" height="18px"/> UI Theme</h6>
         <div className="row">
           <div className="col-xs-6 col-md-3">
             <a className={cx("thumbnail", { 'active': this.state.theme === 'theme1' })} onClick={this.handleThemeClick.bind(this, 'theme1')}>
@@ -727,8 +727,8 @@ class Home extends React.Component {
     ) : null;
 
     let deployment = state.theme ? (
-      <section className="fadeIn animated">
-        <h6><img className="category-icon" src="/img/svg/deployment.svg" alt=""/>Deployment</h6>
+      <section className={cx('fadeIn', 'animated', state.deployment)}>
+        <h6><InlineSvg name="deployment" width="16px" height="18px"/> {!state.deployment || state.deployment === 'none' ? 'Deployment' : state.deployment}</h6>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/heroku-logo.svg" height="60" alt="Heroku Logo"/>
           <input type="radio" name="deploymentRadios" value="heroku" onChange={this.handleChange} defaultChecked={state.deployment === 'heroku'} /> Heroku
@@ -765,7 +765,7 @@ class Home extends React.Component {
 
     let summary = state.deployment ? (
       <section>
-        <h6><img className="category-icon" src="/img/svg/deployment.svg" alt=""/>Summary</h6>
+        <h6><InlineSvg name="summary" width="16px" height="18px"/> Summary</h6>
         <ul>
           <li>Platform <span className="label label-success">{state.platform}</span></li>
           <li>Framework <span className="label label-success">{state.framework}</span></li>
