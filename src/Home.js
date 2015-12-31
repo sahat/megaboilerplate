@@ -12,6 +12,7 @@ import { createHistory, useQueries } from 'history';
 import InlineSvg from './InlineSvg';
 
 import Platform from './sections/Platform';
+import Framework from './sections/Framework';
 
 class Home extends React.Component {
   constructor(props) {
@@ -177,72 +178,14 @@ class Home extends React.Component {
   render() {
     let state = this.state;
 
-    const NODEJS = state.platform === 'node';
 
     let platform = <Platform platform={state.platform} handleChange={this.handleChange} />;
 
-    let nodeFrameworks = NODEJS ? (
-      <div>
-        <label className="radio-inline">
-          <span className="express-logo">Express</span>
-          <input type="radio" id="expressRadio" name="frameworkRadios" value="express" onChange={this.handleChange} checked={state.framework === 'express'} /> Express
-        </label>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/hapi-logo.png" alt="Hapi Logo"/>
-          <input type="radio" name="frameworkRadios" value="hapi" onChange={this.handleChange} checked={state.framework === 'hapi'} /> Hapi
-        </label>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/sails-logo.png" alt="Sails.js Logo"/>
-          <input type="radio" name="frameworkRadios" value="sails" onChange={this.handleChange} checked={state.framework === 'sails'} /> Sails.js
-        </label>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/meteor-logo.png" alt="Meteor Logo"/>
-          <input type="radio" name="frameworkRadios" value="meteor" onChange={this.handleChange} checked={state.framework === 'meteor'} /> Meteor
-        </label>
-
-        <ul className="nav nav-stacked">
-          <li>
-            <a data-toggle="collapse" href="#frameworkCollapse1">
-              <i className="ion-help-circled"/> Which framework is right for me?
-            </a>
-            <div id="frameworkCollapse1" className="collapse">
-              <div className="panel-collapse">
-                lorem ipsum dolor
-              </div>
-            </div>
-          </li>
-          <li>
-            <a data-toggle="collapse" href="#frameworkCollapse2">
-              <i className="ion-help-circled"/> Hapi vs Express?
-            </a>
-            <div id="frameworkCollapse2" className="collapse">
-              <div className="panel-collapse">
-                lorem ipsum dolor
-              </div>
-            </div>
-          </li>
-          <li>
-            <a data-toggle="collapse" href="#frameworkCollapse3">
-              <i className="ion-help-circled"/> Should I use Meteor or Sails.js for real-time apps?
-            </a>
-            <div id="frameworkCollapse3" className="collapse">
-              <div className="panel-collapse">
-                lorem ipsum dolor
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-    ): null;
-
     let framework = state.platform ? (
-      <section className={cx('fadeIn', 'animated', state.framework)}>
-        <h6><InlineSvg name="framework" width="16px" height="18px"/> {state.framework || 'Framework'}</h6>
-        {nodeFrameworks}
-      </section>
+      <Framework platform={state.platform} framework={state.framework} handleChange={this.handleChange} />
     ) : null;
 
-    let nodeTemplateEngines = NODEJS ? (
+    let nodeTemplateEngines = 'NODEJS' ? (
       <div>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/jade-logo.svg" height="60" alt="Jade Logo"/>
