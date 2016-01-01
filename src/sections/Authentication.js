@@ -51,7 +51,7 @@ const Authentication = (props) => {
   );
 
   return (
-    <section className="fadeIn animated">
+    <section className="animated fadeIn">
       <h6>{AUTHENTICATION_SVG} Authentication</h6>
       {authenticationCheckboxes}
     </section>

@@ -9,7 +9,7 @@ const DATABASE_SVG = (
 
 const Database = (props) => {
   return (
-    <section className={cx('fadeIn', 'animated', props.database)}>
+    <section className={cx('animated fadeIn', props.database)}>
       <h6>{DATABASE_SVG} {!props.database || props.database === 'none' ? 'Database' : props.database}</h6>
 
       <label className="radio-inline">

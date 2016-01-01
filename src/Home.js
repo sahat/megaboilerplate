@@ -31,36 +31,12 @@ class Home extends React.Component {
     this.handleThemeClick = this.handleThemeClick.bind(this);
   }
 
-  componentDidUpdate() {
-    $(ReactDOM.findDOMNode(this)).find('[data-toggle="popover"]').popover({ trigger: 'hover' });
-  }
-
-  componentDidMount() {
-
-  }
-
   clickDownload() {
     let state = this.state;
     let downloadBtn = this.refs.downloadBtn;
-    //$(downloadBtn).attr('disabled', 'disabled');
-
 
     // Google Analytics event
     //ga("send","event","Customize","Download","Customize and Download")
-
-
-    //$.when(
-    //  generateCSS(preamble),
-    //  generateJS(preamble),
-    //  generateFonts()
-    //).done(function (css, js, fonts) {
-    //  generateZip(css, js, fonts, configJson, function(blob) {
-    //    $(downloadBtn).removeAttr('disabled');
-    //    setTimeout(function () {
-    //      saveAs(blob, 'bootstrap.zip')
-    //    }, 0)
-    //  })
-    //});
 
     let data = clone(state);
     data.appName = haikunate({ tokenLength: 0 });
@@ -186,7 +162,6 @@ class Home extends React.Component {
   render() {
     let state = this.state;
 
-
     let platform = <Platform platform={state.platform} handleChange={this.handleChange} />;
 
     let framework = state.platform ? (
@@ -217,7 +192,6 @@ class Home extends React.Component {
       <JsFramework jsFramework={state.jsFramework} handleChange={this.handleChange} />
     ) : null;
 
-
     let theme = state.jsFramework ? (
       <Theme theme={state.theme} handleThemeClick={this.handleThemeClick} />
     ) : null;
@@ -227,59 +201,6 @@ class Home extends React.Component {
     ) : null;
 
     let base64State = base64url.encode(JSON.stringify(state));
-
-    let summary = state.deployment ? (
-      <section>
-        <h6><InlineSvg name="summary" width="16px" height="18px"/> Summary</h6>
-        <div className="stack-outline container">
-          <div className="row">
-            <div className="col-sm-4 stack">{state.platform}</div>
-            <div className="col-sm-4 stack">{state.framework}</div>
-            <div className="col-sm-4 stack">{state.database}</div>
-          </div>
-
-          <div className="row">
-            <div className="col-sm-3 stack">{state.authentication}</div>
-          </div>
-
-          <div className="row">
-            <div className="col-sm-4 col-sm-offset-4 stack">{state.templateEngine}</div>
-          </div>
-
-          <div className="row">
-            <div className="col-sm-6 stack">{state.cssFramework}</div>
-            <div className="col-sm-6 stack">{state.cssPreprocessor}</div>
-          </div>
-          <div className="row">
-          </div>
-
-          <div className="row">
-          </div>
-
-          <div className="row">
-            <div className="col-sm-3 stack">{state.jsFramework}</div>
-          </div>
-
-          <div className="row">
-            <div className="col-sm-4 col-sm-offset-8 stack">{state.deployment}</div>
-          </div>
-        </div>
-        <ul>
-          <li>Platform <span className="label label-success">{state.platform}</span></li>
-          <li>Framework <span className="label label-success">{state.framework}</span></li>
-          <li>Template Engine <span className="label label-success">{state.templateEngine}</span></li>
-          <li>Framework <span className="label label-success">{state.cssFramework === 'none' ? state.cssFramework : state.cssFramework + ' (' + state.cssFrameworkOptions + ')'}</span></li>
-          <li>CSS Preprocessor <span className="label label-success">{state.cssPreprocessor || state.cssFrameworkOptions}</span></li>
-          <li>Database <span className="label label-success">{state.database}</span></li>
-          <li>Authentication <span className="label label-success">{Array.from(state.authentication).join(', ')}</span></li>
-          <li>JS Framework <span className="label label-success">{state.jsFramework}</span></li>
-          <li>Theme <span className="label label-success">{state.theme}</span></li>
-          <li>Deployment <span className="label label-success">{state.deployment}</span></li>
-        </ul>
-
-
-      </section>
-    ) : null;
 
     let download = state.deployment ? (
       <div>
