@@ -19,6 +19,7 @@ import CssPreprocessor from './sections/CssPreprocessor';
 import Database from './sections/Database';
 import Authentication from './sections/Authentication';
 import JsFramework from './sections/JsFramework';
+import Theme from './sections/Theme';
 
 class Home extends React.Component {
   constructor(props) {
@@ -26,6 +27,7 @@ class Home extends React.Component {
     this.state = {};
     this.handleChange = this.handleChange.bind(this);
     this.clickDownload = this.clickDownload.bind(this);
+    this.handleThemeClick = this.handleThemeClick.bind(this);
   }
 
   componentDidUpdate() {
@@ -175,10 +177,9 @@ class Home extends React.Component {
    this.setState(state);
   }
 
-  handleThemeClick(theme) {
-    let state = this.state;
-    state.theme = theme;
-    this.setState(state);
+  handleThemeClick(event) {
+    let theme = event.target.getAttribute('data-theme');
+    this.setState({ theme: theme });
   }
 
   render() {
@@ -217,26 +218,7 @@ class Home extends React.Component {
 
 
     let theme = state.jsFramework ? (
-      <section className="fadeIn animated">
-        <h6><InlineSvg name="theme" width="16px" height="18px"/> UI Theme</h6>
-        <div className="row">
-          <div className="col-xs-6 col-md-3">
-            <a className={cx("thumbnail", { 'active': this.state.theme === 'theme1' })} onClick={this.handleThemeClick.bind(this, 'theme1')}>
-              <img src="http://foundry.mediumra.re/img/chooser/fashion.png" />
-            </a>
-          </div>
-          <div className="col-xs-6 col-md-3">
-            <a className={cx("thumbnail", { 'active': this.state.theme === 'theme2' })} onClick={this.handleThemeClick.bind(this, 'theme2')}>
-              <img src="http://foundry.mediumra.re/img/chooser/classic.png" />
-            </a>
-          </div>
-          <div className="col-xs-6 col-md-3">
-            <a className={cx("thumbnail", { 'active': this.state.theme === 'theme3' })} onClick={this.handleThemeClick.bind(this, 'theme3')}>
-              <img src="http://foundry.mediumra.re/img/chooser/winery.png" />
-            </a>
-          </div>
-        </div>
-      </section>
+      <Theme theme={state.theme} handleThemeClick={this.handleThemeClick} />
     ) : null;
 
     let deployment = state.theme ? (
