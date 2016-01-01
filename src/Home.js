@@ -15,6 +15,8 @@ import Platform from './sections/Platform';
 import Framework from './sections/Framework';
 import TemplateEngine from './sections/TemplateEngine';
 import CssFramework from './sections/CssFramework';
+import CssPreprocessor from './sections/CssPreprocessor';
+import Database from './sections/Database';
 
 class Home extends React.Component {
   constructor(props) {
@@ -191,183 +193,18 @@ class Home extends React.Component {
       <TemplateEngine platform={state.platform} templateEngine={state.templateEngine} handleChange={this.handleChange} />
     ) : null;
 
-    const NO_CSS_FRAMEWORK = state.cssFramework === 'none';
-    const BOOTSTRAP = state.cssFramework === 'bootstrap';
-    const FOUNDATION = state.cssFramework === 'foundation';
-    const BOURBON_NEAT = state.cssFramework === 'bourbonNeat';
-
     let cssFramework = state.templateEngine ? (
       <CssFramework cssFramework={state.cssFramework} handleChange={this.handleChange} />
     ) : null;
 
-
-    let cssRadio = (
-      <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/css3-logo.svg" alt="CSS Logo"/>
-        <input type="radio" name="cssPreprocessorRadios" value="css" onChange={this.handleChange} checked={state.cssPreprocessor === 'css'} /> None / CSS
-      </label>
-    );
-
-    let sassRadio = (NO_CSS_FRAMEWORK || BOOTSTRAP || FOUNDATION || BOURBON_NEAT) ? (
-      <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/sass-logo.svg" alt="Sass Logo"/>
-        <input type="radio" name="cssPreprocessorRadios" value="sass" onChange={this.handleChange} checked={state.cssPreprocessor === 'sass'} /> Sass
-      </label>
-    ) : null;
-
-    let lessRadio = (NO_CSS_FRAMEWORK || BOOTSTRAP) ? (
-      <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/less-logo.svg" alt="LESS Logo"/>
-
-        <input type="radio" name="cssPreprocessorRadios" value="less" onChange={this.handleChange} checked={state.cssPreprocessor === 'less'} /> LESS
-      </label>
-    ) : null;
-
-    let cssnextRadio = (NO_CSS_FRAMEWORK) ? (
-      <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/cssnext-logo.svg" height="60" alt="cssnext Logo"/>
-        <input type="radio" name="cssPreprocessorRadios" value="cssnext" onChange={this.handleChange} checked={state.cssPreprocessor === 'cssnext'} /> cssnext
-      </label>
-    ) : null;
-
-    let stylusRadio = (NO_CSS_FRAMEWORK) ? (
-      <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/stylus-logo.svg" alt="Stylus Logo"/>
-        <input type="radio" name="cssPreprocessorRadios" value="stylus" onChange={this.handleChange} checked={state.cssPreprocessor === 'stylus'} /> Stylus
-      </label>
-    ) : null;
-
-    const SASS = state.cssPreprocessor === 'sass';
-    const LESS = state.cssPreprocessor === 'less';
-    const STYLUS = state.cssPreprocessor === 'stylus';
-    const CSSNEXT = state.cssPreprocessor === 'cssnext';
-
-    let cssBuildOptions = (SASS || LESS || STYLUS || CSSNEXT) ? (
-      <section className="fadeIn animated">
-        <h5 className="subcategory">CSS Build Options</h5>
-
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/gulp-logo.png" alt="Gulp Logo"/>
-          <input type="radio" name="cssBuildOptionsRadios" value="gulp" onChange={this.handleChange} defaultChecked={state.cssBuildOptions === 'gulp'} /> Gulp
-        </label>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/webpack-logo.svg" alt="Webpack Logo"/>
-          <input type="radio" name="cssBuildOptionsRadios" value="webpack" onChange={this.handleChange} defaultChecked={state.cssBuildOptions === 'webpack'} /> Webpack
-        </label>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/grunt-logo.svg" alt="Grunt Logo"/>
-          <input type="radio" name="cssBuildOptionsRadios" value="grunt" onChange={this.handleChange} defaultChecked={state.cssBuildOptions === 'grunt'} /> Grunt
-        </label>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/middleware-logo.svg" alt="Middleware Logo"/>
-          <input type="radio" name="cssBuildOptionsRadios" value="middleware" onChange={this.handleChange} defaultChecked={state.cssBuildOptions === 'middleware'} /> Middleware
-        </label>
-
-        <ul className="nav nav-stacked">
-          <li>
-            <a data-toggle="collapse" href="#cssBuildOptionsCollapse1">
-              <i className="ion-help-circled"/> Gulp vs Webpack vs Grunt?
-            </a>
-            <div id="cssBuildOptionsCollapse1" className="collapse">
-              <div className="panel-collapse">
-                Lorem ipsum
-              </div>
-            </div>
-          </li>
-          <li>
-            <a data-toggle="collapse" href="#cssBuildOptionsCollapse2">
-              <i className="ion-help-circled"/> Should I use middleware?
-            </a>
-            <div id="cssBuildOptionsCollapse2" className="collapse">
-              <div className="panel-collapse">
-                Lorem ipsum
-              </div>
-            </div>
-          </li>
-        </ul>
-      </section>
-    ) : null;
-
     let cssPreprocessor = state.cssFramework ? (
-      <section className={cx('fadeIn', 'animated', state.cssPreprocessor)}>
-        <h6><InlineSvg name="css-preprocessor" width="16px" height="18px"/> {!state.cssPreprocessor || state.cssPreprocessor === 'css' ? 'CSS Preprocessor' : state.cssPreprocessor}</h6>
-        {cssRadio}
-        {sassRadio}
-        {lessRadio}
-        {stylusRadio}
-        {cssnextRadio}
-
-        <ul className="nav nav-stacked">
-          <li>
-            <a data-toggle="collapse" href="#cssPreprocessorCollapse1">
-              <i className="ion-help-circled" /> CSS Preprocessor Comparison
-            </a>
-            <div id="cssPreprocessorCollapse1" className="collapse">
-              <div className="panel-collapse">
-                Select <strong>None</strong> if you are building an API server or a single-page application.
-              </div>
-            </div>
-          </li>
-        </ul>
-
-        {cssBuildOptions}
-      </section>
+      <CssPreprocessor cssPreprocessor={state.cssPreprocessor} cssFramework={state.cssFramework} handleChange={this.handleChange} />
     ) : null;
 
 
 
     let database = state.cssPreprocessor ? (
-      <section className={cx('fadeIn', 'animated', state.database)}>
-        <h6><InlineSvg name="database" width="16px" height="18px"/> {!state.database || state.database === 'none' ? 'Database' : state.database}</h6>
-
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/none.png" alt="None Icon" />
-          <input type="radio" name="databaseRadios" value="none" onChange={this.handleChange} checked={state.database === 'none'} /> None
-        </label>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/mongodb-logo.svg" />
-          <input type="radio" name="databaseRadios" value="mongodb" onChange={this.handleChange} checked={state.database === 'mongodb'} /> MongoDB
-          <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
-        </label>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/mysql-logo.svg" />
-          <input type="radio" name="databaseRadios" value="mysql" onChange={this.handleChange} checked={state.database === 'mysql'} /> MySQL
-          <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
-        </label>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/postgresql-logo.svg" />
-          <input type="radio" name="databaseRadios" value="postgresql" onChange={this.handleChange} checked={state.database === 'postgresql'} /> PostgreSQL
-          <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
-        </label>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/rethinkdb-logo.svg" />
-          <input type="radio" name="databaseRadios" value="rethinkdb" onChange={this.handleChange} checked={state.database === 'rethinkdb'} /> RethinkDB
-          <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
-        </label>
-
-        <ul className="nav nav-stacked">
-          <li>
-            <a data-toggle="collapse" href="#databaseCollapse1">
-              <i className="ion-help-circled" /> Do I need a database?
-            </a>
-            <div id="databaseCollapse1" className="collapse">
-              <div className="panel-collapse">
-                Select <strong>None</strong> if you are building an API server or a single-page application.
-              </div>
-            </div>
-          </li>
-          <li>
-            <a data-toggle="collapse" href="#databaseCollapse2">
-              <i className="ion-help-circled" /> Database Comparison
-            </a>
-            <div id="databaseCollapse2" className="collapse">
-              <div className="panel-collapse">
-                Select <strong>None</strong> if you are building an API server or a single-page application.
-              </div>
-            </div>
-          </li>
-        </ul>
-      </section>
+      <Database database={state.database} handleChange={this.handleChange} />
     ) : null;
 
     let authenticationCheckboxes = state.database === 'none' ? (
