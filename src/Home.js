@@ -14,6 +14,7 @@ import InlineSvg from './InlineSvg';
 import Platform from './sections/Platform';
 import Framework from './sections/Framework';
 import TemplateEngine from './sections/TemplateEngine';
+import CssFramework from './sections/CssFramework';
 
 class Home extends React.Component {
   constructor(props) {
@@ -196,49 +197,7 @@ class Home extends React.Component {
     const BOURBON_NEAT = state.cssFramework === 'bourbonNeat';
 
     let cssFramework = state.templateEngine ? (
-      <section className={cx('fadeIn', 'animated', state.cssFramework)}>
-        <h6><InlineSvg name="css-framework" width="16px" height="18px"/> {!state.cssFramework || state.cssFramework === 'none' ? 'CSS Framework' : state.cssFramework}</h6>
-
-        <label className="radio-inline">
-            <img className="btn-logo" src="/img/svg/none.png" />
-            <input type="radio" name="cssFrameworkRadios" value="none" onChange={this.handleChange} checked={NO_CSS_FRAMEWORK} /> None
-        </label>
-        <label className="radio-inline">
-            <img className="btn-logo" src="/img/svg/bootstrap-logo.svg" alt="Bootstrap Logo"/>
-            <input type="radio" name="cssFrameworkRadios" value="bootstrap" onChange={this.handleChange} checked={BOOTSTRAP} /> Bootstrap
-        </label>
-        <label className="radio-inline">
-            <img className="btn-logo" src="/img/svg/foundation-logo.png" alt="Foundation Logo"/>
-            <input type="radio" name="cssFrameworkRadios" value="foundation" onChange={this.handleChange} checked={FOUNDATION} /> Foundation
-        </label>
-        <label className="radio-inline">
-            <img className="btn-logo" src="/img/svg/bourbon-logo.svg" alt="Bourbon Neat Logo"/>
-            <input type="radio" name="cssFrameworkRadios" value="bourbonNeat" onChange={this.handleChange} checked={BOURBON_NEAT} /> Bourbon Neat
-        </label>
-
-        <ul className="nav nav-stacked">
-          <li>
-            <a data-toggle="collapse" href="#cssFrameworkCollapse1">
-              <i className="ion-help-circled" /> Should I use a CSS Framework?
-            </a>
-            <div id="cssFrameworkCollapse1" className="collapse">
-              <div className="panel-collapse">
-                Lorem ipsum.
-              </div>
-            </div>
-          </li>
-          <li>
-            <a data-toggle="collapse" href="#cssFrameworkCollapse2">
-              <i className="ion-help-circled" /> Which CSS framework is the best?
-            </a>
-            <div id="cssFrameworkCollapse2" className="collapse">
-              <div className="panel-collapse">
-                Lorem ipsum.
-              </div>
-            </div>
-          </li>
-        </ul>
-      </section>
+      <CssFramework cssFramework={state.cssFramework} handleChange={this.handleChange} />
     ) : null;
 
 
