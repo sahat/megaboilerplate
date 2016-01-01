@@ -11,20 +11,20 @@ const TemplateEngine = (props) => {
   let nodeTemplateEngines = (props.platform === 'node') ? (
     <div>
       <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/jade-logo.svg" height="60" alt="Jade Logo"/>
-        <input type="radio" name="templateEngineRadios" value="jade" onChange={this.handleChange} checked={props.templateEngine === 'jade'}/> Jade
+        <img className="btn-logo" src="/img/svg/jade-logo.svg" height="60" alt="Jade"/>
+        <input type="radio" name="templateEngineRadios" value="jade" onChange={props.handleChange} checked={props.templateEngine === 'jade'}/> Jade
       </label>
       <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/handlebars-logo.svg" alt="Handlebars Logo"/>
-        <input type="radio" name="templateEngineRadios" value="handlebars" onChange={this.handleChange} checked={props.templateEngine === 'handlebars'}/> Handlebars
+        <img className="btn-logo" src="/img/svg/handlebars-logo.svg" alt="Handlebars"/>
+        <input type="radio" name="templateEngineRadios" value="handlebars" onChange={props.handleChange} checked={props.templateEngine === 'handlebars'}/> Handlebars
       </label>
       <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/nunjucks-logo.png" alt="Nunjucks Logo"/>
-        <input type="radio" name="templateEngineRadios" value="nunjucks" onChange={this.handleChange} checked={props.templateEngine === 'nunjucks'}/> Nunjucks
+        <img className="btn-logo" src="/img/svg/nunjucks-logo.png" alt="Nunjucks"/>
+        <input type="radio" name="templateEngineRadios" value="nunjucks" onChange={props.handleChange} checked={props.templateEngine === 'nunjucks'}/> Nunjucks
       </label>
       <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/none.png"/>
-        <input type="radio" name="templateEngineRadios" value="none" onChange={this.handleChange} checked={props.templateEngine === 'none'}/> None
+        <img className="btn-logo" src="/img/svg/none.png" alt="None"/>
+        <input type="radio" name="templateEngineRadios" value="none" onChange={props.handleChange} checked={props.templateEngine === 'none'}/> None
       </label>
 
       <ul className="nav nav-stacked">
