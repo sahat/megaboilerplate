@@ -12,23 +12,19 @@ const Framework = (props) => {
     <div>
       <label className="radio-inline">
         <span className="express-logo">Express</span>
-        <input type="radio" id="expressRadio" name="frameworkRadios" value="express" onChange={props.handleChange} checked={props.framework === 'express'}/>
-        Express
+        <input type="radio" id="expressRadio" name="frameworkRadios" value="express" onChange={props.handleChange} checked={props.framework === 'express'}/> Express
       </label>
       <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/hapi-logo.png" alt="Hapi Logo"/>
-        <input type="radio" name="frameworkRadios" value="hapi" onChange={props.handleChange} checked={props.framework === 'hapi'}/>
-        Hapi
+        <img className="btn-logo" src="/img/svg/hapi-logo.png" alt="Hapi.js"/>
+        <input type="radio" name="frameworkRadios" value="hapi" onChange={props.handleChange} checked={props.framework === 'hapi'}/> Hapi
       </label>
       <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/sails-logo.png" alt="Sails.js Logo"/>
-        <input type="radio" name="frameworkRadios" value="sails" onChange={props.handleChange} checked={props.framework === 'sails'}/>
-        Sails.js
+        <img className="btn-logo" src="/img/svg/sails-logo.png" alt="Sails.js"/>
+        <input type="radio" name="frameworkRadios" value="sails" onChange={props.handleChange} checked={props.framework === 'sails'}/> Sails.js
       </label>
       <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/meteor-logo.png" alt="Meteor Logo"/>
-        <input type="radio" name="frameworkRadios" value="meteor" onChange={props.handleChange} checked={props.framework === 'meteor'}/>
-        Meteor
+        <img className="btn-logo" src="/img/svg/meteor-logo.png" alt="Meteor"/>
+        <input type="radio" name="frameworkRadios" value="meteor" onChange={props.handleChange} checked={props.framework === 'meteor'}/> Meteor
       </label>
       <ul className="nav nav-stacked">
         <li>

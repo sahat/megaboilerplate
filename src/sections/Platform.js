@@ -9,14 +9,14 @@ const PLATFORM_SVG = (
 
 const Platform = (props) => {
   return (
-    <section className={cx('fadeIn', 'animated', props.platform)}>
+    <section className={cx('animated fadeIn', props.platform)}>
       <h6>{PLATFORM_SVG} {props.platform || 'Platform'}</h6>
       <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/node-logo.svg" alt="Node.js Logo"/>
+        <img className="btn-logo" src="/img/svg/node-logo.svg" alt="Node.js"/>
         <input type="radio" id="nodeRadio" name="platformRadios" value="node" onChange={props.handleChange} checked={props.platform === 'node'} /> Node.js
       </label>
       <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/python-logo.svg" alt="Python Logo"/>
+        <img className="btn-logo" src="/img/svg/python-logo.svg" alt="Python"/>
         <input type="radio" id="nodeRadio" name="platformRadios" value="python" onChange={props.handleChange} checked={props.platform === 'python'} /> Python
       </label>
       <ul className="nav nav-stacked">
