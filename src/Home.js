@@ -13,6 +13,7 @@ import InlineSvg from './InlineSvg';
 
 import Platform from './sections/Platform';
 import Framework from './sections/Framework';
+import TemplateEngine from './sections/TemplateEngine';
 
 class Home extends React.Component {
   constructor(props) {
@@ -185,63 +186,8 @@ class Home extends React.Component {
       <Framework platform={state.platform} framework={state.framework} handleChange={this.handleChange} />
     ) : null;
 
-    let nodeTemplateEngines = 'NODEJS' ? (
-      <div>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/jade-logo.svg" height="60" alt="Jade Logo"/>
-          <input type="radio" name="templateEngineRadios" value="jade" onChange={this.handleChange} checked={state.templateEngine === 'jade'}/> Jade
-        </label>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/handlebars-logo.svg" alt="Handlebars Logo"/>
-          <input type="radio" name="templateEngineRadios" value="handlebars" onChange={this.handleChange} checked={state.templateEngine === 'handlebars'}/> Handlebars
-        </label>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/nunjucks-logo.png" alt="Nunjucks Logo"/>
-          <input type="radio" name="templateEngineRadios" value="nunjucks" onChange={this.handleChange} checked={state.templateEngine === 'nunjucks'}/> Nunjucks
-        </label>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/none.png"/>
-          <input type="radio" name="templateEngineRadios" value="none" onChange={this.handleChange} checked={state.templateEngine === 'none'}/> None
-        </label>
-
-        <ul className="nav nav-stacked">
-          <li>
-            <a data-toggle="collapse" href="#templateEngineCollapse1">
-              <i className="ion-help-circled"/> What's a template engine?
-            </a>
-            <div id="templateEngineCollapse1" className="collapse">
-              <div className="panel-collapse">
-                Lorem ipsum
-              </div>
-            </div>
-          </li>
-          <li>
-            <a data-toggle="collapse" href="#templateEngineCollapse2">
-              <i className="ion-help-circled"/> When should I use a template engine?
-            </a>
-            <div id="templateEngineCollapse2" className="collapse">
-              <div className="panel-collapse">
-                Select <strong>None</strong> if you are building an API server or a single-page application.
-              </div>
-            </div>
-          </li>
-          <li>
-            <a data-toggle="collapse" href="#templateEngineCollapse3">
-              <i className="ion-help-circled"/> Jade vs Handlebars vs Nunjucks?
-            </a>
-            <div id="templateEngineCollapse3" className="panel-collapse collapse">
-              Lorem ipsum
-            </div>
-          </li>
-        </ul>
-      </div>
-    ) : null;
-
     let templateEngine = state.framework ? (
-      <section className={cx('fadeIn', 'animated', state.templateEngine)}>
-        <h6><InlineSvg name="template-engine" width="24px" height="26px"/> {!state.templateEngine || state.templateEngine === 'none' ? 'Template Engine' : state.templateEngine}</h6>
-        {nodeTemplateEngines}
-      </section>
+      <TemplateEngine platform={state.platform} templateEngine={state.templateEngine} handleChange={this.handleChange} />
     ) : null;
 
     const NO_CSS_FRAMEWORK = state.cssFramework === 'none';
