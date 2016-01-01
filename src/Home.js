@@ -18,6 +18,7 @@ import CssFramework from './sections/CssFramework';
 import CssPreprocessor from './sections/CssPreprocessor';
 import Database from './sections/Database';
 import Authentication from './sections/Authentication';
+import JsFramework from './sections/JsFramework';
 
 class Home extends React.Component {
   constructor(props) {
@@ -210,112 +211,8 @@ class Home extends React.Component {
       <Authentication database={state.database} authentication={state.authentication} handleChange={this.handleChange} />
     ) : null;
 
-    let reactOptions = state.jsFramework === 'react' ? (
-      <div className="fadeIn animated">
-        <h5 className="subcategory">React Features</h5>
-        <label className="checkbox-inline">
-          <img className="btn-logo" src="/img/svg/alt-logo.png" />
-          <input type="checkbox" name="reactOptionsCheckboxes" value="fluxAlt" onChange={this.handleChange} checked={state.reactOptions && state.reactOptions.has('fluxAlt')} /> Flux (Alt)
-          <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
-        </label>
-        <label className="checkbox-inline">
-          <img className="btn-logo" src="/img/svg/flux-logo.svg" />
-          <input type="checkbox" name="reactOptionsCheckboxes" value="fluxRedux" onChange={this.handleChange} checked={state.reactOptions && state.reactOptions.has('fluxRedux')} /> Flux (Redux)
-          <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
-        </label>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/react-router-logo.png" />
-          <input type="checkbox" name="reactOptionsCheckboxes" value="reactRouter" onChange={this.handleChange} checked={state.reactOptions && state.reactOptions.has('reactRouter')} /> React Router
-          <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
-        </label>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/relay-logo.svg" />
-          <input type="checkbox" name="reactOptionsCheckboxes" value="graphql" onChange={this.handleChange} checked={state.reactOptions && state.reactOptions.has('graphql')} /> GraphQL + Relay
-          <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
-        </label>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/babel-logo.png" />
-          <input type="checkbox" name="reactOptionsCheckboxes" value="es6" onChange={this.handleChange} checked={state.reactOptions && state.reactOptions.has('es6')} /> ES6
-          <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
-        </label>
-      </div>
-    ) : null;
-
-    let reactBuildSystem = state.jsFramework === 'react' ? (
-      <div className="fadeIn animated">
-        <h5 className="subcategory">React Build System</h5>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/browserify-logo.svg" />
-          <input type="radio" name="reactBuildSystemRadios" value="browserify" onChange={this.handleChange} defaultChecked={state.reactBuildSystem === 'browserify'} /> Browserify / Gulp
-          <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
-        </label>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/webpack-logo.svg" />
-          <input type="radio" name="reactBuildSystemRadios" value="webpack" onChange={this.handleChange} defaultChecked={state.reactBuildSystem === 'webpack'} /> Webpack
-          <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
-        </label>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/none.png" alt="None Icon" />
-          <input type="radio" name="reactBuildSystemRadios" value="none" onChange={this.handleChange} defaultChecked={state.reactBuildSystem === 'none'} /> None
-        </label>
-      </div>
-    ) : null;
-
     let jsFramework = (state.authentication || state.database === 'none') ? (
-      <section className={cx('fadeIn', 'animated', state.jsFramework)}>
-        <h6><InlineSvg name="js-framework" width="16px" height="18px"/> {!state.jsFramework || state.jsFramework === 'none' ? 'JavaScript Framework' : state.jsFramework}</h6>
-
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/none.png" alt="None Icon" />
-          <input type="radio" name="jsFrameworkRadios" value="none" onChange={this.handleChange} defaultChecked={state.jsFramework === 'none'} /> None
-        </label>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/react-logo.svg" />
-          <input type="radio" name="jsFrameworkRadios" value="react" onChange={this.handleChange} defaultChecked={state.jsFramework === 'react'} /> React
-          <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
-        </label>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/angularjs-logo.png" />
-          <input type="radio" name="jsFrameworkRadios" value="angular" onChange={this.handleChange} defaultChecked={state.jsFramework === 'angular'} /> AngularJS
-          <i className="ion-help-circled" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem" />
-        </label>
-
-        <ul className="nav nav-stacked">
-          <li>
-            <a data-toggle="collapse" href="#jsFrameworkCollapse1">
-              <i className="ion-help-circled"/> Should I use a client-side JavaScript Framework at all?
-            </a>
-            <div id="jsFrameworkCollapse1" className="collapse">
-              <div className="panel-collapse">
-                Select <strong>None</strong> if you are building an API server or a single-page application.
-              </div>
-            </div>
-          </li>
-          <li>
-            <a data-toggle="collapse" href="#jsFrameworkCollapse2">
-              <i className="ion-help-circled"/> Single Page Application: Advantages and Disadvantages
-            </a>
-            <div id="jsFrameworkCollapse2" className="collapse">
-              <div className="panel-collapse">
-                Select <strong>None</strong> if you are building an API server or a single-page application.
-              </div>
-            </div>
-          </li>
-          <li>
-            <a data-toggle="collapse" href="#jsFrameworkCollapse3">
-              <i className="ion-help-circled"/> React vs Angular?
-            </a>
-            <div id="jsFrameworkCollapse3" className="collapse">
-              <div className="panel-collapse">
-                Select <strong>None</strong> if you are building an API server or a single-page application.
-              </div>
-            </div>
-          </li>
-        </ul>
-
-        {reactOptions}
-        {reactBuildSystem}
-      </section>
+      <JsFramework jsFramework={state.jsFramework} handleChange={this.handleChange} />
     ) : null;
 
 
