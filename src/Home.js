@@ -17,6 +17,7 @@ import TemplateEngine from './sections/TemplateEngine';
 import CssFramework from './sections/CssFramework';
 import CssPreprocessor from './sections/CssPreprocessor';
 import Database from './sections/Database';
+import Authentication from './sections/Authentication';
 
 class Home extends React.Component {
   constructor(props) {
@@ -201,58 +202,12 @@ class Home extends React.Component {
       <CssPreprocessor cssPreprocessor={state.cssPreprocessor} cssFramework={state.cssFramework} handleChange={this.handleChange} />
     ) : null;
 
-
-
     let database = state.cssPreprocessor ? (
       <Database database={state.database} handleChange={this.handleChange} />
     ) : null;
 
-    let authenticationCheckboxes = state.database === 'none' ? (
-      <div className="alert alert-info">
-        <strong>Important!</strong> To enable authentication you must choose a database.
-      </div>
-    ) : (
-      <div>
-        <label className="checkbox-inline">
-          <img className="btn-logo" src="/img/svg/none.png" alt="None Icon" />
-          <input type="checkbox" name="authenticationCheckboxes" value="none" onChange={this.handleChange} checked={state.authentication && state.authentication.size === 0} disabled={state.database === 'none'} /> None
-        </label>
-        <label className="checkbox-inline">
-          <img className="btn-logo" src="/img/svg/email-logo.svg" height="60" />
-          <input type="checkbox" name="authenticationCheckboxes" value="email" onChange={this.handleChange} checked={state.authentication && state.authentication.has('email')} disabled={state.database === 'none'} /> Email & Password
-        </label>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/facebook-logo.svg" />
-          <input type="checkbox" name="authenticationCheckboxes" value="facebook" onChange={this.handleChange} checked={state.authentication && state.authentication.has('facebook')} disabled={state.database === 'none'} /> Facebook
-        </label>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/google-logo.svg" />
-          <input type="checkbox" name="authenticationCheckboxes" value="google" onChange={this.handleChange} checked={state.authentication && state.authentication.has('google')} disabled={state.database === 'none'} /> Google
-        </label>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/twitter-logo.svg" />
-          <input type="checkbox" name="authenticationCheckboxes" value="twitter" onChange={this.handleChange} checked={state.authentication && state.authentication.has('twitter')} disabled={state.database === 'none'} /> Twitter
-        </label>
-
-        <ul className="nav nav-stacked">
-          <li>
-            <a data-toggle="collapse" href="#authenticationCollapse1">
-              <i className="ion-help-circled" /> Is "Forgot Password" included?
-            </a>
-            <div id="authenticationCollapse1" className="collapse">
-              <div className="panel-collapse">
-                Test.
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-    );
     let authentication = state.database ? (
-      <section className="fadeIn animated">
-        <h6><InlineSvg name="authentication" width="16px" height="18px"/> Authentication</h6>
-        {authenticationCheckboxes}
-      </section>
+      <Authentication database={state.database} authentication={state.authentication} handleChange={this.handleChange} />
     ) : null;
 
     let reactOptions = state.jsFramework === 'react' ? (
