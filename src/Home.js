@@ -20,6 +20,7 @@ import Database from './sections/Database';
 import Authentication from './sections/Authentication';
 import JsFramework from './sections/JsFramework';
 import Theme from './sections/Theme';
+import Deployment from './sections/Deployment';
 
 class Home extends React.Component {
   constructor(props) {
@@ -222,38 +223,7 @@ class Home extends React.Component {
     ) : null;
 
     let deployment = state.theme ? (
-      <section className={cx('fadeIn', 'animated', state.deployment)}>
-        <h6><InlineSvg name="deployment" width="16px" height="18px"/> {!state.deployment || state.deployment === 'none' ? 'Deployment' : state.deployment}</h6>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/heroku-logo.svg" height="60" alt="Heroku Logo"/>
-          <input type="radio" name="deploymentRadios" value="heroku" onChange={this.handleChange} defaultChecked={state.deployment === 'heroku'} /> Heroku
-        </label>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/azure-logo.svg" height="60" alt="Azure Logo"/>
-          <input type="radio" name="deploymentRadios" value="azure" onChange={this.handleChange} defaultChecked={state.deployment === 'azure'} /> Microsoft Azure
-        </label>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/bluemix-logo.svg" alt="IBM Bluemix Logo"/>
-          <input type="radio" name="deploymentRadios" value="bluemix" onChange={this.handleChange} defaultChecked={state.deployment === 'bluemix'} /> IBM Bluemix
-        </label>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/none.png" />
-          <input type="radio" name="deploymentRadios" value="none" onChange={this.handleChange} defaultChecked={state.deployment === 'none'} /> None
-        </label>
-
-        <ul className="nav nav-stacked">
-          <li>
-            <a data-toggle="collapse" href="#deploymentCollapse1">
-              <i className="ion-help-circled"/> Pricing Comparison
-            </a>
-            <div id="deploymentCollapse1" className="collapse">
-              <div className="panel-collapse">
-                Select <strong>None</strong> if you are building an API server or a single-page application.
-              </div>
-            </div>
-          </li>
-        </ul>
-      </section>
+      <Deployment deployment={state.deployment} handleChange={this.handleChange} />
     ) : null;
 
     let base64State = base64url.encode(JSON.stringify(state));
