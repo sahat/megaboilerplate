@@ -38,15 +38,15 @@ const JsFramework = (props) => {
     <div className="fadeIn animated">
       <h5 className="subcategory">React Build System</h5>
       <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/browserify-logo.svg" />
+        <img className="btn-logo" src="/img/svg/browserify-logo.svg" alt="Browserify" />
         <input type="radio" name="reactBuildSystemRadios" value="browserify" onChange={props.handleChange} checked={props.reactBuildSystem === 'browserify'} /> Browserify / Gulp
       </label>
       <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/webpack-logo.svg" />
+        <img className="btn-logo" src="/img/svg/webpack-logo.svg" alt="Webpack" />
         <input type="radio" name="reactBuildSystemRadios" value="webpack" onChange={props.handleChange} checked={props.reactBuildSystem === 'webpack'} /> Webpack
       </label>
       <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/none.png" alt="None Icon" />
+        <img className="btn-logo" src="/img/svg/none.png" alt="None" />
         <input type="radio" name="reactBuildSystemRadios" value="none" onChange={props.handleChange} checked={props.reactBuildSystem === 'none'} /> None
       </label>
     </div>
