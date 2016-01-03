@@ -39,11 +39,11 @@ const JsFramework = (props) => {
       <h5 className="subcategory">React Build System</h5>
       <label className="radio-inline">
         <img className="btn-logo" src="/img/svg/browserify-logo.svg" alt="Browserify" />
-        <input type="radio" name="reactBuildSystemRadios" value="browserify" onChange={props.handleChange} checked={props.reactBuildSystem === 'browserify'} /> Browserify / Gulp
+        <input type="radio" name="reactBuildSystemRadios" value="browserify" onChange={props.handleChange} checked={props.reactBuildSystem === 'browserify'} disabled={props.cssBuildOptions === 'webpack'} /> Browserify / Gulp
       </label>
       <label className="radio-inline">
         <img className="btn-logo" src="/img/svg/webpack-logo.svg" alt="Webpack" />
-        <input type="radio" name="reactBuildSystemRadios" value="webpack" onChange={props.handleChange} checked={props.reactBuildSystem === 'webpack'} /> Webpack
+        <input type="radio" name="reactBuildSystemRadios" value="webpack" onChange={props.handleChange} checked={props.reactBuildSystem === 'webpack'} disabled={props.cssBuildOptions === 'gulp'} /> Webpack
       </label>
       <label className="radio-inline">
         <img className="btn-logo" src="/img/svg/none.png" alt="None" />
@@ -55,7 +55,6 @@ const JsFramework = (props) => {
   return (
     <section className={cx('animated fadeIn', props.jsFramework)}>
       <h6>{JS_FRAMEWORK_SVG} {!props.jsFramework || props.jsFramework === 'none' ? 'JavaScript Framework' : props.jsFramework}</h6>
-
       <label className="radio-inline">
         <img className="btn-logo" src="/img/svg/none.png" alt="None Icon" />
         <input type="radio" name="jsFrameworkRadios" value="none" onChange={props.handleChange} checked={props.jsFramework === 'none'} /> None

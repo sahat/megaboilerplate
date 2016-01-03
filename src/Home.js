@@ -189,7 +189,7 @@ class Home extends React.Component {
     ) : null;
 
     let jsFramework = (state.authentication || state.database === 'none') ? (
-      <JsFramework jsFramework={state.jsFramework} handleChange={this.handleChange} />
+      <JsFramework jsFramework={state.jsFramework} reactOptions={state.reactOptions} reactBuildSystem={state.reactBuildSystem} cssBuildOptions={state.cssBuildOptions} handleChange={this.handleChange} />
     ) : null;
 
     let theme = state.jsFramework ? (
