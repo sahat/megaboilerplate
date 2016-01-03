@@ -19,10 +19,6 @@ const Framework = (props) => {
         <input type="radio" name="frameworkRadios" value="hapi" onChange={props.handleChange} checked={props.framework === 'hapi'}/> Hapi
       </label>
       <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/sails-logo.png" alt="Sails.js"/>
-        <input type="radio" name="frameworkRadios" value="sails" onChange={props.handleChange} checked={props.framework === 'sails'}/> Sails.js
-      </label>
-      <label className="radio-inline">
         <img className="btn-logo" src="/img/svg/meteor-logo.png" alt="Meteor"/>
         <input type="radio" name="frameworkRadios" value="meteor" onChange={props.handleChange} checked={props.framework === 'meteor'}/> Meteor
       </label>
@@ -49,7 +45,7 @@ const Framework = (props) => {
         </li>
         <li>
           <a data-toggle="collapse" href="#frameworkCollapse3">
-            <i className="ion-help-circled"/> Should I use Meteor or Sails.js for real-time apps?
+            <i className="ion-help-circled"/> Should I use Meteor or Express for real-time apps?
           </a>
           <div id="frameworkCollapse3" className="collapse">
             <div className="panel-collapse">
