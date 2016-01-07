@@ -1,5 +1,6 @@
 {
   "name": "boilerplate",
+  "private": true,
   "version": "1.0.0",
   "scripts": {
     "build:webpack": "NODE_ENV=production webpack --config webpack.config.prod.js",
