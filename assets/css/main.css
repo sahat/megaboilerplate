@@ -1,10 +1,13 @@
 body {
   font-size: 13px;
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  padding-bottom: 100px;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+main {
+  padding-bottom: 20px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -327,10 +330,15 @@ section {
 /*Footer*/
 
 footer {
+  color: #fff;
   background-color: #292929;
   padding: 96px 0;
   position: relative;
   overflow: hidden;
+}
+
+footer h6 {
+  color: #fff;
 }
 
 /*Slideshow*/
