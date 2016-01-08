@@ -1,4 +1,6 @@
-let generateFrameworkExpress = require('../../generators/framework/generateFrameworkExpress');
+import generateFrameworkExpress from '../../generators/framework/generateFrameworkExpress';
+import generateFrameworkHapi from '../../generators/framework/generateFrameworkHapi';
+import generateFrameworkMeteor from '../../generators/framework/generateFrameworkMeteor';
 
 async function generateFramework(params) {
   switch (params.framework) {
@@ -6,8 +8,10 @@ async function generateFramework(params) {
       await generateFrameworkExpress(params);
       break;
     case 'hapi':
+      await generateFrameworkHapi(params);
       break;
-    case 'sails':
+    case 'meteor':
+      await generateFrameworkMeteor(params);
       break;
     default:
       break;
