@@ -10,10 +10,12 @@ let remove = Promise.promisify(fs.remove);
 let readJson = Promise.promisify(fs.readJson);
 let writeJson = Promise.promisify(fs.writeJson);
 let stat = Promise.promisify(fs.stat);
+let mkdirs = Promise.promisify(fs.mkdirs);
 
 export { stat }
 export { copy }
 export { remove }
+export { mkdirs }
 export { readFile }
 export { writeFile }
 export { readJson }
