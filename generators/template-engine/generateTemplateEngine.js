@@ -1,5 +1,4 @@
-let generateJadeTemplateEngine = require('../../generators/template-engine/generateJadeTemplateEngine');
-let cleanupTemplateEngineString = require('../../generators/template-engine/cleanupTemplateEngineString');
+import generateJadeTemplateEngine from '../../generators/template-engine/generateJadeTemplateEngine';
 
 async function generateTemplateEngine(params) {
   switch (params.templateEngine) {
@@ -7,16 +6,13 @@ async function generateTemplateEngine(params) {
       await generateJadeTemplateEngine(params);
       break;
     case 'handlebars':
-      // TODO: Not implemented
       break;
-    case 'swig':
-      // TODO: Not implemented
+    case 'nunjucks':
       break;
     case 'none':
       break;
     default:
-      // TODO
   }
 }
 
-module.exports = generateTemplateEngine;
+export default generateTemplateEngine;
