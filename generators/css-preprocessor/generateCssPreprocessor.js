@@ -1,6 +1,6 @@
-let generatePlainCssPreprocessor = require('./generatePlainCssPreprocessor');
-let generateSassPreprocessor = require('./generateSassPreprocessor');
-let generateLessPreprocessor = require('./generateLessPreprocessor');
+import generatePlainCssPreprocessor from './generatePlainCssPreprocessor';
+import generateSassPreprocessor from './generateSassPreprocessor';
+import generateLessPreprocessor from './generateLessPreprocessor';
 
 async function generateCssPreprocessor(params) {
   switch (params.cssPreprocessor) {
@@ -13,12 +13,10 @@ async function generateCssPreprocessor(params) {
     case 'less':
       await generateLessPreprocessor(params);
       break;
-    case 'postcss':
-      // TODO
+    case 'cssnext':
       break;
     default:
-      // TODO
   }
 }
 
-module.exports = generateCssPreprocessor;
+export default generateCssPreprocessor;
