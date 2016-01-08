@@ -3,7 +3,6 @@ let generateEmailAuthentication = require('./generateEmailAuthentication');
 let generateFacebookAuthentication = require('./generateFacebookAuthentication');
 let generateGoogleAuthentication = require('./generateGoogleAuthentication');
 let generateTwitterAuthentication = require('./generateTwitterAuthentication');
-let cleanupAuthentication = require('./cleanupAuthentication');
 
 async function generateAuthentication(params) {
   if (params.authentication.length) {
