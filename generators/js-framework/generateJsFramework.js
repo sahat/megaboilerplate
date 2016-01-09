@@ -1,5 +1,5 @@
-let generateJsFrameworkNone = require('./generateJsFrameworkNone');
-let generateJsFrameworkReact = require('./generateJsFrameworkReact');
+import generateJsFrameworkNone from './generateJsFrameworkNone';
+import generateJsFrameworkReact from './generateJsFrameworkReact';
 
 async function generateJsFramework(params) {
   switch (params.jsFramework) {
@@ -17,4 +17,4 @@ async function generateJsFramework(params) {
   }
 }
 
-module.exports = generateJsFramework;
+export default generateJsFramework;
