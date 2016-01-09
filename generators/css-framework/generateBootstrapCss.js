@@ -1,40 +1,32 @@
-let path = require('path');
-let fs = require('fs-extra');
-let Promise = require('bluebird');
-let copy = Promise.promisify(fs.copy);
-let replaceCode = require('../../utils/replaceCode');
+import { join } from 'path';
+import { copy, replaceCode } from '../utils';
 
 async function generateBootstrapCss(params) {
-  let bootstrapDir = path.join(__base, 'modules', 'css-framework', 'bootstrap');
-  let jqueryDir = path.join(__base, 'modules', 'css-framework', 'jquery');
-  let publicDir = path.join(__base, 'build', params.uuid, 'public');
+  let bootstrapDir = join(__base, 'modules', 'css-framework', 'bootstrap');
+  let jqueryDir = join(__base, 'modules', 'css-framework', 'jquery');
+  let publicDir = join(__base, 'build', params.uuid, 'public');
 
   // Add CSS import
   switch (params.templateEngine) {
     case 'jade':
-      let layout = path.join(__base, 'build', params.uuid, 'views', 'layout.jade');
-      let cssImport = path.join(__base, 'modules', 'css-framework', 'bootstrap', 'jade-import.jade');
+      let layout = join(__base, 'build', params.uuid, 'views', 'layout.jade');
+      let cssImport = join(__base, 'modules', 'css-framework', 'bootstrap', 'jade-import.jade');
       await replaceCode(layout, 'CSS_FRAMEWORK_IMPORT', cssImport, { indentLevel: 2 });
       break;
     case 'handlebars':
-      // TODO
       break;
-    case 'swig':
-      // TODO
+    case 'nunjucks':
       break;
     default:
       break;
   }
 
   // Copy Bootstrap files
-  await copy(path.join(bootstrapDir, 'main.css'), path.join(publicDir, 'stylesheets', 'main.css'));
-  await copy(path.join(bootstrapDir, 'fonts'), path.join(publicDir, 'fonts'));
-  await copy(path.join(bootstrapDir, 'css', 'bootstrap.css'), path.join(publicDir, 'stylesheets', 'vendor', 'bootstrap.css'));
-  await copy(path.join(bootstrapDir, 'css', 'bootstrap.min.css'), path.join(publicDir, 'stylesheets', 'vendor', 'bootstrap.min.css'));
-  await copy(path.join(bootstrapDir, 'js', 'bootstrap.js'), path.join(publicDir, 'javascripts', 'vendor', 'bootstrap.js'));
-  await copy(path.join(bootstrapDir, 'js', 'bootstrap.min.js'), path.join(publicDir, 'javascripts', 'vendor', 'bootstrap.min.js'));
-  await copy(path.join(jqueryDir, 'jquery.js'), path.join(publicDir, 'javascripts', 'vendor', 'jquery.js'));
-  await copy(path.join(jqueryDir, 'jquery.min.js'), path.join(publicDir, 'javascripts', 'vendor', 'jquery.min.js'));
+  await copy(join(bootstrapDir, 'main.css'), join(publicDir, 'stylesheets', 'main.css'));
+  await copy(join(bootstrapDir, 'fonts'), join(publicDir, 'fonts'));
+  await copy(join(bootstrapDir, 'css', 'bootstrap.css'), join(publicDir, 'stylesheets', 'vendor', 'bootstrap.css'));
+  await copy(join(bootstrapDir, 'js', 'bootstrap.js'), join(publicDir, 'javascripts', 'vendor', 'bootstrap.js'));
+  await copy(join(jqueryDir, 'jquery.js'), join(publicDir, 'javascripts', 'vendor', 'jquery.js'));
 }
 
-module.exports = generateBootstrapCss;
+export default generateBootstrapCss;

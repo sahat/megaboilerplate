@@ -6,7 +6,7 @@ let dependencies = require('../../modules/dependencies');
 async function generateMiddlewareBuildOptions(params) {
   switch (params.framework) {
     case 'express':
-      let appPath = path.join(__base, 'build', params.uuid, 'app.js');
+      let appPath = join(__base, 'build', params.uuid, 'app.js');
 
       if (params.cssPreprocessor === 'sass') {
         await generateSassMiddleware(params, appPath);
@@ -42,4 +42,4 @@ async function generateLessMiddleware(params, app) {
   await replaceCode(app, 'LESS_MIDDLEWARE', lessMiddleware);
 }
 
-module.exports = generateMiddlewareBuildOptions;
+export default generateMiddlewareBuildOptions;

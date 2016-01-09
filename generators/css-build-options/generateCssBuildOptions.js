@@ -15,4 +15,4 @@ async function generateCssPreprocessor(params) {
   }
 }
 
-module.exports = generateCssPreprocessor;
+export default generateCssPreprocessor;

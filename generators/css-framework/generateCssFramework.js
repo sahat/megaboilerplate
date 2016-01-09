@@ -1,8 +1,7 @@
-let generateBootstrapCss = require('./generateBootstrapCss');
-let generateCssFrameworkNone = require('./generateCssFrameworkNone');
+import generateBootstrapCss from './generateBootstrapCss';
+import generateCssFrameworkNone from './generateCssFrameworkNone';
 
 async function generateCssFramework(params) {
-  console.log(params);
   if (params.cssFramework === 'bootstrap' && params.cssFrameworkOptions === 'css') {
     await generateBootstrapCss(params);
   } else if (params.cssFramework === 'bootstrap' && params.cssFrameworkOptions === 'less') {
@@ -22,4 +21,4 @@ async function generateCssFramework(params) {
   }
 }
 
-module.exports = generateCssFramework;
+export default generateCssFramework;
