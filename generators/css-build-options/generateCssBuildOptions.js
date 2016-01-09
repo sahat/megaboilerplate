@@ -1,4 +1,4 @@
-let generateMiddlewareBuildOptions = require('./generateMiddlewareBuildOptions');
+import generateMiddlewareBuildOptions from './generateMiddlewareBuildOptions';
 
 async function generateCssPreprocessor(params) {
   switch (params.cssBuildOptions) {
@@ -6,16 +6,12 @@ async function generateCssPreprocessor(params) {
       await generateMiddlewareBuildOptions(params);
       break;
     case 'gulp':
-      // TODO
       break;
     case 'grunt':
-      // TODO
       break;
     case 'webpack':
-      // TODO
       break;
     default:
-      // TODO
   }
 }
 
