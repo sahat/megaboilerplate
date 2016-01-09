@@ -1,16 +1,16 @@
-let prepare = require('./utils/prepare');
-let generateFramework = require('./generators/framework/generateFramework');
-let generateTemplateEngine = require('./generators/template-engine/generateTemplateEngine');
-let generateCssFramework = require('./generators/css-framework/generateCssFramework');
-let generateCssPreprocessor = require('./generators/css-preprocessor/generateCssPreprocessor');
-let generateCssBuildOptions = require('./generators/css-build-options/generateCssBuildOptions');
-let generateDatabase = require('./generators/database/generateDatabase');
-let generateAuthentication = require('./generators/authentication/generateAuthentication');
-let generateJsFramework = require('./generators/js-framework/generateJsFramework');
-//let cleanup = require('./utils/cleanup');
-let walkAndRemoveComments = require('./utils/walkAndRemoveComments');
+import { prepare } from './generators/utils';
 
-async function download(req, res) {
+import generateFramework from './generators/framework/generateFramework';
+import generateTemplateEngine from './generators/template-engine/generateTemplateEngine';
+import generateCssFramework from './generators/css-framework/generateCssFramework';
+import generateCssPreprocessor from './generators/css-preprocessor/generateCssPreprocessor';
+import generateCssBuildOptions from './generators/css-build-options/generateCssBuildOptions';
+import generateDatabase from './generators/database/generateDatabase';
+import generateAuthentication from './generators/authentication/generateAuthentication';
+import generateJsFramework from './generators/js-framework/generateJsFramework';
+import { walkAndRemoveComments, cleanup } from './generators/utils';
+
+export async function download(req, res) {
   let params = await prepare(req.body);
   try {
     await generateFramework(params);
@@ -27,7 +27,3 @@ async function download(req, res) {
   }
   res.end();
 }
-
-module.exports = {
-  download: download
-};
