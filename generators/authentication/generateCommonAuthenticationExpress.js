@@ -1,21 +1,17 @@
-let path = require('path');
-let fs = require('fs-extra');
-let Promise = require('bluebird');
-let copy = Promise.promisify(fs.copy);
-let replaceCode = require('../../utils/replaceCode');
-let removeCode = require('../../utils/removeCode');
-let addDependencies = require('../../utils/addDependencies');
-let packages = require('../../modules/packages');
+import { join } from 'path';
+import { copy, replaceCode, removeCode, addDependencies } from '../utils';
+
+let dependencies = require('../../modules/dependencies');
 
 async function generateCommonAuthenticationExpress(params) {
-  let app = path.join(__base, 'build', params.uuid, 'app.js');
-  let passportConfigFile = path.join(__base, 'build', params.uuid, 'config', 'passport.js');
-  let passportConfigModule = path.join(__base, 'modules', 'authentication', 'common', 'passport-config.js');
-  let passportRequire = path.join(__base, 'modules', 'authentication', 'common', 'passport-require.js');
-  let passportMiddleware = path.join(__base, 'modules', 'authentication', 'common', 'passport-middleware.js');
-  let passportSerializer = path.join(__base, 'modules', 'authentication', 'common', 'passport-serializer.js');
-  let passportDeserializer = path.join(__base, 'modules', 'authentication', 'common', 'passport-deserializer.js');
-  let passportUserModel = path.join(__base, 'modules', 'authentication', 'common', 'passport-user-model.js');
+  let app = join(__base, 'build', params.uuid, 'app.js');
+  let passportConfigFile = join(__base, 'build', params.uuid, 'config', 'passport.js');
+  let passportConfigModule = join(__base, 'modules', 'authentication', 'common', 'passport-config.js');
+  let passportRequire = join(__base, 'modules', 'authentication', 'common', 'passport-require.js');
+  let passportMiddleware = join(__base, 'modules', 'authentication', 'common', 'passport-middleware.js');
+  let passportSerializer = join(__base, 'modules', 'authentication', 'common', 'passport-serializer.js');
+  let passportDeserializer = join(__base, 'modules', 'authentication', 'common', 'passport-deserializer.js');
+  let passportUserModel = join(__base, 'modules', 'authentication', 'common', 'passport-user-model.js');
 
   // Passport middleware
   await replaceCode(app, 'PASSPORT_REQUIRE', passportRequire);
@@ -27,7 +23,7 @@ async function generateCommonAuthenticationExpress(params) {
   await replaceCode(passportConfigFile, 'PASSPORT_SERIALIZER', passportSerializer, { leadingBlankLine: true });
   await replaceCode(passportConfigFile, 'PASSPORT_DESERIALIZER', passportDeserializer, { leadingBlankLine: true });
 
-  await addDependencies(packages.authentication.common, params);
+  await addDependencies(dependencies.authentication.common, params);
 }
 
-module.exports = generateCommonAuthenticationExpress;
+export default generateCommonAuthenticationExpress;

@@ -1,5 +1,3 @@
-let path = require('path');
-let removeCode = require('../../utils/removeCode');
 let generateCommonAuthenticationExpress = require('./generateCommonAuthenticationExpress');
 
 async function generateCommonAuthentication(params) {
@@ -8,14 +6,11 @@ async function generateCommonAuthentication(params) {
       await generateCommonAuthenticationExpress(params);
       break;
     case 'hapi':
-      // TODO
       break;
-    case 'sails':
-      // TODO
+    case 'meteor':
       break;
     default:
-      // TODO
   }
 }
 
-module.exports = generateCommonAuthentication;
+export default generateCommonAuthentication;

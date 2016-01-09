@@ -1,4 +1,4 @@
-let generateFacebookAuthenticationExpress = require('./generateFacebookAuthenticationExpress');
+import generateFacebookAuthenticationExpress from './generateFacebookAuthenticationExpress';
 
 async function generateFacebookAuthentication(params) {
   switch (params.framework) {
@@ -6,14 +6,11 @@ async function generateFacebookAuthentication(params) {
       await generateFacebookAuthenticationExpress(params);
       break;
     case 'hapi':
-      // TODO
       break;
-    case 'sails':
-      // TODO
+    case 'meteor':
       break;
     default:
-      // TODO
   }
 }
 
-module.exports = generateFacebookAuthentication;
+export default generateFacebookAuthentication;

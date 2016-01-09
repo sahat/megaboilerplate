@@ -1,4 +1,4 @@
-let generateGoogleAuthenticationExpress = require('./generateGoogleAuthenticationExpress');
+import generateGoogleAuthenticationExpress from './generateGoogleAuthenticationExpress';
 
 async function generateGoogleAuthentication(params) {
   switch (params.framework) {
@@ -6,14 +6,11 @@ async function generateGoogleAuthentication(params) {
       await generateGoogleAuthenticationExpress(params);
       break;
     case 'hapi':
-      // TODO
       break;
-    case 'sails':
-      // TODO
+    case 'meteor':
       break;
     default:
-      // TODO
   }
 }
 
-module.exports = generateGoogleAuthentication;
+export default generateGoogleAuthentication;

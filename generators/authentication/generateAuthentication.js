@@ -1,8 +1,8 @@
-let generateCommonAuthentication = require('./generateCommonAuthentication');
-let generateEmailAuthentication = require('./generateEmailAuthentication');
-let generateFacebookAuthentication = require('./generateFacebookAuthentication');
-let generateGoogleAuthentication = require('./generateGoogleAuthentication');
-let generateTwitterAuthentication = require('./generateTwitterAuthentication');
+import generateCommonAuthentication from './generateCommonAuthentication';
+import generateEmailAuthentication from './generateEmailAuthentication';
+import generateFacebookAuthentication from './generateFacebookAuthentication';
+import generateGoogleAuthentication from './generateGoogleAuthentication';
+import generateTwitterAuthentication from './generateTwitterAuthentication';
 
 async function generateAuthentication(params) {
   if (params.authentication.length) {
@@ -14,4 +14,4 @@ async function generateAuthentication(params) {
   }
 }
 
-module.exports = generateAuthentication;
+export default generateAuthentication;

@@ -1,19 +1,16 @@
-let generateEmailAuthenticationExpress = require('./generateEmailAuthenticationExpress');
+import generateEmailAuthenticationExpress from './generateEmailAuthenticationExpress';
 
-function generateEmailAuthentication(params) {
+async function generateEmailAuthentication(params) {
   switch (params.framework) {
     case 'express':
-      return generateEmailAuthenticationExpress(params);
+      await generateEmailAuthenticationExpress(params);
       break;
     case 'hapi':
-      // TODO
       break;
-    case 'sails':
-      // TODO
+    case 'meteor':
       break;
     default:
-      return Promise.reject('Unsupported Framework');
   }
 }
 
-module.exports = generateEmailAuthentication;
+export default generateEmailAuthentication;

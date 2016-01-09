@@ -1,4 +1,4 @@
-let generateTwitterAuthenticationExpress = require('./generateTwitterAuthenticationExpress');
+import generateTwitterAuthenticationExpress from './generateTwitterAuthenticationExpress';
 
 async function generateTwitterAuthentication(params) {
   switch (params.framework) {
@@ -6,14 +6,11 @@ async function generateTwitterAuthentication(params) {
       await generateTwitterAuthenticationExpress(params);
       break;
     case 'hapi':
-      // TODO
       break;
-    case 'sails':
-      // TODO
+    case 'meteor':
       break;
     default:
-      // TODO
   }
 }
 
-module.exports = generateTwitterAuthentication;
+export default generateTwitterAuthentication;

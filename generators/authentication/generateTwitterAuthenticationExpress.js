@@ -1,16 +1,13 @@
-let path = require('path');
-let Promise = require('bluebird');
-let fs = Promise.promisifyAll(require('fs-extra'));
-let replaceCode = require('../../utils/replaceCode');
-let removeCode = require('../../utils/removeCode');
-let addDependencies = require('../../utils/addDependencies');
-let packages = require('../../modules/packages');
+import { join } from 'path';
+import { replaceCode, removeCode, addDependencies } from '../utils';
+
+let dependencies = require('../../modules/dependencies');
 
 async function generateTwitterAuthenticationExpress(params) {
-  let config = path.join(__base, 'build', params.uuid, 'config', 'passport.js');
-  let require = path.join(__base, 'modules', 'authentication', 'twitter', 'passport-require.js');
-  let strategy = path.join(__base, 'modules', 'authentication', 'twitter', 'passport-strategy.js');
-  let routes = path.join(__base, 'modules', 'authentication', 'twitter', 'passport-routes.js');
+  let config = join(__base, 'build', params.uuid, 'config', 'passport.js');
+  let require = join(__base, 'modules', 'authentication', 'twitter', 'passport-require.js');
+  let strategy = join(__base, 'modules', 'authentication', 'twitter', 'passport-strategy.js');
+  let routes = join(__base, 'modules', 'authentication', 'twitter', 'passport-routes.js');
 
   if (params.authentication.includes('twitter')) {
     // TODO
@@ -20,4 +17,4 @@ async function generateTwitterAuthenticationExpress(params) {
   }
 }
 
-module.exports = generateTwitterAuthenticationExpress;
+export default generateTwitterAuthenticationExpress;
