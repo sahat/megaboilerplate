@@ -1,28 +1,25 @@
-let path = require('path');
-let replaceCode = require('../../utils/replaceCode');
-let addDependencies = require('../../utils/addDependencies');
-let packages = require('../../modules/packages');
+import { join } from 'path';
+import { replaceCode, addDependencies } from '../utils';
+
+let dependencies = require('../../modules/dependencies');
 
 async function generateMongodbDatabase(params) {
   switch (params.framework) {
     case 'express':
-      let app = path.join(__base, 'build', params.uuid, 'app.js');
-      let mongooseRequire = path.join(__base, 'modules', 'database', 'mongodb', 'mongoose-require.js');
-      let mongooseConnect = path.join(__base, 'modules', 'database', 'mongodb', 'mongoose-connect.js');
+      let app = join(__base, 'build', params.uuid, 'app.js');
+      let mongooseRequire = join(__base, 'modules', 'database', 'mongodb', 'mongoose-require.js');
+      let mongooseConnect = join(__base, 'modules', 'database', 'mongodb', 'mongoose-connect.js');
 
       await replaceCode(app, 'DATABASE_REQUIRE', mongooseRequire);
       await replaceCode(app, 'DATABASE_CONNECTION', mongooseConnect, { leadingBlankLine: true });
-      await addDependencies(packages.database.mongodb, params);
+      await addDependencies(dependencies.database.mongodb, params);
       break;
     case 'hapi':
-      // TODO
       break;
-    case 'sails':
-      // TODO
+    case 'meteor':
       break;
     default:
-      // TODO
   }
 }
 
-module.exports = generateMongodbDatabase;
+export default generateMongodbDatabase;

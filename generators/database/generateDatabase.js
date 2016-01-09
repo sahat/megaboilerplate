@@ -1,4 +1,4 @@
-let generateMongodbDatabase = require('./generateMongodbDatabase');
+import generateMongodbDatabase from './generateMongodbDatabase';
 
 async function generateDatabase(params) {
   switch (params.database) {
@@ -22,4 +22,4 @@ async function generateDatabase(params) {
   }
 }
 
-module.exports = generateDatabase;
+export default generateDatabase;
