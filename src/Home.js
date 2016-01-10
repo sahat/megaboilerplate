@@ -40,7 +40,10 @@ class Home extends React.Component {
 
     let data = clone(state);
     data.appName = haikunate({ tokenLength: 0 });
-    data.authentication = Array.from(data.authentication);
+
+    if (data.authentication) {
+      data.authentication = Array.from(data.authentication);
+    }
 
     $.ajax({
         url: '/download',
@@ -225,6 +228,9 @@ class Home extends React.Component {
         {theme}
         {deployment}
         {download}
+        <div>
+          <button ref="downloadBtn" className="btn btn-block btn-mega" onClick={this.clickDownload}>Compile and Download</button>
+        </div>
         <br/>
         <a className="twitter-share-button" href="https://twitter.com/intent/tweet">Tweet</a>&nbsp;
         <a className="twitter-follow-button" href="https://twitter.com/EvNowAndForever" data-show-count="false">
