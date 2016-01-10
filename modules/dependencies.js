@@ -1,6 +1,8 @@
 module.exports = {
   templateEngine: {
-    jade: '^1.9.2'
+    jade: '^1.9.2',
+    vision: '^4.0.1',
+    handlebars: '^4.0.5'
   },
   database: {
     mongodb: {
