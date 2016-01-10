@@ -8,7 +8,7 @@ async function generateFrameworkExpress(params) {
   // Copy initial Express files
   await copy(express, build);
 
-  // Update package.json app name
+  // Update app name package.json
   let packageJson = join(build, 'package.json');
   let packageObj = await readJson(packageJson);
   packageObj.name = params.appName;

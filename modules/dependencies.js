@@ -1,4 +1,7 @@
 module.exports = {
+  templateEngine: {
+    jade: '^1.9.2'
+  },
   database: {
     mongodb: {
       mongoose: '^4.2.8'

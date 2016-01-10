@@ -3,12 +3,12 @@ import { copy, mkdirs, readJson, writeJson } from '../utils';
 
 async function generateFrameworkHapi(params) {
   let build = join(__base, 'build', params.uuid);
-  let express = join(__base, 'modules', 'framework', 'express');
+  let hapi = join(__base, 'modules', 'framework', 'hapi');
 
-  // Copy initial Express files
-  await copy(express, build);
+  // Copy initial Hapi files
+  await copy(hapi, build);
 
-  // Update package.json app name
+  // Update app name package.json
   let packageJson = join(build, 'package.json');
   let packageObj = await readJson(packageJson);
   packageObj.name = params.appName;

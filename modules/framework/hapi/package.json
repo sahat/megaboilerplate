@@ -1,0 +1,12 @@
+{
+  "name": "<%= name %>",
+  "version": "0.0.0",
+  "description": "My app description",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "inert": "^3.2.0",
+    "hapi": "^12.1.0"
+  }
+}
