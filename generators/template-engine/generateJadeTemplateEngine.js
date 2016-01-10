@@ -1,5 +1,5 @@
 import { join } from 'path';
-import { copy, replaceCode } from '../utils';
+import { copy, replaceCode, addDependencies } from '../utils';
 
 async function generateJadeTemplateEngine(params) {
   switch (params.framework) {
@@ -9,6 +9,9 @@ async function generateJadeTemplateEngine(params) {
 
       // Set "views dir" and "view engine"
       await replaceCode(app, 'TEMPLATE_ENGINE', viewEngineSetup, { leadingBlankLine: true });
+
+      // Add Jade to package.json
+      await addDependencies(dependencies.templateEngine.jade, params);
 
       // Copy initial Jade templates to "views" directory
       await copy(
