@@ -2,6 +2,8 @@ var Hapi = require('hapi');
 var Hoek = require('hoek');
 
 var server = new Hapi.Server();
+//= TEMPLATE_ENGINE
+
 server.connection({
   host: 'localhost',
   port: 3000
