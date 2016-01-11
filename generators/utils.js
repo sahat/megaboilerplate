@@ -153,8 +153,6 @@ export async function replaceCode(srcFile, subStr, newSrcFile, opts) {
 
       newSrcData = newSrcData.toString().split('\n').filter(Boolean).join('\n');
 
-      console.log(newSrcData);
-
       if (opts.leadingBlankLine) {
         newSrcData = '\n' + newSrcData;
       }
