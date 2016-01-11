@@ -1,7 +1,6 @@
 import { join } from 'path';
 import { copy, replaceCode, addDependencies } from '../utils';
-
-let dependencies = require('../../modules/dependencies');
+import dependencies from '../../modules/dependencies';
 
 async function generateJadeTemplateEngine(params) {
   let app;

@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   templateEngine: {
     expressJade: {
       jade: '^1.9.2'
