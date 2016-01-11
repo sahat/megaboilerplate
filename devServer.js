@@ -66,3 +66,7 @@ app.listen(4000, 'localhost', function(err) {
   if (err) { return console.log(err); }
   console.log('Listening at http://localhost:4000');
 });
+
+process.on('unhandledRejection', function(reason, p) {
+  throw Error(reason);
+});
