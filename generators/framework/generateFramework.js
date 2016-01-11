@@ -18,4 +18,4 @@ async function generateFramework(params) {
   }
 }
 
-module.exports = generateFramework;
+export default generateFramework;
