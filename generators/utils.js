@@ -143,14 +143,17 @@ export async function replaceCode(srcFile, subStr, newSrcFile, opts) {
 
   let array = srcData.toString().split('\n');
   array.forEach((line, index) => {
-    let re = new RegExp(subStr + '$');
-    let isMatch = line.match(re) && line.match(re).length;
+    let re = new RegExp(subStr + '\r');
+    let isMatch = re.test(line);
+
     if (isMatch) {
       if (opts.indentLevel) {
         newSrcData = indentCode(newSrcData, opts.indentLevel);
       }
 
       newSrcData = newSrcData.toString().split('\n').filter(Boolean).join('\n');
+
+      console.log(newSrcData);
 
       if (opts.leadingBlankLine) {
         newSrcData = '\n' + newSrcData;
@@ -159,6 +162,7 @@ export async function replaceCode(srcFile, subStr, newSrcFile, opts) {
       array[index] = newSrcData;
     }
   });
+  
   srcData = array.join('\n');
 
   await writeFile(srcFile, srcData);
