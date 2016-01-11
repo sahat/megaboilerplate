@@ -5,7 +5,7 @@ import generateGoogleAuthentication from './generateGoogleAuthentication';
 import generateTwitterAuthentication from './generateTwitterAuthentication';
 
 async function generateAuthentication(params) {
-  if (params.authentication.length) {
+  if (params.authentication && params.authentication.length) {
     await generateCommonAuthentication(params);
     await generateEmailAuthentication(params);
     await generateFacebookAuthentication(params);
