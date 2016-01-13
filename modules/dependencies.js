@@ -3,6 +3,9 @@ export default {
     expressJade: {
       jade: '^1.9.2'
     },
+    expressNunjucks: {
+      nunjucks: '^2.3.0'
+    },
     hapiJade: {
       jade: '^1.9.2',
       vision: '^4.0.1'
