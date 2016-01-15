@@ -145,7 +145,6 @@ export async function replaceCode(srcFile, subStr, newSrcFile, opts) {
   array.forEach((line, index) => {
     let re = new RegExp(subStr + '$|(\r\n|\r|\n)');
     let isMatch = re.test(line);
-    console.log(isMatch, subStr);
 
     if (isMatch) {
       if (opts.indentLevel) {
