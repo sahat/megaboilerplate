@@ -7,7 +7,9 @@ async function generateSassPreprocessor(params) {
 
   switch (params.framework) {
     case 'express':
-      await copy(mainSass, path.join(build, 'public', 'stylesheets', 'main.scss'));
+      if (params.cssFramework === 'none') {
+        await copy(mainSass, path.join(build, 'public', 'stylesheets', 'main.scss'));
+      }
       break;
     case 'hapi':
       break;

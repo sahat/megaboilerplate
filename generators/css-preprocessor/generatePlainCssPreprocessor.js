@@ -7,7 +7,9 @@ async function generatePlainCssPreprocessor(params) {
 
   switch (params.framework) {
     case 'express':
-      await copy(mainCss, path.join(build, 'public', 'stylesheets', 'main.css'));
+      if (params.cssFramework === 'none') {
+        await copy(mainCss, path.join(build, 'public', 'stylesheets', 'main.css'));
+      }
       break;
     case 'hapi':
       break;

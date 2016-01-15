@@ -7,7 +7,9 @@ async function generateLessPreprocessor(params) {
 
   switch (params.framework) {
     case 'express':
-      await copy(mainLess, join(build, 'public', 'stylesheets', 'main.less'));
+      if (params.cssFramework === 'none') {
+        await copy(mainLess, join(build, 'public', 'stylesheets', 'main.less'));
+      }
       break;
     case 'hapi':
       break;
