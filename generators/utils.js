@@ -95,6 +95,32 @@ export async function addDependencies(dependencies, params, isDev) {
   await writeJson(packageJson, packageObj, { spaces: 2 });
 }
 
+
+/**
+ *
+ * @param pkg {object} - package to be added, e.g. { "express": "^4.0.0" }
+ * @param params
+ * @param isDev {bool} - add to devDependencies
+ */
+export async function addNpmPackage(pkg, params, isDev) {
+  let packageJson = path.join(__base, 'build', params.uuid, 'package.json');
+
+  let packageObj = await readJson(packageJson);
+
+  // Get package name and version
+  let pkgName = Object.keys(pkg)[0];
+  let pkgVersion = pkg[pkgName];
+
+  if (isDev) {
+    packageObj.devDependencies = packageObj.devDependencies || {};
+    packageObj.devDependencies[pkgName] = pkgVersion;
+  } else {
+    packageObj.dependencies[pkgName] = pkgVersion;
+  }
+
+  await writeJson(packageJson, packageObj, { spaces: 2 });
+}
+
 export async function cleanup(params) {
   await remove(path.join(__base, 'build', params.uuid));
 }
