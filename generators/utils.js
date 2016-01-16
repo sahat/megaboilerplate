@@ -100,7 +100,7 @@ export async function addDependencies(dependencies, params, isDev) {
  *
  * @param pkg {object} - package to be added, e.g. { "express": "^4.0.0" }
  * @param params
- * @param isDev {bool} - add to devDependencies
+ * @param isDev
  */
 export async function addNpmPackage(pkg, params, isDev) {
   let packageJson = path.join(__base, 'build', params.uuid, 'package.json');
