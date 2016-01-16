@@ -16,8 +16,8 @@ async function generateGulpBuildOptions(params) {
       await addNpmPackage({ 'gulp-sass': '^2.1.1' }, params);
       await addNpmPackage({ 'gulp-csso': '^1.0.1' }, params);
 
-      await replaceCode(gulpfile, 'SASS_GULP_REQUIRE', sassGulpRequire);
-      await replaceCode(gulpfile, 'SASS_GULP_TASK', sassGulpTask);
+      await replaceCode(join(build, 'gulpfile.js'), 'SASS_GULP_REQUIRE', sassGulpRequire);
+      await replaceCode(join(build, 'gulpfile.js'), 'SASS_GULP_TASK', sassGulpTask);
       break;
 
     case 'less':
@@ -30,8 +30,8 @@ async function generateGulpBuildOptions(params) {
       await addNpmPackage({ 'gulp-less': '^3.0.5' }, params);
       await addNpmPackage({ 'gulp-csso': '^1.0.1' }, params);
 
-      await replaceCode(gulpfile, 'LESS_GULP_REQUIRE', lessGulpRequire);
-      await replaceCode(gulpfile, 'LESS_GULP_TASK', lessGulpTask);
+      await replaceCode(join(build, 'gulpfile.js'), 'LESS_GULP_REQUIRE', lessGulpRequire);
+      await replaceCode(join(build, 'gulpfile.js'), 'LESS_GULP_TASK', lessGulpTask);
       break;
 
     case 'css':
