@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var sourcemaps = require('gulp-sourcemaps');
+var plumber = require('gulp-plumber');
 //= LESS_GULP_REQUIRE
 //= SASS_GULP_REQUIRE
 var paths = {
