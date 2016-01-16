@@ -3,6 +3,7 @@ let archiver = require('archiver');
 let shortid = require('shortid');
 let fs = require('fs-extra');
 let Promise = require('bluebird');
+let cpy = require('cpy');
 let copy = Promise.promisify(fs.copy);
 let readFile = Promise.promisify(fs.readFile);
 let writeFile = Promise.promisify(fs.writeFile);
@@ -12,6 +13,7 @@ let writeJson = Promise.promisify(fs.writeJson);
 let stat = Promise.promisify(fs.stat);
 let mkdirs = Promise.promisify(fs.mkdirs);
 
+export { cpy }
 export { stat }
 export { copy }
 export { remove }

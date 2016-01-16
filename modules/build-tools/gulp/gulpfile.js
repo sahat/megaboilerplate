@@ -3,10 +3,12 @@ var sourcemaps = require('gulp-sourcemaps');
 var plumber = require('gulp-plumber');
 //= LESS_GULP_REQUIRE
 //= SASS_GULP_REQUIRE
+
 var paths = {
   scripts: ['client/js/**/*.coffee', '!client/external/**/*.coffee'],
   images: 'client/img/**/*'
 };
+
 //= LESS_GULP_TASK
 //= SASS_GULP_TASK
 

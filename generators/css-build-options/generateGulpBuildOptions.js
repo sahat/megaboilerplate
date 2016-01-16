@@ -1,5 +1,5 @@
 import { join } from 'path';
-import { copy, replaceCode, addNpmPackage } from '../utils';
+import { cpy, replaceCode, addNpmPackage } from '../utils';
 
 async function generateGulpBuildOptions(params) {
   switch (params.cssPreprocessor) {
@@ -15,27 +15,24 @@ async function generateGulpBuildOptions(params) {
   }
 }
 
-async function generateGulpSass(params, app) {
-  let gulpfile = join(__base, 'modules', 'build-tools', 'gulpfile.js');
+async function generateGulpSass(params) {
+  let build = join(__base, 'build', params.uuid);
+  let gulpfile = join(__base, 'modules', 'build-tools', 'gulp', 'gulpfile.js');
   let sassGulpRequire = join(__base, 'modules', 'css-build-options', 'sass-gulp-require.js');
   let sassGulpTask = join(__base, 'modules', 'css-build-options', 'sass-gulp-task.js');
 
-  await addNpmPackage({ 'gulp': '*' }, params);
-  await addNpmPackage({ 'gulp-sass': '*' }, params);
-  await addNpmPackage({ 'gulp-csso': '*' }, params);
+  await cpy([gulpfile], build);
+
+  await addNpmPackage({ 'gulp': '^3.9.0' }, params);
+  await addNpmPackage({ 'gulp-sass': '^2.1.1' }, params);
+  await addNpmPackage({ 'gulp-csso': '^1.0.1' }, params);
 
   await replaceCode(gulpfile, 'SASS_GULP_REQUIRE', sassGulpRequire);
-  await replaceCode(app, 'SASS_GULP_TASK', sassGulpTask);
+  await replaceCode(gulpfile, 'SASS_GULP_TASK', sassGulpTask);
 }
 
-async function generateGulpLess(params, app) {
-  let lessMiddlewareRequire = join(__base, 'modules', 'css-build-options', 'less-middleware-require.js');
-  let lessMiddleware = join(__base, 'modules', 'css-build-options', 'less-middleware.js');
+async function generateGulpLess(params) {
 
-  await addNpmPackage({ 'less-middleware': 'latest' }, params);
-
-  await replaceCode(app, 'LESS_MIDDLEWARE_REQUIRE', lessMiddlewareRequire);
-  await replaceCode(app, 'LESS_MIDDLEWARE', lessMiddleware);
 }
 
 export default generateGulpBuildOptions;
