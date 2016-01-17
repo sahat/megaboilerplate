@@ -8,6 +8,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {isArray, forOwn, clone} from 'lodash';
 import { createHistory, useQueries } from 'history';
+import { Treebeard, decorators, theme } from 'react-treebeard';
 
 import InlineSvg from './InlineSvg';
 
@@ -22,6 +23,48 @@ import JsFramework from './sections/JsFramework';
 import Theme from './sections/Theme';
 import Deployment from './sections/Deployment';
 
+
+let styles = {
+  component: {
+    width: '50%',
+    display: 'inline-block',
+    verticalAlign: 'top',
+    padding: '20px',
+    '@media (max-width: 640px)': {
+      width: '100%',
+      display: 'block'
+    }
+  },
+  viewer: {
+    base: {
+      fontFamily: 'lucida grande ,tahoma,verdana,arial,sans-serif',
+      fontSize: '12px',
+      whiteSpace: 'pre-wrap',
+      backgroundColor: '#282C34',
+      border: 'solid 1px black',
+      padding: '20px',
+      color: '#9DA5AB',
+      minHeight: '250px'
+    }
+  }
+};
+
+decorators.Header = (props) => {
+  const style = props.style;
+  const iconType = props.node.children ? 'folder' : 'file-text';
+  const iconClass = `fa fa-${iconType}`;
+  const iconStyle = { marginRight: '5px' };
+  return (
+    <div style={style.base}>
+      <div style={style.title}>
+        <i className={iconClass} style={iconStyle}/>
+        {props.node.name}
+      </div>
+    </div>
+  );
+};
+
+
 class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -29,6 +72,54 @@ class Home extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.clickDownload = this.clickDownload.bind(this);
     this.handleThemeClick = this.handleThemeClick.bind(this);
+    this.onToggle = this.onToggle.bind(this);
+  }
+
+  getTreeData() {
+    return {
+      name: 'app',
+      toggled: true,
+      children: [
+        {
+          name: 'example',
+          children: [
+            { name: 'app.js' },
+            { name: 'data.js' },
+            { name: 'index.html' },
+            { name: 'styles.js' },
+            { name: 'webpack.config.js' }
+          ]
+        },
+        {
+          name: 'node_modules',
+          loading: true,
+          children: []
+        },
+        {
+          name: 'src',
+          children: [
+            {
+              name: 'components',
+              children: [
+                { name: 'decorators.js' },
+                { name: 'treebeard.js' }
+              ]
+            },
+            { name: 'index.js' }
+          ]
+        },
+        {
+          name: 'themes',
+          children: [
+            { name: 'animations.js' },
+            { name: 'default.js' }
+          ]
+        },
+        { name: 'Gulpfile.js' },
+        { name: 'index.js' },
+        { name: 'package.json' }
+      ]
+    };
   }
 
   clickDownload() {
@@ -228,6 +319,16 @@ class Home extends React.Component {
         {theme}
         {deployment}
         {download}
+        <div style={styles.component}>
+          <Treebeard
+            data={this.getTreeData()}
+            onToggle={this.onToggle}
+            decorators={decorators}
+          />
+        </div>
+        <div style={styles.component}>
+          <NodeViewer node={this.state.cursor}/>
+        </div>
         <div>
           <button ref="downloadBtn" className="btn btn-block btn-mega" onClick={this.clickDownload}>Compile and Download</button>
         </div>
@@ -235,6 +336,31 @@ class Home extends React.Component {
         <a className="twitter-share-button" href="https://twitter.com/intent/tweet">Tweet</a>&nbsp;
         <a className="twitter-follow-button" href="https://twitter.com/EvNowAndForever" data-show-count="false">
           Follow @EvNowAndForever</a>
+      </div>
+    );
+  }
+  onToggle(node, toggled){
+    if(this.state.cursor){this.state.cursor.active = false;}
+    node.active = true;
+    if(node.children){ node.toggled = toggled; }
+    this.setState({ cursor: node });
+  }
+}
+
+const HELP_MSG = 'Select A Node To See Its Data Structure Here...';
+
+
+class NodeViewer extends React.Component {
+  constructor(props){
+    super(props);
+  }
+  render(){
+    const style = styles.viewer;
+    let json = JSON.stringify(this.props.node, null, 4);
+    if(!json){ json = HELP_MSG; }
+    return (
+      <div style={style.base}>
+        {json}
       </div>
     );
   }
