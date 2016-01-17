@@ -1,5 +1,5 @@
 import { join } from 'path';
-import { copy, replaceCode, removeCode, addDependencies } from '../utils';
+import { cpy, replaceCode, removeCode, addDependencies } from '../utils';
 
 async function generateJsFrameworkReact(params) {
   let build = join(__base, 'build', params.uuid);
@@ -15,9 +15,8 @@ async function generateJsFrameworkReact(params) {
       // Add HTML references
       await addTemplateImport(params, layout, reactImport);
 
-      await copy(mainJs, join(build, 'public', 'javascripts', 'main.js'));
-      await copy(react, join(build, 'public', 'javascripts', 'react.js'));
-      await copy(reactDom, join(build, 'public', 'javascripts', 'react-dom.js'));
+      // Copy files
+      await cpy([mainJs, react, reactDom], join(build, 'public', 'javascripts'));
       break;
     case 'hapi':
       break;

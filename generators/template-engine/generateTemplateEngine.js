@@ -1,5 +1,5 @@
 import generateJadeTemplateEngine from '../../generators/template-engine/generateJadeTemplateEngine';
-import generateHandlebarsTemplateEngine from '../../generators/template-engine/generateHandlebarsTemplateEngine';
+//import generateHandlebarsTemplateEngine from '../../generators/template-engine/generateHandlebarsTemplateEngine';
 import generateNunjucksTemplateEngine from '../../generators/template-engine/generateNunjucksTemplateEngine';
 
 async function generateTemplateEngine(params) {
@@ -8,7 +8,7 @@ async function generateTemplateEngine(params) {
       await generateJadeTemplateEngine(params);
       break;
     case 'handlebars':
-      await generateHandlebarsTemplateEngine(params);
+      //await generateHandlebarsTemplateEngine(params);
       break;
     case 'nunjucks':
       await generateNunjucksTemplateEngine(params);
