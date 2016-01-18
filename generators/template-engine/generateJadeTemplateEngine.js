@@ -5,14 +5,19 @@ import dependencies from '../../modules/dependencies';
 async function generateJadeTemplateEngine(params) {
   let app;
   let viewEngineSetup;
+  let baseRoute;
 
   switch (params.framework) {
     case 'express':
       app = join(__base, 'build', params.uuid, 'app.js');
       viewEngineSetup = join(__base, 'modules', 'template-engine', 'jade', 'jade-express.js');
+      baseRoute = join(__base, 'modules', 'template-engine', 'jade', 'express-route.js');
 
       // Set "views dir" and "view engine"
       await replaceCode(app, 'TEMPLATE_ENGINE', viewEngineSetup, { leadingBlankLine: true });
+
+      // Set base route "/"
+      await replaceCode(app, 'BASE_ROUTE', baseRoute, { leadingBlankLine: true });
 
       // Add Jade to package.json
       await addDependencies(dependencies.templateEngine.expressJade, params);

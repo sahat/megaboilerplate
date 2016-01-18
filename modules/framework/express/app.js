@@ -27,6 +27,7 @@ app.use(session({
 }));
 //= PASSPORT_MIDDLEWARE
 app.use(express.static(path.join(__dirname, 'public')));
+//= BASE_ROUTE
 
 // development error handler
 if (app.get('env') === 'development') {
