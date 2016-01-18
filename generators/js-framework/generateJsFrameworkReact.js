@@ -1,40 +1,64 @@
 import { join } from 'path';
-import { cpy, replaceCode, removeCode, addDependencies } from '../utils';
+import { copy, replaceCode, removeCode, addDependencies } from '../utils';
 
 async function generateJsFrameworkReact(params) {
   let build = join(__base, 'build', params.uuid);
   let mainJs = join(__base, 'modules', 'js-framework', 'react', 'main.js');
+  let mainJsBrowser = join(__base, 'modules', 'js-framework', 'react', 'main-browser.js');
   let react = join(__base, 'modules', 'js-framework', 'react', 'react.js');
   let reactDom = join(__base, 'modules', 'js-framework', 'react', 'react-dom.js');
 
   switch (params.framework) {
     case 'express':
-      let layout = join(__base, 'build', params.uuid, 'views', 'layout.jade');
-      let reactImport = join(__base, 'modules', 'js-framework', 'react', 'express-jade-import.jade');
 
-      // Add HTML references
-      await addTemplateImport(params, layout, reactImport);
+      if (params.templateEngine === 'jade') {
+        let mainImport;
+        let reactImport = join(__base, 'modules', 'js-framework', 'react', 'react-jade-import.jade');
+        let babelBrowserImport = join(__base, 'modules', 'js-framework', 'react', 'babel-browser-jade-import.jade');
+        let indexTpl = join(__base, 'modules', 'js-framework', 'react', 'index.jade');
+        let layout = join(__base, 'build', params.uuid, 'views', 'layout.jade');
+
+        // Include React + ReactDOM
+        await replaceCode(layout, 'JS_FRAMEWORK_LIB_IMPORT', reactImport, { indentLevel: 2 });
+
+        // Include browser JSX transpiler
+        if (params.reactBuildSystem === 'none') {
+          mainImport = join(__base, 'modules', 'js-framework', 'react', 'main-browser-jade-import.jade');
+          await replaceCode(layout, 'JS_FRAMEWORK_BABEL_BROWSER', babelBrowserImport, { indentLevel: 2 });
+          await replaceCode(layout, 'JS_FRAMEWORK_MAIN_IMPORT', mainImport, { indentLevel: 2 });
+        } else {
+          // Common.js app
+          mainImport = join(__base, 'modules', 'js-framework', 'react', 'main-jade-import.jade');
+          await replaceCode(layout, 'JS_FRAMEWORK_MAIN_IMPORT', mainImport, { indentLevel: 2 });
+        }
+
+        // Replace index.jade
+        await copy(indexTpl, join(build, 'views', 'index.jade'));
+      } else if (params.templateEngine === 'handlebars') {
+
+      } else if (params.templateEngine === 'nunjucks') {
+
+      }
+
+      if (params.reactBuildSystem === 'none') {
+        // Basic app
+        await copy(mainJsBrowser, join(build, 'public', 'javascripts', 'main.js'));
+      } else {
+        // CommonJS app
+        await copy(mainJs, join(build, 'public', 'javascripts', 'main.js'));
+      }
 
       // Copy files
-      await cpy([mainJs, react, reactDom], join(build, 'public', 'javascripts'));
+      await copy(react, join(build, 'public', 'javascripts', 'vendor', 'react.js'));
+      await copy(reactDom, join(build, 'public', 'javascripts', 'vendor', 'react-dom.js'));
       break;
+
     case 'hapi':
       break;
+
     case 'meteor':
       break;
-    default:
-  }
-}
 
-async function addTemplateImport(params, layout, templateImport) {
-  switch (params.templateEngine) {
-    case 'jade':
-      await replaceCode(layout, 'JS_FRAMEWORK_IMPORT', templateImport, { indentLevel: 2 });
-      break;
-    case 'handlebars':
-      break;
-    case 'nunjucks':
-      break;
     default:
   }
 }
