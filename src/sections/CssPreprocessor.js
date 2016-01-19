@@ -60,6 +60,10 @@ const CssPreprocessor = (props) => {
       <h5 className="subcategory">CSS Build Options</h5>
 
       <label className="radio-inline">
+        <img className="btn-logo" src="/img/svg/npm-logo.svg" alt="NPM Logo"/>
+        <input type="radio" name="cssBuildOptionsRadios" value="npm" onChange={props.handleChange} defaultChecked={props.cssBuildOptions === 'npm'} /> NPM
+      </label>
+      <label className="radio-inline">
         <img className="btn-logo" src="/img/svg/gulp-logo.png" alt="Gulp Logo"/>
         <input type="radio" name="cssBuildOptionsRadios" value="gulp" onChange={props.handleChange} defaultChecked={props.cssBuildOptions === 'gulp'} /> Gulp
       </label>
