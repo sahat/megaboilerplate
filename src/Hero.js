@@ -1,18 +1,14 @@
 import React from 'react';
-import Slider from 'react-slick';
 import Header from './Header';
 
-class Banner extends React.Component {
+class Hero extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      currentLogo: ''
-    }
   }
 
   componentDidMount() {
-    //this.loadCarbonAds();
+    this.loadCarbonAds();
     this.renderConnectedDots();
   }
 
@@ -61,13 +57,13 @@ class Banner extends React.Component {
     }
 
     Dot.prototype = {
-      create: function () {
+      create: function() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
         ctx.fill();
       },
 
-      animate: function () {
+      animate: function() {
 
         for (let i = 0; i < dots.nb; i++) {
 
@@ -86,7 +82,7 @@ class Banner extends React.Component {
         }
       },
 
-      line: function () {
+      line: function() {
         for (let i = 0; i < dots.nb; i++) {
           for (let j = 0; j < dots.nb; j++) {
             var i_dot = dots.array[i];
@@ -120,7 +116,7 @@ class Banner extends React.Component {
       dot.animate();
     }
 
-    window.onmousemove = function (parameter) {
+    window.onmousemove = function(parameter) {
       mousePosition.x = parameter.pageX;
       mousePosition.y = parameter.pageY;
     };
@@ -132,55 +128,16 @@ class Banner extends React.Component {
   }
 
   render() {
-    let settings = {
-      arrows: false,
-      autoplay: true,
-      dots: false,
-      fade: true,
-      infinite: true,
-      speed: 900,
-      slidesToShow: 1,
-      slidesToScroll: 1
-    };
-
-    let slider = (
-      <Slider {...settings}>
-        <div><img className="hero-logo" src="/img/svg/alt-logo.png"/></div>
-        <div><img className="hero-logo" src="/img/svg/angularjs-logo.png"/></div>
-        <div><img className="hero-logo" src="/img/svg/bootstrap-logo.svg"/></div>
-        <div><img className="hero-logo" src="/img/svg/babel-logo.png"/></div>
-        <div><img className="hero-logo" src="/img/svg/css3-logo.svg"/></div>
-        <div><img className="hero-logo" src="/img/svg/express-logo.png"/></div>
-        <div><img className="hero-logo" src="/img/svg/facebook-logo.svg"/></div>
-        <div><img className="hero-logo" src="/img/svg/eslint-logo.svg"/></div>
-        <div><img className="hero-logo" src="/img/svg/flux-logo.svg"/></div>
-        <div><img className="hero-logo" src="/img/svg/google-logo.svg"/></div>
-        <div><img className="hero-logo" src="/img/svg/grunt-logo.svg"/></div>
-        <div><img className="hero-logo" src="/img/svg/gulp-logo.png"/></div>
-        <div><img className="hero-logo" src="/img/svg/handlebars-logo.svg"/></div>
-        <div><img className="hero-logo" src="/img/svg/hapi-logo.png"/></div>
-        <div><img className="hero-logo" src="/img/svg/jade-logo.svg"/></div>
-        <div><img className="hero-logo" src="/img/svg/less-logo.svg"/></div>
-        <div><img className="hero-logo" src="/img/svg/sass-logo.svg"/></div>
-        <div><img className="hero-logo" src="/img/svg/node-logo.svg"/></div>
-        <div><img className="hero-logo" src="/img/svg/mongodb-logo.svg"/></div>
-        <div><img className="hero-logo" src="/img/svg/mysql-logo.svg"/></div>
-        <div><img className="hero-logo" src="/img/svg/foundation-logo.svg"/></div>
-        <div><img className="hero-logo" src="/img/svg/npm-logo.svg"/></div>
-        <div><img className="hero-logo" src="/img/svg/passportjs-logo.svg"/></div>
-        <div><img className="hero-logo" src="/img/svg/polymer-logo.svg"/></div>
-        <div><img className="hero-logo" src="/img/svg/postgresql-logo.svg"/></div>
-      </Slider>
-    );
-
     return (
       <div className="hero">
-        <canvas ref="connectedDots"></canvas>
+        <canvas ref="connectedDots"/>
         <Header />
         <div className="container">
 
-          <div className="text-center">
-            {slider}
+          <div className="wrapper">
+            <div className="box middle"></div>
+            <div className="box upper"></div>
+            <div className="box lower"></div>
           </div>
 
           <h1>Mega Boilerplate</h1>
@@ -193,7 +150,7 @@ class Banner extends React.Component {
           <iframe src="https://ghbtns.com/github-btn.html?user=sahat&type=follow&count=true" frameBorder="0" scrolling="0" width="170px" height="20px"></iframe>
           <div>
             <img className="hero-arrow hidden-xs" src="/img/arrow.png" alt="Arrow"/>
-            <span>Don't forget to <i className="ion-star" /> on GitHub if you liked this project!</span>
+            <span>Don't forget to <i className="ion-star"/> on GitHub if you liked this project!</span>
           </div>
           <div ref="carbonAds"></div>
         </div>
@@ -202,4 +159,4 @@ class Banner extends React.Component {
   }
 }
 
-export default Banner;
+export default Hero;
