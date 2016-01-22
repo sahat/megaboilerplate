@@ -1,4 +1,5 @@
 import generateMongodbDatabase from './generateMongodbDatabase';
+import generatePostgresqlDatabase from './generatePostgresqlDatabase';
 
 async function generateDatabase(params) {
   switch (params.database) {
@@ -9,7 +10,7 @@ async function generateDatabase(params) {
       // TODO
       break;
     case 'postgresql':
-      // TODO
+      await generatePostgresqlDatabase(params);
       break;
     case 'rethinkdb':
       // TODO
