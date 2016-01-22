@@ -1,16 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Hero from './Hero';
 import Home from './Home';
 import Footer from './Footer';
 
-export default class App extends Component {
+class App extends React.Component {
   render() {
     return (
       <div>
         <Hero />
         <main>{this.props.children}</main>
-        <Footer/>
+        <Footer />
       </div>
     );
   }
 }
+
+export default App;

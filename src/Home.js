@@ -29,7 +29,6 @@ class Home extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.clickDownload = this.clickDownload.bind(this);
     this.handleThemeClick = this.handleThemeClick.bind(this);
-    this.onToggle = this.onToggle.bind(this);
   }
 
   clickDownload() {
