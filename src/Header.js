@@ -13,6 +13,12 @@ class Header extends React.Component {
               <li><Link to="/contributing" activeClassName="active">Contributing</Link></li>
             </ul>
             <ul className="nav navbar-nav navbar-right">
+              <li className="facebook-share-button">
+                <div className="fb-share-button"
+                     data-href="http://www.your-domain.com/your-page.html"
+                     data-layout="button_count">
+                </div>
+              </li>
               <li className="tweet-button">
                 <a className="twitter-share-button" href="https://twitter.com/intent/tweet" />
               </li>

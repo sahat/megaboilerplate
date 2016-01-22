@@ -417,6 +417,12 @@ canvas {
   left: 0;
 }
 
+.facebook-share-button {
+  margin-right: 15px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
 .tweet-button {
   padding-top: 15px;
   padding-bottom: 15px;
