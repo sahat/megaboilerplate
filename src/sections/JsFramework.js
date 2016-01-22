@@ -7,17 +7,23 @@ const JS_FRAMEWORK_SVG = (
   </svg>
 );
 
+const REACT_HOT_LOADER_SVG = (
+  <svg version="1.1" x="0px" y="0px" height="50" viewBox="0 0 400 400">
+    <circle fill="rgba(0, 216, 255, .5)" cx="200" cy="200" r="139"></circle>
+    <path fill="none" stroke="#FFFFFF" strokeWidth="4" d="M231.7,200c0,17.4-1.7,88-31.7,88s-31.7-70.6-31.7-88s1.7-88,31.7-88S231.7,182.6,231.7,200z"></path>
+    <path fill="none" stroke="#FFFFFF" strokeWidth="4" d="M216.1,227.7c-15,8.9-76.6,43.4-91.9,17.6s44.6-63.2,59.6-72.1s76.6-43.4,91.9-17.6S231.1,218.8,216.1,227.7z"></path>
+    <path fill="none" stroke="#FFFFFF" strokeWidth="4" d="M183.9,227.7c15,8.9,76.6,43.4,91.9,17.6s-44.6-63.2-59.6-72.1s-76.6-43.4-91.9-17.6S168.9,218.8,183.9,227.7z"></path>
+    <circle fill="#FFFFFF" cx="200" cy="200" r="16"></circle>
+  </svg>
+);
+
 const JsFramework = (props) => {
   let reactOptions = (props.jsFramework === 'react') ? (
     <div className="fadeIn animated">
       <h5 className="subcategory">React Features</h5>
       <label className="checkbox-inline">
-        <img className="btn-logo" src="/img/svg/alt-logo.png" alt="Alt" />
-        <input type="checkbox" name="reactOptionsCheckboxes" value="fluxAlt" onChange={props.handleChange} checked={props.reactOptions && props.reactOptions.has('fluxAlt')} /> Flux (Alt)
-      </label>
-      <label className="checkbox-inline">
         <img className="btn-logo" src="/img/svg/flux-logo.svg" alt="Redux" />
-        <input type="checkbox" name="reactOptionsCheckboxes" value="fluxRedux" onChange={props.handleChange} checked={props.reactOptions && props.reactOptions.has('fluxRedux')} /> Flux (Redux)
+        <input type="checkbox" name="reactOptionsCheckboxes" value="redux" onChange={props.handleChange} checked={props.reactOptions && props.reactOptions.has('redux')} /> Redux
       </label>
       <label className="radio-inline">
         <img className="btn-logo" src="/img/svg/react-router-logo.png" alt="React Router" />
@@ -31,24 +37,11 @@ const JsFramework = (props) => {
         <img className="btn-logo" src="/img/svg/babel-logo.png" alt="Babel" />
         <input type="checkbox" name="reactOptionsCheckboxes" value="es6" onChange={props.handleChange} checked={props.reactOptions && props.reactOptions.has('es6')} /> ES6
       </label>
-    </div>
-  ) : null;
+      <label className="radio-inline">
+        <span className="btn-logo">{REACT_HOT_LOADER_SVG}</span>
+        <input type="checkbox" name="reactOptionsCheckboxes" value="hotReload" onChange={props.handleChange} checked={props.reactOptions && props.reactOptions.has('hotReload')} /> Hot Reload
+      </label>
 
-  let reactBuildSystem = (props.jsFramework === 'react') ? (
-    <div className="fadeIn animated">
-      <h5 className="subcategory">React Build System</h5>
-      <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/browserify-logo.svg" alt="Browserify" />
-        <input type="radio" name="reactBuildSystemRadios" value="browserify" onChange={props.handleChange} checked={props.reactBuildSystem === 'browserify'} disabled={props.cssBuildOptions === 'webpack'} /> Browserify / Gulp
-      </label>
-      <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/webpack-logo.svg" alt="Webpack" />
-        <input type="radio" name="reactBuildSystemRadios" value="webpack" onChange={props.handleChange} checked={props.reactBuildSystem === 'webpack'} disabled={props.cssBuildOptions === 'gulp'} /> Webpack
-      </label>
-      <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/none.png" alt="None" />
-        <input type="radio" name="reactBuildSystemRadios" value="none" onChange={props.handleChange} checked={props.reactBuildSystem === 'none'} /> None
-      </label>
     </div>
   ) : null;
 
@@ -102,7 +95,6 @@ const JsFramework = (props) => {
       </ul>
 
       {reactOptions}
-      {reactBuildSystem}
     </section>
   );
 };
