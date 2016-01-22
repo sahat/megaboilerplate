@@ -2,67 +2,26 @@
 
 let haikunate = require('haikunator');
 let url = require('url');
-let cx = require('classnames');
 let base64url = require('base64-url');
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {isArray, forOwn, clone} from 'lodash';
 import { createHistory, useQueries } from 'history';
-import { Treebeard, decorators, theme } from 'react-treebeard';
 
-import InlineSvg from './InlineSvg';
+import Tree from './Tree/Tree';
 
 import Platform from './sections/Platform';
 import Framework from './sections/Framework';
 import TemplateEngine from './sections/TemplateEngine';
 import CssFramework from './sections/CssFramework';
 import CssPreprocessor from './sections/CssPreprocessor';
+import BuildTool from './sections/BuildTool';
 import Database from './sections/Database';
 import Authentication from './sections/Authentication';
 import JsFramework from './sections/JsFramework';
 import Theme from './sections/Theme';
 import Deployment from './sections/Deployment';
 
-
-let styles = {
-  component: {
-    width: '50%',
-    display: 'inline-block',
-    verticalAlign: 'top',
-    padding: '20px',
-    '@media (max-width: 640px)': {
-      width: '100%',
-      display: 'block'
-    }
-  },
-  viewer: {
-    base: {
-      fontFamily: 'lucida grande ,tahoma,verdana,arial,sans-serif',
-      fontSize: '12px',
-      whiteSpace: 'pre-wrap',
-      backgroundColor: '#282C34',
-      border: 'solid 1px black',
-      padding: '20px',
-      color: '#9DA5AB',
-      minHeight: '250px'
-    }
-  }
-};
-
-decorators.Header = (props) => {
-  const style = props.style;
-  const iconType = props.node.children ? 'folder' : 'file-text';
-  const iconClass = `fa fa-${iconType}`;
-  const iconStyle = { marginRight: '5px' };
-  return (
-    <div style={style.base}>
-      <div style={style.title}>
-        <i className={iconClass} style={iconStyle}/>
-        {props.node.name}
-      </div>
-    </div>
-  );
-};
 
 
 class Home extends React.Component {
@@ -76,10 +35,7 @@ class Home extends React.Component {
   }
 
   getTreeData() {
-    return {
-      name: 'app',
-      toggled: true,
-      children: [
+    return [
         {
           name: 'example',
           children: [
@@ -119,7 +75,6 @@ class Home extends React.Component {
         { name: 'index.js' },
         { name: 'package.json' }
       ]
-    };
   }
 
   clickDownload() {
@@ -202,6 +157,10 @@ class Home extends React.Component {
         state.cssBuildOptions = value;
         break;
 
+      case 'buildToolRadios':
+        state.buildTool = value;
+        break;
+
       case 'databaseRadios':
         if (value === 'none' && state.authentication) {
           state.authentication.clear();
@@ -274,6 +233,14 @@ class Home extends React.Component {
       <CssPreprocessor cssPreprocessor={state.cssPreprocessor} cssFramework={state.cssFramework} handleChange={this.handleChange} />
     ) : null;
 
+    let jsFramework = state.cssPreprocessor ? (
+      <JsFramework jsFramework={state.jsFramework} reactOptions={state.reactOptions} handleChange={this.handleChange} />
+    ) : null;
+
+    let buildTool = state.jsFramework ? (
+      <BuildTool buildTool={state.buildTool} jsFramework={state.jsFramework} cssPreprocessor={state.cssPreprocessor} handleChange={this.handleChange} />
+    ) : null;
+
     let database = state.cssPreprocessor ? (
       <Database database={state.database} handleChange={this.handleChange} />
     ) : null;
@@ -282,11 +249,7 @@ class Home extends React.Component {
       <Authentication database={state.database} authentication={state.authentication} handleChange={this.handleChange} />
     ) : null;
 
-    let jsFramework = (state.authentication || state.database === 'none') ? (
-      <JsFramework jsFramework={state.jsFramework} reactOptions={state.reactOptions} reactBuildSystem={state.reactBuildSystem} cssBuildOptions={state.cssBuildOptions} handleChange={this.handleChange} />
-    ) : null;
-
-    let theme = state.jsFramework ? (
+    let theme = (state.authentication || state.database === 'none') ? (
       <Theme theme={state.theme} handleThemeClick={this.handleThemeClick} />
     ) : null;
 
@@ -298,7 +261,7 @@ class Home extends React.Component {
 
     let download = state.deployment ? (
       <div>
-        <h6><InlineSvg name="link" width="16px" height="18px"/> Reference Url</h6>
+        <h6>Reference Url</h6>
         <input className="form-control" type="text" value={`${location.origin}?state=${base64State}`} disabled />
         <br/>
         <button ref="downloadBtn" className="btn btn-block btn-mega" onClick={this.clickDownload}>Compile and Download</button>
@@ -313,20 +276,20 @@ class Home extends React.Component {
         {templateEngine}
         {cssFramework}
         {cssPreprocessor}
+        {jsFramework}
+        {buildTool}
         {database}
         {authentication}
-        {jsFramework}
         {theme}
         {deployment}
         {download}
-        <div style={styles.component}>
-          <Treebeard
+        <div>
+          <Tree
             data={this.getTreeData()}
             onToggle={this.onToggle}
-            decorators={decorators}
           />
         </div>
-        <div style={styles.component}>
+        <div>
           <NodeViewer node={this.state.cursor}/>
         </div>
         <div>
@@ -355,11 +318,11 @@ class NodeViewer extends React.Component {
     super(props);
   }
   render(){
-    const style = styles.viewer;
+
     let json = JSON.stringify(this.props.node, null, 4);
     if(!json){ json = HELP_MSG; }
     return (
-      <div style={style.base}>
+      <div>
         {json}
       </div>
     );
