@@ -11,9 +11,11 @@ class Header extends React.Component {
               <li><Link to="/" activeClassName="active">Home</Link></li>
               <li><Link to="/trending" activeClassName="active">Trending</Link></li>
               <li><Link to="/contributing" activeClassName="active">Contributing</Link></li>
-              <li><a>Bundles &nbsp;(coming soon)</a></li>
             </ul>
             <ul className="nav navbar-nav navbar-right">
+              <li className="tweet-button">
+                <a className="twitter-share-button" href="https://twitter.com/intent/tweet" />
+              </li>
               <li>
                 <Link to="https://github.com/sahat/boilerplate" className="navbar-icon">
                   <i className="ion-social-github"/>
