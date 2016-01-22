@@ -7,49 +7,75 @@ const BUILD_TOOL_SVG = (
   </svg>
 );
 
-const BuildTool = (props) => {
+class BuildTool extends React.Component {
+  constructor(props) {
+    super(props);
+    this.initializeTooltip.bind(this);
+  }
 
-  let noneAlert = props.buildTool === 'none' ? (
-    <div className="alert alert-info">
-      You have not selected a build system.
-    </div>
-  ) : null;
+  initializeTooltip() {
+    let tooltip = this.refs.tooltip;
+    let requiresBuildTool = this.props.cssPreprocessor !== 'css' || this.props.jsFramework;
 
-  return (
-    <section className={cx('animated fadeIn', props.buildTool)}>
-      <h6>{BUILD_TOOL_SVG} {!props.buildTool || props.buildTool === 'none' ? 'Build Tool' : props.buildTool}</h6>
-      {noneAlert}
-      <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/none.png" alt="None"/>
-        <input type="radio" name="buildToolRadios" value="none" onChange={props.handleChange} checked={props.buildTool === 'none'} /> None
-      </label>
-      <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/browserify-logo.svg" alt="Gulp / Browserify"/>
-        <input type="radio" name="buildToolRadios" value="gulp" onChange={props.handleChange} checked={props.buildTool === 'gulp'} /> Gulp / Browserify
-      </label>
-      <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/webpack-logo.svg" alt="Webpack"/>
-        <input type="radio" name="buildToolRadios" value="webpack" onChange={props.handleChange} checked={props.buildTool === 'webpack'} /> Webpack
-      </label>
-      <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/npm-logo.svg" alt="NPM"/>
-        <input type="radio" name="buildToolRadios" value="npm" onChange={props.handleChange} checked={props.buildTool === 'npm'} /> NPM
-      </label>
+    if (requiresBuildTool) {
+      $(tooltip).tooltip({
+        title: 'You have selected a CSS preprocessor and/or JavaScript framework that requires a compile step.'
+      });
+    } else {
+      // Hides and destroys an element's tooltip.
+      $(tooltip).tooltip('destroy');
+    }
+  }
 
-      <ul className="nav nav-stacked">
-        <li>
-          <a data-toggle="collapse" href="#buildToolCollapse1">
-            <i className="ion-help-circled" /> Should I use a CSS Framework?
-          </a>
-          <div id="buildToolCollapse1" className="collapse">
-            <div className="panel-collapse">
-              Lorem ipsum.
-            </div>
+  componentDidMount() {
+    this.initializeTooltip();
+  }
+
+  componentDidUpdate() {
+    this.initializeTooltip();
+  }
+
+  render() {
+    let props = this.props;
+    let requiresBuildTool = props.cssPreprocessor !== 'css' || props.jsFramework;
+
+    return (
+      <section className={cx('animated fadeIn', props.buildTool)}>
+        <h6>{BUILD_TOOL_SVG} {!props.buildTool || props.buildTool === 'none' ? 'Build Tool' : props.buildTool}</h6>
+        <label className="radio-inline">
+          <div ref="tooltip" data-toggle="tooltip" data-placement="top">
+            <img className="btn-logo" src="/img/svg/none.png" alt="None"/>
+            <input type="radio" name="buildToolRadios" value="none" onChange={props.handleChange} checked={props.buildTool === 'none'} disabled={requiresBuildTool} /> None
           </div>
-        </li>
-      </ul>
-    </section>
-  );
-};
+        </label>
+        <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/browserify-logo.svg" alt="Gulp / Browserify"/>
+          <input type="radio" name="buildToolRadios" value="gulp" onChange={props.handleChange} checked={props.buildTool === 'gulp'} /> Gulp / Browserify
+        </label>
+        <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/webpack-logo.svg" alt="Webpack"/>
+          <input type="radio" name="buildToolRadios" value="webpack" onChange={props.handleChange} checked={props.buildTool === 'webpack'} /> Webpack
+        </label>
+        <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/npm-logo.svg" alt="NPM"/>
+          <input type="radio" name="buildToolRadios" value="npm" onChange={props.handleChange} checked={props.buildTool === 'npm'} /> NPM
+        </label>
+
+        <ul className="nav nav-stacked">
+          <li>
+            <a data-toggle="collapse" href="#buildToolCollapse1">
+              <i className="ion-help-circled" /> Which build tool should I use?
+            </a>
+            <div id="buildToolCollapse1" className="collapse">
+              <div className="panel-collapse">
+                Lorem ipsum.
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+    );
+  }
+}
 
 export default BuildTool;
