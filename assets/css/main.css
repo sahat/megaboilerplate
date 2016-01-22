@@ -332,13 +332,20 @@ section {
 footer {
   color: #fff;
   background-color: #292929;
-  padding: 96px 0;
+  padding: 40px 0;
   position: relative;
   overflow: hidden;
 }
 
-footer h6 {
+footer a {
   color: #fff;
+  opacity: .5;
+  transition: all 0.3s ease;
+}
+
+footer a:hover {
+  color: #fff;
+  opacity: 1;
 }
 
 /*Slideshow*/
