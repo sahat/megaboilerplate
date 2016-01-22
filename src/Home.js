@@ -8,8 +8,6 @@ import ReactDOM from 'react-dom';
 import {isArray, forOwn, clone} from 'lodash';
 import { createHistory, useQueries } from 'history';
 
-import Tree from './Tree/Tree';
-
 import Platform from './sections/Platform';
 import Framework from './sections/Framework';
 import TemplateEngine from './sections/TemplateEngine';
@@ -32,49 +30,6 @@ class Home extends React.Component {
     this.clickDownload = this.clickDownload.bind(this);
     this.handleThemeClick = this.handleThemeClick.bind(this);
     this.onToggle = this.onToggle.bind(this);
-  }
-
-  getTreeData() {
-    return [
-        {
-          name: 'example',
-          children: [
-            { name: 'app.js' },
-            { name: 'data.js' },
-            { name: 'index.html' },
-            { name: 'styles.js' },
-            { name: 'webpack.config.js' }
-          ]
-        },
-        {
-          name: 'node_modules',
-          loading: true,
-          children: []
-        },
-        {
-          name: 'src',
-          children: [
-            {
-              name: 'components',
-              children: [
-                { name: 'decorators.js' },
-                { name: 'treebeard.js' }
-              ]
-            },
-            { name: 'index.js' }
-          ]
-        },
-        {
-          name: 'themes',
-          children: [
-            { name: 'animations.js' },
-            { name: 'default.js' }
-          ]
-        },
-        { name: 'Gulpfile.js' },
-        { name: 'index.js' },
-        { name: 'package.json' }
-      ]
   }
 
   clickDownload() {
@@ -283,21 +238,6 @@ class Home extends React.Component {
         {theme}
         {deployment}
         {download}
-        <div>
-          <Tree
-            data={this.getTreeData()}
-            onToggle={this.onToggle}
-          />
-        </div>
-        <div>
-          <NodeViewer node={this.state.cursor}/>
-        </div>
-        <div>
-          <button ref="downloadBtn" className="btn btn-block btn-mega" onClick={this.clickDownload}>Compile and Download</button>
-        </div>
-        <br/>
-        <a className="twitter-follow-button" href="https://twitter.com/EvNowAndForever" data-show-count="false">
-          Follow @EvNowAndForever</a>
       </div>
     );
   }
