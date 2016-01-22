@@ -417,10 +417,9 @@ canvas {
   left: 0;
 }
 
-/* ANimated stac */
+/* ANimated stack */
 .wrapper {
-  width: 500px;
-  height: 350px;
+  height: 210px;
   margin: 0 auto;
 }
 .wrapper:hover .upper {
@@ -437,8 +436,9 @@ canvas {
   right: 0;
   top: 0;
   bottom: 0;
-  height: 480px;
-  width: 320px;
+  margin-top: 15px;
+  height: 290px;
+  width: 275px;
   position: absolute;
   background: #cfd9db;
   z-index: 50;

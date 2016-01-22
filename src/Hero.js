@@ -8,8 +8,8 @@ class Hero extends React.Component {
   }
 
   componentDidMount() {
-    this.loadCarbonAds();
-    this.renderConnectedDots();
+    //this.loadCarbonAds();
+    //this.renderConnectedDots();
   }
 
   loadCarbonAds() {
