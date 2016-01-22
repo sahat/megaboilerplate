@@ -55,52 +55,6 @@ const CssPreprocessor = (props) => {
     </label>
   ) : null;
 
-  let cssBuildOptions = (SASS || LESS || STYLUS || CSSNEXT) ? (
-    <section className="animated fadeIn">
-      <h5 className="subcategory">CSS Build Options</h5>
-
-      <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/gulp-logo.png" alt="Gulp Logo"/>
-        <input type="radio" name="cssBuildOptionsRadios" value="gulp" onChange={props.handleChange} defaultChecked={props.cssBuildOptions === 'gulp'} /> Gulp
-      </label>
-      <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/webpack-logo.svg" alt="Webpack Logo"/>
-        <input type="radio" name="cssBuildOptionsRadios" value="webpack" onChange={props.handleChange} defaultChecked={props.cssBuildOptions === 'webpack'} /> Webpack
-      </label>
-      <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/grunt-logo.svg" alt="Grunt Logo"/>
-        <input type="radio" name="cssBuildOptionsRadios" value="grunt" onChange={props.handleChange} defaultChecked={props.cssBuildOptions === 'grunt'} /> Grunt
-      </label>
-      <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/middleware-logo.svg" alt="Middleware Logo"/>
-        <input type="radio" name="cssBuildOptionsRadios" value="middleware" onChange={props.handleChange} defaultChecked={props.cssBuildOptions === 'middleware'} /> Middleware
-      </label>
-
-      <ul className="nav nav-stacked">
-        <li>
-          <a data-toggle="collapse" href="#cssBuildOptionsCollapse1">
-            <i className="ion-help-circled"/> Gulp vs Webpack vs Grunt?
-          </a>
-          <div id="cssBuildOptionsCollapse1" className="collapse">
-            <div className="panel-collapse">
-              Lorem ipsum
-            </div>
-          </div>
-        </li>
-        <li>
-          <a data-toggle="collapse" href="#cssBuildOptionsCollapse2">
-            <i className="ion-help-circled"/> Should I use middleware?
-          </a>
-          <div id="cssBuildOptionsCollapse2" className="collapse">
-            <div className="panel-collapse">
-              Lorem ipsum
-            </div>
-          </div>
-        </li>
-      </ul>
-    </section>
-  ) : null;
-
   return (
     <section className={cx('animated fadeIn', props.cssPreprocessor)}>
       <h6>{CSS_PREPROCESSOR_SVG} {!props.cssPreprocessor || props.cssPreprocessor === 'css' ? 'CSS Preprocessor' : props.cssPreprocessor}</h6>
@@ -121,7 +75,6 @@ const CssPreprocessor = (props) => {
           </div>
         </li>
       </ul>
-      {cssBuildOptions}
     </section>
   );
 };
