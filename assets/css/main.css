@@ -771,4 +771,33 @@ section h6 svg {
   fill: currentColor;
 }
 
+.gulp h6 {
+  color: #fff;
+  background: #cf4646;
+  border-color: transparent;
+}
 
+.gulp svg {
+  color: #fff;
+  fill: currentColor;
+}
+
+.webpack h6 {
+  background: #7ea9e8;
+  border-color: transparent;
+}
+
+.webpack svg {
+  fill: currentColor;
+}
+
+.npm h6 {
+  color: #fff;
+  background: #cb3837;
+  border-color: transparent;
+}
+
+.npm svg {
+  color: #fff;
+  fill: currentColor;
+}
