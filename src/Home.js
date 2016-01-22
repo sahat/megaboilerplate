@@ -215,12 +215,7 @@ class Home extends React.Component {
     let base64State = base64url.encode(JSON.stringify(state));
 
     let download = state.deployment ? (
-      <div>
-        <h6>Reference Url</h6>
-        <input className="form-control" type="text" value={`${location.origin}?state=${base64State}`} disabled />
-        <br/>
-        <button ref="downloadBtn" className="btn btn-block btn-mega" onClick={this.clickDownload}>Compile and Download</button>
-      </div>
+      <button ref="downloadBtn" className="btn btn-block btn-mega" onClick={this.clickDownload}>Compile and Download</button>
     ) : null;
 
     return (
@@ -238,31 +233,6 @@ class Home extends React.Component {
         {theme}
         {deployment}
         {download}
-      </div>
-    );
-  }
-  onToggle(node, toggled){
-    if(this.state.cursor){this.state.cursor.active = false;}
-    node.active = true;
-    if(node.children){ node.toggled = toggled; }
-    this.setState({ cursor: node });
-  }
-}
-
-const HELP_MSG = 'Select A Node To See Its Data Structure Here...';
-
-
-class NodeViewer extends React.Component {
-  constructor(props){
-    super(props);
-  }
-  render(){
-
-    let json = JSON.stringify(this.props.node, null, 4);
-    if(!json){ json = HELP_MSG; }
-    return (
-      <div>
-        {json}
       </div>
     );
   }
