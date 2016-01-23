@@ -163,8 +163,12 @@ label span + i {
 .navbar-default {
   background-color: transparent;
 }
+.navbar-inverse {
+  background: #6f5499 linear-gradient(135deg, #271b38, #563d7c, #7952b3);
+}
 
-.navbar-default .navbar-nav > li > a {
+.navbar-default .navbar-nav > li > a,
+.navbar-inverse .navbar-nav > li > a {
   font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: rgba(255, 255, 255, .65);
   font-size: 11px;
