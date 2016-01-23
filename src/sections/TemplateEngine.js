@@ -7,64 +7,71 @@ const TEMPLATE_ENGINE_SVG = (
   </svg>
 );
 
-const TemplateEngine = (props) => {
-  let optionsClasses = cx("nav nav-stacked", {
-    fadeIn: props.templateEngine && props.templateEngine !== 'none',
-    animated: props.templateEngine && props.templateEngine !== 'none',
-    invisible: !props.templateEngine || props.templateEngine === 'none'
-  });
+class TemplateEngine extends React.Component {
+  render() {
+    let props = this.props;
 
-  let nodeTemplateEngines = (props.platform === 'node') ? (
-    <div>
-      <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/jade-logo.svg" height="60" alt="Jade"/>
-        <input type="radio" name="templateEngineRadios" value="jade" onChange={props.handleChange} checked={props.templateEngine === 'jade'}/> Jade
-      </label>
-      <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/handlebars-logo.svg" alt="Handlebars"/>
-        <input type="radio" name="templateEngineRadios" value="handlebars" onChange={props.handleChange} checked={props.templateEngine === 'handlebars'}/> Handlebars
-      </label>
-      <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/nunjucks-logo.png" alt="Nunjucks"/>
-        <input type="radio" name="templateEngineRadios" value="nunjucks" onChange={props.handleChange} checked={props.templateEngine === 'nunjucks'}/> Nunjucks
-      </label>
-      <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/none.png" alt="None"/>
-        <input type="radio" name="templateEngineRadios" value="none" onChange={props.handleChange} checked={props.templateEngine === 'none'}/> None
-      </label>
+    let nodeTemplateEngines = (props.platform === 'node') ? (
+      <div className="radio-group">
+        <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/jade-logo.svg" height="60" alt="Jade"/>
+          <input type="radio" name="templateEngineRadios" value="jade" onChange={props.handleChange} checked={props.templateEngine === 'jade'}/> Jade
+        </label>
+        <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/handlebars-logo.svg" alt="Handlebars"/>
+          <input type="radio" name="templateEngineRadios" value="handlebars" onChange={props.handleChange} checked={props.templateEngine === 'handlebars'}/> Handlebars
+        </label>
+        <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/nunjucks-logo.png" alt="Nunjucks"/>
+          <input type="radio" name="templateEngineRadios" value="nunjucks" onChange={props.handleChange} checked={props.templateEngine === 'nunjucks'}/> Nunjucks
+        </label>
+        <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/none.png" alt="None"/>
+          <input type="radio" name="templateEngineRadios" value="none" onChange={props.handleChange} checked={props.templateEngine === 'none'}/> None
+        </label>
+      </div>
+    ) : null;
 
-      <ul className={optionsClasses}>
-        <li>
-          <a data-toggle="collapse" href="#templateEngineCollapse1">
-            <img className="options-icon animated" src="/img/svg/options.svg"/>
-            Additional Options
-          </a>
-          <div id="templateEngineCollapse1" className="collapse">
-            <div className="panel-collapse">
-              <div className="checkbox">
-                <label>
-                  <input type="checkbox" value="minified" />
-                  <span>Minified HTML</span>
-                </label>
-              </div>
-            </div>
+    let description;
+
+    switch (props.templateEngine) {
+      case 'jade':
+        description = (
+          <div>
+            <strong><a href="http://jade-lang.com/" target="_blank">Jade</a></strong> — High-performance template engine heavily influenced by <a href="http://haml.info/" target="_blank">Haml</a>.
           </div>
-        </li>
-      </ul>
+        );
+        break;
+      case 'handlebars':
+        description = (
+          <div>
+            <strong><a href="http://handlebarsjs.com/" target="_blank">Handlebars</a></strong> — A superset of <a href="http://mustache.github.io/" target="_blank">Mustache</a> templates which adds powerful features like helpers and more advanced blocks.
+          </div>
+        );
+        break;
+      case 'nunjucks':
+        description = (
+          <div>
+            <strong><a href="http://mozilla.github.io/nunjucks/" target="_blank">Nunjucks</a></strong> — A powerful templating engine with inheritance, asynchronous control, and more (<a href="http://jinja.pocoo.org/docs/dev/" target="_blank">Jinja2</a> inspired).
+          </div>
+        );
+        break;
+      default:
+        description = <div className="placeholder"> </div>;
+    }
 
-    </div>
-  ) : null;
-
-  return (
-    <div className={cx('animated fadeIn panel', props.templateEngine)}>
-      <div className="panel-heading">
-        <h6>{TEMPLATE_ENGINE_SVG} {!props.templateEngine || props.templateEngine === 'none' ? 'Template Engine' : props.templateEngine}</h6>
+    return (
+      <div className={cx('animated fadeIn panel', props.templateEngine)}>
+        <div className="panel-heading">
+          <h6>{TEMPLATE_ENGINE_SVG} {!props.templateEngine || props.templateEngine === 'none' ? 'Template Engine' : props.templateEngine}</h6>
+        </div>
+        <div className="panel-body">
+          {description}
+          {nodeTemplateEngines}
+        </div>
       </div>
-      <div className="panel-body">
-        {nodeTemplateEngines}
-      </div>
-    </div>
-  )
-};
+    )
+  }
+}
 
 export default TemplateEngine;
