@@ -394,15 +394,23 @@ footer {
   color: #333;
 }
 
-/*.nav-stacked > li > a > span {*/
-  /*background-image: linear-gradient(to bottom, rgba(0,0,0,0) 50%, rgba(0,0,0,0.6) 50%);*/
-  /*background-repeat: repeat-x;*/
-  /*background-size: 2px 2px;*/
-  /*background-position: 0 15px;*/
-/*}*/
+.nav-stacked > li > a > span {
+  background-image: linear-gradient(to bottom, rgba(0,0,0,0) 50%, rgba(0,0,0,0.6) 50%);
+  background-repeat: repeat-x;
+  background-size: 2px 2px;
+  background-position: 0 16px;
+}
+.nav-stacked > li > a > span:hover {
+  color: rgb(29, 124, 244);
+  background-image: linear-gradient(to bottom, rgba(29, 124, 244,0) 50%, rgba(29, 124, 244,0.6) 50%);
+}
 
 .nav-stacked > li a > i[class^="ion"] {
   margin-right: 5px;
+}
+
+.nav-stacked > li a > span+i {
+  margin-left: 5px;
 }
 
 .panel-collapse  {
