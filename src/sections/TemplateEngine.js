@@ -8,6 +8,12 @@ const TEMPLATE_ENGINE_SVG = (
 );
 
 const TemplateEngine = (props) => {
+  let optionsClasses = cx("nav nav-stacked", {
+    fadeIn: props.templateEngine && props.templateEngine !== 'none',
+    animated: props.templateEngine && props.templateEngine !== 'none',
+    invisible: !props.templateEngine || props.templateEngine === 'none'
+  });
+
   let nodeTemplateEngines = (props.platform === 'node') ? (
     <div>
       <label className="radio-inline">
@@ -27,36 +33,25 @@ const TemplateEngine = (props) => {
         <input type="radio" name="templateEngineRadios" value="none" onChange={props.handleChange} checked={props.templateEngine === 'none'}/> None
       </label>
 
-      <ul className="nav nav-stacked">
+      <ul className={optionsClasses}>
         <li>
           <a data-toggle="collapse" href="#templateEngineCollapse1">
-            <i className="ion-help-circled"/> What's a template engine?
+            <img className="options-icon animated" src="/img/svg/options.svg"/>
+            Additional Options
           </a>
           <div id="templateEngineCollapse1" className="collapse">
             <div className="panel-collapse">
-              Lorem ipsum
+              <div className="checkbox">
+                <label>
+                  <input type="checkbox" value="minified" />
+                  <span>Minified HTML</span>
+                </label>
+              </div>
             </div>
-          </div>
-        </li>
-        <li>
-          <a data-toggle="collapse" href="#templateEngineCollapse2">
-            <i className="ion-help-circled"/> When should I use a template engine?
-          </a>
-          <div id="templateEngineCollapse2" className="collapse">
-            <div className="panel-collapse">
-              Select <strong>None</strong> if you are building an API server or a single-page application.
-            </div>
-          </div>
-        </li>
-        <li>
-          <a data-toggle="collapse" href="#templateEngineCollapse3">
-            <i className="ion-help-circled"/> Jade vs Handlebars vs Nunjucks?
-          </a>
-          <div id="templateEngineCollapse3" className="panel-collapse collapse">
-            Lorem ipsum
           </div>
         </li>
       </ul>
+
     </div>
   ) : null;
 
