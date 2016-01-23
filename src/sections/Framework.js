@@ -42,32 +42,11 @@ class Framework extends React.Component {
   render() {
     let props = this.props;
 
-    let nodeOptions = props.framework ? (
-      <ul className="nav nav-stacked animated fadeInDown">
-        <li>
-          <a data-toggle="collapse" href="#frameworkCollapse1">
-            <img className="options-icon animated" src="/img/svg/options.svg"/>
-            Additional Options
-          </a>
-          <div id="frameworkCollapse1" className="collapse">
-            <div className="panel-collapse">
-              <div className="checkbox">
-                <label>
-                  <input type="checkbox" value="cluster" />
-                  <span ref="clusterTooltip" data-toggle="tooltip" data-placement="top">Node.js Cluster</span>
-                </label>
-              </div>
-              <div className="checkbox">
-                <label>
-                  <input type="checkbox" value="socketio" />
-                  <span ref="socketioTooltip" data-toggle="tooltip" data-placement="top">Socket.IO</span>
-                </label>
-              </div>
-            </div>
-          </div>
-        </li>
-      </ul>
-    ): null;
+    let optionsClasses = cx("nav nav-stacked", {
+      fadeIn: props.framework,
+      animated: props.framework,
+      invisible: !props.framework
+    });
 
     let nodeFrameworks = (props.platform === 'node') ? (
       <div>
@@ -87,7 +66,30 @@ class Framework extends React.Component {
           <span>Meteor</span>
         </label>
 
-        {nodeOptions}
+        <ul className={optionsClasses}>
+          <li>
+            <a data-toggle="collapse" href="#frameworkCollapse1">
+              <img className="options-icon animated" src="/img/svg/options.svg"/>
+              Additional Options
+            </a>
+            <div id="frameworkCollapse1" className="collapse">
+              <div className="panel-collapse">
+                <div className="checkbox">
+                  <label>
+                    <input type="checkbox" value="cluster" />
+                    <span ref="clusterTooltip" data-toggle="tooltip" data-placement="top">Node.js Cluster</span>
+                  </label>
+                </div>
+                <div className="checkbox">
+                  <label>
+                    <input type="checkbox" value="socketio" />
+                    <span ref="socketioTooltip" data-toggle="tooltip" data-placement="top">Socket.IO</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
 
       </div>
     ) : null;
