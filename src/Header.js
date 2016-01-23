@@ -140,18 +140,22 @@ class Header extends React.Component {
               <li><Link to="/contributing" activeClassName="active">Contributing</Link></li>
             </ul>
             <ul className="nav navbar-nav navbar-right">
-              <li className="linkedin-button">
-                <script type="IN/Share" data-counter="right"></script>
-              </li>
-              <li>
-                <div className="g-plusone"></div>
-              </li>
-              <li className="facebook-share-button">
-                <div className="fb-share-button" data-href="http://www.your-domain.com/your-page.html" data-layout="button_count"></div>
-              </li>
               <li className="tweet-button">
                 <a className="twitter-share-button" href="https://twitter.com/intent/tweet" />
               </li>
+
+              <li className="facebook-share-button">
+                <div className="fb-share-button" data-href="http://www.your-domain.com/your-page.html" data-layout="button_count"></div>
+              </li>
+
+              <li className="linkedin-button">
+                <script type="IN/Share" data-counter="right"></script>
+              </li>
+
+              <li className="plusone-button">
+                <div className="g-plusone" data-size="medium" data-href="http://google.com"></div>
+              </li>
+
               <li>
                 <Link to="https://github.com/sahat/boilerplate" className="navbar-icon">
                   <i className="ion-social-github"/>

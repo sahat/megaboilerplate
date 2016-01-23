@@ -423,11 +423,13 @@ canvas {
 }
 
 .facebook-share-button {
-  margin-right: 15px;
+  margin-left: 5px;
+  margin-right: 5px;
   padding-top: 15px;
   padding-bottom: 15px;
 }
 
+.plusone-button,
 .linkedin-button,
 .tweet-button {
   padding-top: 15px;
