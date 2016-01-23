@@ -1,4 +1,5 @@
 body {
+  background-color: #f5f5f5;
   font-size: 13px;
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-rendering: optimizeLegibility;
@@ -13,7 +14,6 @@ main {
 h1, h2, h3, h4, h5, h6 {
   font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 300;
-  color: #282828;
 }
 
 h3 {
@@ -29,10 +29,10 @@ h6 {
   text-transform: uppercase;
   letter-spacing: 2px;
   font-weight: 700;
-  margin-bottom: 24px;
-  border-bottom: 1px solid #ccc;
-  padding-left: 5px;
-  padding-right: 5px;
+  /*margin-bottom: 24px;*/
+  /*border-bottom: 1px solid #ccc;*/
+  /*padding-left: 5px;*/
+  /*padding-right: 5px;*/
 }
 
 hr {
@@ -76,14 +76,6 @@ hr {
   height: 75px;
   margin-top: 5px;
   margin-bottom: 5px;
-}
-
-label input:checked+span,
-label:hover input+span {
-  background-image: linear-gradient(to bottom, rgba(0,0,0,0) 50%, rgba(0,0,0,0.6) 50%);
-  background-repeat: repeat-x;
-  background-size: 2px 2px;
-  background-position: 0 15px;
 }
 
 label span + i {
@@ -208,11 +200,6 @@ label span + i {
   font-size: 250%;
 }
 
-.nav-stacked {
-  margin-top: 5px;
-}
-
-
 
 /** Labels **/
 .label {
@@ -235,10 +222,18 @@ label span + i {
 
 /*Buttons*/
 .btn {
+  font-size: 13px;
+  border-radius: 2px;
 }
 
 .btn:active, .btn.active {
   box-shadow: none;
+}
+
+.btn-default {
+  color: #333;
+  background-color: #fcfcfc;
+  border-color: #ddd;
 }
 
 .btn-group > .btn {
@@ -312,10 +307,9 @@ label span + i {
 .checkbox-inline,
 .radio-inline {
   text-align: center;
-  line-height: 24px;
+  /*line-height: 24px;*/
   border-radius: 0;
   vertical-align: baseline;
-  transition: all 0.3s ease;
 }
 
 
@@ -357,53 +351,62 @@ footer {
   margin-bottom: 10px;
 }
 
-/* Accordion */
+/*!* Accordion *!*/
 
-section .panel {
-  margin-top: 10px;
-}
-.panel {
-  box-shadow: none;
-}
-.panel-group .panel {
-  border-radius: 0;
-}
-.panel-default > .panel-heading {
-  border-radius: 0;
-  background-color: #eee;
-  transition: all 0.3s ease;
-}
+/*section .panel {*/
+  /*margin-top: 10px;*/
+/*}*/
+/*.panel {*/
+  /*box-shadow: none;*/
+/*}*/
+/*.panel-group .panel {*/
+  /*border-radius: 0;*/
+/*}*/
+/*.panel-default > .panel-heading {*/
+  /*border-radius: 0;*/
+  /*background-color: #eee;*/
+  /*transition: all 0.3s ease;*/
+/*}*/
 
-.panel-title {
-  color: #666;
-  font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 11px;
-  text-transform: uppercase;
-  font-weight: 700;
-  letter-spacing: 1px;
-}
+
+/*.panel-title {*/
+  /*color: #666;*/
+  /*font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;*/
+  /*font-size: 11px;*/
+  /*text-transform: uppercase;*/
+  /*font-weight: 700;*/
+  /*letter-spacing: 1px;*/
+/*}*/
 
 /*.panel-default > .panel-heading + .panel-collapse > .panel-body {*/
   /*border: 1px solid #eee;*/
 /*}*/
 
-/*.nav-stacked {*/
-  /*margin-top: 20px;*/
-/*}*/
+.nav-stacked {
+  margin-top: 20px;
+}
 
 .nav-stacked > li + li {
   margin-top: 0;
 }
 .nav-stacked > li > a {
-  padding: 8px 0;
+  padding: 0;
+  color: #333;
 }
+
+/*.nav-stacked > li > a > span {*/
+  /*background-image: linear-gradient(to bottom, rgba(0,0,0,0) 50%, rgba(0,0,0,0.6) 50%);*/
+  /*background-repeat: repeat-x;*/
+  /*background-size: 2px 2px;*/
+  /*background-position: 0 15px;*/
+/*}*/
 
 .nav-stacked > li a > i[class^="ion"] {
   margin-right: 5px;
 }
 
 .panel-collapse  {
-  padding: 5px 15px;
+  padding: 0 20px;
 }
 
 .nav-stacked > li > a:hover,
@@ -584,7 +587,7 @@ section h6 svg {
   vertical-align: sub;
 }
 
-.node h6 {
+.node .panel-heading {
   background: #83cd29;
   border-color: transparent;
 }
@@ -605,7 +608,7 @@ section h6 svg {
   fill: currentColor;
 }
 
-.express h6 {
+.express .panel-heading {
   color: #fff;
   background: #000;
   border-color: transparent;
@@ -890,4 +893,93 @@ section h6 svg {
 .npm svg {
   color: #fff;
   fill: currentColor;
+}
+
+.panel {
+  margin-bottom: 20px;
+  background-color: #fff;
+  border: 0;
+  border-radius: 3px;
+  box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+
+.panel-heading {
+  padding: 0;
+  padding-left: 15px;
+  border-bottom: 1px solid #ccc;
+}
+
+.panel-heading h6 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.panel-heading h6 svg {
+  vertical-align: sub;
+}
+
+.panel-body {
+  /*padding-bottom: 0;*/
+}
+
+.options-icon {
+  margin-right: 5px;
+  vertical-align: sub;
+}
+.options-icon.animated {
+  animation-name: spin;
+  animation-duration: 4000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+@keyframes spin {
+  from {
+    transform:rotate(0deg);
+  }
+  to {
+    transform:rotate(360deg);
+  }
+}
+
+
+
+[type="radio"] {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px; margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+/* One radio button per line */
+
+
+[type="radio"] + span {
+  display: block;
+}
+
+/* the basic, unchecked style */
+[type="radio"] + span:before {
+  content: '';
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  vertical-align: -0.25em;
+  border-radius: 1em;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 0.125em #ddd8ce;
+  margin-right: 0.75em;
+  transition: all .2s ease-out;
+}
+
+[type="radio"]:hover + span:before {
+  box-shadow: 0 0 0 0.125em #000;
+}
+
+/* the checked style using the :checked pseudo class */
+[type="radio"]:checked + span:before {
+  background: #000;
+  box-shadow: 0 0 0 0.125em #000;
 }

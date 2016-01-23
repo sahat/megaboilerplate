@@ -43,7 +43,7 @@ class Framework extends React.Component {
     let props = this.props;
 
     let nodeOptions = props.framework ? (
-      <ul className="nav nav-stacked animated fadeIn">
+      <ul className="nav nav-stacked animated fadeInDown">
         <li>
           <a data-toggle="collapse" href="#frameworkCollapse1">
             <img className="options-icon animated" src="/img/svg/options.svg"/>
@@ -73,25 +73,22 @@ class Framework extends React.Component {
       <div>
         <label className="radio-inline">
           <span className="express-logo">Express</span>
-          <input type="radio" id="expressRadio" name="frameworkRadios" value="express" onChange={props.handleChange} checked={props.framework === 'express'}/> Express
+          <input type="radio" id="expressRadio" name="frameworkRadios" value="express" onChange={props.handleChange} checked={props.framework === 'express'}/>
+          <span>Express</span>
         </label>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/hapi-logo.png" alt="Hapi.js"/>
-          <input type="radio" name="frameworkRadios" value="hapi" onChange={props.handleChange} checked={props.framework === 'hapi'}/> Hapi
+          <input type="radio" name="frameworkRadios" value="hapi" onChange={props.handleChange} checked={props.framework === 'hapi'}/>
+          <span>Hapi</span>
         </label>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/meteor-logo.png" alt="Meteor"/>
-          <input type="radio" name="frameworkRadios" value="meteor" onChange={props.handleChange} checked={props.framework === 'meteor'}/> Meteor
+          <input type="radio" name="frameworkRadios" value="meteor" onChange={props.handleChange} checked={props.framework === 'meteor'}/>
+          <span>Meteor</span>
         </label>
 
         {nodeOptions}
 
-        <ul className="list-unstyled">
-          <li><a href="#">Which framework is right for me?</a></li>
-          <li><a href="#">Hapi vs Express?</a></li>
-          <li><a href="#">Which framework is right for me?</a></li>
-          <li><a href="#">Should I use Meteor or Express for real-time apps?</a></li>
-        </ul>
       </div>
     ) : null;
 
