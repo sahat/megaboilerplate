@@ -13,6 +13,9 @@ class Header extends React.Component {
               <li><Link to="/contributing" activeClassName="active">Contributing</Link></li>
             </ul>
             <ul className="nav navbar-nav navbar-right">
+              <li>
+                <div className="g-plusone"></div>
+              </li>
               <li className="facebook-share-button">
                 <div className="fb-share-button"
                      data-href="http://www.your-domain.com/your-page.html"
