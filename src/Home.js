@@ -8,6 +8,8 @@ import ReactDOM from 'react-dom';
 import {isArray, forOwn, clone} from 'lodash';
 import { createHistory, useQueries } from 'history';
 
+
+import Header from './Header';
 import Platform from './sections/Platform';
 import Framework from './sections/Framework';
 import TemplateEngine from './sections/TemplateEngine';
@@ -218,21 +220,25 @@ class Home extends React.Component {
     ) : null;
 
     return (
-      <div className="container">
-        <br/>
-        {platform}
-        {framework}
-        {templateEngine}
-        {cssFramework}
-        {cssPreprocessor}
-        {jsFramework}
-        {buildTool}
-        {database}
-        {authentication}
-        {theme}
-        {deployment}
-        {download}
-      </div>
+      <main>
+        <Header />
+        <div className="container">
+          <br/>
+          {platform}
+          {framework}
+          {templateEngine}
+          {cssFramework}
+          {cssPreprocessor}
+          {jsFramework}
+          {buildTool}
+          {database}
+          {authentication}
+          {theme}
+          {deployment}
+          {download}
+        </div>
+      </main>
+
     );
   }
 }
