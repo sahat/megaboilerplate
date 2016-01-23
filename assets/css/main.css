@@ -78,6 +78,14 @@ hr {
   margin-bottom: 5px;
 }
 
+label input:checked+span,
+label:hover input+span {
+  background-image: linear-gradient(to bottom, rgba(0,0,0,0) 50%, rgba(0,0,0,0.6) 50%);
+  background-repeat: repeat-x;
+  background-size: 2px 2px;
+  background-position: 0 15px;
+}
+
 label span + i {
   color: #4F8EF7;
   margin-left: 4px;
@@ -567,23 +575,25 @@ canvas {
 
 /*Headings Styles*/
 
+
+
 section h6 svg {
   vertical-align: sub;
 }
 
 .node h6 {
-  background-color: #83cd29;
+  background: #83cd29;
   border-color: transparent;
 }
 
 .python h6 {
-  background-color: #ffd344;
+  background: #ffd344;
   border-color: transparent;
 }
 
 .html5 h6 {
   color: #fff;
-  background-color: #e64c18;
+  background: #e64c18;
   border-color: transparent;
 }
 
@@ -594,7 +604,7 @@ section h6 svg {
 
 .express h6 {
   color: #fff;
-  background-color: #000;
+  background: #000;
   border-color: transparent;
 }
 
@@ -605,7 +615,7 @@ section h6 svg {
 
 .hapi h6 {
   color: #3c3b30;
-  background-color: #f6941e;
+  background: #f6941e;
   border-color: transparent;
 }
 
@@ -616,8 +626,7 @@ section h6 svg {
 
 .sails h6 {
   color: #fff;
-  background-color: #41bac2;
-  background-image: linear-gradient(135deg, #41bac2 0, #0b8fa2 100%);
+  background: #41bac2 linear-gradient(135deg, #41bac2 0, #0b8fa2 100%);
   border-color: transparent;
 }
 
@@ -628,7 +637,7 @@ section h6 svg {
 
 .meteor h6 {
   color: #fff;
-  background-color: #de4f4f;
+  background: #de4f4f;
   border-color: transparent;
 }
 
@@ -639,8 +648,7 @@ section h6 svg {
 
 .handlebars h6 {
   color: #fff;
-  background-color: #f7931e;
-  background-image: url(http://handlebarsjs.com/images/noise.png), radial-gradient(at top center, #f7931e, #f15a24 750px);
+  background: #f7931e radial-gradient(at top center, #f7931e, #f15a24 750px);
   border-color: transparent;
 }
 
@@ -651,7 +659,7 @@ section h6 svg {
 
 .jade h6 {
   color: #fff;
-  background-color: #448B6F;
+  background: #448B6F;
   border-color: transparent;
 }
 
@@ -662,7 +670,7 @@ section h6 svg {
 
 .nunjucks h6 {
   color: #fff;
-  background-color: #1e4514;
+  background: #1e4514;
   border-color: transparent;
 }
 
@@ -684,7 +692,7 @@ section h6 svg {
 
 .foundation h6 {
   color: #fff;
-  background-color: #777;
+  background: #777;
   border-color: transparent;
 }
 
@@ -706,7 +714,7 @@ section h6 svg {
 
 .sass h6 {
   color: #fff;
-  background-color: #c6538c;
+  background: #c6538c;
   border-color: transparent;
 }
 
@@ -717,7 +725,7 @@ section h6 svg {
 
 .less h6 {
   color: #fff;
-  background-color: #1d365d;
+  background: #1d365d;
   border-color: transparent;
 }
 
@@ -728,7 +736,7 @@ section h6 svg {
 
 .stylus h6 {
   color: #fff;
-  background-color: #ff6347;
+  background: #ff6347;
   border-color: transparent;
 }
 
@@ -750,7 +758,7 @@ section h6 svg {
 
 .mongodb h6 {
   color: #fff;
-  background-color: #69b241;
+  background: #69b241;
   border-color: transparent;
 }
 
@@ -762,7 +770,7 @@ section h6 svg {
 
 .mysql h6 {
   color: #fff;
-  background-color: #f59620;
+  background: #f59620;
   border-color: transparent;
 }
 
@@ -773,7 +781,7 @@ section h6 svg {
 
 .postgresql h6 {
   color: #fff;
-  background-color: #0085b0;
+  background: #0085b0;
   border-color: transparent;
 }
 
@@ -796,7 +804,7 @@ section h6 svg {
 
 .react h6 {
   color: #61dafb;
-  background-color: #2d2d2d;
+  background: #2d2d2d;
   border-color: transparent;
 }
 
