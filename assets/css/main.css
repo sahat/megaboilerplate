@@ -600,12 +600,12 @@ section h6 svg {
   border-color: transparent;
 }
 
-.python h6 {
+.python .panel-heading {
   background: #ffd344;
   border-color: transparent;
 }
 
-.html5 h6 {
+.html5 .panel-heading {
   color: #fff;
   background: #e64c18;
   border-color: transparent;
@@ -627,7 +627,7 @@ section h6 svg {
   fill: currentColor;
 }
 
-.hapi h6 {
+.hapi .panel-heading {
   color: #3c3b30;
   background: #f6941e;
   border-color: transparent;
@@ -638,7 +638,7 @@ section h6 svg {
   fill: currentColor;
 }
 
-.sails h6 {
+.sails .panel-heading {
   color: #fff;
   background: #41bac2 linear-gradient(135deg, #41bac2 0, #0b8fa2 100%);
   border-color: transparent;
@@ -649,7 +649,7 @@ section h6 svg {
   fill: currentColor;
 }
 
-.meteor h6 {
+.meteor .panel-heading {
   color: #fff;
   background: #de4f4f;
   border-color: transparent;
@@ -660,7 +660,7 @@ section h6 svg {
   fill: currentColor;
 }
 
-.handlebars h6 {
+.handlebars .panel-heading {
   color: #fff;
   background: #f7931e radial-gradient(at top center, #f7931e, #f15a24 750px);
   border-color: transparent;
@@ -671,7 +671,7 @@ section h6 svg {
   fill: currentColor;
 }
 
-.jade h6 {
+.jade .panel-heading {
   color: #fff;
   background: #448B6F;
   border-color: transparent;
@@ -682,7 +682,7 @@ section h6 svg {
   fill: currentColor;
 }
 
-.nunjucks h6 {
+.nunjucks .panel-heading {
   color: #fff;
   background: #1e4514;
   border-color: transparent;
@@ -693,7 +693,7 @@ section h6 svg {
   fill: currentColor;
 }
 
-.bootstrap h6 {
+.bootstrap .panel-heading {
   color: #fff;
   background: #6f5499 linear-gradient(135deg, #271b38, #563d7c, #7952b3);
   border-color: transparent;
@@ -704,7 +704,7 @@ section h6 svg {
   fill: currentColor;
 }
 
-.foundation h6 {
+.foundation .panel-heading {
   color: #fff;
   background: #777;
   border-color: transparent;
@@ -715,7 +715,7 @@ section h6 svg {
   fill: currentColor;
 }
 
-.bourbonNeat h6 {
+.bourbonNeat .panel-heading {
   color: #fff;
   background: #53aee0 linear-gradient(#53aee0, #3da4dc);
   border-color: transparent;
@@ -726,7 +726,7 @@ section h6 svg {
   fill: currentColor;
 }
 
-.sass h6 {
+.sass .panel-heading {
   color: #fff;
   background: #c6538c;
   border-color: transparent;
@@ -737,7 +737,7 @@ section h6 svg {
   fill: currentColor;
 }
 
-.less h6 {
+.less .panel-heading {
   color: #fff;
   background: #1d365d;
   border-color: transparent;
@@ -748,7 +748,7 @@ section h6 svg {
   fill: currentColor;
 }
 
-.stylus h6 {
+.stylus .panel-heading {
   color: #fff;
   background: #ff6347;
   border-color: transparent;
@@ -759,7 +759,7 @@ section h6 svg {
   fill: currentColor;
 }
 
-.cssnext h6 {
+.cssnext .panel-heading {
   color: #fff;
   background: linear-gradient(160deg, rgba(115, 64, 196, .9), rgba(49, 142, 223, .9));
   border-color: transparent;
@@ -770,7 +770,7 @@ section h6 svg {
   fill: currentColor;
 }
 
-.mongodb h6 {
+.mongodb .panel-heading {
   color: #fff;
   background: #69b241;
   border-color: transparent;
@@ -782,7 +782,7 @@ section h6 svg {
 }
 
 
-.mysql h6 {
+.mysql .panel-heading {
   color: #fff;
   background: #f59620;
   border-color: transparent;
@@ -793,7 +793,7 @@ section h6 svg {
   fill: currentColor;
 }
 
-.postgresql h6 {
+.postgresql .panel-heading {
   color: #fff;
   background: #0085b0;
   border-color: transparent;
@@ -805,7 +805,7 @@ section h6 svg {
 }
 
 
-.rethinkdb h6 {
+.rethinkdb .panel-heading {
   color: #fff;
   background: linear-gradient(to bottom, #214753 0%, #1a5161 50%, #1c5064 81%, #1d4f5f 100%);
   border-color: transparent;
@@ -816,7 +816,7 @@ section h6 svg {
   fill: currentColor;
 }
 
-.react h6 {
+.react .panel-heading {
   color: #61dafb;
   background: #2d2d2d;
   border-color: transparent;
@@ -827,7 +827,7 @@ section h6 svg {
   fill: currentColor;
 }
 
-.angular h6 {
+.angular .panel-heading {
   color: #fff;
   background: #1976d2;
   border-color: transparent;
@@ -838,7 +838,18 @@ section h6 svg {
   fill: currentColor;
 }
 
-.heroku h6 {
+.authentication .panel-heading {
+  color: #fff;
+  background: #00bf8f linear-gradient(to left, #00bf8f , #001510);
+  border-color: transparent;
+}
+
+.authentication svg {
+  color: #fff;
+  fill: currentColor;
+}
+
+.heroku .panel-heading {
   color: #fff;
   background: #430098;
   border-color: transparent;
@@ -849,7 +860,7 @@ section h6 svg {
   fill: currentColor;
 }
 
-.azure h6 {
+.azure .panel-heading {
   color: #fff;
   background: #00adef;
   border-color: transparent;
@@ -861,7 +872,7 @@ section h6 svg {
 }
 
 
-.bluemix h6 {
+.bluemix .panel-heading {
   color: #fff;
   background: #00a391;
   border-color: transparent;
@@ -872,7 +883,7 @@ section h6 svg {
   fill: currentColor;
 }
 
-.gulp h6 {
+.gulp .panel-heading {
   color: #fff;
   background: #cf4646;
   border-color: transparent;
@@ -883,7 +894,7 @@ section h6 svg {
   fill: currentColor;
 }
 
-.webpack h6 {
+.webpack .panel-heading {
   background: #7ea9e8;
   border-color: transparent;
 }
@@ -892,7 +903,7 @@ section h6 svg {
   fill: currentColor;
 }
 
-.npm h6 {
+.npm .panel-heading {
   color: #fff;
   background: #cb3837;
   border-color: transparent;

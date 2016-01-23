@@ -51,7 +51,7 @@ const Authentication = (props) => {
   );
 
   return (
-    <div className="animated fadeIn panel">
+    <div className={cx('animated fadeIn panel', { authentication: props.authentication && props.authentication.size > 0 })}>
       <div className="panel-heading">
         <h6>{AUTHENTICATION_SVG} Authentication</h6>
       </div>
