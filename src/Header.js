@@ -10,7 +10,7 @@ class Header extends React.Component {
 
   componentDidMount() {
     //this.loadCarbonAds();
-    //this.renderConnectedDots();
+    this.renderConnectedDots();
   }
 
   loadCarbonAds() {

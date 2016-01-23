@@ -396,7 +396,6 @@ section .panel {
 
 .panel-collapse  {
   padding: 5px 15px;
-  background-color: #f5f5f5;
 }
 
 .nav-stacked > li > a:hover,

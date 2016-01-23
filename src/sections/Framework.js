@@ -22,6 +22,35 @@ const Framework = (props) => {
         <img className="btn-logo" src="/img/svg/meteor-logo.png" alt="Meteor"/>
         <input type="radio" name="frameworkRadios" value="meteor" onChange={props.handleChange} checked={props.framework === 'meteor'}/> Meteor
       </label>
+
+      <br/><br/>
+      <div>
+      </div>
+
+      <ul className="nav nav-stacked">
+        <li>
+          <a data-toggle="collapse" href="#frameworkCollapse1">
+            <i className="ion-settings"/> Options
+          </a>
+          <div id="frameworkCollapse1" className="collapse">
+            <div className="panel-collapse">
+              <div className="checkbox">
+                <label>
+                  <input type="checkbox" value="cluster" />
+                    Cluster (Node.js Concurrency)
+                </label>
+              </div>
+              <div className="checkbox">
+                <label>
+                  <input type="checkbox" value="socketio" />
+                    Socket.IO
+                </label>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+
       <ul className="nav nav-stacked">
         <li>
           <a data-toggle="collapse" href="#frameworkCollapse1">
