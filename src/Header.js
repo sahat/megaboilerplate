@@ -180,7 +180,7 @@ class Header extends React.Component {
             <div className="box lower"></div>
           </div>
 
-          <h1>Mega Boilerplate</h1>
+          <h1><strong>Mega</strong> Boilerplate</h1>
           <p className="lead">
             Simple and easy to use hand-crafted starter kits.
             <br />
