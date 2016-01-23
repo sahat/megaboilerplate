@@ -61,10 +61,14 @@ const TemplateEngine = (props) => {
   ) : null;
 
   return (
-    <section className={cx('animated fadeIn', props.templateEngine)}>
-      <h6>{TEMPLATE_ENGINE_SVG} {!props.templateEngine || props.templateEngine === 'none' ? 'Template Engine' : props.templateEngine}</h6>
-      {nodeTemplateEngines}
-    </section>
+    <div className={cx('animated fadeIn panel', props.templateEngine)}>
+      <div className="panel-heading">
+        <h6>{TEMPLATE_ENGINE_SVG} {!props.templateEngine || props.templateEngine === 'none' ? 'Template Engine' : props.templateEngine}</h6>
+      </div>
+      <div className="panel-body">
+        {nodeTemplateEngines}
+      </div>
+    </div>
   )
 };
 

@@ -46,56 +46,60 @@ const JsFramework = (props) => {
   ) : null;
 
   return (
-    <section className={cx('animated fadeIn', props.jsFramework)}>
-      <h6>{JS_FRAMEWORK_SVG} {!props.jsFramework || props.jsFramework === 'none' ? 'JavaScript Framework' : props.jsFramework}</h6>
-      <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/none.png" alt="None Icon" />
-        <input type="radio" name="jsFrameworkRadios" value="none" onChange={props.handleChange} checked={props.jsFramework === 'none'} /> None
-      </label>
-      <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/react-logo.svg" />
-        <input type="radio" name="jsFrameworkRadios" value="react" onChange={props.handleChange} checked={props.jsFramework === 'react'} /> React
-      </label>
-      <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/angularjs-logo.png" />
-        <input type="radio" name="jsFrameworkRadios" value="angular" onChange={props.handleChange} checked={props.jsFramework === 'angular'} /> AngularJS
-      </label>
+    <div className={cx('animated fadeIn panel', props.jsFramework)}>
+      <div className="panel-heading">
+        <h6>{JS_FRAMEWORK_SVG} {!props.jsFramework || props.jsFramework === 'none' ? 'JavaScript Framework' : props.jsFramework}</h6>
+      </div>
+      <div className="panel-body">
+        <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/none.png" alt="None Icon" />
+          <input type="radio" name="jsFrameworkRadios" value="none" onChange={props.handleChange} checked={props.jsFramework === 'none'} /> None
+        </label>
+        <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/react-logo.svg" />
+          <input type="radio" name="jsFrameworkRadios" value="react" onChange={props.handleChange} checked={props.jsFramework === 'react'} /> React
+        </label>
+        <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/angularjs-logo.png" />
+          <input type="radio" name="jsFrameworkRadios" value="angular" onChange={props.handleChange} checked={props.jsFramework === 'angular'} /> AngularJS
+        </label>
 
-      <ul className="nav nav-stacked">
-        <li>
-          <a data-toggle="collapse" href="#jsFrameworkCollapse1">
-            <i className="ion-help-circled"/> Should I use a client-side JavaScript Framework at all?
-          </a>
-          <div id="jsFrameworkCollapse1" className="collapse">
-            <div className="panel-collapse">
-              Select <strong>None</strong> if you are building an API server or a single-page application.
+        <ul className="nav nav-stacked">
+          <li>
+            <a data-toggle="collapse" href="#jsFrameworkCollapse1">
+              <i className="ion-help-circled"/> Should I use a client-side JavaScript Framework at all?
+            </a>
+            <div id="jsFrameworkCollapse1" className="collapse">
+              <div className="panel-collapse">
+                Select <strong>None</strong> if you are building an API server or a single-page application.
+              </div>
             </div>
-          </div>
-        </li>
-        <li>
-          <a data-toggle="collapse" href="#jsFrameworkCollapse2">
-            <i className="ion-help-circled"/> Single Page Application: Advantages and Disadvantages
-          </a>
-          <div id="jsFrameworkCollapse2" className="collapse">
-            <div className="panel-collapse">
-              Select <strong>None</strong> if you are building an API server or a single-page application.
+          </li>
+          <li>
+            <a data-toggle="collapse" href="#jsFrameworkCollapse2">
+              <i className="ion-help-circled"/> Single Page Application: Advantages and Disadvantages
+            </a>
+            <div id="jsFrameworkCollapse2" className="collapse">
+              <div className="panel-collapse">
+                Select <strong>None</strong> if you are building an API server or a single-page application.
+              </div>
             </div>
-          </div>
-        </li>
-        <li>
-          <a data-toggle="collapse" href="#jsFrameworkCollapse3">
-            <i className="ion-help-circled"/> React vs Angular?
-          </a>
-          <div id="jsFrameworkCollapse3" className="collapse">
-            <div className="panel-collapse">
-              Select <strong>None</strong> if you are building an API server or a single-page application.
+          </li>
+          <li>
+            <a data-toggle="collapse" href="#jsFrameworkCollapse3">
+              <i className="ion-help-circled"/> React vs Angular?
+            </a>
+            <div id="jsFrameworkCollapse3" className="collapse">
+              <div className="panel-collapse">
+                Select <strong>None</strong> if you are building an API server or a single-page application.
+              </div>
             </div>
-          </div>
-        </li>
-      </ul>
+          </li>
+        </ul>
 
-      {reactOptions}
-    </section>
+        {reactOptions}
+      </div>
+    </div>
   );
 };
 

@@ -56,26 +56,30 @@ const CssPreprocessor = (props) => {
   ) : null;
 
   return (
-    <section className={cx('animated fadeIn', props.cssPreprocessor)}>
-      <h6>{CSS_PREPROCESSOR_SVG} {!props.cssPreprocessor || props.cssPreprocessor === 'css' ? 'CSS Preprocessor' : props.cssPreprocessor}</h6>
-      {cssRadio}
-      {sassRadio}
-      {lessRadio}
-      {stylusRadio}
-      {cssnextRadio}
-      <ul className="nav nav-stacked">
-        <li>
-          <a data-toggle="collapse" href="#cssPreprocessorCollapse1">
-            <i className="ion-help-circled" /> CSS Preprocessor Comparison
-          </a>
-          <div id="cssPreprocessorCollapse1" className="collapse">
-            <div className="panel-collapse">
-              Select <strong>None</strong> if you are building an API server or a single-page application.
+    <div className={cx('animated fadeIn panel', props.cssPreprocessor)}>
+      <div className="panel-heading">
+        <h6>{CSS_PREPROCESSOR_SVG} {!props.cssPreprocessor || props.cssPreprocessor === 'css' ? 'CSS Preprocessor' : props.cssPreprocessor}</h6>
+      </div>
+      <div className="panel-body">
+        {cssRadio}
+        {sassRadio}
+        {lessRadio}
+        {stylusRadio}
+        {cssnextRadio}
+        <ul className="nav nav-stacked">
+          <li>
+            <a data-toggle="collapse" href="#cssPreprocessorCollapse1">
+              <i className="ion-help-circled" /> CSS Preprocessor Comparison
+            </a>
+            <div id="cssPreprocessorCollapse1" className="collapse">
+              <div className="panel-collapse">
+                Select <strong>None</strong> if you are building an API server or a single-page application.
+              </div>
             </div>
-          </div>
-        </li>
-      </ul>
-    </section>
+          </li>
+        </ul>
+      </div>
+    </div>
   );
 };
 

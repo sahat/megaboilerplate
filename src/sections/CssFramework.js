@@ -14,49 +14,52 @@ const CssFramework = (props) => {
   const BOURBON_NEAT = props.cssFramework === 'bourbonNeat';
 
   return (
-    <section className={cx('animated fadeIn', props.cssFramework)}>
-      <h6>{CSS_FRAMEWORK_SVG} {!props.cssFramework || props.cssFramework === 'none' ? 'CSS Framework' : props.cssFramework}</h6>
+    <div className={cx('animated fadeIn panel', props.cssFramework)}>
+      <div className="panel-heading">
+        <h6>{CSS_FRAMEWORK_SVG} {!props.cssFramework || props.cssFramework === 'none' ? 'CSS Framework' : props.cssFramework}</h6>
+      </div>
+      <div className="panel-body">
+        <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/none.png" alt="None"/>
+          <input type="radio" name="cssFrameworkRadios" value="none" onChange={props.handleChange} checked={NO_CSS_FRAMEWORK} /> None
+        </label>
+        <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/bootstrap-logo.svg" alt="Bootstrap"/>
+          <input type="radio" name="cssFrameworkRadios" value="bootstrap" onChange={props.handleChange} checked={BOOTSTRAP} /> Bootstrap
+        </label>
+        <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/foundation-logo.png" alt="Foundation"/>
+          <input type="radio" name="cssFrameworkRadios" value="foundation" onChange={props.handleChange} checked={FOUNDATION} /> Foundation
+        </label>
+        <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/bourbon-logo.svg" alt="Bourbon Neat"/>
+          <input type="radio" name="cssFrameworkRadios" value="bourbonNeat" onChange={props.handleChange} checked={BOURBON_NEAT} /> Bourbon Neat
+        </label>
 
-      <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/none.png" alt="None"/>
-        <input type="radio" name="cssFrameworkRadios" value="none" onChange={props.handleChange} checked={NO_CSS_FRAMEWORK} /> None
-      </label>
-      <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/bootstrap-logo.svg" alt="Bootstrap"/>
-        <input type="radio" name="cssFrameworkRadios" value="bootstrap" onChange={props.handleChange} checked={BOOTSTRAP} /> Bootstrap
-      </label>
-      <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/foundation-logo.png" alt="Foundation"/>
-        <input type="radio" name="cssFrameworkRadios" value="foundation" onChange={props.handleChange} checked={FOUNDATION} /> Foundation
-      </label>
-      <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/bourbon-logo.svg" alt="Bourbon Neat"/>
-        <input type="radio" name="cssFrameworkRadios" value="bourbonNeat" onChange={props.handleChange} checked={BOURBON_NEAT} /> Bourbon Neat
-      </label>
-
-      <ul className="nav nav-stacked">
-        <li>
-          <a data-toggle="collapse" href="#cssFrameworkCollapse1">
-            <i className="ion-help-circled" /> Should I use a CSS Framework?
-          </a>
-          <div id="cssFrameworkCollapse1" className="collapse">
-            <div className="panel-collapse">
-              Lorem ipsum.
+        <ul className="nav nav-stacked">
+          <li>
+            <a data-toggle="collapse" href="#cssFrameworkCollapse1">
+              <i className="ion-help-circled" /> Should I use a CSS Framework?
+            </a>
+            <div id="cssFrameworkCollapse1" className="collapse">
+              <div className="panel-collapse">
+                Lorem ipsum.
+              </div>
             </div>
-          </div>
-        </li>
-        <li>
-          <a data-toggle="collapse" href="#cssFrameworkCollapse2">
-            <i className="ion-help-circled" /> Which CSS framework is the best?
-          </a>
-          <div id="cssFrameworkCollapse2" className="collapse">
-            <div className="panel-collapse">
-              Lorem ipsum.
+          </li>
+          <li>
+            <a data-toggle="collapse" href="#cssFrameworkCollapse2">
+              <i className="ion-help-circled" /> Which CSS framework is the best?
+            </a>
+            <div id="cssFrameworkCollapse2" className="collapse">
+              <div className="panel-collapse">
+                Lorem ipsum.
+              </div>
             </div>
-          </div>
-        </li>
-      </ul>
-    </section>
+          </li>
+        </ul>
+      </div>
+    </div>
   );
 };
 
