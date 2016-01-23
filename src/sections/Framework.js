@@ -7,91 +7,105 @@ const FRAMEWORK_SVG = (
   </svg>
 );
 
-const Framework = (props) => {
-  let nodeFrameworks = (props.platform === 'node') ? (
-    <div>
-      <label className="radio-inline">
-        <span className="express-logo">Express</span>
-        <input type="radio" id="expressRadio" name="frameworkRadios" value="express" onChange={props.handleChange} checked={props.framework === 'express'}/> Express
-      </label>
-      <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/hapi-logo.png" alt="Hapi.js"/>
-        <input type="radio" name="frameworkRadios" value="hapi" onChange={props.handleChange} checked={props.framework === 'hapi'}/> Hapi
-      </label>
-      <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/meteor-logo.png" alt="Meteor"/>
-        <input type="radio" name="frameworkRadios" value="meteor" onChange={props.handleChange} checked={props.framework === 'meteor'}/> Meteor
-      </label>
+class Framework extends React.Component {
+  constructor(props) {
+    super(props);
+    this.initializeTooltip.bind(this);
+  }
 
-      <br/><br/>
-      <div>
-      </div>
+  initializeTooltip() {
+    let clusterTooltip = this.refs.clusterTooltip;
+    let socketioTooltip = this.refs.socketioTooltip;
 
-      <ul className="nav nav-stacked">
+    if (this.props.framework) {
+      $(clusterTooltip).tooltip({
+        title: 'A single instance of Node.js runs in a single thread. To take advantage of multi-core systems the user will sometimes want to launch a cluster of Node.js processes to handle the load.The cluster module allows you to easily create child processes that all share server ports.'
+      });
+      $(socketioTooltip).tooltip({
+        title: 'Socket.IO is a JavaScript library for realtime web applications. It enables realtime, bi-directional communication between web clients and servers.'
+      });
+    } else {
+      // Hides and destroys an element's tooltip.
+      $(clusterTooltip).tooltip('destroy');
+      $(socketioTooltip).tooltip('destroy');
+    }
+  }
+
+  componentDidMount() {
+    this.initializeTooltip();
+  }
+
+  componentDidUpdate() {
+    this.initializeTooltip();
+  }
+
+  render() {
+    let props = this.props;
+
+    let nodeOptions = props.framework ? (
+      <ul className="nav nav-stacked animated fadeIn">
         <li>
           <a data-toggle="collapse" href="#frameworkCollapse1">
-            <i className="ion-settings"/> Options
+            <img className="options-icon animated" src="/img/svg/options.svg"/>
+            Additional Options
           </a>
           <div id="frameworkCollapse1" className="collapse">
             <div className="panel-collapse">
               <div className="checkbox">
                 <label>
                   <input type="checkbox" value="cluster" />
-                    Cluster (Node.js Concurrency)
+                  <span ref="clusterTooltip" data-toggle="tooltip" data-placement="top">Node.js Cluster</span>
                 </label>
               </div>
               <div className="checkbox">
                 <label>
                   <input type="checkbox" value="socketio" />
-                    Socket.IO
+                  <span ref="socketioTooltip" data-toggle="tooltip" data-placement="top">Socket.IO</span>
                 </label>
               </div>
             </div>
           </div>
         </li>
       </ul>
+    ): null;
 
-      <ul className="nav nav-stacked">
-        <li>
-          <a data-toggle="collapse" href="#frameworkCollapse1">
-            <i className="ion-help-circled"/> Which framework is right for me?
-          </a>
-          <div id="frameworkCollapse1" className="collapse">
-            <div className="panel-collapse">
-              lorem ipsum dolor
-            </div>
-          </div>
-        </li>
-        <li>
-          <a data-toggle="collapse" href="#frameworkCollapse2">
-            <i className="ion-help-circled"/> Hapi vs Express?
-          </a>
-          <div id="frameworkCollapse2" className="collapse">
-            <div className="panel-collapse">
-              lorem ipsum dolor
-            </div>
-          </div>
-        </li>
-        <li>
-          <a data-toggle="collapse" href="#frameworkCollapse3">
-            <i className="ion-help-circled"/> Should I use Meteor or Express for real-time apps?
-          </a>
-          <div id="frameworkCollapse3" className="collapse">
-            <div className="panel-collapse">
-              lorem ipsum dolor
-            </div>
-          </div>
-        </li>
-      </ul>
-    </div>
-  ) : null;
+    let nodeFrameworks = (props.platform === 'node') ? (
+      <div>
+        <label className="radio-inline">
+          <span className="express-logo">Express</span>
+          <input type="radio" id="expressRadio" name="frameworkRadios" value="express" onChange={props.handleChange} checked={props.framework === 'express'}/> Express
+        </label>
+        <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/hapi-logo.png" alt="Hapi.js"/>
+          <input type="radio" name="frameworkRadios" value="hapi" onChange={props.handleChange} checked={props.framework === 'hapi'}/> Hapi
+        </label>
+        <label className="radio-inline">
+          <img className="btn-logo" src="/img/svg/meteor-logo.png" alt="Meteor"/>
+          <input type="radio" name="frameworkRadios" value="meteor" onChange={props.handleChange} checked={props.framework === 'meteor'}/> Meteor
+        </label>
 
-  return (
-    <section className={cx('animated fadeIn', props.framework)}>
-      <h6>{FRAMEWORK_SVG} {props.framework || 'Framework'}</h6>
-      {nodeFrameworks}
-    </section>
-  );
+        {nodeOptions}
+
+        <ul className="list-unstyled">
+          <li><a href="#">Which framework is right for me?</a></li>
+          <li><a href="#">Hapi vs Express?</a></li>
+          <li><a href="#">Which framework is right for me?</a></li>
+          <li><a href="#">Should I use Meteor or Express for real-time apps?</a></li>
+        </ul>
+      </div>
+    ) : null;
+
+    return (
+      <div className={cx('animated fadeIn panel', props.framework)}>
+        <div className="panel-heading">
+          <h6>{FRAMEWORK_SVG} {props.framework || 'Framework'}</h6>
+        </div>
+        <div className="panel-body">
+          {nodeFrameworks}
+        </div>
+      </div>
+    );
+  }
 };
 
 export default Framework;
