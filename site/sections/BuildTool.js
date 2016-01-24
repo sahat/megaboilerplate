@@ -14,16 +14,22 @@ class BuildTool extends React.Component {
     this.checkBuildToolRequirement.bind(this);
   }
 
+  componentDidMount() {
+    this.initializeTooltip();
+  }
+
+  componentDidUpdate() {
+    this.initializeTooltip();
+  }
+
+
   initializeTooltip() {
-    let tooltip = this.refs.tooltip;
+    let tooltip = '[data-toggle="tooltip"]';
     let requiresBuildTool = this.checkBuildToolRequirement();
 
     if (requiresBuildTool) {
-      $(tooltip).tooltip({
-        title: 'You have selected a CSS preprocessor and/or JavaScript framework that requires a compile step.'
-      });
+      $(tooltip).tooltip();
     } else {
-      // Hides and destroys an element's tooltip.
       $(tooltip).tooltip('destroy');
     }
   }
@@ -31,14 +37,6 @@ class BuildTool extends React.Component {
   checkBuildToolRequirement() {
     let props = this.props;
     return props.cssPreprocessor !== 'css' || (props.jsFramework && props.jsFramework !== 'none');
-  }
-
-  componentDidMount() {
-    this.initializeTooltip();
-  }
-
-  componentDidUpdate() {
-    this.initializeTooltip();
   }
 
   render() {
@@ -82,7 +80,7 @@ class BuildTool extends React.Component {
           {description}
           <div className="radio-group">
             <label className="radio-inline">
-              <div ref="tooltip" data-toggle="tooltip" data-placement="top">
+              <div data-toggle="tooltip" data-title="You have selected a CSS preprocessor and/or JavaScript framework that requires compilation." data-placement="top">
                 <img className="btn-logo" src="/img/svg/none.png" alt="None"/>
                 <input type="radio" name="buildToolRadios" value="none" onChange={props.handleChange} checked={props.buildTool === 'none'} disabled={requiresBuildTool} /> None
               </div>
