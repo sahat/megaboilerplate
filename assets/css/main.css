@@ -990,49 +990,49 @@ section h6 svg {
   }
 }
 
-/*[type="radio"] {*/
-  /*border: 0;*/
-  /*clip: rect(0 0 0 0);*/
-  /*height: 1px;*/
-  /*margin: -1px;*/
-  /*overflow: hidden;*/
-  /*padding: 0;*/
-  /*position: absolute;*/
-  /*width: 1px;*/
-/*}*/
+[type="radio"] {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
 
-/*!* One radio button per line *!*/
+/* One radio button per line */
 
-/*[type="radio"] + span {*/
-  /*display: block;*/
-/*}*/
+[type="radio"] + span {
+  display: block;
+}
 
-/*!* the basic, unchecked style *!*/
-/*[type="radio"] + span:before {*/
-  /*content: '';*/
-  /*display: inline-block;*/
-  /*width: 13px;*/
-  /*height: 13px;*/
-  /*vertical-align: -0.25em;*/
-  /*border-radius: 1em;*/
-  /*border: 2px solid #fff;*/
-  /*box-shadow: 0 0 0 0.125em rgba(0, 0, 0, 0.54);*/
-  /*margin-right: 0.75em;*/
-  /*transition: all .2s ease-out;*/
-/*}*/
+/* the basic, unchecked style */
+[type="radio"] + span:before {
+  content: '';
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  vertical-align: -0.25em;
+  border-radius: 1em;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 0.125em rgba(0, 0, 0, 0.54);
+  margin-right: 0.75em;
+  transition: all .2s ease-out;
+}
 
-/*[type="radio"]:hover + span:before {*/
-  /*box-shadow: 0 0 0 0.125em rgb(29, 124, 244);*/
-/*}*/
+[type="radio"]:hover + span:before {
+  box-shadow: 0 0 0 0.125em rgb(29, 124, 244);
+}
 
-/*[type="radio"]:active + span:before {*/
-  /*box-shadow: 0 0 0 0.125em #1d7cf4;*/
-  /*background: #1d7cf4;*/
+[type="radio"]:active + span:before {
+  box-shadow: 0 0 0 0.125em #1d7cf4;
+  background: #1d7cf4;
 
-/*}*/
+}
 
-/*!* the checked style using the :checked pseudo class *!*/
-/*[type="radio"]:checked + span:before {*/
-  /*background: #000;*/
-  /*box-shadow: 0 0 0 0.125em #000;*/
-/*}*/
+/* the checked style using the :checked pseudo class */
+[type="radio"]:checked + span:before {
+  background: #000;
+  box-shadow: 0 0 0 0.125em #000;
+}
