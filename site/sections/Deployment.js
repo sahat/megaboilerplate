@@ -8,41 +8,63 @@ const DEPLOYMENT_SVG = (
 );
 
 const Deployment = (props) => {
+  let description;
+
+  switch (props.deployment) {
+    case 'heroku':
+      description = (
+        <div>
+          <strong><a href="https://www.heroku.com/" target="_blank">Heroku</a></strong> — Free Tier. 512MB RAM, 1 web/1 worker, sleeps after 30 min of inactivity, must sleep 6 hours in a 24 hour period. No credit card required.
+        </div>
+      );
+      break;
+    case 'azure':
+      description = (
+        <div>
+          <strong><a href="https://azure.microsoft.com/en-us/pricing/free-trial/" target="_blank">Microsoft Azure</a></strong> — Free one-month trial. Sign up for free and get $200 to spend on all Azure services.
+        </div>
+      );
+      break;
+    case 'bluemix':
+      description = (
+        <div>
+          <strong><a href="https://console.ng.bluemix.net/" target="_blank">IBM Bluemix</a></strong> — Free Tier. 512BM RAM, 2 Public IP Addresses, 20 GB External Storage. No credit card required.
+        </div>
+      );
+      break;
+    default:
+      description = <div className="placeholder"> </div>;
+  }
+
   return (
     <div className={cx('animated fadeIn panel', props.deployment)}>
       <div className="panel-heading">
         <h6>{DEPLOYMENT_SVG} {!props.deployment || props.deployment === 'none' ? 'Deployment' : props.deployment}</h6>
       </div>
       <div className="panel-body">
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/heroku-logo.svg" height="60" alt="Heroku"/>
-          <input type="radio" name="deploymentRadios" value="heroku" onChange={props.handleChange} checked={props.deployment === 'heroku'} /> Heroku
-        </label>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/azure-logo.svg" height="60" alt="Azure"/>
-          <input type="radio" name="deploymentRadios" value="azure" onChange={props.handleChange} checked={props.deployment === 'azure'} /> Microsoft Azure
-        </label>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/bluemix-logo.svg" alt="IBM Bluemix"/>
-          <input type="radio" name="deploymentRadios" value="bluemix" onChange={props.handleChange} checked={props.deployment === 'bluemix'} /> IBM Bluemix
-        </label>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/none.png" alt="None" />
-          <input type="radio" name="deploymentRadios" value="none" onChange={props.handleChange} checked={props.deployment === 'none'} /> None
-        </label>
-
-        <ul className="nav nav-stacked">
-          <li>
-            <a data-toggle="collapse" href="#deploymentCollapse1">
-              <i className="ion-help-circled"/> Pricing Comparison
-            </a>
-            <div id="deploymentCollapse1" className="collapse">
-              <div className="panel-collapse">
-                Select <strong>None</strong> if you are building an API server or a single-page application.
-              </div>
-            </div>
-          </li>
-        </ul>
+        {description}
+        <div className="radio-group">
+          <label className="radio-inline">
+            <img className="btn-logo" src="/img/svg/none.png" alt="None" />
+            <input type="radio" name="deploymentRadios" value="none" onChange={props.handleChange} checked={props.deployment === 'none'} />
+            <span>None</span>
+          </label>
+          <label className="radio-inline">
+            <img className="btn-logo" src="/img/svg/heroku-logo.svg" height="60" alt="Heroku"/>
+            <input type="radio" name="deploymentRadios" value="heroku" onChange={props.handleChange} checked={props.deployment === 'heroku'} />
+            <span>Heroku</span>
+          </label>
+          <label className="radio-inline">
+            <img className="btn-logo" src="/img/svg/azure-logo.svg" height="60" alt="Azure"/>
+            <input type="radio" name="deploymentRadios" value="azure" onChange={props.handleChange} checked={props.deployment === 'azure'} />
+            <span>Microsoft Azure</span>
+          </label>
+          <label className="radio-inline">
+            <img className="btn-logo" src="/img/svg/bluemix-logo.svg" alt="IBM Bluemix"/>
+            <input type="radio" name="deploymentRadios" value="bluemix" onChange={props.handleChange} checked={props.deployment === 'bluemix'} />
+            <span>IBM Bluemix</span>
+          </label>
+        </div>
       </div>
     </div>
   );
