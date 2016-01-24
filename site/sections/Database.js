@@ -7,6 +7,7 @@ const DATABASE_SVG = (
   </svg>
 );
 
+
 const Database = (props) => {
   return (
     <div className={cx('animated fadeIn  panel', props.database)}>
@@ -14,49 +15,33 @@ const Database = (props) => {
         <h6>{DATABASE_SVG} {!props.database || props.database === 'none' ? 'Database' : props.database}</h6>
       </div>
       <div className="panel-body">
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/none.png" alt="None" />
-          <input type="radio" name="databaseRadios" value="none" onChange={props.handleChange} checked={props.database === 'none'} /> None
-        </label>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/mongodb-logo.svg" alt="MongoDB" />
-          <input type="radio" name="databaseRadios" value="mongodb" onChange={props.handleChange} checked={props.database === 'mongodb'} /> MongoDB
-        </label>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/mysql-logo.svg" alt="MySQL" />
-          <input type="radio" name="databaseRadios" value="mysql" onChange={props.handleChange} checked={props.database === 'mysql'} /> MySQL
-        </label>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/postgresql-logo.svg" alt="PostgreSQL" />
-          <input type="radio" name="databaseRadios" value="postgresql" onChange={props.handleChange} checked={props.database === 'postgresql'} /> PostgreSQL
-        </label>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/rethinkdb-logo.svg" alt="RethinkDB" />
-          <input type="radio" name="databaseRadios" value="rethinkdb" onChange={props.handleChange} checked={props.database === 'rethinkdb'} /> RethinkDB
-        </label>
-
-        <ul className="nav nav-stacked">
-          <li>
-            <a data-toggle="collapse" href="#databaseCollapse1">
-              <i className="ion-help-circled" /> Do I need a database?
-            </a>
-            <div id="databaseCollapse1" className="collapse">
-              <div className="panel-collapse">
-                Select <strong>None</strong> if you are building an API server or a single-page application.
-              </div>
-            </div>
-          </li>
-          <li>
-            <a data-toggle="collapse" href="#databaseCollapse2">
-              <i className="ion-help-circled" /> Database Comparison
-            </a>
-            <div id="databaseCollapse2" className="collapse">
-              <div className="panel-collapse">
-                Select <strong>None</strong> if you are building an API server or a single-page application.
-              </div>
-            </div>
-          </li>
-        </ul>
+        <div className="radio-group">
+          <label className="radio-inline">
+            <img className="btn-logo" src="/img/svg/none.png" alt="None" />
+            <input type="radio" name="databaseRadios" value="none" onChange={props.handleChange} checked={props.database === 'none'} />
+            <span>None</span>
+          </label>
+          <label className="radio-inline">
+            <img className="btn-logo" src="/img/svg/mongodb-logo.svg" alt="MongoDB" />
+            <input type="radio" name="databaseRadios" value="mongodb" onChange={props.handleChange} checked={props.database === 'mongodb'} />
+            <span>MongoDB</span>
+          </label>
+          <label className="radio-inline">
+            <img className="btn-logo" src="/img/svg/mysql-logo.svg" alt="MySQL" />
+            <input type="radio" name="databaseRadios" value="mysql" onChange={props.handleChange} checked={props.database === 'mysql'} />
+            <span>MySQL</span>
+          </label>
+          <label className="radio-inline">
+            <img className="btn-logo" src="/img/svg/postgresql-logo.svg" alt="PostgreSQL" />
+            <input type="radio" name="databaseRadios" value="postgresql" onChange={props.handleChange} checked={props.database === 'postgresql'} />
+            <span>PostgreSQL</span>
+          </label>
+          <label className="radio-inline">
+            <img className="btn-logo" src="/img/svg/rethinkdb-logo.svg" alt="RethinkDB" />
+            <input type="radio" name="databaseRadios" value="rethinkdb" onChange={props.handleChange} checked={props.database === 'rethinkdb'} />
+            <span>RethinkDB</span>
+          </label>
+        </div>
       </div>
     </div>
   );
