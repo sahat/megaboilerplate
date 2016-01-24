@@ -24,7 +24,7 @@ require('babel-core/register');
 require('babel-polyfill');
 
 let routes = require('./routes');
-let reactRoutes = require('./src/routes');
+let reactRoutes = require('./site/routes');
 
 let app = express();
 let compiler = webpack(config);
@@ -41,10 +41,6 @@ app.use(require('webpack-dev-middleware')(compiler, {
 app.use(require('webpack-hot-middleware')(compiler));
 
 app.post('/download', routes.download);
-//
-//app.get('*', function(req, res) {
-//  res.sendFile(path.join(__dirname, 'index.html'));
-//});
 
 app.use(function(req, res) {
   Router.match({ routes: reactRoutes.default, location: req.url }, function(err, redirectLocation, renderProps) {
@@ -63,7 +59,6 @@ app.use(function(req, res) {
 });
 
 app.listen(4000, 'localhost', function(err) {
-  if (err) { return console.log(err); }
   console.log('Listening at http://localhost:4000');
 });
 

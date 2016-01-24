@@ -134,6 +134,6 @@ class Framework extends React.Component {
       </div>
     );
   }
-};
+}
 
 export default Framework;
