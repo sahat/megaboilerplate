@@ -50,7 +50,7 @@ class Home extends React.Component {
         contentType: 'application/json; charset=utf-8',
         data: JSON.stringify(data)
       })
-      .success((response, status, request) => {
+      .done((response, status, request) => {
         $(downloadBtn).removeAttr('disabled');
 
         var disp = request.getResponseHeader('Content-Disposition');
@@ -63,6 +63,9 @@ class Home extends React.Component {
           $('body').append(form);
           form.submit();
         }
+      })
+      .fail(function(jqXHR) {
+        window.notie.alert(3, jqXHR.statusText, 2.5);
       });
   }
 
@@ -237,6 +240,8 @@ class Home extends React.Component {
           <div ref="authentication">{authentication}</div>
           <div ref="deployment">{deployment}</div>
           <div ref="download">{download}</div>
+          <button ref="downloadBtn" className="btn btn-block btn-mega" onClick={this.clickDownload}>Compile and Download</button>
+
         </div>
         <Footer />
       </main>
