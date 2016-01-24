@@ -479,6 +479,7 @@ canvas {
 
 /* ANimated stack */
 .wrapper {
+  width: 320px;
   height: 210px;
   margin: 0 auto;
 }
