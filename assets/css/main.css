@@ -917,6 +917,17 @@ section h6 svg {
   fill: currentColor;
 }
 
+.digitalOcean .panel-heading {
+  color: #fff;
+  background: #288feb;
+  border-color: transparent;
+}
+
+.digitalOcean svg {
+  color: #fff;
+  fill: currentColor;
+}
+
 .panel {
   position: relative;
   margin-bottom: 20px;

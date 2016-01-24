@@ -32,6 +32,13 @@ const Deployment = (props) => {
         </div>
       );
       break;
+    case 'digitalOcean':
+      description = (
+        <div>
+          <strong><a href="https://www.digitalocean.com/" target="_blank">Digital Ocean</a></strong> — Starts at $5/month. 512MB RAM, 1 Core Processor, 20GB SSD Disk, 1TB Transfer. <a href="https://m.do.co/c/31bf8418522c">Referral Link</a> — $10 credit bonus.
+        </div>
+      );
+      break;
     default:
       description = <div className="placeholder"> </div>;
   }
@@ -55,7 +62,7 @@ const Deployment = (props) => {
             <span>Heroku</span>
           </label>
           <label className="radio-inline">
-            <img className="btn-logo" src="/img/svg/azure-logo.svg" height="60" alt="Azure"/>
+            <img className="btn-logo" src="/img/svg/azure-logo.svg" height="60" alt="Microsoft Azure"/>
             <input type="radio" name="deploymentRadios" value="azure" onChange={props.handleChange} checked={props.deployment === 'azure'} />
             <span>Microsoft Azure</span>
           </label>
@@ -63,6 +70,11 @@ const Deployment = (props) => {
             <img className="btn-logo" src="/img/svg/bluemix-logo.svg" alt="IBM Bluemix"/>
             <input type="radio" name="deploymentRadios" value="bluemix" onChange={props.handleChange} checked={props.deployment === 'bluemix'} />
             <span>IBM Bluemix</span>
+          </label>
+          <label className="radio-inline">
+            <img className="btn-logo" src="/img/svg/do-logo.png" alt="Digital Ocean"/>
+            <input type="radio" name="deploymentRadios" value="digitalOcean" onChange={props.handleChange} checked={props.deployment === 'digitalOcean'} />
+            <span>Digital Ocean</span>
           </label>
         </div>
       </div>
