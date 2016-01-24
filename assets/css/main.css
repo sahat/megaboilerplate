@@ -304,7 +304,7 @@ label span + i {
   display: block;
   font-size: 32px;
   font-weight: 100;
-  font-family: "Helvetica Neue", "Raleway", Arial, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin-top: 10px;
   line-height: 50px;
   letter-spacing: 1px;

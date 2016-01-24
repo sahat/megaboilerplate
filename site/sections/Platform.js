@@ -21,23 +21,14 @@ const Platform = (props) => {
         <h6>{PLATFORM_SVG} {props.platform || 'Platform'}</h6>
       </div>
       <div className="panel-body">
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/node-logo.svg" alt="Node.js"/>
-          <input type="radio" id="nodeRadio" name="platformRadios" value="node" onChange={props.handleChange} checked={props.platform === 'node'} /> Node.js
-        </label>
+        <div className="radio-group">
+          <label className="radio-inline">
+            <img className="btn-logo" src="/img/svg/node-logo.svg" alt="Node.js"/>
+            <input type="radio" id="nodeRadio" name="platformRadios" value="node" onChange={props.handleChange} checked={props.platform === 'node'} /> Node.js
+          </label>
+        </div>
 
-        <ul className="nav nav-stacked">
-          <li>
-            <a data-toggle="collapse" href="#platformCollapse1">
-              <i className="ion-help-circled"/> Support for other languages?
-            </a>
-            <div id="platformCollapse1" className="collapse">
-              <div className="panel-collapse">
-                Currently <strong>Node.js</strong> is the only supported platform. Adding support for <strong>Ruby</strong>, <strong>Python</strong>, <strong>PHP</strong> and <strong>C#</strong> is on the roadmap, but no ETA yet. GitHub contributions and pull requests are welcome!
-              </div>
-            </div>
-          </li>
-        </ul>
+        <div><strong>Note: </strong>Support for other languages is on the roadmap. GitHub contributions are welcome.</div>
       </div>
     </div>
   )
