@@ -321,6 +321,7 @@ label span + i {
 
 .btn-logo.small {
   height: 40px;
+  padding-bottom: 5px;
 }
 
 .radio-group {
@@ -335,6 +336,11 @@ label span + i {
   /*line-height: 24px;*/
   border-radius: 0;
   vertical-align: baseline;
+}
+
+.checkbox-inline {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 section {

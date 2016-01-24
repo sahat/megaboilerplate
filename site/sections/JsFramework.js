@@ -7,91 +7,121 @@ const JS_FRAMEWORK_SVG = (
   </svg>
 );
 
-const REACT_HOT_LOADER_SVG = (
-  <svg version="1.1" x="0px" y="0px" height="50" viewBox="0 0 400 400">
-    <circle fill="rgba(0, 216, 255, .5)" cx="200" cy="200" r="139"></circle>
-    <path fill="none" stroke="#FFFFFF" strokeWidth="4" d="M231.7,200c0,17.4-1.7,88-31.7,88s-31.7-70.6-31.7-88s1.7-88,31.7-88S231.7,182.6,231.7,200z"></path>
-    <path fill="none" stroke="#FFFFFF" strokeWidth="4" d="M216.1,227.7c-15,8.9-76.6,43.4-91.9,17.6s44.6-63.2,59.6-72.1s76.6-43.4,91.9-17.6S231.1,218.8,216.1,227.7z"></path>
-    <path fill="none" stroke="#FFFFFF" strokeWidth="4" d="M183.9,227.7c15,8.9,76.6,43.4,91.9,17.6s-44.6-63.2-59.6-72.1s-76.6-43.4-91.9-17.6S168.9,218.8,183.9,227.7z"></path>
-    <circle fill="#FFFFFF" cx="200" cy="200" r="16"></circle>
-  </svg>
-);
-
-const JsFramework = (props) => {
-  let reactOptions = (props.jsFramework === 'react') ? (
-    <div className="fadeIn animated">
-      <h5 className="subcategory">React Features</h5>
-      <label className="checkbox-inline">
-        <img className="btn-logo" src="/img/svg/flux-logo.svg" alt="Redux" />
-        <input type="checkbox" name="reactOptionsCheckboxes" value="redux" onChange={props.handleChange} checked={props.reactOptions && props.reactOptions.has('redux')} /> Redux
-      </label>
-      <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/react-router-logo.png" alt="React Router" />
-        <input type="checkbox" name="reactOptionsCheckboxes" value="reactRouter" onChange={props.handleChange} checked={props.reactOptions && props.reactOptions.has('reactRouter')} /> React Router
-      </label>
-      <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/relay-logo.svg" alt="Relay" />
-        <input type="checkbox" name="reactOptionsCheckboxes" value="graphql" onChange={props.handleChange} checked={props.reactOptions && props.reactOptions.has('graphql')} /> GraphQL + Relay
-      </label>
-      <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/babel-logo.png" alt="Babel" />
-        <input type="checkbox" name="reactOptionsCheckboxes" value="es6" onChange={props.handleChange} checked={props.reactOptions && props.reactOptions.has('es6')} /> ES6
-      </label>
-      <label className="radio-inline">
-        <span className="btn-logo">{REACT_HOT_LOADER_SVG}</span>
-        <input type="checkbox" name="reactOptionsCheckboxes" value="hotReload" onChange={props.handleChange} checked={props.reactOptions && props.reactOptions.has('hotReload')} /> Hot Reload
-      </label>
-
-    </div>
-  ) : null;
-
-  let description;
-
-  switch (props.jsFramework) {
-    case 'react':
-      description = (
-        <div>
-          <strong><a href="https://facebook.github.io/react/" target="_blank">React</a></strong> — A  Library for building UIs. Advantages: simple, declarative, composable components, Virtual DOM, one-way reactive data-flow.
-        </div>
-      );
-      break;
-    case 'angular':
-      description = (
-        <div>
-          <strong><a href="https://angular.io/" target="_blank">Angular 2</a></strong> — A JavaScript framework for building web apps. Advantages: feature-rich, big community, two-way data binding, MVC architecture.
-        </div>
-      );
-      break;
-    default:
-      description = <div className="placeholder"> </div>;
+class JsFramework extends React.Component {
+  componentDidMount() {
+    $('[data-toggle="tooltip"]').tooltip();
   }
 
-  return (
-    <div className={cx('animated fadeIn panel', props.jsFramework)}>
-      <div className="panel-heading">
-        <h6>{JS_FRAMEWORK_SVG} {!props.jsFramework || props.jsFramework === 'none' ? 'JavaScript Framework' : props.jsFramework}</h6>
-      </div>
-      <div className="panel-body">
-        {description}
-        <div className="radio-group">
-          <label className="radio-inline">
-            <img className="btn-logo" src="/img/svg/none.png" alt="None Icon" />
-            <input type="radio" name="jsFrameworkRadios" value="none" onChange={props.handleChange} checked={props.jsFramework === 'none'} /> None
-          </label>
-          <label className="radio-inline">
-            <img className="btn-logo" src="/img/svg/react-logo.svg" />
-            <input type="radio" name="jsFrameworkRadios" value="react" onChange={props.handleChange} checked={props.jsFramework === 'react'} /> React
-          </label>
-          <label className="radio-inline">
-            <img className="btn-logo" src="/img/svg/angular2.png" />
-            <input type="radio" name="jsFrameworkRadios" value="angular" onChange={props.handleChange} checked={props.jsFramework === 'angular'} /> Angular 2
-          </label>
-        </div>
+  componentDidUpdate() {
+    $('[data-toggle="tooltip"]').tooltip();
+  }
 
-        {reactOptions}
-      </div>
-    </div>
-  );
-};
+ render() {
+   let props = this.props;
+   let description;
+   let jsFrameworkOptions;
+
+   switch (props.jsFramework) {
+     case 'react':
+       description = (
+         <div>
+           <strong><a href="https://facebook.github.io/react/" target="_blank">React</a></strong> — A  Library for building UIs. Advantages: simple, declarative, composable components, Virtual DOM, one-way reactive data-flow.
+         </div>
+       );
+       jsFrameworkOptions = (
+         <div className="panel-collapse">
+           <div className="checkbox">
+             <label>
+               <input type="checkbox" name="reactOptionsCheckboxes" value="redux" onChange={props.handleChange} checked={props.reactOptions && props.reactOptions.has('redux')} />
+               <span ref="reduxTooltip" data-toggle="tooltip" data-title="Predictable state container for JavaScript apps. Redux is an evolution of the Facebook's Flux, without all the complexity." data-placement="top">Redux</span>
+             </label>
+           </div>
+           <div className="checkbox">
+             <label>
+               <input type="checkbox" name="reactOptionsCheckboxes" value="reactRouter" onChange={props.handleChange} checked={props.reactOptions && props.reactOptions.has('reactRouter')} />
+               <span ref="reactRouterTooltip" data-toggle="tooltip" data-title="A complete routing library for React. React Router keeps your UI in sync with the URL." data-placement="top">React Router</span>
+             </label>
+           </div>
+           <div className="checkbox">
+             <label>
+               <input type="checkbox" name="reactOptionsCheckboxes" value="graphql" onChange={props.handleChange} checked={props.reactOptions && props.reactOptions.has('graphql')} />
+               <span ref="graphqlTooltip" data-toggle="tooltip" data-title="Relay is a framework from Facebook that provides data-fetching functionality for React applications." data-placement="top">GraphQL + Relay</span>
+             </label>
+           </div>
+           <div className="checkbox">
+             <label>
+               <input type="checkbox" name="reactOptionsCheckboxes" value="es6" onChange={props.handleChange} checked={props.reactOptions && props.reactOptions.has('es6')} />
+               <span ref="es6Tooltip" data-toggle="tooltip" data-title="ECMAScript 2015 (ES6) is the upcoming sixth major release of the ECMAScript language specification." data-placement="top">ES6</span>
+             </label>
+           </div>
+           <div className="checkbox">
+             <label>
+               <input type="checkbox" name="reactOptionsCheckboxes" value="hotReload" onChange={props.handleChange} checked={props.reactOptions && props.reactOptions.has('hotReload')} />
+               <span ref="hotReloadTooltip" data-toggle="tooltip" data-title="Modify React components in real time, while preserving the state." data-placement="top">React Hot Reload</span>
+             </label>
+           </div>
+         </div>
+       );
+       break;
+     case 'angular':
+       description = (
+         <div>
+           <strong><a href="https://angular.io/" target="_blank">Angular 2</a></strong> — A JavaScript framework for building web apps. Advantages: feature-rich, big community, two-way data binding, MVC architecture.
+         </div>
+       );
+       jsFrameworkOptions = null;
+       break;
+     default:
+       description = <div className="placeholder"> </div>;
+       jsFrameworkOptions = null;
+   }
+
+   let optionsClasses = cx("nav nav-stacked", {
+     fadeIn: props.jsFramework && props.jsFramework !== 'none',
+     animated: props.jsFramework && props.jsFramework !== 'none',
+     invisible: !props.jsFramework || props.jsFramework === 'none'
+   });
+
+   return (
+     <div className={cx('animated fadeIn panel', props.jsFramework)}>
+       <div className="panel-heading">
+         <h6>{JS_FRAMEWORK_SVG} {!props.jsFramework || props.jsFramework === 'none' ? 'JavaScript Framework' : props.jsFramework}</h6>
+       </div>
+       <div className="panel-body">
+         {description}
+         <div className="radio-group">
+           <label className="radio-inline">
+             <img className="btn-logo" src="/img/svg/none.png" alt="None Icon" />
+             <input type="radio" name="jsFrameworkRadios" value="none" onChange={props.handleChange} checked={props.jsFramework === 'none'} />
+             <span>None</span>
+           </label>
+           <label className="radio-inline">
+             <img className="btn-logo" src="/img/svg/react-logo.svg" />
+             <input type="radio" name="jsFrameworkRadios" value="react" onChange={props.handleChange} checked={props.jsFramework === 'react'} />
+             <span>React</span>
+           </label>
+           <label className="radio-inline">
+             <img className="btn-logo" src="/img/svg/angular2.png" />
+             <input type="radio" name="jsFrameworkRadios" value="angular" onChange={props.handleChange} checked={props.jsFramework === 'angular'} />
+             <span>Angular 2</span>
+           </label>
+         </div>
+
+         <ul className={optionsClasses}>
+           <li>
+             <a data-toggle="collapse" href="#jsFrameworkCollapse1">
+               <img className="options-icon animated" src="/img/svg/options.svg"/>
+               Additional Options
+             </a>
+             <div id="jsFrameworkCollapse1" className="collapse">
+               {jsFrameworkOptions}
+             </div>
+           </li>
+         </ul>
+       </div>
+     </div>
+   );
+ }
+}
 
 export default JsFramework;
