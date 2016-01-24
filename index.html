@@ -49,6 +49,7 @@
 </head>
 <body>
   <div id="root">{{html|safe}}</div>
+  
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   <script>window.jQuery || document.write('<script src="/js/jquery.min.js"><\/script>')</script>
   <script src="/js/jquery.fluidbox.min.js"></script>
@@ -69,25 +70,20 @@
   <!-- Google+ SDK -->
   <script src="http://apis.google.com/js/platform.js" async defer></script>
 
-  <!-- Twitter Buttons -->
+  <!-- Twitter SDK -->
   <script>window.twttr = (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0],
-      t = window.twttr || {};
+    var js, fjs = d.getElementsByTagName(s)[0], t = window.twttr || {};
     if (d.getElementById(id)) return t;
     js = d.createElement(s);
     js.id = id;
     js.src = 'https://platform.twitter.com/widgets.js';
     fjs.parentNode.insertBefore(js, fjs);
-
     t._e = [];
-    t.ready = function(f) {
-      t._e.push(f);
-    };
-
+    t.ready = function(f) { t._e.push(f); };
     return t;
   }(document, 'script', 'twitter-wjs'));</script>
 
-  <!-- Load Facebook SDK for JavaScript -->
+  <!-- Facebook SDK -->
   <div id="fb-root"></div>
   <script>(function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
@@ -99,6 +95,5 @@
 
   <!-- LinkedIn SDK -->
   <script src="//platform.linkedin.com/in.js" type="text/javascript" async defer> lang: en_US</script>
-
 </body>
 </html>
