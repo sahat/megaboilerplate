@@ -9,12 +9,49 @@ const DATABASE_SVG = (
 
 
 const Database = (props) => {
+  let description;
+
+  switch (props.database) {
+    case 'mongodb':
+      description = (
+        <div>
+          <strong><a href="http://mongodb.org/" target="_blank">MongoDB</a></strong> — Document-oriented, general purpose NoSQL database.
+        </div>
+      );
+      break;
+    case 'mysql':
+      description = (
+        <div>
+          <strong><a href="http://www.mysql.com/" target="_blank">MySQL</a></strong> — The world's most popular open source database.
+        </div>
+      );
+      break;
+    case 'postgresql':
+      description = (
+        <div>
+          <strong><a href="http://www.postgresql.org/" target="_blank">PostgreSQL </a></strong> — The world's most advanced open source database.
+        </div>
+      );
+      break;
+    case 'rethinkdb':
+      description = (
+        <div>
+          <strong><a href="https://www.rethinkdb.com/" target="_blank">RethinkDB</a></strong> — The open source database
+          for the realtime web.
+        </div>
+      );
+      break;
+    default:
+      description = <div className="placeholder"> </div>;
+  }
+
   return (
     <div className={cx('animated fadeIn  panel', props.database)}>
       <div className="panel-heading">
         <h6>{DATABASE_SVG} {!props.database || props.database === 'none' ? 'Database' : props.database}</h6>
       </div>
       <div className="panel-body">
+        {description}
         <div className="radio-group">
           <label className="radio-inline">
             <img className="btn-logo" src="/img/svg/none.png" alt="None" />
