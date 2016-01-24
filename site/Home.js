@@ -86,31 +86,39 @@ class Home extends React.Component {
         break;
 
       case 'frameworkRadios':
+        if (!state.framework) {
+          window.smoothScroll(refs.templateEngine);
+        }
         state.framework = value;
-        window.smoothScroll(refs.templateEngine);
         break;
 
       case 'templateEngineRadios':
+        if (!state.templateEngine) {
+          window.smoothScroll(refs.cssFramework);
+        }
         state.templateEngine = value;
-        window.smoothScroll(refs.cssFramework);
         break;
 
       case 'cssFrameworkRadios':
-        // Reset CSS Preprocessor and CSS Build Options
+        if (!state.cssFramework) {
+          window.smoothScroll(refs.cssPreprocessor);
+        }
         state.cssPreprocessor = null;
-        state.cssBuildOptions = null;
         state.cssFramework = value;
-        window.smoothScroll(refs.cssPreprocessor);
         break;
 
       case 'cssPreprocessorRadios':
+        if (!state.cssPreprocessor) {
+          window.smoothScroll(refs.jsFramework);
+        }
         state.cssPreprocessor = value;
-        window.smoothScroll(refs.jsFramework);
         break;
 
       case 'jsFrameworkRadios':
+        if (!state.jsFramework) {
+          window.smoothScroll(refs.buildTool);
+        }
         state.jsFramework = value;
-        window.smoothScroll(refs.buildTool);
         break;
 
       case 'reactOptionsCheckboxes':
@@ -127,17 +135,21 @@ class Home extends React.Component {
         break;
 
       case 'buildToolRadios':
+        if (!state.buildTool) {
+          window.smoothScroll(refs.database);
+        }
         state.buildTool = value;
-        window.smoothScroll(refs.database);
         break;
 
       case 'databaseRadios':
+        if (!state.database) {
+          window.smoothScroll(refs.authentication);
+        }
         if (value === 'none' && state.authentication) {
           state.authentication.clear();
           state.authentication.add('none');
         }
         state.database = value;
-        window.smoothScroll(refs.authentication);
         break;
 
       case 'authenticationCheckboxes':
@@ -151,14 +163,13 @@ class Home extends React.Component {
         } else {
           state.authentication.delete(value);
         }
-        if (state.authentication.size >= 4) {
-          window.smoothScroll(refs.deployment);
-        }
         break;
 
       case 'deploymentRadios':
+        if (!state.deployment) {
+          window.smoothScroll(refs.download);
+        }
         state.deployment = value;
-        window.smoothScroll(refs.download);
         break;
     }
 
