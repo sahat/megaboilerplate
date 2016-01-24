@@ -1,5 +1,9 @@
 'use strict';
 
+// ES6/ES7 Transpiler
+require('babel-core/register');
+require('babel-polyfill');
+
 let Promise = require('bluebird');
 let path = require('path');
 let express = require('express');
@@ -11,7 +15,7 @@ let nunjucks = require('nunjucks');
 let webpack = require('webpack');
 let config = require('./webpack.config.dev');
 
-// Root directory reference
+// Easy access to root directory
 global.__base = __dirname + '/';
 
 // Disable Bluebird warnings
@@ -19,11 +23,10 @@ Promise.config({
   warnings: false
 });
 
-// ES6/ES7 Transpiler
-require('babel-core/register');
-require('babel-polyfill');
+// Express routes
+let downloadHandler = require('./routes/download');
 
-let routes = require('./routes');
+// React routes
 let reactRoutes = require('./site/routes');
 
 let app = express();
@@ -40,8 +43,10 @@ app.use(require('webpack-dev-middleware')(compiler, {
 }));
 app.use(require('webpack-hot-middleware')(compiler));
 
-app.post('/download', routes.download);
+// POST /download
+app.post('/download', downloadHandler.default);
 
+// React server rendering
 app.use(function(req, res) {
   Router.match({ routes: reactRoutes.default, location: req.url }, function(err, redirectLocation, renderProps) {
     if (err) {
