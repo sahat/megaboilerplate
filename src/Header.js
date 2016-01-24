@@ -128,52 +128,46 @@ class Header extends React.Component {
     setInterval(createDots, 1000 / 30);
   }
 
-  renderNav() {
-    let showJumbotron = this.props.showJumbotron;
-    return (
-      <nav className={cx('navbar', showJumbotron ? 'navbar-default' : 'navbar-inverse')}>
-        <div className="container-fluid">
-          <div id="navbar" className="navbar-collapse collapse">
-            <ul className="nav navbar-nav">
-              <li><Link to="/" activeClassName="active">Home</Link></li>
-              <li><Link to="/trending" activeClassName="active">Trending</Link></li>
-              <li><Link to="/contributing" activeClassName="active">Contributing</Link></li>
-            </ul>
-            <ul className="nav navbar-nav navbar-right">
-              <li className="tweet-button">
-                <a className="twitter-share-button" href="https://twitter.com/intent/tweet" />
-              </li>
-
-              <li className="facebook-share-button">
-                <div className="fb-share-button" data-href="http://www.your-domain.com/your-page.html" data-layout="button_count"></div>
-              </li>
-
-              <li className="linkedin-button">
-                <script type="IN/Share" data-counter="right"></script>
-              </li>
-
-              <li className="plusone-button">
-                <div className="g-plusone" data-size="medium" data-href="http://google.com"></div>
-              </li>
-
-              <li>
-                <Link to="https://github.com/sahat/boilerplate" className="navbar-icon">
-                  <i className="ion-social-github"/>
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    );
-  }
-
-  renderJumbotron() {
+  render() {
     return (
       <div className="hero">
         <canvas ref="connectedDots"/>
-        {this.renderNav()}
-        <div className="container">
+
+        <nav className="navbar navbar-default">
+          <div className="container-fluid">
+            <div id="navbar" className="navbar-collapse collapse">
+              <ul className="nav navbar-nav">
+                <li><a href="#"><i className="ion-bug"></i>Bug Reports</a></li>
+                <li><a href="#"><i className="ion-pull-request"></i>Contributing</a></li>
+              </ul>
+              <ul className="nav navbar-nav navbar-right">
+                <li className="tweet-button">
+                  <a className="twitter-share-button" href="https://twitter.com/intent/tweet" />
+                </li>
+
+                <li className="facebook-share-button">
+                  <div className="fb-share-button" data-href="http://www.your-domain.com/your-page.html" data-layout="button_count"></div>
+                </li>
+
+                <li className="linkedin-button">
+                  <script type="IN/Share" data-counter="right"></script>
+                </li>
+
+                <li className="plusone-button">
+                  <div className="g-plusone" data-size="medium" data-href="http://google.com"></div>
+                </li>
+
+                <li>
+                  <a href="https://github.com/sahat/boilerplate" className="navbar-icon">
+                    <i className="ion-social-github"/>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+
+        <div className="container hero-container">
           <div className="wrapper">
             <div className="box middle"></div>
             <div className="box upper"></div>
@@ -181,11 +175,16 @@ class Header extends React.Component {
           </div>
 
           <h1><strong>Mega</strong> Boilerplate</h1>
-          <p className="lead">
+          <div className="lead">
             Simple and easy to use hand-crafted starter kits.
             <br />
-            <a href="#">View Demo</a>
-          </p>
+            <ul className="list-inline">
+              <li><a href="#">Demo 1</a></li>
+              <li><a href="#">Demo 2</a></li>
+              <li><a href="#">Demo 3</a></li>
+              <li><a href="#">Demo 4</a></li>
+            </ul>
+          </div>
           <iframe src="https://ghbtns.com/github-btn.html?user=sahat&repo=satellizer&type=star&count=true" frameBorder="0" scrolling="0" width="100px" height="20px"></iframe>
           <iframe src="https://ghbtns.com/github-btn.html?user=sahat&type=follow&count=true" frameBorder="0" scrolling="0" width="170px" height="20px"></iframe>
           <div>
@@ -197,14 +196,6 @@ class Header extends React.Component {
       </div>
     );
   }
-
-  render() {
-    return this.props.showJumbotron ? this.renderJumbotron() : this.renderNav();
-  }
 }
-
-Header.defaultProps = {
-  showJumbotron: true
-};
 
 export default Header;
