@@ -8,8 +8,8 @@ import ReactDOM from 'react-dom';
 import {isArray, forOwn, clone} from 'lodash';
 import { createHistory, useQueries } from 'history';
 
-
 import Header from './Header';
+import Footer from './Footer';
 import Platform from './sections/Platform';
 import Framework from './sections/Framework';
 import TemplateEngine from './sections/TemplateEngine';
@@ -21,8 +21,6 @@ import Authentication from './sections/Authentication';
 import JsFramework from './sections/JsFramework';
 import Theme from './sections/Theme';
 import Deployment from './sections/Deployment';
-
-
 
 class Home extends React.Component {
   constructor(props) {
@@ -237,6 +235,7 @@ class Home extends React.Component {
           {deployment}
           {download}
         </div>
+        <Footer />
       </main>
 
     );
