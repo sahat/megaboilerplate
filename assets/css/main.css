@@ -7,6 +7,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+a {
+  color: rgb(29, 124, 244);
+}
+
 main {
   padding-bottom: 20px;
 }
@@ -40,6 +44,10 @@ hr {
   border-top: 1px solid #ccc;
   margin: 0 0 24px 0;
   width: 100%;
+}
+
+.placeholder {
+  white-space: pre-wrap;
 }
 
 .hero {
@@ -303,6 +311,11 @@ label span + i {
   height: 40px;
 }
 
+.radio-group {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
 .radio > label,
 .checkbox-inline,
 .radio-inline {
@@ -394,18 +407,21 @@ footer {
   color: #333;
 }
 
+
 .nav-stacked > li > a > span {
   background-image: linear-gradient(to bottom, rgba(0,0,0,0) 50%, rgba(0,0,0,0.6) 50%);
   background-repeat: repeat-x;
   background-size: 2px 2px;
   background-position: 0 16px;
 }
+
+
 .nav-stacked > li > a > span:hover {
   color: rgb(29, 124, 244);
   background-image: linear-gradient(to bottom, rgba(29, 124, 244,0) 50%, rgba(29, 124, 244,0.6) 50%);
 }
 
-.nav-stacked > li a > i[class^="ion"] {
+a > i[class^="ion"] {
   margin-right: 5px;
 }
 
@@ -840,7 +856,7 @@ section h6 svg {
 
 .authentication .panel-heading {
   color: #fff;
-  background: #00bf8f linear-gradient(to left, #00bf8f , #001510);
+  background: #1f1c2c linear-gradient(to left, #1f1c2c , #928dab);
   border-color: transparent;
 }
 
@@ -988,15 +1004,20 @@ section h6 svg {
   vertical-align: -0.25em;
   border-radius: 1em;
   border: 2px solid #fff;
-  box-shadow: 0 0 0 0.125em #ddd8ce;
+  box-shadow: 0 0 0 0.125em rgba(0,0,0,0.54);
   margin-right: 0.75em;
   transition: all .2s ease-out;
 }
 
 [type="radio"]:hover + span:before {
-  box-shadow: 0 0 0 0.125em #000;
+  box-shadow: 0 0 0 0.125em rgb(29, 124, 244);
 }
 
+[type="radio"]:active + span:before {
+  box-shadow: 0 0 0 0.125em #1d7cf4;
+  background: #1d7cf4;
+
+}
 /* the checked style using the :checked pseudo class */
 [type="radio"]:checked + span:before {
   background: #000;
