@@ -28,7 +28,6 @@ class Home extends React.Component {
     this.state = {};
     this.handleChange = this.handleChange.bind(this);
     this.clickDownload = this.clickDownload.bind(this);
-    this.handleThemeClick = this.handleThemeClick.bind(this);
   }
 
   clickDownload() {
@@ -72,6 +71,7 @@ class Home extends React.Component {
     let value = e.target.value;
     let isChecked = e.target.checked;
     let state = clone(this.state);
+    let refs = this.refs;
 
     switch (name) {
       case 'platformRadios':
@@ -82,14 +82,17 @@ class Home extends React.Component {
           }
         }
         state.platform = value;
+        window.smoothScroll(refs.framework);
         break;
 
       case 'frameworkRadios':
         state.framework = value;
+        window.smoothScroll(refs.templateEngine);
         break;
 
       case 'templateEngineRadios':
         state.templateEngine = value;
+        window.smoothScroll(refs.cssFramework);
         break;
 
       case 'cssFrameworkRadios':
@@ -97,47 +100,17 @@ class Home extends React.Component {
         state.cssPreprocessor = null;
         state.cssBuildOptions = null;
         state.cssFramework = value;
+        window.smoothScroll(refs.cssPreprocessor);
         break;
 
       case 'cssPreprocessorRadios':
-        // Clear CSS Build Options for plain vanilla CSS
-        if (value === 'css') {
-          state.cssBuildOptions = null;
-        }
         state.cssPreprocessor = value;
-        break;
-
-      case 'cssBuildOptionsRadios':
-        state.cssBuildOptions = value;
-        break;
-
-      case 'buildToolRadios':
-        state.buildTool = value;
-        break;
-
-      case 'databaseRadios':
-        if (value === 'none' && state.authentication) {
-          state.authentication.clear();
-          state.authentication.add('none');
-        }
-        state.database = value;
-        break;
-
-      case 'authenticationCheckboxes':
-        state.authentication = state.authentication || new Set();
-        if (isChecked) {
-          if (value === 'none') {
-            state.authentication.clear();
-          } else {
-            state.authentication.add(value);
-          }
-        } else {
-          state.authentication.delete(value);
-        }
+        window.smoothScroll(refs.jsFramework);
         break;
 
       case 'jsFrameworkRadios':
         state.jsFramework = value;
+        window.smoothScroll(refs.buildTool);
         break;
 
       case 'reactOptionsCheckboxes':
@@ -153,17 +126,43 @@ class Home extends React.Component {
         state.reactBuildSystem = value;
         break;
 
+      case 'buildToolRadios':
+        state.buildTool = value;
+        window.smoothScroll(refs.database);
+        break;
+
+      case 'databaseRadios':
+        if (value === 'none' && state.authentication) {
+          state.authentication.clear();
+          state.authentication.add('none');
+        }
+        state.database = value;
+        window.smoothScroll(refs.authentication);
+        break;
+
+      case 'authenticationCheckboxes':
+        state.authentication = state.authentication || new Set();
+        if (isChecked) {
+          if (value === 'none') {
+            state.authentication.clear();
+          } else {
+            state.authentication.add(value);
+          }
+        } else {
+          state.authentication.delete(value);
+        }
+        if (state.authentication.size >= 4) {
+          window.smoothScroll(refs.deployment);
+        }
+        break;
+
       case 'deploymentRadios':
         state.deployment = value;
+        window.smoothScroll(refs.download);
         break;
     }
 
     this.setState(state);
-  }
-
-  handleThemeClick(event) {
-    let theme = event.target.getAttribute('data-theme');
-    this.setState({ theme: theme });
   }
 
   render() {
@@ -195,7 +194,7 @@ class Home extends React.Component {
       <BuildTool buildTool={state.buildTool} jsFramework={state.jsFramework} cssPreprocessor={state.cssPreprocessor} handleChange={this.handleChange} />
     ) : null;
 
-    let database = state.cssPreprocessor ? (
+    let database = state.buildTool ? (
       <Database database={state.database} handleChange={this.handleChange} />
     ) : null;
 
@@ -203,15 +202,9 @@ class Home extends React.Component {
       <Authentication database={state.database} authentication={state.authentication} handleChange={this.handleChange} />
     ) : null;
 
-    let theme = (state.authentication || state.database === 'none') ? (
-      <Theme theme={state.theme} handleThemeClick={this.handleThemeClick} />
-    ) : null;
-
-    let deployment = state.theme ? (
+    let deployment = (state.authentication || state.database === 'none')? (
       <Deployment deployment={state.deployment} handleChange={this.handleChange} />
     ) : null;
-
-    let base64State = base64url.encode(JSON.stringify(state));
 
     let download = state.deployment ? (
       <button ref="downloadBtn" className="btn btn-block btn-mega" onClick={this.clickDownload}>Compile and Download</button>
@@ -222,18 +215,17 @@ class Home extends React.Component {
         <Header />
         <div className="container">
           <br/>
-          {platform}
-          {framework}
-          {templateEngine}
-          {cssFramework}
-          {cssPreprocessor}
-          {jsFramework}
-          {buildTool}
-          {database}
-          {authentication}
-          {theme}
-          {deployment}
-          {download}
+          <div ref="platform">{platform}</div>
+          <div ref="framework">{framework}</div>
+          <div ref="templateEngine">{templateEngine}</div>
+          <div ref="cssFramework">{cssFramework}</div>
+          <div ref="cssPreprocessor">{cssPreprocessor}</div>
+          <div ref="jsFramework">{jsFramework}</div>
+          <div ref="buildTool">{buildTool}</div>
+          <div ref="database">{database}</div>
+          <div ref="authentication">{authentication}</div>
+          <div ref="deployment">{deployment}</div>
+          <div ref="download">{download}</div>
         </div>
         <Footer />
       </main>

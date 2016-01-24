@@ -375,36 +375,6 @@ footer {
   margin-bottom: 10px;
 }
 
-/*!* Accordion *!*/
-
-/*section .panel {*/
-/*margin-top: 10px;*/
-/*}*/
-/*.panel {*/
-/*box-shadow: none;*/
-/*}*/
-/*.panel-group .panel {*/
-/*border-radius: 0;*/
-/*}*/
-/*.panel-default > .panel-heading {*/
-/*border-radius: 0;*/
-/*background-color: #eee;*/
-/*transition: all 0.3s ease;*/
-/*}*/
-
-/*.panel-title {*/
-/*color: #666;*/
-/*font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;*/
-/*font-size: 11px;*/
-/*text-transform: uppercase;*/
-/*font-weight: 700;*/
-/*letter-spacing: 1px;*/
-/*}*/
-
-/*.panel-default > .panel-heading + .panel-collapse > .panel-body {*/
-/*border: 1px solid #eee;*/
-/*}*/
-
 .nav-stacked {
   margin-top: 20px;
 }
@@ -942,6 +912,7 @@ section h6 svg {
 }
 
 .panel {
+  position: relative;
   margin-bottom: 20px;
   background-color: #fff;
   border: 1px solid #ddd;
