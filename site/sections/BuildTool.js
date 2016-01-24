@@ -11,11 +11,12 @@ class BuildTool extends React.Component {
   constructor(props) {
     super(props);
     this.initializeTooltip.bind(this);
+    this.checkBuildToolRequirement.bind(this);
   }
 
   initializeTooltip() {
     let tooltip = this.refs.tooltip;
-    let requiresBuildTool = this.props.cssPreprocessor !== 'css' || this.props.jsFramework;
+    let requiresBuildTool = this.checkBuildToolRequirement();
 
     if (requiresBuildTool) {
       $(tooltip).tooltip({
@@ -25,6 +26,11 @@ class BuildTool extends React.Component {
       // Hides and destroys an element's tooltip.
       $(tooltip).tooltip('destroy');
     }
+  }
+
+  checkBuildToolRequirement() {
+    let props = this.props;
+    return props.cssPreprocessor !== 'css' || (props.jsFramework && props.jsFramework !== 'none');
   }
 
   componentDidMount() {
@@ -37,7 +43,35 @@ class BuildTool extends React.Component {
 
   render() {
     let props = this.props;
-    let requiresBuildTool = props.cssPreprocessor !== 'css' || props.jsFramework;
+    let requiresBuildTool = this.checkBuildToolRequirement();
+
+    let description;
+
+    switch (props.buildTool) {
+      case 'gulp':
+        description = (
+          <div>
+            <strong><a href="http://gulpjs.com/" target="_blank">Gulp</a></strong> — The streaming build system. <strong><a href="http://browserify.org/">Browserify</a></strong> — Lets you <em>require('modules')</em> in the browser by bundling up all of your dependencies.
+          </div>
+        );
+        break;
+      case 'webpack':
+        description = (
+          <div>
+            <strong><a href="https://webpack.github.io/" target="_blank">Webpack</a></strong> — A module bundler that bundles javascript and other assets for the browser.
+          </div>
+        );
+        break;
+      case 'npm':
+        description = (
+          <div>
+            <strong><a href="https://medium.com/@dabit3/introduction-to-using-npm-as-a-build-tool-b41076f488b0#.fmqbzcm1v" target="_blank">NPM</a></strong> — A build process using only <a href="https://docs.npmjs.com/cli/npm">npm</a> and your <em>package.json</em> file.
+          </div>
+        );
+        break;
+      default:
+        description = <div className="placeholder"> </div>;
+    }
 
     return (
       <div className={cx('animated fadeIn panel', props.buildTool)}>
@@ -45,37 +79,27 @@ class BuildTool extends React.Component {
           <h6>{BUILD_TOOL_SVG} {!props.buildTool || props.buildTool === 'none' ? 'Build Tool' : props.buildTool}</h6>
         </div>
         <div className="panel-body">
-          <label className="radio-inline">
-            <div ref="tooltip" data-toggle="tooltip" data-placement="top">
-              <img className="btn-logo" src="/img/svg/none.png" alt="None"/>
-              <input type="radio" name="buildToolRadios" value="none" onChange={props.handleChange} checked={props.buildTool === 'none'} disabled={requiresBuildTool} /> None
-            </div>
-          </label>
-          <label className="radio-inline">
-            <img className="btn-logo" src="/img/svg/browserify-logo.svg" alt="Gulp / Browserify"/>
-            <input type="radio" name="buildToolRadios" value="gulp" onChange={props.handleChange} checked={props.buildTool === 'gulp'} /> Gulp / Browserify
-          </label>
-          <label className="radio-inline">
-            <img className="btn-logo" src="/img/svg/webpack-logo.svg" alt="Webpack"/>
-            <input type="radio" name="buildToolRadios" value="webpack" onChange={props.handleChange} checked={props.buildTool === 'webpack'} /> Webpack
-          </label>
-          <label className="radio-inline">
-            <img className="btn-logo" src="/img/svg/npm-logo.svg" alt="NPM"/>
-            <input type="radio" name="buildToolRadios" value="npm" onChange={props.handleChange} checked={props.buildTool === 'npm'} /> NPM
-          </label>
-
-          <ul className="nav nav-stacked">
-            <li>
-              <a data-toggle="collapse" href="#buildToolCollapse1">
-                <i className="ion-help-circled" /> Which build tool should I use?
-              </a>
-              <div id="buildToolCollapse1" className="collapse">
-                <div className="panel-collapse">
-                  Lorem ipsum.
-                </div>
+          {description}
+          <div className="radio-group">
+            <label className="radio-inline">
+              <div ref="tooltip" data-toggle="tooltip" data-placement="top">
+                <img className="btn-logo" src="/img/svg/none.png" alt="None"/>
+                <input type="radio" name="buildToolRadios" value="none" onChange={props.handleChange} checked={props.buildTool === 'none'} disabled={requiresBuildTool} /> None
               </div>
-            </li>
-          </ul>
+            </label>
+            <label className="radio-inline">
+              <img className="btn-logo" src="/img/svg/browserify-logo.svg" alt="Gulp / Browserify"/>
+              <input type="radio" name="buildToolRadios" value="gulp" onChange={props.handleChange} checked={props.buildTool === 'gulp'} /> Gulp + Browserify
+            </label>
+            <label className="radio-inline">
+              <img className="btn-logo" src="/img/svg/webpack-logo.svg" alt="Webpack"/>
+              <input type="radio" name="buildToolRadios" value="webpack" onChange={props.handleChange} checked={props.buildTool === 'webpack'} /> Webpack
+            </label>
+            <label className="radio-inline">
+              <img className="btn-logo" src="/img/svg/npm-logo.svg" alt="NPM"/>
+              <input type="radio" name="buildToolRadios" value="npm" onChange={props.handleChange} checked={props.buildTool === 'npm'} /> NPM
+            </label>
+          </div>
         </div>
       </div>
     );
