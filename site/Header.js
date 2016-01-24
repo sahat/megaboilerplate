@@ -136,7 +136,7 @@ class Header extends React.Component {
           <div className="container-fluid">
             <div id="navbar" className="navbar-collapse collapse">
               <ul className="nav navbar-nav">
-                <li><a href="https://github.com/sahat/boilerplate/issues" target="_blank"><i className="ion-bug"></i>Bug Reports</a></li>
+                <li><a href="https://github.com/sahat/boilerplate/issues" target="_blank"><i className="ion-bug"></i>Report a bug</a></li>
                 <li><a href="https://github.com/sahat/boilerplate/blob/master/CONTRIBUTING.md" target="_blank"><i className="ion-pull-request"></i>Contributing</a></li>
               </ul>
               <ul className="nav navbar-nav navbar-right">
@@ -181,7 +181,6 @@ class Header extends React.Component {
               <li><a href="#">Demo 1</a></li>
               <li><a href="#">Demo 2</a></li>
               <li><a href="#">Demo 3</a></li>
-              <li><a href="#">Demo 4</a></li>
             </ul>
           </div>
           <iframe src="https://ghbtns.com/github-btn.html?user=sahat&repo=satellizer&type=star&count=true" frameBorder="0" scrolling="0" width="100px" height="20px"></iframe>
