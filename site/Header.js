@@ -3,7 +3,6 @@ import cx from 'classnames';
 import { Router, Route, Link } from 'react-router'
 
 class Header extends React.Component {
-
   constructor(props) {
     super(props);
   }
@@ -137,8 +136,8 @@ class Header extends React.Component {
           <div className="container-fluid">
             <div id="navbar" className="navbar-collapse collapse">
               <ul className="nav navbar-nav">
-                <li><a href="#"><i className="ion-bug"></i>Bug Reports</a></li>
-                <li><a href="#"><i className="ion-pull-request"></i>Contributing</a></li>
+                <li><a href="https://github.com/sahat/boilerplate/issues" target="_blank"><i className="ion-bug"></i>Bug Reports</a></li>
+                <li><a href="https://github.com/sahat/boilerplate/blob/master/CONTRIBUTING.md" target="_blank"><i className="ion-pull-request"></i>Contributing</a></li>
               </ul>
               <ul className="nav navbar-nav navbar-right">
                 <li className="tweet-button">
