@@ -9,11 +9,11 @@ const AUTHENTICATION_SVG = (
 
 const Authentication = (props) => {
   let authenticationCheckboxes = props.database === 'none' ? (
-    <div className="alert alert-info">
-      <strong>Important!</strong> To enable authentication you must choose a database.
-    </div>
+      <div>
+        <strong>Note: </strong> To enable authentication you must select a database.
+      </div>
   ) : (
-    <div>
+    <div className="radio-group">
       <label className="checkbox-inline">
         <img className="btn-logo" src="/img/svg/none.png" alt="None" />
         <input type="checkbox" name="authenticationCheckboxes" value="none" onChange={props.handleChange} checked={props.authentication && props.authentication.size === 0} disabled={props.database === 'none'} /> None
@@ -22,31 +22,18 @@ const Authentication = (props) => {
         <img className="btn-logo" src="/img/svg/email-logo.svg" height="60" alt="Email" />
         <input type="checkbox" name="authenticationCheckboxes" value="email" onChange={props.handleChange} checked={props.authentication && props.authentication.has('email')} disabled={props.database === 'none'} /> Email & Password
       </label>
-      <label className="radio-inline">
+      <label className="checkbox-inline">
         <img className="btn-logo" src="/img/svg/facebook-logo.svg" alt="Facebook" />
         <input type="checkbox" name="authenticationCheckboxes" value="facebook" onChange={props.handleChange} checked={props.authentication && props.authentication.has('facebook')} disabled={props.database === 'none'} /> Facebook
       </label>
-      <label className="radio-inline">
+      <label className="checkbox-inline">
         <img className="btn-logo" src="/img/svg/google-logo.svg" alt="Google" />
         <input type="checkbox" name="authenticationCheckboxes" value="google" onChange={props.handleChange} checked={props.authentication && props.authentication.has('google')} disabled={props.database === 'none'} /> Google
       </label>
-      <label className="radio-inline">
+      <label className="checkbox-inline">
         <img className="btn-logo" src="/img/svg/twitter-logo.svg" alt="Twitter" />
         <input type="checkbox" name="authenticationCheckboxes" value="twitter" onChange={props.handleChange} checked={props.authentication && props.authentication.has('twitter')} disabled={props.database === 'none'} /> Twitter
       </label>
-
-      <ul className="nav nav-stacked">
-        <li>
-          <a data-toggle="collapse" href="#authenticationCollapse1">
-            <i className="ion-help-circled" /> Is "Forgot Password" included?
-          </a>
-          <div id="authenticationCollapse1" className="collapse">
-            <div className="panel-collapse">
-              Test.
-            </div>
-          </div>
-        </li>
-      </ul>
     </div>
   );
 
