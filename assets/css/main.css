@@ -613,7 +613,7 @@ section h6 svg {
 
 .node .panel-heading {
   background: #83cd29;
-  border-color: transparent;
+  border-color: #83cd29;
 }
 
 .python .panel-heading {
@@ -933,15 +933,17 @@ section h6 svg {
 .panel {
   margin-bottom: 20px;
   background-color: #fff;
-  border: 0;
+  border: 1px solid #ddd;
   border-radius: 3px;
   box-shadow: 0 1px 1px rgba(0,0,0,.05);
+
 }
 
 .panel-heading {
   padding: 0;
   padding-left: 15px;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #ddd;
+  margin: -1px -1px 0;
 }
 
 .panel-heading h6 {
