@@ -48,6 +48,34 @@ class Framework extends React.Component {
       invisible: !props.framework
     });
 
+    let description;
+
+    switch (props.framework) {
+      case 'express':
+        description = (
+          <div>
+            <strong><a href="http://expressjs.com/" target="_blank">Express</a></strong> — A minimal and flexible web application framework, providing a robust set of features for building web applications. It is the de facto standard framework for Node.js.
+          </div>
+        );
+        break;
+      case 'hapi':
+        description = (
+          <div>
+            <strong><a href="http://hapijs.com/" target="_blank">Hapi</a></strong> — A simple to use configuration-centric framework with built-in support for input validation, caching, authentication, and other essential facilities for building web and services applications. Used by <a href="https://www.yahoo.com/" target="_blank">Yahoo</a>, <a href="http://www.walmart.com/" target="_blank">Walmart</a>, <a href="http://www.macys.com/" target="_blank">Macys</a>, <a href="http://disney.com/" target="_blank">Disney</a>, <a href="https://www.mozilla.org/" target="_blank">Mozilla</a>, <a href="https://www.paypal.com/" target="_blank">PayPal</a> and others.
+          </div>
+        );
+        break;
+      case 'meteor':
+        description = (
+          <div>
+            <strong><a href="https://www.meteor.com/" target="_blank">Meteor</a></strong> — A complete platform for building web and mobile apps in pure JavaScript.
+          </div>
+        );
+        break;
+      default:
+        description = <div className="placeholder"> </div>;
+    }
+
     let nodeFrameworks = (props.platform === 'node') ? (
       <div>
         <label className="radio-inline">
@@ -100,6 +128,7 @@ class Framework extends React.Component {
           <h6>{FRAMEWORK_SVG} {props.framework || 'Framework'}</h6>
         </div>
         <div className="panel-body">
+          {description}
           {nodeFrameworks}
         </div>
       </div>

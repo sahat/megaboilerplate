@@ -52,7 +52,7 @@ class TemplateEngine extends React.Component {
       case 'nunjucks':
         description = (
           <div>
-            <strong><a href="http://mozilla.github.io/nunjucks/" target="_blank">Nunjucks</a></strong> — A powerful templating engine with inheritance, asynchronous control, and more (<a href="http://jinja.pocoo.org/docs/dev/" target="_blank">Jinja2</a> inspired).
+            <strong><a href="http://mozilla.github.io/nunjucks/" target="_blank">Nunjucks</a></strong> — A powerful templating engine with inheritance, asynchronous control, and more. It is heavily inspired by <a href="http://jinja.pocoo.org/docs/dev/" target="_blank">Jinja2</a>.
           </div>
         );
         break;
