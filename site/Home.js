@@ -65,7 +65,7 @@ class Home extends React.Component {
         }
       })
       .fail(function(jqXHR) {
-        window.notie.alert(3, jqXHR.statusText, 2.5);
+        window.notie.alert(3, jqXHR.responseText, 2.5);
       });
   }
 
