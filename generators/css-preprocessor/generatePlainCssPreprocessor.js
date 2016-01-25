@@ -1,14 +1,15 @@
 import { join } from 'path';
-import { copy } from '../utils';
+import { cpy } from '../utils';
 
 async function generatePlainCssPreprocessor(params) {
-  const build = join(__base, 'build', params.uuid);
+  const cssDir = join(__base, 'build', params.uuid, 'public', 'stylesheets');
   const mainCss = join(__base, 'modules', 'css-preprocessor', 'main.css');
+  const normalizeCss = join(__base, 'modules', 'css-preprocessor', 'normalize.css');
 
   switch (params.framework) {
     case 'express':
       if (params.cssFramework === 'none') {
-        await copy(mainCss, join(build, 'public', 'stylesheets', 'main.css'));
+        await cpy([normalizeCss, mainCss], cssDir);
       }
       break;
     case 'hapi':
