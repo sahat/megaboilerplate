@@ -136,7 +136,7 @@ class Header extends React.Component {
           <div className="container-fluid">
             <div id="navbar" className="navbar-collapse collapse">
               <ul className="nav navbar-nav">
-                <li><a href="https://github.com/sahat/boilerplate/issues" target="_blank"><i className="ion-bug"></i>Report a bug</a></li>
+                <li><a href="https://github.com/sahat/boilerplate/issues" target="_blank"><i className="ion-bug"></i>Report Issues</a></li>
                 <li><a href="https://github.com/sahat/boilerplate/blob/master/CONTRIBUTING.md" target="_blank"><i className="ion-pull-request"></i>Contributing</a></li>
               </ul>
               <ul className="nav navbar-nav navbar-right">
