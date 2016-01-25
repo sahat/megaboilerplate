@@ -10,6 +10,8 @@ async function generatePlainCssPreprocessor(params) {
     case 'express':
       if (params.cssFramework === 'none') {
         await cpy([normalizeCss, mainCss], cssDir);
+      } else {
+        await cpy([mainCss], cssDir);
       }
       break;
     case 'hapi':
