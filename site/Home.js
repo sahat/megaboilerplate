@@ -1,12 +1,8 @@
-/* global JSZip saveAs */
+/* global $ */
 
-let haikunate = require('haikunator');
-let url = require('url');
-let base64url = require('base64-url');
+const haikunate = require('haikunator');
 import React from 'react';
-import ReactDOM from 'react-dom';
-import {isArray, forOwn, clone} from 'lodash';
-import { createHistory, useQueries } from 'history';
+import { clone } from 'lodash';
 
 import Header from './Header';
 import Footer from './Footer';
@@ -19,7 +15,6 @@ import BuildTool from './sections/BuildTool';
 import Database from './sections/Database';
 import Authentication from './sections/Authentication';
 import JsFramework from './sections/JsFramework';
-import Theme from './sections/Theme';
 import Deployment from './sections/Deployment';
 
 class Home extends React.Component {
@@ -31,13 +26,13 @@ class Home extends React.Component {
   }
 
   clickDownload() {
-    let state = this.state;
-    let downloadBtn = this.refs.downloadBtn;
+    const state = this.state;
+    const downloadBtn = this.refs.downloadBtn;
 
     // Google Analytics event
-    //ga("send","event","Customize","Download","Customize and Download")
+    // ga("send","event","Customize","Download","Customize and Download")
 
-    let data = clone(state);
+    const data = clone(state);
     data.appName = haikunate({ tokenLength: 0 });
 
     if (data.authentication) {
@@ -45,42 +40,39 @@ class Home extends React.Component {
     }
 
     $.ajax({
-        url: '/download',
-        method: 'POST',
-        contentType: 'application/json; charset=utf-8',
-        data: JSON.stringify(data)
-      })
-      .done((response, status, request) => {
-        $(downloadBtn).removeAttr('disabled');
+      url: '/download',
+      method: 'POST',
+      contentType: 'application/json; charset=utf-8',
+      data: JSON.stringify(data)
+    }).done((response, status, request) => {
+      $(downloadBtn).removeAttr('disabled');
 
-        var disp = request.getResponseHeader('Content-Disposition');
-        if (disp && disp.search('attachment') != -1) {
-          var form = $('<form method="POST" action="/download">');
-          $.each(data, function(k, v) {
-            form.append($('<input type="hidden" name="' + k +
-              '" value="' + v + '">'));
-          });
-          $('body').append(form);
-          form.submit();
-        }
-      })
-      .fail(function(jqXHR) {
-        window.notie.alert(3, jqXHR.responseText, 2.5);
-      });
+      const disp = request.getResponseHeader('Content-Disposition');
+      if (disp && disp.search('attachment') !== -1) {
+        const form = $('<form method="POST" action="/download">');
+        $.each(data, (k, v) => {
+          form.append($(`<input type="hidden" name="${k}" value="${v}">`));
+        });
+        $('body').append(form);
+        form.submit();
+      }
+    }).fail((jqXHR) => {
+      window.notie.alert(3, jqXHR.responseText, 2.5);
+    });
   }
 
   handleChange(e) {
-    let name = e.target.name;
-    let value = e.target.value;
-    let isChecked = e.target.checked;
-    let state = clone(this.state);
-    let refs = this.refs;
+    const name = e.target.name;
+    const value = e.target.value;
+    const isChecked = e.target.checked;
+    const state = clone(this.state);
+    const refs = this.refs;
 
     switch (name) {
       case 'platformRadios':
         // Reset everything
-        for (let key in state) {
-          if (state.hasOwnProperty(key) ) {
+        for (const key in state) {
+          if (state.hasOwnProperty(key)) {
             state[key] = null;
           }
         }
@@ -174,53 +166,56 @@ class Home extends React.Component {
         }
         state.deployment = value;
         break;
+
+      default:
+        // Handle default case
     }
 
     this.setState(state);
   }
 
   render() {
-    let state = this.state;
+    const state = this.state;
 
-    let platform = <Platform platform={state.platform} handleChange={this.handleChange} />;
+    const platform = <Platform platform={state.platform} handleChange={this.handleChange} />;
 
-    let framework = state.platform ? (
+    const framework = state.platform ? (
       <Framework platform={state.platform} framework={state.framework} handleChange={this.handleChange} />
     ) : null;
 
-    let templateEngine = state.framework ? (
+    const templateEngine = state.framework ? (
       <TemplateEngine platform={state.platform} templateEngine={state.templateEngine} handleChange={this.handleChange} />
     ) : null;
 
-    let cssFramework = state.templateEngine ? (
+    const cssFramework = state.templateEngine ? (
       <CssFramework cssFramework={state.cssFramework} handleChange={this.handleChange} />
     ) : null;
 
-    let cssPreprocessor = state.cssFramework ? (
+    const cssPreprocessor = state.cssFramework ? (
       <CssPreprocessor cssPreprocessor={state.cssPreprocessor} cssFramework={state.cssFramework} handleChange={this.handleChange} />
     ) : null;
 
-    let jsFramework = state.cssPreprocessor ? (
+    const jsFramework = state.cssPreprocessor ? (
       <JsFramework jsFramework={state.jsFramework} reactOptions={state.reactOptions} handleChange={this.handleChange} />
     ) : null;
 
-    let buildTool = state.jsFramework ? (
+    const buildTool = state.jsFramework ? (
       <BuildTool buildTool={state.buildTool} jsFramework={state.jsFramework} cssPreprocessor={state.cssPreprocessor} handleChange={this.handleChange} />
     ) : null;
 
-    let database = state.buildTool ? (
+    const database = state.buildTool ? (
       <Database database={state.database} handleChange={this.handleChange} />
     ) : null;
 
-    let authentication = state.database ? (
+    const authentication = state.database ? (
       <Authentication database={state.database} authentication={state.authentication} handleChange={this.handleChange} />
     ) : null;
 
-    let deployment = (state.authentication || state.database === 'none')? (
+    const deployment = (state.authentication || state.database === 'none') ? (
       <Deployment deployment={state.deployment} handleChange={this.handleChange} />
     ) : null;
 
-    let download = state.deployment ? (
+    const download = state.deployment ? (
       <button ref="downloadBtn" className="btn btn-block btn-mega" onClick={this.clickDownload}>Compile and Download</button>
     ) : null;
 
@@ -241,7 +236,6 @@ class Home extends React.Component {
           <div ref="deployment">{deployment}</div>
           <div ref="download">{download}</div>
           <button ref="downloadBtn" className="btn btn-block btn-mega" onClick={this.clickDownload}>Compile and Download</button>
-
         </div>
         <Footer />
       </main>
