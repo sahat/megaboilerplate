@@ -20,10 +20,13 @@ async function download(req, res) {
     await generateAuthentication(params);
     await generateJsFramework(params);
     await walkAndRemoveComments(params);
-  } catch (e) {
-    throw Error(e);
+    res.end();
+  } catch (err) {
+    console.info(err.stack);
+    console.info(params);
+    res.status(500).send(err.message);
   }
-  res.end();
+
 }
 
 export default download;
