@@ -1,14 +1,17 @@
 import { join } from 'path';
-import { copy } from '../utils';
+import { cpy } from '../utils';
 
 async function generateSassPreprocessor(params) {
-  let build = join(__base, 'build', params.uuid);
-  let mainSass = join(__base, 'modules', 'css-preprocessor', 'main.scss');
+  const cssDir = join(__base, 'build', params.uuid, 'public', 'stylesheets');
+  const mainSass = join(__base, 'modules', 'css-preprocessor', 'main.scss');
+  const normalizeCss = join(__base, 'modules', 'css-preprocessor', 'normalize.css');
 
   switch (params.framework) {
     case 'express':
       if (params.cssFramework === 'none') {
-        await copy(mainSass, path.join(build, 'public', 'stylesheets', 'main.scss'));
+        await cpy([normalizeCss, mainSass], cssDir);
+      } else {
+        await cpy([mainSass], cssDir);
       }
       break;
     case 'hapi':

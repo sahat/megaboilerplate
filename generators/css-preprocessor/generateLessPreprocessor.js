@@ -1,14 +1,17 @@
 import { join } from 'path';
-import { copy } from '../utils';
+import { cpy } from '../utils';
 
 async function generateLessPreprocessor(params) {
-  let build = join(__base, 'build', params.uuid);
-  let mainLess = join(__base, 'modules', 'css-preprocessor', 'main.less');
+  const cssDir = join(__base, 'build', params.uuid, 'public', 'stylesheets');
+  const mainLess = join(__base, 'modules', 'css-preprocessor', 'main.less');
+  const normalizeCss = join(__base, 'modules', 'css-preprocessor', 'normalize.css');
 
   switch (params.framework) {
     case 'express':
       if (params.cssFramework === 'none') {
-        await copy(mainLess, join(build, 'public', 'stylesheets', 'main.less'));
+        await cpy([normalizeCss, mainLess], cssDir);
+      } else {
+        await cpy([mainLess], cssDir);
       }
       break;
     case 'hapi':
