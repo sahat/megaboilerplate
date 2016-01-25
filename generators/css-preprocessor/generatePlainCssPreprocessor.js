@@ -2,13 +2,13 @@ import { join } from 'path';
 import { copy } from '../utils';
 
 async function generatePlainCssPreprocessor(params) {
-  let build = join(__base, 'build', params.uuid);
-  let mainCss = join(__base, 'modules', 'css-preprocessor', 'main.css');
+  const build = join(__base, 'build', params.uuid);
+  const mainCss = join(__base, 'modules', 'css-preprocessor', 'main.css');
 
   switch (params.framework) {
     case 'express':
       if (params.cssFramework === 'none') {
-        await copy(mainCss, path.join(build, 'public', 'stylesheets', 'main.css'));
+        await copy(mainCss, join(build, 'public', 'stylesheets', 'main.css'));
       }
       break;
     case 'hapi':

@@ -1,5 +1,6 @@
 {
   "extends": "airbnb",
+  "parser": "babel-eslint",
   "rules": {
     "no-spaced-func:": 0,
     "max-len": 0,
