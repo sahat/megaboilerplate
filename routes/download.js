@@ -2,10 +2,10 @@ import generateFramework from '../generators/framework/generateFramework';
 import generateTemplateEngine from '../generators/template-engine/generateTemplateEngine';
 import generateCssFramework from '../generators/css-framework/generateCssFramework';
 import generateCssPreprocessor from '../generators/css-preprocessor/generateCssPreprocessor';
-import generateCssBuildOptions from '../generators/css-build-options/generateCssBuildOptions';
+import generateBuildTool from '../generators/build-tool/generateBuildTool';
+import generateJsFramework from '../generators/js-framework/generateJsFramework';
 import generateDatabase from '../generators/database/generateDatabase';
 import generateAuthentication from '../generators/authentication/generateAuthentication';
-import generateJsFramework from '../generators/js-framework/generateJsFramework';
 import { walkAndRemoveComments, prepare, cleanup } from '../generators/utils';
 
 async function download(req, res) {
@@ -15,10 +15,10 @@ async function download(req, res) {
     await generateTemplateEngine(params);
     await generateCssFramework(params);
     await generateCssPreprocessor(params);
-    await generateCssBuildOptions(params);
+    await generateJsFramework(params);
+    await generateBuildTool(params);
     await generateDatabase(params);
     await generateAuthentication(params);
-    await generateJsFramework(params);
     await walkAndRemoveComments(params);
     res.end();
   } catch (err) {
