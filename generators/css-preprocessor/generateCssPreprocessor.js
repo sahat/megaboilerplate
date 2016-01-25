@@ -13,7 +13,7 @@ async function generateCssPreprocessor(params) {
     case 'less':
       await generateLessPreprocessor(params);
       break;
-    case 'cssnext':
+    case 'stylus':
       break;
     default:
   }

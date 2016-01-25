@@ -17,7 +17,6 @@ const CssPreprocessor = (props) => {
   const SASS = props.cssPreprocessor === 'sass';
   const LESS = props.cssPreprocessor === 'less';
   const STYLUS = props.cssPreprocessor === 'stylus';
-  const CSSNEXT = props.cssPreprocessor === 'cssnext';
 
   let cssRadio = (
     <label className="radio-inline">
@@ -41,13 +40,6 @@ const CssPreprocessor = (props) => {
     </label>
   ) : null;
 
-  let cssnextRadio = (NO_CSS_FRAMEWORK) ? (
-    <label className="radio-inline">
-      <img className="btn-logo" src="/img/svg/cssnext-logo.svg" height="60" alt="cssnext Logo"/>
-      <input type="radio" name="cssPreprocessorRadios" value="cssnext" onChange={props.handleChange} checked={CSSNEXT} /> cssnext
-    </label>
-  ) : null;
-
   let stylusRadio = (NO_CSS_FRAMEWORK) ? (
     <label className="radio-inline">
       <img className="btn-logo" src="/img/svg/stylus-logo.svg" alt="Stylus Logo"/>
@@ -66,7 +58,6 @@ const CssPreprocessor = (props) => {
           {sassRadio}
           {lessRadio}
           {stylusRadio}
-          {cssnextRadio}
         </div>
       </div>
     </div>
