@@ -22,7 +22,7 @@ async function generateJsFrameworkReact(params) {
         await replaceCode(layout, 'JS_FRAMEWORK_LIB_IMPORT', reactImport, { indentLevel: 2 });
 
         // Include browser JSX transpiler
-        if (params.reactBuildSystem === 'none') {
+        if (params.buildTool === 'none') {
           mainImport = join(__base, 'modules', 'js-framework', 'react', 'main-browser-jade-import.jade');
           await replaceCode(layout, 'JS_FRAMEWORK_BABEL_BROWSER', babelBrowserImport, { indentLevel: 2 });
           await replaceCode(layout, 'JS_FRAMEWORK_MAIN_IMPORT', mainImport, { indentLevel: 2 });
@@ -40,7 +40,7 @@ async function generateJsFrameworkReact(params) {
 
       }
 
-      if (params.reactBuildSystem === 'none') {
+      if (params.buildTool === 'none') {
         // Basic app
         await copy(mainJsBrowser, join(build, 'public', 'javascripts', 'main.jsx'));
       } else {
