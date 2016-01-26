@@ -98,7 +98,9 @@ class Home extends React.Component {
         if (!state.cssFramework) {
           window.smoothScroll(refs.cssPreprocessor);
         }
-        state.cssPreprocessor = 'css';
+        if (state.cssPreprocessor) {
+          state.cssPreprocessor = 'css';
+        }
         state.cssFramework = value;
         break;
 
@@ -200,7 +202,7 @@ class Home extends React.Component {
     ) : null;
 
     const buildTool = state.jsFramework ? (
-      <BuildTool buildTool={state.buildTool} jsFramework={state.jsFramework} cssPreprocessor={state.cssPreprocessor} handleChange={this.handleChange} />
+      <BuildTool {...state} handleChange={this.handleChange} />
     ) : null;
 
     const database = state.buildTool ? (
