@@ -36,7 +36,8 @@ class BuildTool extends React.Component {
 
   checkBuildToolRequirement() {
     let props = this.props;
-    return props.cssPreprocessor !== 'css' || (props.jsFramework && props.jsFramework !== 'none');
+    return props.cssPreprocessor !== 'css';
+    //return props.cssPreprocessor !== 'css' || (props.jsFramework && props.jsFramework !== 'none');
   }
 
   render() {
