@@ -91,17 +91,17 @@ class JsFramework extends React.Component {
          {description}
          <div className="radio-group">
            <label className="radio-inline">
-             <img className="btn-logo" src="/img/svg/none.png" alt="None Icon" />
+             <img className="btn-logo" src="/img/svg/none.png" alt="None" />
              <input type="radio" name="jsFrameworkRadios" value="none" onChange={props.handleChange} checked={props.jsFramework === 'none'} />
              <span>None</span>
            </label>
            <label className="radio-inline">
-             <img className="btn-logo" src="/img/svg/react-logo.svg" />
+             <img className="btn-logo" src="/img/svg/react-logo.svg" alt="React" />
              <input type="radio" name="jsFrameworkRadios" value="react" onChange={props.handleChange} checked={props.jsFramework === 'react'} />
              <span>React</span>
            </label>
            <label className="radio-inline">
-             <img className="btn-logo" src="/img/svg/angular2.png" />
+             <img className="btn-logo" src="/img/svg/angular2.png" alt="Angular" />
              <input type="radio" name="jsFrameworkRadios" value="angular" onChange={props.handleChange} checked={props.jsFramework === 'angular'} />
              <span>Angular 2</span>
            </label>

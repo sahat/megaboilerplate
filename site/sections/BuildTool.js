@@ -87,7 +87,7 @@ class BuildTool extends React.Component {
               </div>
             </label>
             <label className="radio-inline">
-              <img className="btn-logo" src="/img/svg/browserify-logo.svg" alt="Gulp / Browserify"/>
+              <img className="btn-logo" src="/img/svg/browserify-logo.svg" alt="Gulp + Browserify"/>
               <input type="radio" name="buildToolRadios" value="gulp" onChange={props.handleChange} checked={props.buildTool === 'gulp'} /> Gulp + Browserify
             </label>
             <label className="radio-inline">

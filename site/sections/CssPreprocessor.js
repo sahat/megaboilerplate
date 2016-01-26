@@ -20,21 +20,21 @@ const CssPreprocessor = (props) => {
 
   let cssRadio = (
     <label className="radio-inline">
-      <img className="btn-logo" src="/img/svg/css3-logo.svg" alt="CSS Logo"/>
+      <img className="btn-logo" src="/img/svg/css3-logo.svg" alt="CSS"/>
       <input type="radio" name="cssPreprocessorRadios" value="css" onChange={props.handleChange} checked={CSS} /> None / CSS
     </label>
   );
 
   let sassRadio = (NO_CSS_FRAMEWORK || BOOTSTRAP || FOUNDATION || BOURBON_NEAT) ? (
     <label className="radio-inline">
-      <img className="btn-logo" src="/img/svg/sass-logo.svg" alt="Sass Logo"/>
+      <img className="btn-logo" src="/img/svg/sass-logo.svg" alt="Sass"/>
       <input type="radio" name="cssPreprocessorRadios" value="sass" onChange={props.handleChange} checked={SASS} /> Sass
     </label>
   ) : null;
 
   let lessRadio = (NO_CSS_FRAMEWORK || BOOTSTRAP) ? (
     <label className="radio-inline">
-      <img className="btn-logo" src="/img/svg/less-logo.svg" alt="LESS Logo"/>
+      <img className="btn-logo" src="/img/svg/less-logo.svg" alt="LESS"/>
 
       <input type="radio" name="cssPreprocessorRadios" value="less" onChange={props.handleChange} checked={LESS} /> LESS
     </label>
@@ -42,7 +42,7 @@ const CssPreprocessor = (props) => {
 
   let stylusRadio = (NO_CSS_FRAMEWORK) ? (
     <label className="radio-inline">
-      <img className="btn-logo" src="/img/svg/stylus-logo.svg" alt="Stylus Logo"/>
+      <img className="btn-logo" src="/img/svg/stylus-logo.svg" alt="Stylus"/>
       <input type="radio" name="cssPreprocessorRadios" value="stylus" onChange={props.handleChange} checked={STYLUS} /> Stylus
     </label>
   ) : null;
