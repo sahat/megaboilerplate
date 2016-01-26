@@ -1,6 +1,5 @@
 import { join } from 'path';
-import { copy, replaceCode, addDependencies } from '../utils';
-import dependencies from '../../modules/dependencies';
+import { copy, replaceCode, addNpmPackage } from '../utils';
 
 async function generateJadeTemplateEngine(params) {
   let app;
@@ -20,7 +19,7 @@ async function generateJadeTemplateEngine(params) {
       await replaceCode(app, 'BASE_ROUTE', baseRoute, { leadingBlankLine: true });
 
       // Add Jade to package.json
-      await addDependencies(dependencies.templateEngine.expressJade, params);
+      await addNpmPackage('jade', params);
 
       // Copy initial Jade templates to "views" directory
       await copy(
@@ -36,7 +35,8 @@ async function generateJadeTemplateEngine(params) {
       await replaceCode(app, 'TEMPLATE_ENGINE', viewEngineSetup, { leadingBlankLine: true });
 
       // Add dependencies
-      await addDependencies(dependencies.templateEngine.hapiJade, params);
+      await addNpmPackage('jade', params);
+      await addNpmPackage('vision', params);
 
       // Copy initial Jade templates to "views" directory
       await copy(

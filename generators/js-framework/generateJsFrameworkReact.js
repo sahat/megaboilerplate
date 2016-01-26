@@ -1,12 +1,12 @@
 import { join } from 'path';
-import { copy, replaceCode, removeCode, addDependencies } from '../utils';
+import { copy, replaceCode, removeCode } from '../utils';
 
 async function generateJsFrameworkReact(params) {
-  let build = join(__base, 'build', params.uuid);
-  let mainJs = join(__base, 'modules', 'js-framework', 'react', 'main.js');
-  let mainJsBrowser = join(__base, 'modules', 'js-framework', 'react', 'main-browser.js');
-  let react = join(__base, 'modules', 'js-framework', 'react', 'react.js');
-  let reactDom = join(__base, 'modules', 'js-framework', 'react', 'react-dom.js');
+  const build = join(__base, 'build', params.uuid);
+  const mainJs = join(__base, 'modules', 'js-framework', 'react', 'main.js');
+  const mainJsBrowser = join(__base, 'modules', 'js-framework', 'react', 'main-browser.js');
+  const react = join(__base, 'modules', 'js-framework', 'react', 'react.js');
+  const reactDom = join(__base, 'modules', 'js-framework', 'react', 'react-dom.js');
 
   switch (params.framework) {
     case 'express':

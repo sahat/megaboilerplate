@@ -1,7 +1,5 @@
 import { join } from 'path';
-import { copy, replaceCode, removeCode, addDependencies } from '../utils';
-
-let dependencies = require('../../modules/dependencies');
+import { copy, replaceCode, removeCode, addNpmPackage } from '../utils';
 
 async function generateCommonAuthenticationExpress(params) {
   let app = join(__base, 'build', params.uuid, 'app.js');
@@ -23,7 +21,7 @@ async function generateCommonAuthenticationExpress(params) {
   await replaceCode(passportConfigFile, 'PASSPORT_SERIALIZER', passportSerializer, { leadingBlankLine: true });
   await replaceCode(passportConfigFile, 'PASSPORT_DESERIALIZER', passportDeserializer, { leadingBlankLine: true });
 
-  await addDependencies(dependencies.authentication.common, params);
+  await addNpmPackage('passport', params);
 }
 
 export default generateCommonAuthenticationExpress;

@@ -1,5 +1,5 @@
 import { join } from 'path';
-import { copy, replaceCode, removeCode, addDependencies } from '../utils';
+import { copy, replaceCode, removeCode, addNpmPackage } from '../utils';
 
 const CSS_FRAMEWORK_WITH_JQUERY = ['bootstrap', 'foundation'];
 

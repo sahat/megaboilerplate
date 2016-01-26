@@ -1,5 +1,5 @@
 import { join } from 'path';
-import { cpy, copy, replaceCode, removeCode, addDependencies } from '../utils';
+import { cpy, copy, replaceCode, removeCode, addNpmPackage } from '../utils';
 
 async function generateJsFrameworkAngular(params) {
   let build = join(__base, 'build', params.uuid);

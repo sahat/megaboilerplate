@@ -1,20 +1,13 @@
 import { join } from 'path';
-import { replaceCode, removeCode, addDependencies } from '../utils';
-
-let dependencies = require('../../modules/dependencies');
+import { replaceCode, removeCode, addNpmPackage } from '../utils';
 
 async function generateGoogleAuthenticationExpress(params) {
-  let config = join(__base, 'build', params.uuid, 'config', 'passport.js');
-  let require = join(__base, 'modules', 'authentication', 'google', 'passport-require.js');
-  let strategy = join(__base, 'modules', 'authentication', 'google', 'passport-strategy.js');
-  let routes = join(__base, 'modules', 'authentication', 'google', 'passport-routes.js');
+  const config = join(__base, 'build', params.uuid, 'config', 'passport.js');
+  const require = join(__base, 'modules', 'authentication', 'google', 'passport-require.js');
+  const strategy = join(__base, 'modules', 'authentication', 'google', 'passport-strategy.js');
+  const routes = join(__base, 'modules', 'authentication', 'google', 'passport-routes.js');
 
-  if (params.authentication.includes('google')) {
-    // TODO
-  } else {
-    await removeCode(config, 'PASSPORT_GOOGLE_REQUIRE');
-    await removeCode(config, 'PASSPORT_GOOGLE_STRATEGY');
-  }
+  // TODO
 }
 
 export default generateGoogleAuthenticationExpress;

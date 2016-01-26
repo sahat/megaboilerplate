@@ -1,6 +1,5 @@
 import { join } from 'path';
-import { copy, replaceCode, addDependencies } from '../utils';
-import dependencies from '../../modules/dependencies';
+import { copy, replaceCode, addNpmPackage } from '../utils';
 
 async function generateNunjucksTemplateEngine(params) {
   let app;
@@ -15,7 +14,7 @@ async function generateNunjucksTemplateEngine(params) {
       await replaceCode(app, 'TEMPLATE_ENGINE', viewEngineSetup, { leadingBlankLine: true });
 
       // Add Nunjucks to package.json
-      await addDependencies(dependencies.templateEngine.expressNunjucks, params);
+      await addNpmPackage('nunjucks', params);
 
       // Copy initial Nunjucks templates to "views" directory
       await copy(
@@ -24,7 +23,6 @@ async function generateNunjucksTemplateEngine(params) {
       );
       break;
     case 'hapi':
-
       break;
     case 'meteor':
       break;
