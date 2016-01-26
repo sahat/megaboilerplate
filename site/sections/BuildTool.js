@@ -72,6 +72,19 @@ class BuildTool extends React.Component {
         description = <div className="placeholder"> </div>;
     }
 
+    let note;
+
+    if ((props.buildTool && props.buildTool === 'none') && props.jsFramework === 'react') {
+      note = (
+        <div>
+          <strong>Note: </strong>
+          <span>React <a href="https://www.smashingmagazine.com/2015/04/react-to-the-future-with-isomorphic-apps/#isomorphic-javascript" target="_blank">server-side rendering</a> is enabled only when using a build tool.</span>
+        </div>
+      )
+    } else {
+      note = <div className="placeholder"> </div>;
+    }
+
     return (
       <div className={cx('animated fadeIn panel', props.buildTool)}>
         <div className="panel-heading">
@@ -99,6 +112,7 @@ class BuildTool extends React.Component {
               <input type="radio" name="buildToolRadios" value="npm" onChange={props.handleChange} checked={props.buildTool === 'npm'} /> NPM
             </label>
           </div>
+          {note}
         </div>
       </div>
     );
