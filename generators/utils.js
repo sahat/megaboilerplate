@@ -13,22 +13,23 @@ let writeJson = Promise.promisify(fs.writeJson);
 let stat = Promise.promisify(fs.stat);
 let mkdirs = Promise.promisify(fs.mkdirs);
 
-export { cpy }
-export { stat }
-export { copy }
-export { remove }
-export { mkdirs }
-export { readFile }
-export { writeFile }
-export { readJson }
-export { writeJson }
+let npmDependencies = require('./npmDependencies.json');
+
+export { cpy };
+export { copy };
+export { remove };
+export { mkdirs };
+export { readFile };
+export { writeFile };
+export { readJson };
+export { writeJson };
 
 /**
  * Traverse files and remove placeholder comments
  * @param params
  */
 export function walkAndRemoveComments(params) {
-  let build = path.join(__base, 'build', params.uuid);
+  const build = path.join(__base, 'build', params.uuid);
 
   return new Promise((resolve, reject) => {
     fs.walk(build)
@@ -44,8 +45,19 @@ export function walkAndRemoveComments(params) {
       })
       .on('end', () => {
         resolve();
-      })
+      });
   });
+}
+
+export async function exists(filepath) {
+  try {
+    await stat(filepath);
+  } catch (err) {
+    if (err.code === 'ENOENT') {
+      return false;
+    }
+  }
+  return true;
 }
 
 export function generateZip(req, res) {
@@ -97,21 +109,16 @@ export async function addDependencies(dependencies, params, isDev) {
   await writeJson(packageJson, packageObj, { spaces: 2 });
 }
 
-
 /**
- *
- * @param pkg {object} - package to be added, e.g. { "express": "^4.0.0" }
+ * Add NPM package to package.json.
+ * @param pkgName
  * @param params
  * @param isDev
  */
-export async function addNpmPackage(pkg, params, isDev) {
-  let packageJson = path.join(__base, 'build', params.uuid, 'package.json');
-
-  let packageObj = await readJson(packageJson);
-
-  // Get package name and version
-  let pkgName = Object.keys(pkg)[0];
-  let pkgVersion = pkg[pkgName];
+export async function addNpmPackage(pkgName, params, isDev) {
+  const packageJson = path.join(__base, 'build', params.uuid, 'package.json');
+  const packageObj = await readJson(packageJson);
+  const pkgVersion = npmDependencies[pkgName];
 
   if (isDev) {
     packageObj.devDependencies = packageObj.devDependencies || {};
@@ -123,6 +130,10 @@ export async function addNpmPackage(pkg, params, isDev) {
   await writeJson(packageJson, packageObj, { spaces: 2 });
 }
 
+/**
+ * Cleanup build files.
+ * @param params
+ */
 export async function cleanup(params) {
   await remove(path.join(__base, 'build', params.uuid));
 }
@@ -132,6 +143,7 @@ export async function prepare(params) {
   params.uuid = shortid.generate();
   await mkdirs(path.join(__base, 'build', params.uuid));
   await copy(gitignore, path.join(__base, 'build', params.uuid, '.gitignore'));
+  console.info('Created', params.uuid);
   return params;
 }
 
