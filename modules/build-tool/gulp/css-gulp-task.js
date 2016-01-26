@@ -1,7 +1,6 @@
-gulp.task('sass', function() {
-  gulp.src('public/stylesheets/main.scss')
+gulp.task('css', function() {
+  gulp.src('public/stylesheets/main.css')
     .pipe(plumber())
-    .pipe(sass())
     .pipe(autoprefixer())
     .pipe(csso())
     .pipe(gulp.dest('public/stylesheets'));
