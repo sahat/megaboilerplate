@@ -1,4 +1,4 @@
-let generateCommonAuthenticationExpress = require('./generateCommonAuthenticationExpress');
+import generateCommonAuthenticationExpress from './generateCommonAuthenticationExpress';
 
 async function generateCommonAuthentication(params) {
   switch (params.framework) {
