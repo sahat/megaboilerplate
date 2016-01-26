@@ -37,28 +37,35 @@ async function generateGulpBuildTool(params) {
       break;
 
     case 'css':
+      const cssGulpRequire = join(__base, 'modules', 'build-tool', 'gulp', 'css-gulp-require.js');
+      const cssGulpTask = join(__base, 'modules', 'build-tool', 'gulp', 'css-gulp-task.js');
+
+      await cpy([gulpfile], build);
+
+      await addNpmPackage('gulp', params);
+      await addNpmPackage('gulp-csso', params);
+      await addNpmPackage('gulp-autoprefixer', params);
+
+      await replaceCode(join(build, 'gulpfile.js'), 'CSS_PREPROCESSOR_GULP_REQUIRE', cssGulpRequire);
+      await replaceCode(join(build, 'gulpfile.js'), 'CSS_PREPROCESSOR_GULP_TASK', cssGulpTask, { leadingBlankLine: true });
+      break;
 
     default:
       break;
   }
 
-
   switch (params.jsFramework) {
     case 'react':
-      const reactGulpRequire = join(__base, 'modules', 'css-build-options', 'sass-gulp-require.js');
-      const reactGulpTask = join(__base, 'modules', 'css-build-options', 'sass-gulp-task.js');
+      const reactGulpRequire = join(__base, 'modules', 'build-tool', 'gulp', 'react-gulp-require.js');
+      const reactGulpTask = join(__base, 'modules', 'build-tool', 'gulp', 'react-gulp-task.js');
 
-      // Check if gulpfile.js already exists
-      if (!exists(gulpfile)) {
-        await cpy([gulpfile], build);
-      }
+      await addNpmPackage('gulp-util', params);
+      await addNpmPackage('vinyl-source-stream', params);
+      await addNpmPackage('babelify', params);
+      await addNpmPackage('browserify', params);
 
-      await addNpmPackage({ 'gulp': '^3.9.0' }, params);
-      await addNpmPackage({ 'gulp-sass': '^2.1.1' }, params);
-      await addNpmPackage({ 'gulp-csso': '^1.0.1' }, params);
-
-      await replaceCode(join(build, 'gulpfile.js'), 'CSS_PREPROCESSOR_GULP_REQUIRE', sassGulpRequire);
-      await replaceCode(join(build, 'gulpfile.js'), 'CSS_PREPROCESSOR_GULP_TASK', sassGulpTask, { leadingBlankLine: true });
+      await replaceCode(join(build, 'gulpfile.js'), 'JS_FRAMEWORK_GULP_REQUIRE', reactGulpRequire);
+      await replaceCode(join(build, 'gulpfile.js'), 'JS_FRAMEWORK_GULP_TASK', reactGulpTask, { leadingBlankLine: true });
 
       break;
 
