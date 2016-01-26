@@ -1,5 +1,5 @@
 import { join } from 'path';
-import { copy, replaceCode, removeCode } from '../utils';
+import { copy, addNpmPackage, replaceCode, removeCode } from '../utils';
 
 async function generateJsFrameworkReact(params) {
   const build = join(__base, 'build', params.uuid);
@@ -10,30 +10,31 @@ async function generateJsFrameworkReact(params) {
 
   switch (params.framework) {
     case 'express':
+      let indexTemplate;
+      let layoutTemplate;
+      let reactImport;
+      let reactBrowserImport;
 
       if (params.templateEngine === 'jade') {
-        let mainImport;
-        let reactImport = join(__base, 'modules', 'js-framework', 'react', 'react-jade-import.jade');
-        let babelBrowserImport = join(__base, 'modules', 'js-framework', 'react', 'babel-browser-jade-import.jade');
-        let indexTpl = join(__base, 'modules', 'js-framework', 'react', 'index.jade');
-        let layout = join(__base, 'build', params.uuid, 'views', 'layout.jade');
+        reactImport = join(__base, 'modules', 'js-framework', 'react', 'react-jade-import.jade');
+        reactBrowserImport = join(__base, 'modules', 'js-framework', 'react', 'react-browser-jade-import.jade');
+        indexTemplate = join(__base, 'modules', 'js-framework', 'react', 'index.jade');
+        layoutTemplate = join(__base, 'build', params.uuid, 'views', 'layout.jade');
 
-        // Include React + ReactDOM
-        await replaceCode(layout, 'JS_FRAMEWORK_LIB_IMPORT', reactImport, { indentLevel: 2 });
-
-        // Include browser JSX transpiler
+        // Browser support
         if (params.buildTool === 'none') {
-          mainImport = join(__base, 'modules', 'js-framework', 'react', 'main-browser-jade-import.jade');
-          await replaceCode(layout, 'JS_FRAMEWORK_BABEL_BROWSER', babelBrowserImport, { indentLevel: 2 });
-          await replaceCode(layout, 'JS_FRAMEWORK_MAIN_IMPORT', mainImport, { indentLevel: 2 });
+
+          // Includes Babel, React, ReactDOM, main.jsx script tags
+          await replaceCode(layoutTemplate, 'JS_FRAMEWORK_LIB_IMPORT', reactBrowserImport, { indentLevel: 2 });
         } else {
-          // Common.js app
-          mainImport = join(__base, 'modules', 'js-framework', 'react', 'main-jade-import.jade');
-          await replaceCode(layout, 'JS_FRAMEWORK_MAIN_IMPORT', mainImport, { indentLevel: 2 });
+          // When build tool is selected, use bundle.js, which includes all vendor files as well as
+          // main.js file. In addition, server-side rendering is enabled.
+          await replaceCode(layoutTemplate, 'JS_FRAMEWORK_MAIN_IMPORT', reactImport, { indentLevel: 2 });
         }
 
         // Replace index.jade
-        await copy(indexTpl, join(build, 'views', 'index.jade'));
+        // Includes #app div that React uses to render the app.
+        await copy(indexTemplate, join(build, 'views', 'index.jade'));
       } else if (params.templateEngine === 'handlebars') {
 
       } else if (params.templateEngine === 'nunjucks') {
@@ -42,15 +43,16 @@ async function generateJsFrameworkReact(params) {
 
       if (params.buildTool === 'none') {
         // Basic app
+        await copy(react, join(build, 'public', 'javascripts', 'vendor', 'react.js'));
+        await copy(reactDom, join(build, 'public', 'javascripts', 'vendor', 'react-dom.js'));
         await copy(mainJsBrowser, join(build, 'public', 'javascripts', 'main.jsx'));
       } else {
         // CommonJS app
         await copy(mainJs, join(build, 'public', 'javascripts', 'main.jsx'));
+        await addNpmPackage('react', params);
+        await addNpmPackage('react-dom', params);
       }
 
-      // Copy files
-      await copy(react, join(build, 'public', 'javascripts', 'vendor', 'react.js'));
-      await copy(reactDom, join(build, 'public', 'javascripts', 'vendor', 'react-dom.js'));
       break;
 
     case 'hapi':

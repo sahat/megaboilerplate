@@ -4,8 +4,8 @@
   "nunjucks": "^2.3.0",
   "vision": "^4.0.1",
 
-  "react": "^0.14.3",
-  "react-dom": "^0.14.3",
+  "react": "^0.14.6",
+  "react-dom": "^0.14.6",
 
   "babelify": "^7.2.0",
   "browserify": "^13.0.0",
