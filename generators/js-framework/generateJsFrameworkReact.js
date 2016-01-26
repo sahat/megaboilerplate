@@ -42,10 +42,10 @@ async function generateJsFrameworkReact(params) {
 
       if (params.reactBuildSystem === 'none') {
         // Basic app
-        await copy(mainJsBrowser, join(build, 'public', 'javascripts', 'main.js'));
+        await copy(mainJsBrowser, join(build, 'public', 'javascripts', 'main.jsx'));
       } else {
         // CommonJS app
-        await copy(mainJs, join(build, 'public', 'javascripts', 'main.js'));
+        await copy(mainJs, join(build, 'public', 'javascripts', 'main.jsx'));
       }
 
       // Copy files
