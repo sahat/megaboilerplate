@@ -1,18 +1,21 @@
 import { join } from 'path';
-import { cpy, exists, replaceCode, addNpmPackage } from '../utils';
+import { cpy, replaceCode, addNpmPackage } from '../utils';
 
 async function generateGulpBuildTool(params) {
   const build = join(__base, 'build', params.uuid);
   const gulpfile = join(__base, 'modules', 'build-tool', 'gulp', 'gulpfile.js');
+
+  await cpy([gulpfile], build);
+
+  await addNpmPackage('gulp', params);
+  await addNpmPackage('gulp-sourcemaps', params);
+  await addNpmPackage('gulp-plumber', params);
 
   switch (params.cssPreprocessor) {
     case 'sass':
       const sassGulpRequire = join(__base, 'modules', 'build-tool', 'gulp', 'sass-gulp-require.js');
       const sassGulpTask = join(__base, 'modules', 'build-tool', 'gulp', 'sass-gulp-task.js');
 
-      await cpy([gulpfile], build);
-
-      await addNpmPackage('gulp', params);
       await addNpmPackage('gulp-sass', params);
       await addNpmPackage('gulp-csso', params);
       await addNpmPackage('gulp-autoprefixer', params);
@@ -25,9 +28,6 @@ async function generateGulpBuildTool(params) {
       const lessGulpRequire = join(__base, 'modules', 'build-tool', 'gulp', 'less-gulp-require.js');
       const lessGulpTask = join(__base, 'modules', 'build-tool', 'gulp', 'less-gulp-task.js');
 
-      await cpy([gulpfile], build);
-
-      await addNpmPackage('gulp', params);
       await addNpmPackage('gulp-less', params);
       await addNpmPackage('gulp-csso', params);
       await addNpmPackage('gulp-autoprefixer', params);
@@ -40,9 +40,6 @@ async function generateGulpBuildTool(params) {
       const cssGulpRequire = join(__base, 'modules', 'build-tool', 'gulp', 'css-gulp-require.js');
       const cssGulpTask = join(__base, 'modules', 'build-tool', 'gulp', 'css-gulp-task.js');
 
-      await cpy([gulpfile], build);
-
-      await addNpmPackage('gulp', params);
       await addNpmPackage('gulp-csso', params);
       await addNpmPackage('gulp-autoprefixer', params);
 
