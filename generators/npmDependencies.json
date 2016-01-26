@@ -1,4 +1,12 @@
 {
+  "jade": "^1.9.2",
+  "handlebars": "^4.0.5",
+  "nunjucks": "^2.3.0",
+  "vision": "^4.0.1",
+
+  "react": "^0.14.3",
+  "react-dom": "^0.14.3"
+
   "babelify": "^7.2.0",
   "browserify": "^13.0.0",
   "gulp": "^3.9.0",
@@ -10,4 +18,16 @@
   "gulp-sourcemaps": "^1.6.0",
   "gulp-util": "^3.0.7",
   "vinyl-source-stream": "^1.1.0"
+
+  "mongoose": "^4.2.8",
+  "knex": "^0.9.0",
+  "bookshelf": "^0.9.1",
+  "mysql": "^2.9.0",
+  "pg": "^4.4.3",
+
+  "passport": "^0.3.2",
+  "passport-local": "^1.0.0",
+  "passport-facebook": "^2.0.0",
+  "passport-google-oauth": "^0.2.0",
+  "passport-twitter": "^1.0.3"
 }
