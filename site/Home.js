@@ -98,7 +98,7 @@ class Home extends React.Component {
         if (!state.cssFramework) {
           window.smoothScroll(refs.cssPreprocessor);
         }
-        state.cssPreprocessor = null;
+        state.cssPreprocessor = 'css';
         state.cssFramework = value;
         break;
 
