@@ -1,14 +1,14 @@
 import { join } from 'path';
 import { cpy, replaceCode, addNpmPackage } from '../utils';
 
-async function generateGulpBuildOptions(params) {
-  let build = join(__base, 'build', params.uuid);
-  let gulpfile = join(__base, 'modules', 'build-tools', 'gulp', 'gulpfile.js');
+async function generateGulpBuildTool(params) {
+  const build = join(__base, 'build', params.uuid);
+  const gulpfile = join(__base, 'modules', 'build-tools', 'gulp', 'gulpfile.js');
 
   switch (params.cssPreprocessor) {
     case 'sass':
-      let sassGulpRequire = join(__base, 'modules', 'css-build-options', 'sass-gulp-require.js');
-      let sassGulpTask = join(__base, 'modules', 'css-build-options', 'sass-gulp-task.js');
+      const sassGulpRequire = join(__base, 'modules', 'css-build-options', 'sass-gulp-require.js');
+      const sassGulpTask = join(__base, 'modules', 'css-build-options', 'sass-gulp-task.js');
 
       await cpy([gulpfile], build);
 
@@ -16,13 +16,13 @@ async function generateGulpBuildOptions(params) {
       await addNpmPackage({ 'gulp-sass': '^2.1.1' }, params);
       await addNpmPackage({ 'gulp-csso': '^1.0.1' }, params);
 
-      await replaceCode(join(build, 'gulpfile.js'), 'SASS_GULP_REQUIRE', sassGulpRequire);
-      await replaceCode(join(build, 'gulpfile.js'), 'SASS_GULP_TASK', sassGulpTask);
+      await replaceCode(join(build, 'gulpfile.js'), 'CSS_PREPROCESSOR_GULP_REQUIRE', sassGulpRequire);
+      await replaceCode(join(build, 'gulpfile.js'), 'CSS_PREPROCESSOR_GULP_TASK', sassGulpTask, { leadingBlankLine: true });
       break;
 
     case 'less':
-      let lessGulpRequire = join(__base, 'modules', 'css-build-options', 'less-gulp-require.js');
-      let lessGulpTask = join(__base, 'modules', 'css-build-options', 'less-gulp-task.js');
+      const lessGulpRequire = join(__base, 'modules', 'css-build-options', 'less-gulp-require.js');
+      const lessGulpTask = join(__base, 'modules', 'css-build-options', 'less-gulp-task.js');
 
       await cpy([gulpfile], build);
 
@@ -30,15 +30,24 @@ async function generateGulpBuildOptions(params) {
       await addNpmPackage({ 'gulp-less': '^3.0.5' }, params);
       await addNpmPackage({ 'gulp-csso': '^1.0.1' }, params);
 
-      await replaceCode(join(build, 'gulpfile.js'), 'LESS_GULP_REQUIRE', lessGulpRequire);
-      await replaceCode(join(build, 'gulpfile.js'), 'LESS_GULP_TASK', lessGulpTask);
-      break;
-
-    case 'css':
+      await replaceCode(join(build, 'gulpfile.js'), 'CSS_PREPROCESSOR_GULP_REQUIRE', lessGulpRequire);
+      await replaceCode(join(build, 'gulpfile.js'), 'CSS_PREPROCESSOR_GULP_TASK', lessGulpTask, { leadingBlankLine: true });
       break;
 
     default:
+      break;
+  }
+
+  switch (params.jsFramework) {
+    case 'react':
+      break;
+
+    case 'angular':
+      break;
+
+    default:
+      break;
   }
 }
 
-export default generateGulpBuildOptions;
+export default generateGulpBuildTool;
