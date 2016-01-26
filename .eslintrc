@@ -5,6 +5,7 @@
     "no-spaced-func:": 0,
     "max-len": 0,
     "comma-dangle": 0,
-    "quote-props": 0
+    "quote-props": 0,
+    "dot-notation": 0
   }
 }
