@@ -779,13 +779,13 @@ canvas {
   fill: currentColor;
 }
 
-.stylus .panel-heading {
+.postcss .panel-heading {
   color: #fff;
-  background: #ff6347;
+  background: #dd3735;
   border-color: transparent;
 }
 
-.stylus svg {
+.postcss svg {
   color: #fff;
   fill: currentColor;
 }

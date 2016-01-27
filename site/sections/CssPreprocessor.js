@@ -16,7 +16,7 @@ const CssPreprocessor = (props) => {
   const CSS = props.cssPreprocessor === 'css';
   const SASS = props.cssPreprocessor === 'sass';
   const LESS = props.cssPreprocessor === 'less';
-  const STYLUS = props.cssPreprocessor === 'stylus';
+  const POSTCSS = props.cssPreprocessor === 'postcss';
 
   const recommended = props.beginner ? (
     <img data-toggle="tooltip" data-title="Recommended" src="/img/svg/recommended.svg" alt="Recommended" />
@@ -47,11 +47,11 @@ const CssPreprocessor = (props) => {
     </label>
   ) : null;
 
-  const stylusRadio = (NO_CSS_FRAMEWORK) ? (
+  const postcssRadio = (NO_CSS_FRAMEWORK) ? (
     <label className="radio-inline">
-      <img className="btn-logo" src="/img/svg/stylus-logo.svg" alt="Stylus"/>
-      <input type="radio" name="cssPreprocessorRadios" value="stylus" onChange={props.handleChange} checked={STYLUS} />
-      <span>Stylus</span>
+      <img className="btn-logo" src="/img/svg/postcss.svg" alt="PostCSS"/>
+      <input type="radio" name="cssPreprocessorRadios" value="postcss" onChange={props.handleChange} checked={POSTCSS} />
+      <span>PostCSS</span>
     </label>
   ) : null;
 
@@ -68,7 +68,7 @@ const CssPreprocessor = (props) => {
           {cssRadio}
           {sassRadio}
           {lessRadio}
-          {stylusRadio}
+          {postcssRadio}
         </div>
       </div>
     </div>
