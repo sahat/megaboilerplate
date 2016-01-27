@@ -175,7 +175,7 @@ class Header extends React.Component {
 
           <h1><strong>Mega</strong> Boilerplate</h1>
           <div className="lead">
-            Simple and easy to use hand-crafted starter kits.
+            Hand-crafted starter kits with focus on simplicity and ease of use.
             <br />
             <ul className="list-inline">
               <li><a href="#">Demo 1</a></li>
