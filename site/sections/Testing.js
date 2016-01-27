@@ -11,10 +11,10 @@ class Testing extends React.Component {
   render() {
     const props = this.props;
 
-    let optionsClasses = cx("nav nav-stacked", {
-      fadeIn: props.framework,
-      animated: props.framework,
-      invisible: !props.framework
+    let optionsClasses = cx('nav nav-stacked', {
+      fadeIn: props.testing && props.testing !== 'none',
+      animated: props.testing && props.testing !== 'none',
+      invisible: !props.testing || props.testing === 'none'
     });
 
     const recommended = props.beginner ? (
