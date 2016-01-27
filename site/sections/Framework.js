@@ -14,21 +14,8 @@ class Framework extends React.Component {
   }
 
   initializeTooltip() {
-    let clusterTooltip = this.refs.clusterTooltip;
-    let socketioTooltip = this.refs.socketioTooltip;
-
-    if (this.props.framework) {
-      $(clusterTooltip).tooltip({
-        title: 'A single instance of Node.js runs in a single thread. To take advantage of multi-core systems the user will sometimes want to launch a cluster of Node.js processes to handle the load.The cluster module allows you to easily create child processes that all share server ports.'
-      });
-      $(socketioTooltip).tooltip({
-        title: 'Socket.IO is a JavaScript library for realtime web applications. It enables realtime, bi-directional communication between web clients and servers.'
-      });
-    } else {
-      // Hides and destroys an element's tooltip.
-      $(clusterTooltip).tooltip('destroy');
-      $(socketioTooltip).tooltip('destroy');
-    }
+    let tooltip = '[data-toggle="tooltip"]';
+    $(tooltip).tooltip();
   }
 
   componentDidMount() {
@@ -76,15 +63,17 @@ class Framework extends React.Component {
         description = <div className="placeholder"> </div>;
     }
 
-    let recommendedLabel = props.beginner ? <span className="label label-success">Recommended</span> : null;
+    let recommended = props.beginner ? (
+      <img data-toggle="tooltip" data-title="Recommended" data-placement="top" src="/img/svg/recommended.svg" alt="Recommended" />
+    ) : null;
 
     let nodeFrameworks = (props.platform === 'node') ? (
-      <div>
+      <div className="radio-group">
         <label className="radio-inline">
           <span className="express-logo">Express</span>
           <input type="radio" id="expressRadio" name="frameworkRadios" value="express" onChange={props.handleChange} checked={props.framework === 'express'}/>
           <span>Express</span>
-          {recommendedLabel}
+          {recommended}
         </label>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/hapi-logo.png" alt="Hapi.js"/>
@@ -108,13 +97,13 @@ class Framework extends React.Component {
                 <div className="checkbox">
                   <label>
                     <input type="checkbox" value="cluster" />
-                    <span ref="clusterTooltip" data-toggle="tooltip" data-placement="top">Node.js Cluster</span>
+                    <span data-toggle="tooltip" data-title="A single instance of Node.js runs in a single thread. To take advantage of multi-core systems the user will sometimes want to launch a cluster of Node.js processes to handle the load.The cluster module allows you to easily create child processes that all share server ports.">Node.js Cluster</span>
                   </label>
                 </div>
                 <div className="checkbox">
                   <label>
                     <input type="checkbox" value="socketio" />
-                    <span ref="socketioTooltip" data-toggle="tooltip" data-placement="top">Socket.IO</span>
+                    <span data-toggle="tooltip" data-title="Socket.IO is a JavaScript library for realtime web applications. It enables realtime, bi-directional communication between web clients and servers.">Socket.IO</span>
                   </label>
                 </div>
               </div>

@@ -338,6 +338,15 @@ label span + i {
   vertical-align: baseline;
 }
 
+
+.radio-inline .label,
+.checkbox-inline .label {
+  position: absolute;
+  left: 0;
+  /*margin-left: 30px;*/
+  margin-top: 2px;
+}
+
 .checkbox-inline {
   margin-top: 10px;
   margin-bottom: 10px;
@@ -590,10 +599,10 @@ canvas {
   top: 80px;
 }
 
-.tooltip-inner {
-  max-width: 300px;
-  width: 300px;
-}
+/*.tooltip-inner {*/
+  /*max-width: 300px;*/
+  /*width: 300px;*/
+/*}*/
 
 /*Headings Styles*/
 
@@ -979,6 +988,10 @@ section h6 svg {
   }
 }
 
+.radio-inline span + img {
+  vertical-align: bottom;
+}
+
 [type="radio"] {
   border: 0;
   clip: rect(0 0 0 0);
@@ -992,9 +1005,9 @@ section h6 svg {
 
 /* One radio button per line */
 
-[type="radio"] + span {
-  display: block;
-}
+/*[type="radio"] + span {*/
+  /*display: block;*/
+/*}*/
 
 /* the basic, unchecked style */
 [type="radio"] + span:before {
