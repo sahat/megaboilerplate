@@ -18,7 +18,9 @@ const CssPreprocessor = (props) => {
   const LESS = props.cssPreprocessor === 'less';
   const STYLUS = props.cssPreprocessor === 'stylus';
 
-  let recommendedLabel = props.beginner ? <span className="label label-success">Recommended</span> : null;
+  let recommended = props.beginner ? (
+    <img data-toggle="tooltip" data-title="Recommended" src="/img/svg/recommended.svg" alt="Recommended" />
+  ) : null;
 
   let cssRadio = (
     <label className="radio-inline">
@@ -31,7 +33,7 @@ const CssPreprocessor = (props) => {
     <label className="radio-inline">
       <img className="btn-logo" src="/img/svg/sass-logo.svg" alt="Sass"/>
       <input type="radio" name="cssPreprocessorRadios" value="sass" onChange={props.handleChange} checked={SASS} /> Sass
-      {recommendedLabel}
+      {recommended}
     </label>
   ) : null;
 

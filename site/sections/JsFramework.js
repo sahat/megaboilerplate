@@ -34,31 +34,31 @@ class JsFramework extends React.Component {
            <div className="checkbox">
              <label>
                <input type="checkbox" name="reactOptionsCheckboxes" value="redux" onChange={props.handleChange} checked={props.reactOptions && props.reactOptions.has('redux')} />
-               <span ref="reduxTooltip" data-toggle="tooltip" data-title="Predictable state container for JavaScript apps. Redux is an evolution of the Facebook's Flux, without all the complexity." data-placement="top">Redux</span>
+               <span ref="reduxTooltip" data-toggle="tooltip" data-title="Predictable state container for JavaScript apps. Redux is an evolution of the Facebook's Flux, without all the complexity.">Redux</span>
              </label>
            </div>
            <div className="checkbox">
              <label>
                <input type="checkbox" name="reactOptionsCheckboxes" value="reactRouter" onChange={props.handleChange} checked={props.reactOptions && props.reactOptions.has('reactRouter')} />
-               <span ref="reactRouterTooltip" data-toggle="tooltip" data-title="A complete routing library for React. React Router keeps your UI in sync with the URL." data-placement="top">React Router</span>
+               <span ref="reactRouterTooltip" data-toggle="tooltip" data-title="A complete routing library for React. React Router keeps your UI in sync with the URL.">React Router</span>
              </label>
            </div>
            <div className="checkbox">
              <label>
                <input type="checkbox" name="reactOptionsCheckboxes" value="graphql" onChange={props.handleChange} checked={props.reactOptions && props.reactOptions.has('graphql')} />
-               <span ref="graphqlTooltip" data-toggle="tooltip" data-title="Relay is a framework from Facebook that provides data-fetching functionality for React applications." data-placement="top">GraphQL + Relay</span>
+               <span ref="graphqlTooltip" data-toggle="tooltip" data-title="Relay is a framework from Facebook that provides data-fetching functionality for React applications.">GraphQL + Relay</span>
              </label>
            </div>
            <div className="checkbox">
              <label>
                <input type="checkbox" name="reactOptionsCheckboxes" value="es6" onChange={props.handleChange} checked={props.reactOptions && props.reactOptions.has('es6')} />
-               <span ref="es6Tooltip" data-toggle="tooltip" data-title="ECMAScript 2015 (ES6) is the upcoming sixth major release of the ECMAScript language specification." data-placement="top">ES6</span>
+               <span ref="es6Tooltip" data-toggle="tooltip" data-title="ECMAScript 2015 (ES6) is the upcoming sixth major release of the ECMAScript language specification.">ES6</span>
              </label>
            </div>
            <div className="checkbox">
              <label>
                <input type="checkbox" name="reactOptionsCheckboxes" value="hotReload" onChange={props.handleChange} checked={props.reactOptions && props.reactOptions.has('hotReload')} />
-               <span ref="hotReloadTooltip" data-toggle="tooltip" data-title="Tweak React components in real time, while preserving the state." data-placement="top">React Hot Reload</span>
+               <span ref="hotReloadTooltip" data-toggle="tooltip" data-title="Tweak React components in real time, while preserving the state.">React Hot Reload</span>
              </label>
            </div>
          </div>
@@ -83,7 +83,9 @@ class JsFramework extends React.Component {
      invisible: !props.jsFramework || props.jsFramework === 'none'
    });
 
-   let recommendedLabel = props.beginner ? <span className="label label-success">Recommended</span> : null;
+   let recommended = props.beginner ? (
+     <img data-toggle="tooltip" data-title="Recommended" src="/img/svg/recommended.svg" alt="Recommended" />
+   ) : null;
 
    return (
      <div className={cx('animated fadeIn panel', props.jsFramework)}>
@@ -97,7 +99,7 @@ class JsFramework extends React.Component {
              <img className="btn-logo" src="/img/svg/none.png" alt="None" />
              <input type="radio" name="jsFrameworkRadios" value="none" onChange={props.handleChange} checked={props.jsFramework === 'none'} />
              <span>None</span>
-             {recommendedLabel}
+             {recommended}
            </label>
            <label className="radio-inline">
              <img className="btn-logo" src="/img/svg/react-logo.svg" alt="React" />

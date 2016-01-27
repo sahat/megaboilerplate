@@ -11,7 +11,9 @@ class TemplateEngine extends React.Component {
   render() {
     let props = this.props;
 
-    let recommendedLabel = props.beginner ? <span className="label label-success">Recommended</span> : null;
+    let recommended = props.beginner ? (
+      <img data-toggle="tooltip" data-title="Recommended" data-placement="top" src="/img/svg/recommended.svg" alt="Recommended" />
+    ) : null;
 
     let nodeTemplateEngines = (props.platform === 'node') ? (
       <div className="radio-group">
@@ -27,7 +29,7 @@ class TemplateEngine extends React.Component {
           <img className="btn-logo" src="/img/svg/nunjucks-logo.png" alt="Nunjucks"/>
           <input type="radio" name="templateEngineRadios" value="nunjucks" onChange={props.handleChange} checked={props.templateEngine === 'nunjucks'}/>
           <span>Nunjucks</span>
-          {recommendedLabel}
+          {recommended}
         </label>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/none.png" alt="None"/>

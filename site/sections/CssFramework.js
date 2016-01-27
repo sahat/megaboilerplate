@@ -41,7 +41,9 @@ const CssFramework = (props) => {
       description = <div className="placeholder"> </div>;
   }
 
-  let recommendedLabel = props.beginner ? <span className="label label-success">Recommended</span> : null;
+  let recommended = props.beginner ? (
+    <img data-toggle="tooltip" data-title="Recommended" src="/img/svg/recommended.svg" alt="Recommended" />
+  ) : null;
 
   return (
     <div className={cx('animated fadeIn panel', props.cssFramework)}>
@@ -58,7 +60,7 @@ const CssFramework = (props) => {
           <label className="radio-inline">
             <img className="btn-logo" src="/img/svg/bootstrap-logo.svg" alt="Bootstrap"/>
             <input type="radio" name="cssFrameworkRadios" value="bootstrap" onChange={props.handleChange} checked={BOOTSTRAP} /> Bootstrap
-            {recommendedLabel}
+            {recommended}
           </label>
           <label className="radio-inline">
             <img className="btn-logo" src="/img/svg/foundation-logo.png" alt="Foundation"/>

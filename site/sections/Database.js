@@ -45,7 +45,9 @@ const Database = (props) => {
       description = <div className="placeholder"> </div>;
   }
 
-  let recommendedLabel = props.beginner ? <span className="label label-success">Recommended</span> : null;
+  let recommended = props.beginner ? (
+    <img data-toggle="tooltip" data-title="Recommended" src="/img/svg/recommended.svg" alt="Recommended" />
+  ) : null;
 
   return (
     <div className={cx('animated fadeIn  panel', props.database)}>
@@ -64,7 +66,7 @@ const Database = (props) => {
             <img className="btn-logo" src="/img/svg/mongodb-logo.svg" alt="MongoDB" />
             <input type="radio" name="databaseRadios" value="mongodb" onChange={props.handleChange} checked={props.database === 'mongodb'} />
             <span>MongoDB</span>
-            {recommendedLabel}
+            {recommended}
           </label>
           <label className="radio-inline">
             <img className="btn-logo" src="/img/svg/mysql-logo.svg" alt="MySQL" />

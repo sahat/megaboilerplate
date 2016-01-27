@@ -989,7 +989,8 @@ section h6 svg {
 }
 
 .radio-inline span + img {
-  vertical-align: bottom;
+  /*vertical-align: bottom;*/
+  margin-top: -10px;
 }
 
 [type="radio"] {

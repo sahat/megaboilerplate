@@ -65,7 +65,7 @@ class Framework extends React.Component {
     }
 
     let recommended = props.beginner ? (
-      <img data-toggle="tooltip" data-title="Recommended" data-placement="top" src="/img/svg/recommended.svg" alt="Recommended" />
+      <img data-toggle="tooltip" data-title="Recommended" src="/img/svg/recommended.svg" alt="Recommended" />
     ) : null;
 
     let nodeFrameworks = (props.platform === 'node') ? (
