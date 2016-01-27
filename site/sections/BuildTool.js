@@ -8,63 +8,34 @@ const BUILD_TOOL_SVG = (
 );
 
 class BuildTool extends React.Component {
-  constructor(props) {
-    super(props);
-    this.initializeTooltip.bind(this);
-    this.checkBuildToolRequirement.bind(this);
-  }
-
-  componentDidMount() {
-    this.initializeTooltip();
-  }
-
-  componentDidUpdate() {
-    this.initializeTooltip();
-  }
-
-
-  initializeTooltip() {
-    let tooltip = '[data-toggle="tooltip"]';
-    let requiresBuildTool = this.checkBuildToolRequirement();
-
-    if (requiresBuildTool) {
-      $(tooltip).tooltip();
-    } else {
-      $(tooltip).tooltip('destroy');
-    }
-  }
-
-  checkBuildToolRequirement() {
-    let props = this.props;
-    return props.cssPreprocessor !== 'css';
-    //return props.cssPreprocessor !== 'css' || (props.jsFramework && props.jsFramework !== 'none');
-  }
-
   render() {
-    let props = this.props;
-    let requiresBuildTool = this.checkBuildToolRequirement();
-
+    const props = this.props;
     let description;
 
     switch (props.buildTool) {
       case 'gulp':
         description = (
           <div>
-            <strong><a href="http://gulpjs.com/" target="_blank">Gulp</a></strong> — The streaming build system. <strong><a href="http://browserify.org/">Browserify</a></strong> — Lets you <em>require('modules')</em> in the browser by bundling up all of your dependencies.
+            <strong><a href="http://gulpjs.com/" target="_blank">Gulp</a></strong> — The streaming build system.
+            <strong><a href="http://browserify.org/">Browserify</a></strong> — Lets you <em>require('modules')</em> in
+            the browser by bundling up all of your dependencies.
           </div>
         );
         break;
       case 'webpack':
         description = (
           <div>
-            <strong><a href="https://webpack.github.io/" target="_blank">Webpack</a></strong> — A module bundler that bundles javascript and other assets for the browser.
+            <strong><a href="https://webpack.github.io/" target="_blank">Webpack</a></strong> — A module bundler that
+            bundles javascript and other assets for the browser.
           </div>
         );
         break;
       case 'npm':
         description = (
           <div>
-            <strong><a href="https://medium.com/@dabit3/introduction-to-using-npm-as-a-build-tool-b41076f488b0#.fmqbzcm1v" target="_blank">NPM</a></strong> — A build process using only <a href="https://docs.npmjs.com/cli/npm">npm</a> and your <em>package.json</em> file.
+            <strong><a href="https://medium.com/@dabit3/introduction-to-using-npm-as-a-build-tool-b41076f488b0#.fmqbzcm1v" target="_blank">NPM</a></strong>
+            — A build process using only <a href="https://docs.npmjs.com/cli/npm">npm</a> and your <em>package.json</em>
+            file.
           </div>
         );
         break;
@@ -78,15 +49,16 @@ class BuildTool extends React.Component {
       note = (
         <div>
           <strong>Note: </strong>
-          <span>React <a href="https://www.smashingmagazine.com/2015/04/react-to-the-future-with-isomorphic-apps/#isomorphic-javascript" target="_blank">server-side rendering</a> is enabled only when using a build tool.</span>
+          <span>React <a href="https://www.smashingmagazine.com/2015/04/react-to-the-future-with-isomorphic-apps/#isomorphic-javascript" target="_blank">server-side
+            rendering</a> is enabled only when using a build tool.</span>
         </div>
-      )
+      );
     } else {
       note = <div className="placeholder"> </div>;
     }
 
-    let recommended = props.beginner ? (
-      <img data-toggle="tooltip" data-title="Recommended" src="/img/svg/recommended.svg" alt="Recommended" />
+    const recommended = props.beginner ? (
+      <img data-toggle="tooltip" data-title="Recommended" src="/img/svg/recommended.svg" alt="Recommended"/>
     ) : null;
 
     return (
@@ -94,33 +66,31 @@ class BuildTool extends React.Component {
         <div className="panel-heading">
           <h6>{BUILD_TOOL_SVG}{!props.buildTool || props.buildTool === 'none' ? 'Build Tool' : props.buildTool}</h6>
           <a href="#" className="stats-icon" data-toggle="tooltip" data-title="Stats">
-            <i className="fa fa-bar-chart" />
+            <i className="fa fa-bar-chart"/>
           </a>
         </div>
         <div className="panel-body">
           {description}
           <div className="radio-group">
             <label className="radio-inline">
-              <div data-toggle="tooltip" data-title="You have selected a CSS preprocessor and/or JavaScript framework that requires compilation." data-placement="top">
-                <img className="btn-logo" src="/img/svg/none.png" alt="None"/>
-                <input type="radio" name="buildToolRadios" value="none" onChange={props.handleChange} checked={props.buildTool === 'none'} disabled={requiresBuildTool} />
-                <span>None</span>
-              </div>
+              <img className="btn-logo" src="/img/svg/none.png" alt="None"/>
+              <input type="radio" name="buildToolRadios" value="none" onChange={props.handleChange} checked={props.buildTool === 'none'}/>
+              <span>None</span>
             </label>
             <label className="radio-inline">
               <img className="btn-logo" src="/img/svg/browserify-logo.svg" alt="Gulp + Browserify"/>
-              <input type="radio" name="buildToolRadios" value="gulp" onChange={props.handleChange} checked={props.buildTool === 'gulp'} />
+              <input type="radio" name="buildToolRadios" value="gulp" onChange={props.handleChange} checked={props.buildTool === 'gulp'}/>
               <span>Gulp + Browserify</span>
               {recommended}
             </label>
             <label className="radio-inline">
               <img className="btn-logo" src="/img/svg/webpack-logo.svg" alt="Webpack"/>
-              <input type="radio" name="buildToolRadios" value="webpack" onChange={props.handleChange} checked={props.buildTool === 'webpack'} />
+              <input type="radio" name="buildToolRadios" value="webpack" onChange={props.handleChange} checked={props.buildTool === 'webpack'}/>
               <span>Webpack</span>
             </label>
             <label className="radio-inline">
               <img className="btn-logo" src="/img/svg/npm-logo.svg" alt="NPM"/>
-              <input type="radio" name="buildToolRadios" value="npm" onChange={props.handleChange} checked={props.buildTool === 'npm'} />
+              <input type="radio" name="buildToolRadios" value="npm" onChange={props.handleChange} checked={props.buildTool === 'npm'}/>
               <span>NPM</span>
             </label>
           </div>
