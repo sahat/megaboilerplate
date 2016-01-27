@@ -1,6 +1,7 @@
 import generateGulpBuildTool from './generateGulpBuildTool';
 import generateWebpackBuildTool from './generateWebpackBuildTool';
 import generateNpmBuildTool from './generateNpmBuildTool';
+import generateNoneBuildTool from './generateNoneBuildTool';
 
 async function generateBuildTool(params) {
   switch (params.buildTool) {
@@ -14,6 +15,10 @@ async function generateBuildTool(params) {
 
     case 'npm':
       await generateNpmBuildTool(params);
+      break;
+
+    case 'none':
+      await generateNoneBuildTool(params);
       break;
 
     default:
