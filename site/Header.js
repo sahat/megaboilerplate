@@ -17,7 +17,7 @@ class Header extends React.Component {
     const strings = shuffle(['Express', 'Hapi', 'Meteor', 'React', 'Angular 2', 'Bootstrap', 'Foundation', 'Gulp',
       'Webpack', 'Mocha', 'Jasmine', 'Node.js', 'Jade', 'Handlebars', 'Nunjucks', 'Bourbon Neat', 'Sass', 'LESS',
       'Redux', 'React Router', 'ECMAScript 2015', 'Babel', 'GraphQL', 'Browserify', 'Chai', 'Sinon', 'MongoDB', 'MySQL',
-      'PosgreSQL', 'RethinkDB', 'Passport', 'Stylus', 'Socket.IO', 'Istanbul'
+      'PosgreSQL', 'RethinkDB', 'Passport', 'PostCSS', 'Socket.IO', 'Istanbul', 'OAuth 2.0'
     ]);
 
     const h1 = this.refs.heroHeading;
