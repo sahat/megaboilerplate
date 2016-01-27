@@ -1010,7 +1010,7 @@ section h6 svg {
 
 .radio-inline span + img {
   /*vertical-align: bottom;*/
-  margin-top: -10px;
+  margin-top: -5px;
 }
 
 [type="radio"] {
