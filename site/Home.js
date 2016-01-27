@@ -226,6 +226,12 @@ class Home extends React.Component {
         <Header />
         <div className="container">
           <br/>
+          <div className="checkbox">
+            <label title="Provides personal recommendations. Use this only when you are not sure what to pick.">
+              <input type="checkbox" name="reactOptionsCheckboxes" value="redux" onChange={this.handleChange} />
+              <span>I am Beginner</span>
+            </label>
+          </div>
           <div ref="platform">{platform}</div>
           <div ref="framework">{framework}</div>
           <div ref="templateEngine">{templateEngine}</div>
