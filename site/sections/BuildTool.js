@@ -85,6 +85,8 @@ class BuildTool extends React.Component {
       note = <div className="placeholder"> </div>;
     }
 
+    let recommendedLabel = props.beginner ? <span className="label label-success">Recommended</span> : null;
+
     return (
       <div className={cx('animated fadeIn panel', props.buildTool)}>
         <div className="panel-heading">
@@ -96,20 +98,25 @@ class BuildTool extends React.Component {
             <label className="radio-inline">
               <div data-toggle="tooltip" data-title="You have selected a CSS preprocessor and/or JavaScript framework that requires compilation." data-placement="top">
                 <img className="btn-logo" src="/img/svg/none.png" alt="None"/>
-                <input type="radio" name="buildToolRadios" value="none" onChange={props.handleChange} checked={props.buildTool === 'none'} disabled={requiresBuildTool} /> None
+                <input type="radio" name="buildToolRadios" value="none" onChange={props.handleChange} checked={props.buildTool === 'none'} disabled={requiresBuildTool} />
+                <span>None</span>
               </div>
             </label>
             <label className="radio-inline">
               <img className="btn-logo" src="/img/svg/browserify-logo.svg" alt="Gulp + Browserify"/>
-              <input type="radio" name="buildToolRadios" value="gulp" onChange={props.handleChange} checked={props.buildTool === 'gulp'} /> Gulp + Browserify
+              <input type="radio" name="buildToolRadios" value="gulp" onChange={props.handleChange} checked={props.buildTool === 'gulp'} />
+              <span>Gulp + Browserify</span>
+              {recommendedLabel}
             </label>
             <label className="radio-inline">
               <img className="btn-logo" src="/img/svg/webpack-logo.svg" alt="Webpack"/>
-              <input type="radio" name="buildToolRadios" value="webpack" onChange={props.handleChange} checked={props.buildTool === 'webpack'} /> Webpack
+              <input type="radio" name="buildToolRadios" value="webpack" onChange={props.handleChange} checked={props.buildTool === 'webpack'} />
+              <span>Webpack</span>
             </label>
             <label className="radio-inline">
               <img className="btn-logo" src="/img/svg/npm-logo.svg" alt="NPM"/>
-              <input type="radio" name="buildToolRadios" value="npm" onChange={props.handleChange} checked={props.buildTool === 'npm'} /> NPM
+              <input type="radio" name="buildToolRadios" value="npm" onChange={props.handleChange} checked={props.buildTool === 'npm'} />
+              <span>NPM</span>
             </label>
           </div>
           {note}

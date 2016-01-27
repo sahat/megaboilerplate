@@ -76,12 +76,15 @@ class Framework extends React.Component {
         description = <div className="placeholder"> </div>;
     }
 
+    let recommendedLabel = props.beginner ? <span className="label label-success">Recommended</span> : null;
+
     let nodeFrameworks = (props.platform === 'node') ? (
       <div>
         <label className="radio-inline">
           <span className="express-logo">Express</span>
           <input type="radio" id="expressRadio" name="frameworkRadios" value="express" onChange={props.handleChange} checked={props.framework === 'express'}/>
           <span>Express</span>
+          {recommendedLabel}
         </label>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/hapi-logo.png" alt="Hapi.js"/>

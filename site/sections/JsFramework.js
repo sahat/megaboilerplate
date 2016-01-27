@@ -57,7 +57,7 @@ class JsFramework extends React.Component {
            <div className="checkbox">
              <label>
                <input type="checkbox" name="reactOptionsCheckboxes" value="hotReload" onChange={props.handleChange} checked={props.reactOptions && props.reactOptions.has('hotReload')} />
-               <span ref="hotReloadTooltip" data-toggle="tooltip" data-title="Modify React components in real time, while preserving the state." data-placement="top">React Hot Reload</span>
+               <span ref="hotReloadTooltip" data-toggle="tooltip" data-title="Tweak React components in real time, while preserving the state." data-placement="top">React Hot Reload</span>
              </label>
            </div>
          </div>
@@ -82,6 +82,8 @@ class JsFramework extends React.Component {
      invisible: !props.jsFramework || props.jsFramework === 'none'
    });
 
+   let recommendedLabel = props.beginner ? <span className="label label-success">Recommended</span> : null;
+
    return (
      <div className={cx('animated fadeIn panel', props.jsFramework)}>
        <div className="panel-heading">
@@ -94,6 +96,7 @@ class JsFramework extends React.Component {
              <img className="btn-logo" src="/img/svg/none.png" alt="None" />
              <input type="radio" name="jsFrameworkRadios" value="none" onChange={props.handleChange} checked={props.jsFramework === 'none'} />
              <span>None</span>
+             {recommendedLabel}
            </label>
            <label className="radio-inline">
              <img className="btn-logo" src="/img/svg/react-logo.svg" alt="React" />
