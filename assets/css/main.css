@@ -626,11 +626,6 @@ canvas {
 
 /*Headings Styles*/
 
-section h6 svg {
-  margin-right: 6px;
-  vertical-align: sub;
-}
-
 .node .panel-heading {
   background: #83cd29;
   border-color: #83cd29;
@@ -981,6 +976,7 @@ section h6 svg {
 }
 
 .panel-heading h6 svg {
+  margin-right: 6px;
   vertical-align: sub;
 }
 
