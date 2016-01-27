@@ -184,7 +184,6 @@ class Home extends React.Component {
 
   render() {
     const state = this.state;
-    console.log(state.beginner);
 
     const platform = <Platform platform={state.platform} handleChange={this.handleChange} />;
 
@@ -230,9 +229,9 @@ class Home extends React.Component {
 
     const beginner = (
       <div className="checkbox">
-        <label title="Provides personal recommendations. Use this only when you are not sure what to pick.">
+        <label>
           <input type="checkbox" name="beginner" value={state.beginner} onChange={this.handleChange} />
-          <span>I am Beginner</span>
+          <span>I am Beginner <abbr title="Provides personal recommendations. Use this only when you are not sure what to pick.">What's this?</abbr></span>
         </label>
       </div>
     );
