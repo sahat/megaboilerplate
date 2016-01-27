@@ -1,5 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
+import { capitalize } from 'lodash/string';
 
 const FRAMEWORK_SVG = (
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 26 26">
@@ -90,7 +91,7 @@ class Framework extends React.Component {
           <li>
             <a data-toggle="collapse" href="#frameworkCollapse1">
               <img className="options-icon animated" src="/img/svg/options.svg"/>
-              Additional Options
+              {`Additional Options for ${capitalize(props.framework)}`}
             </a>
             <div id="frameworkCollapse1" className="collapse">
               <div className="panel-collapse">
