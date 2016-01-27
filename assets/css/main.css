@@ -942,6 +942,28 @@ canvas {
   fill: currentColor;
 }
 
+.jasmine .panel-heading {
+  color: #fff;
+  background: #8a4182;
+  border-color: transparent;
+}
+
+.jasmine svg {
+  color: #fff;
+  fill: currentColor;
+}
+
+.mocha .panel-heading {
+  color: #fff;
+  background: #a07a5c;
+  border-color: transparent;
+}
+
+.mocha svg {
+  color: #fff;
+  fill: currentColor;
+}
+
 .digitalOcean .panel-heading {
   color: #fff;
   background: #288feb;
@@ -977,7 +999,8 @@ canvas {
 
 .panel-heading h6 svg {
   margin-right: 6px;
-  vertical-align: sub;
+  /*vertical-align: sub;*/
+  vertical-align: middle;
 }
 
 .panel-heading .stats-icon {
