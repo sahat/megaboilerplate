@@ -1,6 +1,9 @@
+/* global $ */
+
 import React from 'react';
 import cx from 'classnames';
-import { Router, Route, Link } from 'react-router'
+import { Router, Route, Link } from 'react-router';
+import { shuffle } from 'lodash/collection';
 
 class Header extends React.Component {
   constructor(props) {
@@ -8,8 +11,22 @@ class Header extends React.Component {
   }
 
   componentDidMount() {
-    //this.loadCarbonAds();
-    //this.renderConnectedDots();
+    // this.loadCarbonAds();
+    // this.renderConnectedDots();
+
+    const strings = shuffle(['Express', 'Hapi', 'Meteor', 'React', 'Angular 2', 'Bootstrap', 'Foundation', 'Gulp',
+      'Webpack', 'Mocha', 'Jasmine', 'Node.js', 'Jade', 'Handlebars', 'Nunjucks', 'Bourbon Neat', 'Sass', 'LESS',
+      'Redux', 'React Router', 'ECMAScript 2015', 'Babel', 'GraphQL', 'Browserify', 'Chai', 'Sinon', 'MongoDB', 'MySQL',
+      'PosgreSQL', 'RethinkDB', 'Passport', 'Stylus', 'Socket.IO'
+    ]);
+
+    const h1 = this.refs.heroHeading;
+    $(h1).typed({
+      strings: strings,
+      typeSpeed: 0,
+      backDelay: 1200,
+      loop: true
+    });
   }
 
   loadCarbonAds() {
@@ -176,11 +193,11 @@ class Header extends React.Component {
           <h1><strong>Mega</strong> Boilerplate</h1>
           <div className="lead">
             Hand-crafted starter kits with focus on simplicity and ease of use.
-            <br />
+            <div className="featuring">
+              Featuring <span style={{color:'white'}} ref="heroHeading"></span>
+            </div>
             <ul className="list-inline">
-              <li><a href="#">Demo 1</a></li>
-              <li><a href="#">Demo 2</a></li>
-              <li><a href="#">Demo 3</a></li>
+              <li><img src="/img/svg/demo.svg" alt="Live Demo"/> <a href="#">Live Demo</a></li>
             </ul>
           </div>
           <iframe src="https://ghbtns.com/github-btn.html?user=sahat&repo=satellizer&type=star&count=true" frameBorder="0" scrolling="0" width="100px" height="20px"></iframe>
