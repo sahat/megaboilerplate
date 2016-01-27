@@ -6,16 +6,14 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 //= DATABASE_REQUIRE
 //= PASSPORT_REQUIRE
-//= SASS_MIDDLEWARE_REQUIRE
-//= LESS_MIDDLEWARE_REQUIRE
+//= CSS_PREPROCESSOR_MIDDLEWARE_REQUIRE
 
 var app = express();
 //= DATABASE_CONNECTION
 //= TEMPLATE_ENGINE
 
 app.set('port', process.env.PORT || 3000);
-//= SASS_MIDDLEWARE
-//= LESS_MIDDLEWARE
+//= CSS_PREPROCESSOR_MIDDLEWARE
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
