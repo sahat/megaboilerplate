@@ -372,6 +372,26 @@ section {
   margin-right: 8px;
 }
 
+.category-panel {
+  cursor: pointer;
+  text-align: center;
+  transition: .2s all;
+}
+
+.category-panel img {
+  margin-bottom: 10px;
+}
+
+.category-panel:hover {
+  color: #fff;
+  background-color: #47b475;
+}
+
+.category-panel.active {
+  color: #fff;
+  background-color: #47b475;
+}
+
 /*Footer*/
 
 footer {

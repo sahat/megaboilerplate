@@ -228,17 +228,53 @@ class Home extends React.Component {
       <button ref="downloadBtn" className="btn btn-block btn-mega" onClick={this.clickDownload}>Compile and Download</button>
     ) : null;
 
+    const beginner = (
+      <div className="checkbox">
+        <label title="Provides personal recommendations. Use this only when you are not sure what to pick.">
+          <input type="checkbox" name="beginner" value={state.beginner} onChange={this.handleChange} />
+          <span>I am Beginner</span>
+        </label>
+      </div>
+    );
+
+    const category = (
+      <div className="row">
+        <div className="col-sm-4">
+          <div className="panel category-panel active">
+            <div className="panel-body">
+              <img src="/img/svg/node-logo.svg" height="27"/>
+
+              <div>Web Application</div>
+            </div>
+          </div>
+        </div>
+        <div className="col-sm-4">
+          <div className="panel category-panel">
+            <div className="panel-body">
+              <img src="/img/svg/polymer-logo.svg" height="27"/>
+              <div>JavaScript Library</div>
+            </div>
+          </div>
+        </div>
+        <div className="col-sm-4">
+          <div className="panel category-panel">
+            <div className="panel-body">
+              <img src="/img/svg/html5-logo.svg" height="27"/>
+              <div>Static Site</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+
     return (
       <main>
         <Header />
         <div className="container">
           <br/>
-          <div className="checkbox">
-            <label title="Provides personal recommendations. Use this only when you are not sure what to pick.">
-              <input type="checkbox" name="beginner" value={state.beginner} onChange={this.handleChange} />
-              <span>I am Beginner</span>
-            </label>
-          </div>
+          <h2>I am building...</h2>
+          {category}
+          {beginner}
           <div ref="platform">{platform}</div>
           <div ref="framework">{framework}</div>
           <div ref="templateEngine">{templateEngine}</div>
