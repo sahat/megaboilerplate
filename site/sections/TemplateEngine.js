@@ -9,13 +9,13 @@ const TEMPLATE_ENGINE_SVG = (
 
 class TemplateEngine extends React.Component {
   render() {
-    let props = this.props;
+    const props = this.props;
 
-    let recommended = props.beginner ? (
+    const recommended = props.beginner ? (
       <img data-toggle="tooltip" data-title="Recommended" data-placement="top" src="/img/svg/recommended.svg" alt="Recommended" />
     ) : null;
 
-    let nodeTemplateEngines = (props.platform === 'node') ? (
+    const nodeTemplateEngines = (props.platform === 'node') ? (
       <div className="radio-group">
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/jade-logo.svg" height="60" alt="Jade"/>
@@ -69,14 +69,17 @@ class TemplateEngine extends React.Component {
     return (
       <div className={cx('animated fadeIn panel', props.templateEngine)}>
         <div className="panel-heading">
-          <h6>{TEMPLATE_ENGINE_SVG} {!props.templateEngine || props.templateEngine === 'none' ? 'Template Engine' : props.templateEngine}</h6>
+          <h6>{TEMPLATE_ENGINE_SVG}{!props.templateEngine || props.templateEngine === 'none' ? 'Template Engine' : props.templateEngine}</h6>
+          <a href="#" className="stats-icon" data-toggle="tooltip" data-title="Stats">
+            <i className="fa fa-bar-chart" />
+          </a>
         </div>
         <div className="panel-body">
           {description}
           {nodeTemplateEngines}
         </div>
       </div>
-    )
+    );
   }
 }
 

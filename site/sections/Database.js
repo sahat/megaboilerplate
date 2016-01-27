@@ -52,7 +52,10 @@ const Database = (props) => {
   return (
     <div className={cx('animated fadeIn  panel', props.database)}>
       <div className="panel-heading">
-        <h6>{DATABASE_SVG} {!props.database || props.database === 'none' ? 'Database' : props.database}</h6>
+        <h6>{DATABASE_SVG}{!props.database || props.database === 'none' ? 'Database' : props.database}</h6>
+        <a href="#" className="stats-icon" data-toggle="tooltip" data-title="Stats">
+          <i className="fa fa-bar-chart" />
+        </a>
       </div>
       <div className="panel-body">
         {description}

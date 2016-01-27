@@ -118,7 +118,10 @@ class Framework extends React.Component {
     return (
       <div className={cx('animated fadeIn panel', props.framework)}>
         <div className="panel-heading">
-          <h6>{FRAMEWORK_SVG} {props.framework || 'Framework'}</h6>
+          <h6>{FRAMEWORK_SVG}{props.framework || 'Framework'}</h6>
+          <a href="#" className="stats-icon" data-toggle="tooltip" data-title="Stats">
+            <i className="fa fa-bar-chart" />
+          </a>
         </div>
         <div className="panel-body">
           {description}

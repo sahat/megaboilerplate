@@ -90,7 +90,10 @@ class JsFramework extends React.Component {
    return (
      <div className={cx('animated fadeIn panel', props.jsFramework)}>
        <div className="panel-heading">
-         <h6>{JS_FRAMEWORK_SVG} {!props.jsFramework || props.jsFramework === 'none' ? 'JavaScript Framework' : props.jsFramework}</h6>
+         <h6>{JS_FRAMEWORK_SVG}{!props.jsFramework || props.jsFramework === 'none' ? 'JavaScript Framework' : props.jsFramework}</h6>
+         <a href="#" className="stats-icon" data-toggle="tooltip" data-title="Stats">
+           <i className="fa fa-bar-chart" />
+         </a>
        </div>
        <div className="panel-body">
          {description}

@@ -92,7 +92,10 @@ class BuildTool extends React.Component {
     return (
       <div className={cx('animated fadeIn panel', props.buildTool)}>
         <div className="panel-heading">
-          <h6>{BUILD_TOOL_SVG} {!props.buildTool || props.buildTool === 'none' ? 'Build Tool' : props.buildTool}</h6>
+          <h6>{BUILD_TOOL_SVG}{!props.buildTool || props.buildTool === 'none' ? 'Build Tool' : props.buildTool}</h6>
+          <a href="#" className="stats-icon" data-toggle="tooltip" data-title="Stats">
+            <i className="fa fa-bar-chart" />
+          </a>
         </div>
         <div className="panel-body">
           {description}

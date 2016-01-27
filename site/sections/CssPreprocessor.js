@@ -18,18 +18,18 @@ const CssPreprocessor = (props) => {
   const LESS = props.cssPreprocessor === 'less';
   const STYLUS = props.cssPreprocessor === 'stylus';
 
-  let recommended = props.beginner ? (
+  const recommended = props.beginner ? (
     <img data-toggle="tooltip" data-title="Recommended" src="/img/svg/recommended.svg" alt="Recommended" />
   ) : null;
 
-  let cssRadio = (
+  const cssRadio = (
     <label className="radio-inline">
       <img className="btn-logo" src="/img/svg/css3-logo.svg" alt="CSS"/>
       <input type="radio" name="cssPreprocessorRadios" value="css" onChange={props.handleChange} checked={CSS} /> None / CSS
     </label>
   );
 
-  let sassRadio = (NO_CSS_FRAMEWORK || BOOTSTRAP || FOUNDATION || BOURBON_NEAT) ? (
+  const sassRadio = (NO_CSS_FRAMEWORK || BOOTSTRAP || FOUNDATION || BOURBON_NEAT) ? (
     <label className="radio-inline">
       <img className="btn-logo" src="/img/svg/sass-logo.svg" alt="Sass"/>
       <input type="radio" name="cssPreprocessorRadios" value="sass" onChange={props.handleChange} checked={SASS} /> Sass
@@ -37,7 +37,7 @@ const CssPreprocessor = (props) => {
     </label>
   ) : null;
 
-  let lessRadio = (NO_CSS_FRAMEWORK || BOOTSTRAP) ? (
+  const lessRadio = (NO_CSS_FRAMEWORK || BOOTSTRAP) ? (
     <label className="radio-inline">
       <img className="btn-logo" src="/img/svg/less-logo.svg" alt="LESS"/>
 
@@ -45,7 +45,7 @@ const CssPreprocessor = (props) => {
     </label>
   ) : null;
 
-  let stylusRadio = (NO_CSS_FRAMEWORK) ? (
+  const stylusRadio = (NO_CSS_FRAMEWORK) ? (
     <label className="radio-inline">
       <img className="btn-logo" src="/img/svg/stylus-logo.svg" alt="Stylus"/>
       <input type="radio" name="cssPreprocessorRadios" value="stylus" onChange={props.handleChange} checked={STYLUS} /> Stylus
@@ -55,7 +55,10 @@ const CssPreprocessor = (props) => {
   return (
     <div className={cx('animated fadeIn panel', props.cssPreprocessor)}>
       <div className="panel-heading">
-        <h6>{CSS_PREPROCESSOR_SVG} {!props.cssPreprocessor || props.cssPreprocessor === 'css' ? 'CSS Preprocessor' : props.cssPreprocessor}</h6>
+        <h6>{CSS_PREPROCESSOR_SVG}{!props.cssPreprocessor || props.cssPreprocessor === 'css' ? 'CSS Preprocessor' : props.cssPreprocessor}</h6>
+        <a href="#" className="stats-icon" data-toggle="tooltip" data-title="Stats">
+          <i className="fa fa-bar-chart" />
+        </a>
       </div>
       <div className="panel-body">
         <div className="radio-group">

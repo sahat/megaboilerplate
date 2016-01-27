@@ -29,7 +29,7 @@ h3 {
 h6 {
   font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 12px;
-  line-height: 30px;
+  line-height: 32px;
   text-transform: uppercase;
   letter-spacing: 2px;
   font-weight: 700;
@@ -627,6 +627,7 @@ canvas {
 /*Headings Styles*/
 
 section h6 svg {
+  margin-right: 6px;
   vertical-align: sub;
 }
 
@@ -968,19 +969,25 @@ section h6 svg {
 }
 
 .panel-heading {
-  padding: 0;
-  padding-left: 15px;
+  padding: 0 15px;
   border-bottom: 1px solid #ddd;
   margin: -1px -1px 0;
 }
 
 .panel-heading h6 {
+  display: inline-block;
   margin-top: 0;
   margin-bottom: 0;
 }
 
 .panel-heading h6 svg {
   vertical-align: sub;
+}
+
+.panel-heading .stats-icon {
+  color: inherit;
+  line-height: 32px;
+  float: right;
 }
 
 .panel-body {

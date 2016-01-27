@@ -18,13 +18,17 @@ const Platform = (props) => {
   return (
     <div className={cx('animated fadeIn panel', props.platform)}>
       <div className="panel-heading">
-        <h6>{PLATFORM_SVG} {props.platform || 'Platform'}</h6>
+        <h6>{PLATFORM_SVG}{props.platform || 'Platform'}</h6>
+        <a href="#" className="stats-icon" data-toggle="tooltip" data-title="Stats">
+          <i className="fa fa-bar-chart" />
+        </a>
       </div>
       <div className="panel-body">
         <div className="radio-group">
           <label className="radio-inline">
             <img className="btn-logo" src="/img/svg/node-logo.svg" alt="Node.js"/>
-            <input type="radio" id="nodeRadio" name="platformRadios" value="node" onChange={props.handleChange} checked={props.platform === 'node'} /> Node.js
+            <input type="radio" id="nodeRadio" name="platformRadios" value="node" onChange={props.handleChange} checked={props.platform === 'node'} />
+            <span>Node.js</span>
           </label>
         </div>
 
