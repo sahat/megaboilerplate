@@ -11,6 +11,12 @@ class Testing extends React.Component {
   render() {
     const props = this.props;
 
+    let optionsClasses = cx("nav nav-stacked", {
+      fadeIn: props.framework,
+      animated: props.framework,
+      invisible: !props.framework
+    });
+
     const recommended = props.beginner ? (
       <img data-toggle="tooltip" data-title="Recommended" data-placement="top" src="/img/svg/recommended.svg" alt="Recommended" />
     ) : null;
@@ -75,6 +81,25 @@ class Testing extends React.Component {
               <span>None</span>
               {recommended}
             </label>
+
+            <ul className={optionsClasses}>
+              <li>
+                <a data-toggle="collapse" href="#testingCollapse1">
+                  <img className="options-icon animated" src="/img/svg/options.svg"/>
+                  <span>Additional Options</span>
+                </a>
+                <div id="testingCollapse1" className="collapse">
+                  <div className="panel-collapse">
+                    <div className="checkbox">
+                      <label>
+                        <input type="checkbox" value="coverage" />
+                        <span data-toggle="tooltip" data-title="Generates test coverage report using Istanbul.">Unit Test Coverage</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
           </div>
           {note}
         </div>
