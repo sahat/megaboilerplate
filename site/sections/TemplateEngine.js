@@ -19,11 +19,13 @@ class TemplateEngine extends React.Component {
       <div className="radio-group">
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/jade-logo.svg" height="60" alt="Jade"/>
-          <input type="radio" name="templateEngineRadios" value="jade" onChange={props.handleChange} checked={props.templateEngine === 'jade'}/> Jade
+          <input type="radio" name="templateEngineRadios" value="jade" onChange={props.handleChange} checked={props.templateEngine === 'jade'}/>
+          <span>Jade</span>
         </label>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/handlebars-logo.svg" alt="Handlebars"/>
-          <input type="radio" name="templateEngineRadios" value="handlebars" onChange={props.handleChange} checked={props.templateEngine === 'handlebars'}/> Handlebars
+          <input type="radio" name="templateEngineRadios" value="handlebars" onChange={props.handleChange} checked={props.templateEngine === 'handlebars'}/>
+          <span>Handlebars</span>
         </label>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/nunjucks-logo.png" alt="Nunjucks"/>
@@ -33,7 +35,8 @@ class TemplateEngine extends React.Component {
         </label>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/none.png" alt="None"/>
-          <input type="radio" name="templateEngineRadios" value="none" onChange={props.handleChange} checked={props.templateEngine === 'none'}/> None
+          <input type="radio" name="templateEngineRadios" value="none" onChange={props.handleChange} checked={props.templateEngine === 'none'}/>
+          <span>None</span>
         </label>
       </div>
     ) : null;

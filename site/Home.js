@@ -12,6 +12,7 @@ import TemplateEngine from './sections/TemplateEngine';
 import CssFramework from './sections/CssFramework';
 import CssPreprocessor from './sections/CssPreprocessor';
 import BuildTool from './sections/BuildTool';
+import Testing from './sections/Testing'
 import Database from './sections/Database';
 import Authentication from './sections/Authentication';
 import JsFramework from './sections/JsFramework';
@@ -144,6 +145,10 @@ class Home extends React.Component {
         state.buildTool = value;
         break;
 
+      case 'testingRadios':
+        state.testing = value;
+        break;
+
       case 'databaseRadios':
         if (!state.database) {
           window.smoothScroll(refs.authentication);
@@ -211,7 +216,11 @@ class Home extends React.Component {
       <BuildTool {...state} handleChange={this.handleChange} />
     ) : null;
 
-    const database = state.buildTool ? (
+    const testing = state.buildTool ? (
+      <Testing {...state} handleChange={this.handleChange} />
+    ) : null;
+
+    const database = state.testing ? (
       <Database {...state} handleChange={this.handleChange} />
     ) : null;
 
@@ -231,48 +240,46 @@ class Home extends React.Component {
       <div className="checkbox">
         <label>
           <input type="checkbox" name="beginner" value={state.beginner} onChange={this.handleChange} />
-          <span>I am Beginner <abbr title="Provides personal recommendations. Use this only when you are not sure what to pick.">What's this?</abbr></span>
+          <span>I am Beginner <abbr title="Provides personal recommendations for beginners. Use this only when you are not sure what to pick.">What's this?</abbr></span>
         </label>
       </div>
     );
 
-    const category = (
-      <div className="row">
-        <div className="col-sm-4">
-          <div className="panel category-panel active">
-            <div className="panel-body">
-              <img src="/img/svg/node-logo.svg" height="27"/>
-
-              <div>Web Application</div>
-            </div>
-          </div>
-        </div>
-        <div className="col-sm-4">
-          <div className="panel category-panel">
-            <div className="panel-body">
-              <img src="/img/svg/polymer-logo.svg" height="27"/>
-              <div>JavaScript Library</div>
-            </div>
-          </div>
-        </div>
-        <div className="col-sm-4">
-          <div className="panel category-panel">
-            <div className="panel-body">
-              <img src="/img/svg/html5-logo.svg" height="27"/>
-              <div>Static Site</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
+    //const category = (
+    //  <div className="row">
+    //    <div className="col-sm-4">
+    //      <div className="panel category-panel active">
+    //        <div className="panel-body">
+    //          <img src="/img/svg/node-logo.svg" height="27"/>
+    //
+    //          <div>Web Application</div>
+    //        </div>
+    //      </div>
+    //    </div>
+    //    <div className="col-sm-4">
+    //      <div className="panel category-panel">
+    //        <div className="panel-body">
+    //          <img src="/img/svg/polymer-logo.svg" height="27"/>
+    //          <div>JavaScript Library</div>
+    //        </div>
+    //      </div>
+    //    </div>
+    //    <div className="col-sm-4">
+    //      <div className="panel category-panel">
+    //        <div className="panel-body">
+    //          <img src="/img/svg/html5-logo.svg" height="27"/>
+    //          <div>Static Site</div>
+    //        </div>
+    //      </div>
+    //    </div>
+    //  </div>
+    //);
 
     return (
       <main>
         <Header />
         <div className="container">
           <br/>
-          <h2>I am building...</h2>
-          {category}
           {beginner}
           <div ref="platform">{platform}</div>
           <div ref="framework">{framework}</div>
@@ -281,6 +288,7 @@ class Home extends React.Component {
           <div ref="cssPreprocessor">{cssPreprocessor}</div>
           <div ref="jsFramework">{jsFramework}</div>
           <div ref="buildTool">{buildTool}</div>
+          <div ref="testing">{testing}</div>
           <div ref="database">{database}</div>
           <div ref="authentication">{authentication}</div>
           <div ref="deployment">{deployment}</div>
