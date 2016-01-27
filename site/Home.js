@@ -69,11 +69,17 @@ class Home extends React.Component {
     const refs = this.refs;
 
     switch (name) {
+      case 'beginner':
+        state.beginner = isChecked;
+        break;
+
       case 'platformRadios':
         // Reset everything
         for (const key in state) {
           if (state.hasOwnProperty(key)) {
-            state[key] = null;
+            if (key !== 'beginner') {
+              state[key] = null;
+            }
           }
         }
         state.platform = value;
@@ -178,27 +184,28 @@ class Home extends React.Component {
 
   render() {
     const state = this.state;
+    console.log(state.beginner);
 
     const platform = <Platform platform={state.platform} handleChange={this.handleChange} />;
 
     const framework = state.platform ? (
-      <Framework platform={state.platform} framework={state.framework} handleChange={this.handleChange} />
+      <Framework {...state} handleChange={this.handleChange} />
     ) : null;
 
     const templateEngine = state.framework ? (
-      <TemplateEngine platform={state.platform} templateEngine={state.templateEngine} handleChange={this.handleChange} />
+      <TemplateEngine {...state} handleChange={this.handleChange} />
     ) : null;
 
     const cssFramework = state.templateEngine ? (
-      <CssFramework cssFramework={state.cssFramework} handleChange={this.handleChange} />
+      <CssFramework {...state} handleChange={this.handleChange} />
     ) : null;
 
     const cssPreprocessor = state.cssFramework ? (
-      <CssPreprocessor cssPreprocessor={state.cssPreprocessor} cssFramework={state.cssFramework} handleChange={this.handleChange} />
+      <CssPreprocessor {...state} handleChange={this.handleChange} />
     ) : null;
 
     const jsFramework = state.cssPreprocessor ? (
-      <JsFramework jsFramework={state.jsFramework} reactOptions={state.reactOptions} handleChange={this.handleChange} />
+      <JsFramework {...state} handleChange={this.handleChange} />
     ) : null;
 
     const buildTool = state.jsFramework ? (
@@ -206,15 +213,15 @@ class Home extends React.Component {
     ) : null;
 
     const database = state.buildTool ? (
-      <Database database={state.database} handleChange={this.handleChange} />
+      <Database {...state} handleChange={this.handleChange} />
     ) : null;
 
     const authentication = state.database ? (
-      <Authentication database={state.database} authentication={state.authentication} handleChange={this.handleChange} />
+      <Authentication {...state} handleChange={this.handleChange} />
     ) : null;
 
     const deployment = (state.authentication || state.database === 'none') ? (
-      <Deployment deployment={state.deployment} handleChange={this.handleChange} />
+      <Deployment {...state} handleChange={this.handleChange} />
     ) : null;
 
     const download = state.deployment ? (
@@ -228,7 +235,7 @@ class Home extends React.Component {
           <br/>
           <div className="checkbox">
             <label title="Provides personal recommendations. Use this only when you are not sure what to pick.">
-              <input type="checkbox" name="reactOptionsCheckboxes" value="redux" onChange={this.handleChange} />
+              <input type="checkbox" name="beginner" value={state.beginner} onChange={this.handleChange} />
               <span>I am Beginner</span>
             </label>
           </div>
