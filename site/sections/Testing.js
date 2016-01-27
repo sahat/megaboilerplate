@@ -57,7 +57,7 @@ class Testing extends React.Component {
     return (
       <div className={cx('animated fadeIn panel', props.testing)}>
         <div className="panel-heading">
-          <h6>{TESTING_SVG}{!props.testing || props.testing === 'none' ? 'Testing' : props.testing}</h6>
+          <h6>{TESTING_SVG}{!props.testing || props.testing === 'none' ? 'Unit Testing' : props.testing}</h6>
           <a href="#" className="stats-icon" data-toggle="tooltip" data-title="Stats">
             <i className="fa fa-bar-chart" />
           </a>
