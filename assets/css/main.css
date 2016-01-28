@@ -183,6 +183,13 @@ label span + i {
 
 }
 
+i.arrow {
+  position: absolute;
+  font-size: 24px;
+  line-height: 13px;
+  margin-top: -1px;
+}
+
 .navbar-default {
   background-color: transparent;
 }

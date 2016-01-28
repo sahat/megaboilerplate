@@ -1,5 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
+import { VelocityComponent } from 'velocity-react';
 
 const TESTING_SVG = (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 50 50">
@@ -87,6 +88,9 @@ class Testing extends React.Component {
                 <a data-toggle="collapse" href="#testingCollapse1">
                   <img className="options-icon animated" src="/img/svg/options.svg"/>
                   <span>Additional Options</span>
+                  <VelocityComponent animation={{ translateX: props.testing ? '6px' : 0 }} loop={true}>
+                    <i className="ion-ios-arrow-thin-left arrow" />
+                  </VelocityComponent>
                 </a>
                 <div id="testingCollapse1" className="collapse">
                   <div className="panel-collapse">
