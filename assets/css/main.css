@@ -992,7 +992,11 @@ canvas {
   border: 1px solid #ddd;
   border-radius: 3px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+  transition: box-shadow .2s ease;
+}
 
+.panel:hover {
+  box-shadow: 0 4px 9px rgba(0, 0, 0, .1);
 }
 
 .panel-heading {
