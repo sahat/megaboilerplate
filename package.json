@@ -46,6 +46,7 @@
     "react-dom": "^0.14.5",
     "react-router": "^1.0.3",
     "react-slick": "^0.9.3",
-    "shortid": "^2.2.4"
+    "shortid": "^2.2.4",
+    "velocity-react": "^1.1.1"
   }
 }
