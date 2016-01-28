@@ -198,13 +198,13 @@ class Home extends React.Component {
       <div className="checkbox">
         <label>
           <input type="checkbox" name="beginner" value={state.beginner} onChange={this.handleChange}/>
-          <span>I am Beginner <abbr title="Provides personal recommendations for beginners. Use this only when you are not sure what to pick.">What's this?</abbr></span>
+          <span>I am Beginner <abbr title="Provides personal recommendations for beginners. Use this only when you are not sure what to pick.">What'sthis?</abbr></span>
         </label>
       </div>
     );
 
     const platform = (
-      <VelocityTransitionGroup runOnMount enter={} duration={600}>
+      <VelocityTransitionGroup runOnMount enter={enterAnimation} duration={600}>
         <Platform platform={state.platform} handleChange={this.handleChange}/>
       </VelocityTransitionGroup>
     );
@@ -229,13 +229,13 @@ class Home extends React.Component {
 
     const cssPreprocessor = (
       <VelocityTransitionGroup enter={enterAnimation} leave={leaveAnimation} duration={duration}>
-        {state.cssFramework ? <CssFramework {...state} handleChange={this.handleChange}/> : null}
+        {state.cssFramework ? <CssPreprocessor {...state} handleChange={this.handleChange}/> : null}
       </VelocityTransitionGroup>
     );
 
     const jsFramework = (
       <VelocityTransitionGroup enter={enterAnimation} leave={leaveAnimation} duration={duration}>
-        {state.cssPreprocessor ? <CssFramework {...state} handleChange={this.handleChange}/> : null}
+        {state.cssPreprocessor ? <JsFramework {...state} handleChange={this.handleChange}/> : null}
       </VelocityTransitionGroup>
     );
 
