@@ -215,10 +215,13 @@ label span + i {
 /*border-right: 1px solid rgba(255, 255, 255, .2);*/
 /*}*/
 
-.nav > li > a.navbar-icon {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  font-size: 250%;
+.navbar-icon {
+  padding-bottom: 8px !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.navbar-icon svg {
+  fill: currentColor;
 }
 
 /** Labels **/
