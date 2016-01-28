@@ -3,6 +3,7 @@
 const haikunate = require('haikunator');
 import React from 'react';
 import { clone } from 'lodash';
+import { VelocityTransitionGroup } from 'velocity-react';
 
 import Header from './Header';
 import Footer from './Footer';
@@ -180,7 +181,7 @@ class Home extends React.Component {
         break;
 
       default:
-        // Handle default case
+      // Handle default case
     }
 
     this.setState(state);
@@ -189,60 +190,89 @@ class Home extends React.Component {
   render() {
     const state = this.state;
 
-    const platform = <Platform platform={state.platform} handleChange={this.handleChange} />;
-
-    const framework = state.platform ? (
-      <Framework {...state} handleChange={this.handleChange} />
-    ) : null;
-
-    const templateEngine = state.framework ? (
-      <TemplateEngine {...state} handleChange={this.handleChange} />
-    ) : null;
-
-    const cssFramework = state.templateEngine ? (
-      <CssFramework {...state} handleChange={this.handleChange} />
-    ) : null;
-
-    const cssPreprocessor = state.cssFramework ? (
-      <CssPreprocessor {...state} handleChange={this.handleChange} />
-    ) : null;
-
-    const jsFramework = state.cssPreprocessor ? (
-      <JsFramework {...state} handleChange={this.handleChange} />
-    ) : null;
-
-    const buildTool = state.jsFramework ? (
-      <BuildTool {...state} handleChange={this.handleChange} />
-    ) : null;
-
-    const testing = state.buildTool ? (
-      <Testing {...state} handleChange={this.handleChange} />
-    ) : null;
-
-    const database = state.testing ? (
-      <Database {...state} handleChange={this.handleChange} />
-    ) : null;
-
-    const authentication = state.database ? (
-      <Authentication {...state} handleChange={this.handleChange} />
-    ) : null;
-
-    const deployment = (state.authentication || state.database === 'none') ? (
-      <Deployment {...state} handleChange={this.handleChange} />
-    ) : null;
-
-    const download = state.deployment ? (
-      <button ref="downloadBtn" className="btn btn-block btn-mega" onClick={this.clickDownload}>Compile and Download</button>
-    ) : null;
+    const enterAnimation = { animation: 'transition.slideLeftIn' };
+    const leaveAnimation = { animation: 'transition.bounceOut' };
+    const duration = 600;
 
     const beginner = (
       <div className="checkbox">
         <label>
-          <input type="checkbox" name="beginner" value={state.beginner} onChange={this.handleChange} />
+          <input type="checkbox" name="beginner" value={state.beginner} onChange={this.handleChange}/>
           <span>I am Beginner <abbr title="Provides personal recommendations for beginners. Use this only when you are not sure what to pick.">What's this?</abbr></span>
         </label>
       </div>
     );
+
+    const platform = (
+      <VelocityTransitionGroup runOnMount enter={} duration={600}>
+        <Platform platform={state.platform} handleChange={this.handleChange}/>
+      </VelocityTransitionGroup>
+    );
+
+    const framework = (
+      <VelocityTransitionGroup enter={enterAnimation} leave={leaveAnimation} duration={duration}>
+        {state.platform ? <Framework {...state} handleChange={this.handleChange}/> : null}
+      </VelocityTransitionGroup>
+    );
+
+    const templateEngine = (
+      <VelocityTransitionGroup enter={enterAnimation} leave={leaveAnimation} duration={duration}>
+        {state.framework ? <TemplateEngine {...state} handleChange={this.handleChange}/> : null}
+      </VelocityTransitionGroup>
+    );
+
+    const cssFramework = (
+      <VelocityTransitionGroup enter={enterAnimation} leave={leaveAnimation} duration={duration}>
+        {state.templateEngine ? <CssFramework {...state} handleChange={this.handleChange}/> : null}
+      </VelocityTransitionGroup>
+    );
+
+    const cssPreprocessor = (
+      <VelocityTransitionGroup enter={enterAnimation} leave={leaveAnimation} duration={duration}>
+        {state.cssFramework ? <CssFramework {...state} handleChange={this.handleChange}/> : null}
+      </VelocityTransitionGroup>
+    );
+
+    const jsFramework = (
+      <VelocityTransitionGroup enter={enterAnimation} leave={leaveAnimation} duration={duration}>
+        {state.cssPreprocessor ? <CssFramework {...state} handleChange={this.handleChange}/> : null}
+      </VelocityTransitionGroup>
+    );
+
+    const buildTool = (
+      <VelocityTransitionGroup enter={enterAnimation} leave={leaveAnimation} duration={duration}>
+        {state.jsFramework ? <BuildTool {...state} handleChange={this.handleChange}/> : null}
+      </VelocityTransitionGroup>
+    );
+
+    const testing = (
+      <VelocityTransitionGroup enter={enterAnimation} leave={leaveAnimation} duration={duration}>
+        {state.buildTool ? <Testing {...state} handleChange={this.handleChange}/> : null}
+      </VelocityTransitionGroup>
+    );
+
+    const database = (
+      <VelocityTransitionGroup enter={enterAnimation} leave={leaveAnimation} duration={duration}>
+        {state.testing ? <Database {...state} handleChange={this.handleChange}/> : null}
+      </VelocityTransitionGroup>
+    );
+
+    const authentication = (
+      <VelocityTransitionGroup enter={enterAnimation} leave={leaveAnimation} duration={duration}>
+        {state.database ? <Authentication {...state} handleChange={this.handleChange}/> : null}
+      </VelocityTransitionGroup>
+    );
+
+    const deployment = (
+      <VelocityTransitionGroup enter={enterAnimation} leave={leaveAnimation} duration={duration}>
+        {(state.authentication || state.database === 'none') ? <Deployment {...state} handleChange={this.handleChange}/> : null}
+      </VelocityTransitionGroup>
+    );
+
+    const download = state.deployment ? (
+      <button ref="downloadBtn" className="btn btn-block btn-mega" onClick={this.clickDownload}>Compile and
+        Download</button>
+    ) : null;
 
     //const category = (
     //  <div className="row">
@@ -292,7 +322,9 @@ class Home extends React.Component {
           <div ref="authentication">{authentication}</div>
           <div ref="deployment">{deployment}</div>
           <div ref="download">{download}</div>
-          <button ref="downloadBtn" className="btn btn-block btn-mega" onClick={this.clickDownload}>Compile and Download</button>
+          <button ref="downloadBtn" className="btn btn-block btn-mega" onClick={this.clickDownload}>Compile and
+            Download
+          </button>
         </div>
         <Footer />
       </main>
