@@ -47,21 +47,24 @@ app.use(require('webpack-hot-middleware')(compiler));
 app.post('/download', downloadHandler.default);
 
 // React server rendering
-app.use(function(req, res) {
-  Router.match({ routes: reactRoutes.default, location: req.url }, function(err, redirectLocation, renderProps) {
-    if (err) {
-      res.status(500).send(err.message)
-    } else if (redirectLocation) {
-      res.status(302).redirect(redirectLocation.pathname + redirectLocation.search)
-    } else if (renderProps) {
-      let html = ReactDOM.renderToString(React.createElement(Router.RoutingContext, renderProps));
-      let page = nunjucks.render(path.join(__dirname, 'index.html'), { html: html });
-      res.status(200).send(page);
-    } else {
-      res.status(404).send('Page Not Found')
-    }
-  });
+app.use((req, res) => {
+  return res.sendFile(path.join(__dirname, 'index.html'));
 });
+//app.use(function(req, res) {
+//  Router.match({ routes: reactRoutes.default, location: req.url }, function(err, redirectLocation, renderProps) {
+//    if (err) {
+//      res.status(500).send(err.message)
+//    } else if (redirectLocation) {
+//      res.status(302).redirect(redirectLocation.pathname + redirectLocation.search)
+//    } else if (renderProps) {
+//      let html = ReactDOM.renderToString(React.createElement(Router.RoutingContext, renderProps));
+//      let page = nunjucks.render(path.join(__dirname, 'index.html'), { html: html });
+//      res.status(200).send(page);
+//    } else {
+//      res.status(404).send('Page Not Found')
+//    }
+//  });
+//});
 
 app.listen(4000, 'localhost', function(err) {
   console.log('Listening at http://localhost:4000');
