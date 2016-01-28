@@ -8,15 +8,8 @@ const PLATFORM_SVG = (
 );
 
 const Platform = (props) => {
-  let python = (
-    <label className="radio-inline">
-      <img className="btn-logo" src="/img/svg/python-logo.svg" alt="Python"/>
-      <input type="radio" id="nodeRadio" name="platformRadios" value="python" onChange={props.handleChange} checked={props.platform === 'python'} /> Python
-    </label>
-  );
-
   return (
-    <div className={cx('animated fadeIn panel', props.platform)}>
+    <div className={cx('panel', props.platform)}>
       <div className="panel-heading">
         <h6>{PLATFORM_SVG}{props.platform || 'Platform'}</h6>
         <a href="#" className="stats-icon" data-toggle="tooltip" data-title="Stats">
@@ -31,7 +24,6 @@ const Platform = (props) => {
             <span>Node.js</span>
           </label>
         </div>
-
         <div><strong>Note: </strong>Support for other languages is on the roadmap. GitHub contributions are welcome.</div>
       </div>
     </div>

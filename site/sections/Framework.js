@@ -1,6 +1,5 @@
 import React from 'react';
 import cx from 'classnames';
-import { VelocityComponent } from 'velocity-react';
 
 const FRAMEWORK_SVG = (
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 26 26">
@@ -92,22 +91,19 @@ class Framework extends React.Component {
           <li>
             <a data-toggle="collapse" href="#frameworkCollapse1">
               <img className="options-icon animated" src="/img/svg/options.svg"/>
-               <span>Additional Options</span>
-              <VelocityComponent animation={{ translateX: props.framework ? '6px' : 0 }} loop={true}>
-                <i className="ion-ios-arrow-thin-left arrow" />
-              </VelocityComponent>
+              <span>Additional Options</span>
             </a>
             <div id="frameworkCollapse1" className="collapse">
               <div className="panel-collapse">
                 <div className="checkbox">
                   <label>
-                    <input type="checkbox" value="cluster" />
+                    <input type="checkbox" value="cluster"/>
                     <span data-toggle="tooltip" data-title="A single instance of Node.js runs in a single thread. To take advantage of multi-core systems the user will sometimes want to launch a cluster of Node.js processes to handle the load.The cluster module allows you to easily create child processes that all share server ports.">Node.js Cluster</span>
                   </label>
                 </div>
                 <div className="checkbox">
                   <label>
-                    <input type="checkbox" value="socketio" />
+                    <input type="checkbox" value="socketio"/>
                     <span data-toggle="tooltip" data-title="Socket.IO is a JavaScript library for realtime web applications. It enables realtime, bi-directional communication between web clients and servers.">Socket.IO</span>
                   </label>
                 </div>
@@ -120,7 +116,7 @@ class Framework extends React.Component {
     ) : null;
 
     return (
-      <div className={cx('animated fadeIn panel', props.framework)}>
+      <div className={cx('panel', props.framework)}>
         <div className="panel-heading">
           <h6>{FRAMEWORK_SVG}{props.framework || 'Framework'}</h6>
           <a href="#" className="stats-icon" data-toggle="tooltip" data-title="Stats">
