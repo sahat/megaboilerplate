@@ -56,10 +56,7 @@ hr {
 }
 
 .hero {
-  display: flex;
-  flex-direction: column;
   position: relative;
-  min-height: 100vh;
   padding: 0;
   padding-bottom: 20px;
   color: #cdbfe3;
@@ -67,12 +64,6 @@ hr {
   text-align: center;
   text-shadow: 0 1px 0 rgba(0, 0, 0, .1);
   background: #6f5499 linear-gradient(135deg, #271b38, #563d7c, #7952b3);
-}
-
-.header-content {
-  display: flex;
-  align-items: center;
-  flex-grow: 1;
 }
 
 .hero .lead a {
@@ -1002,11 +993,11 @@ canvas {
   border: 1px solid #ddd;
   border-radius: 3px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
-  transition: box-shadow .2s ease;
+  transition: box-shadow .2s linear;
 }
 
 .panel:hover {
-  box-shadow: 0 4px 9px rgba(0, 0, 0, .1);
+  box-shadow: 0 4px 9px rgba(0, 0, 0, .15);
 }
 
 .panel-heading {

@@ -1,7 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
 import { capitalize } from 'lodash/string';
-import { VelocityComponent } from 'velocity-react';
 
 const JS_FRAMEWORK_SVG = (
   <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 50 50">
@@ -122,9 +121,6 @@ class JsFramework extends React.Component {
              <a data-toggle="collapse" href="#jsFrameworkCollapse1">
                <img className="options-icon animated" src="/img/svg/options.svg"/>
                {`Additional Options for ${capitalize(props.jsFramework)}`}
-               <VelocityComponent animation={{ translateX: props.jsFramework ? '6px' : 0 }} loop={true}>
-                 <i className="ion-ios-arrow-thin-left arrow" />
-               </VelocityComponent>
              </a>
              <div id="jsFrameworkCollapse1" className="collapse">
                {jsFrameworkOptions}

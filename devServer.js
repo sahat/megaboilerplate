@@ -14,6 +14,7 @@ let Router = require('react-router');
 let nunjucks = require('nunjucks');
 let webpack = require('webpack');
 let config = require('./webpack.config.dev');
+const compression = require('compression');
 
 // Easy access to root directory
 global.__base = __dirname + '/';
@@ -32,6 +33,7 @@ let reactRoutes = require('./site/routes');
 let app = express();
 let compiler = webpack(config);
 
+app.use(compression());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'assets')));

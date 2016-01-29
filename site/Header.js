@@ -185,8 +185,8 @@ class Header extends React.Component {
           <div className="container-fluid">
             <div id="navbar" className="navbar-collapse collapse">
               <ul className="nav navbar-nav">
-                <li><a href="https://github.com/sahat/boilerplate/issues" target="_blank"><i className="ion-bug"></i>Report Issues</a></li>
-                <li><a href="https://github.com/sahat/boilerplate/blob/master/CONTRIBUTING.md" target="_blank"><i className="ion-pull-request"></i>Contributing</a></li>
+                <li><a href="https://github.com/sahat/boilerplate/issues" target="_blank"><i className="fa fa-bug"></i>Report Issues</a></li>
+                <li><a href="https://github.com/sahat/boilerplate/blob/master/CONTRIBUTING.md" target="_blank"><i className="fa fa-code-fork"></i>Contributing</a></li>
               </ul>
               <ul className="nav navbar-nav navbar-right">
                 <li className="tweet-button">
@@ -215,44 +215,42 @@ class Header extends React.Component {
           </div>
         </nav>
 
-        <div className="header-content">
-          <div className="container hero-container">
-            <div className="wrapper">
-              <div className="box middle"></div>
-              <div className="box upper"></div>
-              <div className="box lower"></div>
-            </div>
+        <div className="container hero-container">
+          <div className="wrapper">
+            <div className="box middle"></div>
+            <div className="box upper"></div>
+            <div className="box lower"></div>
+          </div>
 
-            <VelocityComponent runOnMount animation="transition.slideDownIn" duration={600} delay={125}>
-              <h1><strong>Mega</strong> Boilerplate</h1>
+          <VelocityComponent runOnMount animation="transition.slideDownIn" duration={600} delay={125}>
+            <h1><strong>Mega</strong> Boilerplate</h1>
+          </VelocityComponent>
+          <div className="lead">
+            <VelocityComponent runOnMount animation="transition.expandIn" duration={800} delay={200}>
+              <div>Hand-crafted starter kits with focus on simplicity and ease of use.</div>
             </VelocityComponent>
-            <div className="lead">
-              <VelocityComponent runOnMount animation="transition.expandIn" duration={800} delay={200}>
-                <div>Hand-crafted starter kits with focus on simplicity and ease of use.</div>
-              </VelocityComponent>
-              <VelocityComponent runOnMount animation="transition.fadeIn" duration={1200} delay={325}>
-                <div className="featuring">
-                  Featuring <span style={{ color: '#fff' }} ref="heroHeading"/>
-                </div>
-              </VelocityComponent>
-              <VelocityComponent runOnMount animation="transition.slideUpIn" duration={800} delay={450}>
-                <ul className="list-inline">
-                  <li><img src="/img/svg/demo.svg" alt="Live Demo"/> <a href="#">Live Demo</a></li>
-                </ul>
-              </VelocityComponent>
-            </div>
-            <VelocityComponent>
-              <div>
-                <iframe src="https://ghbtns.com/github-btn.html?user=sahat&repo=satellizer&type=star&count=true" frameBorder="0" scrolling="0" width="100px" height="20px"></iframe>
-                <iframe src="https://ghbtns.com/github-btn.html?user=sahat&type=follow&count=true" frameBorder="0" scrolling="0" width="170px" height="20px"></iframe>
-                <div>
-                  <img className="hero-arrow hidden-xs" src="/img/arrow.png" alt="Arrow"/>
-                  <span>Don't forget to <i className="ion-star"/> on GitHub if you liked this project!</span>
-                </div>
+            <VelocityComponent runOnMount animation="transition.fadeIn" duration={1200} delay={325}>
+              <div className="featuring">
+                Featuring <span style={{ color: '#fff' }} ref="heroHeading"/>
               </div>
             </VelocityComponent>
-            <div ref="carbonAds"></div>
+            <VelocityComponent runOnMount animation="transition.slideUpIn" duration={800} delay={450}>
+              <ul className="list-inline">
+                <li><img src="/img/svg/demo.svg" alt="Live Demo"/> <a href="#">Live Demo</a></li>
+              </ul>
+            </VelocityComponent>
           </div>
+          <VelocityComponent>
+            <div>
+              <iframe src="https://ghbtns.com/github-btn.html?user=sahat&repo=satellizer&type=star&count=true" frameBorder="0" scrolling="0" width="100px" height="20px"></iframe>
+              <iframe src="https://ghbtns.com/github-btn.html?user=sahat&type=follow&count=true" frameBorder="0" scrolling="0" width="170px" height="20px"></iframe>
+              <div>
+                <img className="hero-arrow hidden-xs" src="/img/arrow.png" alt="Arrow"/>
+                <span>Don't forget to <i className="fa fa-star"/> on GitHub if you liked this project!</span>
+              </div>
+            </div>
+          </VelocityComponent>
+          <div ref="carbonAds"></div>
         </div>
       </header>
     );
