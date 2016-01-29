@@ -18,7 +18,9 @@ class Testing extends React.Component {
     });
 
     const recommended = props.beginner ? (
-      <img data-toggle="tooltip" data-title="Recommended" data-placement="top" src="/img/svg/recommended.svg" alt="Recommended" />
+      <span className="hint--top hint--rounded" data-hint="Recommended">
+        <img src="/img/svg/recommended.svg" alt="Recommended" />
+      </span>
     ) : null;
 
     let description;
@@ -58,7 +60,7 @@ class Testing extends React.Component {
       <div className={cx('animated fadeIn panel', props.testing)}>
         <div className="panel-heading">
           <h6>{TESTING_SVG}{!props.testing || props.testing === 'none' ? 'Unit Testing' : props.testing}</h6>
-          <a href="#" className="stats-icon" data-toggle="tooltip" data-title="Stats">
+          <a href="#" className="stats-icon hint--top hint--rounded" data-title="Download Stats">
             <i className="fa fa-bar-chart" />
           </a>
         </div>
@@ -93,7 +95,7 @@ class Testing extends React.Component {
                     <div className="checkbox">
                       <label>
                         <input type="checkbox" value="coverage" />
-                        <span data-toggle="tooltip" data-title="Generates test coverage report using Istanbul.">Unit Test Coverage</span>
+                        <span className="hint--top hint--rounded" data-hint="Generates test coverage report using Istanbul.">Unit Test Coverage</span>
                       </label>
                     </div>
                   </div>

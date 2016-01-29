@@ -45,15 +45,17 @@ const Database = (props) => {
       description = <div className="placeholder"> </div>;
   }
 
-  let recommended = props.beginner ? (
-    <img data-toggle="tooltip" data-title="Recommended" src="/img/svg/recommended.svg" alt="Recommended" />
+  const recommended = props.beginner ? (
+    <span className="hint--top hint--rounded" data-hint="Recommended">
+        <img src="/img/svg/recommended.svg" alt="Recommended" />
+      </span>
   ) : null;
 
   return (
     <div className={cx('animated fadeIn  panel', props.database)}>
       <div className="panel-heading">
         <h6>{DATABASE_SVG}{!props.database || props.database === 'none' ? 'Database' : props.database}</h6>
-        <a href="#" className="stats-icon" data-toggle="tooltip" data-title="Stats">
+        <a href="#" className="stats-icon hint--top hint--rounded" data-hint="Download Stats">
           <i className="fa fa-bar-chart" />
         </a>
       </div>

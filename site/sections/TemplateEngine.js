@@ -11,8 +11,10 @@ class TemplateEngine extends React.Component {
   render() {
     const props = this.props;
 
-    const recommended = props.beginner ? (
-      <img data-toggle="tooltip" data-title="Recommended" data-placement="top" src="/img/svg/recommended.svg" alt="Recommended" />
+    let recommended = props.beginner ? (
+      <span className="hint--top hint--rounded" data-hint="Recommended">
+        <img src="/img/svg/recommended.svg" alt="Recommended" />
+      </span>
     ) : null;
 
     const nodeTemplateEngines = (props.platform === 'node') ? (
@@ -73,7 +75,7 @@ class TemplateEngine extends React.Component {
       <div className={cx('animated fadeIn panel', props.templateEngine)}>
         <div className="panel-heading">
           <h6>{TEMPLATE_ENGINE_SVG}{!props.templateEngine || props.templateEngine === 'none' ? 'Template Engine' : props.templateEngine}</h6>
-          <a href="#" className="stats-icon" data-toggle="tooltip" data-title="Stats">
+          <a href="#" className="stats-icon hint--top hint--rounded" data-hint="Stats">
             <i className="fa fa-bar-chart" />
           </a>
         </div>

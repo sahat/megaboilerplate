@@ -9,14 +9,6 @@ const JS_FRAMEWORK_SVG = (
 );
 
 class JsFramework extends React.Component {
-  componentDidMount() {
-    $('[data-toggle="tooltip"]').tooltip();
-  }
-
-  componentDidUpdate() {
-    $('[data-toggle="tooltip"]').tooltip();
-  }
-
  render() {
    let props = this.props;
    let description;
@@ -32,33 +24,33 @@ class JsFramework extends React.Component {
        jsFrameworkOptions = (
          <div className="panel-collapse">
            <div className="checkbox">
-             <label>
+             <label cl>
                <input type="checkbox" name="reactOptionsCheckboxes" value="redux" onChange={props.handleChange} checked={props.reactOptions && props.reactOptions.has('redux')} />
-               <span ref="reduxTooltip" data-toggle="tooltip" data-title="Predictable state container for JavaScript apps. Redux is an evolution of the Facebook's Flux, without all the complexity.">Redux</span>
+               <span className="hint--top hint--rounded" data-hint="Predictable state container for JavaScript apps. Redux is an evolution of the Facebook's Flux, without all the complexity.">Redux</span>
              </label>
            </div>
            <div className="checkbox">
              <label>
                <input type="checkbox" name="reactOptionsCheckboxes" value="reactRouter" onChange={props.handleChange} checked={props.reactOptions && props.reactOptions.has('reactRouter')} />
-               <span ref="reactRouterTooltip" data-toggle="tooltip" data-title="A complete routing library for React. React Router keeps your UI in sync with the URL.">React Router</span>
+               <span className="hint--top hint--rounded" data-hint="A complete routing library for React. React Router keeps your UI in sync with the URL.">React Router</span>
              </label>
            </div>
            <div className="checkbox">
              <label>
                <input type="checkbox" name="reactOptionsCheckboxes" value="graphql" onChange={props.handleChange} checked={props.reactOptions && props.reactOptions.has('graphql')} />
-               <span ref="graphqlTooltip" data-toggle="tooltip" data-title="Relay is a framework from Facebook that provides data-fetching functionality for React applications.">GraphQL + Relay</span>
+               <span className="hint--top hint--rounded" data-hint="Relay is a framework from Facebook that provides data-fetching functionality for React applications.">GraphQL + Relay</span>
              </label>
            </div>
            <div className="checkbox">
              <label>
                <input type="checkbox" name="reactOptionsCheckboxes" value="es6" onChange={props.handleChange} checked={props.reactOptions && props.reactOptions.has('es6')} />
-               <span ref="es6Tooltip" data-toggle="tooltip" data-title="ECMAScript 2015 (ES6) is the upcoming sixth major release of the ECMAScript language specification.">ES6</span>
+               <span className="hint--top hint--rounded" data-hint="ECMAScript 2015 (ES6) is the upcoming sixth major release of the ECMAScript language specification.">ES6</span>
              </label>
            </div>
            <div className="checkbox">
              <label>
                <input type="checkbox" name="reactOptionsCheckboxes" value="hotReload" onChange={props.handleChange} checked={props.reactOptions && props.reactOptions.has('hotReload')} />
-               <span ref="hotReloadTooltip" data-toggle="tooltip" data-title="Tweak React components in real time, while preserving the state.">React Hot Reload</span>
+               <span className="hint--top hint--rounded" data-hint="Tweak React components in real time, while preserving the state.">React Hot Reload</span>
              </label>
            </div>
          </div>
@@ -83,15 +75,17 @@ class JsFramework extends React.Component {
      invisible: !props.jsFramework || props.jsFramework === 'none'
    });
 
-   let recommended = props.beginner ? (
-     <img data-toggle="tooltip" data-title="Recommended" src="/img/svg/recommended.svg" alt="Recommended" />
+   const recommended = props.beginner ? (
+     <span className="hint--top hint--rounded" data-hint="Recommended">
+        <img src="/img/svg/recommended.svg" alt="Recommended" />
+      </span>
    ) : null;
 
    return (
      <div className={cx('animated fadeIn panel', props.jsFramework)}>
        <div className="panel-heading">
          <h6>{JS_FRAMEWORK_SVG}{!props.jsFramework || props.jsFramework === 'none' ? 'JavaScript Framework' : props.jsFramework}</h6>
-         <a href="#" className="stats-icon" data-toggle="tooltip" data-title="Stats">
+         <a href="#" className="stats-icon hint--top hint--rounded" data-hint="Download Stats">
            <i className="fa fa-bar-chart" />
          </a>
        </div>

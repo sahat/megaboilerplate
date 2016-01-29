@@ -19,7 +19,9 @@ const CssPreprocessor = (props) => {
   const POSTCSS = props.cssPreprocessor === 'postcss';
 
   const recommended = props.beginner ? (
-    <img data-toggle="tooltip" data-title="Recommended" src="/img/svg/recommended.svg" alt="Recommended" />
+    <span className="hint--top hint--rounded" data-hint="Recommended">
+        <img src="/img/svg/recommended.svg" alt="Recommended" />
+      </span>
   ) : null;
 
   const cssRadio = (
@@ -59,7 +61,7 @@ const CssPreprocessor = (props) => {
     <div className={cx('animated fadeIn panel', props.cssPreprocessor)}>
       <div className="panel-heading">
         <h6>{CSS_PREPROCESSOR_SVG}{!props.cssPreprocessor || props.cssPreprocessor === 'css' ? 'CSS Preprocessor' : props.cssPreprocessor}</h6>
-        <a href="#" className="stats-icon" data-toggle="tooltip" data-title="Stats">
+        <a href="#" className="stats-icon hint--top hint--rounded" data-hint="Download Stats">
           <i className="fa fa-bar-chart" />
         </a>
       </div>

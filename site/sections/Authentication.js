@@ -41,7 +41,7 @@ const Authentication = (props) => {
     <div className={cx('animated fadeIn panel', { authentication: props.authentication && props.authentication.size > 0 })}>
       <div className="panel-heading">
         <h6>{AUTHENTICATION_SVG}<span>Authentication</span></h6>
-        <a href="#" className="stats-icon" data-toggle="tooltip" data-title="Stats">
+        <a href="#" className="stats-icon hint--top hint--rounded" data-hint="Download Stats">
           <i className="fa fa-bar-chart" />
         </a>
       </div>

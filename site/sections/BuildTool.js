@@ -58,14 +58,16 @@ class BuildTool extends React.Component {
     }
 
     const recommended = props.beginner ? (
-      <img data-toggle="tooltip" data-title="Recommended" src="/img/svg/recommended.svg" alt="Recommended"/>
+      <span className="hint--top hint--rounded" data-hint="Recommended">
+        <img src="/img/svg/recommended.svg" alt="Recommended" />
+      </span>
     ) : null;
 
     return (
       <div className={cx('animated fadeIn panel', props.buildTool)}>
         <div className="panel-heading">
           <h6>{BUILD_TOOL_SVG}{!props.buildTool || props.buildTool === 'none' ? 'Build Tool' : props.buildTool}</h6>
-          <a href="#" className="stats-icon" data-toggle="tooltip" data-title="Stats">
+          <a href="#" className="stats-icon hint--top hint--rounded" data-hint="Download Stats">
             <i className="fa fa-bar-chart"/>
           </a>
         </div>
