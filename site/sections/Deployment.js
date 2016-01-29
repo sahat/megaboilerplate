@@ -47,7 +47,7 @@ const Deployment = (props) => {
     <div className={cx('animated fadeIn panel', props.deployment)}>
       <div className="panel-heading">
         <h6>{DEPLOYMENT_SVG}{!props.deployment || props.deployment === 'none' ? 'Deployment' : props.deployment}</h6>
-        <a href="#" className="stats-icon" data-toggle="tooltip" data-title="Stats">
+        <a href="#" className="stats-icon hint--top hint--rounded" data-hint="Download Stats">
           <i className="fa fa-bar-chart" />
         </a>
       </div>

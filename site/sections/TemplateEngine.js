@@ -75,7 +75,7 @@ class TemplateEngine extends React.Component {
       <div className={cx('animated fadeIn panel', props.templateEngine)}>
         <div className="panel-heading">
           <h6>{TEMPLATE_ENGINE_SVG}{!props.templateEngine || props.templateEngine === 'none' ? 'Template Engine' : props.templateEngine}</h6>
-          <a href="#" className="stats-icon hint--top hint--rounded" data-hint="Stats">
+          <a href="#" className="stats-icon hint--top hint--rounded" data-hint="Download Stats">
             <i className="fa fa-bar-chart" />
           </a>
         </div>
