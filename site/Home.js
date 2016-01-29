@@ -305,9 +305,9 @@ class Home extends React.Component {
     //);
 
     return (
-      <main>
+      <div>
         <Header />
-        <div className="container">
+        <main className="container">
           <br/>
           {beginner}
           <div ref="platform">{platform}</div>
@@ -325,9 +325,9 @@ class Home extends React.Component {
           <button ref="downloadBtn" className="btn btn-block btn-mega" onClick={this.clickDownload}>Compile and
             Download
           </button>
-        </div>
+        </main>
         <Footer />
-      </main>
+      </div>
 
     );
   }

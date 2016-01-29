@@ -179,7 +179,7 @@ class Header extends React.Component {
 
   render() {
     return (
-      <div className="hero">
+      <header className="hero">
         <canvas ref="connectedDots"/>
 
         <nav className="navbar navbar-default">
@@ -253,7 +253,7 @@ class Header extends React.Component {
           </VelocityComponent>
           <div ref="carbonAds"></div>
         </div>
-      </div>
+      </header>
     );
   }
 }
