@@ -92,7 +92,7 @@ hr {
   height: 32px;
   vertical-align: baseline;
   margin-right: 2px;
-  margin-left: 155px;
+  margin-left: 310px;
 }
 
 .hero-logo {
@@ -141,7 +141,7 @@ label span + i {
 /*Carbon Ads*/
 .carbon-container,
 #carbonads {
-  max-width: 400px;
+  max-width: 320px;
   height: 120px;
   background-color: rgba(0, 0, 0, 0.25);
   padding: 10px;
@@ -446,7 +446,7 @@ footer {
   background-image: linear-gradient(to bottom, rgba(29, 124, 244, 0) 50%, rgba(29, 124, 244, 0.6) 50%);
 }
 
-a > i[class^="ion"] {
+a > i[class^="fa"] {
   margin-right: 5px;
 }
 

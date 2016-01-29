@@ -44,7 +44,9 @@ class Header extends React.Component {
   }
 
   componentDidMount() {
-    // this.loadCarbonAds();
+     setTimeout(() => {
+       this.loadCarbonAds();
+     }, 500);
     // this.renderConnectedDots();
 
     const strings = shuffle(['Express', 'Hapi', 'Meteor', 'React', 'Angular 2', 'Bootstrap', 'Foundation', 'Gulp',
@@ -65,6 +67,7 @@ class Header extends React.Component {
   loadCarbonAds() {
     let carbonAdsContainer = this.refs.carbonAds;
     let script = document.createElement('script');
+    script.defer = true;
     script.type = 'text/javascript';
     script.src = '//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=sahatyalkabovcom';
     script.id = '_carbonads_js';
@@ -222,28 +225,27 @@ class Header extends React.Component {
             <div className="box lower"></div>
           </div>
 
-          <VelocityComponent runOnMount animation="transition.slideDownIn" duration={600} delay={125}>
-            <h1><strong>Mega</strong> Boilerplate</h1>
+          <VelocityComponent runOnMount animation="transition.slideDownIn" duration={1200}>
+            <h1>              <iframe src="https://ghbtns.com/github-btn.html?user=sahat&type=follow&count=true" frameBorder="0" scrolling="0" width="170px" height="20px"></iframe>
+              <strong>Mega</strong> Boilerplate               <iframe src="https://ghbtns.com/github-btn.html?user=sahat&repo=satellizer&type=star&count=true" frameBorder="0" scrolling="0" width="100px" height="20px"></iframe>
+            </h1>
           </VelocityComponent>
           <div className="lead">
-            <VelocityComponent runOnMount animation="transition.expandIn" duration={800} delay={200}>
+            <VelocityComponent runOnMount animation="transition.slideUpIn" duration={1100} delay={200}>
               <div>Hand-crafted starter kits with focus on simplicity and ease of use.</div>
             </VelocityComponent>
-            <VelocityComponent runOnMount animation="transition.fadeIn" duration={1200} delay={325}>
+            <VelocityComponent runOnMount animation="transition.slideUpIn" duration={1200} delay={400}>
               <div className="featuring">
                 Featuring <span style={{ color: '#fff' }} ref="heroHeading"/>
               </div>
             </VelocityComponent>
-            <VelocityComponent runOnMount animation="transition.slideUpIn" duration={800} delay={450}>
               <ul className="list-inline">
                 <li><img src="/img/svg/demo.svg" alt="Live Demo"/> <a href="#">Live Demo</a></li>
               </ul>
-            </VelocityComponent>
           </div>
           <VelocityComponent>
             <div>
               <iframe src="https://ghbtns.com/github-btn.html?user=sahat&repo=satellizer&type=star&count=true" frameBorder="0" scrolling="0" width="100px" height="20px"></iframe>
-              <iframe src="https://ghbtns.com/github-btn.html?user=sahat&type=follow&count=true" frameBorder="0" scrolling="0" width="170px" height="20px"></iframe>
               <div>
                 <img className="hero-arrow hidden-xs" src="/img/arrow.png" alt="Arrow"/>
                 <span>Don't forget to <i className="fa fa-star"/> on GitHub if you liked this project!</span>
