@@ -13,7 +13,7 @@ async function generateHandlebarsTemplateEngine(params) {
       app = join(__base, 'build', params.uuid, 'app.js');
       viewEngineRequire = join(__base, 'modules', 'template-engine', 'handlebars', 'handlebars-require-express.js');
       viewEngineSetup = join(__base, 'modules', 'template-engine', 'handlebars', 'handlebars-express.js');
-      baseRoute = join(__base, 'modules', 'template-engine', 'jade', 'express-route.js');
+      baseRoute = join(__base, 'modules', 'template-engine', 'routes', 'express-route.js');
 
       await replaceCode(app, 'TEMPLATE_ENGINE_REQUIRE', viewEngineRequire);
       await replaceCode(app, 'TEMPLATE_ENGINE', viewEngineSetup, { leadingBlankLine: true });

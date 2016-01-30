@@ -10,7 +10,7 @@ async function generateJadeTemplateEngine(params) {
     case 'express':
       app = join(__base, 'build', params.uuid, 'app.js');
       viewEngineSetup = join(__base, 'modules', 'template-engine', 'jade', 'jade-express.js');
-      baseRoute = join(__base, 'modules', 'template-engine', 'jade', 'express-route.js');
+      baseRoute = join(__base, 'modules', 'template-engine', 'routes', 'express-route.js');
 
       // Set "views dir" and "view engine"
       await replaceCode(app, 'TEMPLATE_ENGINE', viewEngineSetup, { leadingBlankLine: true });

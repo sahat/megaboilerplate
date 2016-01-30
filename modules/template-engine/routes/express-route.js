@@ -1,5 +1,5 @@
 app.get('/', function(req, res) {
-  res.render('index', {
+  res.render('home', {
     title: 'Home'
   });
 });
