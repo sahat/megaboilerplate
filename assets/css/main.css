@@ -63,27 +63,24 @@ hr {
   position: relative;
   padding: 0;
   padding-bottom: 20px;
-  color: #cdbfe3;
+  color: rgba(255, 255, 255, .6);
   overflow: hidden;
   text-align: center;
   text-shadow: 0 1px 0 rgba(0, 0, 0, .1);
-  background: #6f5499 linear-gradient(135deg, #271b38, #563d7c, #7952b3);
+  /*background: #6f5499 linear-gradient(135deg, #271b38, #563d7c, #7952b3);*/
+  background-size:cover;
+  background: url('../img/hero-bg.jpg') 0 50%, linear-gradient(224deg, #2B8BE3 0%, #663FB5 100%);
+  /*background-position: 0;*/
 }
 
 .hero .lead a {
-  text-decoration: none;
-  color: rgb(205, 191, 227);
-  background-image: linear-gradient(to bottom, rgba(205, 191, 227, 0) 50%, rgba(205, 191, 227, 0.6) 50%);
-  background-repeat: repeat-x;
-  background-size: 2px 2px;
-  background-position: 0 24px;
+  color: rgba(255, 255, 255, .6);
+  transition: .2s all;
 }
 
 .hero .lead a:hover {
+  text-decoration: none;
   color: #fff;
-  border-color: #fff;
-  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.6) 50%);
-  transition: .2s all;
 }
 
 .hero h1 {
@@ -206,7 +203,7 @@ i.arrow {
 .navbar-default .navbar-nav > li > a,
 .navbar-inverse .navbar-nav > li > a {
   font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: rgba(255, 255, 255, .65);
+  color: rgba(255, 255, 255, .6);
   font-size: 11px;
   text-transform: uppercase;
   font-weight: 600;
@@ -1112,6 +1109,7 @@ canvas {
 }
 
 .featuring {
+  color: rgba(255, 255, 255, .6);
   margin-bottom: 10px;
 }
 

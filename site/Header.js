@@ -47,7 +47,7 @@ class Header extends React.Component {
      setTimeout(() => {
        this.loadCarbonAds();
      }, 500);
-    // this.renderConnectedDots();
+     //this.renderConnectedDots();
 
     const strings = shuffle(['Express', 'Hapi', 'Meteor', 'React', 'Angular 2', 'Bootstrap', 'Foundation', 'Gulp',
       'Webpack', 'Mocha', 'Jasmine', 'Node.js', 'Jade', 'Handlebars', 'Nunjucks', 'Bourbon Neat', 'Sass', 'LESS',
@@ -248,7 +248,7 @@ class Header extends React.Component {
               <iframe src="https://ghbtns.com/github-btn.html?user=sahat&repo=satellizer&type=star&count=true" frameBorder="0" scrolling="0" width="100px" height="20px"></iframe>
               <div>
                 <img className="hero-arrow hidden-xs" src="/img/arrow.png" alt="Arrow"/>
-                <span>Don't forget to <i className="fa fa-star"/> on GitHub if you liked this project!</span>
+                <span>Don't forget to <i className="fa fa-star bounce animated"/> on GitHub if you liked this project!</span>
               </div>
             </div>
           </VelocityComponent>
