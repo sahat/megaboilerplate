@@ -12,8 +12,8 @@ import { shuffle } from 'lodash/collection';
 import { VelocityComponent, VelocityTransitionGroup } from 'velocity-react';
 
 const BRAND_LOGO = (
-  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 0 213.5 246.5">
-  <polygon class="st0" points="213.5,123.6 213.5,185 213.5,185 106.8,246.5 0,185 0,123.6 0.5,123.3 0,123 0,61.6 106.8,0
+  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="26" height="30" viewBox="0 0 213.5 246.5">
+  <polygon points="213.5,123.6 213.5,185 213.5,185 106.8,246.5 0,185 0,123.6 0.5,123.3 0,123 0,61.6 106.8,0
     211.9,60.8 158.5,91.9 106.8,62 0.5,123.3 106.8,184.6 213.4,123.3 "/>
   </svg>
 );
