@@ -17,7 +17,7 @@ class BuildTool extends React.Component {
         description = (
           <div>
             <strong><a href="http://gulpjs.com/" target="_blank">Gulp</a></strong> — The streaming build system.
-            <strong><a href="http://browserify.org/">Browserify</a></strong> — Lets you <em>require('modules')</em> in
+            <strong><a href="http://browserify.org/"> Browserify</a></strong> — Lets you <code>require('modules')</code> in
             the browser by bundling up all of your dependencies.
           </div>
         );
@@ -34,8 +34,7 @@ class BuildTool extends React.Component {
         description = (
           <div>
             <strong><a href="https://medium.com/@dabit3/introduction-to-using-npm-as-a-build-tool-b41076f488b0#.fmqbzcm1v" target="_blank">NPM</a></strong>
-            — A build process using only <a href="https://docs.npmjs.com/cli/npm">npm</a> and your <em>package.json</em>
-            file.
+            — A build process using only <a href="https://docs.npmjs.com/cli/npm">npm</a> and your <em>package.json</em> file.
           </div>
         );
         break;
@@ -43,18 +42,46 @@ class BuildTool extends React.Component {
         description = <div className="placeholder"> </div>;
     }
 
-    let note;
+    let reactNote;
 
     if ((props.buildTool && props.buildTool === 'none') && props.jsFramework === 'react') {
-      note = (
+      reactNote = (
         <div>
-          <strong>Note: </strong>
-          <span>React <a href="https://www.smashingmagazine.com/2015/04/react-to-the-future-with-isomorphic-apps/#isomorphic-javascript" target="_blank">server-side
-            rendering</a> is enabled only when using a build tool.</span>
+          <img className="info-icon" src="/img/svg/info.svg" alt="Note"/>
+          <span>React <a href="https://www.smashingmagazine.com/2015/04/react-to-the-future-with-isomorphic-apps/#isomorphic-javascript" target="_blank">server-side rendering</a> is enabled only when using a build tool.</span>
         </div>
       );
-    } else {
-      note = <div className="placeholder"> </div>;
+    }
+
+    let cssPreprocessorNote;
+
+    if (props.buildTool && props.buildTool === 'none') {
+      switch (props.cssPreprocessor) {
+        case 'sass':
+          cssPreprocessorNote = (
+            <div>
+              <img className="info-icon" src="/img/svg/info.svg" alt="Note"/>
+              <span>Sass will be compiled via <a href="https://github.com/sass/node-sass-middleware">node-sass-middleware</a> package.</span>
+            </div>
+          );
+          break;
+        case 'less':
+          cssPreprocessorNote = (
+            <div>
+              <img className="info-icon" src="/img/svg/info.svg" alt="Note"/>
+              <span>LESS will be compiled via <a href="https://github.com/emberfeather/less.js-middleware">less.js-middleware</a> package.</span>
+            </div>
+          );
+          break;
+        case 'postcss':
+          cssPreprocessorNote = (
+            <div>
+              <img className="info-icon" src="/img/svg/info.svg" alt="Note"/>
+              <span>PostCSS will be compiled via <a href="https://github.com/jedmao/postcss-middleware">postcss-middleware</a> package.</span>
+            </div>
+          );
+          break;
+      }
     }
 
     const recommended = props.beginner ? (
@@ -96,7 +123,8 @@ class BuildTool extends React.Component {
               {recommended}
             </label>
           </div>
-          {note}
+          {reactNote}
+          {cssPreprocessorNote}
         </div>
       </div>
     );

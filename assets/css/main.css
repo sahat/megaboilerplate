@@ -378,6 +378,12 @@ section {
   margin-bottom: 24px;
 }
 
+.info-icon {
+  height: 18px;
+  vertical-align: text-bottom;
+  margin-right: 4px;
+}
+
 .category-icon {
   height: 16px;
   margin-right: 8px;
