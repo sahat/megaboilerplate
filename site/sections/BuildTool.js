@@ -1,5 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
+import { VelocityComponent, VelocityTransitionGroup } from 'velocity-react';
 
 const BUILD_TOOL_SVG = (
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 50 50">
@@ -44,12 +45,12 @@ class BuildTool extends React.Component {
 
     let reactNote;
 
-    if ((props.buildTool && props.buildTool === 'none') && props.jsFramework === 'react') {
+    if (props.buildTool && props.buildTool === 'none' && props.jsFramework === 'react') {
       reactNote = (
-        <div>
+        <p>
           <img className="info-icon" src="/img/svg/info.svg" alt="Note"/>
           <span>React <a href="https://www.smashingmagazine.com/2015/04/react-to-the-future-with-isomorphic-apps/#isomorphic-javascript" target="_blank">server-side rendering</a> is enabled only when using a build tool.</span>
-        </div>
+        </p>
       );
     }
 
@@ -123,8 +124,8 @@ class BuildTool extends React.Component {
               {recommended}
             </label>
           </div>
-          {reactNote}
-          {cssPreprocessorNote}
+          <VelocityTransitionGroup enter={{ animation: 'transition.slideRightIn' }}>{reactNote}</VelocityTransitionGroup>
+          <VelocityTransitionGroup enter={{ animation: 'transition.slideLeftIn' }}>{cssPreprocessorNote}</VelocityTransitionGroup>
         </div>
       </div>
     );
