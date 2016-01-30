@@ -2,26 +2,13 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>{% block title %}{% endblock %} - Example</title>
-
-
+  <title>{% block title %}{% endblock %} - My App</title>
 </head>
 <body>
 
-<header>
-  <h1>{% block title %}{% endblock %}</h1>
-  {% block header %}{% endblock %}
-  <nav>
-    <ul>
-      <li><a href="/">Home Page</a></li>
-      <li><a href="/people">People</a></li>
-    </ul>
-  </nav>
-</header>
-
-<section role="main">
-  {% block body %}{% endblock %}
-</section>
+{% include partials "header" %}
+{% block body %}{% endblock %}
+{% include partials "footer" %}
 
 <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
 <script>
@@ -32,6 +19,5 @@
     r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
   ga('create','UA-XXXXX-X','auto');ga('send','pageview');
 </script>
-
 </body>
 </html>
