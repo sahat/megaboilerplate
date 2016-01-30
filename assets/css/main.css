@@ -87,12 +87,18 @@ hr {
   font-size: 13px;
   color: rgba(255,255,255,0.6);
   background-color: transparent;
-  border-color: rgba(255,255,255,0.6);
   letter-spacing: .1rem;
   border-radius: 4px;
   text-transform: uppercase;
   font-weight: bold;
   text-shadow: none;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  padding: 8px 16px;
+}
+
+.hero .btn .fa {
+  font-size: 200%;
+  vertical-align: sub;
 }
 
 .btn-outline:hover,
@@ -208,7 +214,7 @@ i.arrow {
 }
 
 .navbar-brand svg {
-  fill: rgba(255, 255, 255, .6);
+  fill: rgba(255, 255, 255, .7);
   transition: fill .2s;
 
 }
@@ -1133,7 +1139,6 @@ canvas {
 }
 
 .featuring {
-  color: rgba(255, 255, 255, .6);
   margin-bottom: 10px;
 }
 

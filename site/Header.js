@@ -191,33 +191,33 @@ class Header extends React.Component {
     const isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
     const isFirefox = typeof InstallTrigger !== 'undefined';
     const isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
-    const isIE = false || !!document.documentMode;
+    const isIE = !!document.documentMode;
     const isEdge = !isIE && !!window.StyleMedia;
     const isChrome = !!window.chrome && !!window.chrome.webstore;
 
     let demoIcon;
 
     if (isFirefox) {
-      demoIcon = <i className="fa fa-firefox" />
+      demoIcon = <i className="fa fa-firefox"/>;
     } else if (isIE) {
-      demoIcon = <i className="fa fa-internet-explorer" />
+      demoIcon = <i className="fa fa-internet-explorer"/>;
     } else if (isEdge) {
-      demoIcon = <i className="fa fa-edge" />
+      demoIcon = <i className="fa fa-edge"/>;
     } else if (isChrome) {
-      demoIcon = <i className="fa fa-chrome" />
+      demoIcon = <i className="fa fa-chrome"/>;
     } else if (isOpera) {
-      demoIcon = <i className="fa fa-opera" />
+      demoIcon = <i className="fa fa-opera"/>;
     } else if (isSafari) {
-      demoIcon = <i className="fa fa-safari" />
+      demoIcon = <i className="fa fa-safari"/>;
     } else {
-      demoIcon = <i className="fa fa-globe" />
+      demoIcon = <i className="fa fa-globe"/>;
     }
 
     return (
       <header className="hero">
         <canvas ref="connectedDots"/>
         <nav className="navbar navbar-default">
-          <div className="container">
+          <div className="container-fluid">
             <div className="navbar-header">
               <a href="/" className="navbar-brand">
                 {BRAND_LOGO}
@@ -263,8 +263,8 @@ class Header extends React.Component {
           </div>
 
           <VelocityComponent runOnMount animation="transition.slideDownIn" duration={1200}>
-            <h1>              <iframe src="https://ghbtns.com/github-btn.html?user=sahat&type=follow&count=true" frameBorder="0" scrolling="0" width="170px" height="20px"></iframe>
-              <strong>Mega</strong> Boilerplate               <iframe src="https://ghbtns.com/github-btn.html?user=sahat&repo=satellizer&type=star&count=true" frameBorder="0" scrolling="0" width="100px" height="20px"></iframe>
+            <h1>
+              <strong>Mega</strong> Boilerplate
             </h1>
           </VelocityComponent>
           <div className="lead">
@@ -283,7 +283,7 @@ class Header extends React.Component {
               <iframe src="https://ghbtns.com/github-btn.html?user=sahat&repo=satellizer&type=star&count=true" frameBorder="0" scrolling="0" width="100px" height="20px"></iframe>
               <div>
                 <img className="hero-arrow hidden-xs" src="/img/arrow.png" alt="Arrow"/>
-                <span>Don't forget to <i className="fa fa-star bounce animated"/> on GitHub if you liked this project!</span>
+                <span>Don't forget to <i className="fa fa-star"/> on GitHub if you liked this project!</span>
               </div>
             </div>
           </VelocityComponent>
