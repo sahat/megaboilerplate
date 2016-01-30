@@ -1,4 +1,5 @@
 var express = require('express');
+//= TEMPLATE_ENGINE_REQUIRE
 var path = require('path');
 var logger = require('morgan');
 var session = require('express-session');
@@ -11,7 +12,6 @@ var bodyParser = require('body-parser');
 var app = express();
 //= DATABASE_CONNECTION
 //= TEMPLATE_ENGINE
-
 app.set('port', process.env.PORT || 3000);
 //= CSS_PREPROCESSOR_MIDDLEWARE
 app.use(logger('dev'));
