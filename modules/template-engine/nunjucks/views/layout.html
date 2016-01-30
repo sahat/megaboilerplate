@@ -5,10 +5,11 @@
   <title>{% block title %}{% endblock %} - My App</title>
 </head>
 <body>
+{% include "partials/header.html" %}
 
-{% include partials "header" %}
 {% block body %}{% endblock %}
-{% include partials "footer" %}
+
+{% include "partials/footer.html" %}
 
 <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
 <script>

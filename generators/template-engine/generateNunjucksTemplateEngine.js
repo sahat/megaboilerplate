@@ -12,7 +12,7 @@ async function generateNunjucksTemplateEngine(params) {
       app = join(__base, 'build', params.uuid, 'app.js');
       viewEngineSetup = join(__base, 'modules', 'template-engine', 'nunjucks', 'nunjucks-express.js');
       viewEngineRequire = join(__base, 'modules', 'template-engine', 'nunjucks', 'nunjucks-require-express.js');
-      baseRoute = join(__base, 'modules', 'template-engine', 'routes', 'express-route.js');
+      baseRoute = join(__base, 'modules', 'template-engine', 'nunjucks', 'express-route.js');
 
       // Set "views dir" and "view engine" and require nunjucks
       await replaceCode(app, 'TEMPLATE_ENGINE_REQUIRE', viewEngineRequire);
