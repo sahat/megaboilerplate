@@ -83,6 +83,25 @@ hr {
   color: #fff;
 }
 
+.hero .btn {
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+  background-color: transparent;
+  border-color: rgba(255,255,255,0.6);
+  letter-spacing: .1rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-shadow: none;
+}
+
+.btn-outline:hover,
+.btn-outline:focus {
+  color: #6c59b4 !important;
+  background-color: #fff;
+  text-shadow: none;
+}
+
 .hero h1 {
   margin-top: 0;
   color: #fff;
@@ -93,7 +112,7 @@ hr {
   height: 32px;
   vertical-align: baseline;
   margin-right: 2px;
-  margin-left: 310px;
+  margin-left: 315px;
 }
 
 .hero-logo {
@@ -107,12 +126,6 @@ label span + i {
   color: #4F8EF7;
   margin-left: 4px;
   cursor: help;
-}
-
-.btn-outline {
-  color: #563d7c;
-  background-color: transparent;
-  border-color: #563d7c;
 }
 
 .bd-booticon {

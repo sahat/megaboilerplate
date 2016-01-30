@@ -188,6 +188,31 @@ class Header extends React.Component {
   }
 
   render() {
+    const isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+    const isFirefox = typeof InstallTrigger !== 'undefined';
+    const isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
+    const isIE = false || !!document.documentMode;
+    const isEdge = !isIE && !!window.StyleMedia;
+    const isChrome = !!window.chrome && !!window.chrome.webstore;
+
+    let demoIcon;
+
+    if (isFirefox) {
+      demoIcon = <i className="fa fa-firefox" />
+    } else if (isIE) {
+      demoIcon = <i className="fa fa-internet-explorer" />
+    } else if (isEdge) {
+      demoIcon = <i className="fa fa-edge" />
+    } else if (isChrome) {
+      demoIcon = <i className="fa fa-chrome" />
+    } else if (isOpera) {
+      demoIcon = <i className="fa fa-opera" />
+    } else if (isSafari) {
+      demoIcon = <i className="fa fa-safari" />
+    } else {
+      demoIcon = <i className="fa fa-globe" />
+    }
+
     return (
       <header className="hero">
         <canvas ref="connectedDots"/>
@@ -251,9 +276,7 @@ class Header extends React.Component {
                 Featuring <span style={{ color: '#fff' }} ref="heroHeading"/>
               </div>
             </VelocityComponent>
-              <ul className="list-inline">
-                <li><img src="/img/svg/demo.svg" alt="Live Demo"/> <a href="#">Live Demo</a></li>
-              </ul>
+            <a href="#" className="btn btn-outline">{demoIcon} Live Demo</a>
           </div>
           <VelocityComponent>
             <div>
