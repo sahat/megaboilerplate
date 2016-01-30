@@ -1,4 +1,4 @@
-/* global $ */
+/* global $, localStorage */
 
 const haikunate = require('haikunator');
 import React from 'react';
@@ -24,7 +24,18 @@ class Home extends React.Component {
     super(props);
     this.state = {};
     this.handleChange = this.handleChange.bind(this);
+    this.handleAutoScroll = this.handleAutoScroll.bind(this);
     this.clickDownload = this.clickDownload.bind(this);
+  }
+
+  componentDidMount() {
+    // Get checkbox value from local storage
+    try {
+      const autoScroll = localStorage.getItem('autoScroll');
+      this.setState({ autoScroll: autoScroll === 'true'})
+    } catch(e) {
+      // Local storage is not supported or disabled
+    }
   }
 
   clickDownload() {
@@ -63,10 +74,10 @@ class Home extends React.Component {
     });
   }
 
-  handleChange(e) {
-    const name = e.target.name;
-    const value = e.target.value;
-    const isChecked = e.target.checked;
+  handleChange(event) {
+    const name = event.target.name;
+    const value = event.target.value;
+    const isChecked = event.target.checked;
     const state = clone(this.state);
     const refs = this.refs;
 
@@ -76,34 +87,38 @@ class Home extends React.Component {
         break;
 
       case 'platformRadios':
-        // Reset everything
-        for (const key in state) {
-          if (state.hasOwnProperty(key)) {
-            if (key !== 'beginner') {
-              state[key] = null;
-            }
-          }
-        }
+        //// Reset all state
+        //// Will be relevant when adding new platforms
+        //for (const key in state) {
+        //  if (state.hasOwnProperty(key)) {
+        //    // Don't want to reset these 2 checkboxes
+        //    if (key !== 'beginner' || key !== 'autoScroll') {
+        //      state[key] = null;
+        //    }
+        //  }
+        //}
         state.platform = value;
-        $(refs.platform).velocity('scroll');
+        if (state.autoScroll) {
+          $(refs.platform).velocity('scroll');
+        }
         break;
 
       case 'frameworkRadios':
-        if (!state.framework) {
+        if (!state.framework && state.autoScroll) {
           $(refs.framework).velocity('scroll');
         }
         state.framework = value;
         break;
 
       case 'templateEngineRadios':
-        if (!state.templateEngine) {
+        if (!state.templateEngine && state.autoScroll) {
           $(refs.templateEngine).velocity('scroll');
         }
         state.templateEngine = value;
         break;
 
       case 'cssFrameworkRadios':
-        if (!state.cssFramework) {
+        if (!state.cssFramework && state.autoScroll) {
           $(refs.cssFramework).velocity('scroll');
         }
         if (state.cssPreprocessor) {
@@ -113,14 +128,14 @@ class Home extends React.Component {
         break;
 
       case 'cssPreprocessorRadios':
-        if (!state.cssPreprocessor) {
+        if (!state.cssPreprocessor && state.autoScroll) {
           $(refs.cssPreprocessor).velocity('scroll');
         }
         state.cssPreprocessor = value;
         break;
 
       case 'jsFrameworkRadios':
-        if (!state.jsFramework) {
+        if (!state.jsFramework && state.autoScroll) {
           $(refs.jsFramework).velocity('scroll');
         }
         state.jsFramework = value;
@@ -136,21 +151,21 @@ class Home extends React.Component {
         break;
 
       case 'buildToolRadios':
-        if (!state.buildTool) {
+        if (!state.buildTool && state.autoScroll) {
           $(refs.buildTool).velocity('scroll');
         }
         state.buildTool = value;
         break;
 
       case 'testingRadios':
-        if (!state.testing) {
+        if (!state.testing && state.autoScroll) {
           $(refs.testing).velocity('scroll');
         }
         state.testing = value;
         break;
 
       case 'databaseRadios':
-        if (!state.database) {
+        if (!state.database && state.autoScroll) {
           $(refs.database).velocity('scroll');
         }
         if (value === 'none' && state.authentication) {
@@ -174,7 +189,7 @@ class Home extends React.Component {
         break;
 
       case 'deploymentRadios':
-        if (!state.deployment) {
+        if (!state.deployment && state.autoScroll) {
           $(refs.deployment).velocity('scroll');
 z        }
         state.deployment = value;
@@ -187,6 +202,20 @@ z        }
     this.setState(state);
   }
 
+  handleAutoScroll(event) {
+    const isChecked = event.target.checked;
+
+    this.setState({ autoScroll: !isChecked });
+
+    // Persist changes in local storage
+    try {
+      // gotcha: boolean will be converted to string
+      localStorage.setItem('autoScroll', !isChecked);
+    } catch(e) {
+      // Local storage is not supported or disabled
+    }
+  }
+
   render() {
     const state = this.state;
 
@@ -194,13 +223,25 @@ z        }
     const leaveAnimation = { animation: 'transition.bounceOut' };
     const duration = 600;
 
-    const beginner = (
-      <div className="checkbox">
-        <label>
-          <input type="checkbox" name="beginner" value={state.beginner} onChange={this.handleChange}/>
-          <span>I am Beginner <abbr title="Provides personal recommendations for beginners. Use this only when you are not sure what to pick.">What'sthis?</abbr></span>
-        </label>
-      </div>
+    const settingsCheckboxes = (
+      <ul className="list-inline list-unstyled">
+        <li>
+          <div className="checkbox">
+            <label>
+              <input type="checkbox" name="beginner" value={state.beginner} onChange={this.handleChange}/>
+              <span>I am Beginner</span>
+            </label>
+          </div>
+        </li>
+        <li>
+          <div className="checkbox">
+            <label>
+              <input type="checkbox" name="autoScroll" value={state.autoScroll} onChange={this.handleAutoScroll} checked={!state.autoScroll}/>
+              <span>Disable auto-scroll</span>
+            </label>
+          </div>
+        </li>
+      </ul>
     );
 
     const platform = (
@@ -309,7 +350,7 @@ z        }
         <Header />
         <main className="container">
           <br/>
-          {beginner}
+          {settingsCheckboxes}
           <div ref="platform">{platform}</div>
           <div ref="framework">{framework}</div>
           <div ref="templateEngine">{templateEngine}</div>
