@@ -1068,9 +1068,8 @@ canvas {
   }
 }
 
-.radio-inline span + img {
-  /*vertical-align: bottom;*/
-  margin-top: -5px;
+.radio-inline span > img {
+  margin-top: -3px;
 }
 
 [type="radio"] {
