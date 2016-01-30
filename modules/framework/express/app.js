@@ -31,11 +31,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    // TODO: replace if no template engine provided
-    // TODO: need to replace for other engines?
-    res.render('error', {
-      message: err.message,
-      error: err
+    res.send({
+      status: err.status || 500,
+      message: err.message
     });
   });
 }
@@ -43,9 +41,9 @@ if (app.get('env') === 'development') {
 // production error handler
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
+  res.send({
+    status: err.status || 500,
+    message: err.message
   });
 });
 
