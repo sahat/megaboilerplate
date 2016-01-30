@@ -85,26 +85,26 @@ class Home extends React.Component {
           }
         }
         state.platform = value;
-        window.smoothScroll(refs.platform, 800);
+        $(refs.platform).velocity('scroll');
         break;
 
       case 'frameworkRadios':
         if (!state.framework) {
-          window.smoothScroll(refs.framework, 800);
+          $(refs.framework).velocity('scroll');
         }
         state.framework = value;
         break;
 
       case 'templateEngineRadios':
         if (!state.templateEngine) {
-          window.smoothScroll(refs.templateEngine, 800);
+          $(refs.templateEngine).velocity('scroll');
         }
         state.templateEngine = value;
         break;
 
       case 'cssFrameworkRadios':
         if (!state.cssFramework) {
-          window.smoothScroll(refs.cssFramework, 800);
+          $(refs.cssFramework).velocity('scroll');
         }
         if (state.cssPreprocessor) {
           state.cssPreprocessor = 'css';
@@ -114,14 +114,14 @@ class Home extends React.Component {
 
       case 'cssPreprocessorRadios':
         if (!state.cssPreprocessor) {
-          window.smoothScroll(refs.cssPreprocessor, 800);
+          $(refs.cssPreprocessor).velocity('scroll');
         }
         state.cssPreprocessor = value;
         break;
 
       case 'jsFrameworkRadios':
         if (!state.jsFramework) {
-          window.smoothScroll(refs.jsFramework, 800);
+          $(refs.jsFramework).velocity('scroll');
         }
         state.jsFramework = value;
         break;
@@ -137,21 +137,21 @@ class Home extends React.Component {
 
       case 'buildToolRadios':
         if (!state.buildTool) {
-          window.smoothScroll(refs.buildTool, 800);
+          $(refs.buildTool).velocity('scroll');
         }
         state.buildTool = value;
         break;
 
       case 'testingRadios':
         if (!state.testing) {
-          window.smoothScroll(refs.testing, 800);
+          $(refs.testing).velocity('scroll');
         }
         state.testing = value;
         break;
 
       case 'databaseRadios':
         if (!state.database) {
-          window.smoothScroll(refs.database, 800);
+          $(refs.database).velocity('scroll');
         }
         if (value === 'none' && state.authentication) {
           state.authentication.clear();
@@ -175,8 +175,8 @@ class Home extends React.Component {
 
       case 'deploymentRadios':
         if (!state.deployment) {
-          window.smoothScroll(refs.deployment, 800);
-        }
+          $(refs.deployment).velocity('scroll');
+z        }
         state.deployment = value;
         break;
 
