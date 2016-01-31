@@ -68,8 +68,8 @@ hr {
   text-align: center;
   text-shadow: 0 1px 0 rgba(0, 0, 0, .1);
   /*background: #6f5499 linear-gradient(135deg, #271b38, #563d7c, #7952b3);*/
-  background-size:cover;
   background: url('../img/hero-bg.jpg') 0 50%, linear-gradient(224deg, #2B8BE3 0%, #663FB5 100%);
+  background-size:cover;
   /*background-position: 0;*/
 }
 
