@@ -18,7 +18,7 @@ class BuildTool extends React.Component {
         description = (
           <div>
             <strong><a href="http://gulpjs.com/" target="_blank">Gulp</a></strong> — The streaming build system.
-            <strong><a href="http://browserify.org/"> Browserify</a></strong> — Lets you <code>require('modules')</code> in
+            <strong> <a href="http://browserify.org/">Browserify</a></strong> — Lets you <code>require('modules')</code> in
             the browser by bundling up all of your dependencies.
           </div>
         );
@@ -108,7 +108,7 @@ class BuildTool extends React.Component {
               <span>None</span>
             </label>
             <label className="radio-inline">
-              <img className="btn-logo" src="/img/svg/browserify-logo.svg" alt="Gulp + Browserify"/>
+              <img className="btn-logo" src="/img/svg/gulp-logo.svg" alt="Gulp + Browserify"/>
               <input type="radio" name="buildToolRadios" value="gulp" onChange={props.handleChange} checked={props.buildTool === 'gulp'}/>
               <span>Gulp + Browserify</span>
             </label>
