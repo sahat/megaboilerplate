@@ -1,10 +1,10 @@
 var express = require('express');
-//= TEMPLATE_ENGINE_REQUIRE
 var path = require('path');
 var logger = require('morgan');
-var session = require('express-session');
 var cookieParser = require('cookie-parser');
+var session = require('express-session');
 var bodyParser = require('body-parser');
+//= TEMPLATE_ENGINE_REQUIRE
 //= DATABASE_REQUIRE
 //= PASSPORT_REQUIRE
 //= CSS_PREPROCESSOR_MIDDLEWARE_REQUIRE
@@ -12,40 +12,24 @@ var bodyParser = require('body-parser');
 var app = express();
 //= DATABASE_CONNECTION
 //= TEMPLATE_ENGINE
+
 app.set('port', process.env.PORT || 3000);
 //= CSS_PREPROCESSOR_MIDDLEWARE
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(session({
-  secret: 'keyboard cat',
-  resave: true,
-  saveUninitialized: true
-}));
+app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 //= PASSPORT_MIDDLEWARE
 app.use(express.static(path.join(__dirname, 'public')));
 //= BASE_ROUTE
 
-// development error handler
-if (app.get('env') === 'development') {
+// production error handler
+if (app.get('env') === 'production') {
   app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.send({
-      status: err.status || 500,
-      message: err.message
-    });
+    res.sendStatus(err.status || 500);
   });
 }
-
-// production error handler
-app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.send({
-    status: err.status || 500,
-    message: err.message
-  });
-});
 
 app.listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));

@@ -16,7 +16,7 @@ async function generateNoneBuildTool(params) {
       await addNpmPackage('node-sass-middleware', params);
 
       await replaceCode(app, 'CSS_PREPROCESSOR_MIDDLEWARE_REQUIRE', sassMiddlewareRequire);
-      await replaceCode(app, 'CSS_PREPROCESSOR_MIDDLEWARE', sassMiddleware, { leadingBlankLine: true });
+      await replaceCode(app, 'CSS_PREPROCESSOR_MIDDLEWARE', sassMiddleware);
       break;
 
     case 'less':
@@ -26,7 +26,7 @@ async function generateNoneBuildTool(params) {
       await addNpmPackage('node-sass-middleware', params);
 
       await replaceCode(app, 'CSS_PREPROCESSOR_MIDDLEWARE_REQUIRE', lessMiddlewareRequire);
-      await replaceCode(app, 'CSS_PREPROCESSOR_MIDDLEWARE', lessMiddleware, { leadingBlankLine: true });
+      await replaceCode(app, 'CSS_PREPROCESSOR_MIDDLEWARE', lessMiddleware);
       break;
 
     case 'postcss':
@@ -36,7 +36,7 @@ async function generateNoneBuildTool(params) {
       await addNpmPackage('postcss-middleware', params);
 
       await replaceCode(app, 'CSS_PREPROCESSOR_MIDDLEWARE_REQUIRE', postcssMiddlewareRequire);
-      await replaceCode(app, 'CSS_PREPROCESSOR_MIDDLEWARE', postcssMiddleware, { leadingBlankLine: true });
+      await replaceCode(app, 'CSS_PREPROCESSOR_MIDDLEWARE', postcssMiddleware);
       break;
 
     default:
