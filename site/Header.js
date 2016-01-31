@@ -213,11 +213,14 @@ class Header extends React.Component {
       demoIcon = <i className="fa fa-globe"/>;
     }
 
+    // <img className="hero-arrow hidden-xs" src="/img/arrow.png" alt="Arrow"/>
+    // <span>Don't forget to <i className="fa fa-star"/> on GitHub if you liked this project!</span>
+
     return (
       <header className="hero">
         <canvas ref="connectedDots"/>
         <nav className="navbar navbar-default">
-          <div className="container-fluid">
+          <div className="container">
             <div className="navbar-header">
               <a href="/" className="navbar-brand">
                 {BRAND_LOGO}
@@ -279,15 +282,7 @@ class Header extends React.Component {
             </VelocityComponent>
             <a href="#" className="btn btn-outline">{demoIcon} Live Demo</a>
           </div>
-          <VelocityComponent>
-            <div>
-              <iframe src="https://ghbtns.com/github-btn.html?user=sahat&repo=satellizer&type=star&count=true" frameBorder="0" scrolling="0" width="100px" height="20px"></iframe>
-              <div>
-                <img className="hero-arrow hidden-xs" src="/img/arrow.png" alt="Arrow"/>
-                <span>Don't forget to <i className="fa fa-star"/> on GitHub if you liked this project!</span>
-              </div>
-            </div>
-          </VelocityComponent>
+          <iframe src="https://ghbtns.com/github-btn.html?user=twbs&repo=bootstrap&type=star&count=true&size=large" frameBorder="0" scrolling="0" width="160px" height="30px"></iframe>
           <div ref="carbonAds"></div>
         </div>
       </header>
