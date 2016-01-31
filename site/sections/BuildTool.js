@@ -62,7 +62,7 @@ class BuildTool extends React.Component {
           cssPreprocessorNote = (
             <div>
               <img className="info-icon" src="/img/svg/info.svg" alt="Note"/>
-              <span>Sass will be compiled via <a href="https://github.com/sass/node-sass-middleware">node-sass-middleware</a> package.</span>
+              <span>Sass will be compiled via <a href="https://github.com/sass/node-sass-middleware" target="_blank">node-sass-middleware</a> package.</span>
             </div>
           );
           break;
@@ -70,7 +70,7 @@ class BuildTool extends React.Component {
           cssPreprocessorNote = (
             <div>
               <img className="info-icon" src="/img/svg/info.svg" alt="Note"/>
-              <span>LESS will be compiled via <a href="https://github.com/emberfeather/less.js-middleware">less.js-middleware</a> package.</span>
+              <span>LESS will be compiled via <a href="https://github.com/emberfeather/less.js-middleware" target="_blank">less.js-middleware</a> package.</span>
             </div>
           );
           break;
@@ -78,7 +78,7 @@ class BuildTool extends React.Component {
           cssPreprocessorNote = (
             <div>
               <img className="info-icon" src="/img/svg/info.svg" alt="Note"/>
-              <span>PostCSS will be compiled via <a href="https://github.com/jedmao/postcss-middleware">postcss-middleware</a> package.</span>
+              <span>PostCSS will be compiled via <a href="https://github.com/jedmao/postcss-middleware" target="_blank">postcss-middleware</a> package.</span>
             </div>
           );
           break;
