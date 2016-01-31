@@ -221,6 +221,7 @@ class Header extends React.Component {
             <div className="navbar-header">
               <a href="/" className="navbar-brand">
                 {BRAND_LOGO}
+                <span><strong>Mega</strong> Boilerplate</span>
               </a>
             </div>
             <div id="navbar" className="navbar-collapse collapse">

@@ -93,12 +93,12 @@ hr {
   font-weight: bold;
   text-shadow: none;
   border: 2px solid rgba(255, 255, 255, 0.6);
-  padding: 8px 16px;
+  padding: 10px 18px;
 }
 
 .hero .btn .fa {
-  font-size: 200%;
-  vertical-align: sub;
+  font-size: 150%;
+  vertical-align: middle;
 }
 
 .btn-outline:hover,
@@ -209,14 +209,26 @@ i.arrow {
   margin-top: -1px;
 }
 
-.navbar-brand {
+.navbar-default .navbar-brand {
+  font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  color: rgba(255, 255, 255, .6);
   padding: 10px 15px;
+  transition: color .2s;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+  color: #fff;
 }
 
 .navbar-brand svg {
+  vertical-align: middle;
   fill: rgba(255, 255, 255, .7);
   transition: fill .2s;
+}
 
+.navbar-brand > span {
+  margin-left: 10px;
 }
 
 .navbar-brand:hover svg {
@@ -471,6 +483,8 @@ footer {
   padding: 0;
   color: #333;
 }
+
+
 
 .nav-stacked > li > a > span {
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.6) 50%);
