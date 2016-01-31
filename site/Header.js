@@ -280,7 +280,7 @@ class Header extends React.Component {
                 Featuring <span style={{ color: '#fff' }} ref="heroHeading"/>
               </div>
             </VelocityComponent>
-            <a href="#" className="btn btn-outline">{demoIcon} Live Demo</a>
+            <a href="#" className="btn btn-outline">{demoIcon} Live Demo</a> <a href="#" className="btn btn-outline">Project Examples</a>
           </div>
           <iframe src="https://ghbtns.com/github-btn.html?user=twbs&repo=bootstrap&type=star&count=true&size=large" frameBorder="0" scrolling="0" width="160px" height="30px"></iframe>
           <div ref="carbonAds"></div>
