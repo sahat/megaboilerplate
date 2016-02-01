@@ -181,7 +181,7 @@ class Home extends React.Component {
       case 'deploymentRadios':
         if (!state.deployment && state.autoScroll) {
           $(refs.deployment).velocity('scroll');
-z        }
+        }
         state.deployment = value;
         break;
 
@@ -334,7 +334,7 @@ z        }
     //    </div>
     //  </div>
     //);
-
+    console.log('testing');
     return (
       <div>
         <Header />
