@@ -32,23 +32,25 @@ async function generateBootstrap(params) {
 
   switch (params.cssPreprocessor) {
     case 'css':
-      await copy(join(bootstrapDir, 'main.css'), join(publicDir, 'stylesheets', 'main.css'));
-      await copy(join(bootstrapDir, 'css', 'bootstrap.css'), join(publicDir, 'stylesheets', 'vendor', 'bootstrap.css'));
+      await copy(join(bootstrapDir, 'main.css'), join(publicDir, 'css', 'main.css'));
+      await copy(join(bootstrapDir, 'css', 'bootstrap.css'), join(publicDir, 'css', 'vendor', 'bootstrap.css'));
       break;
     case 'less':
-      await copy(join(bootstrapDir, 'main.less'), join(publicDir, 'stylesheets', 'main.less'));
-      await copy(join(bootstrapDir, 'less'), join(publicDir, 'stylesheets', 'vendor', 'bootstrap'));
+      await copy(join(bootstrapDir, 'main.less'), join(publicDir, 'css', 'main.less'));
+      await copy(join(bootstrapDir, 'less'), join(publicDir, 'css', 'vendor', 'bootstrap'));
       break;
     case 'sass':
-      await copy(join(bootstrapDir, 'main.scss'), join(publicDir, 'stylesheets', 'main.scss'));
-      await copy(join(bootstrapDir, 'sass'), join(publicDir, 'stylesheets', 'vendor', 'bootstrap'));
+      await copy(join(bootstrapDir, 'main.scss'), join(publicDir, 'css', 'main.scss'));
+      await copy(join(bootstrapDir, 'sass'), join(publicDir, 'css', 'vendor', 'bootstrap'));
+      break;
+    default:
       break;
   }
 
   // Copy additional Bootstrap files
   await copy(join(bootstrapDir, 'fonts'), join(publicDir, 'fonts'));
-  await copy(join(bootstrapDir, 'js', 'bootstrap.js'), join(publicDir, 'javascripts', 'vendor', 'bootstrap.js'));
-  await copy(join(jqueryDir, 'jquery.js'), join(publicDir, 'javascripts', 'vendor', 'jquery.js'));
+  await copy(join(bootstrapDir, 'js', 'bootstrap.js'), join(publicDir, 'js', 'vendor', 'bootstrap.js'));
+  await copy(join(jqueryDir, 'jquery.js'), join(publicDir, 'js', 'vendor', 'jquery.js'));
 }
 
 export default generateBootstrap;

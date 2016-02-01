@@ -2,7 +2,7 @@ import { join } from 'path';
 import { cpy } from '../utils';
 
 async function generateSassPreprocessor(params) {
-  const cssDir = join(__base, 'build', params.uuid, 'public', 'stylesheets');
+  const cssDir = join(__base, 'build', params.uuid, 'public', 'css');
   const mainSass = join(__base, 'modules', 'css-preprocessor', 'main.scss');
 
   switch (params.framework) {

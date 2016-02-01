@@ -19,7 +19,7 @@ async function generateCssFrameworkNone(params) {
         // TODO
       }
       // Copy normalize.css
-      await cpy([normalizeCss], join(build, 'public', 'stylesheets'));
+      await cpy([normalizeCss], join(build, 'public', 'css'));
       break;
 
     case 'meteor':

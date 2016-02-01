@@ -1,7 +1,7 @@
 gulp.task('css', function() {
-  gulp.src('public/stylesheets/main.css')
+  gulp.src('./public/css/main.css')
     .pipe(plumber())
     .pipe(autoprefixer())
     .pipe(csso())
-    .pipe(gulp.dest('public/stylesheets'));
+    .pipe(gulp.dest('./public/css'));
 });
