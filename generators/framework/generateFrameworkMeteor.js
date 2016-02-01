@@ -15,9 +15,9 @@ async function generateFrameworkMeteor(params) {
   await writeJson(packageJson, packageObj, { spaces: 2 });
 
   // Create public dirs
-  await mkdirs(join(build, 'public', 'images'));
-  await mkdirs(join(build, 'public', 'javascripts'));
-  await mkdirs(join(build, 'public', 'stylesheets'));
+  await mkdirs(join(build, 'public', 'img'));
+  await mkdirs(join(build, 'public', 'css'));
+  await mkdirs(join(build, 'public', 'js'));
 }
 
 export default generateFrameworkMeteor;
