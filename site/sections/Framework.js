@@ -1,5 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
+import { VelocityTransitionGroup } from 'velocity-react';
 
 const FRAMEWORK_SVG = (
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 26 26">
@@ -8,14 +9,19 @@ const FRAMEWORK_SVG = (
 );
 
 class Framework extends React.Component {
-  render() {
-    let props = this.props;
+  constructor(props) {
+    super(props);
+    this.state = {};
+    this.toggleAdditionalOptions = this.toggleAdditionalOptions.bind(this);
+  }
 
-    let optionsClasses = cx("nav nav-stacked", {
-      fadeIn: props.framework,
-      animated: props.framework,
-      invisible: !props.framework
-    });
+  toggleAdditionalOptions() {
+    this.setState({ showOptions: !this.state.showOptions });
+  }
+
+  render() {
+    const props = this.props;
+    const state = this.state;
 
     let description;
 
@@ -51,7 +57,38 @@ class Framework extends React.Component {
       </span>
     ) : null;
 
-    let nodeFrameworks = (props.platform === 'node') ? (
+    const options = state.showOptions ? (
+      <div className="radio-group">
+        <label className="checkbox-inline">
+          <img className="btn-logo" src="/img/svg/node-cluster.svg" alt="Node.js Cluster"/>
+
+          <input type="checkbox" value="cluster"/>
+          <span className="hint--top hint--rounded" data-hint="A single instance of Node.js runs in a single thread. To take advantage of multi-core systems the user will sometimes want to launch a cluster of Node.js processes to handle the load.The cluster module allows you to easily create child processes that all share server ports.">Node.js Cluster</span>
+        </label>
+        <label className="checkbox-inline">
+          <img className="btn-logo" src="/img/svg/socket-io.svg" alt="Socket.IO"/>
+
+          <input type="checkbox" value="socketio"/>
+          <span className="hint--top hint--rounded" data-hint="Socket.IO is a JavaScript library for realtime web applications. It enables realtime, bi-directional communication between web clients and servers.">Socket.IO</span>
+        </label>
+      </div>
+    ) : null;
+
+    const additionalOptions = props.framework ? (
+      <div>
+        <button className="btn btn-link" onClick={this.toggleAdditionalOptions}>
+          <img className="options-icon animated" src="/img/svg/options.svg"/>
+          <span>Additional Options</span>
+        </button>
+        <VelocityTransitionGroup enter={{ animation: 'transition.slideRightIn', duration: 600 }}>
+          {options}
+        </VelocityTransitionGroup>
+      </div>
+    ) : null;
+
+
+
+    const nodeFrameworks = (props.platform === 'node') ? (
       <div className="radio-group">
         <label className="radio-inline">
           <span className="express-logo">Express</span>
@@ -69,32 +106,7 @@ class Framework extends React.Component {
           <input type="radio" name="frameworkRadios" value="meteor" onChange={props.handleChange} checked={props.framework === 'meteor'}/>
           <span>Meteor</span>
         </label>
-
-        <ul className={optionsClasses}>
-          <li>
-            <a data-toggle="collapse" href="#frameworkCollapse1">
-              <img className="options-icon animated" src="/img/svg/options.svg"/>
-              <span>Additional Options</span>
-            </a>
-            <div id="frameworkCollapse1" className="collapse">
-              <div className="panel-collapse">
-                <div className="checkbox">
-                  <label>
-                    <input type="checkbox" value="cluster"/>
-                    <span className="hint--top hint--rounded" data-hint="A single instance of Node.js runs in a single thread. To take advantage of multi-core systems the user will sometimes want to launch a cluster of Node.js processes to handle the load.The cluster module allows you to easily create child processes that all share server ports.">Node.js Cluster</span>
-                  </label>
-                </div>
-                <div className="checkbox">
-                  <label>
-                    <input type="checkbox" value="socketio"/>
-                    <span className="hint--top hint--rounded" data-hint="Socket.IO is a JavaScript library for realtime web applications. It enables realtime, bi-directional communication between web clients and servers.">Socket.IO</span>
-                  </label>
-                </div>
-              </div>
-            </div>
-          </li>
-        </ul>
-
+        {additionalOptions}
       </div>
     ) : null;
 
