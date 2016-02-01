@@ -63,7 +63,7 @@ hr {
   position: relative;
   padding: 0;
   padding-bottom: 20px;
-  color: rgba(255, 255, 255, .6);
+  color: rgba(255, 255, 255, .7);
   overflow: hidden;
   text-align: center;
   text-shadow: 0 1px 0 rgba(0, 0, 0, .1);
@@ -74,7 +74,7 @@ hr {
 }
 
 .hero .lead a {
-  color: rgba(255, 255, 255, .6);
+  color: rgba(255, 255, 255, .7);
   transition: .2s all;
 }
 
@@ -212,7 +212,7 @@ i.arrow {
 .navbar-default .navbar-brand {
   font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 300;
-  color: rgba(255, 255, 255, .6);
+  color: rgba(255, 255, 255, .7);
   padding: 10px 15px;
   transition: color .2s;
 }
@@ -246,7 +246,7 @@ i.arrow {
 .navbar-default .navbar-nav > li > a,
 .navbar-inverse .navbar-nav > li > a {
   font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: rgba(255, 255, 255, .6);
+  color: rgba(255, 255, 255, .7);
   font-size: 11px;
   text-transform: uppercase;
   font-weight: 600;
