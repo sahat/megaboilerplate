@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>{% block title %}{% endblock %} - My App</title>
+  <title>My App</title>
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,11 +10,7 @@
   <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
-  {% include "partials/header.html" %}
-
-  {% block body %}{% endblock %}
-
-  {% include "partials/footer.html" %}
+  <div id="app"></div>
 
   //= JS_FRAMEWORK_LIB_IMPORT
   //= JS_FRAMEWORK_MAIN_IMPORT

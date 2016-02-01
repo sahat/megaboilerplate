@@ -22,10 +22,17 @@ async function generateJadeTemplateEngine(params) {
       await addNpmPackage('jade', params);
 
       // Copy initial Jade templates to "views" directory
-      await copy(
-        join(__base, 'modules', 'template-engine', 'jade', 'views'),
-        join(__base, 'build', params.uuid, 'views')
-      );
+      if (params.jsFramework) {
+        await copy(
+          join(__base, 'modules', 'template-engine', 'jade', 'layout-spa.jade'),
+          join(__base, 'build', params.uuid, 'views', 'layout.jade')
+        );
+      } else {
+        await copy(
+          join(__base, 'modules', 'template-engine', 'jade', 'views'),
+          join(__base, 'build', params.uuid, 'views')
+        );
+      }
       break;
     case 'hapi':
       app = join(__base, 'build', params.uuid, 'app.js');
@@ -39,10 +46,17 @@ async function generateJadeTemplateEngine(params) {
       await addNpmPackage('vision', params);
 
       // Copy initial Jade templates to "views" directory
-      await copy(
-        join(__base, 'modules', 'template-engine', 'jade', 'views'),
-        join(__base, 'build', params.uuid, 'views')
-      );
+      if (params.jsFramework) {
+        await copy(
+          join(__base, 'modules', 'template-engine', 'jade', 'layout-spa.jade'),
+          join(__base, 'build', params.uuid, 'views', 'layout.jade')
+        );
+      } else {
+        await copy(
+          join(__base, 'modules', 'template-engine', 'jade', 'views'),
+          join(__base, 'build', params.uuid, 'views')
+        );
+      }
       break;
     case 'meteor':
       break;

@@ -25,10 +25,17 @@ async function generateNunjucksTemplateEngine(params) {
       await addNpmPackage('nunjucks', params);
 
       // Copy initial Nunjucks templates to "views" directory
-      await copy(
-        join(__base, 'modules', 'template-engine', 'nunjucks', 'views'),
-        join(__base, 'build', params.uuid, 'views')
-      );
+      if (params.jsFramework) {
+        await copy(
+          join(__base, 'modules', 'template-engine', 'nunjucks', 'layout-spa.html'),
+          join(__base, 'build', params.uuid, 'views', 'layout.html')
+        );
+      } else {
+        await copy(
+          join(__base, 'modules', 'template-engine', 'nunjucks', 'views'),
+          join(__base, 'build', params.uuid, 'views')
+        );
+      }
       break;
     case 'hapi':
       break;
