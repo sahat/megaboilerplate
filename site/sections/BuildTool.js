@@ -91,6 +91,14 @@ class BuildTool extends React.Component {
       </span>
     ) : null;
 
+    const noneRadio = props.jsFramework === 'none' ? (
+      <label className="radio-inline">
+        <img className="btn-logo" src="/img/svg/none.png" alt="None"/>
+        <input type="radio" name="buildToolRadios" value="none" onChange={props.handleChange} checked={props.buildTool === 'none'}/>
+        <span>None</span>
+      </label>
+    ) : null;
+
     return (
       <div className={cx('animated fadeIn panel', props.buildTool)}>
         <div className="panel-heading">
@@ -102,11 +110,7 @@ class BuildTool extends React.Component {
         <div className="panel-body">
           {description}
           <div className="radio-group">
-            <label className="radio-inline">
-              <img className="btn-logo" src="/img/svg/none.png" alt="None"/>
-              <input type="radio" name="buildToolRadios" value="none" onChange={props.handleChange} checked={props.buildTool === 'none'}/>
-              <span>None</span>
-            </label>
+            {noneRadio}
             <label className="radio-inline">
               <img className="btn-logo" src="/img/svg/gulp-logo.svg" alt="Gulp + Browserify"/>
               <input type="radio" name="buildToolRadios" value="gulp" onChange={props.handleChange} checked={props.buildTool === 'gulp'}/>
