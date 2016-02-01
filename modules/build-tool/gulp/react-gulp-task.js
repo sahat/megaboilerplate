@@ -1,5 +1,5 @@
 gulp.task('build', function() {
-  return browserify({ entries: './public/js/main.js', debug: true })
+  return browserify({ entries: './app/main.js', debug: true })
     .transform('babelify', { presets: ['es2015', 'react'] })
     .bundle()
     .pipe(source('bundle.js'))
