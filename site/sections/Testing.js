@@ -1,5 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
+import { VelocityTransitionGroup } from 'velocity-react';
 
 const TESTING_SVG = (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 50 50">
@@ -8,8 +9,19 @@ const TESTING_SVG = (
 );
 
 class Testing extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+    this.toggleAdditionalOptions = this.toggleAdditionalOptions.bind(this);
+  }
+
+  toggleAdditionalOptions() {
+    this.setState({ showOptions: !this.state.showOptions });
+  }
+
   render() {
     const props = this.props;
+    const state = this.state;
 
     let optionsClasses = cx('nav nav-stacked', {
       fadeIn: props.testing && props.testing !== 'none',
@@ -51,10 +63,32 @@ class Testing extends React.Component {
           <strong>Note: </strong>
           <span>Mocha comes bundled with <a href="http://chaijs.com/" target="_blank">Chai</a> and <a href="http://sinonjs.org/" target="_blank">Sinon</a> for complete testing experience.</span>
         </div>
-      )
+      );
     } else {
       note = <div className="placeholder"> </div>;
     }
+
+    const additionalOptions = state.showOptions ? (
+      <div className="radio-group">
+        <label className="checkbox-inline hint--top hint--rounded" data-hint="Generates test coverage report using Istanbul.">
+          <img className="btn-logo" src="/img/svg/test-coverage.svg" alt="Test Coverage"/>
+          <input type="checkbox" value="test-coverage" />
+          <span>Test Coverage</span>
+        </label>
+      </div>
+    ) : null;
+
+    const additionalOptionsButton = props.testing && props.testing !== 'none' ? (
+      <div>
+        <button className="btn btn-link" onClick={this.toggleAdditionalOptions}>
+          <img className="options-icon animated" src="/img/svg/options.svg"/>
+          <span>Additional Options</span>
+        </button>
+        <VelocityTransitionGroup enter={{ animation: 'transition.slideUpIn', duration: 600 }}>
+          {additionalOptions}
+        </VelocityTransitionGroup>
+      </div>
+    ) : null;
 
     return (
       <div className={cx('animated fadeIn panel', props.testing)}>
@@ -83,25 +117,8 @@ class Testing extends React.Component {
               <span>None</span>
               {recommended}
             </label>
-
-            <ul className={optionsClasses}>
-              <li>
-                <a data-toggle="collapse" href="#testingCollapse1">
-                  <img className="options-icon animated" src="/img/svg/options.svg"/>
-                  <span>Additional Options</span>
-                </a>
-                <div id="testingCollapse1" className="collapse">
-                  <div className="panel-collapse">
-                    <div className="checkbox">
-                      <label>
-                        <input type="checkbox" value="coverage" />
-                        <span className="hint--top hint--rounded" data-hint="Generates test coverage report using Istanbul.">Unit Test Coverage</span>
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            </ul>
+            <br/><br/>
+            {additionalOptionsButton}
           </div>
           {note}
         </div>

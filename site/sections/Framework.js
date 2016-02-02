@@ -57,38 +57,34 @@ class Framework extends React.Component {
       </span>
     ) : null;
 
-    const options = state.showOptions ? (
+    const additionalOptions = state.showOptions ? (
       <div className="radio-group">
-        <label className="checkbox-inline">
+        <label className="checkbox-inline hint--right hint--rounded" data-hint="Allows you to create separate processes which can share same server port.">
           <img className="btn-logo" src="/img/svg/node-cluster.svg" alt="Node.js Cluster"/>
-
           <input type="checkbox" value="cluster"/>
-          <span className="hint--top hint--rounded" data-hint="A single instance of Node.js runs in a single thread. To take advantage of multi-core systems the user will sometimes want to launch a cluster of Node.js processes to handle the load.The cluster module allows you to easily create child processes that all share server ports.">Node.js Cluster</span>
+          <span>Node.js Cluster</span>
         </label>
-        <label className="checkbox-inline">
+        <label className="checkbox-inline hint--right hint--rounded" data-hint="Socket.IO enables realtime, bi-directional communication between web clients and servers.">
           <img className="btn-logo" src="/img/svg/socket-io.svg" alt="Socket.IO"/>
-
           <input type="checkbox" value="socketio"/>
-          <span className="hint--top hint--rounded" data-hint="Socket.IO is a JavaScript library for realtime web applications. It enables realtime, bi-directional communication between web clients and servers.">Socket.IO</span>
+          <span>Socket.IO</span>
         </label>
       </div>
     ) : null;
 
-    const additionalOptions = props.framework ? (
+    const additionalOptionsButton = props.framework ? (
       <div>
         <button className="btn btn-link" onClick={this.toggleAdditionalOptions}>
           <img className="options-icon animated" src="/img/svg/options.svg"/>
           <span>Additional Options</span>
         </button>
-        <VelocityTransitionGroup enter={{ animation: 'transition.slideRightIn', duration: 600 }}>
-          {options}
+        <VelocityTransitionGroup enter={{ animation: 'transition.slideUpIn', duration: 600 }}>
+          {additionalOptions}
         </VelocityTransitionGroup>
       </div>
     ) : null;
 
-
-
-    const nodeFrameworks = (props.platform === 'node') ? (
+    const nodeFrameworks = props.platform === 'node' ? (
       <div className="radio-group">
         <label className="radio-inline">
           <span className="express-logo">Express</span>
@@ -106,7 +102,8 @@ class Framework extends React.Component {
           <input type="radio" name="frameworkRadios" value="meteor" onChange={props.handleChange} checked={props.framework === 'meteor'}/>
           <span>Meteor</span>
         </label>
-        {additionalOptions}
+        <br/><br/>
+        {additionalOptionsButton}
       </div>
     ) : null;
 
