@@ -1188,6 +1188,9 @@ code {
 }
 
 
+.react-toggle + label {
+  padding-left: 10px;
+}
 
 .react-toggle {
   display: inline-block;
@@ -1196,6 +1199,7 @@ code {
   background-color: transparent;
   border: 0;
   padding: 0;
+  vertical-align: middle;
 
   -webkit-touch-callout: none;
   -webkit-user-select: none;

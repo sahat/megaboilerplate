@@ -1,6 +1,7 @@
 import React from 'react';
 import cx from 'classnames';
 import { VelocityTransitionGroup } from 'velocity-react';
+import Toggle from '../Toggle';
 
 const FRAMEWORK_SVG = (
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 26 26">
@@ -74,10 +75,10 @@ class Framework extends React.Component {
 
     const additionalOptionsButton = props.framework ? (
       <div>
-        <button className="btn btn-link" onClick={this.toggleAdditionalOptions}>
+        <span className="options-btn" onClick={this.toggleAdditionalOptions}>
           <img className="options-icon animated" src="/img/svg/options.svg"/>
           <span>Additional Options</span>
-        </button>
+        </span>
         <VelocityTransitionGroup enter={{ animation: 'transition.slideUpIn', duration: 600 }}>
           {additionalOptions}
         </VelocityTransitionGroup>
@@ -103,6 +104,12 @@ class Framework extends React.Component {
           <span>Meteor</span>
         </label>
         <br/><br/>
+
+        <Toggle
+          id="framework-options"
+          defaultChecked={false}
+          onChange={props.handleChange} />
+        <label className="checkbox-inline" htmlFor="framework-options">Additional Options</label>
         {additionalOptionsButton}
       </div>
     ) : null;

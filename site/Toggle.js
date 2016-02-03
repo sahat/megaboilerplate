@@ -4,16 +4,23 @@ import cx from 'classnames'
 class Toggle extends React.Component {
   constructor(props) {
     super(props);
+
     let checked = false;
+
     if ('checked' in props) {
       checked = props.checked;
     } else if ('defaultChecked' in props) {
       checked = props.defaultChecked;
     }
+
     this.state = {
       checked: !!checked,
       hasFocus: false
     };
+
+    this.handleClick = this.handleClick.bind(this);
+    this.handleFocus = this.handleFocus.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -26,7 +33,6 @@ class Toggle extends React.Component {
     var checkbox = this.refs.input;
     if (event.target !== checkbox) {
       event.preventDefault();
-      checkbox.focus();
       checkbox.click();
       return
     }
@@ -54,12 +60,6 @@ class Toggle extends React.Component {
     return (
       <div className={classes} onClick={this.handleClick}>
         <div className="react-toggle-track">
-          <div className="react-toggle-track-check">
-            <Check />
-          </div>
-          <div className="react-toggle-track-x">
-            <X />
-          </div>
         </div>
         <div className="react-toggle-thumb"></div>
 
