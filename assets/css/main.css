@@ -1038,6 +1038,18 @@ canvas {
   fill: currentColor;
 }
 
+
+
+.icon {
+  display: inline-block;
+  position: relative;
+  top: -0.0625em;
+  fill: currentColor;
+  height: 1em;
+  width: 1em;
+  vertical-align: middle;
+}
+
 .panel {
   position: relative;
   margin-bottom: 20px;
@@ -1063,6 +1075,8 @@ canvas {
   margin-top: 0;
   margin-bottom: 0;
 }
+
+
 
 .panel-heading h6 svg {
   margin-right: 6px;
