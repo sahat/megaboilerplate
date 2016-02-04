@@ -1,7 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
-import { VelocityTransitionGroup } from 'velocity-react';
-import Toggle from '../Toggle';
+import { VelocityComponent, VelocityTransitionGroup } from 'velocity-react';
 
 const FRAMEWORK_SVG = (
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 26 26">
@@ -60,28 +59,30 @@ class Framework extends React.Component {
 
     const additionalOptions = state.showOptions ? (
       <div className="radio-group">
-        <label className="checkbox-inline hint--right hint--rounded" data-hint="Allows you to create separate processes which can share same server port.">
-          <img className="btn-logo" src="/img/svg/node-cluster.svg" alt="Node.js Cluster"/>
-          <input type="checkbox" value="cluster"/>
-          <span>Node.js Cluster</span>
-        </label>
-        <label className="checkbox-inline hint--right hint--rounded" data-hint="Socket.IO enables realtime, bi-directional communication between web clients and servers.">
-          <img className="btn-logo" src="/img/svg/socket-io.svg" alt="Socket.IO"/>
-          <input type="checkbox" value="socketio"/>
-          <span>Socket.IO</span>
-        </label>
+        <VelocityComponent runOnMount animation="transition.slideUpIn">
+          <div className="checkbox transparent">
+            <label className="hint--right hint--rounded" data-hint="Allows you to create separate processes which can share same server port.">
+              <input type="checkbox" value="cluster"/> Node.js Cluster
+            </label>
+          </div>
+        </VelocityComponent>
+        <VelocityComponent runOnMount animation="transition.slideUpIn" delay={100}>
+          <div className="checkbox transparent">
+            <label className="hint--right hint--rounded" data-hint="Socket.IO enables realtime, bi-directional communication between web clients and servers.">
+              <input type="checkbox" value="socketio"/> Socket.IO
+            </label>
+          </div>
+        </VelocityComponent>
       </div>
     ) : null;
 
     const additionalOptionsButton = props.framework ? (
       <div>
-        <span className="options-btn" onClick={this.toggleAdditionalOptions}>
-          <img className="options-icon animated" src="/img/svg/options.svg"/>
+        <span className="options" onClick={this.toggleAdditionalOptions}>
+          <img className={cx('animated', { fast: state.showOptions })} src="/img/svg/options.svg"/>
           <span>Additional Options</span>
         </span>
-        <VelocityTransitionGroup enter={{ animation: 'transition.slideUpIn', duration: 600 }}>
-          {additionalOptions}
-        </VelocityTransitionGroup>
+        {additionalOptions}
       </div>
     ) : null;
 
@@ -103,14 +104,6 @@ class Framework extends React.Component {
           <input type="radio" name="frameworkRadios" value="meteor" onChange={props.handleChange} checked={props.framework === 'meteor'}/>
           <span>Meteor</span>
         </label>
-        <br/><br/>
-
-        <Toggle
-          id="framework-options"
-          defaultChecked={false}
-          onChange={props.handleChange} />
-        <label className="checkbox-inline" htmlFor="framework-options">Additional Options</label>
-        {additionalOptionsButton}
       </div>
     ) : null;
 
@@ -125,6 +118,9 @@ class Framework extends React.Component {
         <div className="panel-body">
           {description}
           {nodeFrameworks}
+          <VelocityTransitionGroup enter={{ animation: 'transition.fadeIn', duration: 1000 }}>
+            {additionalOptionsButton}
+          </VelocityTransitionGroup>
         </div>
       </div>
     );
