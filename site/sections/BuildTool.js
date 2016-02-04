@@ -100,7 +100,7 @@ class BuildTool extends React.Component {
     ) : null;
 
     return (
-      <div className={cx('animated fadeIn panel', props.buildTool)}>
+      <div className={cx('zoomInBackwards panel', props.buildTool)}>
         <div className="panel-heading">
           <h6>{BUILD_TOOL_SVG}{!props.buildTool || props.buildTool === 'none' ? 'Build Tool' : props.buildTool}</h6>
           <a href="#" className="stats-icon hint--top hint--rounded" data-hint="Download Stats">

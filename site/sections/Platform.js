@@ -9,7 +9,7 @@ const PLATFORM_SVG = (
 
 const Platform = (props) => {
   return (
-    <div className={cx('panel', props.platform)}>
+    <div className={cx('zoomInBackwards panel', props.platform)}>
       <div className="panel-heading">
         <h6>{PLATFORM_SVG}{props.platform || 'Platform'}</h6>
         <a href="#" className="stats-icon hint--top hint--rounded" data-hint="Download Stats">

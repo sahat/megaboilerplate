@@ -58,7 +58,7 @@ const CssPreprocessor = (props) => {
   ) : null;
 
   return (
-    <div className={cx('animated fadeIn panel', props.cssPreprocessor)}>
+    <div className={cx('zoomInBackwards panel', props.cssPreprocessor)}>
       <div className="panel-heading">
         <h6>{CSS_PREPROCESSOR_SVG}{!props.cssPreprocessor || props.cssPreprocessor === 'css' ? 'CSS Preprocessor' : props.cssPreprocessor}</h6>
         <a href="#" className="stats-icon hint--top hint--rounded" data-hint="Download Stats">

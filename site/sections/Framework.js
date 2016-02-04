@@ -115,7 +115,7 @@ class Framework extends React.Component {
     ) : null;
 
     return (
-      <div className={cx('panel', props.framework)}>
+      <div className={cx('zoomInBackwards panel', props.framework)}>
         <div className="panel-heading">
           <h6>{FRAMEWORK_SVG}{props.framework || 'Framework'}</h6>
           <a href="#" className="stats-icon hint--top hint--rounded" data-hint="Download Stats">

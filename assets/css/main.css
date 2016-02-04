@@ -5,6 +5,7 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 a {
@@ -1057,11 +1058,13 @@ canvas {
   border: 1px solid #ddd;
   border-radius: 3px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+
   transition: box-shadow .2s linear;
 }
 
 .panel:hover {
   box-shadow: 0 4px 9px rgba(0, 0, 0, .15);
+  /*box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);*/
 }
 
 .panel-heading {
@@ -1196,6 +1199,21 @@ canvas {
   50% { opacity:0; }
   100% { opacity:1; }
 }
+
+@keyframes zoomIn {
+  from {
+    transform: scale(1.05);
+    opacity: 0
+  }
+}
+
+.zoomIn {
+  animation: 0.5s 0.2s zoomIn;
+}
+.zoomInBackwards {
+  animation: 0.5s 0.2s zoomIn backwards;
+}
+
 
 code {
   line-height: 1;

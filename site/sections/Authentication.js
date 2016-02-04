@@ -38,7 +38,7 @@ const Authentication = (props) => {
   );
 
   return (
-    <div className={cx('animated fadeIn panel', { authentication: props.authentication && props.authentication.size > 0 })}>
+    <div className={cx('zoomInBackwards panel', { authentication: props.authentication && props.authentication.size > 0 })}>
       <div className="panel-heading">
         <h6>{AUTHENTICATION_SVG}<span>Authentication</span></h6>
         <a href="#" className="stats-icon hint--top hint--rounded" data-hint="Download Stats">

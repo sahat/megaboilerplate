@@ -209,7 +209,9 @@ class Home extends React.Component {
   render() {
     const state = this.state;
 
-    const enterAnimation = { animation: 'transition.slideLeftIn' };
+    const enterAnimation = { animation: {
+      scale: '1.05'
+    } };
     const leaveAnimation = { animation: 'transition.bounceOut' };
     const duration = 600;
 
@@ -235,106 +237,54 @@ class Home extends React.Component {
     );
 
     const platform = (
-      <VelocityTransitionGroup runOnMount enter={enterAnimation} duration={600}>
-        <Platform platform={state.platform} handleChange={this.handleChange}/>
-      </VelocityTransitionGroup>
+      <Platform platform={state.platform} handleChange={this.handleChange}/>
     );
 
-    const framework = (
-      <VelocityTransitionGroup enter={enterAnimation} leave={leaveAnimation} duration={duration}>
-        {state.platform ? <Framework {...state} handleChange={this.handleChange}/> : null}
-      </VelocityTransitionGroup>
-    );
+    const framework = state.platform ? (
+      <Framework {...state} handleChange={this.handleChange}/>
+    ) : null;
 
-    const templateEngine = (
-      <VelocityTransitionGroup enter={enterAnimation} leave={leaveAnimation} duration={duration}>
-        {state.framework ? <TemplateEngine {...state} handleChange={this.handleChange}/> : null}
-      </VelocityTransitionGroup>
-    );
+    const templateEngine = state.framework ? (
+      <TemplateEngine {...state} handleChange={this.handleChange}/>
+    ) : null;
 
-    const cssFramework = (
-      <VelocityTransitionGroup enter={enterAnimation} leave={leaveAnimation} duration={duration}>
-        {state.templateEngine ? <CssFramework {...state} handleChange={this.handleChange}/> : null}
-      </VelocityTransitionGroup>
-    );
+    const cssFramework = state.templateEngine ? (
+      <CssFramework {...state} handleChange={this.handleChange}/>
+    ) : null;
 
-    const cssPreprocessor = (
-      <VelocityTransitionGroup enter={enterAnimation} leave={leaveAnimation} duration={duration}>
-        {state.cssFramework ? <CssPreprocessor {...state} handleChange={this.handleChange}/> : null}
-      </VelocityTransitionGroup>
-    );
+    const cssPreprocessor = state.cssFramework ? (
+      <CssPreprocessor {...state} handleChange={this.handleChange}/>
+    ) : null;
 
-    const jsFramework = (
-      <VelocityTransitionGroup enter={enterAnimation} leave={leaveAnimation} duration={duration}>
-        {state.cssPreprocessor ? <JsFramework {...state} handleChange={this.handleChange}/> : null}
-      </VelocityTransitionGroup>
-    );
+    const jsFramework = state.cssPreprocessor ? (
+      <JsFramework {...state} handleChange={this.handleChange}/>
+    ) : null;
 
-    const buildTool = (
-      <VelocityTransitionGroup enter={enterAnimation} leave={leaveAnimation} duration={duration}>
-        {state.jsFramework ? <BuildTool {...state} handleChange={this.handleChange}/> : null}
-      </VelocityTransitionGroup>
-    );
+    const buildTool = state.jsFramework ? (
+      <BuildTool {...state} handleChange={this.handleChange}/>
+    ) : null;
 
-    const testing = (
-      <VelocityTransitionGroup enter={enterAnimation} leave={leaveAnimation} duration={duration}>
-        {state.buildTool ? <Testing {...state} handleChange={this.handleChange}/> : null}
-      </VelocityTransitionGroup>
-    );
+    const testing = state.buildTool ? (
+      <Testing {...state} handleChange={this.handleChange}/>
+    ) : null;
 
-    const database = (
-      <VelocityTransitionGroup enter={enterAnimation} leave={leaveAnimation} duration={duration}>
-        {state.testing ? <Database {...state} handleChange={this.handleChange}/> : null}
-      </VelocityTransitionGroup>
-    );
+    const database = state.testing ? (
+      <Database {...state} handleChange={this.handleChange}/>
+    ) : null;
 
-    const authentication = (
-      <VelocityTransitionGroup enter={enterAnimation} leave={leaveAnimation} duration={duration}>
-        {state.database ? <Authentication {...state} handleChange={this.handleChange}/> : null}
-      </VelocityTransitionGroup>
-    );
+    const authentication = state.database ? (
+      <Authentication {...state} handleChange={this.handleChange}/>
+    ) : null;
 
-    const deployment = (
-      <VelocityTransitionGroup enter={enterAnimation} leave={leaveAnimation} duration={duration}>
-        {(state.authentication || state.database === 'none') ? <Deployment {...state} handleChange={this.handleChange}/> : null}
-      </VelocityTransitionGroup>
-    );
+    const deployment = (state.authentication || state.database === 'none') ? (
+      <Deployment {...state} handleChange={this.handleChange}/>
+    ) : null;
 
     const download = state.deployment ? (
       <button ref="downloadBtn" className="btn btn-block btn-mega" onClick={this.clickDownload}>Compile and
         Download</button>
     ) : null;
 
-    //const category = (
-    //  <div className="row">
-    //    <div className="col-sm-4">
-    //      <div className="panel category-panel active">
-    //        <div className="panel-body">
-    //          <img src="/img/svg/node-logo.svg" height="27"/>
-    //
-    //          <div>Web Application</div>
-    //        </div>
-    //      </div>
-    //    </div>
-    //    <div className="col-sm-4">
-    //      <div className="panel category-panel">
-    //        <div className="panel-body">
-    //          <img src="/img/svg/polymer-logo.svg" height="27"/>
-    //          <div>JavaScript Library</div>
-    //        </div>
-    //      </div>
-    //    </div>
-    //    <div className="col-sm-4">
-    //      <div className="panel category-panel">
-    //        <div className="panel-body">
-    //          <img src="/img/svg/html5-logo.svg" height="27"/>
-    //          <div>Static Site</div>
-    //        </div>
-    //      </div>
-    //    </div>
-    //  </div>
-    //);
-    console.log('testing');
     return (
       <div>
         <Header />

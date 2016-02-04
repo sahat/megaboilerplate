@@ -91,7 +91,7 @@ class Testing extends React.Component {
     ) : null;
 
     return (
-      <div className={cx('animated fadeIn panel', props.testing)}>
+      <div className={cx('zoomInBackwards panel', props.testing)}>
         <div className="panel-heading">
           <h6>{TESTING_SVG}{!props.testing || props.testing === 'none' ? 'Unit Testing' : props.testing}</h6>
           <a href="#" className="stats-icon hint--top hint--rounded" data-title="Download Stats">

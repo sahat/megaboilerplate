@@ -72,7 +72,7 @@ class TemplateEngine extends React.Component {
     }
 
     return (
-      <div className={cx('animated fadeIn panel', props.templateEngine)}>
+      <div className={cx('zoomInBackwards panel', props.templateEngine)}>
         <div className="panel-heading">
           <h6>{TEMPLATE_ENGINE_SVG}{!props.templateEngine || props.templateEngine === 'none' ? 'Template Engine' : props.templateEngine}</h6>
           <a href="#" className="stats-icon hint--top hint--rounded" data-hint="Download Stats">
