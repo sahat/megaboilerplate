@@ -206,6 +206,10 @@ class Home extends React.Component {
     }
   }
 
+  handleReduceAnimations(event) {
+    console.log('todo');
+  }
+
   render() {
     const state = this.state;
 
@@ -230,6 +234,14 @@ class Home extends React.Component {
             <label>
               <input type="checkbox" name="autoScroll" value={state.autoScroll} onChange={this.handleAutoScroll} checked={!state.autoScroll}/>
               <span>Disable auto-scroll</span>
+            </label>
+          </div>
+        </li>
+        <li>
+          <div className="checkbox">
+            <label>
+              <input type="checkbox" name="reduceAnimations" value={state.reduceAnimations} onChange={this.handleReduceAnimations} checked={!state.reduceAnimations}/>
+              <span>Reduce Animations</span>
             </label>
           </div>
         </li>
