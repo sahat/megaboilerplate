@@ -6,8 +6,6 @@ if (typeof window !== 'undefined') {
 }
 
 import React from 'react';
-import cx from 'classnames';
-import { Router, Route, Link } from 'react-router';
 import { shuffle } from 'lodash/collection';
 import { VelocityComponent, VelocityTransitionGroup } from 'velocity-react';
 
@@ -273,7 +271,7 @@ class Header extends React.Component {
           </VelocityComponent>
           <div className="lead">
             <VelocityComponent runOnMount animation="transition.slideUpIn" duration={1100} delay={200}>
-              <div>Hand-crafted starter kits with focus on simplicity and ease of use.</div>
+              <div>Hand-crafted starter kits optimized for <span className="highlight">simplicity</span> and <span className="highlight">ease of use</span>.¹</div>
             </VelocityComponent>
             <VelocityComponent runOnMount animation="transition.slideUpIn" duration={1200} delay={400}>
               <div className="featuring">
@@ -284,6 +282,8 @@ class Header extends React.Component {
           </div>
           <iframe src="https://ghbtns.com/github-btn.html?user=twbs&repo=bootstrap&type=star&count=true&size=large" frameBorder="0" scrolling="0" width="160px" height="30px"></iframe>
           <div ref="carbonAds"></div>
+
+          <div className="footnote">¹ Inspired by <a href="https://github.com/sahat/hackathon-starter" target="_blank">Hackathon Starter</a></div>
         </div>
       </header>
     );

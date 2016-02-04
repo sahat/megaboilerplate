@@ -60,6 +60,16 @@ hr {
   position: relative;
 }
 
+.footnote {
+  text-align: left;
+  position: absolute;
+  bottom: 0;
+}
+
+.footnote a {
+  color: #fff;
+}
+
 .hero {
   position: relative;
   padding: 0;
@@ -72,6 +82,12 @@ hr {
   background: url('../img/hero-bg.jpg') 0 50%, linear-gradient(224deg, #2B8BE3 0%, #663FB5 100%);
   background-size:cover;
   /*background-position: 0;*/
+}
+
+.hero .highlight {
+  background-color: transparent;
+  color: #fff;
+  font-weight: 600;
 }
 
 .hero .lead a {
