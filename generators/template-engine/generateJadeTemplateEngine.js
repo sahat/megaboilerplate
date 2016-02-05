@@ -16,22 +16,8 @@ async function generateJadeTemplateEngine(params) {
       await replaceCode(app, 'TEMPLATE_ENGINE', viewEngineSetup, { leadingBlankLine: true });
 
       // Set base route "/"
-      await replaceCode(app, 'BASE_ROUTE', baseRoute, { leadingBlankLine: true });
-
-      // Add Jade to package.json
-      await addNpmPackage('jade', params);
-
-      // Copy initial Jade templates to "views" directory
-      if (params.jsFramework) {
-        await copy(
-          join(__base, 'modules', 'template-engine', 'jade', 'layout-spa.jade'),
-          join(__base, 'build', params.uuid, 'views', 'layout.jade')
-        );
-      } else {
-        await copy(
-          join(__base, 'modules', 'template-engine', 'jade', 'views'),
-          join(__base, 'build', params.uuid, 'views')
-        );
+      if (params.jsFramework === 'none') {
+        await replaceCode(app, 'BASE_ROUTE', baseRoute, { leadingBlankLine: true });
       }
       break;
     case 'hapi':
@@ -42,26 +28,30 @@ async function generateJadeTemplateEngine(params) {
       await replaceCode(app, 'TEMPLATE_ENGINE', viewEngineSetup, { leadingBlankLine: true });
 
       // Add dependencies
-      await addNpmPackage('jade', params);
       await addNpmPackage('vision', params);
 
-      // Copy initial Jade templates to "views" directory
-      if (params.jsFramework) {
-        await copy(
-          join(__base, 'modules', 'template-engine', 'jade', 'layout-spa.jade'),
-          join(__base, 'build', params.uuid, 'views', 'layout.jade')
-        );
-      } else {
-        await copy(
-          join(__base, 'modules', 'template-engine', 'jade', 'views'),
-          join(__base, 'build', params.uuid, 'views')
-        );
-      }
       break;
     case 'meteor':
       break;
     default:
   }
+
+  // Copy initial Jade templates to "views" directory
+  if (params.jsFramework) {
+    await copy(
+      join(__base, 'modules', 'template-engine', 'jade', 'layout-spa.jade'),
+      join(__base, 'build', params.uuid, 'views', 'layout.jade')
+    );
+  } else {
+    await copy(
+      join(__base, 'modules', 'template-engine', 'jade', 'views'),
+      join(__base, 'build', params.uuid, 'views')
+    );
+  }
+
+  // Add Jade to package.json
+  await addNpmPackage('jade', params);
+
 }
 
 export default generateJadeTemplateEngine;
