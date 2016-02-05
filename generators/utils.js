@@ -111,6 +111,16 @@ export async function addNpmPackage(pkgName, params, isDev) {
 }
 
 /**
+ * Add NPM script to package.json.
+ */
+export async function addNpmScript(name, value, params, isDev) {
+  const packageJson = path.join(__base, 'build', params.uuid, 'package.json');
+  const packageObj = await readJson(packageJson);
+  packageObj.scripts[name] = value;
+  await writeJson(packageJson, packageObj, { spaces: 2 });
+}
+
+/**
  * Cleanup build files.
  * @param params
  */
