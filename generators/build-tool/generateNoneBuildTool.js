@@ -4,10 +4,6 @@ import { cpy, replaceCode, addNpmPackage } from '../utils';
 async function generateNoneBuildTool(params) {
   const app = join(__base, 'build', params.uuid, 'app.js');
 
-  await addNpmPackage('gulp', params);
-  await addNpmPackage('gulp-sourcemaps', params);
-  await addNpmPackage('gulp-plumber', params);
-
   switch (params.cssPreprocessor) {
     case 'sass':
       const sassMiddlewareRequire = join(__base, 'modules', 'build-tool', 'none', 'sass-middleware-require.js');

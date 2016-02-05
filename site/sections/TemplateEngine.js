@@ -22,7 +22,7 @@ class TemplateEngine extends React.Component {
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/jade-logo.svg" height="60" alt="Jade"/>
           <input type="radio" name="templateEngineRadios" value="jade" onChange={props.handleChange} checked={props.templateEngine === 'jade'}/>
-          <span>Pug (Jade)</span>
+          <span>Jade</span>
         </label>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/handlebars-logo.svg" alt="Handlebars"/>
@@ -49,7 +49,7 @@ class TemplateEngine extends React.Component {
       case 'jade':
         description = (
           <div>
-            <strong><a href="http://jade-lang.com/" target="_blank">Pug</a></strong> — High-performance template engine heavily influenced by <a href="http://haml.info/" target="_blank">Haml</a>. (Previously known as Jade)
+            <strong><a href="http://jade-lang.com/" target="_blank">Jade</a></strong> — High-performance template engine heavily influenced by <a href="http://haml.info/" target="_blank">Haml</a>.
           </div>
         );
         break;

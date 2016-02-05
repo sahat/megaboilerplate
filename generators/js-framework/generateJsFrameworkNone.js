@@ -3,6 +3,19 @@ import { copy, replaceCode, removeCode, addNpmPackage } from '../utils';
 
 const CSS_FRAMEWORK_WITH_JQUERY = ['bootstrap', 'foundation'];
 
+async function addTemplateImport(params, layout, templateImport) {
+  switch (params.templateEngine) {
+    case 'jade':
+      await replaceCode(layout, 'JS_FRAMEWORK_IMPORT', templateImport, { indentLevel: 2 });
+      break;
+    case 'handlebars':
+      break;
+    case 'nunjucks':
+      break;
+    default:
+  }
+}
+
 async function generateJsFrameworkNone(params) {
   let mainJs = join(__base, 'modules', 'js-framework', 'none', 'main.js');
   let mainJsWithJquery = join(__base, 'modules', 'js-framework', 'none', 'main-with-jquery.js');
@@ -31,19 +44,6 @@ async function generateJsFrameworkNone(params) {
       break;
     default:
     // TODO
-  }
-}
-
-async function addTemplateImport(params, layout, templateImport) {
-  switch (params.templateEngine) {
-    case 'jade':
-      await replaceCode(layout, 'JS_FRAMEWORK_IMPORT', templateImport, { indentLevel: 2 });
-      break;
-    case 'handlebars':
-      break;
-    case 'nunjucks':
-      break;
-    default:
   }
 }
 

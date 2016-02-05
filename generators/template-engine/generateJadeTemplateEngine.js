@@ -37,15 +37,15 @@ async function generateJadeTemplateEngine(params) {
   }
 
   // Copy initial Jade templates to "views" directory
-  if (params.jsFramework) {
-    await copy(
-      join(__base, 'modules', 'template-engine', 'jade', 'layout-spa.jade'),
-      join(__base, 'build', params.uuid, 'views', 'layout.jade')
-    );
-  } else {
+  if (params.jsFramework === 'none') {
     await copy(
       join(__base, 'modules', 'template-engine', 'jade', 'views'),
       join(__base, 'build', params.uuid, 'views')
+    );
+  } else {
+    await copy(
+      join(__base, 'modules', 'template-engine', 'jade', 'layout-spa.jade'),
+      join(__base, 'build', params.uuid, 'views', 'layout.jade')
     );
   }
 
