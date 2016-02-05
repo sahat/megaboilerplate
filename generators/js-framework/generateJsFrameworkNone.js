@@ -18,9 +18,9 @@ async function generateJsFrameworkNone(params) {
       // Copy main.js with jQuery support, if jQuery has been added by other dependencies
       // such as Bootstrap or Foundation CSS frameworks
       if (CSS_FRAMEWORK_WITH_JQUERY.includes(params.cssFramework)) {
-        await copy(mainJsWithJquery, join(__base, 'build', params.uuid, 'public', 'javascripts', 'main.js'));
+        await copy(mainJsWithJquery, join(__base, 'build', params.uuid, 'public', 'js', 'main.js'));
       } else {
-        await copy(mainJs, join(__base, 'build', params.uuid, 'public', 'javascripts', 'main.js'));
+        await copy(mainJs, join(__base, 'build', params.uuid, 'public', 'js', 'main.js'));
       }
       break;
     case 'hapi':
