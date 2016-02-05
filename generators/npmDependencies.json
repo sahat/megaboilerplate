@@ -25,6 +25,7 @@
   "postcss-middleware": "^1.0.0",
 
   "chai": "^3.5.0",
+  "chai-http": "^2.0.1",
   "mocha": "^2.4.5",
   "karma": "^0.13.19",
   "karma-chai": "^0.1.0",

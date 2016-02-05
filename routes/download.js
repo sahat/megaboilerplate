@@ -3,6 +3,7 @@ import generateTemplateEngine from '../generators/template-engine/generateTempla
 import generateCssFramework from '../generators/css-framework/generateCssFramework';
 import generateCssPreprocessor from '../generators/css-preprocessor/generateCssPreprocessor';
 import generateBuildTool from '../generators/build-tool/generateBuildTool';
+import generateTesting from '../generators/testing/generateTesting';
 import generateJsFramework from '../generators/js-framework/generateJsFramework';
 import generateDatabase from '../generators/database/generateDatabase';
 import generateAuthentication from '../generators/authentication/generateAuthentication';
@@ -17,6 +18,7 @@ async function download(req, res) {
     await generateCssPreprocessor(params);
     await generateJsFramework(params);
     await generateBuildTool(params);
+    await generateTesting(params);
     await generateDatabase(params);
     await generateAuthentication(params);
     await walkAndRemoveComments(params);
