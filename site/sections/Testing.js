@@ -1,6 +1,5 @@
 import React from 'react';
 import cx from 'classnames';
-import { VelocityTransitionGroup } from 'velocity-react';
 
 const TESTING_SVG = (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 50 50">
@@ -9,25 +8,8 @@ const TESTING_SVG = (
 );
 
 class Testing extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-    this.toggleAdditionalOptions = this.toggleAdditionalOptions.bind(this);
-  }
-
-  toggleAdditionalOptions() {
-    this.setState({ showOptions: !this.state.showOptions });
-  }
-
   render() {
     const props = this.props;
-    const state = this.state;
-
-    let optionsClasses = cx('nav nav-stacked', {
-      fadeIn: props.testing && props.testing !== 'none',
-      animated: props.testing && props.testing !== 'none',
-      invisible: !props.testing || props.testing === 'none'
-    });
 
     const recommended = props.beginner ? (
       <span className="hint--top hint--rounded" data-hint="Recommended">
@@ -68,28 +50,6 @@ class Testing extends React.Component {
       note = <div className="placeholder"> </div>;
     }
 
-    const additionalOptions = state.showOptions ? (
-      <div className="radio-group">
-        <label className="checkbox-inline hint--top hint--rounded" data-hint="Generates test coverage report using Istanbul.">
-          <img className="btn-logo" src="/img/svg/test-coverage.svg" alt="Test Coverage"/>
-          <input type="checkbox" value="test-coverage" />
-          <span>Test Coverage</span>
-        </label>
-      </div>
-    ) : null;
-
-    const additionalOptionsButton = props.testing && props.testing !== 'none' ? (
-      <div>
-        <button className="btn btn-link" onClick={this.toggleAdditionalOptions}>
-          <img className="options-icon animated" src="/img/svg/options.svg"/>
-          <span>Additional Options</span>
-        </button>
-        <VelocityTransitionGroup enter={{ animation: 'transition.slideUpIn', duration: 600 }}>
-          {additionalOptions}
-        </VelocityTransitionGroup>
-      </div>
-    ) : null;
-
     return (
       <div className={cx('zoomInBackwards panel', props.testing)}>
         <div className="panel-heading">
@@ -117,9 +77,6 @@ class Testing extends React.Component {
               <span>None</span>
               {recommended}
             </label>
-            <br/><br/>
-            {additionalOptionsButton}
-          </div>
           {note}
         </div>
       </div>
