@@ -4,6 +4,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bodyParser = require('body-parser');
+//= REACT_REQUIRE
 //= TEMPLATE_ENGINE_REQUIRE
 //= DATABASE_REQUIRE
 //= PASSPORT_REQUIRE
@@ -23,6 +24,7 @@ app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true 
 //= PASSPORT_MIDDLEWARE
 app.use(express.static(path.join(__dirname, 'public')));
 //= BASE_ROUTE
+//= REACT_SERVER_RENDERING
 
 // production error handler
 if (app.get('env') === 'production') {

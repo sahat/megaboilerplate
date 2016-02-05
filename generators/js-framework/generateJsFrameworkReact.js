@@ -4,9 +4,21 @@ import { copy, mkdirs, addNpmPackage, replaceCode, removeCode } from '../utils';
 async function generateJsFrameworkReact(params) {
   const build = join(__base, 'build', params.uuid);
   const mainJs = join(__base, 'modules', 'js-framework', 'react', 'main.js');
+  const reactRequire = join(__base, 'modules', 'js-framework', 'react', 'react-require.js');
+  const app = join(build, 'app.js');
 
   switch (params.framework) {
     case 'express':
+      const expressReactRouterServerRendering = join(__base, 'modules', 'js-framework', 'react', 'react-router-server-rendering.js');
+      const expressServerRendering = join(__base, 'modules', 'js-framework', 'react', 'server-rendering.js');
+      const renderTemplateNunjucks = join(__base, 'modules', 'js-framework', 'react', 'render-template-nunjucks.js');
+
+      if (params.reactOptions && params.reactOptions.reactRouter) {
+        await replaceCode(app, 'REACT_SERVER_RENDERING', expressReactRouterServerRendering, { leadingBlankLine: true });
+      } else {
+        await replaceCode(app, 'REACT_SERVER_RENDERING', expressServerRendering, { leadingBlankLine: true });
+      }
+
       switch (params.templateEngine) {
         case 'jade':
           const layoutJade = join(build, 'views', 'layout.jade');
@@ -18,14 +30,18 @@ async function generateJsFrameworkReact(params) {
           break;
 
         case 'nunjucks':
-          const layoutNunjucks = join(bundle, 'views', 'layout.html');
+          const layoutNunjucks = join(build, 'views', 'layout.html');
           const bundleNunjucksImport = join(__base, 'modules', 'js-framework', 'react', 'react-html-import.html');
           await replaceCode(layoutNunjucks, 'JS_FRAMEWORK_MAIN_IMPORT', bundleNunjucksImport, { indentLevel: 1 });
+          await replaceCode(app, 'RENDER_TEMPLATE', renderTemplateNunjucks);
           break;
 
         default:
           break;
       }
+
+
+      await replaceCode(app, 'REACT_REQUIRE', reactRequire);
 
       await addNpmPackage('react', params);
       await addNpmPackage('react-dom', params);
