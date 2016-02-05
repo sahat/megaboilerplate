@@ -77,8 +77,8 @@ class Testing extends React.Component {
               <span>None</span>
               {recommended}
             </label>
-            {note}
           </div>
+          {note}
         </div>
       </div>
     );
