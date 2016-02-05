@@ -19,7 +19,9 @@ async function generateNunjucksTemplateEngine(params) {
       await replaceCode(app, 'TEMPLATE_ENGINE', viewEngineSetup, { leadingBlankLine: true });
 
       // Set base route "/"
-      await replaceCode(app, 'BASE_ROUTE', baseRoute, { leadingBlankLine: true });
+      if (params.jsFramework === 'none') {
+        await replaceCode(app, 'BASE_ROUTE', baseRoute, { leadingBlankLine: true });
+      }
 
       // Add Nunjucks to package.json
       await addNpmPackage('nunjucks', params);
