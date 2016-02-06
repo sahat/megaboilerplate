@@ -424,6 +424,10 @@ i.arrow {
   margin-bottom: 10px;
 }
 
+.checkbox label, .radio label {
+  padding-left: 0;
+}
+
 section {
   /*padding-top: 50px;*/
   padding-bottom: 10px;
