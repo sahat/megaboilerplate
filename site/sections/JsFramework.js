@@ -90,7 +90,7 @@ class JsFramework extends React.Component {
       </div>
     ) : null;
 
-    const additionalOptionsButton = props.jsFramework ? (
+    const additionalOptionsButton = (props.jsFramework === 'react') ? (
       <div>
         <span className="options" onClick={this.toggleAdditionalOptions}>
           <img className={cx('animated', { fast: state.showOptions })} src="/img/svg/options.svg"/>
