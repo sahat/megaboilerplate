@@ -29,12 +29,15 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
-    // Get checkbox value from local storage
     try {
       const autoScroll = localStorage.getItem('autoScroll');
-      this.setState({ autoScroll: autoScroll === 'true'})
-    } catch(e) {
-      // Local storage is not supported or disabled
+      const reduceAnimations = localStorage.getItem('reduceAnimations');
+      this.setState({
+        autoScroll: autoScroll === 'true',
+        reduceAnimations: reduceAnimations === 'true'
+      });
+    } catch (e) {
+      console.warn(e);
     }
   }
 
@@ -193,32 +196,25 @@ class Home extends React.Component {
   }
 
   handleAutoScroll(event) {
-    const isChecked = event.target.checked;
-
-    this.setState({ autoScroll: !isChecked });
-
-    // Persist changes in local storage
+    this.setState({ autoScroll: !event.target.checked });
     try {
-      // gotcha: boolean will be converted to string
-      localStorage.setItem('autoScroll', !isChecked);
+      localStorage.setItem('autoScroll', !event.target.checked);
     } catch(e) {
-      // Local storage is not supported or disabled
+      console.warn(e);
     }
   }
 
   handleReduceAnimations(event) {
-    console.log('todo');
+    this.setState({ reduceAnimations: event.target.checked });
+    try {
+      localStorage.setItem('reduceAnimations', event.target.checked);
+    } catch (e) {
+      console.warn(e);
+    }
   }
 
   render() {
     const state = this.state;
-
-    const enterAnimation = { animation: {
-      scale: '1.05'
-    } };
-    const leaveAnimation = { animation: 'transition.bounceOut' };
-    const duration = 600;
-
     const settingsCheckboxes = (
       <ul className="list-inline list-unstyled">
         <li>
