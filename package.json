@@ -39,7 +39,7 @@
     "express": "^4.13.3",
     "fs-extra": "^0.26.3",
     "haikunator": "^1.1.0",
-    "history": "^1.17.0",
+    "history": "^2.0.0",
     "lodash": "^4.2.1",
     "nunjucks": "^2.2.0",
     "react": "^0.14.5",
