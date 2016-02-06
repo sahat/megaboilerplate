@@ -63,7 +63,7 @@ class Framework extends React.Component {
           <div className="checkbox transparent">
             <label className="hint--right hint--rounded" data-hint="Allows you to create separate processes which can share same server port.">
               <input type="checkbox" value="cluster"/>
-              <span><img src="/img/svg/node-cluster.svg" alt="" className="icon"/> Node.js Cluster</span>
+              <span>Node.js Cluster</span>
             </label>
           </div>
         </VelocityComponent>
@@ -71,7 +71,7 @@ class Framework extends React.Component {
           <div className="checkbox transparent">
             <label className="hint--right hint--rounded" data-hint="Socket.IO enables realtime, bi-directional communication between web clients and servers.">
               <input type="checkbox" value="socket-io"/>
-              <span><img src="/img/svg/socket-io.svg" alt="" className="icon"/> Socket.IO</span>
+              <span>Socket.IO</span>
             </label>
           </div>
         </VelocityComponent>

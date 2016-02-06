@@ -50,8 +50,8 @@ class JsFramework extends React.Component {
         <VelocityComponent runOnMount animation="transition.slideUpIn">
           <div className="checkbox transparent">
             <label className="hint--right hint--rounded" data-hint="Predictable state container for JavaScript apps. Redux is an evolution of the Facebook's Flux, without all the complexity.">
-              <input type="checkbox"  name="reactOptionsCheckboxes" value="reactRouter" onChange={props.handleChange} checked={props.reactOptions && props.reactOptions.has('redux')}/>
-              <span><img className="icon" src="/img/svg/flux-logo.svg" alt="Redux"/> Redux</span>
+              <input type="checkbox"  name="reactOptionsCheckboxes" value="redux" onChange={props.handleChange} checked={props.reactOptions && props.reactOptions.has('redux')}/>
+              <span>Redux</span>
             </label>
           </div>
         </VelocityComponent>
@@ -67,7 +67,7 @@ class JsFramework extends React.Component {
           <div className="checkbox transparent">
             <label className="hint--right hint--rounded" data-hint="Relay is a framework from Facebook that provides data-fetching functionality for React applications.">
               <input type="checkbox" name="reactOptionsCheckboxes" value="graphql" onChange={props.handleChange} checked={props.reactOptions && props.reactOptions.has('graphql')}/>
-              <span><img className="icon" src="/img/svg/relay-logo.svg" alt="Relay"/> GraphQL + Relay</span>
+              <span>GraphQL + Relay</span>
             </label>
           </div>
         </VelocityComponent>
