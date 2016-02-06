@@ -25,6 +25,7 @@ class Home extends React.Component {
     this.state = {};
     this.handleChange = this.handleChange.bind(this);
     this.handleAutoScroll = this.handleAutoScroll.bind(this);
+    this.handleReduceAnimations = this.handleReduceAnimations.bind(this);
     this.clickDownload = this.clickDownload.bind(this);
   }
 
@@ -236,7 +237,7 @@ class Home extends React.Component {
         <li>
           <div className="checkbox">
             <label>
-              <input type="checkbox" name="reduceAnimations" value={state.reduceAnimations} onChange={this.handleReduceAnimations} checked={!state.reduceAnimations}/>
+              <input type="checkbox" name="reduceAnimations" value={state.reduceAnimations} onChange={this.handleReduceAnimations} checked={state.reduceAnimations}/>
               <span>Reduce Animations</span>
             </label>
           </div>
