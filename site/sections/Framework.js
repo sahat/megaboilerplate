@@ -62,7 +62,7 @@ class Framework extends React.Component {
         <VelocityComponent runOnMount animation="transition.slideUpIn">
           <div className="checkbox transparent">
             <label className="hint--right hint--rounded" data-hint="Allows you to create separate processes which can share same server port.">
-              <input type="checkbox" value="cluster"/>
+              <input type="checkbox" name="frameworkOptionsCheckboxes" value="cluster"/>
               <span>Node.js Cluster</span>
             </label>
           </div>
@@ -70,7 +70,7 @@ class Framework extends React.Component {
         <VelocityComponent runOnMount animation="transition.slideUpIn" delay={100}>
           <div className="checkbox transparent">
             <label className="hint--right hint--rounded" data-hint="Socket.IO enables realtime, bi-directional communication between web clients and servers.">
-              <input type="checkbox" value="socket-io"/>
+              <input type="checkbox" name="frameworkOptionsCheckboxes" value="socket-io"/>
               <span>Socket.IO</span>
             </label>
           </div>

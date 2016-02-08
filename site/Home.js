@@ -52,8 +52,14 @@ class Home extends React.Component {
     const data = clone(state);
     data.appName = haikunate({ tokenLength: 0 });
 
+    // Convert ES6 set to array
     if (data.authentication) {
       data.authentication = Array.from(data.authentication);
+    }
+
+    // Convert ES6 set to array
+    if (data.frameworkOptions) {
+      data.frameworkOptions = Array.from(data.frameworkOptions);
     }
 
     $.ajax({
@@ -102,6 +108,15 @@ class Home extends React.Component {
           $(refs.framework).velocity('scroll');
         }
         state.framework = value;
+        break;
+
+      case 'frameworkOptionsCheckboxes':
+        state.frameworkOptions = state.frameworkOptions || new Set();
+        if (isChecked) {
+          state.frameworkOptions.add(value);
+        } else {
+          state.frameworkOptions.delete(value);
+        }
         break;
 
       case 'templateEngineRadios':
