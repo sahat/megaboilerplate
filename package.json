@@ -44,7 +44,7 @@
     "nunjucks": "^2.2.0",
     "react": "^0.14.5",
     "react-dom": "^0.14.5",
-    "react-router": "^v1.0.3",
+    "react-router": "^2.0.0",
     "shortid": "^2.2.4",
     "velocity-react": "^1.1.2"
   }
