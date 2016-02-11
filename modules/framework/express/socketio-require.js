@@ -1,2 +1,2 @@
-var io = require('socket.io');
-var http = require('http');
+var server = require('http').Server(app);
+var io = require('socket.io').listen(server);

@@ -4,7 +4,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bodyParser = require('body-parser');
-//= SOCKETIO_REQUIRE
 //= REACT_REQUIRE
 //= TEMPLATE_ENGINE_REQUIRE
 //= DATABASE_REQUIRE
@@ -12,6 +11,7 @@ var bodyParser = require('body-parser');
 //= CSS_PREPROCESSOR_MIDDLEWARE_REQUIRE
 
 var app = express();
+//= SOCKETIO_REQUIRE
 //= DATABASE_CONNECTION
 //= TEMPLATE_ENGINE
 

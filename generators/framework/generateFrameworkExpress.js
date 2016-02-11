@@ -19,6 +19,7 @@ async function generateFrameworkExpress(params) {
 
   // Socket.IO?
   if (params.frameworkOptions.includes('socketio')) {
+    await replaceCode(join(build, 'app.js'), 'SOCKETIO_REQUIRE', join(express, 'socketio-require.js'));
     await replaceCode(join(build, 'app.js'), 'SOCKETIO', join(express, 'socketio-init.js'));
     await addNpmPackage('socket.io', params);
   } else {
