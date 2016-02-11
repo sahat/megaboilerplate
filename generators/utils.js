@@ -1,3 +1,5 @@
+import { last, isEmpty, dropRight } from 'lodash';
+
 let path = require('path');
 let archiver = require('archiver');
 let shortid = require('shortid');
@@ -23,6 +25,22 @@ export { readFile };
 export { writeFile };
 export { readJson };
 export { writeJson };
+
+/**
+ * @private
+ * @param subStr {string} - what to indent
+ * @param indentLevel {number} - how many levels to indent
+ * @returns {string}
+ */
+function indentCode(subStr, indentLevel) {
+  let defaultIndentation = 2;
+  let indent = ' '.repeat(indentLevel * defaultIndentation);
+  let array = subStr.toString().split('\n').filter(Boolean);
+  array.forEach((line, index) => {
+    array[index] = indent + line;
+  });
+  return array.join('\n');
+}
 
 /**
  * Traverse files and remove placeholder comments
@@ -171,43 +189,30 @@ export async function replaceCode(srcFile, subStr, newSrcFile, opts) {
   let srcData = await readFile(srcFile);
   let newSrcData = await readFile(newSrcFile);
 
-  let array = srcData.toString().split('\n');
+  const array = srcData.toString().split('\n');
+
   array.forEach((line, index) => {
-    let re = new RegExp(subStr + '$|(\r\n|\r|\n)');
-    let isMatch = re.test(line);
+    const re = new RegExp(subStr + '$|(\r\n|\r|\n)');
+    const isMatch = re.test(line);
 
     if (isMatch) {
       if (opts.indentLevel) {
         newSrcData = indentCode(newSrcData, opts.indentLevel);
       }
 
-      newSrcData = newSrcData.toString().split('\n').filter(Boolean).join('\n');
+      if (isEmpty(last(newSrcData.toString().split('\n')))) {
+        newSrcData = dropRight(newSrcData.toString().split('\n')).join('\n');
+      }
 
       if (opts.leadingBlankLine) {
-        newSrcData = '\n' + newSrcData;
+        newSrcData = ['\n', newSrcData].join('');
       }
 
       array[index] = newSrcData;
     }
   });
-  
+
   srcData = array.join('\n');
 
   await writeFile(srcFile, srcData);
-}
-
-/**
- * @private
- * @param subStr {string} - what to indent
- * @param indentLevel {number} - how many levels to indent
- * @returns {string}
- */
-function indentCode(subStr, indentLevel) {
-  let defaultIndentation = 2;
-  let indent = ' '.repeat(indentLevel * defaultIndentation);
-  let array = subStr.toString().split('\n').filter(Boolean);
-  array.forEach((line, index) => {
-    array[index] = indent + line;
-  });
-  return array.join('\n');
 }
