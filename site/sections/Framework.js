@@ -70,7 +70,7 @@ class Framework extends React.Component {
         <VelocityComponent runOnMount animation="transition.slideUpIn" delay={100}>
           <div className="checkbox transparent">
             <label className="hint--right hint--rounded" data-hint="Socket.IO enables realtime, bi-directional communication between web clients and servers.">
-              <input type="checkbox" name="frameworkOptionsCheckboxes" value="socket-io" onChange={props.handleChange}/>
+              <input type="checkbox" name="frameworkOptionsCheckboxes" value="socketio" onChange={props.handleChange}/>
               <span>Socket.IO</span>
             </label>
           </div>

@@ -1,16 +1,25 @@
 import { join } from 'path';
-import { copy, mkdirs, readJson, writeJson } from '../utils';
+import { cpy, mkdirs, readJson, writeJson, replaceCode } from '../utils';
 
 async function generateFrameworkExpress(params) {
-  let build = join(__base, 'build', params.uuid);
-  let express = join(__base, 'modules', 'framework', 'express');
+  const build = join(__base, 'build', params.uuid);
+  const express = join(__base, 'modules', 'framework', 'express');
 
   // Copy initial Express files
-  await copy(express, build);
+  await cpy([
+    join(express, 'app.js'),
+    join(express, 'package.json')
+  ], build);
+
+  if (params.frameworkOptions.includes('socketio')) {
+    await replaceCode(join(build, 'app.js'), 'SOCKETIO', join(express, 'socketio-init.js'));
+  } else {
+    await replaceCode(join(build, 'app.js'), 'APP_LISTEN', join(express, 'app-listen.js'));
+  }
 
   // Update app name package.json
-  let packageJson = join(build, 'package.json');
-  let packageObj = await readJson(packageJson);
+  const packageJson = join(build, 'package.json');
+  const packageObj = await readJson(packageJson);
   packageObj.name = params.appName;
   await writeJson(packageJson, packageObj, { spaces: 2 });
 

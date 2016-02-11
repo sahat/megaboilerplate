@@ -1,4 +1,6 @@
 {
+  "socket.io": "^1.4.5",
+
   "jade": "^1.9.2",
   "handlebars": "^4.0.5",
   "nunjucks": "^2.3.0",
