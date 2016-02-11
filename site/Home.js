@@ -53,14 +53,10 @@ class Home extends React.Component {
     data.appName = haikunate({ tokenLength: 0 });
 
     // Convert ES6 set to array
-    if (data.authentication) {
-      data.authentication = Array.from(data.authentication);
-    }
+    data.authentication = data.authentication ? Array.from(data.authentication) : [];
 
     // Convert ES6 set to array
-    if (data.frameworkOptions) {
-      data.frameworkOptions = Array.from(data.frameworkOptions);
-    }
+    data.frameworkOptions = data.frameworkOptions ? Array.from(data.frameworkOptions) : [];
 
     $.ajax({
       url: '/download',
