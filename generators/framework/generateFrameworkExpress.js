@@ -1,5 +1,5 @@
 import { join } from 'path';
-import { cpy, mkdirs, readJson, writeJson, replaceCode } from '../utils';
+import { cpy, mkdirs, readJson, writeJson, replaceCode, addNpmScript, addNpmPackage } from '../utils';
 
 async function generateFrameworkExpress(params) {
   const build = join(__base, 'build', params.uuid);
@@ -11,17 +11,25 @@ async function generateFrameworkExpress(params) {
     join(express, 'package.json')
   ], build);
 
-  if (params.frameworkOptions.includes('socketio')) {
-    await replaceCode(join(build, 'app.js'), 'SOCKETIO', join(express, 'socketio-init.js'));
-  } else {
-    await replaceCode(join(build, 'app.js'), 'APP_LISTEN', join(express, 'app-listen.js'));
-  }
-
   // Update app name package.json
   const packageJson = join(build, 'package.json');
   const packageObj = await readJson(packageJson);
   packageObj.name = params.appName;
   await writeJson(packageJson, packageObj, { spaces: 2 });
+
+  // Socket.IO?
+  if (params.frameworkOptions.includes('socketio')) {
+    await replaceCode(join(build, 'app.js'), 'SOCKETIO', join(express, 'socketio-init.js'));
+    await addNpmPackage('socket.io', params);
+  } else {
+    await replaceCode(join(build, 'app.js'), 'APP_LISTEN', join(express, 'app-listen.js'));
+  }
+
+  // PM2?
+  if (params.frameworkOptions.includes('pm2')) {
+    await addNpmPackage('socket.io', params);
+    await addNpmScript('start-production', 'pm2 start app.js -i 4', params);
+  }
 
   // Create public dirs
   await mkdirs(join(build, 'public', 'img'));

@@ -61,9 +61,9 @@ class Framework extends React.Component {
       <div>
         <VelocityComponent runOnMount animation="transition.slideUpIn">
           <div className="checkbox transparent">
-            <label className="hint--right hint--rounded" data-hint="Allows you to create separate processes which can share same server port.">
-              <input type="checkbox" name="frameworkOptionsCheckboxes" value="cluster" onChange={props.handleChange}/>
-              <span>Node.js Cluster</span>
+            <label className="hint--right hint--rounded" data-hint="Advanced, production process manager with a built-in load balancer for Node.js.">
+              <input type="checkbox" name="frameworkOptionsCheckboxes" value="pm2" onChange={props.handleChange}/>
+              <span>PM2</span>
             </label>
           </div>
         </VelocityComponent>
