@@ -37,21 +37,23 @@ async function generateJadeTemplateEngine(params) {
   }
 
   // Copy initial Jade templates to "views" directory
-  if (params.jsFramework === 'none') {
-    await copy(
-      join(__base, 'modules', 'template-engine', 'jade', 'views'),
-      join(__base, 'build', params.uuid, 'views')
-    );
+  await copy(
+    join(__base, 'modules', 'template-engine', 'jade', 'views'),
+    join(__base, 'build', params.uuid, 'views')
+  );
+
+  const layout = join(__base, 'build', params.uuid, 'views', 'layout.jade');
+  const appContainerJade = join(__base, 'modules', 'template-engine', 'jade', 'app-container.jade');
+  const blockContentJade = join(__base, 'modules', 'template-engine', 'jade', 'block-content.jade');
+
+  if (!params.jsFramework || params.jsFramework === 'none') {
+    await replaceCode(layout, 'APP_CONTAINER_OR_BLOCK_CONTENT', blockContentJade, { indentLevel: 2 });
   } else {
-    await copy(
-      join(__base, 'modules', 'template-engine', 'jade', 'layout-spa.jade'),
-      join(__base, 'build', params.uuid, 'views', 'layout.jade')
-    );
+    await replaceCode(layout, 'APP_CONTAINER_OR_BLOCK_CONTENT', appContainerJade, { indentLevel: 2 });
   }
 
   // Add Jade to package.json
   await addNpmPackage('jade', params);
-
 }
 
 export default generateJadeTemplateEngine;

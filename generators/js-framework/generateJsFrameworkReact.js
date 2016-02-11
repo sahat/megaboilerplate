@@ -23,7 +23,7 @@ async function generateJsFrameworkReact(params) {
         case 'jade':
           const layoutJade = join(build, 'views', 'layout.jade');
           const bundleJadeImport = join(__base, 'modules', 'js-framework', 'react', 'react-jade-import.jade');
-          await replaceCode(layoutJade, 'JS_FRAMEWORK_MAIN_IMPORT', bundleJadeImport, { indentLevel: 2 });
+          await replaceCode(layoutJade, 'JS_FRAMEWORK_MAIN_IMPORT', bundleJadeImport, { indentLevel: 2, leadingBlankLine: true });
           break;
 
         case 'handlebars':
