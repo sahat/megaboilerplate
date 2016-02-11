@@ -27,7 +27,7 @@ async function generateFrameworkExpress(params) {
 
   // PM2?
   if (params.frameworkOptions.includes('pm2')) {
-    await addNpmPackage('socket.io', params);
+    await addNpmPackage('pm2', params);
     await addNpmScript('start-production', 'pm2 start app.js -i 4', params);
   }
 
