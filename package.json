@@ -33,7 +33,7 @@
   "dependencies": {
     "archiver": "^0.21.0",
     "bluebird": "^3.2.2",
-    "body-parser": "^1.14.2",
+    "body-parser": "^1.15.0",
     "classnames": "^2.2.1",
     "compression": "^1.6.1",
     "express": "^4.13.3",
