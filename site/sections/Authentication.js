@@ -8,11 +8,19 @@ const AUTHENTICATION_SVG = (
 );
 
 const Authentication = (props) => {
-  let authenticationCheckboxes = props.database === 'none' ? (
-      <div>
-        <strong>Note: </strong> To enable authentication you must select a database.
-      </div>
-  ) : (
+  const notSupported = props.jsFramework && (props.jsFramework === 'angular' || props.jsFramework === 'react') ? (
+    <div>
+      <strong>Note: </strong> Authentication is currently not compatible with React or Angular.
+    </div>
+  ) : null;
+
+  const notSupported2 = props.database === 'none' ? (
+    <div>
+      <strong>Note: </strong> To enable authentication you must select a database.
+    </div>
+  ) : null;
+
+  let authenticationCheckboxes = !notSupported && !notSupported2 ? (
     <div className="radio-group">
       <label className="checkbox-inline">
         <img className="btn-logo" src="/img/svg/none.png" alt="None" />
@@ -35,7 +43,7 @@ const Authentication = (props) => {
         <input type="checkbox" name="authenticationCheckboxes" value="twitter" onChange={props.handleChange} checked={props.authentication && props.authentication.has('twitter')} disabled={props.database === 'none'} /> Twitter
       </label>
     </div>
-  );
+  ) : null;
 
   return (
     <div className={cx('zoomInBackwards panel', { authentication: props.authentication && props.authentication.size > 0 })}>
@@ -46,6 +54,8 @@ const Authentication = (props) => {
         </a>
       </div>
       <div className="panel-body">
+        {notSupported}
+        {notSupported2}
         {authenticationCheckboxes}
       </div>
     </div>
