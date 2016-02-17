@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "babel-core": "^6.5.2",
-    "babel-eslint": "^5.0.0-beta6",
+    "babel-eslint": "^5.0.0",
     "babel-loader": "^6.2.2",
     "babel-plugin-react-transform": "^2.0.0",
     "babel-polyfill": "^6.5.0",
