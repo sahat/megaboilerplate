@@ -24,14 +24,14 @@ const CssPreprocessor = (props) => {
       </span>
   ) : null;
 
-  const cssRadio = (
+  const cssRadio = (NO_CSS_FRAMEWORK || BOOTSTRAP || FOUNDATION) ? (
     <label className="radio-inline">
       <img className="btn-logo" src="/img/svg/css3-logo.svg" alt="CSS"/>
       <input type="radio" name="cssPreprocessorRadios" value="css" onChange={props.handleChange} checked={CSS} />
       <span>None / CSS</span>
       {recommended}
     </label>
-  );
+  ) : null;
 
   const sassRadio = (NO_CSS_FRAMEWORK || BOOTSTRAP || FOUNDATION || BOURBON_NEAT) ? (
     <label className="radio-inline">
