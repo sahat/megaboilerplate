@@ -8,7 +8,7 @@ var userSchema = new Schema({
   password: { type: String, required: true },
   passwordResetToken: String,
   passwordResetExpires: Date
-});
+}, { timestamps: true });
 
 userSchema.pre('save', function(next) {
   var user = this;
