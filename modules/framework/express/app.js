@@ -10,6 +10,7 @@ var dotenv = require('dotenv');
 //= DATABASE_REQUIRE
 //= PASSPORT_REQUIRE
 //= CSS_PREPROCESSOR_MIDDLEWARE_REQUIRE
+
 // Load environment variables
 dotenv.load();
 

@@ -1,5 +1,5 @@
 import { join } from 'path';
-import { replaceCode, addNpmPackage } from '../utils';
+import { replaceCode, appendFile, addNpmPackage } from '../utils';
 
 async function generateMongodbDatabase(params) {
   switch (params.framework) {
@@ -10,6 +10,8 @@ async function generateMongodbDatabase(params) {
 
       await replaceCode(app, 'DATABASE_REQUIRE', mongooseRequire);
       await replaceCode(app, 'DATABASE_CONNECTION', mongooseConnect, { leadingBlankLine: true });
+
+      await appendFile(join(__base, 'build', params.uuid, '.env'), 'MONGODB=mongodb://localhost/test');
 
       await addNpmPackage('mongoose', params);
       break;

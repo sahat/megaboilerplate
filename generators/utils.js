@@ -1,21 +1,22 @@
 import { last, isEmpty, dropRight } from 'lodash';
 
-let path = require('path');
-let archiver = require('archiver');
-let shortid = require('shortid');
-let fs = require('fs-extra');
-let Promise = require('bluebird');
-let cpy = require('cpy');
-let copy = Promise.promisify(fs.copy);
-let readFile = Promise.promisify(fs.readFile);
-let writeFile = Promise.promisify(fs.writeFile);
-let remove = Promise.promisify(fs.remove);
-let readJson = Promise.promisify(fs.readJson);
-let writeJson = Promise.promisify(fs.writeJson);
-let stat = Promise.promisify(fs.stat);
-let mkdirs = Promise.promisify(fs.mkdirs);
+const path = require('path');
+const archiver = require('archiver');
+const shortid = require('shortid');
+const fs = require('fs-extra');
+const Promise = require('bluebird');
+const cpy = require('cpy');
+const copy = Promise.promisify(fs.copy);
+const readFile = Promise.promisify(fs.readFile);
+const writeFile = Promise.promisify(fs.writeFile);
+const appendFile = Promise.promisify(fs.appendFile);
+const remove = Promise.promisify(fs.remove);
+const readJson = Promise.promisify(fs.readJson);
+const writeJson = Promise.promisify(fs.writeJson);
+const stat = Promise.promisify(fs.stat);
+const mkdirs = Promise.promisify(fs.mkdirs);
 
-let npmDependencies = require('./npmDependencies.json');
+const npmDependencies = require('./npmDependencies.json');
 
 export { cpy };
 export { copy };
@@ -23,6 +24,7 @@ export { remove };
 export { mkdirs };
 export { readFile };
 export { writeFile };
+export { appendFile };
 export { readJson };
 export { writeJson };
 
@@ -148,7 +150,11 @@ export async function cleanup(params) {
 
 export async function prepare(params) {
   let gitignore = path.join(__base, 'modules', 'prepare', '.gitignore');
-  params.uuid = shortid.generate();
+  //params.uuid = shortid.generate();
+  // TODO: Remove
+  params.uuid = 'testing'
+  await remove(path.join(__base, 'build', params.uuid));
+
   await mkdirs(path.join(__base, 'build', params.uuid));
   await copy(gitignore, path.join(__base, 'build', params.uuid, '.gitignore'));
   console.info('Created', params.uuid);
