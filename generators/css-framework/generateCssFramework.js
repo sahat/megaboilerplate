@@ -1,5 +1,6 @@
 import generateBootstrap from './generateBootstrap';
 import generateFoundation from './generateFoundation';
+import generateBourbonNeat from './generateBourbonNeat';
 import generateCssFrameworkNone from './generateCssFrameworkNone';
 
 async function generateCssFramework(params) {
@@ -14,6 +15,7 @@ async function generateCssFramework(params) {
       break;
 
     case 'bourbonNeat':
+      await generateBourbonNeat(params);
       break;
 
     case 'none':
