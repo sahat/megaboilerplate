@@ -8,7 +8,8 @@ async function generateFrameworkExpress(params) {
   // Copy initial Express files
   await cpy([
     join(express, 'app.js'),
-    join(express, 'package.json')
+    join(express, 'package.json'),
+    join(express, '.env')
   ], build);
 
   // Update app name package.json

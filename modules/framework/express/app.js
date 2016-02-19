@@ -4,11 +4,14 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bodyParser = require('body-parser');
+var dotenv = require('dotenv');
 //= REACT_REQUIRE
 //= TEMPLATE_ENGINE_REQUIRE
 //= DATABASE_REQUIRE
 //= PASSPORT_REQUIRE
 //= CSS_PREPROCESSOR_MIDDLEWARE_REQUIRE
+// Load environment variables
+dotenv.load();
 
 var app = express();
 //= SOCKETIO_REQUIRE
