@@ -127,7 +127,7 @@ class Home extends React.Component {
           $(refs.cssFramework).velocity('scroll');
         }
         if (state.cssPreprocessor) {
-          state.cssPreprocessor = 'css';
+          state.cssPreprocessor = null;
         }
         state.cssFramework = value;
         break;
