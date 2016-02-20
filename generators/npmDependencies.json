@@ -47,5 +47,8 @@
   "passport-local": "^1.0.0",
   "passport-facebook": "^2.0.0",
   "passport-google-oauth": "^0.2.0",
-  "passport-twitter": "^1.0.3"
+  "passport-twitter": "^1.0.3",
+  "async": "^1.5.2",
+  "bcrypt-nodejs": "^0.0.3",
+  "nodemailer": "^2.2.0"
 }
