@@ -11,8 +11,11 @@ var dotenv = require('dotenv');
 //= PASSPORT_REQUIRE
 //= CSS_PREPROCESSOR_MIDDLEWARE_REQUIRE
 
-// Load environment variables
+// Load environment variables from .env file
 dotenv.load();
+
+// Controllers
+//= USER_CONTROLLER
 
 var app = express();
 //= SOCKETIO_REQUIRE
@@ -30,6 +33,7 @@ app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true 
 app.use(express.static(path.join(__dirname, 'public')));
 //= BASE_ROUTE
 //= REACT_SERVER_RENDERING
+//= PASSPORT_LOCAL_ROUTES
 
 // production error handler
 if (app.get('env') === 'production') {
