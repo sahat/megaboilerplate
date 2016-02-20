@@ -1,10 +1,11 @@
 import { join } from 'path';
-import { copy, replaceCode, addNpmPackage } from '../utils';
+import { cpy, copy, replaceCode, addNpmPackage } from '../utils';
 
 async function generateJadeTemplateEngine(params) {
   let app;
   let viewEngineSetup;
   let baseRoute;
+  const viewsDir = join(__base, 'build', params.uuid, 'views');
 
   switch (params.framework) {
     case 'express':
@@ -36,11 +37,35 @@ async function generateJadeTemplateEngine(params) {
     default:
   }
 
+
   // Copy initial Jade templates to "views" directory
   await copy(
-    join(__base, 'modules', 'template-engine', 'jade', 'views'),
-    join(__base, 'build', params.uuid, 'views')
+    join(__base, 'modules', 'template-engine', 'jade', 'views', 'layout.jade'),
+    join(viewsDir, 'layout.jade')
   );
+  await copy(
+    join(__base, 'modules', 'template-engine', 'jade', 'views', 'home.jade'),
+    join(viewsDir, 'home.jade')
+  );
+
+  switch (params.cssFramework) {
+    case 'none':
+      break;
+    case 'bootstrap':
+      // Copy header
+      await copy(
+        join(__base, 'modules', 'template-engine', 'jade', 'views', 'header-bootstrap.jade'),
+        join(viewsDir, 'header.jade')
+      );
+      // Copy footer
+      await copy(
+        join(__base, 'modules', 'template-engine', 'jade', 'views', 'footer-bootstrap.jade'),
+        join(viewsDir, 'footer.jade')
+      );
+      break;
+    default:
+      break;
+  }
 
   const layout = join(__base, 'build', params.uuid, 'views', 'layout.jade');
   const appContainerJade = join(__base, 'modules', 'template-engine', 'jade', 'app-container.jade');
