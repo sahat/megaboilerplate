@@ -11,12 +11,6 @@ class Testing extends React.Component {
   render() {
     const props = this.props;
 
-    const recommended = props.beginner ? (
-      <span className="hint--top hint--rounded" data-hint="Recommended">
-        <img src="/img/svg/recommended.svg" alt="Recommended" />
-      </span>
-    ) : null;
-
     let description;
 
     switch (props.testing) {
@@ -62,6 +56,11 @@ class Testing extends React.Component {
           {description}
           <div className="radio-group">
             <label className="radio-inline">
+              <img className="btn-logo" src="/img/svg/none.png" alt="None"/>
+              <input type="radio" name="testingRadios" value="none" onChange={props.handleChange} checked={props.testing === 'none'}/>
+              <span>None</span>
+            </label>
+            <label className="radio-inline">
               <img className="btn-logo" src="/img/svg/mocha.svg" alt="Mocha"/>
               <input type="radio" name="testingRadios" value="mocha" onChange={props.handleChange} checked={props.testing === 'mocha'}/>
               <span>Mocha</span>
@@ -70,12 +69,6 @@ class Testing extends React.Component {
               <img className="btn-logo" src="/img/svg/jasmine.svg" alt="Jasmine"/>
               <input type="radio" name="testingRadios" value="jasmine" onChange={props.handleChange} checked={props.testing === 'jasmine'}/>
               <span>Jasmine</span>
-            </label>
-            <label className="radio-inline">
-              <img className="btn-logo" src="/img/svg/none.png" alt="None"/>
-              <input type="radio" name="testingRadios" value="none" onChange={props.handleChange} checked={props.testing === 'none'}/>
-              <span>None</span>
-              {recommended}
             </label>
           </div>
           {note}
