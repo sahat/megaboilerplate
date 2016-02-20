@@ -2,19 +2,25 @@ import { join } from 'path';
 import { copy, mkdirs, replaceCode, removeCode, addNpmPackage } from '../utils';
 
 async function generateCommonAuthenticationExpress(params) {
-  let build = join(__base, 'build', params.uuid);
-  let app = join(build, 'app.js');
-  let passportConfigFile = join(build, 'config', 'passport.js');
-  let passportConfigModule = join(__base, 'modules', 'authentication', 'common', 'passport-config.js');
-  let passportRequire = join(__base, 'modules', 'authentication', 'common', 'passport-require.js');
-  let passportMiddleware = join(__base, 'modules', 'authentication', 'common', 'passport-middleware.js');
-  let passportSerializer = join(__base, 'modules', 'authentication', 'common', 'passport-serializer.js');
-  let passportDeserializer = join(__base, 'modules', 'authentication', 'common', 'passport-deserializer.js');
-  let passportUserModel = join(__base, 'modules', 'authentication', 'common', 'passport-user-model.js');
+  const build = join(__base, 'build', params.uuid);
+  const app = join(build, 'app.js');
+  const passportConfigFile = join(build, 'config', 'passport.js');
+  const passportConfigModule = join(__base, 'modules', 'authentication', 'common', 'passport-config.js');
+  const passportRequire = join(__base, 'modules', 'authentication', 'common', 'passport-require.js');
+  const passportMiddleware = join(__base, 'modules', 'authentication', 'common', 'passport-middleware.js');
+  const userHelperMiddleware = join(__base, 'modules', 'authentication', 'common', 'user-middleware.js');
+  const passportSerializer = join(__base, 'modules', 'authentication', 'common', 'passport-serializer.js');
+  const passportDeserializer = join(__base, 'modules', 'authentication', 'common', 'passport-deserializer.js');
+  const passportUserModel = join(__base, 'modules', 'authentication', 'common', 'passport-user-model.js');
+  const userControllerRequire = join(__base, 'modules', 'authentication', 'controllers', 'user-require.js');
 
   // Passport middleware
   await replaceCode(app, 'PASSPORT_REQUIRE', passportRequire);
   await replaceCode(app, 'PASSPORT_MIDDLEWARE', passportMiddleware);
+  await replaceCode(app, 'USER_HELPER_MIDDLEWARE', userHelperMiddleware);
+
+  // Add user controller reference
+  await replaceCode(app, 'USER_CONTROLLER', userControllerRequire);
 
   // Passport config file
   await copy(passportConfigModule, passportConfigFile);
@@ -31,6 +37,7 @@ async function generateCommonAuthenticationExpress(params) {
 
       await copy(mongooseUserModel, join(build, 'models', 'user.js'));
       await copy(userController, join(build, 'controllers', 'user.js'));
+
       break;
     default:
       break;

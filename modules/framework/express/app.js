@@ -30,6 +30,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 //= PASSPORT_MIDDLEWARE
+//= USER_HELPER_MIDDLEWARE
 app.use(express.static(path.join(__dirname, 'public')));
 //= BASE_ROUTE
 //= REACT_SERVER_RENDERING
