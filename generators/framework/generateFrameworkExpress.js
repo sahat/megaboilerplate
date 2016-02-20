@@ -33,6 +33,9 @@ async function generateFrameworkExpress(params) {
     await addNpmScript('start-production', 'pm2 start app.js -i 4', params);
   }
 
+  // Create controllers dir
+  await mkdirs(join(build, 'controllers'));
+
   // Create public dirs
   await mkdirs(join(build, 'public', 'img'));
   await mkdirs(join(build, 'public', 'css'));

@@ -22,6 +22,18 @@ async function generateCommonAuthenticationExpress(params) {
   await replaceCode(passportConfigFile, 'PASSPORT_DESERIALIZER', passportDeserializer, { leadingBlankLine: true });
 
   await addNpmPackage('passport', params);
+
+  switch (params.database) {
+    case 'mongodb':
+      const mongooseUserModel = join(__base, 'modules', 'authentication', 'models', 'user.js');
+      const userController = join(__base, 'modules', 'authentication', 'controllers', 'user.js');
+
+      await copy(mongooseUserModel, join(__base, 'build', params.uuid, 'models', 'user.js'));
+      await copy(userController, join(__base, 'build', params.uuid, 'controllers', 'user.js'));
+      break;
+    default:
+      break;
+  }
 }
 
 export default generateCommonAuthenticationExpress;
