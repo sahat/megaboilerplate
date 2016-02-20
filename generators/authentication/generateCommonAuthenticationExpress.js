@@ -1,9 +1,10 @@
 import { join } from 'path';
-import { copy, replaceCode, removeCode, addNpmPackage } from '../utils';
+import { copy, mkdirs, replaceCode, removeCode, addNpmPackage } from '../utils';
 
 async function generateCommonAuthenticationExpress(params) {
-  let app = join(__base, 'build', params.uuid, 'app.js');
-  let passportConfigFile = join(__base, 'build', params.uuid, 'config', 'passport.js');
+  let build = join(__base, 'build', params.uuid);
+  let app = join(build, 'app.js');
+  let passportConfigFile = join(build, 'config', 'passport.js');
   let passportConfigModule = join(__base, 'modules', 'authentication', 'common', 'passport-config.js');
   let passportRequire = join(__base, 'modules', 'authentication', 'common', 'passport-require.js');
   let passportMiddleware = join(__base, 'modules', 'authentication', 'common', 'passport-middleware.js');
@@ -28,8 +29,18 @@ async function generateCommonAuthenticationExpress(params) {
       const mongooseUserModel = join(__base, 'modules', 'authentication', 'models', 'user.js');
       const userController = join(__base, 'modules', 'authentication', 'controllers', 'user.js');
 
-      await copy(mongooseUserModel, join(__base, 'build', params.uuid, 'models', 'user.js'));
-      await copy(userController, join(__base, 'build', params.uuid, 'controllers', 'user.js'));
+      await copy(mongooseUserModel, join(build, 'models', 'user.js'));
+      await copy(userController, join(build, 'controllers', 'user.js'));
+      break;
+    default:
+      break;
+  }
+
+  switch (params.templateEngine) {
+    case 'jade':
+      const loginJade = join(__base, 'modules', 'authentication', 'common', 'views', 'login.jade');
+      await mkdirs(join(build, 'views', 'account'));
+      await copy(loginJade, join(build, 'views', 'account', 'login.jade'));
       break;
     default:
       break;
