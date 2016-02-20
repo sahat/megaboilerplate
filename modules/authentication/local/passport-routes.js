@@ -1,5 +1,5 @@
-app.get('/login', userController.getLogin);
-app.post('/login', userController.postLogin);
+app.get('/login', user.loginGet);
+app.post('/login', user.loginPost);
 //app.get('/logout', userController.logout);
 //app.get('/forgot', userController.getForgot);
 //app.post('/forgot', userController.postForgot);
