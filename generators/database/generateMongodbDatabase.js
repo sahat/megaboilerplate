@@ -1,23 +1,25 @@
 import { join } from 'path';
-import { replaceCode, mkdirs, copy, appendFile, addNpmPackage } from '../utils';
+import { replaceCode, mkdirs, appendFile, addNpmPackage } from '../utils';
 
 async function generateMongodbDatabase(params) {
-  const build = join(__base, 'build', params.uuid);
-
   switch (params.framework) {
     case 'express':
-      const app = join(build, 'app.js');
-      const mongooseRequire = join(__base, 'modules', 'database', 'mongodb', 'mongoose-require.js');
-      const mongooseConnect = join(__base, 'modules', 'database', 'mongodb', 'mongoose-connect.js');
+      const appExpress = join(__base, 'build', params.uuid, 'app.js');
+      const mongooseRequire = join(__dirname, 'modules', 'mongodb', 'mongoose-require.js');
+      const mongooseConnect = join(__dirname, 'modules', 'mongodb', 'mongoose-connect.js');
 
-      await replaceCode(app, 'DATABASE_REQUIRE', mongooseRequire);
-      await replaceCode(app, 'DATABASE_CONNECTION', mongooseConnect, { leadingBlankLine: true });
+      // Add require('mongoose')
+      await replaceCode(appExpress, 'DATABASE_REQUIRE', mongooseRequire);
+      // Add mongoose.connect();
+      await replaceCode(appExpress, 'DATABASE_CONNECTION', mongooseConnect);
 
-      await appendFile(join(build, '.env'), 'MONGODB=mongodb://localhost/test');
+      // Add MONGODB environment variable
+      await appendFile(join(__base, 'build', params.uuid, '.env'), 'MONGODB=mongodb://localhost/test');
 
+      // Add mongoose to package.json
       await addNpmPackage('mongoose', params);
 
-      // Create models dir
+      // Create models/ directory
       await mkdirs(join(__base, 'build', params.uuid, 'models'));
       break;
     case 'hapi':
