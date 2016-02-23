@@ -10,7 +10,8 @@ async function generateMongodbDatabase(params) {
 
       // Add require('mongoose')
       await replaceCode(appExpress, 'DATABASE_REQUIRE', mongooseRequire);
-      // Add mongoose.connect();
+
+      // Add mongoose.connect()
       await replaceCode(appExpress, 'DATABASE_CONNECTION', mongooseConnect);
 
       // Add MONGODB environment variable

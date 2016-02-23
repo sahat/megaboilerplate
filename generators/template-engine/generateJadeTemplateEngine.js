@@ -1,26 +1,84 @@
 import { join } from 'path';
-import { cpy, copy, replaceCode, addNpmPackage } from '../utils';
+import { copy, replaceCode, addNpmPackage } from '../utils';
+
+// helper function
+async function updateLayoutTemplate(params) {
+  const layout = join(__base, 'build', params.uuid, 'views', 'layout.jade');
+
+  const appContainer = join(__dirname, 'modules', 'jade', 'app-container.jade');
+  const blockContent = join(__dirname, 'modules', 'jade', 'block-content.jade');
+  const socketIoImport = join(__dirname, 'modules', 'jade', 'socketio-import.jade');
+
+  if (params.jsFramework === 'none') {
+    // Use "block content" (traditional web app)
+    await replaceCode(layout, 'APP_CONTAINER_OR_BLOCK_CONTENT', blockContent, { indentLevel: 2 });
+  } else {
+    // Use "#app-container" div element (single page app)
+    await replaceCode(layout, 'APP_CONTAINER_OR_BLOCK_CONTENT', appContainer, { indentLevel: 2 });
+  }
+
+  // Add Socket.IO <script> tag (optional)
+  if (params.frameworkOptions.includes('socketio')) {
+    await replaceCode(layout, 'SOCKETIO_IMPORT', socketIoImport, { indentLevel: 2 });
+  }
+}
+
+async function copyTemplates(params) {
+  const layout = join(__dirname, 'modules', 'jade', 'views', 'layout.jade');
+  const home = join(__dirname, 'modules', 'jade', 'views', 'home.jade');
+  const bootstrapHeader = join(__dirname, 'modules', 'jade', 'views', 'header-bootstrap.jade');
+  const bootstrapFooter = join(__dirname, 'modules', 'jade', 'views', 'footer-bootstrap.jade');
+
+  // Copy initial Jade templates to "views" directory
+  await copy(layout, join(__base, 'build', params.uuid, 'views', 'layout.jade'));
+  await copy(home, join(__base, 'build', params.uuid, 'views', 'home.jade'));
+
+  // Copy header and footer partial templates
+  switch (params.cssFramework) {
+    case 'none':
+      break;
+
+    case 'bootstrap':
+      await copy(bootstrapHeader, join(__base, 'build', params.uuid, 'views', 'header.jade'));
+      await copy(bootstrapFooter, join(__base, 'build', params.uuid, 'views', 'footer.jade'));
+      break;
+
+    default:
+      break;
+  }
+}
 
 async function generateJadeTemplateEngine(params) {
   let app;
   let viewEngineSetup;
-  let baseRoute;
-  const viewsDir = join(__base, 'build', params.uuid, 'views');
 
   switch (params.framework) {
     case 'express':
-      app = join(__base, 'build', params.uuid, 'app.js');
-      viewEngineSetup = join(__base, 'modules', 'template-engine', 'jade', 'jade-express.js');
-      baseRoute = join(__base, 'modules', 'template-engine', 'routes', 'express-route.js');
+      const appExpress = join(__base, 'build', params.uuid, 'app.js');
+      const expressViewEngine = join(__dirname, 'modules', 'jade', 'jade-express.js');
+      const expressHomeRoute = join(__dirname, 'modules', 'routes', 'home-route-express.js');
+      const homeControllerRequire = join(__dirname, 'modules', 'controllers', 'home-require.js');
+      const expressHomeController = join(__dirname, 'modules', 'controllers', 'home-controller-express.js');
 
       // Set "views dir" and "view engine"
-      await replaceCode(app, 'TEMPLATE_ENGINE', viewEngineSetup, { leadingBlankLine: true });
+      await replaceCode(appExpress, 'TEMPLATE_ENGINE', expressViewEngine);
 
-      // Set base route "/"
-      if (!params.jsFramework || params.jsFramework === 'none') {
-        await replaceCode(app, 'BASE_ROUTE', baseRoute, { leadingBlankLine: true });
+      // Require home controller and add home route, i.e. "GET /"
+      if (params.jsFramework === 'none') {
+        await replaceCode(appExpress, 'HOME_ROUTE', expressHomeRoute);
+        await replaceCode(appExpress, 'HOME_CONTROLLER', homeControllerRequire);
       }
+
+      // Copy home controller
+      await copy(expressHomeController, join(__base, 'build', params.uuid, 'controllers', 'home.js'));
+
+      // Copy Jade templates, including header/footer partials
+      await copyTemplates(params);
+
+      // Add/remove features to the newly generated layout file above
+      await updateLayoutTemplate(params);
       break;
+
     case 'hapi':
       app = join(__base, 'build', params.uuid, 'app.js');
       viewEngineSetup = join(__base, 'modules', 'template-engine', 'jade', 'jade-hapi.js');
@@ -31,57 +89,20 @@ async function generateJadeTemplateEngine(params) {
       // Add dependencies
       await addNpmPackage('vision', params);
 
+      // Copy Jade templates, including header/footer partials
+      await copyTemplates(params);
+
+      // Add/remove features to the newly generated layout file above
+      await updateLayoutTemplate(params);
       break;
+
     case 'meteor':
       break;
+
     default:
   }
 
 
-  // Copy initial Jade templates to "views" directory
-  await copy(
-    join(__base, 'modules', 'template-engine', 'jade', 'views', 'layout.jade'),
-    join(viewsDir, 'layout.jade')
-  );
-  await copy(
-    join(__base, 'modules', 'template-engine', 'jade', 'views', 'home.jade'),
-    join(viewsDir, 'home.jade')
-  );
-
-  switch (params.cssFramework) {
-    case 'none':
-      break;
-    case 'bootstrap':
-      // Copy header
-      await copy(
-        join(__base, 'modules', 'template-engine', 'jade', 'views', 'header-bootstrap.jade'),
-        join(viewsDir, 'header.jade')
-      );
-      // Copy footer
-      await copy(
-        join(__base, 'modules', 'template-engine', 'jade', 'views', 'footer-bootstrap.jade'),
-        join(viewsDir, 'footer.jade')
-      );
-      break;
-    default:
-      break;
-  }
-
-  const layout = join(__base, 'build', params.uuid, 'views', 'layout.jade');
-  const appContainerJade = join(__base, 'modules', 'template-engine', 'jade', 'app-container.jade');
-  const blockContentJade = join(__base, 'modules', 'template-engine', 'jade', 'block-content.jade');
-  const socketioImport = join(__base, 'modules', 'template-engine', 'jade', 'socketio-import.jade');
-
-  if (!params.jsFramework || params.jsFramework === 'none') {
-    await replaceCode(layout, 'APP_CONTAINER_OR_BLOCK_CONTENT', blockContentJade, { indentLevel: 2 });
-  } else {
-    await replaceCode(layout, 'APP_CONTAINER_OR_BLOCK_CONTENT', appContainerJade, { indentLevel: 2 });
-  }
-
-  // Socket.IO?
-  if (params.frameworkOptions.includes('socketio')) {
-    await replaceCode(layout, 'SOCKETIO_IMPORT', socketioImport, { indentLevel: 2, leadingBlankLine: true });
-  }
 
   // Add Jade to package.json
   await addNpmPackage('jade', params);
