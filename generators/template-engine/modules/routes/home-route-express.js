@@ -1,0 +1,2 @@
+
+app.get('/', home.index);
