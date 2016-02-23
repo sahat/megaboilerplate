@@ -23,6 +23,7 @@ async function updateLayoutTemplate(params) {
   }
 }
 
+// helper function
 async function copyTemplates(params) {
   const layout = join(__dirname, 'modules', 'jade', 'views', 'layout.jade');
   const home = join(__dirname, 'modules', 'jade', 'views', 'home.jade');

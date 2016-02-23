@@ -18,7 +18,7 @@ server.connection({
   port: 3000
 });
 
-//= BASE_ROUTE
+//= HOME_ROUTE
 //= REACT_SERVER_RENDERING
 
 
