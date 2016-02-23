@@ -1,12 +1,8 @@
 import { join } from 'path';
 import { copy, replaceCode } from '../utils';
 
-async function generateBootstrap(params) {
-  const bootstrapDir = join(__base, 'modules', 'css-framework', 'bootstrap');
-  const jqueryDir = join(__base, 'modules', 'css-framework', 'jquery');
-  const publicDir = join(__base, 'build', params.uuid, 'public');
-
-  // Add CSS import
+// helper function
+async function addCssFrameworkImport(params) {
   switch (params.templateEngine) {
     case 'jade':
       const jadeLayout = join(__base, 'build', params.uuid, 'views', 'layout.jade');
@@ -29,20 +25,32 @@ async function generateBootstrap(params) {
     default:
       break;
   }
+}
+
+async function generateBootstrap(params) {
+  const bootstrapDir = join(__base, 'modules', 'css-framework', 'bootstrap');
+  const jqueryDir = join(__base, 'modules', 'css-framework', 'jquery');
+  const publicDir = join(__base, 'build', params.uuid, 'public');
 
   switch (params.cssPreprocessor) {
     case 'css':
+      // Add CSS import
+      await addCssFrameworkImport(params);
+
       await copy(join(bootstrapDir, 'main.css'), join(publicDir, 'css', 'main.css'));
       await copy(join(bootstrapDir, 'css', 'bootstrap.css'), join(publicDir, 'css', 'vendor', 'bootstrap.css'));
       break;
+
     case 'less':
       await copy(join(bootstrapDir, 'main.less'), join(publicDir, 'css', 'main.less'));
       await copy(join(bootstrapDir, 'less'), join(publicDir, 'css', 'vendor', 'bootstrap'));
       break;
+
     case 'sass':
       await copy(join(bootstrapDir, 'main.scss'), join(publicDir, 'css', 'main.scss'));
       await copy(join(bootstrapDir, 'sass'), join(publicDir, 'css', 'vendor', 'bootstrap'));
       break;
+
     default:
       break;
   }
