@@ -26,6 +26,8 @@ async function updateLayoutTemplate(params) {
 async function copyTemplates(params) {
   const layout = join(__dirname, 'modules', 'jade', 'views', 'layout.jade');
   const home = join(__dirname, 'modules', 'jade', 'views', 'home.jade');
+  const plainCssHeader = join(__dirname, 'modules', 'jade', 'views', 'header.jade');
+  const plainCssFooter = join(__dirname, 'modules', 'jade', 'views', 'footer.jade');
   const bootstrapHeader = join(__dirname, 'modules', 'jade', 'views', 'header-bootstrap.jade');
   const bootstrapFooter = join(__dirname, 'modules', 'jade', 'views', 'footer-bootstrap.jade');
 
@@ -36,6 +38,8 @@ async function copyTemplates(params) {
   // Copy header and footer partial templates
   switch (params.cssFramework) {
     case 'none':
+      await copy(plainCssHeader, join(__base, 'build', params.uuid, 'views', 'header.jade'));
+      await copy(plainCssFooter, join(__base, 'build', params.uuid, 'views', 'footer.jade'));
       break;
 
     case 'bootstrap':
