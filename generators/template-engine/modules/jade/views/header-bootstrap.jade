@@ -15,12 +15,12 @@ nav.navbar.navbar-default.navbar-static-top
           a(href='/contact') Contact
       ul.nav.navbar-nav.navbar-right
         if user
-          li(class=title == 'Account Management' ? 'active' : undefined)
+          li(class=(title == 'Account Management') ? 'active' : undefined)
             a(href='/account') My Account
           li
             a(href='/logout') Logout
         else
-          li(class=title == 'Login' ? 'active' : undefined)
-            a(href='/login') Login
-          li(class=title == 'Create Account' ? 'active' : undefined)
-            a(href='/signup') Create Account
+          li(class=(title == 'Log in') ? 'active' : undefined)
+            a(href='/login') Log in
+          li(class=(title == 'Sign up') ? 'active' : undefined)
+            a(href='/signup') Sign up
