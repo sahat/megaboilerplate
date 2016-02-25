@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "archiver": "^0.21.0",
-    "bluebird": "^3.3.1",
+    "bluebird": "^3.3.3",
     "body-parser": "^1.15.0",
     "classnames": "^2.2.1",
     "compression": "^1.6.1",
