@@ -28,7 +28,7 @@
     "redbox-react": "^1.2.2",
     "webpack": "^1.12.14",
     "webpack-dev-middleware": "^1.5.1",
-    "webpack-hot-middleware": "^2.7.1"
+    "webpack-hot-middleware": "^2.8.1"
   },
   "dependencies": {
     "archiver": "^0.21.0",
