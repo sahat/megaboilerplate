@@ -6,6 +6,7 @@ async function generateCommonAuthenticationExpress(params) {
   const app = join(build, 'app.js');
   const passportConfigFile = join(build, 'config', 'passport.js');
   const passportConfigModule = join(__dirname, 'modules', 'common', 'passport-config.js');
+  const passportCommonRoutes = join(__dirname, 'modules', 'common', 'passport-routes.js');
   const passportRequire = join(__dirname, 'modules', 'common', 'passport-require.js');
   const passportMiddleware = join(__dirname, 'modules', 'common', 'passport-middleware.js');
   const userHelperMiddleware = join(__dirname, 'modules', 'common', 'user-middleware.js');
@@ -21,6 +22,9 @@ async function generateCommonAuthenticationExpress(params) {
 
   // Add user controller reference
   await replaceCode(app, 'USER_CONTROLLER', userControllerRequire);
+
+  // Add common Passport routes, e.g. logout, unlink
+  await replaceCode(app, 'PASSPORT_COMMON_ROUTES', passportCommonRoutes);
 
   // Passport config file
   await copy(passportConfigModule, passportConfigFile);
