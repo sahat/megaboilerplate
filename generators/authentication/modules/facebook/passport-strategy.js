@@ -1,3 +1,5 @@
+
+// Sign in with Facebook
 passport.use(new FacebookStrategy({
   clientID: process.env.FACEBOOK_ID,
   clientSecret: process.env.FACEBOOK_SECRET,

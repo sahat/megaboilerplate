@@ -36,6 +36,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 //= HOME_ROUTE
 //= REACT_SERVER_RENDERING
 //= PASSPORT_LOCAL_ROUTES
+//= PASSPORT_FACEBOOK_ROUTES
+//= PASSPORT_GOOGLE_ROUTES
+//= PASSPORT_TWITTER_ROUTES
 
 // production error handler
 if (app.get('env') === 'production') {

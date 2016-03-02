@@ -1,3 +1,4 @@
+// Sign in with Email and Password
 passport.use(new LocalStrategy({ usernameField: 'email' }, function(email, password, done) {
   User.findOne({ email: email.toLowerCase() }, function(err, user) {
     if (!user) {
