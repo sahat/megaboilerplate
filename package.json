@@ -9,11 +9,11 @@
     "start": "node devServer.js"
   },
   "devDependencies": {
-    "babel-core": "^6.5.2",
+    "babel-core": "^6.6.0",
     "babel-eslint": "^5.0.0",
     "babel-loader": "^6.2.4",
     "babel-plugin-react-transform": "^2.0.0",
-    "babel-polyfill": "^6.5.0",
+    "babel-polyfill": "^6.6.1",
     "babel-preset-es2015": "^6.5.0",
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "^6.5.0",
@@ -28,7 +28,7 @@
     "redbox-react": "^1.2.2",
     "webpack": "^1.12.14",
     "webpack-dev-middleware": "^1.5.1",
-    "webpack-hot-middleware": "^2.7.1"
+    "webpack-hot-middleware": "^2.9.0"
   },
   "dependencies": {
     "archiver": "^0.21.0",
