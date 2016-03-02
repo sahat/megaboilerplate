@@ -1,7 +1,7 @@
 import { join } from 'path';
 import { replaceCode, removeCode, addNpmPackage } from '../utils';
 
-async function generateEmailAuthenticationExpress(params) {
+async function generateLocalAuthenticationExpress(params) {
   const app = join(__base, 'build', params.uuid, 'app.js');
   const config = join(__base, 'build', params.uuid, 'config', 'passport.js');
   const require = join(__base, 'modules', 'authentication', 'local', 'passport-require.js');
@@ -18,4 +18,4 @@ async function generateEmailAuthenticationExpress(params) {
   await addNpmPackage('bcrypt-nodejs', params);
 }
 
-export default generateEmailAuthenticationExpress;
+export default generateLocalAuthenticationExpress;
