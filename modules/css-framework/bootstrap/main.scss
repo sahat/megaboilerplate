@@ -3,17 +3,13 @@ $body-bg: #fafafa;
 //$body-bg: #f3f4f5;
 $font-family-base: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
-$navbar-default-brand-color: #fff;
-$navbar-default-brand-hover-color: #fff;
-$navbar-default-brand-hover-bg: #3f51b5;
-
 $navbar-default-border: #e0e0e0;
 $navbar-default-link-active-bg: transparent;
 
 $navbar-default-color: #757575;
-$navbar-default-link-hover-bg: rgba(238, 238, 238, .3);
-$navbar-default-link-active-bg: rgba(238, 238, 238, .3);
-$navbar-default-link-color: #616161;
+$navbar-default-link-hover-bg: transparent;
+$navbar-default-link-active-bg: transparent;
+$navbar-default-link-color: #262626;
 $navbar-default-link-active-color: #616161;
 
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,700);
@@ -29,18 +25,21 @@ $navbar-default-link-active-color: #616161;
 }
 
 .navbar-header {
-  border-bottom: 2px solid #3f51b5;
+  //margin-top: -2px;
+
+  //border-bottom: 2px solid #3f51b5;
 }
 
 .navbar-brand {
-  background-color: #3f51b5;
+  //background-color: #3f51b5;
 }
 
 //.navbar-nav {
 //  border-bottom: 1px solid #e0e0e0;
 //}
 .navbar-default .navbar-nav > li > a {
-  border-bottom: 2px solid transparent;
+  border-bottom: 3px solid transparent;
+  margin-top: -1px;
   transition: all 0.25s;
   &:hover {
     border-bottom-color: #bdbdbd;
