@@ -5,14 +5,14 @@ async function generateCommonAuthenticationExpress(params) {
   const build = join(__base, 'build', params.uuid);
   const app = join(build, 'app.js');
   const passportConfigFile = join(build, 'config', 'passport.js');
-  const passportConfigModule = join(__base, 'modules', 'authentication', 'common', 'passport-config.js');
-  const passportRequire = join(__base, 'modules', 'authentication', 'common', 'passport-require.js');
-  const passportMiddleware = join(__base, 'modules', 'authentication', 'common', 'passport-middleware.js');
-  const userHelperMiddleware = join(__base, 'modules', 'authentication', 'common', 'user-middleware.js');
-  const passportSerializer = join(__base, 'modules', 'authentication', 'common', 'passport-serializer.js');
-  const passportDeserializer = join(__base, 'modules', 'authentication', 'common', 'passport-deserializer.js');
-  const passportUserModel = join(__base, 'modules', 'authentication', 'common', 'passport-user-model.js');
-  const userControllerRequire = join(__base, 'modules', 'authentication', 'controllers', 'user-require.js');
+  const passportConfigModule = join(__dirname, 'modules', 'common', 'passport-config.js');
+  const passportRequire = join(__dirname, 'modules', 'common', 'passport-require.js');
+  const passportMiddleware = join(__dirname, 'modules', 'common', 'passport-middleware.js');
+  const userHelperMiddleware = join(__dirname, 'modules', 'common', 'user-middleware.js');
+  const passportSerializer = join(__dirname, 'modules', 'common', 'passport-serializer.js');
+  const passportDeserializer = join(__dirname, 'modules', 'common', 'passport-deserializer.js');
+  const passportUserModel = join(__dirname, 'modules', 'common', 'passport-user-model.js');
+  const userControllerRequire = join(__dirname, 'modules', 'controllers', 'user-require.js');
 
   // Passport middleware
   await replaceCode(app, 'PASSPORT_REQUIRE', passportRequire);
@@ -32,8 +32,8 @@ async function generateCommonAuthenticationExpress(params) {
 
   switch (params.database) {
     case 'mongodb':
-      const mongooseUserModel = join(__base, 'modules', 'authentication', 'models', 'user.js');
-      const userController = join(__base, 'modules', 'authentication', 'controllers', 'user.js');
+      const mongooseUserModel = join(__dirname, 'modules', 'models', 'user.js');
+      const userController = join(__dirname, 'modules', 'controllers', 'user.js');
 
       await copy(mongooseUserModel, join(build, 'models', 'user.js'));
       await copy(userController, join(build, 'controllers', 'user.js'));
@@ -45,7 +45,7 @@ async function generateCommonAuthenticationExpress(params) {
 
   switch (params.templateEngine) {
     case 'jade':
-      const loginJade = join(__base, 'modules', 'authentication', 'common', 'views', 'login.jade');
+      const loginJade = join(__dirname, 'modules', 'common', 'views', 'login.jade');
       await mkdirs(join(build, 'views', 'account'));
       await copy(loginJade, join(build, 'views', 'account', 'login.jade'));
       break;
