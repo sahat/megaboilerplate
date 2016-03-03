@@ -4,20 +4,22 @@ block content
   .page-content.vertical
     .panel.panel-login
       .panel-heading
-        h3.panel-title Log In
+        h3.panel-title Create an account
       .panel-body
         form(method='POST')
           .form-group
+            label.control-label(for='name') Name
+            input.form-control(type='text', name='name', id='name', placeholder='Name', autofocus=true)
+          .form-group
             label.control-label(for='email') Email
-            input.form-control(type='email', name='email', id='email', placeholder='Email', autofocus=true)
+            input.form-control(type='email', name='email', id='email', placeholder='Email')
           .form-group
             label.control-label(for='password') Password
             input.form-control(type='password', name='password', id='password', placeholder='Password')
           .form-group
-            a(href='/forgot')
-              strong Forgot your password?
+            small.text-muted By signing up, you agree to the <a href="#">Terms of Service</a>.
           .form-group
-            button.btn.btn-success(type='submit') Log in
+            button.btn.btn-success(type='submit') Create an account
 
         .hr-title
           abbr or
@@ -29,7 +31,7 @@ block content
           | &nbsp;
           a.btn.btn.btn-google(href='/auth/google') Sign in with Google
     br
-    p.text-center Don't have an account?
+    p.text-center Already have an account?
       |&nbsp;
       a(href='/signup')
-        strong Sign up
+        strong Sign in
