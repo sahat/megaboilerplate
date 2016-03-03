@@ -1,11 +1,12 @@
 import { join } from 'path';
-import { copy, mkdirs, replaceCode, removeCode, addNpmPackage } from '../utils';
+import { cpy, copy, mkdirs, replaceCode, removeCode, addNpmPackage } from '../utils';
 
 async function generateCommonAuthenticationExpress(params) {
   const build = join(__base, 'build', params.uuid);
   const app = join(build, 'app.js');
   const passportConfigFile = join(build, 'config', 'passport.js');
   const passportConfigModule = join(__dirname, 'modules', 'common', 'passport-config.js');
+  const passportConfigRequire = join(__dirname, 'modules', 'common', 'passport-config-require.js');
   const passportCommonRoutes = join(__dirname, 'modules', 'common', 'passport-routes.js');
   const passportRequire = join(__dirname, 'modules', 'common', 'passport-require.js');
   const passportMiddleware = join(__dirname, 'modules', 'common', 'passport-middleware.js');
@@ -19,6 +20,7 @@ async function generateCommonAuthenticationExpress(params) {
   await replaceCode(app, 'PASSPORT_REQUIRE', passportRequire);
   await replaceCode(app, 'PASSPORT_MIDDLEWARE', passportMiddleware);
   await replaceCode(app, 'USER_HELPER_MIDDLEWARE', userHelperMiddleware);
+  await replaceCode(app, 'PASSPORT_CONFIG_REQUIRE', passportConfigRequire);
 
   // Add user controller reference
   await replaceCode(app, 'USER_CONTROLLER', userControllerRequire);
@@ -50,8 +52,9 @@ async function generateCommonAuthenticationExpress(params) {
   switch (params.templateEngine) {
     case 'jade':
       const loginJade = join(__dirname, 'modules', 'common', 'views', 'login.jade');
+      const signupJade = join(__dirname, 'modules', 'common', 'views', 'signup.jade');
       await mkdirs(join(build, 'views', 'account'));
-      await copy(loginJade, join(build, 'views', 'account', 'login.jade'));
+      await cpy([loginJade, signupJade], join(build, 'views', 'account'));
       break;
     default:
       break;

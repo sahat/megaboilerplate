@@ -17,6 +17,7 @@ dotenv.load();
 // Controllers
 //= HOME_CONTROLLER
 //= USER_CONTROLLER
+//= PASSPORT_CONFIG_REQUIRE
 
 var app = express();
 //= SOCKETIO_REQUIRE
