@@ -2,8 +2,9 @@ $navbar-default-bg: #fff;
 $body-bg: #f4f4f4;
 $font-family-base: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 $line-height-base: 1.57142857;
-
+$headings-font-weight: 600;
 $link-color: #1d7cf4;
+$link-hover-decoration: none;
 $navbar-height: 56px;
 $navbar-default-border: #e0e0e0;
 $navbar-default-link-active-bg: transparent;
@@ -14,7 +15,10 @@ $navbar-default-link-active-bg: transparent;
 $navbar-default-link-color: #262626;
 $navbar-default-link-active-color: #262626;
 
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,800,700,600%7CRaleway:100,300,600,700,800);
+$panel-heading-padding: 20px 30px;
+$panel-body-padding: 30px;
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CRaleway:100,300,600,700,800);
 @import 'vendor/bootstrap/bootstrap';
 
 html {
@@ -38,6 +42,10 @@ footer {
 
   border-top: 1px solid #e0e0e0;
 }
+
+//a:hover {
+//  border-bottom: dotted 1px rgba(29, 124, 244, 0.65);
+//}
 
 .navbar {
   //border: none;
@@ -73,15 +81,24 @@ footer {
 }
 
 .panel {
-  //box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
-  //-webkit-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
   border: solid 1px rgba(160, 160, 160, 0.3);
+}
+
+.panel-heading + .panel-body {
+  padding-top: 0;
 }
 
 .panel-body {
   h1, h2, h3, h4, h5, h6 {
     margin-top: 0;
   }
+}
+
+.panel-title {
+  font-size: 18px;
+  color: #424242;
 }
 
 .btn {
@@ -177,9 +194,6 @@ footer {
   border-radius: 4px;
 }
 
-.panel-login > .panel-body {
-  padding: 30px;
-}
 
 .form-control {
   border-radius: 0;
@@ -194,13 +208,11 @@ footer {
   text-transform: uppercase;
   font-size: 13px;
 }
-
 .hr-title {
   border-top-style: solid;
   border-top-width: 1px;
   font-size: 16px;
   text-align: center;
-  height: 10px;
   line-height: 20px;
   margin-top: 20px;
   height: auto;

@@ -3,9 +3,9 @@ extends ../layout
 block content
   .page-content.vertical
     .panel.panel-login
+      .panel-heading
+        h3.panel-title Log In
       .panel-body
-        h3 Log In
-        br
         form(method='POST')
           .form-group
             label.control-label(for='email') Email
@@ -18,14 +18,16 @@ block content
               strong Forgot your password?
           .form-group
             button.btn.btn-success(type='submit') Log in
-          .hr-title
-            abbr or
-          .text-center
-            a.btn.btn.btn-facebook(href='/auth/facebook') Sign in with Facebook
-            | &nbsp;
-            a.btn.btn.btn-twitter(href='/auth/twitter') Sign in with Twitter
-            | &nbsp;
-            a.btn.btn.btn-google(href='/auth/google') Sign in with Google
+
+        .hr-title
+          abbr or
+
+        .text-center
+          a.btn.btn.btn-facebook(href='/auth/facebook') Sign in with Facebook
+          | &nbsp;
+          a.btn.btn.btn-twitter(href='/auth/twitter') Sign in with Twitter
+          | &nbsp;
+          a.btn.btn.btn-google(href='/auth/google') Sign in with Google
     br
     p.text-center Don't have an account yet?
       |&nbsp;
