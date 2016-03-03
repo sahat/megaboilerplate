@@ -7,10 +7,22 @@ import generateTwitterAuthentication from './generateTwitterAuthentication';
 async function generateAuthentication(params) {
   if (params.authentication && params.authentication.length) {
     await generateCommonAuthentication(params);
-    await generateLocalAuthentication(params);
-    await generateFacebookAuthentication(params);
-    await generateGoogleAuthentication(params);
-    await generateTwitterAuthentication(params);
+
+    if (params.authentication.includes('email')) {
+      await generateLocalAuthentication(params);
+    }
+
+    if (params.authentication.includes('facebook')) {
+      await generateFacebookAuthentication(params);
+    }
+
+    if (params.authentication.includes('google')) {
+      await generateGoogleAuthentication(params);
+    }
+
+    if (params.authentication.includes('twitter')) {
+      await generateTwitterAuthentication(params);
+    }
   }
 }
 
