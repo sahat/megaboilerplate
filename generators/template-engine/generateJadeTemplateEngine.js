@@ -31,6 +31,7 @@ async function copyTemplates(params) {
   const plainCssFooter = join(__dirname, 'modules', 'jade', 'views', 'footer.jade');
   const bootstrapHeader = join(__dirname, 'modules', 'jade', 'views', 'header-bootstrap.jade');
   const bootstrapFooter = join(__dirname, 'modules', 'jade', 'views', 'footer-bootstrap.jade');
+  const bootstrapHome = join(__dirname, 'modules', 'jade', 'views', 'home-bootstrap.jade');
 
   // Copy initial Jade templates to "views" directory
   await copy(layout, join(__base, 'build', params.uuid, 'views', 'layout.jade'));
@@ -46,6 +47,7 @@ async function copyTemplates(params) {
     case 'bootstrap':
       await copy(bootstrapHeader, join(__base, 'build', params.uuid, 'views', 'header.jade'));
       await copy(bootstrapFooter, join(__base, 'build', params.uuid, 'views', 'footer.jade'));
+      await copy(bootstrapHome, join(__base, 'build', params.uuid, 'views', 'home.jade'));
       break;
 
     default:
