@@ -13,7 +13,7 @@ exports.loginGet = function(req, res) {
     return res.redirect('/');
   }
   res.render('account/login', {
-    title: 'Login'
+    title: 'Log in'
   });
 };
 
@@ -59,7 +59,7 @@ exports.signupGet = function(req, res) {
     return res.redirect('/');
   }
   res.render('account/signup', {
-    title: 'Create Account'
+    title: 'Sign up'
   });
 };
 
@@ -178,7 +178,7 @@ exports.accountDelete = function(req, res, next) {
  * GET /account/unlink/:provider
  * Unlink OAuth provider.
  */
-exports.getOauthUnlink = function(req, res, next) {
+exports.unlink = function(req, res, next) {
   var provider = req.params.provider;
   User.findById(req.user.id, function(err, user) {
     if (err) {
