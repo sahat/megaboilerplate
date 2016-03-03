@@ -1,31 +1,33 @@
 extends ../layout
 
 block content
-  .page-header
-    h3 Sign in
-  form.form-horizontal(method='POST')
-    .form-group
-      label.col-sm-3.control-label(for='email') Email
-      .col-sm-7
-        input.form-control(type='email', name='email', id='email', placeholder='Email', autofocus=true)
-    .form-group
-      label.col-sm-3.control-label(for='password') Password
-      .col-sm-7
-        input.form-control(type='password', name='password', id='password', placeholder='Password')
-    .form-group
-      .col-sm-offset-3.col-sm-7
-        button.col-sm-3.btn.btn-primary(type='submit')
-          i.fa.fa-user
-          | Login
-        a.btn.btn-link(href='/forgot') Forgot your password?
-    .form-group
-      .col-sm-offset-3.col-sm-7
-        hr
-    .form-group
-      .col-sm-offset-3.col-sm-7
-        a.btn.btn-block.btn-facebook(href='/auth/facebook') Sign in with Facebook
-        a.btn.btn-block.btn-twitter(href='/auth/twitter') Sign in with Twitter
-        a.btn.btn-block.btn-google(href='/auth/google') Sign in with Google
-        a.btn.btn-block.btn-github(href='/auth/github') Sign in with GitHub
-        a.btn.btn-block.btn-linkedin(href='/auth/linkedin') Sign in with LinkedIn
-        a.btn.btn-block.btn-instagram(href='/auth/instagram') Sign in with Instagram
+  .page-content.vertical
+    .panel.panel-login
+      .panel-body
+        h3 Log In
+        br
+        form(method='POST')
+          .form-group
+            label.control-label(for='email') Email
+            input.form-control(type='email', name='email', id='email', placeholder='Email', autofocus=true)
+          .form-group
+            label.control-label(for='password') Password
+            input.form-control(type='password', name='password', id='password', placeholder='Password')
+          .form-group
+            a(href='/forgot')
+              strong Forgot your password?
+          .form-group
+            button.btn.btn-success(type='submit') Log in
+          .hr-title
+            abbr or
+          .text-center
+            a.btn.btn.btn-facebook(href='/auth/facebook') Sign in with Facebook
+            | &nbsp;
+            a.btn.btn.btn-twitter(href='/auth/twitter') Sign in with Twitter
+            | &nbsp;
+            a.btn.btn.btn-google(href='/auth/google') Sign in with Google
+    br
+    p.text-center Don't have an account yet?
+      |&nbsp;
+      a(href='/signup')
+        strong Sign up!
