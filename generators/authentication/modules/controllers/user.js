@@ -35,15 +35,18 @@ exports.loginPost = function(req, res, next) {
   }
 
   passport.authenticate('local', function(err, user, info) {
-    if (!user) {
-      return res.render('account/login', {
+    if (user) {
+      // success
+      req.logIn(user, function(err) {
+        res.redirect('/');
+      });
+    } else {
+      // user not found or invalid password
+      res.render('account/login', {
         title: 'Log in',
         errors: [info]
       });
     }
-    req.logIn(user, function(err) {
-      res.redirect('/');
-    });
   })(req, res, next);
 };
 
