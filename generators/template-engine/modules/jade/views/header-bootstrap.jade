@@ -8,18 +8,18 @@ nav.navbar.navbar-default.navbar-static-top
     a.navbar-brand(href='/') Project name
   #navbar.navbar-collapse.collapse
     ul.nav.navbar-nav
-      li.active
+      li(class=(title == 'Home') ? 'active' : null)
         a(href='/') Home
       li
         a(href='/contact') Contact
     ul.nav.navbar-nav.navbar-right
       if user
-        li(class=(title == 'Account Management') ? 'active' : undefined)
+        li(class=(title == 'Account Management') ? 'active' : null)
           a(href='/account') My Account
         li
           a(href='/logout') Logout
       else
-        li(class=(title == 'Log in') ? 'active' : undefined)
+        li(class=(title == 'Log in') ? 'active' : null)
           a(href='/login') Log in
-        li(class=(title == 'Sign up') ? 'active' : undefined)
+        li(class=(title == 'Sign up') ? 'active' : null)
           a(href='/signup') Sign up
