@@ -4,6 +4,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bodyParser = require('body-parser');
+var expressValidator = require('express-validator');
 var dotenv = require('dotenv');
 //= REACT_REQUIRE
 //= TEMPLATE_ENGINE_REQUIRE
@@ -29,6 +30,7 @@ app.set('port', process.env.PORT || 3000);
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(expressValidator());
 app.use(cookieParser());
 app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 //= PASSPORT_MIDDLEWARE

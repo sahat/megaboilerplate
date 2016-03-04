@@ -8,6 +8,8 @@
   "vision": "^4.0.1",
   "express-handlebars": "^3.0.0",
 
+  "express-validator": "^2.19.1",
+
   "react": "^0.14.6",
   "react-dom": "^0.14.6",
 
