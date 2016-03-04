@@ -22,8 +22,8 @@ exports.loginGet = function(req, res) {
  */
 exports.loginPost = function(req, res, next) {
   req.assert('email', 'Email is not valid').isEmail();
-  req.assert('email', 'Email cannot be empty').notEmpty();
-  req.assert('password', 'Password cannot be empty').notEmpty();
+  req.assert('email', 'Email cannot be blank').notEmpty();
+  req.assert('password', 'Password cannot be blank').notEmpty();
 
   var errors = req.validationErrors(true);
 
@@ -38,10 +38,10 @@ exports.loginPost = function(req, res, next) {
     if (!user) {
       return res.render('account/login', {
         title: 'Log in',
-        errors: { user: { msg: info }}
+        errors: [info]
       });
     }
-    req.logIn(user, function() {
+    req.logIn(user, function(err) {
       res.redirect('/');
     });
   })(req, res, next);
@@ -62,35 +62,35 @@ exports.signupGet = function(req, res) {
 };
 
 exports.signupPost = function(req, res, next) {
+  req.assert('name', 'Name cannot be blank').notEmpty();
   req.assert('email', 'Email is not valid').isEmail();
+  req.assert('email', 'Email cannot be blank').notEmpty();
   req.assert('password', 'Password must be at least 4 characters long').len(4);
-  req.assert('confirmPassword', 'Passwords do not match').equals(req.body.password);
 
-  var errors = req.validationErrors();
+  var errors = req.validationErrors(true);
 
   if (errors) {
-    req.flash('errors', errors);
-    return res.redirect('/signup');
+    return res.render('account/signup', {
+      title: 'Sign up',
+      errors: errors
+    });
   }
 
-  var user = new User({
+  var newUser = new User({
+    name: req.body.name,
     email: req.body.email,
     password: req.body.password
   });
 
-  User.findOne({ email: req.body.email }, function(err, existingUser) {
-    if (existingUser) {
-      req.flash('errors', { msg: 'Account with that email address already exists.' });
-      return res.redirect('/signup');
+  User.findOne({ email: req.body.email }, function(err, user) {
+    if (user) {
+      return res.render('account/signup', {
+        title: 'Sign up',
+        errors: [{ msg: 'The email address you have entered is already associated with an account.' }]
+      });
     }
-    user.save(function(err) {
-      if (err) {
-        return next(err);
-      }
-      req.logIn(user, function(err) {
-        if (err) {
-          return next(err);
-        }
+    newUser.save(function(err) {
+      req.logIn(newUser, function(err) {
         res.redirect('/');
       });
     });
@@ -113,9 +113,6 @@ exports.accountGet = function(req, res) {
  */
 exports.accountPut = function(req, res, next) {
   User.findById(req.user.id, function(err, user) {
-    if (err) {
-      return next(err);
-    }
     user.email = req.body.email || '';
     user.profile.name = req.body.name || '';
     user.profile.gender = req.body.gender || '';
