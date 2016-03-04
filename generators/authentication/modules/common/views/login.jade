@@ -1,11 +1,15 @@
 extends ../layout
 
 block content
-  .page-content.vertical
-    .panel.panel-login
+  .login-container
+    .panel
       .panel-heading
         h3.panel-title Log In
       .panel-body
+        if locals.errors
+          .alert.alert-danger(role='alert')
+            for error in locals.errors
+              div= error.msg
         form(method='POST')
           .form-group
             label.control-label(for='email') Email
