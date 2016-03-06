@@ -25,6 +25,7 @@ async function updateLayoutTemplate(params) {
 
 // helper function
 async function copyTemplates(params) {
+  const viewsDir = join(__base, 'build', params.uuid, 'views');
   const layout = join(__dirname, 'modules', 'jade', 'views', 'layout.jade');
   const home = join(__dirname, 'modules', 'jade', 'views', 'home.jade');
   const plainCssHeader = join(__dirname, 'modules', 'jade', 'views', 'header.jade');
@@ -32,22 +33,24 @@ async function copyTemplates(params) {
   const bootstrapHeader = join(__dirname, 'modules', 'jade', 'views', 'header-bootstrap.jade');
   const bootstrapFooter = join(__dirname, 'modules', 'jade', 'views', 'footer-bootstrap.jade');
   const bootstrapHome = join(__dirname, 'modules', 'jade', 'views', 'home-bootstrap.jade');
+  const bootstrapContact = join(__dirname, 'modules', 'jade', 'views', 'contact-bootstrap.jade');
 
   // Copy initial Jade templates to "views" directory
-  await copy(layout, join(__base, 'build', params.uuid, 'views', 'layout.jade'));
-  await copy(home, join(__base, 'build', params.uuid, 'views', 'home.jade'));
+  await copy(layout, join(viewsDir, 'layout.jade'));
+  await copy(home, join(viewsDir, 'home.jade'));
 
   // Copy header and footer partial templates
   switch (params.cssFramework) {
     case 'none':
-      await copy(plainCssHeader, join(__base, 'build', params.uuid, 'views', 'header.jade'));
-      await copy(plainCssFooter, join(__base, 'build', params.uuid, 'views', 'footer.jade'));
+      await copy(plainCssHeader, join(viewsDir, 'header.jade'));
+      await copy(plainCssFooter, join(viewsDir, 'footer.jade'));
       break;
 
     case 'bootstrap':
-      await copy(bootstrapHeader, join(__base, 'build', params.uuid, 'views', 'header.jade'));
-      await copy(bootstrapFooter, join(__base, 'build', params.uuid, 'views', 'footer.jade'));
-      await copy(bootstrapHome, join(__base, 'build', params.uuid, 'views', 'home.jade'));
+      await copy(bootstrapHeader, join(viewsDir, 'header.jade'));
+      await copy(bootstrapFooter, join(viewsDir, 'footer.jade'));
+      await copy(bootstrapHome, join(viewsDir, 'home.jade'));
+      await copy(bootstrapContact, join(viewsDir, 'contact.jade'));
       break;
 
     default:
