@@ -18,6 +18,7 @@ dotenv.load();
 // Controllers
 //= HOME_CONTROLLER
 //= USER_CONTROLLER
+//= CONTACT_CONTROLLER
 //= PASSPORT_CONFIG_REQUIRE
 
 var app = express();
@@ -37,6 +38,7 @@ app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true 
 //= USER_HELPER_MIDDLEWARE
 app.use(express.static(path.join(__dirname, 'public')));
 //= HOME_ROUTE
+//= CONTACT_ROUTE
 //= REACT_SERVER_RENDERING
 //= PASSPORT_LOCAL_ROUTES
 //= PASSPORT_COMMON_ROUTES

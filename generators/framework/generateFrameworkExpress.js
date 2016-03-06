@@ -4,6 +4,9 @@ import { cpy, mkdirs, readJson, writeJson, replaceCode, addNpmScript, addNpmPack
 async function generateFrameworkExpress(params) {
   const build = join(__base, 'build', params.uuid);
   const express = join(__base, 'modules', 'framework', 'express');
+  const contactRoute = join(__base, 'modules', 'framework', 'express', 'routes', 'contact.js');
+  const contactController = join(__base, 'modules', 'framework', 'express', 'controllers', 'contact.js');
+  const contactControllerRequire = join(__base, 'modules', 'framework', 'express', 'controllers', 'contact-require.js');
 
   // Copy initial Express files
   await cpy([
@@ -18,7 +21,7 @@ async function generateFrameworkExpress(params) {
   packageObj.name = params.appName;
   await writeJson(packageJson, packageObj, { spaces: 2 });
 
-  // Socket.IO?
+  // Optional: Socket.IO
   if (params.frameworkOptions.includes('socketio')) {
     await replaceCode(join(build, 'app.js'), 'SOCKETIO_REQUIRE', join(express, 'socketio-require.js'));
     await replaceCode(join(build, 'app.js'), 'SOCKETIO', join(express, 'socketio-init.js'));
@@ -27,7 +30,7 @@ async function generateFrameworkExpress(params) {
     await replaceCode(join(build, 'app.js'), 'APP_LISTEN', join(express, 'app-listen.js'));
   }
 
-  // PM2?
+  // Optional: PM2
   if (params.frameworkOptions.includes('pm2')) {
     await addNpmPackage('pm2', params);
     await addNpmScript('start-production', 'pm2 start app.js -i 4', params);
@@ -35,6 +38,11 @@ async function generateFrameworkExpress(params) {
 
   // Create controllers dir
   await mkdirs(join(build, 'controllers'));
+
+  // Add initial routes and controllers
+  await cpy([contactController], join(build, 'controllers'));
+  await replaceCode(join(build, 'app.js'), 'CONTACT_CONTROLLER', contactControllerRequire);
+  await replaceCode(join(build, 'app.js'), 'CONTACT_ROUTE', contactRoute);
 
   // Create public dirs
   await mkdirs(join(build, 'public', 'img'));
