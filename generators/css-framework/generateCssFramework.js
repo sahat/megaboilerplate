@@ -4,7 +4,6 @@ import generateBourbonNeat from './generateBourbonNeat';
 import generateCssFrameworkNone from './generateCssFrameworkNone';
 
 async function generateCssFramework(params) {
-  console.log(params.cssFramework);
   switch (params.cssFramework) {
     case 'bootstrap':
       await generateBootstrap(params);

@@ -82,6 +82,7 @@ hr {
   background: url('../img/hero-bg.jpg') 0 50%, linear-gradient(224deg, #2B8BE3 0%, #663FB5 100%);
   background-size: cover;
   /*background-position: 0;*/
+  box-shadow: inset 0 0 50px rgba(0,0,0,0.45);
 }
 
 .hero .highlight {
