@@ -2,24 +2,38 @@ import { join } from 'path';
 import { copy, replaceCode } from '../utils';
 
 // helper function
-async function addCssFrameworkImport(params) {
+async function addCssFrameworkImports(params) {
   switch (params.templateEngine) {
     case 'jade':
       const jadeLayout = join(__base, 'build', params.uuid, 'views', 'layout.jade');
-      const jadeBootstrapImport = join(__base, 'modules', 'css-framework', 'bootstrap', 'jade-import.jade');
-      await replaceCode(jadeLayout, 'CSS_FRAMEWORK_IMPORT', jadeBootstrapImport, { indentLevel: 2 });
+      const jadeBootstrapCssImport = join(__base, 'modules', 'css-framework', 'bootstrap', 'jade-css-import.jade');
+      const jadeBootstrapJsImport = join(__base, 'modules', 'css-framework', 'bootstrap', 'jade-js-import.jade');
+
+      if (params.cssPreprocessor === 'css') {
+        await replaceCode(jadeLayout, 'CSS_FRAMEWORK_IMPORT', jadeBootstrapCssImport, { indentLevel: 2 });
+      }
+
+      await replaceCode(jadeLayout, 'JS_FRAMEWORK_LIB_IMPORT', jadeBootstrapJsImport, { indentLevel: 2 });
       break;
 
     case 'handlebars':
       const handlebarsLayout = join(__base, 'build', params.uuid, 'views', 'layout.html');
-      const handlebarsBootstrapImport = join(__base, 'modules', 'css-framework', 'bootstrap', 'html-import.html');
-      await replaceCode(handlebarsLayout, 'CSS_FRAMEWORK_IMPORT', handlebarsBootstrapImport, { indentLevel: 1 });
+      const handlebarsBootstrapCssImport = join(__base, 'modules', 'css-framework', 'bootstrap', 'html-css-import.html');
+      const handlebarsBootstrapJsImport = join(__base, 'modules', 'css-framework', 'bootstrap', 'html-js-import.html');
+
+      if (params.cssPreprocessor === 'css') {
+        await replaceCode(handlebarsLayout, 'CSS_FRAMEWORK_IMPORT', handlebarsBootstrapCssImport, { indentLevel: 1 });
+      }
+
+      await replaceCode(handlebarsLayout, 'JS_FRAMEWORK_LIB_IMPORT', handlebarsBootstrapJsImport, { indentLevel: 1 });
       break;
 
     case 'nunjucks':
       const nunjucksLayout = join(__base, 'build', params.uuid, 'views', 'layout.html');
-      const nunjucksBootstrapImport = join(__base, 'modules', 'css-framework', 'bootstrap', 'html-import.html');
-      await replaceCode(nunjucksLayout, 'CSS_FRAMEWORK_IMPORT', nunjucksBootstrapImport, { indentLevel: 1 });
+      const nunjucksBootstrapCssImport = join(__base, 'modules', 'css-framework', 'bootstrap', 'html-import.html');
+      const nunjucksBootstrapJsImport = join(__base, 'modules', 'css-framework', 'bootstrap', 'html-js-import.html');
+
+      await replaceCode(nunjucksLayout, 'CSS_FRAMEWORK_IMPORT', nunjucksBootstrapCssImport, { indentLevel: 1 });
       break;
 
     default:
@@ -34,9 +48,6 @@ async function generateBootstrap(params) {
 
   switch (params.cssPreprocessor) {
     case 'css':
-      // Add CSS import
-      await addCssFrameworkImport(params);
-
       await copy(join(bootstrapDir, 'main.css'), join(publicDir, 'css', 'main.css'));
       await copy(join(bootstrapDir, 'css', 'bootstrap.css'), join(publicDir, 'css', 'vendor', 'bootstrap.css'));
       break;
@@ -54,6 +65,10 @@ async function generateBootstrap(params) {
     default:
       break;
   }
+
+  // Import Bootstrap CSS/JS files
+  await addCssFrameworkImports(params);
+
 
   // Copy additional Bootstrap files
   await copy(join(bootstrapDir, 'fonts'), join(publicDir, 'fonts'));
