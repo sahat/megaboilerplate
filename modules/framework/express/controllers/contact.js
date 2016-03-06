@@ -3,7 +3,7 @@ var smtpTransport = require('nodemailer-smtp-transport');
 var transporter = nodemailer.createTransport({
   service: 'mandrill',
   auth: {
-    user: process.env.MANDRILL_USERNAME
+    user: process.env.MANDRILL_USERNAME,
     pass: process.env.MANDRILL_PASSWORD
   }
 });
