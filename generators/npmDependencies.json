@@ -9,6 +9,7 @@
   "express-handlebars": "^3.0.0",
 
   "express-validator": "^2.19.1",
+  "express-flash": "^0.0.2",
 
   "react": "^0.14.6",
   "react-dom": "^0.14.6",
@@ -52,5 +53,6 @@
   "passport-twitter": "^1.0.3",
   "async": "^1.5.2",
   "bcrypt-nodejs": "^0.0.3",
-  "nodemailer": "^2.2.0"
+  "nodemailer": "^2.2.0",
+  "nodemailer-smtp-transport": "^2.4.1"
 }

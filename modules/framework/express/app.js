@@ -3,6 +3,7 @@ var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
+var flash = require('express-flash');
 var bodyParser = require('body-parser');
 var expressValidator = require('express-validator');
 var dotenv = require('dotenv');
@@ -34,6 +35,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator());
 app.use(cookieParser());
 app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
+app.use(flash());
 //= PASSPORT_MIDDLEWARE
 //= USER_HELPER_MIDDLEWARE
 app.use(express.static(path.join(__dirname, 'public')));
