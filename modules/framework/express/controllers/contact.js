@@ -1,5 +1,4 @@
 var nodemailer = require('nodemailer');
-var smtpTransport = require('nodemailer-smtp-transport');
 var transporter = nodemailer.createTransport({
   service: 'mandrill',
   auth: {
@@ -10,7 +9,6 @@ var transporter = nodemailer.createTransport({
 
 /**
  * GET /contact
- * Contact form page.
  */
 exports.contactGet = function(req, res) {
   res.render('contact', {
@@ -20,7 +18,6 @@ exports.contactGet = function(req, res) {
 
 /**
  * POST /contact
- * Send a contact form via Nodemailer.
  */
 exports.contactPost = function(req, res) {
   req.assert('name', 'Name cannot be blank').notEmpty();
