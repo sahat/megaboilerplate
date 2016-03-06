@@ -3,10 +3,11 @@ import { copy, replaceCode, removeCode, addNpmPackage } from '../utils';
 
 const CSS_FRAMEWORK_WITH_JQUERY = ['bootstrap', 'foundation'];
 
+// helper function
 async function addTemplateImport(params, layout, templateImport) {
   switch (params.templateEngine) {
     case 'jade':
-      await replaceCode(layout, 'JS_FRAMEWORK_IMPORT', templateImport, { indentLevel: 2 });
+      await replaceCode(layout, 'JS_FRAMEWORK_MAIN_IMPORT', templateImport, { indentLevel: 2 });
       break;
     case 'handlebars':
       break;
@@ -17,13 +18,13 @@ async function addTemplateImport(params, layout, templateImport) {
 }
 
 async function generateJsFrameworkNone(params) {
-  let mainJs = join(__base, 'modules', 'js-framework', 'none', 'main.js');
-  let mainJsWithJquery = join(__base, 'modules', 'js-framework', 'none', 'main-with-jquery.js');
+  const mainJs = join(__base, 'modules', 'js-framework', 'none', 'main.js');
+  const mainJsWithJquery = join(__base, 'modules', 'js-framework', 'none', 'main-with-jquery.js');
 
   switch (params.framework) {
     case 'express':
-      let layout = join(__base, 'build', params.uuid, 'views', 'layout.jade');
-      let mainJsImport = join(__base, 'modules', 'js-framework', 'none', 'express-jade-import.jade');
+      const layout = join(__base, 'build', params.uuid, 'views', 'layout.jade');
+      const mainJsImport = join(__base, 'modules', 'js-framework', 'none', 'express-jade-import.jade');
 
       // Add HTML references
       await addTemplateImport(params, layout, mainJsImport);
@@ -36,12 +37,15 @@ async function generateJsFrameworkNone(params) {
         await copy(mainJs, join(__base, 'build', params.uuid, 'public', 'js', 'main.js'));
       }
       break;
+
     case 'hapi':
       // TODO
       break;
-    case 'sails':
+
+    case 'meteor':
       // TODO
       break;
+
     default:
     // TODO
   }
