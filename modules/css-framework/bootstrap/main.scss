@@ -5,6 +5,17 @@ $line-height-base: 1.57142857;
 $headings-font-weight: 600;
 $link-color: #1d7cf4;
 $link-hover-decoration: none;
+
+
+$alert-success-border: #2d672f;
+$alert-success-text: #fff;
+$alert-success-bg: #5cb85c;
+
+$alert-danger-border: #b61b17;
+$alert-danger-text: #b61b17;
+$alert-danger-bg: #ffcdd2;
+
+
 $navbar-height: 56px;
 $navbar-default-border: #e0e0e0;
 $navbar-default-link-active-bg: transparent;
@@ -46,6 +57,10 @@ footer {
 //a:hover {
 //  border-bottom: dotted 1px rgba(29, 124, 244, 0.65);
 //}
+
+.alert {
+  border-width: 0 0 0 3px;
+}
 
 .navbar {
   //border: none;
