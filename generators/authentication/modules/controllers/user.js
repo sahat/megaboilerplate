@@ -25,28 +25,21 @@ exports.loginPost = function(req, res, next) {
   req.assert('email', 'Email cannot be blank').notEmpty();
   req.assert('password', 'Password cannot be blank').notEmpty();
 
-  var errors = req.validationErrors(true);
+  var errors = req.validationErrors();
 
   if (errors) {
-    return res.render('account/login', {
-      title: 'Log in',
-      errors: errors
-    });
+    req.flash('error', errors);
+    return res.redirect('/login');
   }
 
   passport.authenticate('local', function(err, user, info) {
-    if (user) {
-      // success
-      req.logIn(user, function(err) {
-        res.redirect('/');
-      });
-    } else {
-      // user not found or invalid password
-      res.render('account/login', {
-        title: 'Log in',
-        errors: [info]
-      });
+    if (!user) {
+      req.flash('error', info);
+      return res.redirect('/login')
     }
+    req.logIn(user, function(err) {
+      res.redirect('/');
+    });
   })(req, res, next);
 };
 
@@ -70,13 +63,11 @@ exports.signupPost = function(req, res, next) {
   req.assert('email', 'Email cannot be blank').notEmpty();
   req.assert('password', 'Password must be at least 4 characters long').len(4);
 
-  var errors = req.validationErrors(true);
+  var errors = req.validationErrors();
 
   if (errors) {
-    return res.render('account/signup', {
-      title: 'Sign up',
-      errors: errors
-    });
+    req.flash('error', errors);
+    return res.redirect('/signup');
   }
 
   var newUser = new User({
@@ -87,10 +78,8 @@ exports.signupPost = function(req, res, next) {
 
   User.findOne({ email: req.body.email }, function(err, user) {
     if (user) {
-      return res.render('account/signup', {
-        title: 'Sign up',
-        errors: [{ msg: 'The email address you have entered is already associated with an account.' }]
-      });
+      req.flash('error', { msg: 'The email address you have entered is already associated with an account.' });
+      return res.redirect('/signup');
     }
     newUser.save(function(err) {
       req.logIn(newUser, function(err) {

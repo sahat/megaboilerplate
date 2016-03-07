@@ -6,10 +6,11 @@ block content
       .panel-heading
         h3.panel-title Create an account
       .panel-body
-        if locals.errors
+        if messages.error
           .alert.alert-danger(role='alert')
-            for error in locals.errors
+            for error in messages.error
               div= error.msg
+
         form(method='post')
           .form-group
             label.control-label(for='name') Name
