@@ -8,7 +8,8 @@ block content
       .panel-body
         if messages.success
           .alert.alert-success(role='alert')
-            span= messages.success
+            for success in messages.success
+              div= success.msg
         if messages.error
           .alert.alert-danger(role='alert')
             for error in messages.error

@@ -40,7 +40,7 @@ exports.contactPost = function(req, res) {
   };
 
   transporter.sendMail(mailOptions, function(err) {
-    req.flash('success', 'Thank you! Your feedback has been submitted.');
+    req.flash('success', { msg: 'Thank you! Your feedback has been submitted.' });
     res.redirect('/contact');
   });
 };
