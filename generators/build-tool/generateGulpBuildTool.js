@@ -3,7 +3,7 @@ import { cpy, replaceCode, addNpmPackage } from '../utils';
 
 async function generateGulpBuildTool(params) {
   const build = join(__base, 'build', params.uuid);
-  const gulpfile = join(__base, 'modules', 'build-tool', 'gulp', 'gulpfile.js');
+  const gulpfile = join(__dirname, 'modules', 'gulp', 'gulpfile.js');
 
   await cpy([gulpfile], build);
 
@@ -17,8 +17,8 @@ async function generateGulpBuildTool(params) {
 
   switch (params.cssPreprocessor) {
     case 'sass':
-      const sassGulpRequire = join(__base, 'modules', 'build-tool', 'gulp', 'sass-gulp-require.js');
-      const sassGulpTask = join(__base, 'modules', 'build-tool', 'gulp', 'sass-gulp-task.js');
+      const sassGulpRequire = join(__dirname, 'modules', 'gulp', 'sass-gulp-require.js');
+      const sassGulpTask = join(__dirname, 'modules', 'gulp', 'sass-gulp-task.js');
 
       await addNpmPackage('gulp-sass', params);
 
@@ -27,8 +27,8 @@ async function generateGulpBuildTool(params) {
       break;
 
     case 'less':
-      const lessGulpRequire = join(__base, 'modules', 'build-tool', 'gulp', 'less-gulp-require.js');
-      const lessGulpTask = join(__base, 'modules', 'build-tool', 'gulp', 'less-gulp-task.js');
+      const lessGulpRequire = join(__dirname, 'modules', 'gulp', 'less-gulp-require.js');
+      const lessGulpTask = join(__dirname, 'modules', 'gulp', 'less-gulp-task.js');
 
       await addNpmPackage('gulp-less', params);
 
@@ -37,8 +37,8 @@ async function generateGulpBuildTool(params) {
       break;
 
     case 'css':
-      const cssGulpRequire = join(__base, 'modules', 'build-tool', 'gulp', 'css-gulp-require.js');
-      const cssGulpTask = join(__base, 'modules', 'build-tool', 'gulp', 'css-gulp-task.js');
+      const cssGulpRequire = join(__dirname, 'modules', 'gulp', 'css-gulp-require.js');
+      const cssGulpTask = join(__dirname, 'modules', 'gulp', 'css-gulp-task.js');
 
       await replaceCode(join(build, 'gulpfile.js'), 'CSS_PREPROCESSOR_GULP_REQUIRE', cssGulpRequire);
       await replaceCode(join(build, 'gulpfile.js'), 'CSS_PREPROCESSOR_GULP_TASK', cssGulpTask, { leadingBlankLine: true });
@@ -50,8 +50,8 @@ async function generateGulpBuildTool(params) {
 
   switch (params.jsFramework) {
     case 'react':
-      const reactGulpRequire = join(__base, 'modules', 'build-tool', 'gulp', 'react-gulp-require.js');
-      const reactGulpTask = join(__base, 'modules', 'build-tool', 'gulp', 'react-gulp-task.js');
+      const reactGulpRequire = join(__dirname, 'modules', 'gulp', 'react-gulp-require.js');
+      const reactGulpTask = join(__dirname, 'modules', 'gulp', 'react-gulp-task.js');
 
       await addNpmPackage('vinyl-source-stream', params);
       await addNpmPackage('babelify', params);

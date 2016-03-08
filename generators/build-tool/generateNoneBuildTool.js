@@ -6,8 +6,8 @@ async function generateNoneBuildTool(params) {
 
   switch (params.cssPreprocessor) {
     case 'sass':
-      const sassMiddlewareRequire = join(__base, 'modules', 'build-tool', 'none', 'sass-middleware-require.js');
-      const sassMiddleware = join(__base, 'modules', 'build-tool', 'none', 'sass-middleware.js');
+      const sassMiddlewareRequire = join(__dirname, 'modules', 'none', 'sass-middleware-require.js');
+      const sassMiddleware = join(__dirname, 'modules', 'none', 'sass-middleware.js');
 
       await addNpmPackage('node-sass-middleware', params);
 
@@ -16,8 +16,8 @@ async function generateNoneBuildTool(params) {
       break;
 
     case 'less':
-      const lessMiddlewareRequire = join(__base, 'modules', 'build-tool', 'none', 'less-middleware-require.js');
-      const lessMiddleware = join(__base, 'modules', 'build-tool', 'none', 'less-middleware.js');
+      const lessMiddlewareRequire = join(__dirname, 'modules', 'none', 'less-middleware-require.js');
+      const lessMiddleware = join(__dirname, 'modules', 'none', 'less-middleware.js');
 
       await addNpmPackage('node-sass-middleware', params);
 
@@ -26,8 +26,8 @@ async function generateNoneBuildTool(params) {
       break;
 
     case 'postcss':
-      const postcssMiddlewareRequire = join(__base, 'modules', 'build-tool', 'none', 'postcss-middleware-require.js');
-      const postcssMiddleware = join(__base, 'modules', 'build-tool', 'none', 'postcss-middleware.js');
+      const postcssMiddlewareRequire = join(__dirname, 'modules', 'none', 'postcss-middleware-require.js');
+      const postcssMiddleware = join(__dirname, 'modules', 'none', 'postcss-middleware.js');
 
       await addNpmPackage('postcss-middleware', params);
 
