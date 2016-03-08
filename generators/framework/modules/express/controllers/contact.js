@@ -24,6 +24,7 @@ exports.contactPost = function(req, res) {
   req.assert('email', 'Email is not valid').isEmail();
   req.assert('email', 'Email cannot be blank').notEmpty();
   req.assert('message', 'Message cannot be blank').notEmpty();
+  req.sanitize('email').normalizeEmail();
 
   var errors = req.validationErrors();
 
