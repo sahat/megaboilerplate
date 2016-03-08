@@ -1,0 +1,24 @@
+extends ../layout
+
+block content
+  .container
+    .panel
+      .panel-body
+        if messages.info
+          .alert.alert-info(role='alert')
+            for info in messages.info
+              div= info.msg
+
+        if messages.error
+          .alert.alert-danger(role='alert')
+            for error in messages.error
+              div= error.msg
+
+        form(method='post')
+          legend Forgot Password
+          .form-group
+            p Enter your email address below and we'll send you password reset instructions.
+            label.control-label(for='email') Email
+            input.form-control(type='email', name='email', id='email', placeholder='Email', autofocus=true)
+          .form-group
+            button.btn.btn-success(type='submit') Reset Password

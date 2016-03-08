@@ -24,6 +24,7 @@ exports.loginPost = function(req, res, next) {
   req.assert('email', 'Email is not valid').isEmail();
   req.assert('email', 'Email cannot be blank').notEmpty();
   req.assert('password', 'Password cannot be blank').notEmpty();
+  req.sanitize('email').normalizeEmail();
 
   var errors = req.validationErrors();
 
@@ -62,6 +63,7 @@ exports.signupPost = function(req, res, next) {
   req.assert('email', 'Email is not valid').isEmail();
   req.assert('email', 'Email cannot be blank').notEmpty();
   req.assert('password', 'Password must be at least 4 characters long').len(4);
+  req.sanitize('email').normalizeEmail();
 
   var errors = req.validationErrors();
 
@@ -277,12 +279,14 @@ exports.forgotPasswordGet = function(req, res) {
 };
 
 exports.forgotPasswordPost = function(req, res, next) {
-  req.assert('email', 'Please enter a valid email address.').isEmail();
+  req.assert('email', 'Email is not valid').isEmail();
+  req.assert('email', 'Email cannot be blank').notEmpty();
+  req.sanitize('email').normalizeEmail();
 
   var errors = req.validationErrors();
 
   if (errors) {
-    req.flash('errors', errors);
+    req.flash('error', errors);
     return res.redirect('/forgot');
   }
 
@@ -294,13 +298,14 @@ exports.forgotPasswordPost = function(req, res, next) {
       });
     },
     function(token, done) {
-      User.findOne({ email: req.body.email.toLowerCase() }, function(err, user) {
+      User.findOne({ email: req.body.email }, function(err, user) {
         if (!user) {
-          req.flash('errors', { msg: 'No account with that email address exists.' });
+          req.flash('error', { msg: 'The email address ' + req.body.email +
+          ' is not associated with any account. Double-check your email address and try again.' });
           return res.redirect('/forgot');
         }
-        user.resetPasswordToken = token;
-        user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+        user.passwordResetToken = token;
+        user.passwordResetExpires = Date.now() + 3600000; // 1 hour
         user.save(function(err) {
           done(err, token, user);
         });
@@ -308,30 +313,27 @@ exports.forgotPasswordPost = function(req, res, next) {
     },
     function(token, user, done) {
       var transporter = nodemailer.createTransport({
-        service: 'SendGrid',
+        service: 'mandrill',
         auth: {
-          user: process.env.SENDGRID_USER,
-          pass: process.env.SENDGRID_PASSWORD
+          user: process.env.MANDRILL_USERNAME,
+          pass: process.env.MANDRILL_PASSWORD
         }
       });
       var mailOptions = {
         to: user.email,
-        from: 'hackathon@starter.com',
-        subject: 'Reset your password on Hackathon Starter',
+        from: 'support@yourdomain.com',
+        subject: '✔ Reset your password on Mega Boilerplate',
         text: 'You are receiving this email because you (or someone else) have requested the reset of the password for your account.\n\n' +
         'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
         'http://' + req.headers.host + '/reset/' + token + '\n\n' +
         'If you did not request this, please ignore this email and your password will remain unchanged.\n'
       };
       transporter.sendMail(mailOptions, function(err) {
-        req.flash('info', { msg: 'An e-mail has been sent to ' + user.email + ' with further instructions.' });
-        done(err, 'done');
+        req.flash('info', { msg: 'An email has been sent to ' + user.email + ' with further instructions.' });
+        done(err);
       });
     }
   ], function(err) {
-    if (err) {
-      return next(err);
-    }
     res.redirect('/forgot');
   });
 };
