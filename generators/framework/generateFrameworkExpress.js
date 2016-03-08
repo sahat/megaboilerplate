@@ -3,10 +3,10 @@ import { cpy, mkdirs, readJson, writeJson, replaceCode, addNpmScript, addNpmPack
 
 async function generateFrameworkExpress(params) {
   const build = join(__base, 'build', params.uuid);
-  const express = join(__base, 'modules', 'framework', 'express');
-  const contactRoute = join(__base, 'modules', 'framework', 'express', 'routes', 'contact.js');
-  const contactController = join(__base, 'modules', 'framework', 'express', 'controllers', 'contact.js');
-  const contactControllerRequire = join(__base, 'modules', 'framework', 'express', 'controllers', 'contact-require.js');
+  const express = join(__dirname, 'modules', 'express');
+  const contactRoute = join(__dirname, 'express', 'routes', 'contact.js');
+  const contactController = join(__dirname, 'modules', 'express', 'controllers', 'contact.js');
+  const contactControllerRequire = join(__dirname, 'modules', 'express', 'controllers', 'contact-require.js');
 
   // Copy initial Express files
   await cpy([

@@ -3,7 +3,7 @@ import { copy, mkdirs, readJson, writeJson } from '../utils';
 
 async function generateFrameworkHapi(params) {
   let build = join(__base, 'build', params.uuid);
-  let hapi = join(__base, 'modules', 'framework', 'hapi');
+  let hapi = join(__dirname, 'modules', 'hapi');
 
   // Copy initial Hapi files
   await copy(hapi, build);
