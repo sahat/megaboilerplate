@@ -44,11 +44,17 @@ exports.loginPost = function(req, res, next) {
   })(req, res, next);
 };
 
+/**
+ * GET /logout
+ */
 exports.logout = function(req, res) {
   req.logout();
   res.redirect('/');
 };
 
+/**
+ * GET /signup
+ */
 exports.signupGet = function(req, res) {
   if (req.user) {
     return res.redirect('/');
@@ -58,6 +64,9 @@ exports.signupGet = function(req, res) {
   });
 };
 
+/**
+ * POST /signup
+ */
 exports.signupPost = function(req, res, next) {
   req.assert('name', 'Name cannot be blank').notEmpty();
   req.assert('email', 'Email is not valid').isEmail();
@@ -93,7 +102,6 @@ exports.signupPost = function(req, res, next) {
 
 /**
  * GET /account
- * Profile page.
  */
 exports.accountGet = function(req, res) {
   res.render('account/profile', {
@@ -102,8 +110,7 @@ exports.accountGet = function(req, res) {
 };
 
 /**
- * POST /account/profile
- * Update profile information.
+ * PUT /account
  */
 exports.accountPut = function(req, res, next) {
   User.findById(req.user.id, function(err, user) {
@@ -152,6 +159,9 @@ exports.postUpdatePassword = function(req, res, next) {
   });
 };
 
+/**
+ * DELETE /account
+ */
 exports.accountDelete = function(req, res, next) {
   User.remove({ _id: req.user.id }, function(err) {
     if (err) {
@@ -183,93 +193,10 @@ exports.unlink = function(req, res, next) {
   });
 };
 
-exports.resetPasswordGet = function(req, res) {
-  if (req.isAuthenticated()) {
-    return res.redirect('/');
-  }
-  User
-    .findOne({ resetPasswordToken: req.params.token })
-    .where('resetPasswordExpires').gt(Date.now())
-    .exec(function(err, user) {
-      if (err) {
-        return next(err);
-      }
-      if (!user) {
-        req.flash('errors', { msg: 'Password reset token is invalid or has expired.' });
-        return res.redirect('/forgot');
-      }
-      res.render('account/reset', {
-        title: 'Password Reset'
-      });
-    });
-};
-
-exports.resetPasswordPost = function(req, res, next) {
-  req.assert('password', 'Password must be at least 4 characters long.').len(4);
-  req.assert('confirm', 'Passwords must match.').equals(req.body.password);
-
-  var errors = req.validationErrors();
-
-  if (errors) {
-    req.flash('errors', errors);
-    return res.redirect('back');
-  }
-
-  async.waterfall([
-    function(done) {
-      User
-        .findOne({ resetPasswordToken: req.params.token })
-        .where('resetPasswordExpires').gt(Date.now())
-        .exec(function(err, user) {
-          if (err) {
-            return next(err);
-          }
-          if (!user) {
-            req.flash('errors', { msg: 'Password reset token is invalid or has expired.' });
-            return res.redirect('back');
-          }
-          user.password = req.body.password;
-          user.resetPasswordToken = undefined;
-          user.resetPasswordExpires = undefined;
-          user.save(function(err) {
-            if (err) {
-              return next(err);
-            }
-            req.logIn(user, function(err) {
-              done(err, user);
-            });
-          });
-        });
-    },
-    function(user, done) {
-      var transporter = nodemailer.createTransport({
-        service: 'SendGrid',
-        auth: {
-          user: process.env.SENDGRID_USER,
-          pass: process.env.SENDGRID_PASSWORD
-        }
-      });
-      var mailOptions = {
-        to: user.email,
-        from: 'hackathon@starter.com',
-        subject: 'Your Hackathon Starter password has been changed',
-        text: 'Hello,\n\n' +
-        'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
-      };
-      transporter.sendMail(mailOptions, function(err) {
-        req.flash('success', { msg: 'Success! Your password has been changed.' });
-        done(err);
-      });
-    }
-  ], function(err) {
-    if (err) {
-      return next(err);
-    }
-    res.redirect('/');
-  });
-};
-
-exports.forgotPasswordGet = function(req, res) {
+/**
+ * GET /forgot
+ */
+exports.forgotGet = function(req, res) {
   if (req.isAuthenticated()) {
     return res.redirect('/');
   }
@@ -278,7 +205,10 @@ exports.forgotPasswordGet = function(req, res) {
   });
 };
 
-exports.forgotPasswordPost = function(req, res, next) {
+/**
+ * POST /forgot
+ */
+exports.forgotPost = function(req, res, next) {
   req.assert('email', 'Email is not valid').isEmail();
   req.assert('email', 'Email cannot be blank').notEmpty();
   req.sanitize('email').normalizeEmail();
@@ -335,5 +265,83 @@ exports.forgotPasswordPost = function(req, res, next) {
     }
   ], function(err) {
     res.redirect('/forgot');
+  });
+};
+
+/**
+ * GET /reset
+ */
+exports.resetGet = function(req, res) {
+  if (req.isAuthenticated()) {
+    return res.redirect('/');
+  }
+  User.findOne({ passwordResetToken: req.params.token })
+    .where('passwordResetExpires').gt(Date.now())
+    .exec(function(err, user) {
+      if (!user) {
+        req.flash('error', { msg: 'Password reset token is invalid or has expired.' });
+        return res.redirect('/forgot');
+      }
+      res.render('account/reset', {
+        title: 'Password Reset'
+      });
+    });
+};
+
+/**
+ * POST /reset
+ */
+exports.resetPost = function(req, res, next) {
+  req.assert('password', 'Password must be at least 4 characters long').len(4);
+  req.assert('confirm', 'Passwords must match').equals(req.body.password);
+
+  var errors = req.validationErrors();
+
+  if (errors) {
+    req.flash('error', errors);
+    return res.redirect('back');
+  }
+
+  async.waterfall([
+    function(done) {
+      User.findOne({ passwordResetToken: req.params.token })
+        .where('passwordResetExpires').gt(Date.now())
+        .exec(function(err, user) {
+          if (!user) {
+            req.flash('error', { msg: 'Password reset token is invalid or has expired.' });
+            return res.redirect('back');
+          }
+          user.password = req.body.password;
+          user.passwordResetToken = undefined;
+          user.passwordResetExpires = undefined;
+          user.save(function(err) {
+            req.logIn(user, function(err) {
+              done(err, user);
+            });
+          });
+        });
+    },
+    function(user, done) {
+      var transporter = nodemailer.createTransport({
+        service: 'mandrill',
+        auth: {
+          user: process.env.MANDRILL_USERNAME,
+          pass: process.env.MANDRILL_PASSWORD
+        }
+      });
+      var mailOptions = {
+        from: 'support@yourdomain.com',
+        to: user.email,
+        subject: 'Your Mega Boilerplate password has been changed',
+        text: 'Hello,\n\n' +
+        'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
+      };
+      transporter.sendMail(mailOptions, function(err) {
+        req.flash('success', { msg: 'Your password has been changed successfully.' });
+        done(err);
+      });
+    }
+  ], function(err) {
+    res.redirect('/');
   });
 };
