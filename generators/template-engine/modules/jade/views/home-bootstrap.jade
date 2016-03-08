@@ -2,6 +2,11 @@ extends layout
 
 block content
   main.container-fluid
+    if messages.success
+      .alert.alert-success(role='alert')
+        for success in messages.success
+          div= success.msg
+
     .row
       .col-sm-4
         .panel
