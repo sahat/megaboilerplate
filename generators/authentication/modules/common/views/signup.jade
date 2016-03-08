@@ -3,8 +3,6 @@ extends ../layout
 block content
   .login-container
     .panel
-      .panel-heading
-        h3.panel-title Create an account
       .panel-body
         if messages.error
           .alert.alert-danger(role='alert')
@@ -12,6 +10,7 @@ block content
               div= error.msg
 
         form(method='post')
+          legend Create an account
           .form-group
             label.control-label(for='name') Name
             input.form-control(type='text', name='name', id='name', placeholder='Name', autofocus=true)
@@ -38,5 +37,5 @@ block content
     br
     p.text-center Already have an account?
       |&nbsp;
-      a(href='/signup')
+      a(href='/login')
         strong Log in

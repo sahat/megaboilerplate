@@ -3,8 +3,6 @@ extends ../layout
 block content
   .login-container
     .panel
-      .panel-heading
-        h3.panel-title Log In
       .panel-body
         if messages.error
           .alert.alert-danger(role='alert')
@@ -12,6 +10,7 @@ block content
               div= error.msg
 
         form(method='post')
+          legend Log In
           .form-group
             label.control-label(for='email') Email
             input.form-control(type='email', name='email', id='email', placeholder='Email', autofocus=true)
