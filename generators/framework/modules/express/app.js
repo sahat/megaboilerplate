@@ -41,6 +41,7 @@ app.use(flash());
 app.use(express.static(path.join(__dirname, 'public')));
 //= HOME_ROUTE
 //= CONTACT_ROUTE
+//= ACCOUNT_ROUTES
 //= REACT_SERVER_RENDERING
 //= PASSPORT_LOCAL_ROUTES
 //= PASSPORT_COMMON_ROUTES
