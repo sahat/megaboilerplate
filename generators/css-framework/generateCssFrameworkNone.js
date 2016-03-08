@@ -3,7 +3,7 @@ import { cpy, replaceCode } from '../utils';
 
 async function generateCssFrameworkNone(params) {
   const build = join(__base, 'build', params.uuid);
-  const normalizeCss = join(__base, 'modules', 'css-framework', 'none', 'normalize.css');
+  const normalizeCss = join(__dirname, 'modules', 'none', 'normalize.css');
   const token = 'CSS_FRAMEWORK_IMPORT';
 
   switch (params.framework) {
@@ -11,7 +11,7 @@ async function generateCssFrameworkNone(params) {
     case 'hapi':
       if (params.templateEngine === 'jade') {
         const layoutJade = join(build, 'views', 'layout.jade');
-        const cssImport = join(__base, 'modules', 'css-framework', 'none', 'express-jade-import.jade');
+        const cssImport = join(__dirname, 'modules', 'none', 'express-jade-import.jade');
         await replaceCode(layoutJade, token, cssImport, { indentLevel: 2 });
       } else if (params.templateEngine === 'handlebars') {
         // TODO
