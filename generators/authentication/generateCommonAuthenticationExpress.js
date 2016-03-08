@@ -31,8 +31,8 @@ async function generateCommonAuthenticationExpress(params) {
   // Passport config file
   await copy(passportConfigModule, passportConfigFile);
   await replaceCode(passportConfigFile, 'PASSPORT_USER_MODEL', passportUserModel);
-  await replaceCode(passportConfigFile, 'PASSPORT_SERIALIZER', passportSerializer, { leadingBlankLine: true });
-  await replaceCode(passportConfigFile, 'PASSPORT_DESERIALIZER', passportDeserializer, { leadingBlankLine: true });
+  await replaceCode(passportConfigFile, 'PASSPORT_SERIALIZER', passportSerializer);
+  await replaceCode(passportConfigFile, 'PASSPORT_DESERIALIZER', passportDeserializer);
 
   await addNpmPackage('passport', params);
 
@@ -53,8 +53,17 @@ async function generateCommonAuthenticationExpress(params) {
     case 'jade':
       const loginJade = join(__dirname, 'modules', 'common', 'views', 'login.jade');
       const signupJade = join(__dirname, 'modules', 'common', 'views', 'signup.jade');
+      const forgotJade = join(__dirname, 'modules', 'common', 'views', 'forgot.jade');
+      const resetJade = join(__dirname, 'modules', 'common', 'views', 'reset.jade');
+      const profileJade = join(__dirname, 'modules', 'common', 'views', 'profile.jade');
       await mkdirs(join(build, 'views', 'account'));
-      await cpy([loginJade, signupJade], join(build, 'views', 'account'));
+      await cpy([
+        loginJade,
+        signupJade,
+        forgotJade,
+        resetJade,
+        profileJade
+      ], join(build, 'views', 'account'));
       break;
     default:
       break;
