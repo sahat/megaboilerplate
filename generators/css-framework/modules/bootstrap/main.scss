@@ -87,8 +87,19 @@ footer {
   border-bottom: 3px solid transparent;
   padding-bottom: ($navbar-padding-vertical - 3);
   transition: all 0.25s;
+
   &:hover {
     border-bottom-color: #bdbdbd;
+  }
+
+  &.navbar-avatar {
+    padding-top: $navbar-padding-vertical - 4.5;
+    padding-bottom: ($navbar-padding-vertical - 4.5) - 3;
+    img {
+      border-radius: 50%;
+      width: 30px;
+      height: auto;
+    }
   }
 }
 
