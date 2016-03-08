@@ -3,7 +3,7 @@ import { cpy } from '../utils';
 
 async function generateLessPreprocessor(params) {
   const cssDir = join(__base, 'build', params.uuid, 'public', 'css');
-  const mainLess = join(__base, 'modules', 'css-preprocessor', 'main.less');
+  const mainLess = join(__dirname, 'modules', 'main.less');
 
   switch (params.framework) {
     case 'express':

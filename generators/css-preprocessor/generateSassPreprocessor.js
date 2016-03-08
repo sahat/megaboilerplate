@@ -3,7 +3,7 @@ import { cpy } from '../utils';
 
 async function generateSassPreprocessor(params) {
   const cssDir = join(__base, 'build', params.uuid, 'public', 'css');
-  const mainSass = join(__base, 'modules', 'css-preprocessor', 'main.scss');
+  const mainSass = join(__dirname, 'modules', 'main.scss');
 
   switch (params.framework) {
     case 'express':
