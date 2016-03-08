@@ -3,15 +3,15 @@ import { copy, mkdirs, addNpmPackage, replaceCode, removeCode } from '../utils';
 
 async function generateJsFrameworkReact(params) {
   const build = join(__base, 'build', params.uuid);
-  const mainJs = join(__base, 'modules', 'js-framework', 'react', 'main.js');
-  const reactRequire = join(__base, 'modules', 'js-framework', 'react', 'react-require.js');
+  const mainJs = join(__dirname, 'modules', 'react', 'main.js');
+  const reactRequire = join(__dirname, 'modules', 'react', 'react-require.js');
   const app = join(build, 'app.js');
 
   switch (params.framework) {
     case 'express':
-      const expressReactRouterServerRendering = join(__base, 'modules', 'js-framework', 'react', 'react-router-server-rendering.js');
-      const expressServerRendering = join(__base, 'modules', 'js-framework', 'react', 'server-rendering.js');
-      const renderTemplateNunjucks = join(__base, 'modules', 'js-framework', 'react', 'render-template-nunjucks.js');
+      const expressReactRouterServerRendering = join(__dirname, 'modules', 'react', 'react-router-server-rendering.js');
+      const expressServerRendering = join(__dirname, 'modules', 'react', 'server-rendering.js');
+      const renderTemplateNunjucks = join(__dirname, 'modules', 'react', 'render-template-nunjucks.js');
 
       if (params.reactOptions && params.reactOptions.reactRouter) {
         await replaceCode(app, 'REACT_SERVER_RENDERING', expressReactRouterServerRendering, { leadingBlankLine: true });
@@ -22,7 +22,7 @@ async function generateJsFrameworkReact(params) {
       switch (params.templateEngine) {
         case 'jade':
           const layoutJade = join(build, 'views', 'layout.jade');
-          const bundleJadeImport = join(__base, 'modules', 'js-framework', 'react', 'react-jade-import.jade');
+          const bundleJadeImport = join(__dirname, 'modules', 'react', 'react-jade-import.jade');
           await replaceCode(layoutJade, 'JS_FRAMEWORK_MAIN_IMPORT', bundleJadeImport, { indentLevel: 2, leadingBlankLine: true });
           break;
 
@@ -31,7 +31,7 @@ async function generateJsFrameworkReact(params) {
 
         case 'nunjucks':
           const layoutNunjucks = join(build, 'views', 'layout.html');
-          const bundleNunjucksImport = join(__base, 'modules', 'js-framework', 'react', 'react-html-import.html');
+          const bundleNunjucksImport = join(__dirname, 'modules', 'react', 'react-html-import.html');
           await replaceCode(layoutNunjucks, 'JS_FRAMEWORK_MAIN_IMPORT', bundleNunjucksImport, { indentLevel: 1 });
           await replaceCode(app, 'RENDER_TEMPLATE', renderTemplateNunjucks);
           break;

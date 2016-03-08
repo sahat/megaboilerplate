@@ -18,13 +18,13 @@ async function addTemplateImport(params, layout, templateImport) {
 }
 
 async function generateJsFrameworkNone(params) {
-  const mainJs = join(__base, 'modules', 'js-framework', 'none', 'main.js');
-  const mainJsWithJquery = join(__base, 'modules', 'js-framework', 'none', 'main-with-jquery.js');
+  const mainJs = join(__dirname, 'modules', 'none', 'main.js');
+  const mainJsWithJquery = join(__dirname, 'modules', 'none', 'main-with-jquery.js');
 
   switch (params.framework) {
     case 'express':
       const layout = join(__base, 'build', params.uuid, 'views', 'layout.jade');
-      const mainJsImport = join(__base, 'modules', 'js-framework', 'none', 'express-jade-import.jade');
+      const mainJsImport = join(__dirname, 'modules', 'none', 'express-jade-import.jade');
 
       // Add HTML references
       await addTemplateImport(params, layout, mainJsImport);
