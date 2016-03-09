@@ -19,7 +19,7 @@ async function generateTestingMocha(params) {
 
       await mkdirs(join(build, 'test'));
       await cpy([
-        join(__base, 'modules', 'testing', 'mocha', 'server.test.js')
+        join(__dirname, 'modules', 'mocha', 'server.test.js')
       ], join(build, 'test'));
       break;
     case 'hapi':
