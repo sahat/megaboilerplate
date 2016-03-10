@@ -158,11 +158,8 @@ exports.accountPut = function(req, res, next) {
  */
 exports.accountDelete = function(req, res, next) {
   User.remove({ _id: req.user.id }, function(err) {
-    if (err) {
-      return next(err);
-    }
     req.logout();
-    req.flash('info', { msg: 'Your account has been deleted.' });
+    req.flash('info', { msg: 'Your account has been permanently deleted.' });
     res.redirect('/');
   });
 };

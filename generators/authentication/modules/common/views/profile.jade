@@ -85,7 +85,7 @@ block content
 
     .panel
       .panel-body
-        form.form-horizontal(method='post')
+        form.form-horizontal(method='POST', action='/account?_method=DELETE')
           legend Delete Account
           .form-group
             p.col-sm-offset-3.col-sm-9 You can delete your account, but keep in mind this action is irreversible.
