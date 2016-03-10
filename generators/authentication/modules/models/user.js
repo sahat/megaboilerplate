@@ -1,14 +1,17 @@
 var crypto = require('crypto');
 var bcrypt = require('bcrypt-nodejs');
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
 
-var userSchema = new Schema({
+var userSchema = new mongoose.Schema({
   name: String,
   email: { type: String, unique: true, lowercase: true },
   password: { type: String, required: true },
   passwordResetToken: String,
-  passwordResetExpires: Date
+  passwordResetExpires: Date,
+  gender: String,
+  location: String,
+  website: String,
+  picture: String
 }, { timestamps: true });
 
 userSchema.pre('save', function(next) {
