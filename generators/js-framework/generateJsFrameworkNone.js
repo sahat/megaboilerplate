@@ -1,6 +1,7 @@
 import { join } from 'path';
 import { copy, replaceCode, removeCode, addNpmPackage } from '../utils';
 
+// CSS frameworks that depend on jQuery
 const CSS_FRAMEWORK_WITH_JQUERY = ['bootstrap', 'foundation'];
 
 // helper function

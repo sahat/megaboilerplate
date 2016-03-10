@@ -1,6 +1,28 @@
 import { join } from 'path';
 import { copy, mkdirs, addNpmPackage, replaceCode, removeCode } from '../utils';
 
+// helper function
+async function updateLayoutTemplate(params) {
+  const layout = join(__base, 'build', params.uuid, 'views', 'layout.jade');
+
+  const appContainer = join(__dirname, 'modules', 'jade', 'app-container.jade');
+  const blockContent = join(__dirname, 'modules', 'jade', 'block-content.jade');
+  const socketIoImport = join(__dirname, 'modules', 'jade', 'socketio-import.jade');
+
+  if (params.jsFramework === 'none') {
+    // Use "block content" (traditional web app)
+    await replaceCode(layout, 'APP_CONTAINER_OR_BLOCK_CONTENT', blockContent, { indentLevel: 2 });
+  } else {
+    // Use "#app-container" div element (single page app)
+    await replaceCode(layout, 'APP_CONTAINER_OR_BLOCK_CONTENT', appContainer, { indentLevel: 2 });
+  }
+
+  // Add Socket.IO <script> tag (optional)
+  if (params.frameworkOptions.includes('socketio')) {
+    await replaceCode(layout, 'SOCKETIO_IMPORT', socketIoImport, { indentLevel: 2 });
+  }
+}
+
 async function generateJsFrameworkReact(params) {
   const build = join(__base, 'build', params.uuid);
   const mainJs = join(__dirname, 'modules', 'react', 'main.js');
@@ -9,14 +31,15 @@ async function generateJsFrameworkReact(params) {
 
   switch (params.framework) {
     case 'express':
-      const expressReactRouterServerRendering = join(__dirname, 'modules', 'react', 'react-router-server-rendering.js');
-      const expressServerRendering = join(__dirname, 'modules', 'react', 'server-rendering.js');
       const renderTemplateNunjucks = join(__dirname, 'modules', 'react', 'render-template-nunjucks.js');
 
+      // Optional: React Router
       if (params.reactOptions && params.reactOptions.reactRouter) {
-        await replaceCode(app, 'REACT_SERVER_RENDERING', expressReactRouterServerRendering, { leadingBlankLine: true });
+        const reactRouterServerRendering = join(__dirname, 'modules', 'react', 'react-router-server-rendering.js');
+        await replaceCode(app, 'REACT_SERVER_RENDERING', reactRouterServerRendering);
       } else {
-        await replaceCode(app, 'REACT_SERVER_RENDERING', expressServerRendering, { leadingBlankLine: true });
+        const serverRendering = join(__dirname, 'modules', 'react', 'server-rendering.js');
+        await replaceCode(app, 'REACT_SERVER_RENDERING', serverRendering);
       }
 
       switch (params.templateEngine) {
