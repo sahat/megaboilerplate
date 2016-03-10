@@ -11,6 +11,7 @@
     "dotenv": "^2.0.0",
     "express": "^4.12.2",
     "express-session": "^1.2.1",
+    "method-override": "^2.3.5",
     "morgan": "^1.5.1"
   }
 }
