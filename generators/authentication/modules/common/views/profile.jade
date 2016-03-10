@@ -4,7 +4,16 @@ block content
   .container
     .panel
       .panel-body
-        form.form-horizontal(method='post')
+        if messages.success
+          .alert.alert-success(role='alert')
+            for success in messages.success
+              div= success.msg
+        if messages.error
+          .alert.alert-danger(role='alert')
+            for error in messages.error
+              div= error.msg
+
+        form.form-horizontal(method='POST', action='/account?_method=PUT')
           legend Profile Information
           .form-group
             label.col-sm-3.control-label(for='email') Email
@@ -41,16 +50,16 @@ block content
 
     .panel
       .panel-body
-        form.form-horizontal(method='post')
+        form.form-horizontal(method='POST', action='/account?_method=PUT')
           legend Change Password
           .form-group
             label.col-sm-3.control-label(for='password') New Password
             .col-sm-7
               input.form-control(type='password', name='password', id='password')
           .form-group
-            label.col-sm-3.control-label(for='confirmPassword') Confirm Password
+            label.col-sm-3.control-label(for='confirm') Confirm Password
             .col-sm-7
-              input.form-control(type='password', name='confirmPassword', id='confirmPassword')
+              input.form-control(type='password', name='confirm', id='confirm')
           .form-group
             .col-sm-4.col-sm-offset-3
               button.btn.btn-success(type='submit') Change Password
