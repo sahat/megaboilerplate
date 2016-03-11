@@ -20,7 +20,7 @@ passport.use(new FacebookStrategy({
           user.picture = user.picture || 'https://graph.facebook.com/' + profile.id + '/picture?type=large';
           user.facebook = profile.id;
           user.save(function(err) {
-            req.flash('info', { msg: 'Your Facebook account has been successfully linked.' });
+            req.flash('info', { msg: 'Your Facebook account has been linked successfully.' });
             done(err, user);
           });
         });

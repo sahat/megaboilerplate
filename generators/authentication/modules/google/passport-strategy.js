@@ -7,43 +7,45 @@ passport.use(new GoogleStrategy({
   passReqToCallback: true
 }, function(req, accessToken, refreshToken, profile, done) {
   if (req.user) {
-    User.findOne({ google: profile.id }, function(err, existingUser) {
-      if (existingUser) {
-        req.flash('errors', { msg: 'There is already a Google account that belongs to you. Sign in with that account or delete it, then link it with your current account.' });
+    User.findOne({ google: profile.id }, function(err, user) {
+      if (user) {
+        req.flash('error', { msg: 'There is an existing Google account that belongs to you. ' +
+        'Sign in with that account or delete it, then link it with your current account.' });
         done(err);
       } else {
         User.findById(req.user.id, function(err, user) {
+          user.name = user.name || profile.displayName;
+          user.gender = user.gender || profile._json.gender;
+          user.picture = user.picture || profile._json.image.url;
           user.google = profile.id;
-          user.tokens.push({ kind: 'google', accessToken: accessToken });
-          user.profile.name = user.profile.name || profile.displayName;
-          user.profile.gender = user.profile.gender || profile._json.gender;
-          user.profile.picture = user.profile.picture || profile._json.image.url;
           user.save(function(err) {
-            req.flash('info', { msg: 'Google account has been linked.' });
+            req.flash('info', { msg: 'Your Google account has been linked successfully.' });
             done(err, user);
           });
         });
       }
     });
   } else {
-    User.findOne({ google: profile.id }, function(err, existingUser) {
-      if (existingUser) {
-        return done(null, existingUser);
+    User.findOne({ google: profile.id }, function(err, user) {
+      if (user) {
+        return done(null, user);
       }
-      User.findOne({ email: profile.emails[0].value }, function(err, existingEmailUser) {
-        if (existingEmailUser) {
-          req.flash('errors', { msg: 'There is already an account using this email address. Sign in to that account and link it with Google manually from Account Settings.' });
+      User.findOne({ email: profile.emails[0].value }, function(err, user) {
+        if (user) {
+          req.flash('error', { msg: 'Your email ' + user.email + ' is already associated with an account. ' +
+          'Sign in to that account, then link it with Google manually from My Account page.' });
           done(err);
         } else {
-          var user = new User();
-          user.email = profile.emails[0].value;
-          user.google = profile.id;
-          user.tokens.push({ kind: 'google', accessToken: accessToken });
-          user.profile.name = profile.displayName;
-          user.profile.gender = profile._json.gender;
-          user.profile.picture = profile._json.image.url;
-          user.save(function(err) {
-            done(err, user);
+          var newUser = new User({
+            name: profile.displayName,
+            email: profile.emails[0].value,
+            gender: profile._json.gender,
+            location: profile._json.location,
+            picture: profile._json.image.url,
+            google: profile.id
+          });
+          newUser.save(function(err) {
+            done(err, newUser);
           });
         }
       });
