@@ -10,7 +10,7 @@ passport.use(new TwitterStrategy({
     User.findOne({ twitter: profile.id }, function(err, user) {
       if (user) {
         req.flash('error', { msg: 'There is an existing Twitter account that belongs to you. ' +
-        'Sign in with that account or delete it, then link it with your current account.' });
+        'Sign in with that account, or delete it and then link it with your current account.' });
         done(err);
       } else {
         User.findById(req.user.id, function(err, user) {
