@@ -1,9 +1,11 @@
 import { join } from 'path';
-import { replaceCode, removeCode, addNpmPackage } from '../utils';
+import { replaceCode, appendFile, addNpmPackage } from '../utils';
 
 async function generateFacebookAuthenticationExpress(params) {
-  const app = join(__base, 'build', params.uuid, 'app.js');
-  const config = join(__base, 'build', params.uuid, 'config', 'passport.js');
+  const build = join(__base, 'build', params.uuid);
+  const app = join(build, 'app.js');
+  const env = join(build, '.env');
+  const config = join(build, 'config', 'passport.js');
   const require = join(__dirname, 'modules', 'facebook', 'passport-require.js');
   const strategy = join(__dirname, 'modules', 'facebook', 'passport-strategy.js');
   const routes = join(__dirname, 'modules', 'facebook', 'passport-routes.js');
@@ -13,6 +15,9 @@ async function generateFacebookAuthenticationExpress(params) {
   await replaceCode(config, 'PASSPORT_FACEBOOK_STRATEGY', strategy);
 
   await addNpmPackage('passport-facebook', params);
+
+  await appendFile(env, '\nFACEBOOK_ID=754220301289665');
+  await appendFile(env, '\nFACEBOOK_SECRET=41860e58c256a3d7ad8267d3c1939a4a\n');
 }
 
 export default generateFacebookAuthenticationExpress;

@@ -15,7 +15,7 @@ async function generateMongodbDatabase(params) {
       await replaceCode(appExpress, 'DATABASE_CONNECTION', mongooseConnect);
 
       // Add MONGODB environment variable
-      await appendFile(join(__base, 'build', params.uuid, '.env'), 'MONGODB=mongodb://localhost/test');
+      await appendFile(join(__base, 'build', params.uuid, '.env'), '\nMONGODB=mongodb://localhost/test\n');
 
       // Add mongoose to package.json
       await addNpmPackage('mongoose', params);
