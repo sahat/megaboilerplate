@@ -8,44 +8,45 @@ passport.use(new FacebookStrategy({
   passReqToCallback: true
 }, function(req, accessToken, refreshToken, profile, done) {
   if (req.user) {
-    User.findOne({ facebook: profile.id }, function(err, existingUser) {
-      if (existingUser) {
-        req.flash('errors', { msg: 'There is already a Facebook account that belongs to you. Sign in with that account or delete it, then link it with your current account.' });
+    User.findOne({ facebook: profile.id }, function(err, user) {
+      if (user) {
+        req.flash('error', { msg: 'There is an existing Facebook account that belongs to you. ' +
+        'Sign in with that account or delete it, then link it with your current account.' });
         done(err);
       } else {
         User.findById(req.user.id, function(err, user) {
+          user.name = user.name || profile.displayName;
+          user.gender = user.gender || profile._json.gender;
+          user.picture = user.picture || 'https://graph.facebook.com/' + profile.id + '/picture?type=large';
           user.facebook = profile.id;
-          user.tokens.push({ kind: 'facebook', accessToken: accessToken });
-          user.profile.name = user.profile.name || profile.displayName;
-          user.profile.gender = user.profile.gender || profile._json.gender;
-          user.profile.picture = user.profile.picture || 'https://graph.facebook.com/' + profile.id + '/picture?type=large';
           user.save(function(err) {
-            req.flash('info', { msg: 'Facebook account has been linked.' });
+            req.flash('info', { msg: 'Your Facebook account has been successfully linked.' });
             done(err, user);
           });
         });
       }
     });
   } else {
-    User.findOne({ facebook: profile.id }, function(err, existingUser) {
-      if (existingUser) {
-        return done(null, existingUser);
+    User.findOne({ facebook: profile.id }, function(err, user) {
+      if (user) {
+        return done(err, user);
       }
-      User.findOne({ email: profile._json.email }, function(err, existingEmailUser) {
-        if (existingEmailUser) {
-          req.flash('errors', { msg: 'There is already an account using this email address. Sign in to that account and link it with Facebook manually from Account Settings.' });
+      User.findOne({ email: profile._json.email }, function(err, user) {
+        if (user) {
+          req.flash('error', { msg: 'Your email ' + user.email + ' is already associated with an account. ' +
+          'Sign in to that account, then link it with Facebook manually from My Account page.' });
           done(err);
         } else {
-          var user = new User();
-          user.email = profile._json.email;
-          user.facebook = profile.id;
-          user.tokens.push({ kind: 'facebook', accessToken: accessToken });
-          user.profile.name = profile.displayName;
-          user.profile.gender = profile._json.gender;
-          user.profile.picture = 'https://graph.facebook.com/' + profile.id + '/picture?type=large';
-          user.profile.location = (profile._json.location) ? profile._json.location.name : '';
-          user.save(function(err) {
-            done(err, user);
+          var newUser = new User({
+            name: profile.displayName,
+            email: profile._json.email,
+            gender: profile._json.gender,
+            location: profile._json.location,
+            picture: 'https://graph.facebook.com/' + profile.id + '/picture?type=large',
+            facebook: profile.id
+          });
+          newUser.save(function(err) {
+            done(err, newUser);
           });
         }
       });
