@@ -1,5 +1,5 @@
 import { join } from 'path';
-import { copy, replaceCode, addNpmPackage } from '../utils';
+import { mkdirs, copy, replaceCode, addNpmPackage } from '../utils';
 
 // helper function
 async function updateLayoutTemplate(params) {
@@ -38,17 +38,18 @@ async function copyTemplates(params) {
   // Copy initial Jade templates to "views" directory
   await copy(layout, join(viewsDir, 'layout.jade'));
   await copy(home, join(viewsDir, 'home.jade'));
+  await mkdirs(join(viewsDir, 'includes'));
 
   // Copy header and footer partial templates
   switch (params.cssFramework) {
     case 'none':
-      await copy(plainCssHeader, join(viewsDir, 'header.jade'));
-      await copy(plainCssFooter, join(viewsDir, 'footer.jade'));
+      await copy(plainCssHeader, join(viewsDir, 'includes', 'header.jade'));
+      await copy(plainCssFooter, join(viewsDir, 'includes', 'footer.jade'));
       break;
 
     case 'bootstrap':
-      await copy(bootstrapHeader, join(viewsDir, 'header.jade'));
-      await copy(bootstrapFooter, join(viewsDir, 'footer.jade'));
+      await copy(bootstrapHeader, join(viewsDir, 'includes', 'header.jade'));
+      await copy(bootstrapFooter, join(viewsDir, 'includes', 'footer.jade'));
       await copy(bootstrapHome, join(viewsDir, 'home.jade'));
       await copy(bootstrapContact, join(viewsDir, 'contact.jade'));
       break;
