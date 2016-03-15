@@ -2,7 +2,6 @@ var express = require('express');
 var path = require('path');
 var logger = require('morgan');
 var methodOverride = require('method-override');
-var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var flash = require('express-flash');
 var bodyParser = require('body-parser');
@@ -35,7 +34,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator());
 app.use(methodOverride('_method'));
-app.use(cookieParser());
 app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 app.use(flash());
 //= PASSPORT_MIDDLEWARE
