@@ -883,6 +883,17 @@ canvas {
   fill: currentColor;
 }
 
+.sqlite .panel-heading {
+  color: #fff;
+  background: #0f80cc;
+  border-color: transparent;
+}
+
+.sqlite svg {
+  color: #fff;
+  fill: currentColor;
+}
+
 .mysql .panel-heading {
   color: #fff;
   background: #f59620;

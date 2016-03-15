@@ -19,6 +19,13 @@ const Database = (props) => {
         </div>
       );
       break;
+    case 'sqlite':
+      description = (
+        <div>
+          <strong><a href="https://www.sqlite.org/" target="_blank">SQLite</a></strong> — A self-contained, serverless, zero-configuration, transactional SQL database engine.
+        </div>
+      );
+      break;
     case 'mysql':
       description = (
         <div>
@@ -72,6 +79,11 @@ const Database = (props) => {
             <input type="radio" name="databaseRadios" value="mongodb" onChange={props.handleChange} checked={props.database === 'mongodb'} />
             <span>MongoDB</span>
             {recommended}
+          </label>
+          <label className="radio-inline">
+            <img className="btn-logo" src="/img/svg/sqlite-logo.svg" alt="SQLite3" />
+            <input type="radio" name="databaseRadios" value="sqlite" onChange={props.handleChange} checked={props.database === 'sqlite'} />
+            <span>SQLite3</span>
           </label>
           <label className="radio-inline">
             <img className="btn-logo" src="/img/svg/mysql-logo.svg" alt="MySQL" />
