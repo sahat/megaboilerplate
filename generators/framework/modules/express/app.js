@@ -60,3 +60,5 @@ if (app.get('env') === 'production') {
 
 //= SOCKETIO
 //= APP_LISTEN
+
+module.exports = app;

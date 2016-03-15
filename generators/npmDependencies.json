@@ -39,6 +39,7 @@
   "karma-mocha": "^0.2.1",
   "sinon": "^1.17.3",
   "sinon-chai": "^2.8.0",
+  "supertest": "^1.2.0",
 
   "mongoose": "^4.2.8",
   "knex": "^0.9.0",
