@@ -30,7 +30,6 @@ async function copyTemplates(params) {
   const home = join(__dirname, 'modules', 'jade', 'views', 'home.jade');
   const plainCssHeader = join(__dirname, 'modules', 'jade', 'views', 'header.jade');
   const plainCssFooter = join(__dirname, 'modules', 'jade', 'views', 'footer.jade');
-  const bootstrapHeader = join(__dirname, 'modules', 'jade', 'views', 'header-bootstrap.jade');
   const bootstrapFooter = join(__dirname, 'modules', 'jade', 'views', 'footer-bootstrap.jade');
   const bootstrapHome = join(__dirname, 'modules', 'jade', 'views', 'home-bootstrap.jade');
   const bootstrapContact = join(__dirname, 'modules', 'jade', 'views', 'contact-bootstrap.jade');
@@ -48,7 +47,16 @@ async function copyTemplates(params) {
       break;
 
     case 'bootstrap':
+      const bootstrapHeader = join(__dirname, 'modules', 'jade', 'views', 'header-bootstrap.jade');
+      const bootstrapHeaderAuthLinks = join(__dirname, 'modules', 'jade', 'views', 'header-auth-bootstrap.jade');
+
       await copy(bootstrapHeader, join(viewsDir, 'includes', 'header.jade'));
+
+      // Is authentication checked? Add "Log in" / "Sign up"/ "Logout" links to the header
+      if (params.authentication && params.authentication.length) {
+        await replaceCode(join(viewsDir, 'includes', 'header.jade'), 'HEADER_AUTH_LINKS', bootstrapHeaderAuthLinks, { indentLevel: 3 });
+      }
+
       await copy(bootstrapFooter, join(viewsDir, 'includes', 'footer.jade'));
       await copy(bootstrapHome, join(viewsDir, 'home.jade'));
       await copy(bootstrapContact, join(viewsDir, 'contact.jade'));
