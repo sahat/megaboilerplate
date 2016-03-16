@@ -1,5 +1,5 @@
 new User({ passwordResetToken: req.params.token })
-  .where('passwordResetExpires', '>', Date.now())
+  .where('passwordResetExpires', '>', new Date())
   .fetch()
   .then(function(user) {
     if (!user) {
