@@ -5,7 +5,7 @@ ul.nav.navbar-nav.navbar-right
         if user.picture
           img(src=user.picture)
         else
-          img(src=user.gravatar(60))
+          img(src=user.gravatar)
         | <span> #{user.name || user.email || user.id} </span>
         i.caret
       ul.dropdown-menu
