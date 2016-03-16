@@ -125,11 +125,9 @@ exports.accountDelete = function(req, res, next) {
 };
 
 /**
- * GET /account/unlink/:provider
- * Unlink OAuth provider.
+ * GET /unlink/:provider
  */
 exports.unlink = function(req, res, next) {
-  var provider = req.params.provider;
   //= USER_PROVIDER_UNLINK
 };
 
