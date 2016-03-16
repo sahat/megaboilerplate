@@ -15,7 +15,7 @@ new User({ id: req.user.id })
         req.flash('error', { msg: 'Invalid OAuth Provider' });
         return res.redirect('/account');
     }
-    user.save().then(function() {
+    user.save(user.changed, { patch: true }).then(function() {
       req.flash('success', { msg: 'Your account has been unlinked.' });
       res.redirect('/account');
     });
