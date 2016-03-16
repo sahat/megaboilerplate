@@ -6,7 +6,7 @@ exports.up = function(knex, Promise) {
       table.string('email').unique();
       table.string('password');
       table.string('passwordResetToken');
-      table.date('passwordResetExpires');
+      table.dateTime('passwordResetExpires');
       table.string('gender');
       table.string('location');
       table.string('website');
