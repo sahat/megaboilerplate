@@ -40,9 +40,7 @@ userSchema.methods.comparePassword = function(password, cb) {
 };
 
 userSchema.methods.gravatar = function(size) {
-  if (!size) {
-    size = 200;
-  }
+  size = size || 200;
   if (!this.email) {
     return 'https://gravatar.com/avatar/?s=' + size + '&d=retro';
   }

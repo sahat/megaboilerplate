@@ -5,9 +5,11 @@ var bookshelf = require('../config/bookshelf');
 var User = bookshelf.Model.extend({
   tableName: 'users',
   hasTimestamps: true,
+
   initialize: function() {
     this.on('saving', this.hashPassword, this);
   },
+
   hashPassword: function(model, attrs, options) {
     var password = options.patch ? attrs.password : model.get('password');
     if (!password) { return; }
@@ -23,12 +25,21 @@ var User = bookshelf.Model.extend({
       });
     });
   },
+
   comparePassword: function(password, done) {
     var model = this;
     bcrypt.compare(password, model.get('password'), function(err, isMatch) {
-      console.log(err, isMatch);
       done(err, isMatch);
     });
+  },
+
+  gravatar: function(size) {
+    size = size || 200;
+    if (!this.email) {
+      return 'https://gravatar.com/avatar/?s=' + size + '&d=retro';
+    }
+    var md5 = crypto.createHash('md5').update(this.email).digest('hex');
+    return 'https://gravatar.com/avatar/' + md5 + '?s=' + size + '&d=retro';
   }
 });
 
