@@ -1,5 +1,5 @@
 import { join } from 'path';
-import { cpy, copy, mkdirs, replaceCode, removeCode, addNpmPackage } from '../utils';
+import { cpy, copy, mkdirs, replaceCode, addNpmPackage } from '../utils';
 
 async function generateCommonAuthenticationExpress(params) {
   const build = join(__base, 'build', params.uuid);
@@ -40,15 +40,41 @@ async function generateCommonAuthenticationExpress(params) {
 
   await addNpmPackage('passport', params);
 
+  // Copy user model
   switch (params.database) {
     case 'mongodb':
-      const mongooseUserModel = join(__dirname, 'modules', 'models', 'user.js');
-      const userController = join(__dirname, 'modules', 'controllers', 'user.js');
+      // Copy user model
+      await copy(
+        join(__dirname, 'modules', 'models', 'mongodb', 'user.js'),
+        join(build, 'models', 'user.js')
+      );
 
-      await copy(mongooseUserModel, join(build, 'models', 'user.js'));
-      await copy(userController, join(build, 'controllers', 'user.js'));
-
+      // Copy user migrations
+      await copy(
+        join(__dirname, 'modules', 'controllers', 'user.js'),
+        join(build, 'controllers', 'user.js')
+      );
       break;
+
+    case 'mysql':
+    case 'sqlite':
+    case 'postgresql':
+      // Copy user model
+      await copy(
+        join(__dirname, 'modules', 'models', 'sql', 'user.js'),
+        join(build, 'models', 'user.js')
+      );
+
+      // Copy user migrations
+      await copy(
+        join(__dirname, 'modules', 'migrations'),
+        join(build, 'migrations')
+      );
+      break;
+
+    case 'rethinkdb':
+      break;
+
     default:
       break;
   }
