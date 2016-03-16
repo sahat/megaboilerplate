@@ -1,5 +1,5 @@
 import { join } from 'path';
-import { copy, mkdirs, readJson, writeJson } from '../utils';
+import { copy, mkdirs, templateReplace } from '../utils';
 
 async function generateFrameworkHapi(params) {
   let build = join(__base, 'build', params.uuid);
@@ -9,10 +9,7 @@ async function generateFrameworkHapi(params) {
   await copy(hapi, build);
 
   // Update app name package.json
-  let packageJson = join(build, 'package.json');
-  let packageObj = await readJson(packageJson);
-  packageObj.name = params.appName;
-  await writeJson(packageJson, packageObj, { spaces: 2 });
+  templateReplace(join(build, 'package.json'), { name: params.appName });
 
   // Create public dirs
   await mkdirs(join(build, 'public', 'img'));

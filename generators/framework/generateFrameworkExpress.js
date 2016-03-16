@@ -1,5 +1,5 @@
 import { join } from 'path';
-import { cpy, mkdirs, readJson, writeJson, replaceCode, addNpmScript, addNpmPackage } from '../utils';
+import { cpy, mkdirs, templateReplace, replaceCode, addNpmScript, addNpmPackage } from '../utils';
 
 async function generateFrameworkExpress(params) {
   const build = join(__base, 'build', params.uuid);
@@ -16,10 +16,7 @@ async function generateFrameworkExpress(params) {
   ], build);
 
   // Update app name package.json
-  const packageJson = join(build, 'package.json');
-  const packageObj = await readJson(packageJson);
-  packageObj.name = params.appName;
-  await writeJson(packageJson, packageObj, { spaces: 2 });
+  templateReplace(join(build, 'package.json'), { name: params.appName });
 
   // Optional: Socket.IO
   if (params.frameworkOptions.includes('socketio')) {
