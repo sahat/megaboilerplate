@@ -33,13 +33,14 @@ var User = bookshelf.Model.extend({
     });
   },
 
-  gravatar: function(size) {
-    size = size || 200;
-    if (!this.email) {
-      return 'https://gravatar.com/avatar/?s=' + size + '&d=retro';
+  virtuals: {
+    gravatar: function() {
+      if (!this.get('email')) {
+        return 'https://gravatar.com/avatar/?s=200&d=retro';
+      }
+      var md5 = crypto.createHash('md5').update(this.get('email')).digest('hex');
+      return 'https://gravatar.com/avatar/' + md5 + '?s=200&d=retro';
     }
-    var md5 = crypto.createHash('md5').update(this.email).digest('hex');
-    return 'https://gravatar.com/avatar/' + md5 + '?s=' + size + '&d=retro';
   }
 });
 
