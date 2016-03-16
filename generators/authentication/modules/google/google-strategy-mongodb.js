@@ -9,9 +9,7 @@ passport.use(new GoogleStrategy({
   if (req.user) {
     User.findOne({ google: profile.id }, function(err, user) {
       if (user) {
-        req.flash('error', { msg: 'There is an existing Google account that belongs to you. ' +
-        'Sign in with that account, or delete it and then link it with your current account.' });
-        done(err);
+        req.flash('error', { msg: 'There is already an existing account linked with Google that belongs to you.' });
       } else {
         User.findById(req.user.id, function(err, user) {
           user.name = user.name || profile.displayName;
@@ -19,7 +17,7 @@ passport.use(new GoogleStrategy({
           user.picture = user.picture || profile._json.image.url;
           user.google = profile.id;
           user.save(function(err) {
-            req.flash('info', { msg: 'Your Google account has been linked successfully.' });
+            req.flash('success', { msg: 'Your Google account has been linked.' });
             done(err, user);
           });
         });
@@ -32,8 +30,7 @@ passport.use(new GoogleStrategy({
       }
       User.findOne({ email: profile.emails[0].value }, function(err, user) {
         if (user) {
-          req.flash('error', { msg: 'Your email ' + user.email + ' is already associated with an account. ' +
-          'Sign in to that account, then link it with Google manually from My Account page.' });
+          req.flash('error', { msg: user.email + ' is already associated with another account.' });
           done(err);
         } else {
           var newUser = new User({
