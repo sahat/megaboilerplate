@@ -8,6 +8,6 @@ new User({ email: req.body.email })
     }
     user.save({ passwordResetToken: token, passwordResetExpires: Date.now() + 3600000 }, { patch: true })
       .then(function() {
-        done(null, token, user);
+        done(null, token, user.toJSON());
       });
   });
