@@ -1,4 +1,5 @@
 import generateMongodbDatabase from './generateMongodbDatabase';
+import generateMysqlDatabase from './generateMysqlDatabase';
 import generatePostgresqlDatabase from './generatePostgresqlDatabase';
 
 async function generateDatabase(params) {
@@ -7,7 +8,7 @@ async function generateDatabase(params) {
       await generateMongodbDatabase(params);
       break;
     case 'mysql':
-      // TODO
+      await generateMysqlDatabase(params);
       break;
     case 'postgresql':
       await generatePostgresqlDatabase(params);
