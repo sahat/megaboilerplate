@@ -244,6 +244,6 @@ exports.resetPost = function(req, res, next) {
       });
     }
   ], function(err) {
-    res.redirect('/');
+    res.redirect('/account');
   });
 };
