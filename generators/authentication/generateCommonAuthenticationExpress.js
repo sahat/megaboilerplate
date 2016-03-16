@@ -12,7 +12,8 @@ async function generateCommonAuthenticationExpress(params) {
   const passportMiddleware = join(__dirname, 'modules', 'common', 'passport-middleware.js');
   const userHelperMiddleware = join(__dirname, 'modules', 'common', 'user-middleware.js');
   const passportSerializer = join(__dirname, 'modules', 'common', 'passport-serializer.js');
-  const passportDeserializer = join(__dirname, 'modules', 'common', 'passport-deserializer.js');
+  const passportDeserializerMongoDb = join(__dirname, 'modules', 'common', 'passport-deserializer.js');
+  const passportDeserializerSql = join(__dirname, 'modules', 'common', 'passport-deserializer-sql.js');
   const passportUserModel = join(__dirname, 'modules', 'common', 'passport-user-model.js');
   const userControllerModule = join(__dirname, 'modules', 'controllers', 'user.js');
   const userControllerRequire = join(__dirname, 'modules', 'controllers', 'user-require.js');
@@ -30,14 +31,13 @@ async function generateCommonAuthenticationExpress(params) {
   // Add common Passport routes, e.g. logout, unlink
   await replaceCode(app, 'PASSPORT_COMMON_ROUTES', passportCommonRoutes);
 
-  // Add "my account" routes
+  // Add "My Account" routes
   await replaceCode(app, 'ACCOUNT_ROUTES', accountRoutes);
 
   // Passport config file
   await copy(passportConfigModule, passportConfigFile);
   await replaceCode(passportConfigFile, 'PASSPORT_USER_MODEL', passportUserModel);
   await replaceCode(passportConfigFile, 'PASSPORT_SERIALIZER', passportSerializer);
-  await replaceCode(passportConfigFile, 'PASSPORT_DESERIALIZER', passportDeserializer);
 
   await addNpmPackage('passport', params);
 
@@ -49,6 +49,8 @@ async function generateCommonAuthenticationExpress(params) {
     case 'mongodb':
       const mongooseModel = join(__dirname, 'modules', 'models', 'mongodb', 'user.js');
       await copy(mongooseModel, join(build, 'models', 'user.js'));
+
+      await replaceCode(passportConfigFile, 'PASSPORT_DESERIALIZER', passportDeserializerMongoDb);
 
       await replaceCode(userController, 'USER_SIGNUP_POST', join(__dirname, 'modules', 'controllers', 'mongodb', 'user-signup-post.js'), { indentLevel: 1 });
       await replaceCode(userController, 'USER_ACCOUNT_PUT', join(__dirname, 'modules', 'controllers', 'mongodb', 'user-account-put.js'), { indentLevel: 1 });
@@ -62,9 +64,19 @@ async function generateCommonAuthenticationExpress(params) {
     case 'mysql':
     case 'sqlite':
     case 'postgresql':
-      const bookshelfModel = join(__dirname, 'modules', 'models', 'mongodb', 'user.js');
+      const bookshelfModel = join(__dirname, 'modules', 'models', 'sql', 'user.js');
       await copy(bookshelfModel, join(build, 'models', 'user.js'));
       await copy(join(__dirname, 'modules', 'migrations'), join(build, 'migrations'));
+
+      await replaceCode(passportConfigFile, 'PASSPORT_DESERIALIZER', passportDeserializerSql);
+
+      await replaceCode(userController, 'USER_SIGNUP_POST', join(__dirname, 'modules', 'controllers', 'sql', 'user-signup-post.js'), { indentLevel: 1 });
+      await replaceCode(userController, 'USER_ACCOUNT_PUT', join(__dirname, 'modules', 'controllers', 'sql', 'user-account-put.js'), { indentLevel: 1 });
+      await replaceCode(userController, 'USER_ACCOUNT_DELETE', join(__dirname, 'modules', 'controllers', 'sql', 'user-account-delete.js'), { indentLevel: 1 });
+      await replaceCode(userController, 'USER_PROVIDER_UNLINK', join(__dirname, 'modules', 'controllers', 'sql', 'user-provider-unlink.js'), { indentLevel: 1 });
+      await replaceCode(userController, 'USER_FORGOT_POST', join(__dirname, 'modules', 'controllers', 'sql', 'user-forgot-post.js'), { indentLevel: 3 });
+      await replaceCode(userController, 'USER_RESET_GET', join(__dirname, 'modules', 'controllers', 'sql', 'user-reset-get.js'), { indentLevel: 1 });
+      await replaceCode(userController, 'USER_RESET_POST', join(__dirname, 'modules', 'controllers', 'sql', 'user-reset-post.js'), { indentLevel: 3 });
       break;
 
     case 'rethinkdb':
