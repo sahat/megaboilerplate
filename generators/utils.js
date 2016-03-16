@@ -201,6 +201,11 @@ export async function replaceCode(srcFile, subStr, newSrcFile, opts) {
     const re = new RegExp(subStr + '$|(\r\n|\r|\n)');
     const isMatch = re.test(line);
 
+    // Preserve whitespace if it detects //_ token
+    if (line.indexOf('//_') > - 1) {
+      array[index] = '';
+    }
+
     if (isMatch) {
       if (opts.indentLevel) {
         newSrcData = indentCode(newSrcData, opts.indentLevel);

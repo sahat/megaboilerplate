@@ -3,7 +3,7 @@ var newUser = new User({
   email: req.body.email,
   password: req.body.password
 });
-
+//_
 User.findOne({ email: req.body.email }, function(err, user) {
   if (user) {
     req.flash('error', { msg: 'The email address you have entered is already associated with an account.' });
