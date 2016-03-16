@@ -1,4 +1,4 @@
-import { last, isEmpty, dropRight } from 'lodash';
+import { template, last, isEmpty, dropRight } from 'lodash';
 
 const path = require('path');
 const archiver = require('archiver');
@@ -221,4 +221,16 @@ export async function replaceCode(srcFile, subStr, newSrcFile, opts) {
   srcData = array.join('\n');
 
   await writeFile(srcFile, srcData);
+}
+
+/**
+ * lodash _.template() function
+ * @param srcFile
+ * @param data
+ */
+export async function templateReplace(srcFile, data) {
+  const src = await readFile(srcFile);
+  const compiled = template(src.toString());
+  const newSrc = compiled(data);
+  await writeFile(srcFile, newSrc);
 }
