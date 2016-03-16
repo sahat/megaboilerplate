@@ -1,10 +1,8 @@
-
-// Sign in with Facebook
 passport.use(new FacebookStrategy({
   clientID: process.env.FACEBOOK_ID,
   clientSecret: process.env.FACEBOOK_SECRET,
   callbackURL: '/auth/facebook/callback',
-  profileFields: ['name', 'email', 'link', 'locale', 'timezone'],
+  profileFields: ['name', 'email', 'gender', 'location'],
   passReqToCallback: true
 }, function(req, accessToken, refreshToken, profile, done) {
   if (req.user) {
@@ -12,22 +10,20 @@ passport.use(new FacebookStrategy({
       .fetch()
       .then(function(user) {
         if (user) {
-          req.flash('error', {
-            msg: 'There is an existing Facebook account that belongs to you. ' +
-            'Sign in with that account, or delete it and then link it with your current account.'
-          });
+          req.flash('error', { msg: 'There is already an existing account linked with Facebook that belongs to you.' });
           return done(null);
         }
         new User({ id: req.user.id })
-          .save({
-            name: user.name || profile.displayName,
-            gender: user.gender || profile._json.gender,
-            picture: user.picture || 'https://graph.facebook.com/' + profile.id + '/picture?type=large',
-            facebook: profile.id
-          }, { patch: true })
-          .then(function() {
-            req.flash('info', { msg: 'Your Facebook account has been linked successfully.' });
-            done(null, user);
+          .fetch()
+          .then(function(user) {
+            user.set('name', user.get('name') || profile.name.givenName + ' ' + profile.name.familyName);
+            user.set('gender', user.get('gender') || profile._json.gender);
+            user.set('picture', user.get('picture') || 'https://graph.facebook.com/' + profile.id + '/picture?type=large');
+            user.set('facebook', profile.id);
+            user.save().then(function() {
+              req.flash('success', { msg: 'Your Facebook account has been linked.' });
+              done(null, user);
+            });
           });
       });
   } else {
@@ -41,22 +37,19 @@ passport.use(new FacebookStrategy({
           .fetch()
           .then(function(user) {
             if (user) {
-              req.flash('error', { msg: 'Your email ' + user.email + ' is already associated with an account. ' +
-                'Sign in to that account, then link it with Facebook manually from My Account page.' });
+              req.flash('error', { msg: user.get('email') + ' is already associated with another account.' });
               return done();
             }
-            new User({
-              name: profile.displayName,
-              email: profile._json.email,
-              gender: profile._json.gender,
-              location: profile._json.location,
-              picture: 'https://graph.facebook.com/' + profile.id + '/picture?type=large',
-              facebook: profile.id
-            })
-              .save()
-              .then(function(user) {
-                done(null, user);
-              });
+            user = new User();
+            user.set('name', profile.name.givenName + ' ' + profile.name.familyName);
+            user.set('email', profile._json.email);
+            user.set('gender', profile._json.gender);
+            user.set('location', profile._json.location);
+            user.set('picture', 'https://graph.facebook.com/' + profile.id + '/picture?type=large');
+            user.set('facebook', profile.id);
+            user.save().then(function(user) {
+              done(null, user);
+            });
           });
       });
   }
