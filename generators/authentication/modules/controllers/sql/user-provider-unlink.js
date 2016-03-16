@@ -1,21 +1,22 @@
-var user = new User({ id: req.user.id });
-
-switch (req.params.provider) {
-  case 'facebook':
-    user.save({ facebook: null }, { patch: true });
-    break;
-  case 'google':
-    user.save({ google: null }, { patch: true });
-    break;
-  case 'twitter':
-    user.save({ twitter: null }, { patch: true });
-    break;
-  default:
-    req.flash('info', { msg: 'Your account has been permanently deleted.' });
-    return res.redirect('/');
-}
-
-user.then(function(user) {
-  req.flash('info', { msg: 'Account has been unlinked' });
-  res.redirect('/account');
-});
+new User({ id: req.user.id })
+  .fetch()
+  .then(function(user) {
+    switch (req.params.provider) {
+      case 'facebook':
+        user.set('facebook', null);
+        break;
+      case 'google':
+        user.set('google', null);
+        break;
+      case 'twitter':
+        user.set('twitter', null);
+        break;
+      default:
+        req.flash('error', { msg: 'Invalid OAuth Provider' });
+        return res.redirect('/');
+    }
+    user.save().then(function() {
+      req.flash('success', { msg: 'Account has been unlinked' });
+      res.redirect('/account');
+    });
+  });
