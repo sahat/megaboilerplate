@@ -234,3 +234,19 @@ export async function templateReplace(srcFile, data) {
   const newSrc = compiled(data);
   await writeFile(srcFile, newSrc);
 }
+
+/**
+ * Add env vars to .env
+ * @param params
+ * @param data
+ */
+export async function addEnv(params, data) {
+  const env = join(__base, 'build', params.uuid, '.env');
+  const vars = [];
+  for (const i in data) {
+    if (data.hasOwnProperty(i)) {
+      vars.push([i, data[i]].join('='));
+    }
+  }
+  await appendFile(env, vars.join('\n'));
+}
