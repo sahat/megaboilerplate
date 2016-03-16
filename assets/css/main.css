@@ -949,6 +949,17 @@ canvas {
   fill: currentColor;
 }
 
+.polymer .panel-heading {
+  color: #fff;
+  background: #3f51b5;
+  border-color: transparent;
+}
+
+.polymer svg {
+  color: #fff;
+  fill: currentColor;
+}
+
 .authentication .panel-heading {
   color: #fff;
   background: #1f1c2c linear-gradient(to left, #1f1c2c, #928dab);
