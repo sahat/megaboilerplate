@@ -20,7 +20,7 @@ passport.use(new FacebookStrategy({
             user.set('gender', user.get('gender') || profile._json.gender);
             user.set('picture', user.get('picture') || 'https://graph.facebook.com/' + profile.id + '/picture?type=large');
             user.set('facebook', profile.id);
-            user.save().then(function() {
+            user.save(user.changed, { patch: true }).then(function() {
               req.flash('success', { msg: 'Your Facebook account has been linked.' });
               done(null, user);
             });
