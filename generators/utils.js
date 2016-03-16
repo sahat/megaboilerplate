@@ -241,7 +241,7 @@ export async function templateReplace(srcFile, data) {
  * @param data
  */
 export async function addEnv(params, data) {
-  const env = join(__base, 'build', params.uuid, '.env');
+  const env = path.join(__base, 'build', params.uuid, '.env');
   const vars = [];
   for (const i in data) {
     if (data.hasOwnProperty(i)) {
