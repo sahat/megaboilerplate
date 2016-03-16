@@ -81,11 +81,6 @@ const Database = (props) => {
             {recommended}
           </label>
           <label className="radio-inline">
-            <img className="btn-logo" src="/img/svg/sqlite-logo.svg" alt="SQLite3" />
-            <input type="radio" name="databaseRadios" value="sqlite" onChange={props.handleChange} checked={props.database === 'sqlite'} />
-            <span>SQLite3</span>
-          </label>
-          <label className="radio-inline">
             <img className="btn-logo" src="/img/svg/mysql-logo.svg" alt="MySQL" />
             <input type="radio" name="databaseRadios" value="mysql" onChange={props.handleChange} checked={props.database === 'mysql'} />
             <span>MySQL</span>
@@ -94,6 +89,11 @@ const Database = (props) => {
             <img className="btn-logo" src="/img/svg/postgresql-logo.svg" alt="PostgreSQL" />
             <input type="radio" name="databaseRadios" value="postgresql" onChange={props.handleChange} checked={props.database === 'postgresql'} />
             <span>PostgreSQL</span>
+          </label>
+          <label className="radio-inline">
+            <img className="btn-logo" src="/img/svg/sqlite-logo.svg" alt="SQLite3" />
+            <input type="radio" name="databaseRadios" value="sqlite" onChange={props.handleChange} checked={props.database === 'sqlite'} />
+            <span>SQLite3</span>
           </label>
           <label className="radio-inline">
             <img className="btn-logo" src="/img/svg/rethinkdb-logo.svg" alt="RethinkDB" />
