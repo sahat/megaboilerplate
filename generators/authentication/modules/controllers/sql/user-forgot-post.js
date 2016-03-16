@@ -1,0 +1,16 @@
+new User({ email: req.body.email })
+  .save({
+    passwordResetToken: token,
+    passwordResetExpires: Date.now() + 3600000 // 1 hour expiration
+  }, {
+    patch: true,
+    require: true
+  })
+  .then(function() {
+    done(null, token, user);
+  })
+  .catch(function(err) {
+    req.flash('error', { msg: 'The email address ' + req.body.email +
+    ' is not associated with any account. Double-check your email address and try again.' });
+    return res.redirect('/forgot');
+  });
