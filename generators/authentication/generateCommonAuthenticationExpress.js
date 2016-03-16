@@ -14,6 +14,7 @@ async function generateCommonAuthenticationExpress(params) {
   const passportSerializer = join(__dirname, 'modules', 'common', 'passport-serializer.js');
   const passportDeserializer = join(__dirname, 'modules', 'common', 'passport-deserializer.js');
   const passportUserModel = join(__dirname, 'modules', 'common', 'passport-user-model.js');
+  const userControllerModule = join(__dirname, 'modules', 'controllers', 'user.js');
   const userControllerRequire = join(__dirname, 'modules', 'controllers', 'user-require.js');
   const accountRoutes = join(__dirname, 'modules', 'common', 'routes', 'account-routes.js');
 
@@ -40,36 +41,30 @@ async function generateCommonAuthenticationExpress(params) {
 
   await addNpmPackage('passport', params);
 
-  // Copy user model
+  // Copy user controller (replace database-specific things below)
+  await copy(userControllerModule, join(build, 'controllers', 'user.js'));
+  const userController = join(build, 'controllers', 'user.js');
+
   switch (params.database) {
     case 'mongodb':
-      // Copy user model
-      await copy(
-        join(__dirname, 'modules', 'models', 'mongodb', 'user.js'),
-        join(build, 'models', 'user.js')
-      );
+      const mongooseModel = join(__dirname, 'modules', 'models', 'mongodb', 'user.js');
+      await copy(mongooseModel, join(build, 'models', 'user.js'));
 
-      // Copy user migrations
-      await copy(
-        join(__dirname, 'modules', 'controllers', 'user.js'),
-        join(build, 'controllers', 'user.js')
-      );
+      await replaceCode(userController, 'USER_SIGNUP_POST', join(__dirname, 'modules', 'controllers', 'mongodb', 'user-signup-post.js'), { indentLevel: 1 });
+      await replaceCode(userController, 'USER_ACCOUNT_PUT', join(__dirname, 'modules', 'controllers', 'mongodb', 'user-account-put.js'), { indentLevel: 1 });
+      await replaceCode(userController, 'USER_ACCOUNT_DELETE', join(__dirname, 'modules', 'controllers', 'mongodb', 'user-account-delete.js'), { indentLevel: 1 });
+      await replaceCode(userController, 'USER_PROVIDER_UNLINK', join(__dirname, 'modules', 'controllers', 'mongodb', 'user-provider-unlink.js'), { indentLevel: 1 });
+      await replaceCode(userController, 'USER_FORGOT_POST', join(__dirname, 'modules', 'controllers', 'mongodb', 'user-forgot-post.js'), { indentLevel: 3 });
+      await replaceCode(userController, 'USER_RESET_GET', join(__dirname, 'modules', 'controllers', 'mongodb', 'user-reset-get.js'), { indentLevel: 1 });
+      await replaceCode(userController, 'USER_RESET_POST', join(__dirname, 'modules', 'controllers', 'mongodb', 'user-reset-post.js'), { indentLevel: 3 });
       break;
 
     case 'mysql':
     case 'sqlite':
     case 'postgresql':
-      // Copy user model
-      await copy(
-        join(__dirname, 'modules', 'models', 'sql', 'user.js'),
-        join(build, 'models', 'user.js')
-      );
-
-      // Copy user migrations
-      await copy(
-        join(__dirname, 'modules', 'migrations'),
-        join(build, 'migrations')
-      );
+      const bookshelfModel = join(__dirname, 'modules', 'models', 'mongodb', 'user.js');
+      await copy(bookshelfModel, join(build, 'models', 'user.js'));
+      await copy(join(__dirname, 'modules', 'migrations'), join(build, 'migrations'));
       break;
 
     case 'rethinkdb':

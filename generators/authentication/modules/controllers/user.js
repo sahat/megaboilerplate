@@ -81,23 +81,7 @@ exports.signupPost = function(req, res, next) {
     return res.redirect('/signup');
   }
 
-  var newUser = new User({
-    name: req.body.name,
-    email: req.body.email,
-    password: req.body.password
-  });
-
-  User.findOne({ email: req.body.email }, function(err, user) {
-    if (user) {
-      req.flash('error', { msg: 'The email address you have entered is already associated with an account.' });
-      return res.redirect('/signup');
-    }
-    newUser.save(function(err) {
-      req.logIn(newUser, function(err) {
-        res.redirect('/');
-      });
-    });
-  });
+  //= USER_SIGNUP_POST
 };
 
 /**
@@ -130,38 +114,14 @@ exports.accountPut = function(req, res, next) {
     return res.redirect('/account');
   }
 
-  User.findById(req.user.id, function(err, user) {
-    if ('password' in req.body) {
-      user.password = req.body.password;
-    } else {
-      user.email = req.body.email;
-      user.name = req.body.name;
-      user.gender = req.body.gender;
-      user.location = req.body.location;
-      user.website = req.body.website;
-    }
-    user.save(function(err) {
-      if ('password' in req.body) {
-        req.flash('success', { msg: 'Your password has been changed.' });
-      } else if (err && err.code === 11000) {
-        req.flash('error', { msg: 'The email address you have entered is already associated with an account.' });
-      } else {
-        req.flash('success', { msg: 'Your profile information has been updated.' });
-      }
-      res.redirect('/account');
-    });
-  });
+  //= USER_ACCOUNT_PUT
 };
 
 /**
  * DELETE /account
  */
 exports.accountDelete = function(req, res, next) {
-  User.remove({ _id: req.user.id }, function(err) {
-    req.logout();
-    req.flash('info', { msg: 'Your account has been permanently deleted.' });
-    res.redirect('/');
-  });
+  //= USER_ACCOUNT_DELETE
 };
 
 /**
@@ -170,18 +130,7 @@ exports.accountDelete = function(req, res, next) {
  */
 exports.unlink = function(req, res, next) {
   var provider = req.params.provider;
-  User.findById(req.user.id, function(err, user) {
-    if (err) {
-      return next(err);
-    }
-    user[provider] = undefined;
-    user.tokens = _.reject(user.tokens, function(token) { return token.kind === provider; });
-    user.save(function(err) {
-      if (err) return next(err);
-      req.flash('info', { msg: provider + ' account has been unlinked.' });
-      res.redirect('/account');
-    });
-  });
+  //= USER_PROVIDER_UNLINK
 };
 
 /**
@@ -219,18 +168,7 @@ exports.forgotPost = function(req, res, next) {
       });
     },
     function(token, done) {
-      User.findOne({ email: req.body.email }, function(err, user) {
-        if (!user) {
-          req.flash('error', { msg: 'The email address ' + req.body.email +
-          ' is not associated with any account. Double-check your email address and try again.' });
-          return res.redirect('/forgot');
-        }
-        user.passwordResetToken = token;
-        user.passwordResetExpires = Date.now() + 3600000; // 1 hour
-        user.save(function(err) {
-          done(err, token, user);
-        });
-      });
+      //= USER_FORGOT_POST
     },
     function(token, user, done) {
       var transporter = nodemailer.createTransport({
@@ -266,17 +204,7 @@ exports.resetGet = function(req, res) {
   if (req.isAuthenticated()) {
     return res.redirect('/');
   }
-  User.findOne({ passwordResetToken: req.params.token })
-    .where('passwordResetExpires').gt(Date.now())
-    .exec(function(err, user) {
-      if (!user) {
-        req.flash('error', { msg: 'Password reset token is invalid or has expired.' });
-        return res.redirect('/forgot');
-      }
-      res.render('account/reset', {
-        title: 'Password Reset'
-      });
-    });
+  //= USER_RESET_GET
 };
 
 /**
@@ -295,22 +223,7 @@ exports.resetPost = function(req, res, next) {
 
   async.waterfall([
     function(done) {
-      User.findOne({ passwordResetToken: req.params.token })
-        .where('passwordResetExpires').gt(Date.now())
-        .exec(function(err, user) {
-          if (!user) {
-            req.flash('error', { msg: 'Password reset token is invalid or has expired.' });
-            return res.redirect('back');
-          }
-          user.password = req.body.password;
-          user.passwordResetToken = undefined;
-          user.passwordResetExpires = undefined;
-          user.save(function(err) {
-            req.logIn(user, function(err) {
-              done(err, user);
-            });
-          });
-        });
+      //= USER_RESET_POST
     },
     function(user, done) {
       var transporter = nodemailer.createTransport({
