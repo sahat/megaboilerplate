@@ -10,7 +10,6 @@ async function generateCommonAuthenticationExpress(params) {
   const passportCommonRoutes = join(__dirname, 'modules', 'common', 'passport-routes.js');
   const passportRequire = join(__dirname, 'modules', 'common', 'passport-require.js');
   const passportMiddleware = join(__dirname, 'modules', 'common', 'passport-middleware.js');
-  const userHelperMiddleware = join(__dirname, 'modules', 'common', 'user-middleware.js');
   const passportSerializer = join(__dirname, 'modules', 'common', 'passport-serializer.js');
   const passportDeserializerMongoDb = join(__dirname, 'modules', 'common', 'passport-deserializer.js');
   const passportDeserializerSql = join(__dirname, 'modules', 'common', 'passport-deserializer-sql.js');
@@ -22,7 +21,6 @@ async function generateCommonAuthenticationExpress(params) {
   // Passport middleware
   await replaceCode(app, 'PASSPORT_REQUIRE', passportRequire);
   await replaceCode(app, 'PASSPORT_MIDDLEWARE', passportMiddleware);
-  await replaceCode(app, 'USER_HELPER_MIDDLEWARE', userHelperMiddleware);
   await replaceCode(app, 'PASSPORT_CONFIG_REQUIRE', passportConfigRequire);
 
   // Add user controller reference
@@ -48,7 +46,11 @@ async function generateCommonAuthenticationExpress(params) {
   switch (params.database) {
     case 'mongodb':
       const mongooseModel = join(__dirname, 'modules', 'models', 'mongodb', 'user.js');
+      const userHelperMiddlewareForMongoDb = join(__dirname, 'modules', 'common', 'user-middleware-mongodb.js');
+
       await copy(mongooseModel, join(build, 'models', 'user.js'));
+
+      await replaceCode(app, 'USER_HELPER_MIDDLEWARE', userHelperMiddlewareForMongoDb);
 
       await replaceCode(passportConfigFile, 'PASSPORT_DESERIALIZER', passportDeserializerMongoDb);
 
@@ -65,8 +67,13 @@ async function generateCommonAuthenticationExpress(params) {
     case 'sqlite':
     case 'postgresql':
       const bookshelfModel = join(__dirname, 'modules', 'models', 'sql', 'user.js');
+      const userHelperMiddlewareForSql = join(__dirname, 'modules', 'common', 'user-middleware-sql.js');
+
       await copy(bookshelfModel, join(build, 'models', 'user.js'));
       await copy(join(__dirname, 'modules', 'migrations'), join(build, 'migrations'));
+
+      await replaceCode(app, 'USER_HELPER_MIDDLEWARE', userHelperMiddlewareForSql);
+
 
       await replaceCode(passportConfigFile, 'PASSPORT_DESERIALIZER', passportDeserializerSql);
 
