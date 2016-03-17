@@ -949,6 +949,17 @@ canvas {
   fill: currentColor;
 }
 
+.vue .panel-heading {
+  color: #fff;
+  background: #42b983;
+  border-color: transparent;
+}
+
+.vue svg {
+  color: #fff;
+  fill: currentColor;
+}
+
 .authentication .panel-heading {
   color: #fff;
   background: #1f1c2c linear-gradient(to left, #1f1c2c, #928dab);

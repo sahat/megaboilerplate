@@ -39,6 +39,13 @@ class JsFramework extends React.Component {
           </div>
         );
         break;
+      case 'vue':
+        description = (
+          <div>
+            <strong><a href="http://vuejs.org/" target="_blank">Vue.js</a></strong> — Intuitive, Fast and Composable MVVM for building interactive interfaces.
+          </div>
+        );
+        break;
       default:
         description = <div className="placeholder"></div>;
     }
@@ -135,6 +142,11 @@ class JsFramework extends React.Component {
               <img className="btn-logo" src="/img/svg/polymer-logo.svg" alt="Polymer"/>
               <input type="radio" name="jsFrameworkRadios" value="polymer" onChange={props.handleChange} checked={props.jsFramework === 'polymer'}/>
               <span>Polymer</span>
+            </label>
+            <label className="radio-inline">
+              <img className="btn-logo" src="/img/svg/vue-logo.png" alt="Vue.js"/>
+              <input type="radio" name="jsFrameworkRadios" value="vue" onChange={props.handleChange} checked={props.jsFramework === 'vue'}/>
+              <span>Vue.js</span>
             </label>
           </div>
 
