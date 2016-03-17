@@ -3,8 +3,10 @@ import { copy, mkdirs, templateReplace, addEnv, addNpmPackage } from '../utils';
 
 async function generateSqlDatabase(params) {
   const build = join(__base, 'build', params.uuid);
-  const knexfile = join(__dirname, 'modules', 'sql-common', 'knexfile.js');
-  const bookshelf = join(__dirname, 'modules', 'sql-common', 'bookshelf.js');
+  const knexfile = join(__dirname, 'modules', 'sql', 'knexfile.js');
+  const knexfileSqlite = join(__dirname, 'modules', 'sql', 'knexfile-sqlite.js');
+  const sqliteDb = join(__dirname, 'modules', 'sql', 'dev.sqlite3');
+  const bookshelf = join(__dirname, 'modules', 'sql', 'bookshelf.js');
 
   switch (params.framework) {
     case 'express':
@@ -12,7 +14,13 @@ async function generateSqlDatabase(params) {
       await mkdirs(join(build, 'config'));
 
       await copy(bookshelf, join(build, 'config', 'bookshelf.js'));
-      await copy(knexfile, join(build, 'knexfile.js'));
+
+      if (params.database === 'sqlite') {
+        await copy(knexfileSqlite, join(build, 'knexfile.js'));
+        await copy(sqliteDb, join(build, 'dev.sqlite3'));
+      } else {
+        await copy(knexfile, join(build, 'knexfile.js'));
+      }
 
       await templateReplace(join(build, 'knexfile.js'), { dialect: params.database });
 
