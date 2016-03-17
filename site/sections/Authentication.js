@@ -20,6 +20,13 @@ const Authentication = (props) => {
     </div>
   ) : null;
 
+  const isEmailChecked = props.authentication && (
+      props.authentication.has('email') ||
+      props.authentication.has('facebook') ||
+      props.authentication.has('google') ||
+      props.authentication.has('twitter')
+    );
+
   let authenticationCheckboxes = !notSupported && !notSupported2 ? (
     <div className="radio-group">
       <label className="checkbox-inline">
@@ -28,7 +35,7 @@ const Authentication = (props) => {
       </label>
       <label className="checkbox-inline">
         <img className="btn-logo" src="/img/svg/email-logo.svg" height="60" alt="Email" />
-        <input type="checkbox" name="authenticationCheckboxes" value="email" onChange={props.handleChange} checked={props.authentication && props.authentication.has('email')} disabled={props.database === 'none'} /> Email & Password
+        <input type="checkbox" name="authenticationCheckboxes" value="email" onChange={props.handleChange} checked={isEmailChecked} disabled={props.database === 'none'} /> Email & Password
       </label>
       <label className="checkbox-inline">
         <img className="btn-logo" src="/img/svg/facebook-logo.svg" alt="Facebook" />
