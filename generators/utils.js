@@ -253,5 +253,5 @@ export async function addEnv(params, data) {
       vars.push([i, data[i]].join('='));
     }
   }
-  await appendFile(env, vars.join('\n'));
+  await appendFile(env, '\n' + vars.join('\n') + '\n');
 }
