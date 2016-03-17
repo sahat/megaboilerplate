@@ -916,17 +916,6 @@ canvas {
   fill: currentColor;
 }
 
-.rethinkdb .panel-heading {
-  color: #fff;
-  background: linear-gradient(to bottom, #214753 0%, #1a5161 50%, #1c5064 81%, #1d4f5f 100%);
-  border-color: transparent;
-}
-
-.rethinkdb svg {
-  color: #fff;
-  fill: currentColor;
-}
-
 .react .panel-heading {
   color: #61dafb;
   background: #2d2d2d;

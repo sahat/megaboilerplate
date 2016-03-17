@@ -40,14 +40,6 @@ const Database = (props) => {
         </div>
       );
       break;
-    case 'rethinkdb':
-      description = (
-        <div>
-          <strong><a href="https://www.rethinkdb.com/" target="_blank">RethinkDB</a></strong> — The open source database
-          for the realtime web.
-        </div>
-      );
-      break;
     default:
       description = <div className="placeholder"> </div>;
   }
@@ -93,12 +85,7 @@ const Database = (props) => {
           <label className="radio-inline">
             <img className="btn-logo" src="/img/svg/sqlite-logo.svg" alt="SQLite3" />
             <input type="radio" name="databaseRadios" value="sqlite" onChange={props.handleChange} checked={props.database === 'sqlite'} />
-            <span>SQLite3</span>
-          </label>
-          <label className="radio-inline">
-            <img className="btn-logo" src="/img/svg/rethinkdb-logo.svg" alt="RethinkDB" />
-            <input type="radio" name="databaseRadios" value="rethinkdb" onChange={props.handleChange} checked={props.database === 'rethinkdb'} />
-            <span>RethinkDB</span>
+            <span>SQLite</span>
           </label>
         </div>
       </div>
