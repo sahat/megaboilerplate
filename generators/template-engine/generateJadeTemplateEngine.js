@@ -75,12 +75,17 @@ async function generateJadeTemplateEngine(params) {
     case 'express':
       const appExpress = join(__base, 'build', params.uuid, 'app.js');
       const expressViewEngine = join(__dirname, 'modules', 'jade', 'jade-express.js');
+      const expressViewEngineRequire = join(__dirname, 'modules', 'jade', 'jade-require-express.js');
       const expressHomeRoute = join(__dirname, 'modules', 'routes', 'home-route-express.js');
       const homeControllerRequire = join(__dirname, 'modules', 'controllers', 'home-require.js');
       const expressHomeController = join(__dirname, 'modules', 'controllers', 'home-controller-express.js');
 
       // Set "views dir" and "view engine"
       await replaceCode(appExpress, 'TEMPLATE_ENGINE', expressViewEngine);
+      
+      if (params.jsFramework === 'react') {
+        await replaceCode(appExpress, 'TEMPLATE_ENGINE_REQUIRE', expressViewEngineRequire);
+      }
 
       // Require home controller and add home route, i.e. "GET /"
       if (params.jsFramework === 'none') {
