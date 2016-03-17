@@ -9,17 +9,16 @@ passport.use(new TwitterStrategy({
   if (req.user) {
     User.findOne({ twitter: profile.id }, function(err, user) {
       if (user) {
-        req.flash('error', { msg: 'There is an existing Twitter account that belongs to you. ' +
-        'Sign in with that account, or delete it and then link it with your current account.' });
+        req.flash('error', { msg: 'There is already an existing account linked with Twitter that belongs to you.' });
         done(err);
       } else {
         User.findById(req.user.id, function(err, user) {
-          user.name = user.profile.name || profile.displayName;
-          user.location = user.profile.location || profile._json.location;
-          user.picture = user.profile.picture || profile._json.profile_image_url_https;
+          user.name = user.name || profile.displayName;
+          user.location = user.location || profile._json.location;
+          user.picture = user.picture || profile._json.profile_image_url_https;
           user.twitter = profile.id;
           user.save(function(err) {
-            req.flash('info', { msg: 'Your Twitter account has been linked successfully.' });
+            req.flash('success', { msg: 'Your Twitter account has been linked.' });
             done(err, user);
           });
         });
