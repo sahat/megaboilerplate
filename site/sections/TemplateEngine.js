@@ -1,5 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
+import { VelocityComponent, VelocityTransitionGroup } from 'velocity-react';
 
 const TEMPLATE_ENGINE_SVG = (
   <svg xmlns="http://www.w3.org/2000/svg" style={{verticalAlign: "middle", marginTop: '-1px'}} width="24px" height="24px" viewBox="0 0 32 32">
@@ -8,13 +9,56 @@ const TEMPLATE_ENGINE_SVG = (
 );
 
 class TemplateEngine extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+    this.toggleAdditionalOptions = this.toggleAdditionalOptions.bind(this);
+  }
+
+  toggleAdditionalOptions() {
+    this.setState({ showOptions: !this.state.showOptions });
+  }
+
   render() {
     const props = this.props;
+    const state = this.state;
 
     let recommended = props.beginner ? (
       <span className="hint--top hint--rounded" data-hint="Recommended">
         <img src="/img/svg/recommended.svg" alt="Recommended" />
       </span>
+    ) : null;
+
+    const additionalOptions = state.showOptions ? (
+      <div>
+        <VelocityComponent runOnMount animation="transition.slideUpIn">
+          <div className="radio">
+            <label>
+              <input type="radio" name="templateEngineOptionsRadios" value="2" onChange={props.handleChange} defaultChecked={true}/>
+              <span>2 spaces</span>
+              {recommended}
+            </label>
+          </div>
+        </VelocityComponent>
+        <VelocityComponent runOnMount animation="transition.slideUpIn" delay={100}>
+          <div className="radio">
+            <label>
+              <input type="radio" name="templateEngineOptionsRadios" value="4" onChange={props.handleChange}/>
+              <span>4 spaces</span>
+            </label>
+          </div>
+        </VelocityComponent>
+      </div>
+    ) : null;
+
+    const additionalOptionsButton = props.framework ? (
+      <div>
+        <span className="options" onClick={this.toggleAdditionalOptions}>
+          <img className={cx('animated', { fast: state.showOptions })} src="/img/svg/options.svg"/>
+          <span>Indentation Options</span>
+        </span>
+        {additionalOptions}
+      </div>
     ) : null;
 
     const nodeTemplateEngines = (props.platform === 'node') ? (
@@ -82,6 +126,9 @@ class TemplateEngine extends React.Component {
         <div className="panel-body">
           {description}
           {nodeTemplateEngines}
+          <VelocityTransitionGroup enter={{ animation: 'transition.fadeIn', duration: 1000 }}>
+            {additionalOptionsButton}
+          </VelocityTransitionGroup>
         </div>
       </div>
     );
