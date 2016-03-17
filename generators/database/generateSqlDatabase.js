@@ -1,7 +1,7 @@
 import { join } from 'path';
 import { copy, mkdirs, templateReplace, addEnv, addNpmPackage } from '../utils';
 
-async function generateMysqlDatabase(params) {
+async function generateSqlDatabase(params) {
   const build = join(__base, 'build', params.uuid);
   const knexfile = join(__dirname, 'modules', 'sql-common', 'knexfile.js');
   const bookshelf = join(__dirname, 'modules', 'sql-common', 'bookshelf.js');
@@ -14,7 +14,7 @@ async function generateMysqlDatabase(params) {
       await copy(bookshelf, join(build, 'config', 'bookshelf.js'));
       await copy(knexfile, join(build, 'knexfile.js'));
 
-      templateReplace(join(build, 'knexfile.js'), { dialect: 'mysql' });
+      await templateReplace(join(build, 'knexfile.js'), { dialect: params.database });
 
       await addEnv(params, {
         DB_HOST: 'localhost',
@@ -23,7 +23,16 @@ async function generateMysqlDatabase(params) {
         DB_NAME: 'megaboilerplate'
       });
 
-      await addNpmPackage('mysql', params);
+      if (params.database === 'mysql') {
+        await addNpmPackage('mysql', params);
+      }
+      if (params.database === 'postgresql') {
+        await addNpmPackage('pg', params);
+      }
+      if (params.database === 'sqlite') {
+        await addNpmPackage('sqlite3', params);
+      }
+
       await addNpmPackage('knex', params);
       await addNpmPackage('bookshelf', params);
       break;
@@ -38,4 +47,4 @@ async function generateMysqlDatabase(params) {
   }
 }
 
-export default generateMysqlDatabase;
+export default generateSqlDatabase;

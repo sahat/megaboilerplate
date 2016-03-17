@@ -1,6 +1,5 @@
 import generateMongodbDatabase from './generateMongodbDatabase';
-import generateMysqlDatabase from './generateMysqlDatabase';
-import generatePostgresqlDatabase from './generatePostgresqlDatabase';
+import generateSqlDatabase from './generateSqlDatabase';
 
 async function generateDatabase(params) {
   switch (params.database) {
@@ -8,19 +7,13 @@ async function generateDatabase(params) {
       await generateMongodbDatabase(params);
       break;
     case 'mysql':
-      await generateMysqlDatabase(params);
-      break;
     case 'postgresql':
-      await generatePostgresqlDatabase(params);
-      break;
-    case 'rethinkdb':
-      // TODO
+    case 'sqlite':
+      await generateSqlDatabase(params);
       break;
     case 'none':
-      // TODO
       break;
     default:
-    // TODO
   }
 }
 

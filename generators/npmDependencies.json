@@ -46,7 +46,7 @@
   "bookshelf": "^0.9.1",
   "mysql": "^2.10.2",
   "pg": "^4.5.1",
-  "sqlite": "^3.1.1",
+  "sqlite3": "^3.1.1",
 
   "passport": "^0.3.2",
   "passport-local": "^1.0.0",
