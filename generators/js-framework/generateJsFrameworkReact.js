@@ -84,13 +84,14 @@ async function generateJsFrameworkReact(params) {
 
   await addNpmPackage('react', params);
   await addNpmPackage('react-dom', params);
+  await addNpmPackage('react-router', params);
 }
 
 async function addRedux(params) {
   const build = join(__base, 'build', params.uuid);
   const app = join(__base, 'build', params.uuid, 'app.js');
 
-  if (params.reactOptions.redux) {
+  if (params.reactOptions && params.reactOptions.redux) {
     await mkdirs(join(build, 'actions'));
     await mkdirs(join(build, 'containers'));
     await mkdirs(join(build, 'reducers'));
