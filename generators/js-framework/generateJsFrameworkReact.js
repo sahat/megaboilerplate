@@ -31,7 +31,7 @@ async function generateJsFrameworkReact(params) {
       await cpy([
         join(__dirname, 'modules', 'react', 'components', 'App.js'),
         join(__dirname, 'modules', 'react', 'components', 'Home.js'),
-        join(__dirname, 'modules', 'react', 'components', 'Contant.js'),
+        join(__dirname, 'modules', 'react', 'components', 'Contact.js'),
         join(__dirname, 'modules', 'react', 'components', 'Header.js'),
         join(__dirname, 'modules', 'react', 'components', 'Footer.js')
       ], join(build, 'app', 'components'));

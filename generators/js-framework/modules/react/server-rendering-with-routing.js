@@ -9,7 +9,6 @@ app.use(function(req, res) {
     } else if (renderProps) {
       var html = ReactDOM.renderToString(React.createElement(Router.RoutingContext, renderProps));
       //= RENDER_TEMPLATE
-      res.status(200).send(page);
     } else {
       res.sendStatus(404);
     }
