@@ -85,6 +85,9 @@ async function generateJsFrameworkReact(params) {
   await addNpmPackage('react', params);
   await addNpmPackage('react-dom', params);
   await addNpmPackage('react-router', params);
+  if (params.authentication.length) {
+    await addNpmPackage('react-cookie', params);
+  }
 }
 
 async function addRedux(params) {
