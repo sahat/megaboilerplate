@@ -10,7 +10,7 @@ var plumber = require('gulp-plumber');
 //= JS_FRAMEWORK_GULP_TASK
 
 gulp.task('watch', function() {
-  gulp.watch('./app/**/*.js', ['build']);
+  gulp.watch('app/**/*.js', ['build']);
 });
 
-gulp.task('default', ['watch', 'scripts', 'images']);
+gulp.task('default', ['build',  'watch']);

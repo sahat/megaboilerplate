@@ -23,7 +23,7 @@ async function generateGulpBuildTool(params) {
       await addNpmPackage('gulp-sass', params);
 
       await replaceCode(join(build, 'gulpfile.js'), 'CSS_PREPROCESSOR_GULP_REQUIRE', sassGulpRequire);
-      await replaceCode(join(build, 'gulpfile.js'), 'CSS_PREPROCESSOR_GULP_TASK', sassGulpTask, { leadingBlankLine: true });
+      await replaceCode(join(build, 'gulpfile.js'), 'CSS_PREPROCESSOR_GULP_TASK', sassGulpTask);
       break;
 
     case 'less':
@@ -33,7 +33,7 @@ async function generateGulpBuildTool(params) {
       await addNpmPackage('gulp-less', params);
 
       await replaceCode(join(build, 'gulpfile.js'), 'CSS_PREPROCESSOR_GULP_REQUIRE', lessGulpRequire);
-      await replaceCode(join(build, 'gulpfile.js'), 'CSS_PREPROCESSOR_GULP_TASK', lessGulpTask, { leadingBlankLine: true });
+      await replaceCode(join(build, 'gulpfile.js'), 'CSS_PREPROCESSOR_GULP_TASK', lessGulpTask);
       break;
 
     case 'css':
@@ -41,7 +41,7 @@ async function generateGulpBuildTool(params) {
       const cssGulpTask = join(__dirname, 'modules', 'gulp', 'css-gulp-task.js');
 
       await replaceCode(join(build, 'gulpfile.js'), 'CSS_PREPROCESSOR_GULP_REQUIRE', cssGulpRequire);
-      await replaceCode(join(build, 'gulpfile.js'), 'CSS_PREPROCESSOR_GULP_TASK', cssGulpTask, { leadingBlankLine: true });
+      await replaceCode(join(build, 'gulpfile.js'), 'CSS_PREPROCESSOR_GULP_TASK', cssGulpTask);
       break;
 
     default:
