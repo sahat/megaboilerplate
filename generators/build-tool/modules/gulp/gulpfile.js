@@ -1,4 +1,6 @@
 var gulp = require('gulp');
+var gulpif = require('gulp-if');
+var argv = require('yargs').argv;
 //= JS_FRAMEWORK_GULP_REQUIRE
 //= CSS_PREPROCESSOR_GULP_REQUIRE
 var buffer = require('vinyl-buffer');

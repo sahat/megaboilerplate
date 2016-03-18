@@ -3,6 +3,6 @@ gulp.task('less', function() {
     .pipe(plumber())
     .pipe(less())
     .pipe(autoprefixer())
-    .pipe(csso())
+    .pipe(gulpif(argv.production, csso()))
     .pipe(gulp.dest('public/stylesheets'));
 });

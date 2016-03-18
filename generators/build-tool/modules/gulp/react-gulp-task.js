@@ -5,7 +5,7 @@ gulp.task('build', function() {
     .pipe(source('bundle.js'))
     .pipe(buffer())
     .pipe(sourcemaps.init({ loadMaps: true }))
-    .pipe(uglify())
+    .pipe(gulpif(argv.production, uglify()))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('public/js'));
 });

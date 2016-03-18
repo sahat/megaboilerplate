@@ -8,6 +8,8 @@ async function generateGulpBuildTool(params) {
   await cpy([gulpfile], build);
 
   await addNpmPackage('gulp', params, true);
+  await addNpmPackage('gulp-if', params, true);
+  await addNpmPackage('yargs', params, true);
   await addNpmPackage('gulp-sourcemaps', params, true);
   await addNpmPackage('gulp-uglify', params, true);
   await addNpmPackage('vinyl-buffer', params, true);
