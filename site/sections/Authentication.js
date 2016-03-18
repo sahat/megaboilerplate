@@ -8,13 +8,13 @@ const AUTHENTICATION_SVG = (
 );
 
 const Authentication = (props) => {
-  const notSupported = props.jsFramework && (props.jsFramework === 'angular' || props.jsFramework === 'react') ? (
+  const notSupportedJsFramework = props.jsFramework && (props.jsFramework === 'angular') ? (
     <div>
-      <strong>Note: </strong> Authentication is currently not compatible with React or Angular.
+      <strong>Note: </strong> Authentication is currently not compatible with Angular.
     </div>
   ) : null;
 
-  const notSupported2 = props.database === 'none' ? (
+  const notSupportedNoDatabase = props.database === 'none' ? (
     <div>
       <strong>Note: </strong> To enable authentication you must select a database.
     </div>
@@ -27,7 +27,7 @@ const Authentication = (props) => {
       props.authentication.has('twitter')
     );
 
-  let authenticationCheckboxes = !notSupported && !notSupported2 ? (
+  let authenticationCheckboxes = !notSupportedJsFramework && !notSupportedNoDatabase ? (
     <div className="radio-group">
       <label className="checkbox-inline">
         <img className="btn-logo" src="/img/svg/none.png" alt="None" />
@@ -61,8 +61,8 @@ const Authentication = (props) => {
         </a>
       </div>
       <div className="panel-body">
-        {notSupported}
-        {notSupported2}
+        {notSupportedJsFramework}
+        {notSupportedNoDatabase}
         {authenticationCheckboxes}
       </div>
     </div>

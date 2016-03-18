@@ -60,14 +60,6 @@ class JsFramework extends React.Component {
             </label>
           </div>
         </VelocityComponent>
-        <VelocityComponent runOnMount animation="transition.slideUpIn" delay={75}>
-          <div className="checkbox transparent">
-            <label className="hint--right hint--rounded" data-hint="A complete routing library for React. React Router keeps your UI in sync with the URL.">
-              <input type="checkbox" name="reactOptionsCheckboxes" value="reactRouter" onChange={props.handleChange} checked={props.reactOptions && props.reactOptions.has('reactRouter')}/>
-              <span>React Router</span>
-            </label>
-          </div>
-        </VelocityComponent>
         <VelocityComponent runOnMount animation="transition.slideUpIn" delay={150}>
           <div className="checkbox transparent">
             <label className="hint--right hint--rounded" data-hint="Relay is a framework from Facebook that provides data-fetching functionality for React applications.">
@@ -80,7 +72,7 @@ class JsFramework extends React.Component {
           <div className="checkbox transparent">
             <label className="hint--right hint--rounded" data-hint="ECMAScript 2015 (ES6) is the upcoming sixth major release of the ECMAScript language specification.">
               <input type="checkbox" name="reactOptionsCheckboxes" value="es6" onChange={props.handleChange} checked={props.reactOptions && props.reactOptions.has('es6')}/>
-              <span>ES6</span>
+              <span>ES6 (Babel)</span>
             </label>
           </div>
         </VelocityComponent>
@@ -88,7 +80,7 @@ class JsFramework extends React.Component {
           <div className="checkbox transparent">
             <label className="hint--right hint--rounded" data-hint="Tweak React components in real time, while preserving the state.">
               <input type="checkbox" name="reactOptionsCheckboxes" value="hotReload" onChange={props.handleChange} checked={props.reactOptions && props.reactOptions.has('hotReload')}/>
-              <span>React Transform HMR</span>
+              <span>React Transform HMR (requires Webpack)</span>
             </label>
           </div>
         </VelocityComponent>
@@ -99,7 +91,7 @@ class JsFramework extends React.Component {
       <div>
         <span className="options" onClick={this.toggleAdditionalOptions}>
           <img className={cx('animated', { fast: state.showOptions })} src="/img/svg/options.svg"/>
-          <span>Additional Options</span>
+          <span>React Options</span>
         </span>
         {additionalOptions}
       </div>
