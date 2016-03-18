@@ -6,7 +6,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Header history={this.props.history} />
+        <Header />
         {this.props.children}
         <Footer />
       </div>

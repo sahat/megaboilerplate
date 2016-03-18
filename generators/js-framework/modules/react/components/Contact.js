@@ -11,19 +11,19 @@ class Contact extends React.Component {
           <div className="panel-body">
             <form method="POST" className="form-horizontal">
               <div className="form-group">
-                <label htmlFor="name" className="col-sm-2 control-label">Name</label>
+                <label htmlFor="name" className="col-sm-2">Name</label>
                 <div className="col-sm-8">
-                  <input type="text" name="name" id="name" autoFocus="autofocus" className="form-control"/>
+                  <input type="text" name="name" id="name" autoFocus className="form-control"/>
                 </div>
               </div>
               <div className="form-group">
-                <label htmlFor="email" className="col-sm-2 control-label">Email</label>
+                <label htmlFor="email" className="col-sm-2">Email</label>
                 <div className="col-sm-8">
                   <input type="email" name="email" id="email" className="form-control"/>
                 </div>
               </div>
               <div className="form-group">
-                <label htmlFor="message" className="col-sm-2 control-label">Body</label>
+                <label htmlFor="message" className="col-sm-2">Body</label>
                 <div className="col-sm-8">
                   <textarea name="message" id="message" rows="7" className="form-control"></textarea>
                 </div>

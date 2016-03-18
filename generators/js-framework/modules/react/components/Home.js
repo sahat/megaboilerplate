@@ -3,7 +3,7 @@ import React from 'react';
 class Home extends React.Component {
   render() {
     return (
-      <main className="container-fluid">
+      <div className="container-fluid">
         <div className="row">
           <div className="col-sm-4">
             <div className="panel">
@@ -30,7 +30,7 @@ class Home extends React.Component {
             </div>
           </div>
         </div>
-      </main>
+      </div>
     );
   }
 }
