@@ -2,6 +2,7 @@ var express = require('express');
 var path = require('path');
 var logger = require('morgan');
 var methodOverride = require('method-override');
+var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var flash = require('express-flash');
 var bodyParser = require('body-parser');
@@ -36,6 +37,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator());
 app.use(methodOverride('_method'));
+app.use(cookieParser());
 app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 app.use(flash());
 //= PASSPORT_MIDDLEWARE
@@ -44,12 +46,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 //= HOME_ROUTE
 //= CONTACT_ROUTE
 //= ACCOUNT_ROUTES
-//= REACT_SERVER_RENDERING
 //= PASSPORT_LOCAL_ROUTES
 //= PASSPORT_COMMON_ROUTES
 //= PASSPORT_FACEBOOK_ROUTES
 //= PASSPORT_GOOGLE_ROUTES
 //= PASSPORT_TWITTER_ROUTES
+//= REACT_SERVER_RENDERING
 
 // production error handler
 if (app.get('env') === 'production') {
