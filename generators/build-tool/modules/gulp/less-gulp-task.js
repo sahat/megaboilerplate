@@ -1,8 +1,8 @@
 gulp.task('less', function() {
-  gulp.src('public/stylesheets/main.less')
+  gulp.src('public/css/main.less')
     .pipe(plumber())
     .pipe(less())
     .pipe(autoprefixer())
     .pipe(gulpif(argv.production, csso()))
-    .pipe(gulp.dest('public/stylesheets'));
+    .pipe(gulp.dest('public/css'));
 });
