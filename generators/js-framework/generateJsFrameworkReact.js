@@ -1,52 +1,40 @@
 import { join } from 'path';
-import { copy, mkdirs, addNpmPackage, replaceCode, removeCode } from '../utils';
-
-// helper function
-async function updateLayoutTemplate(params) {
-  const layout = join(__base, 'build', params.uuid, 'views', 'layout.jade');
-
-  const appContainer = join(__dirname, 'modules', 'jade', 'app-container.jade');
-  const blockContent = join(__dirname, 'modules', 'jade', 'block-content.jade');
-  const socketIoImport = join(__dirname, 'modules', 'jade', 'socketio-import.jade');
-
-  if (params.jsFramework === 'none') {
-    // Use "block content" (traditional web app)
-    await replaceCode(layout, 'APP_CONTAINER_OR_BLOCK_CONTENT', blockContent, { indentLevel: 2 });
-  } else {
-    // Use "#app-container" div element (single page app)
-    await replaceCode(layout, 'APP_CONTAINER_OR_BLOCK_CONTENT', appContainer, { indentLevel: 2 });
-  }
-
-  // Add Socket.IO <script> tag (optional)
-  if (params.frameworkOptions.includes('socketio')) {
-    await replaceCode(layout, 'SOCKETIO_IMPORT', socketIoImport, { indentLevel: 2 });
-  }
-}
+import { copy, mkdirs, addNpmPackage, replaceCode } from '../utils';
 
 async function generateJsFrameworkReact(params) {
   const build = join(__base, 'build', params.uuid);
+  const app = join(build, 'app.js');
   const mainJs = join(__dirname, 'modules', 'react', 'main.js');
   const reactRequire = join(__dirname, 'modules', 'react', 'react-require.js');
-  const app = join(build, 'app.js');
+  const reactRoutesRequire = join(__dirname, 'modules', 'react', 'react-routes-require.js');
+  const serverRenderingWithRouting = join(__dirname, 'modules', 'react', 'server-rendering-with-routing.js');
 
   switch (params.framework) {
     case 'express':
-      const renderTemplateNunjucks = join(__dirname, 'modules', 'react', 'render-template-nunjucks.js');
+      
+      await mkdirs(join(build, 'app', 'components'));
 
-      // Optional: React Router
-      if (params.reactOptions && params.reactOptions.reactRouter) {
-        const reactRouterServerRendering = join(__dirname, 'modules', 'react', 'react-router-server-rendering.js');
-        await replaceCode(app, 'REACT_SERVER_RENDERING', reactRouterServerRendering);
-      } else {
-        const serverRendering = join(__dirname, 'modules', 'react', 'server-rendering.js');
-        await replaceCode(app, 'REACT_SERVER_RENDERING', serverRendering);
-      }
+      await addRedux(params);
+
+      // Require react and react-dom packages
+      await replaceCode(app, 'REACT_REQUIRE', reactRequire);
+      
+      // Require react routes
+      await replaceCode(app, 'REACT_ROUTES_REQUIRE', reactRoutesRequire);
+      
+      // Add react server-rendering with react-router middleware
+      await replaceCode(join(build, 'app.js'), 'REACT_SERVER_RENDERING', serverRenderingWithRouting);
+
+      await copy(mainJs, join(build, 'app', 'main.js'));
 
       switch (params.templateEngine) {
         case 'jade':
           const layoutJade = join(build, 'views', 'layout.jade');
-          const bundleJadeImport = join(__dirname, 'modules', 'react', 'react-jade-import.jade');
-          await replaceCode(layoutJade, 'JS_FRAMEWORK_MAIN_IMPORT', bundleJadeImport, { indentLevel: 2, leadingBlankLine: true });
+          const bundleJsJadeImport = join(__dirname, 'modules', 'react', 'react-jade-import.jade');
+          const renderFileJade = join(__dirname, 'modules', 'react', 'render-template-jade.js');
+          await replaceCode(app, 'RENDER_TEMPLATE', renderFileJade, { indentLevel: 3 });
+
+          await replaceCode(layoutJade, 'JS_FRAMEWORK_MAIN_IMPORT', bundleJsJadeImport, { indentLevel: 2 });
           break;
 
         case 'handlebars':
@@ -55,22 +43,18 @@ async function generateJsFrameworkReact(params) {
         case 'nunjucks':
           const layoutNunjucks = join(build, 'views', 'layout.html');
           const bundleNunjucksImport = join(__dirname, 'modules', 'react', 'react-html-import.html');
+          const renderFileNunjucks = join(__dirname, 'modules', 'react', 'render-template-nunjucks.js');
+
           await replaceCode(layoutNunjucks, 'JS_FRAMEWORK_MAIN_IMPORT', bundleNunjucksImport, { indentLevel: 1 });
-          await replaceCode(app, 'RENDER_TEMPLATE', renderTemplateNunjucks);
+          await replaceCode(app, 'RENDER_TEMPLATE', renderFileNunjucks);
           break;
 
         default:
           break;
       }
 
-
-      await replaceCode(app, 'REACT_REQUIRE', reactRequire);
-
       await addNpmPackage('react', params);
       await addNpmPackage('react-dom', params);
-
-      await mkdirs(join(build, 'app', 'components'));
-      await copy(mainJs, join(build, 'app', 'main.js'));
 
       break;
 
@@ -81,6 +65,23 @@ async function generateJsFrameworkReact(params) {
       break;
 
     default:
+  }
+}
+
+async function addRedux(params) {
+  const build = join(__base, 'build', params.uuid);
+  const app = join(__base, 'build', params.uuid, 'app.js');
+
+  if (params.reactOptions.redux) {
+    await mkdirs(join(build, 'actions'));
+    await mkdirs(join(build, 'containers'));
+    await mkdirs(join(build, 'reducers'));
+
+    // const serverRenderingWithRouting = join(__dirname, 'modules', 'react', 'react-router', 'server-rendering-with-routing.js');
+    // await replaceCode(join(build, 'app.js'), 'REACT_SERVER_RENDERING', serverRenderingWithRouting);
+  } else {
+    // const serverRendering = join(__dirname, 'modules', 'react', 'server-rendering.js');
+    // await replaceCode(join(build, 'app.js'), 'REACT_SERVER_RENDERING', serverRendering);
   }
 }
 
