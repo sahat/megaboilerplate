@@ -7,20 +7,20 @@ async function generateGulpBuildTool(params) {
 
   await cpy([gulpfile], build);
 
-  await addNpmPackage('gulp', params);
-  await addNpmPackage('gulp-sourcemaps', params);
-  await addNpmPackage('gulp-uglify', params);
-  await addNpmPackage('vinyl-buffer', params);
-  await addNpmPackage('gulp-plumber', params);
-  await addNpmPackage('gulp-csso', params);
-  await addNpmPackage('gulp-autoprefixer', params);
+  await addNpmPackage('gulp', params, true);
+  await addNpmPackage('gulp-sourcemaps', params, true);
+  await addNpmPackage('gulp-uglify', params, true);
+  await addNpmPackage('vinyl-buffer', params, true);
+  await addNpmPackage('gulp-plumber', params, true);
+  await addNpmPackage('gulp-csso', params, true);
+  await addNpmPackage('gulp-autoprefixer', params, true);
 
   switch (params.cssPreprocessor) {
     case 'sass':
       const sassGulpRequire = join(__dirname, 'modules', 'gulp', 'sass-gulp-require.js');
       const sassGulpTask = join(__dirname, 'modules', 'gulp', 'sass-gulp-task.js');
 
-      await addNpmPackage('gulp-sass', params);
+      await addNpmPackage('gulp-sass', params, true);
 
       await replaceCode(join(build, 'gulpfile.js'), 'CSS_PREPROCESSOR_GULP_REQUIRE', sassGulpRequire);
       await replaceCode(join(build, 'gulpfile.js'), 'CSS_PREPROCESSOR_GULP_TASK', sassGulpTask);
@@ -30,7 +30,7 @@ async function generateGulpBuildTool(params) {
       const lessGulpRequire = join(__dirname, 'modules', 'gulp', 'less-gulp-require.js');
       const lessGulpTask = join(__dirname, 'modules', 'gulp', 'less-gulp-task.js');
 
-      await addNpmPackage('gulp-less', params);
+      await addNpmPackage('gulp-less', params, true);
 
       await replaceCode(join(build, 'gulpfile.js'), 'CSS_PREPROCESSOR_GULP_REQUIRE', lessGulpRequire);
       await replaceCode(join(build, 'gulpfile.js'), 'CSS_PREPROCESSOR_GULP_TASK', lessGulpTask);
@@ -53,9 +53,9 @@ async function generateGulpBuildTool(params) {
       const reactGulpRequire = join(__dirname, 'modules', 'gulp', 'react-gulp-require.js');
       const reactGulpTask = join(__dirname, 'modules', 'gulp', 'react-gulp-task.js');
 
-      await addNpmPackage('vinyl-source-stream', params);
-      await addNpmPackage('babelify', params);
-      await addNpmPackage('browserify', params);
+      await addNpmPackage('vinyl-source-stream', params, true);
+      await addNpmPackage('babelify', params, true);
+      await addNpmPackage('browserify', params, true);
 
       await replaceCode(join(build, 'gulpfile.js'), 'JS_FRAMEWORK_GULP_REQUIRE', reactGulpRequire);
       await replaceCode(join(build, 'gulpfile.js'), 'JS_FRAMEWORK_GULP_TASK', reactGulpTask, { leadingBlankLine: true });
