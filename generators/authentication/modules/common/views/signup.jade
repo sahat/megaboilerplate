@@ -12,18 +12,17 @@ block content
         form(method='POST')
           legend Create an account
           .form-group
-            label.control-label(for='name') Name
+            label(for='name') Name
             input.form-control(type='text', name='name', id='name', placeholder='Name', autofocus=true)
           .form-group
-            label.control-label(for='email') Email
+            label(for='email') Email
             input.form-control(type='email', name='email', id='email', placeholder='Email')
           .form-group
-            label.control-label(for='password') Password
+            label(for='password') Password
             input.form-control(type='password', name='password', id='password', placeholder='Password')
           .form-group
             small.text-muted By signing up, you agree to the <a href="/">Terms of Service</a>.
-          .form-group
-            button.btn.btn-success(type='submit') Create an account
+          button.btn.btn-success(type='submit') Create an account
 
         .hr-title
           abbr or
@@ -34,8 +33,6 @@ block content
           a.btn.btn-twitter(href='/auth/twitter') Sign in with Twitter
           | &nbsp;
           a.btn.btn-google(href='/auth/google') Sign in with Google
-    br
-    p.text-center Already have an account?
-      |&nbsp;
+    p.text-center Already have an account?&nbsp;
       a(href='/login')
         strong Log in
