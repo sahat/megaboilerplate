@@ -12,7 +12,7 @@ var dotenv = require('dotenv');
 //= DATABASE_REQUIRE
 //= PASSPORT_REQUIRE
 //= CSS_PREPROCESSOR_MIDDLEWARE_REQUIRE
-
+//= ES6_TRANSPILER
 // Load environment variables from .env file
 dotenv.load();
 

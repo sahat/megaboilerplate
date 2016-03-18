@@ -4,6 +4,7 @@ import { copy, mkdirs, addNpmPackage, replaceCode } from '../utils';
 async function generateJsFrameworkReact(params) {
   const build = join(__base, 'build', params.uuid);
   const app = join(build, 'app.js');
+  const es6Transpiler = join(__dirname, 'modules', 'react', 'es6-transpiler.js');
   const mainJs = join(__dirname, 'modules', 'react', 'main.js');
   const reactRequire = join(__dirname, 'modules', 'react', 'react-require.js');
   const reactRoutesRequire = join(__dirname, 'modules', 'react', 'react-routes-require.js');
@@ -21,7 +22,10 @@ async function generateJsFrameworkReact(params) {
       
       // Require react routes
       await replaceCode(app, 'REACT_ROUTES_REQUIRE', reactRoutesRequire);
-      
+
+      // Add ES6 transpiler
+      await replaceCode(app, 'ES6_TRANSPILER', es6Transpiler);
+
       // Add react server-rendering with react-router middleware
       await replaceCode(join(build, 'app.js'), 'REACT_SERVER_RENDERING', serverRenderingWithRouting);
 
