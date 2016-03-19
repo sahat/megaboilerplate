@@ -41,8 +41,8 @@
     "haikunator": "^1.1.0",
     "lodash": "^4.6.1",
     "nunjucks": "^2.4.1",
-    "react": "^15.0.0-rc.2",
-    "react-dom": "^15.0.0-rc.2",
+    "react": "^0.14",
+    "react-dom": "0.14",
     "react-router": "^2.0.1",
     "shortid": "^2.2.4",
     "velocity-react": "^1.1.4"
