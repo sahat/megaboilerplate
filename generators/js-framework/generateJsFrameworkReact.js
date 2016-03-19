@@ -85,6 +85,7 @@ async function generateJsFrameworkReact(params) {
   await addNpmPackage('react', params);
   await addNpmPackage('react-dom', params);
   await addNpmPackage('react-router', params);
+  await addNpmPackage('whatwg-fetch', params);
   if (params.authentication.length) {
     await addNpmPackage('react-cookie', params);
     await addNpmPackage('jsonwebtoken', params);
