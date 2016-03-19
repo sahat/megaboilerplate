@@ -1,17 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router';
 import cookie from 'react-cookie';
+import { Link } from 'react-router';
+import { connect } from 'react-redux'
+import { login } from '../../actions/auth';
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
-    this.state = {
-      email: '',
-      password: '',
-      errorMessages: []
-    };
+    this.state = { email: '', password: '' };
   }
 
   handleChange(event) {
@@ -21,28 +19,17 @@ class Login extends React.Component {
 
   handleLogin(event) {
     event.preventDefault();
-
-    fetch('/auth/login', {
-      method: 'post',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(this.state)
-    }).then((response) => {
-      if (response.ok) {
-        response.json().then((json) => {
-          console.log('Token', json.token);
-        });
-      } else {
-        response.json().then((json) => {
-          this.setState({ errorMessages: Array.isArray(json) ? json : [json] });
-        });
-      }
-    });
+    const { email, password } = this.state;
+    this.props.dispatch(login(email, password));
   }
 
   render() {
-    const errorMessages = this.state.errorMessages.length ? (
+    console.log('Data', this.props);
+    const props = this.props;
+
+    const errorMessages = props.errorMessages.length ? (
       <div role="alert" className="alert alert-danger">
-        {this.state.errorMessages.map((message, index) => <div key={index}>{message.msg}</div>)}
+        {props.errorMessages.map((message, index) => <div key={index}>{message.msg}</div>)}
       </div>
     ) : null;
 
@@ -80,4 +67,12 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+const mapStateToProps = (state) => {
+  return {
+    token: state.token,
+    user: state.user,
+    errorMessages: state.errorMessages
+  }
+};
+
+export default connect(mapStateToProps)(Login);
