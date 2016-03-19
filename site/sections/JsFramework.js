@@ -52,14 +52,6 @@ class JsFramework extends React.Component {
 
     const additionalOptions = (state.showOptions && props.jsFramework === 'react') ? (
       <div>
-        <VelocityComponent runOnMount animation="transition.slideUpIn">
-          <div className="checkbox transparent">
-            <label className="hint--right hint--rounded" data-hint="Predictable state container for JavaScript apps. Redux is an evolution of the Facebook's Flux, without all the complexity.">
-              <input type="checkbox"  name="reactOptionsCheckboxes" value="redux" onChange={props.handleChange} checked={props.reactOptions && props.reactOptions.has('redux')}/>
-              <span>Redux</span>
-            </label>
-          </div>
-        </VelocityComponent>
         <VelocityComponent runOnMount animation="transition.slideUpIn" delay={150}>
           <div className="checkbox transparent">
             <label className="hint--right hint--rounded" data-hint="Relay is a framework from Facebook that provides data-fetching functionality for React applications.">

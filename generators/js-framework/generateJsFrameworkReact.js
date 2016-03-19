@@ -14,7 +14,10 @@ async function generateJsFrameworkReact(params) {
   switch (params.framework) {
     case 'express':
 
-      await addRedux(params);
+      await mkdirs(join(build, 'app', 'actions'));
+      await mkdirs(join(build, 'app', 'containers'));
+      await mkdirs(join(build, 'app', 'components'));
+      await mkdirs(join(build, 'app', 'reducers'));
 
       // Require react, react-router, react-dom packages
       await replaceCode(app, 'REACT_REQUIRE', reactRequire);
@@ -27,7 +30,6 @@ async function generateJsFrameworkReact(params) {
       await replaceCode(join(build, 'app.js'), 'REACT_SERVER_RENDERING', serverRenderingWithRouting);
 
       // Copy React components
-      await mkdirs(join(build, 'app', 'components'));
       await cpy([
         join(__dirname, 'modules', 'react', 'components', 'App.js'),
         join(__dirname, 'modules', 'react', 'components', 'Home.js'),
@@ -85,28 +87,13 @@ async function generateJsFrameworkReact(params) {
   await addNpmPackage('react', params);
   await addNpmPackage('react-dom', params);
   await addNpmPackage('react-router', params);
+  await addNpmPackage('redux', params);
+  await addNpmPackage('react-redux', params);
   await addNpmPackage('whatwg-fetch', params);
   if (params.authentication.length) {
     await addNpmPackage('react-cookie', params);
     await addNpmPackage('jsonwebtoken', params);
     await addNpmPackage('moment', params);
-  }
-}
-
-async function addRedux(params) {
-  const build = join(__base, 'build', params.uuid);
-  const app = join(__base, 'build', params.uuid, 'app.js');
-
-  if (params.reactOptions && params.reactOptions.redux) {
-    await mkdirs(join(build, 'actions'));
-    await mkdirs(join(build, 'containers'));
-    await mkdirs(join(build, 'reducers'));
-
-    // const serverRenderingWithRouting = join(__dirname, 'modules', 'react', 'react-router', 'server-rendering-with-routing.js');
-    // await replaceCode(join(build, 'app.js'), 'REACT_SERVER_RENDERING', serverRenderingWithRouting);
-  } else {
-    // const serverRendering = join(__dirname, 'modules', 'react', 'server-rendering.js');
-    // await replaceCode(join(build, 'app.js'), 'REACT_SERVER_RENDERING', serverRendering);
   }
 }
 
