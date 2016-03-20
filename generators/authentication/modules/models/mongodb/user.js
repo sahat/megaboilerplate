@@ -2,25 +2,27 @@ var crypto = require('crypto');
 var bcrypt = require('bcrypt-nodejs');
 var mongoose = require('mongoose');
 
+var schemaOptions = {
+  timestamps: true,
+  toObject: {
+    virtuals: true
+  }
+};
+
 var userSchema = new mongoose.Schema({
-  // essential fields
   name: String,
-  email: { type: String, unique: true, lowercase: true },
+  email: { type: String, unique: true},
   password: String,
   passwordResetToken: String,
   passwordResetExpires: Date,
-
-  // optional profile fields
   gender: String,
   location: String,
   website: String,
   picture: String,
-
-  // unique user identifiers
   facebook: String,
   twitter: String,
   google: String
-}, { timestamps: true });
+}, schemaOptions);
 
 userSchema.pre('save', function(next) {
   var user = this;
