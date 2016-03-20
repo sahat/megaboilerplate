@@ -11,14 +11,14 @@ import Forgot from './components/Account/Forgot';
 import Reset from './components/Account/Reset';
 
 export default (
-  <Route path ="/" component={App}>
-      <IndexRoute component={Home} />
-      <Route path="contact" component={Contact} />
-      <Route path="login" component={Login} />
-      <Route path="signup" component={Signup} />
-      <Route path="account" component={Profile} />
-      <Route path="forgot" component={Forgot} />
-      <Route path='reset' component={Reset} />
-      <Route path="*" component={NotFound}/>
+  <Route path="/" component={App}>
+    <IndexRoute component={Home}/>
+    <Route path="/contact" component={Contact}/>
+    <Route path="/login" component={Login}/>
+    <Route path="/signup" component={Signup}/>
+    <Route path="/account" component={Profile}/>
+    <Route path="/forgot" component={Forgot}/>
+    <Route path='/reset' component={Reset}/>
+    <Route path="*" component={NotFound}/>
   </Route>
 );

@@ -1,19 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { IndexLink, Link } from 'react-router';
 import { connect } from 'react-redux'
 
 class Header extends React.Component {
   render() {
-    const { user } = this.props;
+    const ACTIVE = { borderBottomColor: '#3f51b5' };
+    const { token, user } = this.props;
 
     let rightNav;
 
-    if (user) {
+    if (token) {
       rightNav = (
         <ul className="nav navbar-nav navbar-right">
           <li className="dropdown">
             <a href="#" data-toggle="dropdown" className="navbar-avatar dropdown-toggle">
-              <img src={user.picture || user.gravatar} /> {user.name || user.email || user.id}
+              <img src={user.picture || user.gravatar}/> {user.name || user.email || user.id}
               <i className="caret"></i>
             </a>
             <ul className="dropdown-menu">
@@ -27,8 +28,8 @@ class Header extends React.Component {
     } else {
       rightNav = (
         <ul className="nav navbar-nav navbar-right">
-          <li><Link to="/login">Log in</Link></li>
-          <li><Link to="/signup">Sign up</Link></li>
+          <li><Link to="/login" activeStyle={ACTIVE}>Log in</Link></li>
+          <li><Link to="/signup" activeStyle={ACTIVE}>Sign up</Link></li>
         </ul>
       );
     }
@@ -43,12 +44,12 @@ class Header extends React.Component {
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
             </button>
-            <Link to="/" className="navbar-brand">Project name</Link>
+            <IndexLink to="/" activeStyle={ACTIVE} className="navbar-brand">Project name</IndexLink>
           </div>
           <div id="navbar" className="navbar-collapse collapse">
             <ul className="nav navbar-nav">
-              <li><Link to="/">Home</Link></li>
-              <li><Link to="/contact">Contact</Link></li>
+              <li><IndexLink to="/" activeStyle={ACTIVE}>Home</IndexLink></li>
+              <li><Link to="/contact" activeStyle={ACTIVE}>Contact</Link></li>
             </ul>
             {rightNav}
           </div>
