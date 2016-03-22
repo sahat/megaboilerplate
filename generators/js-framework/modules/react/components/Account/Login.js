@@ -1,52 +1,39 @@
 import React from 'react';
-import cookie from 'react-cookie';
 import { Link } from 'react-router';
 import { connect } from 'react-redux'
 import { login } from '../../actions/auth';
+import Messages from '../Messages';
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleLogin = this.handleLogin.bind(this);
     this.state = { email: '', password: '' };
   }
 
   handleChange(event) {
-    event.preventDefault();
     this.setState({ [event.target.name]: event.target.value });
   }
 
   handleLogin(event) {
     event.preventDefault();
-    const { email, password } = this.state;
-    this.props.dispatch(login(email, password));
+    this.props.dispatch(login(this.state.email, this.state.password));
   }
 
   render() {
-    console.log('Data', this.props);
-    const props = this.props;
-
-    const errorMessages = props.errorMessages.length ? (
-      <div role="alert" className="alert alert-danger">
-        {props.errorMessages.map((message, index) => <div key={index}>{message.msg}</div>)}
-      </div>
-    ) : null;
-
     return (
       <div className="login-container">
         <div className="panel">
           <div className="panel-body">
-            {errorMessages}
-            <form onSubmit={this.handleLogin}>
+            <Messages messages={this.props.messages}/>
+            <form onSubmit={this.handleLogin.bind(this)}>
               <legend>Log In</legend>
               <div className="form-group">
                 <label htmlFor="email">Email</label>
-                <input type="email" name="email" id="email" placeholder="Email" autoFocus className="form-control" value={this.state.email} onChange={this.handleChange} />
+                <input type="email" name="email" id="email" placeholder="Email" autoFocus className="form-control" value={this.state.email} onChange={this.handleChange.bind(this)}/>
               </div>
               <div className="form-group">
                 <label htmlFor="password">Password</label>
-                <input type="password" name="password" id="password" placeholder="Password" className="form-control" value={this.state.password} onChange={this.handleChange} />
+                <input type="password" name="password" id="password" placeholder="Password" className="form-control" value={this.state.password} onChange={this.handleChange.bind(this)}/>
               </div>
               <div className="form-group"><Link to="/forgot"><strong>Forgot your password?</strong></Link></div>
               <button type="submit" className="btn btn-success">Log in</button>
@@ -69,10 +56,8 @@ class Login extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    token: state.token,
-    user: state.user,
-    errorMessages: state.errorMessages
-  }
+    messages: state.messages
+  };
 };
 
 export default connect(mapStateToProps)(Login);
