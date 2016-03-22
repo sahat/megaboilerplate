@@ -1,29 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { updateProfile, changePassword, deleteAccount, clearMessages} from '../../actions/auth';
-import Messages from '../Shared/Messages';
+import { updateProfile, changePassword, deleteAccount } from '../../actions/auth';
+import Messages from '../Messages';
 
 class Profile extends React.Component {
   constructor(props) {
     super(props);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleProfileUpdate = this.handleProfileUpdate.bind(this);
-    this.handleChangePassword = this.handleChangePassword.bind(this);
-    this.handleDeleteAccount = this.handleDeleteAccount.bind(this);
     this.state = {
       email: props.user.email,
       name: props.user.name,
       gender: props.user.gender,
       location: props.user.location,
       website: props.user.website,
+      gravatar: props.user.gravatar,
       password: '',
       confirm: ''
     };
-  }
-
-  componentWillMount() {
-    const { dispatch } = this.props;
-    dispatch(clearMessages());
   }
 
   handleChange(event) {
@@ -32,73 +24,82 @@ class Profile extends React.Component {
 
   handleProfileUpdate(event) {
     event.preventDefault();
-    const state = this.state;
-    const { dispatch, token } = this.props;
-    dispatch(updateProfile(state, token));
+    this.props.dispatch(updateProfile(this.state, this.props.token));
   }
 
   handleChangePassword(event) {
     event.preventDefault();
-    const { dispatch } = this.props;
-    const { password, confirm } = this.state;
-    dispatch(changePassword(password, confirm));
+    this.props.dispatch(changePassword(this.state.password, this.state.confirm, this.props.token));
   }
 
   handleDeleteAccount(event) {
     event.preventDefault();
-    const { dispatch } = this.props;
-    dispatch(deleteAccount());
+    this.props.dispatch(deleteAccount(this.props.token));
   }
 
   render() {
-    const state = this.state;
-    const { user } = this.props;
+    const googleLinkedAccount = this.props.user.google ? (
+      <a href="/auth/unlink/google" className="text-danger">Unlink your Google account</a>
+    ) : (
+      <a href="/auth/google">Link your Google account</a>
+    );
+    const facebookLinkedAccount = this.props.user.facebook ? (
+      <a href="/unlink/facebook" className="text-danger">Unlink your Facebook account</a>
+    ) : (
+      <a href="/auth/facebook">Link your Facebook account</a>
+    );
+    const twitterLinkedAccount = this.props.user.twitter ? (
+      <a href="/unlink/twitter" className="text-danger">Unlink your Twitter account</a>
+    ) : (
+      <a href="/auth/twitter">Link your Twitter account</a>
+    );
+
     return (
       <div className="container">
         <div className="panel">
           <div className="panel-body">
-            <Messages messages={this.props.messages} />
-            <form onSubmit={this.handleProfileUpdate} className="form-horizontal">
+            <Messages messages={this.props.messages}/>
+            <form onSubmit={this.handleProfileUpdate.bind(this)} className="form-horizontal">
               <legend>Profile Information</legend>
               <div className="form-group">
                 <label htmlFor="email" className="col-sm-3">Email</label>
                 <div className="col-sm-7">
-                  <input type="email" name="email" id="email" className="form-control" value={user.email} onChange={this.handleChange} />
+                  <input type="email" name="email" id="email" className="form-control" value={this.state.email} onChange={this.handleChange.bind(this)}/>
                 </div>
               </div>
               <div className="form-group">
                 <label htmlFor="name" className="col-sm-3">Name</label>
                 <div className="col-sm-7">
-                  <input type="text" name="name" id="name" className="form-control" value={user.name} onChange={this.handleChange} />
+                  <input type="text" name="name" id="name" className="form-control" value={this.state.name} onChange={this.handleChange.bind(this)}/>
                 </div>
               </div>
               <div className="form-group">
                 <label className="col-sm-3">Gender</label>
                 <div className="col-sm-4">
                   <label className="radio-inline radio col-sm-4">
-                    <input type="radio" name="gender" value="male" checked={user.gender === 'male'} onChange={this.handleChange} /><span>Male</span>
+                    <input type="radio" name="gender" value="male" checked={this.state.gender === 'male'} onChange={this.handleChange.bind(this)}/><span>Male</span>
                   </label>
                   <label className="radio-inline col-sm-4">
-                    <input type="radio" name="gender" value="female" checked={user.gender === 'female'} onChange={this.handleChange} /><span>Female</span>
+                    <input type="radio" name="gender" value="female" checked={this.state.gender === 'female'} onChange={this.handleChange.bind(this)}/><span>Female</span>
                   </label>
                 </div>
               </div>
               <div className="form-group">
                 <label htmlFor="location" className="col-sm-3">Location</label>
                 <div className="col-sm-7">
-                  <input type="text" name="location" id="location" className="form-control" value={user.location} onChange={this.handleChange} />
+                  <input type="text" name="location" id="location" className="form-control" value={this.state.location} onChange={this.handleChange.bind(this)}/>
                 </div>
               </div>
               <div className="form-group">
                 <label htmlFor="website" className="col-sm-3">Website</label>
                 <div className="col-sm-7">
-                  <input type="text" name="website" id="website" className="form-control" value={user.website} onChange={this.handleChange} />
+                  <input type="text" name="website" id="website" className="form-control" value={this.state.website} onChange={this.handleChange.bind(this)}/>
                 </div>
               </div>
               <div className="form-group">
                 <label className="col-sm-3">Gravatar</label>
                 <div className="col-sm-4">
-                  <img src={user.gravatar} width="100" height="100" className="profile" />
+                  <img src={this.state.gravatar} width="100" height="100" className="profile"/>
                 </div>
               </div>
               <div className="form-group">
@@ -111,18 +112,18 @@ class Profile extends React.Component {
         </div>
         <div className="panel">
           <div className="panel-body">
-            <form onSubmit={this.handleChangePassword} className="form-horizontal">
+            <form onSubmit={this.handleChangePassword.bind(this)} className="form-horizontal">
               <legend>Change Password</legend>
               <div className="form-group">
                 <label htmlFor="password" className="col-sm-3">New Password</label>
                 <div className="col-sm-7">
-                  <input type="password" name="password" id="password" className="form-control" value={state.password} onChange={this.handleChange} />
+                  <input type="password" name="password" id="password" className="form-control" value={this.state.password} onChange={this.handleChange.bind(this)}/>
                 </div>
               </div>
               <div className="form-group">
                 <label htmlFor="confirm" className="col-sm-3">Confirm Password</label>
                 <div className="col-sm-7">
-                  <input type="password" name="confirm" id="confirm" className="form-control"  value={state.confirm} onChange={this.handleChange} />
+                  <input type="password" name="confirm" id="confirm" className="form-control" value={this.state.confirm} onChange={this.handleChange.bind(this)}/>
                 </div>
               </div>
               <div className="form-group">
@@ -139,12 +140,9 @@ class Profile extends React.Component {
               <legend>Linked Accounts</legend>
               <div className="form-group">
                 <div className="col-sm-offset-3 col-sm-4">
-                  <p><a href="/unlink/google" className="text-danger">Unlink your Google account</a></p>
-                  <p><a href="/auth/google">Link your Google account</a></p>
-                  <p><a href="/unlink/facebook" className="text-danger">Unlink your Facebook account</a></p>
-                  <p><a href="/auth/facebook">Link your Facebook account</a></p>
-                  <p><a href="/unlink/twitter" className="text-danger">Unlink your Twitter account</a></p>
-                  <p><a href="/auth/twitter">Link your Twitter account</a></p>
+                  <p>{googleLinkedAccount}</p>
+                  <p>{facebookLinkedAccount}</p>
+                  <p>{twitterLinkedAccount}</p>
                 </div>
               </div>
             </div>
@@ -152,7 +150,7 @@ class Profile extends React.Component {
         </div>
         <div className="panel">
           <div className="panel-body">
-            <form onSubmit={this.handleDeleteAccount} className="form-horizontal">
+            <form onSubmit={this.handleDeleteAccount.bind(this)} className="form-horizontal">
               <legend>Delete Account</legend>
               <div className="form-group">
                 <p className="col-sm-offset-3 col-sm-9">You can delete your account, but keep in mind this action is irreversible.</p>
@@ -168,12 +166,12 @@ class Profile extends React.Component {
   }
 }
 
-const mapReduxStateToProfileProps = (state) => {
+const mapStateToProps = (state) => {
   return {
-    token: state.token,
-    user: state.user,
+    token: state.auth.token,
+    user: state.auth.user,
     messages: state.messages
   };
 };
 
-export default connect(mapReduxStateToProfileProps)(Profile);
+export default connect(mapStateToProps)(Profile);
