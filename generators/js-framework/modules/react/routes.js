@@ -12,25 +12,30 @@ import Reset from './components/Account/Reset';
 
 export default (store) => {
   const requireAuth = (nextState, replace) => {
-    if (!store.getState().token) {
+    if (!store.getState().auth.token) {
       replace('/login');
     }
   };
   const skipIfAuthenticated = (nextState, replace) => {
-    if (store.getState().token) {
+    if (store.getState().auth.token) {
       replace('/');
     }
   };
+  const clearMessages = () => {
+    store.dispatch({
+      type: 'CLEAR_MESSAGES'
+    });
+  };
   return (
     <Route path="/" component={App}>
-      <IndexRoute component={Home}/>
-      <Route path="/contact" component={Contact}/>
-      <Route path="/login" component={Login} onEnter={skipIfAuthenticated}/>
-      <Route path="/signup" component={Signup} onEnter={skipIfAuthenticated}/>
-      <Route path="/account" component={Profile} onEnter={requireAuth}/>
-      <Route path="/forgot" component={Forgot}/>
-      <Route path='/reset' component={Reset}/>
-      <Route path="*" component={NotFound}/>
+      <IndexRoute component={Home} onLeave={clearMessages}/>
+      <Route path="/contact" component={Contact} onLeave={clearMessages}/>
+      <Route path="/login" component={Login} onEnter={skipIfAuthenticated} onLeave={clearMessages}/>
+      <Route path="/signup" component={Signup} onEnter={skipIfAuthenticated} onLeave={clearMessages}/>
+      <Route path="/account" component={Profile} onEnter={requireAuth} onLeave={clearMessages}/>
+      <Route path="/forgot" component={Forgot} onEnter={skipIfAuthenticated} onLeave={clearMessages}/>
+      <Route path='/reset/:token' component={Reset} onEnter={skipIfAuthenticated} onLeave={clearMessages}/>
+      <Route path="*" component={NotFound} onLeave={clearMessages}/>
     </Route>
   );
 }
