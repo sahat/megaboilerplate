@@ -2,15 +2,11 @@ import moment from 'moment';
 import cookie from 'react-cookie';
 import { browserHistory } from 'react-router';
 
-export function clearMessages() {
-  return {
-    type: 'CLEAR_MESSAGES'
-  }
-}
-
 export function login(email, password) {
   return (dispatch) => {
-    dispatch(clearMessages());
+    dispatch({
+      type: 'CLEAR_MESSAGES'
+    });
     fetch('/auth/login', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
@@ -43,7 +39,9 @@ export function login(email, password) {
 
 export function signup(name, email, password) {
   return (dispatch) => {
-    dispatch(clearMessages());
+    dispatch({
+      type: 'CLEAR_MESSAGES'
+    });
     fetch('/auth/signup', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
@@ -51,12 +49,13 @@ export function signup(name, email, password) {
     }).then((response) => {
       response.json().then((json) => {
         if (response.ok) {
-          cookie.save('token', json.token, { expires: moment().add(1, 'hour').toDate() });
           dispatch({
             type: 'SIGNUP_SUCCESS',
             token: json.token,
             user: json.user
           });
+          browserHistory.push('/');
+          cookie.save('token', json.token, { expires: moment().add(1, 'hour').toDate() });
         } else {
           dispatch({
             type: 'SIGNUP_FAILURE',
@@ -68,14 +67,86 @@ export function signup(name, email, password) {
   };
 }
 
+export function logout() {
+  cookie.remove('token');
+  browserHistory.push('/');
+  return {
+    type: 'LOGOUT_SUCCESS'
+  };
+}
+
+export function forgotPassword(email) {
+  return (dispatch) => {
+    dispatch({
+      type: 'CLEAR_MESSAGES'
+    });
+    fetch('/auth/forgot', {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email })
+    }).then((response) => {
+      if (response.ok) {
+        response.json().then((json) => {
+          dispatch({
+            type: 'FORGOT_PASSWORD_SUCCESS',
+            messages: [json]
+          });
+        });
+      } else {
+        response.json().then((json) => {
+          dispatch({
+            type: 'FORGOT_PASSWORD_FAILURE',
+            messages: Array.isArray(json) ? json : [json]
+          });
+        });
+      }
+    });
+  };
+}
+
+export function resetPassword(password, confirm, pathToken) {
+  return (dispatch) => {
+    dispatch({
+      type: 'CLEAR_MESSAGES'
+    });
+    fetch(`/auth/reset/${pathToken}`, {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        password: password,
+        confirm: confirm
+      })
+    }).then((response) => {
+      if (response.ok) {
+        response.json().then((json) => {
+          browserHistory.push('/login');
+          dispatch({
+            type: 'RESET_PASSWORD_SUCCESS',
+            messages: [json]
+          });
+        });
+      } else {
+        response.json().then((json) => {
+          dispatch({
+            type: 'RESET_PASSWORD_FAILURE',
+            messages: Array.isArray(json) ? json : [json]
+          });
+        });
+      }
+    });
+  };
+}
+
 export function updateProfile(state, token) {
   return (dispatch) => {
-    dispatch(clearMessages());
+    dispatch({
+      type: 'CLEAR_MESSAGES'
+    });
     fetch('/account', {
       method: 'put',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token
+        'Authorization': `Bearer ${token}`
       },
       body: JSON.stringify({
         email: state.email,
@@ -104,32 +175,59 @@ export function updateProfile(state, token) {
   };
 }
 
-export function changePassword(password, confirm) {
-
-}
-
-export function deleteAccount() {
+export function changePassword(password, confirm, token) {
   return (dispatch) => {
-    dispatch(clearMessages());
+    dispatch({
+      type: 'CLEAR_MESSAGES'
+    });
     fetch('/account', {
-      method: 'delete',
+      method: 'put',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token
-      }
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        password: password,
+        confirm: confirm
+      })
     }).then((response) => {
       if (response.ok) {
         response.json().then((json) => {
           dispatch({
-            type: 'DELETE_ACCOUNT_SUCCESS',
+            type: 'CHANGE_PASSWORD_SUCCESS',
             messages: [json]
           });
         });
       } else {
         response.json().then((json) => {
           dispatch({
-            type: 'DELETE_ACCOUNT_FAILURE',
+            type: 'CHANGE_PASSWORD_FAILURE',
             messages: Array.isArray(json) ? json : [json]
+          });
+        });
+      }
+    });
+  };
+}
+
+export function deleteAccount(token) {
+  return (dispatch) => {
+    dispatch({
+      type: 'CLEAR_MESSAGES'
+    });
+    fetch('/account', {
+      method: 'delete',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    }).then((response) => {
+      if (response.ok) {
+        response.json().then((json) => {
+          dispatch(logout());
+          dispatch({
+            type: 'DELETE_ACCOUNT_SUCCESS',
+            messages: [json]
           });
         });
       }
