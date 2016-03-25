@@ -1,3 +1,3 @@
 
 // Passport OAuth strategies
-var passportConf = require('./config/passport');
+require('./config/passport');

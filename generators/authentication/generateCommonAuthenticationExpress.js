@@ -18,7 +18,7 @@ async function generateCommonAuthenticationExpress(params) {
   const passportSerializer = join(__dirname, 'modules', 'common', 'passport-serializer.js');
   const passportDeserializerMongoDb = join(__dirname, 'modules', 'common', 'passport-deserializer.js');
   const passportDeserializerSql = join(__dirname, 'modules', 'common', 'passport-deserializer-sql.js');
-  const passportUserModel = join(__dirname, 'modules', 'common', 'passport-user-model.js');
+  const userModelRequire = join(__dirname, 'modules', 'common', 'models', 'user-model-require.js');
   const userControllerModule = join(__dirname, 'modules', 'controllers', 'user.js');
   const userControllerRequire = join(__dirname, 'modules', 'controllers', 'user-require.js');
   const accountRoutes = join(__dirname, 'modules', 'common', 'routes', 'account-routes.js');
@@ -28,11 +28,8 @@ async function generateCommonAuthenticationExpress(params) {
 
   const userController = join(build, 'controllers', 'user.js');
 
-  // Passport middleware
-  await replaceCode(app, 'PASSPORT_MIDDLEWARE', passportMiddleware);
-  await replaceCode(app, 'PASSPORT_CONFIG_REQUIRE', passportConfigRequire);
+    
 
-  // isAuthenticated middleware
   if (params.jsFramework) {
     await replaceCode(app, 'IS_AUTHENTICATED_MIDDLEWARE', jwtIsAuthenticatedMiddleware);
     await replaceCode(userController, 'ENSURE_AUTHENTICATED_MIDDLEWARE', jwtEnsureAuthenticated);
@@ -40,20 +37,22 @@ async function generateCommonAuthenticationExpress(params) {
   } else {
     await replaceCode(userController, 'ENSURE_AUTHENTICATED_MIDDLEWARE', passportEnsureAuthenticated);
     await replaceCode(userController, 'PASSPORT_REQUIRE', passportRequire);
+    await replaceCode(app, 'PASSPORT_MIDDLEWARE', passportMiddleware);
+    await replaceCode(app, 'PASSPORT_CONFIG_REQUIRE', passportConfigRequire);
   }
 
   // Add user controller reference
   await replaceCode(app, 'USER_CONTROLLER', userControllerRequire);
 
   // Add common Passport routes, e.g. logout, unlink
-  await replaceCode(app, 'PASSPORT_COMMON_ROUTES', passportCommonRoutes);
+  await replaceCode(app, 'COMMON_AUTH_ROUTES', passportCommonRoutes);
 
   // Add "My Account" routes
   await replaceCode(app, 'ACCOUNT_ROUTES', accountRoutes);
 
   // Passport config file
   await copy(passportConfigModule, passportConfigFile);
-  await replaceCode(passportConfigFile, 'PASSPORT_USER_MODEL', passportUserModel);
+  await replaceCode(passportConfigFile, 'USER_MODEL_REQUIRE', userModelRequire);
 
   if (params.jsFramework) {
 
