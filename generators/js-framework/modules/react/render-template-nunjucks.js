@@ -1,3 +1,3 @@
-nunjucks.render('views/layout.html', { html: html }, function(err, html) {
-  res.status(200).send(html);
+nunjucks.render('views/layout.html', { html: html, initialState: store.getState() }, function(err, html) {
+  res.send(html);
 });
