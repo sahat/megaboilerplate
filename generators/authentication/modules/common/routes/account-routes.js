@@ -1,3 +1,3 @@
-app.get('/account', passportConf.isAuthenticated, user.accountGet);
-app.put('/account', passportConf.isAuthenticated, user.accountPut);
-app.delete('/account', passportConf.isAuthenticated, user.accountDelete);
+app.get('/account', UserController.ensureAuthenticated, UserController.accountGet);
+app.put('/account', UserController.ensureAuthenticated, UserController.accountPut);
+app.delete('/account', UserController.ensureAuthenticated, UserController.accountDelete);

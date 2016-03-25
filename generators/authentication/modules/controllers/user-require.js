@@ -1,1 +1,1 @@
-var user = require('./controllers/user');
+var UserController = require('./controllers/user');

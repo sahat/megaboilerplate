@@ -2,9 +2,10 @@ var _ = require('lodash');
 var async = require('async');
 var crypto = require('crypto');
 var nodemailer = require('nodemailer');
-var passport = require('passport');
+//= PASSPORT_REQUIRE
+//= JWT_REQUIRE
 var User = require('../models/user');
-//= IS_AUTHENTICATED_MIDDLEWARE
+//= ENSURE_AUTHENTICATED_MIDDLEWARE
 
 /**
  * GET /login
