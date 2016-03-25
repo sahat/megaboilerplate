@@ -1,4 +1,9 @@
 {
+  "cookie-parser": "^1.4.1",
+  "express-flash": "0.0.2",
+  "express-session": "^1.2.1",
+  "method-override": "^2.3.5",
+
   "socket.io": "^1.4.5",
   "pm2": "^1.0.2",
 
@@ -8,8 +13,6 @@
   "vision": "^4.0.1",
   "express-handlebars": "^3.0.0",
 
-  "express-validator": "^2.20.2",
-  "express-flash": "^0.0.2",
 
   "classnames": "2.2.3",
   "react": "15.0.0-rc.2",
