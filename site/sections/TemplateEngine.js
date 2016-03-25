@@ -79,11 +79,6 @@ class TemplateEngine extends React.Component {
           <span>Nunjucks</span>
           {recommended}
         </label>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/none.png" alt="None"/>
-          <input type="radio" name="templateEngineRadios" value="none" onChange={props.handleChange} checked={props.templateEngine === 'none'}/>
-          <span>None</span>
-        </label>
       </div>
     ) : null;
 
