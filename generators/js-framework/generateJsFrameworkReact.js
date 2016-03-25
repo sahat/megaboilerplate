@@ -15,9 +15,9 @@ async function generateJsFrameworkReact(params) {
     case 'express':
 
       await mkdirs(join(build, 'app', 'actions'));
-      await mkdirs(join(build, 'app', 'containers'));
       await mkdirs(join(build, 'app', 'components'));
       await mkdirs(join(build, 'app', 'reducers'));
+      await mkdirs(join(build, 'app', 'store'));
 
       // Require react, react-router, react-dom packages
       await replaceCode(app, 'REACT_REQUIRE', reactRequire);
@@ -30,21 +30,43 @@ async function generateJsFrameworkReact(params) {
       await replaceCode(join(build, 'app.js'), 'REACT_SERVER_RENDERING', serverRenderingWithRouting);
 
       // Copy React components
+      const components = join(__dirname, 'modules', 'react', 'components');
       await cpy([
-        join(__dirname, 'modules', 'react', 'components', 'App.js'),
-        join(__dirname, 'modules', 'react', 'components', 'Home.js'),
-        join(__dirname, 'modules', 'react', 'components', 'Contact.js'),
-        join(__dirname, 'modules', 'react', 'components', 'Header.js'),
-        join(__dirname, 'modules', 'react', 'components', 'Footer.js')
+        join(components, 'App.js'),
+        join(components, 'Contact.js'),
+        join(components, 'Footer.js'),
+        join(components, 'Header.js'),
+        join(components, 'Home.js'),
+        join(components, 'Messages.js'),
+        join(components, 'NotFound.js')
       ], join(build, 'app', 'components'));
       await cpy([
-        join(__dirname, 'modules', 'react', 'components', 'Account', 'Login.js'),
-        join(__dirname, 'modules', 'react', 'components', 'Account', 'Signup.js'),
-        join(__dirname, 'modules', 'react', 'components', 'Account', 'Profile.js'),
-        join(__dirname, 'modules', 'react', 'components', 'Account', 'Forgot.js'),
-        join(__dirname, 'modules', 'react', 'components', 'Account', 'Reset.js')
+        join(components, 'Account', 'Forgot.js'),
+        join(components, 'Account', 'Login.js'),
+        join(components, 'Account', 'Profile.js'),
+        join(components, 'Account', 'Reset.js'),
+        join(components, 'Account', 'Signup.js')
       ], join(build, 'app', 'components', 'Account'));
 
+      // Copy Redux actions, reducers, store
+      const actions = join(__dirname, 'modules', 'react', 'actions');
+      await cpy([
+        join(actions, 'auth.js'),
+        join(actions, 'contact.js'),
+        join(actions, 'oauth.js')
+      ], join(build, 'app', 'actions'));
+
+      const reducers = join(__dirname, 'modules', 'react', 'actions');
+      await cpy([
+        join(reducers, 'auth.js'),
+        join(reducers, 'index.js'),
+        join(reducers, 'messages.js')
+      ], join(build, 'app', 'reducers'));
+
+      const store = join(__dirname, 'modules', 'react', 'store');
+      await cpy([join(store, 'configureStore.js')], join(build, 'app', 'store'));
+
+      // Copy entry file and React routes
       await copy(mainJs, join(build, 'app', 'main.js'));
       await copy(reactRoutes, join(build, 'app', 'routes.js'));
 
