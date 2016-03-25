@@ -11,12 +11,13 @@ var dotenv = require('dotenv');
 //= TEMPLATE_ENGINE_REQUIRE
 //= DATABASE_REQUIRE
 //= PASSPORT_REQUIRE
+//= JWT_REQUIRE
 //= CSS_PREPROCESSOR_MIDDLEWARE_REQUIRE
-//= ES6_TRANSPILER
 
 // Load environment variables from .env file
 dotenv.load();
-
+//= ES6_TRANSPILER
+//= USER_MODEL_REQUIRE
 // Controllers
 //= HOME_CONTROLLER
 //= USER_CONTROLLER
@@ -28,7 +29,6 @@ var app = express();
 //= SOCKETIO_REQUIRE
 //= DATABASE_CONNECTION
 //= TEMPLATE_ENGINE
-
 app.set('port', process.env.PORT || 3000);
 //= CSS_PREPROCESSOR_MIDDLEWARE
 app.use(logger('dev'));
@@ -45,11 +45,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 //= HOME_ROUTE
 //= CONTACT_ROUTE
 //= ACCOUNT_ROUTES
-//= PASSPORT_LOCAL_ROUTES
-//= PASSPORT_COMMON_ROUTES
-//= PASSPORT_FACEBOOK_ROUTES
-//= PASSPORT_GOOGLE_ROUTES
-//= PASSPORT_TWITTER_ROUTES
+//= LOCAL_ROUTES
+//= COMMON_AUTH_ROUTES
+//= FACEBOOK_ROUTES
+//= GOOGLE_ROUTES
+//= TWITTER_ROUTES
 //= REACT_SERVER_RENDERING
 
 // production error handler
