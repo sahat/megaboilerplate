@@ -1,9 +1,9 @@
 var nodemailer = require('nodemailer');
 var transporter = nodemailer.createTransport({
-  service: 'mandrill',
+  service: 'Mailgun',
   auth: {
-    user: process.env.MANDRILL_USERNAME,
-    pass: process.env.MANDRILL_PASSWORD
+    user: process.env.MAILGUN_USERNAME,
+    pass: process.env.MAILGUN_PASSWORD
   }
 });
 
