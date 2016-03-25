@@ -6,11 +6,16 @@ async function generateTwitterAuthenticationExpress(params) {
   const app = join(build, 'app.js');
   const env = join(build, '.env');
   const config = join(build, 'config', 'passport.js');
-  const require = join(__dirname, 'modules', 'twitter', 'passport-require.js');
-  const routes = join(__dirname, 'modules', 'twitter', 'passport-routes.js');
+  const strategyRequire = join(__dirname, 'modules', 'twitter', 'passport-require.js');
+  const passportRoutes = join(__dirname, 'modules', 'twitter', 'passport-routes.js');
+  const jwtRoutes = join(__dirname, 'modules', 'twitter', 'passport-routes.js');
 
-  await replaceCode(app, 'PASSPORT_TWITTER_ROUTES', routes);
-  await replaceCode(config, 'PASSPORT_TWITTER_REQUIRE', require);
+  if (params.jsFramework) {
+    await replaceCode(app, 'TWITTER_ROUTES', jwtRoutes);
+  } else {
+    await replaceCode(app, 'TWITTER_ROUTES', passportRoutes);
+    await replaceCode(config, 'PASSPORT_TWITTER_REQUIRE', strategyRequire);
+  }
 
   await addNpmPackage('passport-twitter', params);
 

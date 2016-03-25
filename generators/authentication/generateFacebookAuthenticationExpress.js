@@ -6,11 +6,16 @@ async function generateFacebookAuthenticationExpress(params) {
   const app = join(build, 'app.js');
   const env = join(build, '.env');
   const config = join(build, 'config', 'passport.js');
-  const require = join(__dirname, 'modules', 'facebook', 'passport-require.js');
-  const routes = join(__dirname, 'modules', 'facebook', 'passport-routes.js');
+  const strategyRequire = join(__dirname, 'modules', 'facebook', 'passport-require.js');
+  const passportRoutes = join(__dirname, 'modules', 'facebook', 'passport-routes.js');
+  const jwtRoutes = join(__dirname, 'modules', 'facebook', 'jwt-routes.js');
 
-  await replaceCode(app, 'PASSPORT_FACEBOOK_ROUTES', routes);
-  await replaceCode(config, 'PASSPORT_FACEBOOK_REQUIRE', require);
+  if (params.jsFramework) {
+    await replaceCode(app, 'FACEBOOK_ROUTES', jwtRoutes);
+  } else {
+    await replaceCode(app, 'FACEBOOK_ROUTES', passportRoutes);
+    await replaceCode(config, 'PASSPORT_FACEBOOK_REQUIRE', strategyRequire);
+  }
 
   await addNpmPackage('passport-facebook', params);
 
@@ -26,10 +31,7 @@ async function generateFacebookAuthenticationExpress(params) {
       const sqlStrategy = join(__dirname, 'modules', 'facebook', 'facebook-strategy-sql.js');
       await replaceCode(config, 'PASSPORT_FACEBOOK_STRATEGY', sqlStrategy);
       break;
-
-    case 'rethinkdb':
-      break;
-
+    
     default:
       break;
   }

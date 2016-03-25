@@ -6,11 +6,16 @@ async function generateGoogleAuthenticationExpress(params) {
   const app = join(build, 'app.js');
   const env = join(build, '.env');
   const config = join(build, 'config', 'passport.js');
-  const require = join(__dirname, 'modules', 'google', 'passport-require.js');
-  const routes = join(__dirname, 'modules', 'google', 'passport-routes.js');
+  const strategyRequire = join(__dirname, 'modules', 'google', 'passport-require.js');
+  const passportRoutes = join(__dirname, 'modules', 'google', 'passport-routes.js');
+  const jwtRoutes = join(__dirname, 'modules', 'google', 'jwt-routes.js');
 
-  await replaceCode(app, 'PASSPORT_GOOGLE_ROUTES', routes);
-  await replaceCode(config, 'PASSPORT_GOOGLE_REQUIRE', require);
+  if (params.jsFramework) {
+    await replaceCode(app, 'GOOGLE_ROUTES', jwtRoutes);
+  } else {
+    await replaceCode(app, 'GOOGLE_ROUTES', passportRoutes);
+    await replaceCode(config, 'PASSPORT_GOOGLE_REQUIRE', strategyRequire);
+  }
 
   await addNpmPackage('passport-google-oauth', params);
 
@@ -25,9 +30,6 @@ async function generateGoogleAuthenticationExpress(params) {
     case 'postgresql':
       const sqlStrategy = join(__dirname, 'modules', 'google', 'google-strategy-sql.js');
       await replaceCode(config, 'PASSPORT_GOOGLE_STRATEGY', sqlStrategy);
-      break;
-
-    case 'rethinkdb':
       break;
 
     default:
