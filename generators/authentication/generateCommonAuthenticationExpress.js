@@ -1,9 +1,10 @@
 import { join } from 'path';
-import { cpy, copy, mkdirs, replaceCode, addNpmPackage } from '../utils';
+import { cpy, copy, mkdirs, appendFile, replaceCode, addNpmPackage } from '../utils';
 
 async function generateCommonAuthenticationExpress(params) {
   const build = join(__base, 'build', params.uuid);
   const app = join(build, 'app.js');
+  const env = join(build, '.env');
   const passportConfigFile = join(build, 'config', 'passport.js');
   const passportConfigModule = join(__dirname, 'modules', 'common', 'passport-config.js');
   const passportConfigRequire = join(__dirname, 'modules', 'common', 'passport-config-require.js');
@@ -111,6 +112,10 @@ async function generateCommonAuthenticationExpress(params) {
       break;
     default:
       break;
+  }
+
+  if (params.jsFramework) {
+    await appendFile(env, '\nTOKEN_SECRET=Secret key for signing and verifying JWT\n');
   }
 }
 
