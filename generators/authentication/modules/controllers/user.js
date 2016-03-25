@@ -4,6 +4,7 @@ var crypto = require('crypto');
 var nodemailer = require('nodemailer');
 var passport = require('passport');
 var User = require('../models/user');
+//= IS_AUTHENTICATED_MIDDLEWARE
 
 /**
  * GET /login

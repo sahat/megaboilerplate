@@ -11,6 +11,8 @@ async function generateCommonAuthenticationExpress(params) {
   const passportCommonRoutes = join(__dirname, 'modules', 'common', 'passport-routes.js');
   const passportRequire = join(__dirname, 'modules', 'common', 'passport-require.js');
   const passportMiddleware = join(__dirname, 'modules', 'common', 'passport-middleware.js');
+  const passportIsAuthenticated = join(__dirname, 'modules', 'common', 'is-authenticated-passport.js');
+  const jwtIsAuthenticated = join(__dirname, 'modules', 'common', 'is-authenticated-jwt.js');
   const passportSerializer = join(__dirname, 'modules', 'common', 'passport-serializer.js');
   const passportDeserializerMongoDb = join(__dirname, 'modules', 'common', 'passport-deserializer.js');
   const passportDeserializerSql = join(__dirname, 'modules', 'common', 'passport-deserializer-sql.js');
@@ -23,6 +25,13 @@ async function generateCommonAuthenticationExpress(params) {
   await replaceCode(app, 'PASSPORT_REQUIRE', passportRequire);
   await replaceCode(app, 'PASSPORT_MIDDLEWARE', passportMiddleware);
   await replaceCode(app, 'PASSPORT_CONFIG_REQUIRE', passportConfigRequire);
+
+  // isAuthenticated middleware
+  if (params.jsFramework) {
+    await replaceCode(app, 'IS_AUTHENTICATED_MIDDLEWARE', jwtIsAuthenticated);
+  } else {
+    await replaceCode(app, 'IS_AUTHENTICATED_MIDDLEWARE', passportIsAuthenticated);
+  }
 
   // Add user controller reference
   await replaceCode(app, 'USER_CONTROLLER', userControllerRequire);
