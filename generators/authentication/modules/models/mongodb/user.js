@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 
 var schemaOptions = {
   timestamps: true,
-  toObject: {
+  toJSON: {
     virtuals: true
   }
 };

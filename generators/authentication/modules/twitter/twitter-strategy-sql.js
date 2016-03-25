@@ -36,7 +36,7 @@ passport.use(new TwitterStrategy({
         }
         // Twitter does not provide an email address, but email is a required field in our User schema.
         // We can "fake" a Twitter email address as follows: username@twitter.com.
-        // It should be changed by a user to their real email address afterwards.
+        // Ideally, it should be changed by a user to their real email address afterwards.
         // For example, after login, check if email contains @twitter.com, then redirect to My Account page,
         // and restrict user's page navigation until they update their email address.
         user = new User();
