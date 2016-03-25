@@ -1,14 +1,21 @@
 
-exports.isAuthenticated = function(req, res, next) {
-  var token = req.headers.authorization && req.headers.authorization.split(' ')[1];
-
-  jwt.verify(token, process.env.TOKEN_SECRET, function(err) {
-    if (err) {
-      return res.status(401).send({ msg: err.message });
+app.use(function(req, res, next) {
+  req.isAuthenticated = function() {
+    var token = (req.headers.authorization && req.headers.authorization.split(' ')[1]) || req.cookies.token;
+    try {
+      return jwt.verify(token, process.env.TOKEN_SECRET);
+    } catch (err) {
+      return false;
     }
-    User.findById(payload.sub, '-password', function(err, user) {
-      req.user = user;
+  };
+
+  if (req.isAuthenticated()) {
+    var payload = req.isAuthenticated();
+    User.findById(payload.sub, function(err, user) {
+      req.user = user.user;
       next();
     });
-  });
-};
+  } else {
+    next();
+  }
+});

@@ -10,9 +10,11 @@ async function generateCommonAuthenticationExpress(params) {
   const passportConfigRequire = join(__dirname, 'modules', 'common', 'passport-config-require.js');
   const passportCommonRoutes = join(__dirname, 'modules', 'common', 'passport-routes.js');
   const passportRequire = join(__dirname, 'modules', 'common', 'passport-require.js');
+  const jwtRequire = join(__dirname, 'modules', 'common', 'jwt-require.js');
   const passportMiddleware = join(__dirname, 'modules', 'common', 'passport-middleware.js');
-  const passportIsAuthenticated = join(__dirname, 'modules', 'common', 'is-authenticated-passport.js');
-  const jwtIsAuthenticated = join(__dirname, 'modules', 'common', 'is-authenticated-jwt.js');
+  const jwtIsAuthenticatedMiddleware = join(__dirname, 'modules', 'common', 'is-authenticated-jwt.js');
+  const passportEnsureAuthenticated = join(__dirname, 'modules', 'common', 'ensure-authenticated-passport.js');
+  const jwtEnsureAuthenticated = join(__dirname, 'modules', 'common', 'ensure-authenticated-jwt.js');
   const passportSerializer = join(__dirname, 'modules', 'common', 'passport-serializer.js');
   const passportDeserializerMongoDb = join(__dirname, 'modules', 'common', 'passport-deserializer.js');
   const passportDeserializerSql = join(__dirname, 'modules', 'common', 'passport-deserializer-sql.js');
@@ -21,16 +23,23 @@ async function generateCommonAuthenticationExpress(params) {
   const userControllerRequire = join(__dirname, 'modules', 'controllers', 'user-require.js');
   const accountRoutes = join(__dirname, 'modules', 'common', 'routes', 'account-routes.js');
 
+  // Copy user controller
+  await copy(userControllerModule, join(build, 'controllers', 'user.js'));
+
+  const userController = join(build, 'controllers', 'user.js');
+
   // Passport middleware
-  await replaceCode(app, 'PASSPORT_REQUIRE', passportRequire);
   await replaceCode(app, 'PASSPORT_MIDDLEWARE', passportMiddleware);
   await replaceCode(app, 'PASSPORT_CONFIG_REQUIRE', passportConfigRequire);
 
   // isAuthenticated middleware
   if (params.jsFramework) {
-    await replaceCode(app, 'IS_AUTHENTICATED_MIDDLEWARE', jwtIsAuthenticated);
+    await replaceCode(app, 'IS_AUTHENTICATED_MIDDLEWARE', jwtIsAuthenticatedMiddleware);
+    await replaceCode(userController, 'ENSURE_AUTHENTICATED_MIDDLEWARE', jwtEnsureAuthenticated);
+    await replaceCode(userController, 'JWT_REQUIRE', jwtRequire);
   } else {
-    await replaceCode(app, 'IS_AUTHENTICATED_MIDDLEWARE', passportIsAuthenticated);
+    await replaceCode(userController, 'ENSURE_AUTHENTICATED_MIDDLEWARE', passportEnsureAuthenticated);
+    await replaceCode(userController, 'PASSPORT_REQUIRE', passportRequire);
   }
 
   // Add user controller reference
@@ -45,13 +54,15 @@ async function generateCommonAuthenticationExpress(params) {
   // Passport config file
   await copy(passportConfigModule, passportConfigFile);
   await replaceCode(passportConfigFile, 'PASSPORT_USER_MODEL', passportUserModel);
-  await replaceCode(passportConfigFile, 'PASSPORT_SERIALIZER', passportSerializer);
+
+  if (params.jsFramework) {
+
+  } else {
+    await replaceCode(passportConfigFile, 'PASSPORT_SERIALIZER', passportSerializer);
+  }
 
   await addNpmPackage('passport', params);
 
-  // Copy user controller (replace database-specific things below)
-  await copy(userControllerModule, join(build, 'controllers', 'user.js'));
-  const userController = join(build, 'controllers', 'user.js');
 
   switch (params.database) {
     case 'mongodb':
@@ -62,7 +73,11 @@ async function generateCommonAuthenticationExpress(params) {
 
       await replaceCode(app, 'USER_HELPER_MIDDLEWARE', userHelperMiddlewareForMongoDb);
 
-      await replaceCode(passportConfigFile, 'PASSPORT_DESERIALIZER', passportDeserializerMongoDb);
+      if (params.jsFramework) {
+
+      } else {
+        await replaceCode(passportConfigFile, 'PASSPORT_DESERIALIZER', passportDeserializerMongoDb);
+      }
 
       await replaceCode(userController, 'USER_SIGNUP_POST', join(__dirname, 'modules', 'controllers', 'mongodb', 'user-signup-post.js'), { indentLevel: 1 });
       await replaceCode(userController, 'USER_ACCOUNT_PUT', join(__dirname, 'modules', 'controllers', 'mongodb', 'user-account-put.js'), { indentLevel: 1 });
