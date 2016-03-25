@@ -127,7 +127,18 @@ export async function addNpmPackage(pkgName, params, isDev) {
     packageObj.dependencies[pkgName] = pkgVersion;
   }
 
+  // Sort dependencies alphabetically in package.json
+  packageObj.dependencies = sortJson(packageObj.dependencies);
+  packageObj.devDependencies = sortJson(packageObj.devDependencies);
+
   await writeJson(packageJson, packageObj, { spaces: 2 });
+}
+
+function sortJson(obj) {
+  return Object.keys(obj).sort().reduce((a, b) => {
+    a[b] = obj[b];
+    return a;
+  }, {});
 }
 
 /**
