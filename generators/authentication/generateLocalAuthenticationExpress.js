@@ -4,11 +4,16 @@ import { replaceCode, removeCode, addNpmPackage } from '../utils';
 async function generateLocalAuthenticationExpress(params) {
   const app = join(__base, 'build', params.uuid, 'app.js');
   const config = join(__base, 'build', params.uuid, 'config', 'passport.js');
-  const require = join(__dirname, 'modules', 'local', 'passport-require.js');
-  const routes = join(__dirname, 'modules', 'local', 'passport-routes.js');
+  const strategyRequire = join(__dirname, 'modules', 'local', 'passport-require.js');
+  const passportRoutes = join(__dirname, 'modules', 'local', 'passport-routes.js');
+  const jwtRoutes = join(__dirname, 'modules', 'local', 'jwt-routes.js');
 
-  await replaceCode(app, 'PASSPORT_LOCAL_ROUTES', routes);
-  await replaceCode(config, 'PASSPORT_LOCAL_REQUIRE', require);
+  if (params.jsFramework) {
+    await replaceCode(app, 'LOCAL_ROUTES', jwtRoutes);
+  } else {
+    await replaceCode(app, 'LOCAL_ROUTES', passportRoutes);
+    await replaceCode(config, 'PASSPORT_LOCAL_REQUIRE', strategyRequire);
+  }
 
   await addNpmPackage('passport-local', params);
   await addNpmPackage('nodemailer', params);
@@ -26,9 +31,6 @@ async function generateLocalAuthenticationExpress(params) {
     case 'postgresql':
       const sqlStrategy = join(__dirname, 'modules', 'local', 'local-strategy-sql.js');
       await replaceCode(config, 'PASSPORT_LOCAL_STRATEGY', sqlStrategy);
-      break;
-
-    case 'rethinkdb':
       break;
 
     default:
