@@ -1,3 +1,5 @@
+import url from 'url';
+import qs from 'querystring';
 import moment from 'moment';
 import cookie from 'react-cookie';
 import { browserHistory } from 'react-router';
@@ -5,27 +7,41 @@ import { browserHistory } from 'react-router';
 export function facebookLogin() {
   const facebook = {
     clientId: '603122136500203',
-    redirectUri: 'http://localhost:3000/',
     url: 'http://localhost:3000/auth/facebook',
+    redirectUri: 'http://localhost:3000/',
     authorizationUrl: 'https://www.facebook.com/v2.5/dialog/oauth',
     scope: 'email,user_location',
-    oauthType: '2.0',
-    popupOptions: { width: 580, height: 400 }
+    width: 580,
+    height: 400
   };
-  return openPopup(facebook);
+
+  return (dispatch) => {
+    oauth2(facebook, dispatch)
+      .then(openPopup)
+      .then(pollPopup)
+      .then(exchangeCodeForToken)
+      .then(signIn);
+  };
 }
 
 export function googleLogin() {
   const google = {
-    clientId: '828110519058.apps.googleusercontent.com',
+    clientId: '925504469943-ftfpddjifbiveu590geaegj3ei6ij9bh.apps.googleusercontent.com',
     redirectUri: 'http://localhost:3000',
     url: 'http://localhost:3000/auth/google',
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth',
     scope: 'openid profile email',
-    oauthType: '2.0',
-    popupOptions: { width: 452, height: 633 }
+    width: 452,
+    height: 633
   };
-  return openPopup(google);
+
+  return (dispatch) => {
+    oauth2(google, dispatch)
+      .then(openPopup)
+      .then(pollPopup)
+      .then(exchangeCodeForToken)
+      .then(signIn);
+  };
 }
 
 export function twitterLogin() {
@@ -33,89 +49,136 @@ export function twitterLogin() {
     redirectUri: 'http://localhost:3000',
     url: 'http://localhost:3000/auth/twitter',
     authorizationUrl: 'https://api.twitter.com/oauth/authenticate',
-    oauthType: '1.0',
-    popupOptions: { width: 495, height: 645 }
   };
-  return openPopup(twitter);
+
+  return (dispatch) => {
+    oauth1(twitter, dispatch)
+      .then(openPopup)
+      .then(getRequestToken)
+      .then(pollPopup)
+      .then(exchangeCodeForToken)
+      .then(signIn);
+  };
 }
 
-function openPopup(config) {
-  return (dispatch) => {
-    dispatch({
-      type: 'CLEAR_MESSAGES'
+
+function oauth2(config, dispatch) {
+  return new Promise((resolve, reject) => {
+    const params = {
+      client_id: config.clientId,
+      redirect_uri: config.redirectUri,
+      scope: config.scope,
+      display: 'popup',
+      response_type: 'code'
+    };
+    const url = config.authorizationUrl + '?' + qs.stringify(params);
+    resolve({ url: url, config: config, dispatch: dispatch });
+  });
+}
+
+function oauth1(config, dispatch) {
+  return new Promise((resolve, reject) => {
+    resolve({ url: 'about:blank', config: config, dispatch: dispatch });
+  });
+}
+
+
+function openPopup({ url, config, dispatch }) {
+  return new Promise((resolve, reject) => {
+    const width = config.width || 500;
+    const height = config.height || 500;
+    const options = {
+      width: width,
+      height: height,
+      top: window.screenY + ((window.outerHeight - height) / 2.5),
+      left: window.screenX + ((window.outerWidth - width) / 2)
+    };
+    const popup = window.open(url, '_blank', qs.stringify(options, ','));
+
+    if (url === 'about:blank') {
+      popup.document.body.innerHTML = 'Loading...';
+    }
+
+    resolve({ window: popup, config: config, dispatch: dispatch });
+  });
+}
+
+function getRequestToken({ window, config, dispatch }) {
+  return new Promise((resolve, reject) => {
+    fetch(config.url, {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        redirectUri: config.redirectUri
+      })
+    }).then((response) => {
+      if (response.ok) {
+        response.json().then((json) => {
+          resolve({ window: window, config: config, requestToken: json, dispatch: dispatch });
+        });
+      }
     });
+  });
+}
 
-    const url = [config.authorizationUrl, buildUrlParams(config)].join('?');
-    const options = stringifyOptions(config.popupOptions);
-    const popup = window.open(url, '_blank', options);
+function pollPopup({ window, config, requestToken, dispatch }) {
+  return new Promise((resolve, reject) => {
+    const redirectUri = url.parse(config.redirectUri);
+    const redirectUriPath = redirectUri.host + redirectUri.pathname;
 
-    const redirectUriParser = document.createElement('a');
-    redirectUriParser.href = config.redirectUri;
-    const redirectUri = getFullUrl(redirectUriParser);
+    if (requestToken) {
+      window.location = config.authorizationUrl + '?' + qs.stringify(requestToken);
+    }
 
     const polling = setInterval(() => {
-      if (!popup || popup.closed || popup.closed === undefined) {
+      if (!window || window.closed) {
         clearInterval(polling);
       }
-
       try {
-        const popupUrl = getFullUrl(popup.location);
+        const popupUrlPath = window.location.host + window.location.pathname;
+        if (popupUrlPath === redirectUriPath) {
+          if (window.location.search || window.location.hash) {
+            const query = qs.parse(window.location.search.substring(1).replace(/\/$/, ''));
+            const hash = qs.parse(window.location.hash.substring(1).replace(/[\/$]/, ''));
+            const params = Object.assign({}, query, hash);
 
-        if (popupUrl === redirectUri) {
-          if (popup.location.search || popup.location.hash) {
-            const hash = parseQueryString(popup.location.hash.substring(1).replace(/[\/$]/, ''));
-            const query = parseQueryString(popup.location.search.substring(1).replace(/\/$/, ''));
-            const combinedParams = Object.assign({}, query, hash);
-
-            if (combinedParams.error) {
+            if (params.error) {
               dispatch({
                 type: 'OAUTH_ERROR',
-                messages: [{ msg: combinedParams.error }]
+                messages: [{ msg: params.error }]
               });
             } else {
-              dispatch(exchangeCodeForToken(combinedParams.code, config));
+              resolve({ oauthData: params, config: config, dispatch: dispatch });
             }
           } else {
             dispatch({
               type: 'OAUTH_ERROR',
-              messages: [{
-                msg: 'Redirect has occurred but no query or hash parameters were found. ' +
-                'They were either not set during the redirect, or were removed before they ' +
-                'could be parsed.'
-              }]
+              messages: [{ msg: 'OAuth redirect has occurred but no query or hash parameters were found.' }]
             });
           }
           clearInterval(polling);
-          popup.close();
+          window.close();
         }
       } catch (error) {
         // Ignore DOMException: Blocked a frame with origin from accessing a cross-origin frame.
         // A hack to get around same-origin security policy errors in Internet Explorer.
       }
     }, 500);
-  };
+  });
 }
 
-function exchangeCodeForToken(code, options) {
-  return (dispatch) => {
-    fetch(options.url, {
+function exchangeCodeForToken({ oauthData, config, dispatch }) {
+  return new Promise((resolve, reject) => {
+    const data = Object.assign({}, oauthData, config);
+
+    fetch(config.url, {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        code: code,
-        clientId: options.clientId,
-        redirectUri: options.redirectUri
-      })
+      body: JSON.stringify(data)
     }).then((response) => {
       if (response.ok) {
         response.json().then((json) => {
-          dispatch({
-            type: 'OAUTH_SUCCESS',
-            token: json.token,
-            user: json.user
-          });
-          cookie.save('token', json.token, { expires: moment().add(1, 'hour').toDate() });
-          browserHistory.push('/account');
+          resolve({ token: json.token, user: json.user, dispatch: dispatch });
         });
       } else {
         response.json().then((json) => {
@@ -126,56 +189,15 @@ function exchangeCodeForToken(code, options) {
         });
       }
     });
-  };
-}
-
-function buildUrlParams(options) {
-  var keyValuePairs = [
-    ['client_id', options.clientId],
-    ['redirect_uri', options.redirectUri],
-    ['scope', options.scope],
-    ['display', 'popup'],
-    ['response_type', 'code']
-  ];
-  return keyValuePairs.map(pair => pair.join('=')).join('&');
-}
-
-function getFullUrl(location) {
-  return location.protocol + '//' + location.hostname +
-    ':' + (location.port || (location.protocol === 'https:' ? '443' : '80')) +
-    (/^\//.test(location.pathname) ? location.pathname : '/' + location.pathname);
-}
-
-function parseQueryString(str) {
-  const obj = {};
-
-  str.split('&').map((keyValue) => {
-    if (keyValue) {
-      const value = keyValue.split('=');
-      const key = decodeURIComponent(value[0]);
-      obj[key] = decodeURIComponent(value[1]);
-    }
   });
-
-  return obj;
 }
 
-function stringifyOptions({ width=500, height=500 }) {
-  const options = {
-    width: width,
-    height: height,
-    left: window.screenX + ((window.outerWidth - width) / 2),
-    top: window.screenY + ((window.outerHeight - height) / 2.5)
-  };
-
-  const parts = [];
-
-  for (const key in options) {
-    if (options.hasOwnProperty(key)) {
-      const value = options[key];
-      parts.push(key + '=' + value)
-    }
-  }
-
-  return parts.join(',');
+function signIn({ token, user, dispatch }) {
+  dispatch({
+    type: 'OAUTH_SUCCESS',
+    token: token,
+    user: user
+  });
+  cookie.save('token', token, { expires: moment().add(1, 'hour').toDate() });
+  browserHistory.push('/');
 }
