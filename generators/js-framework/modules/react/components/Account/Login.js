@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux'
 import { login } from '../../actions/auth';
+import { facebookLogin, twitterLogin, googleLogin } from '../../actions/oauth';
 import Messages from '../Messages';
 
 class Login extends React.Component {
@@ -17,6 +18,18 @@ class Login extends React.Component {
   handleLogin(event) {
     event.preventDefault();
     this.props.dispatch(login(this.state.email, this.state.password));
+  }
+
+  handleFacebook() {
+    this.props.dispatch(facebookLogin())
+  }
+
+  handleTwitter() {
+    this.props.dispatch(twitterLogin())
+  }
+
+  handleGoogle() {
+    this.props.dispatch(googleLogin())
   }
 
   render() {
@@ -40,9 +53,9 @@ class Login extends React.Component {
             </form>
             <div className="hr-title"><abbr>or</abbr></div>
             <div className="text-center">
-              <a href="/auth/facebook" className="btn btn-facebook">Sign in with Facebook</a><span> </span>
-              <a href="/auth/twitter" className="btn btn-twitter">Sign in with Twitter</a><span> </span>
-              <a href="/auth/google" className="btn btn-google">Sign in with Google</a>
+              <button onClick={this.handleFacebook.bind(this)} className="btn btn-facebook">Sign in with Facebook</button>{' '}
+              <button onClick={this.handleTwitter.bind(this)} className="btn btn-twitter">Sign in with Twitter</button>{' '}
+              <button onClick={this.handleGoogle.bind(this)} className="btn btn-google">Sign in with Google</button>
             </div>
           </div>
         </div>
