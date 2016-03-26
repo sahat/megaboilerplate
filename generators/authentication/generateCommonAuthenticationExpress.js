@@ -82,8 +82,10 @@ async function generateCommonAuthenticationExpress(params) {
 
       if (params.jsFramework) {
         await replaceCode(userController, 'USER_LOGIN_POST', join(__dirname, 'modules', 'controllers', 'mongodb', 'user-login-jwt-post.js'), { indentLevel: 1 });
+        await replaceCode(userController, 'PROFILE_UPDATE_RESPONSE', join(__dirname, 'modules', 'responses', 'json', 'profile-update-response-mongodb.js'), { indentLevel: 2 });
       } else {
         await replaceCode(passportConfigFile, 'PASSPORT_DESERIALIZER', passportDeserializerMongoDb);
+        await replaceCode(userController, 'PROFILE_UPDATE_RESPONSE', join(__dirname, 'modules', 'responses', 'session', 'profile-update-response-mongodb.js'), { indentLevel: 2 });
       }
 
       await replaceCode(userController, 'USER_SIGNUP_POST', join(__dirname, 'modules', 'controllers', 'mongodb', 'user-signup-post.js'), { indentLevel: 1 });
@@ -108,8 +110,10 @@ async function generateCommonAuthenticationExpress(params) {
 
       if (params.jsFramework) {
         await replaceCode(userController, 'USER_LOGIN_POST', join(__dirname, 'modules', 'controllers', 'sql', 'user-login-jwt-post.js'), { indentLevel: 1 });
+        await replaceCode(userController, 'PROFILE_UPDATE_RESPONSE', join(__dirname, 'modules', 'responses', 'json', 'profile-update-response-sql.js'), { indentLevel: 2 });
       } else {
         await replaceCode(passportConfigFile, 'PASSPORT_DESERIALIZER', passportDeserializerSql);
+        await replaceCode(userController, 'PROFILE_UPDATE_RESPONSE', join(__dirname, 'modules', 'responses', 'session', 'profile-update-response-sql.js'), { indentLevel: 2 });
       }
 
       await replaceCode(userController, 'USER_SIGNUP_POST', join(__dirname, 'modules', 'controllers', 'sql', 'user-signup-post.js'), { indentLevel: 1 });
@@ -129,11 +133,13 @@ async function generateCommonAuthenticationExpress(params) {
     await replaceCode(userController, 'SIGNUP_VALIDATION_ERROR', join(__dirname, 'modules', 'responses', 'json', 'signup-validation-error.js'), { indentLevel: 2 });
     await replaceCode(userController, 'SIGNUP_EMAIL_ALREADY_EXISTS', join(__dirname, 'modules', 'responses', 'json', 'signup-email-already-exists.js'), { indentLevel: 2 });
     await replaceCode(userController, 'SIGNUP_SUCCESS_RESPONSE', join(__dirname, 'modules', 'responses', 'json', 'signup-success-response.js'), { indentLevel: 2 });
+    await replaceCode(userController, 'PROFILE_UPDATE_VALIDATION_ERROR', join(__dirname, 'modules', 'responses', 'json', 'profile-update-validation-error.js'), { indentLevel: 2 });
 
   } else {
     await replaceCode(userController, 'SIGNUP_VALIDATION_ERROR', join(__dirname, 'modules', 'responses', 'session', 'signup-validation-error.js'), { indentLevel: 2 });
     await replaceCode(userController, 'SIGNUP_EMAIL_ALREADY_EXISTS', join(__dirname, 'modules', 'responses', 'session', 'signup-email-already-exists.js'), { indentLevel: 2 });
     await replaceCode(userController, 'SIGNUP_SUCCESS_RESPONSE', join(__dirname, 'modules', 'responses', 'session', 'signup-success-response.js'), { indentLevel: 2 });
+    await replaceCode(userController, 'PROFILE_UPDATE_VALIDATION_ERROR', join(__dirname, 'modules', 'responses', 'session', 'profile-update-validation-error.js'), { indentLevel: 2 });
 
 
   }

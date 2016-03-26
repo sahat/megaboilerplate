@@ -29,11 +29,12 @@ exports.signupPost = function(req, res, next) {
 
   //= USER_SIGNUP_POST
 };
+
 //= USER_ACCOUNT_GET
 
 /**
  * PUT /account
- * Update profile information OR password.
+ * Update profile information OR change password.
  */
 exports.accountPut = function(req, res, next) {
   if ('password' in req.body) {
@@ -48,8 +49,7 @@ exports.accountPut = function(req, res, next) {
   var errors = req.validationErrors();
 
   if (errors) {
-    req.flash('error', errors);
-    return res.redirect('/account');
+    //= PROFILE_UPDATE_VALIDATION_ERROR
   }
 
   //= USER_ACCOUNT_PUT
