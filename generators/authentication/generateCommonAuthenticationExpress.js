@@ -70,6 +70,7 @@ async function generateCommonAuthenticationExpress(params) {
     await replaceCode(userController, 'USER_LOGOUT', join(__dirname, 'modules', 'controllers', 'user-logout.js'), { indentLevel: 1 });
     await replaceCode(userController, 'USER_ACCOUNT_GET', join(__dirname, 'modules', 'controllers', 'user-account-get.js'), { indentLevel: 1 });
     await replaceCode(userController, 'USER_FORGOT_GET', join(__dirname, 'modules', 'controllers', 'user-forgot-get.js'), { indentLevel: 1 });
+    await replaceCode(userController, 'USER_RESET_GET_ROUTE', join(__dirname, 'modules', 'controllers', 'user-reset-get-route.js'), { indentLevel: 1 });
   }
 
   switch (params.database) {
@@ -140,6 +141,8 @@ async function generateCommonAuthenticationExpress(params) {
     await replaceCode(userController, 'PROVIDER_UNLINK_SUCCESS', join(__dirname, 'modules', 'responses', 'json', 'provider-unlink-success.js'), { indentLevel: 3 });
     await replaceCode(userController, 'FORGOT_POST_VALIDATION_ERROR', join(__dirname, 'modules', 'responses', 'json', 'common-validation-error.js'), { indentLevel: 3 });
     await replaceCode(userController, 'FORGOT_POST_SUCCESS', join(__dirname, 'modules', 'responses', 'json', 'forgot-post-success.js'), { indentLevel: 3 });
+    await replaceCode(userController, 'RESET_POST_VALIDATION_ERROR', join(__dirname, 'modules', 'responses', 'json', 'common-validation-error.js'), { indentLevel: 3 });
+    await replaceCode(userController, 'RESET_POST_SUCCESS', join(__dirname, 'modules', 'responses', 'json', 'reset-post-success.js'), { indentLevel: 3 });
 
   } else {
     await replaceCode(userController, 'SIGNUP_VALIDATION_ERROR', join(__dirname, 'modules', 'responses', 'session', 'signup-validation-error.js'), { indentLevel: 2 });
@@ -151,6 +154,8 @@ async function generateCommonAuthenticationExpress(params) {
     await replaceCode(userController, 'PROVIDER_UNLINK_SUCCESS', join(__dirname, 'modules', 'responses', 'session', 'provider-unlink-success.js'), { indentLevel: 3 });
     await replaceCode(userController, 'FORGOT_POST_VALIDATION_ERROR', join(__dirname, 'modules', 'responses', 'session', 'forgot-post-validation-error.js'), { indentLevel: 3 });
     await replaceCode(userController, 'FORGOT_POST_SUCCESS', join(__dirname, 'modules', 'responses', 'session', 'forgot-post-success.js'), { indentLevel: 3 });
+    await replaceCode(userController, 'RESET_POST_VALIDATION_ERROR', join(__dirname, 'modules', 'responses', 'session', 'reset-post-validation-error.js'), { indentLevel: 3 });
+    await replaceCode(userController, 'RESET_POST_SUCCESS', join(__dirname, 'modules', 'responses', 'session', 'reset-post-success.js'), { indentLevel: 3 });
 
 
   }

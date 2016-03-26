@@ -118,16 +118,7 @@ exports.forgotPost = function(req, res, next) {
     }
   ]);
 };
-
-/**
- * GET /reset
- */
-exports.resetGet = function(req, res) {
-  if (req.isAuthenticated()) {
-    return res.redirect('/');
-  }
-  //= USER_RESET_GET
-};
+//= USER_RESET_GET_ROUTE
 
 /**
  * POST /reset
@@ -139,8 +130,7 @@ exports.resetPost = function(req, res, next) {
   var errors = req.validationErrors();
 
   if (errors) {
-    req.flash('error', errors);
-    return res.redirect('back');
+    //= RESET_POST_VALIDATION_ERROR
   }
 
   async.waterfall([
@@ -163,11 +153,8 @@ exports.resetPost = function(req, res, next) {
         'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
       };
       transporter.sendMail(mailOptions, function(err) {
-        req.flash('success', { msg: 'Your password has been changed successfully.' });
-        done(err);
+        //= RESET_POST_SUCCESS
       });
     }
-  ], function(err) {
-    res.redirect('/account');
-  });
+  ]);
 };
