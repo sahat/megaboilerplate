@@ -64,9 +64,11 @@ async function generateCommonAuthenticationExpress(params) {
   if (params.jsFramework) {
 
   } else {
+    await replaceCode(userController, 'USER_SIGNUP_GET', join(__dirname, 'modules', 'controllers', 'user-signup-get.js'), { indentLevel: 1 });
     await replaceCode(userController, 'USER_LOGIN_GET', join(__dirname, 'modules', 'controllers', 'user-login-get.js'), { indentLevel: 1 });
     await replaceCode(userController, 'USER_LOGIN_POST', join(__dirname, 'modules', 'controllers', 'user-login-post.js'), { indentLevel: 1 });
     await replaceCode(userController, 'USER_LOGOUT', join(__dirname, 'modules', 'controllers', 'user-logout.js'), { indentLevel: 1 });
+    await replaceCode(userController, 'USER_ACCOUNT_GET', join(__dirname, 'modules', 'controllers', 'user-account-get.js'), { indentLevel: 1 });
   }
 
   switch (params.database) {
@@ -119,11 +121,15 @@ async function generateCommonAuthenticationExpress(params) {
       await replaceCode(userController, 'USER_RESET_POST', join(__dirname, 'modules', 'controllers', 'sql', 'user-reset-post.js'), { indentLevel: 3 });
       break;
 
-    case 'rethinkdb':
-      break;
-
     default:
       break;
+  }
+
+  if (params.jsFramework) {
+    await replaceCode(userController, 'SIGNUP_VALIDATION_ERROR', join(__dirname, 'modules', 'responses', 'json', 'signup-validation-error.js'), { indentLevel: 2 });
+  } else {
+    await replaceCode(userController, 'SIGNUP_VALIDATION_ERROR', join(__dirname, 'modules', 'responses', 'session', 'signup-validation-error.js'), { indentLevel: 2 });
+
   }
 
   switch (params.templateEngine) {

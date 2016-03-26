@@ -9,18 +9,7 @@ var User = require('../models/user');
 //= USER_LOGIN_GET
 //= USER_LOGIN_POST
 //= USER_LOGOUT
-
-/**
- * GET /signup
- */
-exports.signupGet = function(req, res) {
-  if (req.user) {
-    return res.redirect('/');
-  }
-  res.render('account/signup', {
-    title: 'Sign up'
-  });
-};
+//= USER_SIGNUP_GET
 
 /**
  * POST /signup
@@ -35,21 +24,12 @@ exports.signupPost = function(req, res, next) {
   var errors = req.validationErrors();
 
   if (errors) {
-    req.flash('error', errors);
-    return res.redirect('/signup');
+    //= SIGNUP_VALIDATION_ERROR
   }
 
   //= USER_SIGNUP_POST
 };
-
-/**
- * GET /account
- */
-exports.accountGet = function(req, res) {
-  res.render('account/profile', {
-    title: 'My Account'
-  });
-};
+//= USER_ACCOUNT_GET
 
 /**
  * PUT /account
