@@ -1,7 +1,8 @@
 
 exports.ensureAuthenticated = function(req, res, next) {
   if (req.isAuthenticated()) {
-    return next();
+    next();
+  } else {
+    res.sendStatus(401);
   }
-  res.sendStatus(401);
 };
