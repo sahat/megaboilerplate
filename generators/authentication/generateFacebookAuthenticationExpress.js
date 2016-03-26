@@ -6,6 +6,7 @@ async function generateFacebookAuthenticationExpress(params) {
   const app = join(build, 'app.js');
   const env = join(build, '.env');
   const config = join(build, 'config', 'passport.js');
+  const userController = join(build, 'controllers', 'user.js');
   const strategyRequire = join(__dirname, 'modules', 'facebook', 'passport-require.js');
   const passportRoutes = join(__dirname, 'modules', 'facebook', 'passport-routes.js');
   const jwtRoutes = join(__dirname, 'modules', 'facebook', 'jwt-routes.js');
@@ -21,6 +22,11 @@ async function generateFacebookAuthenticationExpress(params) {
 
   switch (params.database) {
     case 'mongodb':
+      if (params.jsFramework) {
+        await replaceCode(userController, 'AUTH_FACEBOOK_JWT_DB', join(__dirname, 'modules', 'facebook', 'facebook-jwt-mongodb.js'), { indentLevel: 3 });
+      } else {
+
+      }
       const mongodbStrategy = join(__dirname, 'modules', 'facebook', 'facebook-strategy-mongodb.js');
       await replaceCode(config, 'PASSPORT_FACEBOOK_STRATEGY', mongodbStrategy);
       break;
@@ -28,6 +34,11 @@ async function generateFacebookAuthenticationExpress(params) {
     case 'mysql':
     case 'sqlite':
     case 'postgresql':
+      if (params.jsFramework) {
+        await replaceCode(userController, 'AUTH_FACEBOOK_JWT_DB', join(__dirname, 'modules', 'facebook', 'facebook-jwt-sql.js'), { indentLevel: 3 });
+      } else {
+
+      }
       const sqlStrategy = join(__dirname, 'modules', 'facebook', 'facebook-strategy-sql.js');
       await replaceCode(config, 'PASSPORT_FACEBOOK_STRATEGY', sqlStrategy);
       break;

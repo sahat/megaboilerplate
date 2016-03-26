@@ -158,3 +158,6 @@ exports.resetPost = function(req, res, next) {
     }
   ]);
 };
+//= AUTH_FACEBOOK_JWT
+//= AUTH_GOOGLE_JWT
+//= AUTH_TWITTER_JWT
