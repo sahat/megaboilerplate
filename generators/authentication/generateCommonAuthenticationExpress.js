@@ -127,8 +127,14 @@ async function generateCommonAuthenticationExpress(params) {
 
   if (params.jsFramework) {
     await replaceCode(userController, 'SIGNUP_VALIDATION_ERROR', join(__dirname, 'modules', 'responses', 'json', 'signup-validation-error.js'), { indentLevel: 2 });
+    await replaceCode(userController, 'SIGNUP_EMAIL_ALREADY_EXISTS', join(__dirname, 'modules', 'responses', 'json', 'signup-email-already-exists.js'), { indentLevel: 2 });
+    await replaceCode(userController, 'SIGNUP_SUCCESS_RESPONSE', join(__dirname, 'modules', 'responses', 'json', 'signup-success-response.js'), { indentLevel: 2 });
+
   } else {
     await replaceCode(userController, 'SIGNUP_VALIDATION_ERROR', join(__dirname, 'modules', 'responses', 'session', 'signup-validation-error.js'), { indentLevel: 2 });
+    await replaceCode(userController, 'SIGNUP_EMAIL_ALREADY_EXISTS', join(__dirname, 'modules', 'responses', 'session', 'signup-email-already-exists.js'), { indentLevel: 2 });
+    await replaceCode(userController, 'SIGNUP_SUCCESS_RESPONSE', join(__dirname, 'modules', 'responses', 'session', 'signup-success-response.js'), { indentLevel: 2 });
+
 
   }
 
