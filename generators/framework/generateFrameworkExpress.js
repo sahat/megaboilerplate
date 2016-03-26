@@ -18,7 +18,8 @@ async function generateFrameworkExpress(params) {
   await cpy([
     join(express, 'app.js'),
     join(express, 'package.json'),
-    join(express, '.env')
+    join(express, '.env'),
+    join(express, '.gitignore)
   ], build);
   
   const app = join(build, 'app.js');

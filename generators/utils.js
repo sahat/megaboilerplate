@@ -160,14 +160,12 @@ export async function cleanup(params) {
 }
 
 export async function prepare(params) {
-  let gitignore = path.join(__base, 'modules', 'prepare', '.gitignore');
   //params.uuid = shortid.generate();
   // TODO: Remove
-  params.uuid = 'testing'
+  params.uuid = 'testing';
   await remove(path.join(__base, 'build', params.uuid));
 
   await mkdirs(path.join(__base, 'build', params.uuid));
-  await copy(gitignore, path.join(__base, 'build', params.uuid, '.gitignore'));
   console.info('Created', params.uuid);
   return params;
 }
