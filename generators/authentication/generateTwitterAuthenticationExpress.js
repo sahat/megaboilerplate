@@ -21,6 +21,11 @@ async function generateTwitterAuthenticationExpress(params) {
 
   switch (params.database) {
     case 'mongodb':
+      if (params.jsFramework) {
+        await replaceCode(userController, 'AUTH_TWITTER_JWT_DB', join(__dirname, 'modules', 'twitter', 'twitter-jwt-sql.js'), { indentLevel: 3 });
+      } else {
+
+      }
       const mongodbStrategy = join(__dirname, 'modules', 'twitter', 'twitter-strategy-mongodb.js');
       await replaceCode(config, 'PASSPORT_TWITTER_STRATEGY', mongodbStrategy);
       break;
@@ -28,6 +33,11 @@ async function generateTwitterAuthenticationExpress(params) {
     case 'mysql':
     case 'sqlite':
     case 'postgresql':
+      if (params.jsFramework) {
+        await replaceCode(userController, 'AUTH_TWITTER_JWT_DB', join(__dirname, 'modules', 'twitter', 'twitter-jwt-sql.js'), { indentLevel: 3 });
+      } else {
+
+      }
       const sqlStrategy = join(__dirname, 'modules', 'twitter', 'twitter-strategy-sql.js');
       await replaceCode(config, 'PASSPORT_TWITTER_STRATEGY', sqlStrategy);
       break;

@@ -28,7 +28,7 @@ passport.use(new TwitterStrategy({
           });
       });
   } else {
-    new User({ google: profile.id })
+    new User({ twitter: profile.id })
       .fetch()
       .then(function(user) {
         if (user) {
