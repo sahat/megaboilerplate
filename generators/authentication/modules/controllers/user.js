@@ -8,14 +8,7 @@ var User = require('../models/user');
 //= ENSURE_AUTHENTICATED_MIDDLEWARE
 //= USER_LOGIN_GET
 //= USER_LOGIN_POST
-
-/**
- * GET /logout
- */
-exports.logout = function(req, res) {
-  req.logout();
-  res.redirect('/');
-};
+//= USER_LOGOUT
 
 /**
  * GET /signup

@@ -65,7 +65,8 @@ async function generateCommonAuthenticationExpress(params) {
 
   } else {
     await replaceCode(userController, 'USER_LOGIN_GET', join(__dirname, 'modules', 'controllers', 'user-login-get.js'), { indentLevel: 1 });
-    await replaceCode(userController, 'USER_LOGIN_POST', join(__dirname, 'modules', 'controllers', 'user-login-post-passport.js'), { indentLevel: 1 });
+    await replaceCode(userController, 'USER_LOGIN_POST', join(__dirname, 'modules', 'controllers', 'user-login-post.js'), { indentLevel: 1 });
+    await replaceCode(userController, 'USER_LOGOUT', join(__dirname, 'modules', 'controllers', 'user-logout.js'), { indentLevel: 1 });
   }
 
   switch (params.database) {
