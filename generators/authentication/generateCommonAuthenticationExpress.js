@@ -28,8 +28,6 @@ async function generateCommonAuthenticationExpress(params) {
 
   const userController = join(build, 'controllers', 'user.js');
 
-    
-
   if (params.jsFramework) {
     await replaceCode(app, 'IS_AUTHENTICATED_MIDDLEWARE', jwtIsAuthenticatedMiddleware);
     await replaceCode(userController, 'ENSURE_AUTHENTICATED_MIDDLEWARE', jwtEnsureAuthenticated);
@@ -63,6 +61,13 @@ async function generateCommonAuthenticationExpress(params) {
   await addNpmPackage('passport', params);
 
 
+  if (params.jsFramework) {
+
+  } else {
+    await replaceCode(userController, 'USER_LOGIN_GET', join(__dirname, 'modules', 'controllers', 'user-login-get.js'), { indentLevel: 1 });
+    await replaceCode(userController, 'USER_LOGIN_POST', join(__dirname, 'modules', 'controllers', 'user-login-post-passport.js'), { indentLevel: 1 });
+  }
+
   switch (params.database) {
     case 'mongodb':
       const mongooseModel = join(__dirname, 'modules', 'models', 'mongodb', 'user.js');
@@ -73,7 +78,7 @@ async function generateCommonAuthenticationExpress(params) {
       await replaceCode(app, 'USER_HELPER_MIDDLEWARE', userHelperMiddlewareForMongoDb);
 
       if (params.jsFramework) {
-
+        await replaceCode(userController, 'USER_LOGIN_POST', join(__dirname, 'modules', 'controllers', 'mongodb', 'user-login-jwt-post.js'), { indentLevel: 1 });
       } else {
         await replaceCode(passportConfigFile, 'PASSPORT_DESERIALIZER', passportDeserializerMongoDb);
       }
@@ -98,8 +103,11 @@ async function generateCommonAuthenticationExpress(params) {
 
       await replaceCode(app, 'USER_HELPER_MIDDLEWARE', userHelperMiddlewareForSql);
 
-
-      await replaceCode(passportConfigFile, 'PASSPORT_DESERIALIZER', passportDeserializerSql);
+      if (params.jsFramework) {
+        await replaceCode(userController, 'USER_LOGIN_POST', join(__dirname, 'modules', 'controllers', 'sql', 'user-login-jwt-post.js'), { indentLevel: 1 });
+      } else {
+        await replaceCode(passportConfigFile, 'PASSPORT_DESERIALIZER', passportDeserializerSql);
+      }
 
       await replaceCode(userController, 'USER_SIGNUP_POST', join(__dirname, 'modules', 'controllers', 'sql', 'user-signup-post.js'), { indentLevel: 1 });
       await replaceCode(userController, 'USER_ACCOUNT_PUT', join(__dirname, 'modules', 'controllers', 'sql', 'user-account-put.js'), { indentLevel: 1 });

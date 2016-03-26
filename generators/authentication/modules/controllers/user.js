@@ -6,45 +6,8 @@ var nodemailer = require('nodemailer');
 //= JWT_REQUIRE
 var User = require('../models/user');
 //= ENSURE_AUTHENTICATED_MIDDLEWARE
-
-/**
- * GET /login
- */
-exports.loginGet = function(req, res) {
-  if (req.user) {
-    return res.redirect('/');
-  }
-  res.render('account/login', {
-    title: 'Log in'
-  });
-};
-
-/**
- * POST /login
- */
-exports.loginPost = function(req, res, next) {
-  req.assert('email', 'Email is not valid').isEmail();
-  req.assert('email', 'Email cannot be blank').notEmpty();
-  req.assert('password', 'Password cannot be blank').notEmpty();
-  req.sanitize('email').normalizeEmail();
-
-  var errors = req.validationErrors();
-
-  if (errors) {
-    req.flash('error', errors);
-    return res.redirect('/login');
-  }
-
-  passport.authenticate('local', function(err, user, info) {
-    if (!user) {
-      req.flash('error', info);
-      return res.redirect('/login')
-    }
-    req.logIn(user, function(err) {
-      res.redirect('/');
-    });
-  })(req, res, next);
-};
+//= USER_LOGIN_GET
+//= USER_LOGIN_POST
 
 /**
  * GET /logout
