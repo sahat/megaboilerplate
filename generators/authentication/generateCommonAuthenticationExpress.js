@@ -135,6 +135,8 @@ async function generateCommonAuthenticationExpress(params) {
     await replaceCode(userController, 'SIGNUP_SUCCESS_RESPONSE', join(__dirname, 'modules', 'responses', 'json', 'signup-success-response.js'), { indentLevel: 2 });
     await replaceCode(userController, 'PROFILE_UPDATE_VALIDATION_ERROR', join(__dirname, 'modules', 'responses', 'json', 'profile-update-validation-error.js'), { indentLevel: 2 });
     await replaceCode(userController, 'ACCOUNT_DELETE_SUCCESS', join(__dirname, 'modules', 'responses', 'json', 'account-delete-success.js'), { indentLevel: 1 });
+    await replaceCode(userController, 'PROVIDER_UNLINK_ERROR', join(__dirname, 'modules', 'responses', 'json', 'provider-unlink-error.js'), { indentLevel: 4 });
+    await replaceCode(userController, 'PROVIDER_UNLINK_SUCCESS', join(__dirname, 'modules', 'responses', 'json', 'provider-unlink-success.js'), { indentLevel: 3 });
 
   } else {
     await replaceCode(userController, 'SIGNUP_VALIDATION_ERROR', join(__dirname, 'modules', 'responses', 'session', 'signup-validation-error.js'), { indentLevel: 2 });
@@ -142,6 +144,8 @@ async function generateCommonAuthenticationExpress(params) {
     await replaceCode(userController, 'SIGNUP_SUCCESS_RESPONSE', join(__dirname, 'modules', 'responses', 'session', 'signup-success-response.js'), { indentLevel: 2 });
     await replaceCode(userController, 'PROFILE_UPDATE_VALIDATION_ERROR', join(__dirname, 'modules', 'responses', 'session', 'profile-update-validation-error.js'), { indentLevel: 2 });
     await replaceCode(userController, 'ACCOUNT_DELETE_SUCCESS', join(__dirname, 'modules', 'responses', 'session', 'account-delete-success.js'), { indentLevel: 1 });
+    await replaceCode(userController, 'PROVIDER_UNLINK_ERROR', join(__dirname, 'modules', 'responses', 'session', 'provider-unlink-error.js'), { indentLevel: 4 });
+    await replaceCode(userController, 'PROVIDER_UNLINK_SUCCESS', join(__dirname, 'modules', 'responses', 'session', 'provider-unlink-success.js'), { indentLevel: 3 });
 
 
   }

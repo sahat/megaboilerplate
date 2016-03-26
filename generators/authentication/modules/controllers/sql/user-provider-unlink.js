@@ -12,11 +12,9 @@ new User({ id: req.user.id })
         user.set('twitter', null);
         break;
       default:
-        req.flash('error', { msg: 'Invalid OAuth Provider' });
-        return res.redirect('/account');
+        //= PROVIDER_UNLINK_ERROR
     }
     user.save(user.changed, { patch: true }).then(function() {
-      req.flash('success', { msg: 'Your account has been unlinked.' });
-      res.redirect('/account');
+      //= PROVIDER_UNLINK_SUCCESS
     });
   });
