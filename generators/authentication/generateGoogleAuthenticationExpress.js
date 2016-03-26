@@ -6,6 +6,7 @@ async function generateGoogleAuthenticationExpress(params) {
   const app = join(build, 'app.js');
   const env = join(build, '.env');
   const config = join(build, 'config', 'passport.js');
+  const userController = join(build, 'controllers', 'user.js');
   const strategyRequire = join(__dirname, 'modules', 'google', 'passport-require.js');
   const passportRoutes = join(__dirname, 'modules', 'google', 'passport-routes.js');
   const jwtRoutes = join(__dirname, 'modules', 'google', 'jwt-routes.js');
@@ -21,6 +22,11 @@ async function generateGoogleAuthenticationExpress(params) {
 
   switch (params.database) {
     case 'mongodb':
+      if (params.jsFramework) {
+        await replaceCode(userController, 'AUTH_GOOGLE_JWT_DB', join(__dirname, 'modules', 'google', 'google-jwt-mongodb.js'), { indentLevel: 3 });
+      } else {
+
+      }
       const mongodbStrategy = join(__dirname, 'modules', 'google', 'google-strategy-mongodb.js');
       await replaceCode(config, 'PASSPORT_GOOGLE_STRATEGY', mongodbStrategy);
       break;
@@ -28,6 +34,11 @@ async function generateGoogleAuthenticationExpress(params) {
     case 'mysql':
     case 'sqlite':
     case 'postgresql':
+      if (params.jsFramework) {
+        await replaceCode(userController, 'AUTH_GOOGLE_JWT_DB', join(__dirname, 'modules', 'google', 'google-jwt-sql.js'), { indentLevel: 3 });
+      } else {
+
+      }
       const sqlStrategy = join(__dirname, 'modules', 'google', 'google-strategy-sql.js');
       await replaceCode(config, 'PASSPORT_GOOGLE_STRATEGY', sqlStrategy);
       break;
