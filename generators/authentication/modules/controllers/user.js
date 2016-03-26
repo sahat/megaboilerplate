@@ -68,18 +68,7 @@ exports.accountDelete = function(req, res, next) {
 exports.unlink = function(req, res, next) {
   //= USER_PROVIDER_UNLINK
 };
-
-/**
- * GET /forgot
- */
-exports.forgotGet = function(req, res) {
-  if (req.isAuthenticated()) {
-    return res.redirect('/');
-  }
-  res.render('account/forgot', {
-    title: 'Forgot Password'
-  });
-};
+//= USER_FORGOT_GET
 
 /**
  * POST /forgot
@@ -124,13 +113,10 @@ exports.forgotPost = function(req, res, next) {
         'If you did not request this, please ignore this email and your password will remain unchanged.\n'
       };
       transporter.sendMail(mailOptions, function(err) {
-        req.flash('info', { msg: 'An email has been sent to ' + user.email + ' with further instructions.' });
-        done(err);
+        //= FORGOT_POST_SUCCESS
       });
     }
-  ], function(err) {
-    res.redirect('/forgot');
-  });
+  ]);
 };
 
 /**
