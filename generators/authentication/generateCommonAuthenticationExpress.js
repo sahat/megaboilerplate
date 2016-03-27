@@ -19,7 +19,8 @@ async function generateCommonAuthenticationExpress(params) {
   const passportSerializer = join(__dirname, 'modules', 'common', 'passport-serializer.js');
   const passportDeserializerMongoDb = join(__dirname, 'modules', 'common', 'passport-deserializer.js');
   const passportDeserializerSql = join(__dirname, 'modules', 'common', 'passport-deserializer-sql.js');
-  const userModelRequire = join(__dirname, 'modules', 'models', 'user-model-require.js');
+  const userModelAppRequire = join(__dirname, 'modules', 'models', 'user-model-app-require.js');
+  const userModelPassportRequire = join(__dirname, 'modules', 'models', 'user-model-passport-require.js');
   const userControllerModule = join(__dirname, 'modules', 'controllers', 'user.js');
   const userControllerRequire = join(__dirname, 'modules', 'controllers', 'user-require.js');
   const accountRoutes = join(__dirname, 'modules', 'common', 'routes', 'account-routes.js');
@@ -55,7 +56,7 @@ async function generateCommonAuthenticationExpress(params) {
     await replaceCode(passportJs, 'PASSPORT_SERIALIZER', passportSerializer);
 
     // Add User model reference to passport.js config
-    await replaceCode(passportJs, 'USER_MODEL_REQUIRE', userModelRequire);
+    await replaceCode(passportJs, 'USER_MODEL_REQUIRE', userModelPassportRequire);
 
     // Add app routes
     await replaceCode(app, 'LOGOUT_ROUTE', logoutRoute);
@@ -73,7 +74,7 @@ async function generateCommonAuthenticationExpress(params) {
   }
 
   // Add User model reference to app.js
-  await replaceCode(app, 'USER_MODEL_REQUIRE', userModelRequire);
+  await replaceCode(app, 'USER_MODEL_REQUIRE', userModelAppRequire);
 
 
   switch (params.database) {
