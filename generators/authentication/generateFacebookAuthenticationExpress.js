@@ -13,6 +13,7 @@ async function generateFacebookAuthenticationExpress(params) {
 
   if (params.jsFramework) {
     await replaceCode(app, 'FACEBOOK_ROUTES', jwtRoutes);
+    await replaceCode(userController, 'AUTH_FACEBOOK_JWT', join(__dirname, 'modules', 'facebook', 'facebook-jwt.js'));
   } else {
     await replaceCode(app, 'FACEBOOK_ROUTES', passportRoutes);
     await replaceCode(config, 'PASSPORT_FACEBOOK_REQUIRE', strategyRequire);

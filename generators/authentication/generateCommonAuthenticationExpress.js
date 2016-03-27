@@ -23,7 +23,8 @@ async function generateCommonAuthenticationExpress(params) {
   const userModelPassportRequire = join(__dirname, 'modules', 'models', 'user-model-passport-require.js');
   const userControllerModule = join(__dirname, 'modules', 'controllers', 'user.js');
   const userControllerRequire = join(__dirname, 'modules', 'controllers', 'user-require.js');
-  const accountRoutes = join(__dirname, 'modules', 'common', 'routes', 'account-routes.js');
+  const accountRoutesJwt = join(__dirname, 'modules', 'common', 'routes', 'account-routes-jwt.js');
+  const accountRoutesPassport = join(__dirname, 'modules', 'common', 'routes', 'account-routes-passport.js');
 
   // Copy user controller
   await copy(userControllerModule, join(build, 'controllers', 'user.js'));
@@ -41,14 +42,17 @@ async function generateCommonAuthenticationExpress(params) {
     await replaceCode(app, 'PASSPORT_CONFIG_REQUIRE', passportConfigRequire);
   }
 
+  // Add User model reference to app.js
+  await replaceCode(app, 'USER_MODEL_REQUIRE', userModelAppRequire);
+
   // Add user controller reference
   await replaceCode(app, 'USER_CONTROLLER', userControllerRequire);
 
-  // Add "My Account" routes
-  await replaceCode(app, 'ACCOUNT_ROUTES', accountRoutes);
 
   if (params.jsFramework) {
     await replaceCode(app, 'UNLINK_ROUTE', unlinkRoute);
+    await replaceCode(app, 'ACCOUNT_ROUTES', accountRoutesJwt);
+
   } else {
     await copy(passportConfigModule, passportJs);
 
@@ -61,7 +65,7 @@ async function generateCommonAuthenticationExpress(params) {
     // Add app routes
     await replaceCode(app, 'LOGOUT_ROUTE', logoutRoute);
     await replaceCode(app, 'UNLINK_ROUTE', unlinkRoute);
-
+    await replaceCode(app, 'ACCOUNT_ROUTES', accountRoutesPassport);
     await replaceCode(userController, 'USER_SIGNUP_GET', join(__dirname, 'modules', 'controllers', 'user-signup-get.js'), { indentLevel: 1 });
     await replaceCode(userController, 'USER_LOGIN_GET', join(__dirname, 'modules', 'controllers', 'user-login-get.js'), { indentLevel: 1 });
     await replaceCode(userController, 'USER_LOGIN_POST', join(__dirname, 'modules', 'controllers', 'user-login-post.js'), { indentLevel: 1 });
@@ -72,10 +76,6 @@ async function generateCommonAuthenticationExpress(params) {
 
     await addNpmPackage('passport', params);
   }
-
-  // Add User model reference to app.js
-  await replaceCode(app, 'USER_MODEL_REQUIRE', userModelAppRequire);
-
 
   switch (params.database) {
     case 'mongodb':

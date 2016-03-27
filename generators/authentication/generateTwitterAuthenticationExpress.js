@@ -13,6 +13,8 @@ async function generateTwitterAuthenticationExpress(params) {
   
   if (params.jsFramework) {
     await replaceCode(app, 'TWITTER_ROUTES', jwtRoutes);
+    await replaceCode(userController, 'AUTH_TWITTER_JWT', join(__dirname, 'modules', 'twitter', 'twitter-jwt.js'));
+
   } else {
     await replaceCode(app, 'TWITTER_ROUTES', passportRoutes);
     await replaceCode(config, 'PASSPORT_TWITTER_REQUIRE', strategyRequire);

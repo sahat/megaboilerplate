@@ -13,6 +13,8 @@ async function generateGoogleAuthenticationExpress(params) {
 
   if (params.jsFramework) {
     await replaceCode(app, 'GOOGLE_ROUTES', jwtRoutes);
+    await replaceCode(userController, 'AUTH_GOOGLE_JWT', join(__dirname, 'modules', 'google', 'google-jwt.js'));
+
   } else {
     await replaceCode(app, 'GOOGLE_ROUTES', passportRoutes);
     await replaceCode(config, 'PASSPORT_GOOGLE_REQUIRE', strategyRequire);
