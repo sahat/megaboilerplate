@@ -18,7 +18,7 @@ async function generateCommonAuthenticationExpress(params) {
   const passportSerializer = join(__dirname, 'modules', 'common', 'passport-serializer.js');
   const passportDeserializerMongoDb = join(__dirname, 'modules', 'common', 'passport-deserializer.js');
   const passportDeserializerSql = join(__dirname, 'modules', 'common', 'passport-deserializer-sql.js');
-  const userModelRequire = join(__dirname, 'modules', 'common', 'models', 'user-model-require.js');
+  const userModelRequire = join(__dirname, 'modules', 'models', 'user-model-require.js');
   const userControllerModule = join(__dirname, 'modules', 'controllers', 'user.js');
   const userControllerRequire = join(__dirname, 'modules', 'controllers', 'user-require.js');
   const accountRoutes = join(__dirname, 'modules', 'common', 'routes', 'account-routes.js');
@@ -84,10 +84,10 @@ async function generateCommonAuthenticationExpress(params) {
 
       if (params.jsFramework) {
         await replaceCode(userController, 'USER_LOGIN_POST', join(__dirname, 'modules', 'controllers', 'mongodb', 'user-login-jwt-post.js'), { indentLevel: 1 });
-        await replaceCode(userController, 'PROFILE_UPDATE_RESPONSE', join(__dirname, 'modules', 'responses', 'json', 'profile-update-response-mongodb.js'), { indentLevel: 2 });
+        await replaceCode(userController, 'PROFILE_UPDATE_RESPONSE', join(__dirname, 'modules', 'controllers', 'responses', 'json', 'profile-update-response-mongodb.js'), { indentLevel: 2 });
       } else {
         await replaceCode(passportConfigFile, 'PASSPORT_DESERIALIZER', passportDeserializerMongoDb);
-        await replaceCode(userController, 'PROFILE_UPDATE_RESPONSE', join(__dirname, 'modules', 'responses', 'session', 'profile-update-response-mongodb.js'), { indentLevel: 2 });
+        await replaceCode(userController, 'PROFILE_UPDATE_RESPONSE', join(__dirname, 'modules', 'controllers', 'responses', 'session', 'profile-update-response-mongodb.js'), { indentLevel: 2 });
       }
 
       await replaceCode(userController, 'USER_SIGNUP_POST', join(__dirname, 'modules', 'controllers', 'mongodb', 'user-signup-post.js'), { indentLevel: 1 });
@@ -112,10 +112,10 @@ async function generateCommonAuthenticationExpress(params) {
 
       if (params.jsFramework) {
         await replaceCode(userController, 'USER_LOGIN_POST', join(__dirname, 'modules', 'controllers', 'sql', 'user-login-jwt-post.js'), { indentLevel: 1 });
-        await replaceCode(userController, 'PROFILE_UPDATE_RESPONSE', join(__dirname, 'modules', 'responses', 'json', 'profile-update-response-sql.js'), { indentLevel: 2 });
+        await replaceCode(userController, 'PROFILE_UPDATE_RESPONSE', join(__dirname, 'modules', 'controllers', 'responses', 'json', 'profile-update-response-sql.js'), { indentLevel: 2 });
       } else {
         await replaceCode(passportConfigFile, 'PASSPORT_DESERIALIZER', passportDeserializerSql);
-        await replaceCode(userController, 'PROFILE_UPDATE_RESPONSE', join(__dirname, 'modules', 'responses', 'session', 'profile-update-response-sql.js'), { indentLevel: 2 });
+        await replaceCode(userController, 'PROFILE_UPDATE_RESPONSE', join(__dirname, 'modules', 'controllers', 'responses', 'session', 'profile-update-response-sql.js'), { indentLevel: 2 });
       }
 
       await replaceCode(userController, 'USER_SIGNUP_POST', join(__dirname, 'modules', 'controllers', 'sql', 'user-signup-post.js'), { indentLevel: 1 });
@@ -132,30 +132,30 @@ async function generateCommonAuthenticationExpress(params) {
   }
 
   if (params.jsFramework) {
-    await replaceCode(userController, 'SIGNUP_VALIDATION_ERROR', join(__dirname, 'modules', 'responses', 'json', 'common-validation-error.js'), { indentLevel: 2 });
-    await replaceCode(userController, 'SIGNUP_EMAIL_ALREADY_EXISTS', join(__dirname, 'modules', 'responses', 'json', 'signup-email-already-exists.js'), { indentLevel: 2 });
-    await replaceCode(userController, 'SIGNUP_SUCCESS_RESPONSE', join(__dirname, 'modules', 'responses', 'json', 'signup-success-response.js'), { indentLevel: 2 });
-    await replaceCode(userController, 'PROFILE_UPDATE_VALIDATION_ERROR', join(__dirname, 'modules', 'responses', 'json', 'common-validation-error.js'), { indentLevel: 2 });
-    await replaceCode(userController, 'ACCOUNT_DELETE_SUCCESS', join(__dirname, 'modules', 'responses', 'json', 'account-delete-success.js'), { indentLevel: 1 });
-    await replaceCode(userController, 'PROVIDER_UNLINK_ERROR', join(__dirname, 'modules', 'responses', 'json', 'provider-unlink-error.js'), { indentLevel: 4 });
-    await replaceCode(userController, 'PROVIDER_UNLINK_SUCCESS', join(__dirname, 'modules', 'responses', 'json', 'provider-unlink-success.js'), { indentLevel: 3 });
-    await replaceCode(userController, 'FORGOT_POST_VALIDATION_ERROR', join(__dirname, 'modules', 'responses', 'json', 'common-validation-error.js'), { indentLevel: 3 });
-    await replaceCode(userController, 'FORGOT_POST_SUCCESS', join(__dirname, 'modules', 'responses', 'json', 'forgot-post-success.js'), { indentLevel: 3 });
-    await replaceCode(userController, 'RESET_POST_VALIDATION_ERROR', join(__dirname, 'modules', 'responses', 'json', 'common-validation-error.js'), { indentLevel: 3 });
-    await replaceCode(userController, 'RESET_POST_SUCCESS', join(__dirname, 'modules', 'responses', 'json', 'reset-post-success.js'), { indentLevel: 3 });
+    await replaceCode(userController, 'SIGNUP_VALIDATION_ERROR', join(__dirname, 'modules', 'controllers', 'responses', 'json', 'common-validation-error.js'), { indentLevel: 2 });
+    await replaceCode(userController, 'SIGNUP_EMAIL_ALREADY_EXISTS', join(__dirname, 'modules', 'controllers', 'responses', 'json', 'signup-email-already-exists.js'), { indentLevel: 2 });
+    await replaceCode(userController, 'SIGNUP_SUCCESS_RESPONSE', join(__dirname, 'modules', 'controllers', 'responses', 'json', 'signup-success-response.js'), { indentLevel: 2 });
+    await replaceCode(userController, 'PROFILE_UPDATE_VALIDATION_ERROR', join(__dirname, 'modules', 'controllers', 'responses', 'json', 'common-validation-error.js'), { indentLevel: 2 });
+    await replaceCode(userController, 'ACCOUNT_DELETE_SUCCESS', join(__dirname, 'modules', 'controllers', 'responses', 'json', 'account-delete-success.js'), { indentLevel: 1 });
+    await replaceCode(userController, 'PROVIDER_UNLINK_ERROR', join(__dirname, 'modules', 'controllers', 'responses', 'json', 'provider-unlink-error.js'), { indentLevel: 4 });
+    await replaceCode(userController, 'PROVIDER_UNLINK_SUCCESS', join(__dirname, 'modules', 'controllers', 'responses', 'json', 'provider-unlink-success.js'), { indentLevel: 3 });
+    await replaceCode(userController, 'FORGOT_POST_VALIDATION_ERROR', join(__dirname, 'modules', 'controllers', 'responses', 'json', 'common-validation-error.js'), { indentLevel: 3 });
+    await replaceCode(userController, 'FORGOT_POST_SUCCESS', join(__dirname, 'modules', 'controllers', 'responses', 'json', 'forgot-post-success.js'), { indentLevel: 3 });
+    await replaceCode(userController, 'RESET_POST_VALIDATION_ERROR', join(__dirname, 'modules', 'controllers', 'responses', 'json', 'common-validation-error.js'), { indentLevel: 3 });
+    await replaceCode(userController, 'RESET_POST_SUCCESS', join(__dirname, 'modules', 'controllers', 'responses', 'json', 'reset-post-success.js'), { indentLevel: 3 });
 
   } else {
-    await replaceCode(userController, 'SIGNUP_VALIDATION_ERROR', join(__dirname, 'modules', 'responses', 'session', 'signup-validation-error.js'), { indentLevel: 2 });
-    await replaceCode(userController, 'SIGNUP_EMAIL_ALREADY_EXISTS', join(__dirname, 'modules', 'responses', 'session', 'signup-email-already-exists.js'), { indentLevel: 2 });
-    await replaceCode(userController, 'SIGNUP_SUCCESS_RESPONSE', join(__dirname, 'modules', 'responses', 'session', 'signup-success-response.js'), { indentLevel: 2 });
-    await replaceCode(userController, 'PROFILE_UPDATE_VALIDATION_ERROR', join(__dirname, 'modules', 'responses', 'session', 'profile-update-validation-error.js'), { indentLevel: 2 });
-    await replaceCode(userController, 'ACCOUNT_DELETE_SUCCESS', join(__dirname, 'modules', 'responses', 'session', 'account-delete-success.js'), { indentLevel: 1 });
-    await replaceCode(userController, 'PROVIDER_UNLINK_ERROR', join(__dirname, 'modules', 'responses', 'session', 'provider-unlink-error.js'), { indentLevel: 4 });
-    await replaceCode(userController, 'PROVIDER_UNLINK_SUCCESS', join(__dirname, 'modules', 'responses', 'session', 'provider-unlink-success.js'), { indentLevel: 3 });
-    await replaceCode(userController, 'FORGOT_POST_VALIDATION_ERROR', join(__dirname, 'modules', 'responses', 'session', 'forgot-post-validation-error.js'), { indentLevel: 3 });
-    await replaceCode(userController, 'FORGOT_POST_SUCCESS', join(__dirname, 'modules', 'responses', 'session', 'forgot-post-success.js'), { indentLevel: 3 });
-    await replaceCode(userController, 'RESET_POST_VALIDATION_ERROR', join(__dirname, 'modules', 'responses', 'session', 'reset-post-validation-error.js'), { indentLevel: 3 });
-    await replaceCode(userController, 'RESET_POST_SUCCESS', join(__dirname, 'modules', 'responses', 'session', 'reset-post-success.js'), { indentLevel: 3 });
+    await replaceCode(userController, 'SIGNUP_VALIDATION_ERROR', join(__dirname, 'modules', 'controllers', 'responses', 'session', 'signup-validation-error.js'), { indentLevel: 2 });
+    await replaceCode(userController, 'SIGNUP_EMAIL_ALREADY_EXISTS', join(__dirname, 'modules', 'controllers', 'responses', 'session', 'signup-email-already-exists.js'), { indentLevel: 2 });
+    await replaceCode(userController, 'SIGNUP_SUCCESS_RESPONSE', join(__dirname, 'modules', 'controllers', 'responses', 'session', 'signup-success-response.js'), { indentLevel: 2 });
+    await replaceCode(userController, 'PROFILE_UPDATE_VALIDATION_ERROR', join(__dirname, 'modules', 'controllers', 'responses', 'session', 'profile-update-validation-error.js'), { indentLevel: 2 });
+    await replaceCode(userController, 'ACCOUNT_DELETE_SUCCESS', join(__dirname, 'modules', 'controllers', 'responses', 'session', 'account-delete-success.js'), { indentLevel: 1 });
+    await replaceCode(userController, 'PROVIDER_UNLINK_ERROR', join(__dirname, 'modules', 'controllers', 'responses', 'session', 'provider-unlink-error.js'), { indentLevel: 4 });
+    await replaceCode(userController, 'PROVIDER_UNLINK_SUCCESS', join(__dirname, 'modules', 'controllers', 'responses', 'session', 'provider-unlink-success.js'), { indentLevel: 3 });
+    await replaceCode(userController, 'FORGOT_POST_VALIDATION_ERROR', join(__dirname, 'modules', 'controllers', 'responses', 'session', 'forgot-post-validation-error.js'), { indentLevel: 3 });
+    await replaceCode(userController, 'FORGOT_POST_SUCCESS', join(__dirname, 'modules', 'controllers', 'responses', 'session', 'forgot-post-success.js'), { indentLevel: 3 });
+    await replaceCode(userController, 'RESET_POST_VALIDATION_ERROR', join(__dirname, 'modules', 'controllers', 'responses', 'session', 'reset-post-validation-error.js'), { indentLevel: 3 });
+    await replaceCode(userController, 'RESET_POST_SUCCESS', join(__dirname, 'modules', 'controllers', 'responses', 'session', 'reset-post-success.js'), { indentLevel: 3 });
 
 
   }

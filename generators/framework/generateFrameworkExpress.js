@@ -19,7 +19,7 @@ async function generateFrameworkExpress(params) {
     join(express, 'app.js'),
     join(express, 'package.json'),
     join(express, '.env'),
-    join(express, '.gitignore)
+    join(express, '.gitignore')
   ], build);
   
   const app = join(build, 'app.js');

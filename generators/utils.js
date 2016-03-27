@@ -129,7 +129,10 @@ export async function addNpmPackage(pkgName, params, isDev) {
 
   // Sort dependencies alphabetically in package.json
   packageObj.dependencies = sortJson(packageObj.dependencies);
-  packageObj.devDependencies = sortJson(packageObj.devDependencies);
+  
+  if (packageObj.devDependencies) {
+    packageObj.devDependencies = sortJson(packageObj.devDependencies);
+  }
 
   await writeJson(packageJson, packageObj, { spaces: 2 });
 }

@@ -6,6 +6,7 @@ async function generateTwitterAuthenticationExpress(params) {
   const app = join(build, 'app.js');
   const env = join(build, '.env');
   const config = join(build, 'config', 'passport.js');
+  const userController = join(build, 'controllers', 'user.js');
   const strategyRequire = join(__dirname, 'modules', 'twitter', 'passport-require.js');
   const passportRoutes = join(__dirname, 'modules', 'twitter', 'passport-routes.js');
   const jwtRoutes = join(__dirname, 'modules', 'twitter', 'passport-routes.js');
