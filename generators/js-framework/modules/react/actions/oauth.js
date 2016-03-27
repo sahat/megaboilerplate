@@ -20,14 +20,15 @@ export function facebookLogin() {
       .then(openPopup)
       .then(pollPopup)
       .then(exchangeCodeForToken)
-      .then(signIn);
+      .then(signIn)
+      .then(closePopup);
   };
 }
 
 export function googleLogin() {
   const google = {
-    clientId: '925504469943-ftfpddjifbiveu590geaegj3ei6ij9bh.apps.googleusercontent.com',
-    redirectUri: 'http://localhost:3000',
+    clientId: '771417488024-ltua6b8msfo6ipdcnk2ahcpd0qrpdu61.apps.googleusercontent.com',
+    redirectUri: 'http://localhost:3000/auth/google/callback',
     url: 'http://localhost:3000/auth/google',
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth',
     scope: 'openid profile email',
@@ -40,7 +41,8 @@ export function googleLogin() {
       .then(openPopup)
       .then(pollPopup)
       .then(exchangeCodeForToken)
-      .then(signIn);
+      .then(signIn)
+      .then(closePopup);
   };
 }
 
@@ -57,10 +59,10 @@ export function twitterLogin() {
       .then(getRequestToken)
       .then(pollPopup)
       .then(exchangeCodeForToken)
-      .then(signIn);
+      .then(signIn)
+      .then(closePopup);
   };
 }
-
 
 function oauth2(config, dispatch) {
   return new Promise((resolve, reject) => {
@@ -81,7 +83,6 @@ function oauth1(config, dispatch) {
     resolve({ url: 'about:blank', config: config, dispatch: dispatch });
   });
 }
-
 
 function openPopup({ url, config, dispatch }) {
   return new Promise((resolve, reject) => {
@@ -148,7 +149,7 @@ function pollPopup({ window, config, requestToken, dispatch }) {
                 messages: [{ msg: params.error }]
               });
             } else {
-              resolve({ oauthData: params, config: config, dispatch: dispatch });
+              resolve({ oauthData: params, config: config, window: window, interval: polling, dispatch: dispatch });
             }
           } else {
             dispatch({
@@ -156,8 +157,6 @@ function pollPopup({ window, config, requestToken, dispatch }) {
               messages: [{ msg: 'OAuth redirect has occurred but no query or hash parameters were found.' }]
             });
           }
-          clearInterval(polling);
-          window.close();
         }
       } catch (error) {
         // Ignore DOMException: Blocked a frame with origin from accessing a cross-origin frame.
@@ -167,7 +166,7 @@ function pollPopup({ window, config, requestToken, dispatch }) {
   });
 }
 
-function exchangeCodeForToken({ oauthData, config, dispatch }) {
+function exchangeCodeForToken({ oauthData, config, window, interval, dispatch }) {
   return new Promise((resolve, reject) => {
     const data = Object.assign({}, oauthData, config);
 
@@ -178,7 +177,7 @@ function exchangeCodeForToken({ oauthData, config, dispatch }) {
     }).then((response) => {
       if (response.ok) {
         response.json().then((json) => {
-          resolve({ token: json.token, user: json.user, dispatch: dispatch });
+          resolve({ token: json.token, user: json.user, window: window, interval: interval, dispatch: dispatch });
         });
       } else {
         response.json().then((json) => {
@@ -192,12 +191,26 @@ function exchangeCodeForToken({ oauthData, config, dispatch }) {
   });
 }
 
-function signIn({ token, user, dispatch }) {
-  dispatch({
-    type: 'OAUTH_SUCCESS',
-    token: token,
-    user: user
+function signIn({ token, user, window, interval, dispatch }) {
+  return new Promise((resolve, reject) => {
+    dispatch({
+      type: 'OAUTH_SUCCESS',
+      token: token,
+      user: user
+    });
+    cookie.save('token', token, { expires: moment().add(1, 'hour').toDate() });
+    browserHistory.push('/');
+    resolve({ window: window, interval: interval });
   });
-  cookie.save('token', token, { expires: moment().add(1, 'hour').toDate() });
-  browserHistory.push('/');
+
 }
+
+
+function closePopup({ window, interval }) {
+  return new Promise((resolve, reject) => {
+    clearInterval(interval);
+    window.close();
+    resolve();
+  });
+}
+
