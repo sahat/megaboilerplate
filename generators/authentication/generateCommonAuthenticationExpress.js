@@ -72,6 +72,10 @@ async function generateCommonAuthenticationExpress(params) {
     await addNpmPackage('passport', params);
   }
 
+  // Add User model reference to app.js
+  await replaceCode(app, 'USER_MODEL_REQUIRE', userModelRequire);
+
+
   switch (params.database) {
     case 'mongodb':
       const mongooseModel = join(__dirname, 'modules', 'models', 'mongodb', 'user.js');
@@ -79,12 +83,12 @@ async function generateCommonAuthenticationExpress(params) {
 
       await copy(mongooseModel, join(build, 'models', 'user.js'));
 
-      await replaceCode(app, 'USER_HELPER_MIDDLEWARE', userHelperMiddlewareForMongoDb);
 
       if (params.jsFramework) {
         await replaceCode(userController, 'USER_LOGIN_POST', join(__dirname, 'modules', 'controllers', 'mongodb', 'user-login-jwt-post.js'), { indentLevel: 1 });
         await replaceCode(userController, 'PROFILE_UPDATE_RESPONSE', join(__dirname, 'modules', 'controllers', 'responses', 'json', 'profile-update-response-mongodb.js'), { indentLevel: 2 });
       } else {
+        await replaceCode(app, 'USER_HELPER_MIDDLEWARE', userHelperMiddlewareForMongoDb);
         await replaceCode(passportJs, 'PASSPORT_DESERIALIZER', passportDeserializerMongoDb);
         await replaceCode(userController, 'PROFILE_UPDATE_RESPONSE', join(__dirname, 'modules', 'controllers', 'responses', 'session', 'profile-update-response-mongodb.js'), { indentLevel: 2 });
       }
@@ -107,12 +111,12 @@ async function generateCommonAuthenticationExpress(params) {
       await copy(bookshelfModel, join(build, 'models', 'user.js'));
       await copy(join(__dirname, 'modules', 'migrations'), join(build, 'migrations'));
 
-      await replaceCode(app, 'USER_HELPER_MIDDLEWARE', userHelperMiddlewareForSql);
 
       if (params.jsFramework) {
         await replaceCode(userController, 'USER_LOGIN_POST', join(__dirname, 'modules', 'controllers', 'sql', 'user-login-jwt-post.js'), { indentLevel: 1 });
         await replaceCode(userController, 'PROFILE_UPDATE_RESPONSE', join(__dirname, 'modules', 'controllers', 'responses', 'json', 'profile-update-response-sql.js'), { indentLevel: 2 });
       } else {
+        await replaceCode(app, 'USER_HELPER_MIDDLEWARE', userHelperMiddlewareForSql);
         await replaceCode(passportJs, 'PASSPORT_DESERIALIZER', passportDeserializerSql);
         await replaceCode(userController, 'PROFILE_UPDATE_RESPONSE', join(__dirname, 'modules', 'controllers', 'responses', 'session', 'profile-update-response-sql.js'), { indentLevel: 2 });
       }

@@ -18,6 +18,7 @@ var dotenv = require('dotenv');
 dotenv.load();
 //= ES6_TRANSPILER
 //= USER_MODEL_REQUIRE
+
 // Controllers
 //= HOME_CONTROLLER
 //= USER_CONTROLLER
@@ -42,6 +43,7 @@ app.use(expressValidator());
 //= USER_HELPER_MIDDLEWARE
 app.use(express.static(path.join(__dirname, 'public')));
 //= IS_AUTHENTICATED_MIDDLEWARE
+
 //= HOME_ROUTE
 //= CONTACT_ROUTE
 //= ACCOUNT_ROUTES
