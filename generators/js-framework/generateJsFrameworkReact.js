@@ -56,7 +56,7 @@ async function generateJsFrameworkReact(params) {
         join(actions, 'oauth.js')
       ], join(build, 'app', 'actions'));
 
-      const reducers = join(__dirname, 'modules', 'react', 'actions');
+      const reducers = join(__dirname, 'modules', 'react', 'reducers');
       await cpy([
         join(reducers, 'auth.js'),
         join(reducers, 'index.js'),
