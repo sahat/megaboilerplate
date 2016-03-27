@@ -6,9 +6,9 @@ import { browserHistory } from 'react-router';
 
 export function facebookLogin() {
   const facebook = {
-    clientId: '603122136500203',
     url: 'http://localhost:3000/auth/facebook',
-    redirectUri: 'http://localhost:3000/',
+    clientId: '603122136500203',
+    redirectUri: 'http://localhost:3000/auth/facebook/callback',
     authorizationUrl: 'https://www.facebook.com/v2.5/dialog/oauth',
     scope: 'email,user_location',
     width: 580,
@@ -27,9 +27,9 @@ export function facebookLogin() {
 
 export function googleLogin() {
   const google = {
+    url: 'http://localhost:3000/auth/google',
     clientId: '771417488024-ltua6b8msfo6ipdcnk2ahcpd0qrpdu61.apps.googleusercontent.com',
     redirectUri: 'http://localhost:3000/auth/google/callback',
-    url: 'http://localhost:3000/auth/google',
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth',
     scope: 'openid profile email',
     width: 452,
@@ -48,9 +48,9 @@ export function googleLogin() {
 
 export function twitterLogin() {
   const twitter = {
-    redirectUri: 'http://localhost:3000',
     url: 'http://localhost:3000/auth/twitter',
-    authorizationUrl: 'https://api.twitter.com/oauth/authenticate',
+    redirectUri: 'http://localhost:3000/auth/twitter/callback',
+    authorizationUrl: 'https://api.twitter.com/oauth/authenticate'
   };
 
   return (dispatch) => {

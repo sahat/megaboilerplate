@@ -31,5 +31,5 @@ exports.authGoogle = function(req, res) {
 };
 
 exports.authGoogleCallback = function(req, res) {
-  res.send('Loading...');
+  res.render('loading');
 };

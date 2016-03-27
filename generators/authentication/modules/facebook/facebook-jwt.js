@@ -34,5 +34,5 @@ exports.authFacebook = function(req, res) {
 };
 
 exports.authFacebookCallback = function(req, res) {
-  res.send('Loading...');
+  res.render('loading');
 };

@@ -56,5 +56,5 @@ exports.authTwitter = function(req, res) {
 };
 
 exports.authTwitterCallback = function(req, res) {
-  res.send('Loading...');
+  res.render('loading');
 };
