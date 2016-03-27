@@ -162,19 +162,25 @@ async function generateCommonAuthenticationExpress(params) {
 
   switch (params.templateEngine) {
     case 'jade':
-      const loginJade = join(__dirname, 'modules', 'common', 'views', 'login.jade');
-      const signupJade = join(__dirname, 'modules', 'common', 'views', 'signup.jade');
-      const forgotJade = join(__dirname, 'modules', 'common', 'views', 'forgot.jade');
-      const resetJade = join(__dirname, 'modules', 'common', 'views', 'reset.jade');
-      const profileJade = join(__dirname, 'modules', 'common', 'views', 'profile.jade');
       await mkdirs(join(build, 'views', 'account'));
       await cpy([
-        loginJade,
-        signupJade,
-        forgotJade,
-        resetJade,
-        profileJade
+        join(__dirname, 'modules', 'common', 'views', 'login.jade'),
+        join(__dirname, 'modules', 'common', 'views', 'signup.jade'),
+        join(__dirname, 'modules', 'common', 'views', 'forgot.jade'),
+        join(__dirname, 'modules', 'common', 'views', 'reset.jade'),
+        join(__dirname, 'modules', 'common', 'views', 'profile.jade')
       ], join(build, 'views', 'account'));
+      
+      // Local auth is always required, so if length is greater than 2, one of OAuth provider is selected
+      if (params.jsFramework.length > 1) {
+        await cpy([join(__dirname, 'modules', 'common', 'views', 'loading.jade')], join(build, 'views'));
+      }
+      break;
+    case 'handlebars':
+    case 'nunjucks':
+      if (params.jsFramework.length > 1) {
+        await cpy([join(__dirname, 'modules', 'common', 'views', 'loading.html')], join(build, 'views'));
+      }
       break;
     default:
       break;
