@@ -1,11 +1,13 @@
 import { join } from 'path';
-import { cpy, replaceCode, addNpmPackage } from '../utils';
+import { cpy, replaceCode, addNpmPackage, addNpmScript } from '../utils';
 
 async function generateGulpBuildTool(params) {
   const build = join(__base, 'build', params.uuid);
   const gulpfile = join(__dirname, 'modules', 'gulp', 'gulpfile.js');
 
   await cpy([gulpfile], build);
+
+  await addNpmScript('postinstall', 'gulp build', params);
 
   await addNpmPackage('gulp', params, true);
   await addNpmPackage('gulp-if', params, true);
