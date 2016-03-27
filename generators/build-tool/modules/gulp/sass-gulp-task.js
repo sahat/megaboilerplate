@@ -1,5 +1,5 @@
 gulp.task('sass', function() {
-  gulp.src('public/css/main.scss')
+  return gulp.src('public/css/main.scss')
     .pipe(plumber())
     .pipe(sass())
     .pipe(autoprefixer())

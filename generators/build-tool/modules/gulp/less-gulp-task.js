@@ -1,5 +1,5 @@
 gulp.task('less', function() {
-  gulp.src('public/css/main.less')
+  return gulp.src('public/css/main.less')
     .pipe(plumber())
     .pipe(less())
     .pipe(autoprefixer())
