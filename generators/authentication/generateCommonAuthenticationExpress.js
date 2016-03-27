@@ -45,7 +45,7 @@ async function generateCommonAuthenticationExpress(params) {
 
   // Add "My Account" routes
   await replaceCode(app, 'ACCOUNT_ROUTES', accountRoutes);
-  
+
   if (params.jsFramework) {
     await replaceCode(app, 'UNLINK_ROUTE', unlinkRoute);
   } else {
@@ -163,26 +163,39 @@ async function generateCommonAuthenticationExpress(params) {
 
   }
 
+  const usingOAuth = (
+    params.authentication.includes('facebook') ||
+    params.authentication.includes('twitter') ||
+    params.authentication.includes('google')
+  );
+
   switch (params.templateEngine) {
     case 'jade':
-      await mkdirs(join(build, 'views', 'account'));
-      await cpy([
-        join(__dirname, 'modules', 'common', 'views', 'login.jade'),
-        join(__dirname, 'modules', 'common', 'views', 'signup.jade'),
-        join(__dirname, 'modules', 'common', 'views', 'forgot.jade'),
-        join(__dirname, 'modules', 'common', 'views', 'reset.jade'),
-        join(__dirname, 'modules', 'common', 'views', 'profile.jade')
-      ], join(build, 'views', 'account'));
-      
-      // Local auth is always required, so if length is greater than 2, one of OAuth provider is selected
-      if (params.jsFramework.length > 1) {
-        await cpy([join(__dirname, 'modules', 'common', 'views', 'loading.jade')], join(build, 'views'));
+      if (params.jsFramework) {
+        if (usingOAuth) {
+          await cpy([join(__dirname, 'modules', 'common', 'views', 'loading.jade')], join(build, 'views'));
+        }
+
+      } else {
+        await mkdirs(join(build, 'views', 'account'));
+        await cpy([
+          join(__dirname, 'modules', 'common', 'views', 'login.jade'),
+          join(__dirname, 'modules', 'common', 'views', 'signup.jade'),
+          join(__dirname, 'modules', 'common', 'views', 'forgot.jade'),
+          join(__dirname, 'modules', 'common', 'views', 'reset.jade'),
+          join(__dirname, 'modules', 'common', 'views', 'profile.jade')
+        ], join(build, 'views', 'account'));
       }
+
+      // Local auth is always required, so if length is greater than 2, one of OAuth provider is selected
+
       break;
     case 'handlebars':
     case 'nunjucks':
-      if (params.jsFramework.length > 1) {
-        await cpy([join(__dirname, 'modules', 'common', 'views', 'loading.html')], join(build, 'views'));
+      if (params.jsFramework) {
+        if (usingOAuth) {
+          await cpy([join(__dirname, 'modules', 'common', 'views', 'loading.html')], join(build, 'views'));
+        }
       }
       break;
     default:
