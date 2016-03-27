@@ -13,28 +13,28 @@ async function generateLocalAuthenticationExpress(params) {
   } else {
     await replaceCode(app, 'LOCAL_ROUTES', passportRoutes);
     await replaceCode(config, 'PASSPORT_LOCAL_REQUIRE', strategyRequire);
-  }
 
-  await addNpmPackage('passport-local', params);
-  await addNpmPackage('nodemailer', params);
-  await addNpmPackage('bcrypt-nodejs', params);
-  await addNpmPackage('async', params);
+    await addNpmPackage('passport-local', params);
+    await addNpmPackage('nodemailer', params);
+    await addNpmPackage('bcrypt-nodejs', params);
+    await addNpmPackage('async', params);
 
-  switch (params.database) {
-    case 'mongodb':
-      const mongodbStrategy = join(__dirname, 'modules', 'local', 'local-strategy-mongodb.js');
-      await replaceCode(config, 'PASSPORT_LOCAL_STRATEGY', mongodbStrategy);
-      break;
+    switch (params.database) {
+      case 'mongodb':
+        const mongodbStrategy = join(__dirname, 'modules', 'local', 'local-strategy-mongodb.js');
+        await replaceCode(config, 'PASSPORT_LOCAL_STRATEGY', mongodbStrategy);
+        break;
 
-    case 'mysql':
-    case 'sqlite':
-    case 'postgresql':
-      const sqlStrategy = join(__dirname, 'modules', 'local', 'local-strategy-sql.js');
-      await replaceCode(config, 'PASSPORT_LOCAL_STRATEGY', sqlStrategy);
-      break;
+      case 'mysql':
+      case 'sqlite':
+      case 'postgresql':
+        const sqlStrategy = join(__dirname, 'modules', 'local', 'local-strategy-sql.js');
+        await replaceCode(config, 'PASSPORT_LOCAL_STRATEGY', sqlStrategy);
+        break;
 
-    default:
-      break;
+      default:
+        break;
+    }
   }
 }
 

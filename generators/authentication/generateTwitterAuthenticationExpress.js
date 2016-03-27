@@ -9,26 +9,28 @@ async function generateTwitterAuthenticationExpress(params) {
   const userController = join(build, 'controllers', 'user.js');
   const strategyRequire = join(__dirname, 'modules', 'twitter', 'passport-require.js');
   const passportRoutes = join(__dirname, 'modules', 'twitter', 'passport-routes.js');
-  const jwtRoutes = join(__dirname, 'modules', 'twitter', 'passport-routes.js');
-
+  const jwtRoutes = join(__dirname, 'modules', 'twitter', 'jwt-routes.js');
+  
   if (params.jsFramework) {
     await replaceCode(app, 'TWITTER_ROUTES', jwtRoutes);
   } else {
     await replaceCode(app, 'TWITTER_ROUTES', passportRoutes);
     await replaceCode(config, 'PASSPORT_TWITTER_REQUIRE', strategyRequire);
+
+    await addNpmPackage('passport-twitter', params);
+
   }
 
-  await addNpmPackage('passport-twitter', params);
 
   switch (params.database) {
     case 'mongodb':
       if (params.jsFramework) {
         await replaceCode(userController, 'AUTH_TWITTER_JWT_DB', join(__dirname, 'modules', 'twitter', 'twitter-jwt-sql.js'), { indentLevel: 3 });
       } else {
-
+        const mongodbStrategy = join(__dirname, 'modules', 'twitter', 'twitter-strategy-mongodb.js');
+        await replaceCode(config, 'PASSPORT_TWITTER_STRATEGY', mongodbStrategy);
       }
-      const mongodbStrategy = join(__dirname, 'modules', 'twitter', 'twitter-strategy-mongodb.js');
-      await replaceCode(config, 'PASSPORT_TWITTER_STRATEGY', mongodbStrategy);
+
       break;
 
     case 'mysql':
@@ -37,10 +39,10 @@ async function generateTwitterAuthenticationExpress(params) {
       if (params.jsFramework) {
         await replaceCode(userController, 'AUTH_TWITTER_JWT_DB', join(__dirname, 'modules', 'twitter', 'twitter-jwt-sql.js'), { indentLevel: 3 });
       } else {
-
+        const sqlStrategy = join(__dirname, 'modules', 'twitter', 'twitter-strategy-sql.js');
+        await replaceCode(config, 'PASSPORT_TWITTER_STRATEGY', sqlStrategy);
       }
-      const sqlStrategy = join(__dirname, 'modules', 'twitter', 'twitter-strategy-sql.js');
-      await replaceCode(config, 'PASSPORT_TWITTER_STRATEGY', sqlStrategy);
+
       break;
 
     default:

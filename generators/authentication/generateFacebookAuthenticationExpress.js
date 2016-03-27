@@ -16,19 +16,20 @@ async function generateFacebookAuthenticationExpress(params) {
   } else {
     await replaceCode(app, 'FACEBOOK_ROUTES', passportRoutes);
     await replaceCode(config, 'PASSPORT_FACEBOOK_REQUIRE', strategyRequire);
+
+    await addNpmPackage('passport-facebook', params);
   }
 
-  await addNpmPackage('passport-facebook', params);
+  
 
   switch (params.database) {
     case 'mongodb':
       if (params.jsFramework) {
         await replaceCode(userController, 'AUTH_FACEBOOK_JWT_DB', join(__dirname, 'modules', 'facebook', 'facebook-jwt-mongodb.js'), { indentLevel: 3 });
       } else {
-
+        const mongodbStrategy = join(__dirname, 'modules', 'facebook', 'facebook-strategy-mongodb.js');
+        await replaceCode(config, 'PASSPORT_FACEBOOK_STRATEGY', mongodbStrategy);
       }
-      const mongodbStrategy = join(__dirname, 'modules', 'facebook', 'facebook-strategy-mongodb.js');
-      await replaceCode(config, 'PASSPORT_FACEBOOK_STRATEGY', mongodbStrategy);
       break;
 
     case 'mysql':
@@ -37,10 +38,9 @@ async function generateFacebookAuthenticationExpress(params) {
       if (params.jsFramework) {
         await replaceCode(userController, 'AUTH_FACEBOOK_JWT_DB', join(__dirname, 'modules', 'facebook', 'facebook-jwt-sql.js'), { indentLevel: 3 });
       } else {
-
+        const sqlStrategy = join(__dirname, 'modules', 'facebook', 'facebook-strategy-sql.js');
+        await replaceCode(config, 'PASSPORT_FACEBOOK_STRATEGY', sqlStrategy);
       }
-      const sqlStrategy = join(__dirname, 'modules', 'facebook', 'facebook-strategy-sql.js');
-      await replaceCode(config, 'PASSPORT_FACEBOOK_STRATEGY', sqlStrategy);
       break;
     
     default:

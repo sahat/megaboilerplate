@@ -5,10 +5,11 @@ async function generateCommonAuthenticationExpress(params) {
   const build = join(__base, 'build', params.uuid);
   const app = join(build, 'app.js');
   const env = join(build, '.env');
-  const passportConfigFile = join(build, 'config', 'passport.js');
+  const passportJs = join(build, 'config', 'passport.js');
   const passportConfigModule = join(__dirname, 'modules', 'common', 'passport-config.js');
   const passportConfigRequire = join(__dirname, 'modules', 'common', 'passport-config-require.js');
-  const passportCommonRoutes = join(__dirname, 'modules', 'common', 'passport-routes.js');
+  const logoutRoute = join(__dirname, 'modules', 'common', 'logout-route.js');
+  const unlinkRoute = join(__dirname, 'modules', 'common', 'unlink-route.js');
   const passportRequire = join(__dirname, 'modules', 'common', 'passport-require.js');
   const jwtRequire = join(__dirname, 'modules', 'common', 'jwt-require.js');
   const passportMiddleware = join(__dirname, 'modules', 'common', 'passport-middleware.js');
@@ -42,28 +43,24 @@ async function generateCommonAuthenticationExpress(params) {
   // Add user controller reference
   await replaceCode(app, 'USER_CONTROLLER', userControllerRequire);
 
-  // Add common Passport routes, e.g. logout, unlink
-  await replaceCode(app, 'COMMON_AUTH_ROUTES', passportCommonRoutes);
-
   // Add "My Account" routes
   await replaceCode(app, 'ACCOUNT_ROUTES', accountRoutes);
-
-  // Passport config file
-  await copy(passportConfigModule, passportConfigFile);
-  await replaceCode(passportConfigFile, 'USER_MODEL_REQUIRE', userModelRequire);
-
+  
   if (params.jsFramework) {
-
+    await replaceCode(app, 'UNLINK_ROUTE', unlinkRoute);
   } else {
-    await replaceCode(passportConfigFile, 'PASSPORT_SERIALIZER', passportSerializer);
-  }
+    await copy(passportConfigModule, passportJs);
 
-  await addNpmPackage('passport', params);
+    // Add passport.js serializer function
+    await replaceCode(passportJs, 'PASSPORT_SERIALIZER', passportSerializer);
 
+    // Add User model reference to passport.js config
+    await replaceCode(passportJs, 'USER_MODEL_REQUIRE', userModelRequire);
 
-  if (params.jsFramework) {
+    // Add app routes
+    await replaceCode(app, 'LOGOUT_ROUTE', logoutRoute);
+    await replaceCode(app, 'UNLINK_ROUTE', unlinkRoute);
 
-  } else {
     await replaceCode(userController, 'USER_SIGNUP_GET', join(__dirname, 'modules', 'controllers', 'user-signup-get.js'), { indentLevel: 1 });
     await replaceCode(userController, 'USER_LOGIN_GET', join(__dirname, 'modules', 'controllers', 'user-login-get.js'), { indentLevel: 1 });
     await replaceCode(userController, 'USER_LOGIN_POST', join(__dirname, 'modules', 'controllers', 'user-login-post.js'), { indentLevel: 1 });
@@ -71,6 +68,8 @@ async function generateCommonAuthenticationExpress(params) {
     await replaceCode(userController, 'USER_ACCOUNT_GET', join(__dirname, 'modules', 'controllers', 'user-account-get.js'), { indentLevel: 1 });
     await replaceCode(userController, 'USER_FORGOT_GET', join(__dirname, 'modules', 'controllers', 'user-forgot-get.js'), { indentLevel: 1 });
     await replaceCode(userController, 'USER_RESET_GET_ROUTE', join(__dirname, 'modules', 'controllers', 'user-reset-get-route.js'), { indentLevel: 1 });
+
+    await addNpmPackage('passport', params);
   }
 
   switch (params.database) {
@@ -86,7 +85,7 @@ async function generateCommonAuthenticationExpress(params) {
         await replaceCode(userController, 'USER_LOGIN_POST', join(__dirname, 'modules', 'controllers', 'mongodb', 'user-login-jwt-post.js'), { indentLevel: 1 });
         await replaceCode(userController, 'PROFILE_UPDATE_RESPONSE', join(__dirname, 'modules', 'controllers', 'responses', 'json', 'profile-update-response-mongodb.js'), { indentLevel: 2 });
       } else {
-        await replaceCode(passportConfigFile, 'PASSPORT_DESERIALIZER', passportDeserializerMongoDb);
+        await replaceCode(passportJs, 'PASSPORT_DESERIALIZER', passportDeserializerMongoDb);
         await replaceCode(userController, 'PROFILE_UPDATE_RESPONSE', join(__dirname, 'modules', 'controllers', 'responses', 'session', 'profile-update-response-mongodb.js'), { indentLevel: 2 });
       }
 
@@ -114,7 +113,7 @@ async function generateCommonAuthenticationExpress(params) {
         await replaceCode(userController, 'USER_LOGIN_POST', join(__dirname, 'modules', 'controllers', 'sql', 'user-login-jwt-post.js'), { indentLevel: 1 });
         await replaceCode(userController, 'PROFILE_UPDATE_RESPONSE', join(__dirname, 'modules', 'controllers', 'responses', 'json', 'profile-update-response-sql.js'), { indentLevel: 2 });
       } else {
-        await replaceCode(passportConfigFile, 'PASSPORT_DESERIALIZER', passportDeserializerSql);
+        await replaceCode(passportJs, 'PASSPORT_DESERIALIZER', passportDeserializerSql);
         await replaceCode(userController, 'PROFILE_UPDATE_RESPONSE', join(__dirname, 'modules', 'controllers', 'responses', 'session', 'profile-update-response-sql.js'), { indentLevel: 2 });
       }
 

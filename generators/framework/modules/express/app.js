@@ -46,7 +46,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 //= CONTACT_ROUTE
 //= ACCOUNT_ROUTES
 //= LOCAL_ROUTES
-//= COMMON_AUTH_ROUTES
+//= LOGOUT_ROUTE
+//= UNLINK_ROUTE
 //= FACEBOOK_ROUTES
 //= GOOGLE_ROUTES
 //= TWITTER_ROUTES
