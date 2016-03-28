@@ -185,6 +185,7 @@ function exchangeCodeForToken({ oauthData, config, window, interval, dispatch })
             type: 'OAUTH_FAILURE',
             messages: Array.isArray(json) ? json : [json]
           });
+          closePopup({ window: window, interval: interval });
         });
       }
     });
