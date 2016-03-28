@@ -145,7 +145,7 @@ function pollPopup({ window, config, requestToken, dispatch }) {
 
             if (params.error) {
               dispatch({
-                type: 'OAUTH_ERROR',
+                type: 'OAUTH_FAILURE',
                 messages: [{ msg: params.error }]
               });
             } else {
@@ -153,7 +153,7 @@ function pollPopup({ window, config, requestToken, dispatch }) {
             }
           } else {
             dispatch({
-              type: 'OAUTH_ERROR',
+              type: 'OAUTH_FAILURE',
               messages: [{ msg: 'OAuth redirect has occurred but no query or hash parameters were found.' }]
             });
           }

@@ -7,7 +7,7 @@ export function login(email, password) {
     dispatch({
       type: 'CLEAR_MESSAGES'
     });
-    fetch('/auth/login', {
+    fetch('/login', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -42,7 +42,7 @@ export function signup(name, email, password) {
     dispatch({
       type: 'CLEAR_MESSAGES'
     });
-    fetch('/auth/signup', {
+    fetch('/signup', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name: name, email: email, password: password })
@@ -80,7 +80,7 @@ export function forgotPassword(email) {
     dispatch({
       type: 'CLEAR_MESSAGES'
     });
-    fetch('/auth/forgot', {
+    fetch('/forgot', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: email })
@@ -109,7 +109,7 @@ export function resetPassword(password, confirm, pathToken) {
     dispatch({
       type: 'CLEAR_MESSAGES'
     });
-    fetch(`/auth/reset/${pathToken}`, {
+    fetch(`/reset/${pathToken}`, {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
