@@ -36,7 +36,6 @@ async function copyTemplates(params) {
 
   // Copy initial Jade templates to "views" directory
   await copy(layout, join(viewsDir, 'layout.jade'));
-  await copy(home, join(viewsDir, 'home.jade'));
   await mkdirs(join(viewsDir, 'includes'));
 
   // Copy header and footer partial templates
@@ -54,7 +53,6 @@ async function copyTemplates(params) {
       const bootstrapHeader = join(__dirname, 'modules', 'jade', 'views', 'header-bootstrap.jade');
       const bootstrapHeaderAuthLinks = join(__dirname, 'modules', 'jade', 'views', 'header-auth-bootstrap.jade');
 
-      await copy(bootstrapHeader, join(viewsDir, 'includes', 'header.jade'));
 
       // Is authentication checked? Add "Log in" / "Sign up"/ "Logout" links to the header
       if (params.authentication.length) {
@@ -65,6 +63,7 @@ async function copyTemplates(params) {
 
       } else {
         await copy(bootstrapFooter, join(viewsDir, 'includes', 'footer.jade'));
+        await copy(bootstrapHeader, join(viewsDir, 'includes', 'header.jade'));
         await copy(bootstrapHome, join(viewsDir, 'home.jade'));
         await copy(bootstrapContact, join(viewsDir, 'contact.jade'));
       }
@@ -129,8 +128,6 @@ async function generateJadeTemplateEngine(params) {
 
     default:
   }
-
-
 
   // Add Jade to package.json
   await addNpmPackage('jade', params);
