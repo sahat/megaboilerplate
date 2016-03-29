@@ -38,6 +38,7 @@ async function generateCommonAuthenticationExpress(params) {
   } else {
     await replaceCode(userController, 'ENSURE_AUTHENTICATED_MIDDLEWARE', passportEnsureAuthenticated);
     await replaceCode(userController, 'PASSPORT_REQUIRE', passportRequire);
+    await replaceCode(app, 'PASSPORT_REQUIRE', passportRequire);
     await replaceCode(app, 'PASSPORT_MIDDLEWARE', passportMiddleware);
     await replaceCode(app, 'PASSPORT_CONFIG_REQUIRE', passportConfigRequire);
   }
@@ -60,7 +61,7 @@ async function generateCommonAuthenticationExpress(params) {
     await replaceCode(passportJs, 'PASSPORT_SERIALIZER', passportSerializer);
 
     // Add User model reference to passport.js config
-    await replaceCode(passportJs, 'USER_MODEL_REQUIRE', userModelPassportRequire);
+    await replaceCode(passportJs, 'PASSPORT_USER_MODEL', userModelPassportRequire);
 
     // Add app routes
     await replaceCode(app, 'LOGOUT_ROUTE', logoutRoute);
