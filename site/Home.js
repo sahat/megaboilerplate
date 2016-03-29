@@ -52,6 +52,10 @@ class Home extends React.Component {
     const data = clone(state);
     data.appName = haikunate({ tokenLength: 0 });
 
+    if (data.jsFramework === 'none') {
+      data.jsFramework = null;
+    }
+
     // Convert ES6 set to array
     data.authentication = data.authentication ? Array.from(data.authentication) : [];
 

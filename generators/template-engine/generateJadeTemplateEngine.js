@@ -9,7 +9,7 @@ async function updateLayoutTemplate(params) {
   const blockContent = join(__dirname, 'modules', 'jade', 'block-content.jade');
   const socketIoImport = join(__dirname, 'modules', 'jade', 'socketio-import.jade');
 
-  if (params.jsFramework === 'none') {
+  if (!params.jsFramework) {
     // Use "block content" (traditional web app)
     await replaceCode(layout, 'APP_CONTAINER_OR_BLOCK_CONTENT', blockContent, { indentLevel: 2 });
   } else {
@@ -53,12 +53,6 @@ async function copyTemplates(params) {
       const bootstrapHeader = join(__dirname, 'modules', 'jade', 'views', 'header-bootstrap.jade');
       const bootstrapHeaderAuthLinks = join(__dirname, 'modules', 'jade', 'views', 'header-auth-bootstrap.jade');
 
-
-      // Is authentication checked? Add "Log in" / "Sign up"/ "Logout" links to the header
-      if (params.authentication.length) {
-        await replaceCode(join(viewsDir, 'includes', 'header.jade'), 'HEADER_AUTH_LINKS', bootstrapHeaderAuthLinks, { indentLevel: 3 });
-      }
-
       if (params.jsFramework) {
 
       } else {
@@ -66,6 +60,11 @@ async function copyTemplates(params) {
         await copy(bootstrapHeader, join(viewsDir, 'includes', 'header.jade'));
         await copy(bootstrapHome, join(viewsDir, 'home.jade'));
         await copy(bootstrapContact, join(viewsDir, 'contact.jade'));
+      }
+
+      // Is authentication checked? Add "Log in" / "Sign up"/ "Logout" links to the header
+      if (params.authentication.length) {
+        await replaceCode(join(viewsDir, 'includes', 'header.jade'), 'HEADER_AUTH_LINKS', bootstrapHeaderAuthLinks, { indentLevel: 3 });
       }
 
       break;
