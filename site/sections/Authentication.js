@@ -20,7 +20,7 @@ const Authentication = (props) => {
     </div>
   ) : null;
 
-  const isEmailChecked = props.authentication && (
+  const isEmailRequired = props.authentication && (
       props.authentication.has('facebook') ||
       props.authentication.has('google') ||
       props.authentication.has('twitter')
@@ -30,23 +30,23 @@ const Authentication = (props) => {
     <div className="radio-group">
       <label className="checkbox-inline">
         <img className="btn-logo" src="/img/svg/none.png" alt="None" />
-        <input type="checkbox" name="authenticationCheckboxes" value="none" onChange={props.handleChange} checked={props.authentication && props.authentication.size === 0} disabled={props.database === 'none'} /> None
+        <input type="checkbox" name="authenticationCheckboxes" value="none" onChange={props.handleChange} checked={props.authentication && props.authentication.size === 0}  /> None
       </label>
-      <label className={cx('checkbox-inline', { 'locked': isEmailChecked })}>
+      <label className={cx('checkbox-inline', { 'locked': isEmailRequired })}>
         <img className="btn-logo" src="/img/svg/email-logo.svg" height="60" alt="Email" />
-        <input type="checkbox" name="authenticationCheckboxes" value="email" onChange={props.handleChange} checked={props.authentication && props.authentication.has('email') || isEmailChecked} disabled={props.database === 'none'} /> Email & Password
+        <input type="checkbox" name="authenticationCheckboxes" value="email" onChange={props.handleChange} checked={props.authentication && props.authentication.has('email') || isEmailRequired} /> Email & Password
       </label>
       <label className="checkbox-inline">
         <img className="btn-logo" src="/img/svg/facebook-logo.svg" alt="Facebook" />
-        <input type="checkbox" name="authenticationCheckboxes" value="facebook" onChange={props.handleChange} checked={props.authentication && props.authentication.has('facebook')} disabled={props.database === 'none'} /> Facebook
+        <input type="checkbox" name="authenticationCheckboxes" value="facebook" onChange={props.handleChange} checked={props.authentication && props.authentication.has('facebook')}  /> Facebook
       </label>
       <label className="checkbox-inline">
         <img className="btn-logo" src="/img/svg/google-logo.svg" alt="Google" />
-        <input type="checkbox" name="authenticationCheckboxes" value="google" onChange={props.handleChange} checked={props.authentication && props.authentication.has('google')} disabled={props.database === 'none'} /> Google
+        <input type="checkbox" name="authenticationCheckboxes" value="google" onChange={props.handleChange} checked={props.authentication && props.authentication.has('google')} /> Google
       </label>
       <label className="checkbox-inline">
         <img className="btn-logo" src="/img/svg/twitter-logo.svg" alt="Twitter" />
-        <input type="checkbox" name="authenticationCheckboxes" value="twitter" onChange={props.handleChange} checked={props.authentication && props.authentication.has('twitter')} disabled={props.database === 'none'} /> Twitter
+        <input type="checkbox" name="authenticationCheckboxes" value="twitter" onChange={props.handleChange} checked={props.authentication && props.authentication.has('twitter')} /> Twitter
       </label>
     </div>
   ) : null;

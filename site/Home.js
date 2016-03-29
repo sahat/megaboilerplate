@@ -190,6 +190,13 @@ class Home extends React.Component {
 
       case 'authenticationCheckboxes':
         state.authentication = state.authentication || new Set();
+
+        const requiresEmail = (
+          state.authentication.has('facebook') ||
+          state.authentication.has('google') ||
+          state.authentication.has('twitter')
+        );
+
         if (isChecked) {
           if (value === 'none') {
             state.authentication.clear();
@@ -197,6 +204,7 @@ class Home extends React.Component {
             state.authentication.add(value);
           }
         } else {
+          if (value === 'email' && requiresEmail) { return; }
           state.authentication.delete(value);
         }
         break;
