@@ -51,32 +51,14 @@ class JsFramework extends React.Component {
     }
 
     const additionalOptions = (state.showOptions && props.jsFramework === 'react') ? (
-      <div>
-        <VelocityComponent runOnMount animation="transition.slideUpIn" delay={150}>
-          <div className="checkbox transparent">
-            <label className="hint--right hint--rounded" data-hint="Relay is a framework from Facebook that provides data-fetching functionality for React applications.">
-              <input type="checkbox" name="reactOptionsCheckboxes" value="graphql" onChange={props.handleChange} checked={props.reactOptions && props.reactOptions.has('graphql')}/>
-              <span>GraphQL + Relay</span>
-            </label>
-          </div>
-        </VelocityComponent>
-        <VelocityComponent runOnMount animation="transition.slideUpIn" delay={225}>
-          <div className="checkbox transparent">
-            <label className="hint--right hint--rounded" data-hint="ECMAScript 2015 (ES6) is the upcoming sixth major release of the ECMAScript language specification.">
-              <input type="checkbox" name="reactOptionsCheckboxes" value="es6" onChange={props.handleChange} checked={props.reactOptions && props.reactOptions.has('es6')}/>
-              <span>ES6 (Babel)</span>
-            </label>
-          </div>
-        </VelocityComponent>
-        <VelocityComponent runOnMount animation="transition.slideUpIn" delay={300}>
-          <div className="checkbox transparent">
-            <label className="hint--right hint--rounded" data-hint="Tweak React components in real time, while preserving the state.">
-              <input type="checkbox" name="reactOptionsCheckboxes" value="hotReload" onChange={props.handleChange} checked={props.reactOptions && props.reactOptions.has('hotReload')}/>
-              <span>React Transform HMR (requires Webpack)</span>
-            </label>
-          </div>
-        </VelocityComponent>
-      </div>
+      <VelocityComponent runOnMount animation="transition.slideUpIn">
+        <div className="checkbox transparent">
+          <label className="hint--right hint--rounded" data-hint="Tweak React components in real time, while preserving the state.">
+            <input type="checkbox" name="reactOptionsCheckboxes" value="hotReload" onChange={props.handleChange} checked={props.reactOptions && props.reactOptions.has('hotReload')}/>
+            <span>React Hot Reloading (Requires Webpack)</span>
+          </label>
+        </div>
+      </VelocityComponent>
     ) : null;
 
     const additionalOptionsButton = (props.jsFramework === 'react') ? (
@@ -121,16 +103,6 @@ class JsFramework extends React.Component {
               <img className="btn-logo" src="/img/svg/angular2.png" alt="Angular"/>
               <input type="radio" name="jsFrameworkRadios" value="angular" onChange={props.handleChange} checked={props.jsFramework === 'angular'}/>
               <span>Angular 2</span>
-            </label>
-            <label className="radio-inline">
-              <img className="btn-logo" src="/img/svg/polymer-logo.svg" alt="Polymer"/>
-              <input type="radio" name="jsFrameworkRadios" value="polymer" onChange={props.handleChange} checked={props.jsFramework === 'polymer'}/>
-              <span>Polymer</span>
-            </label>
-            <label className="radio-inline">
-              <img className="btn-logo" src="/img/svg/vue-logo.png" alt="Vue.js"/>
-              <input type="radio" name="jsFrameworkRadios" value="vue" onChange={props.handleChange} checked={props.jsFramework === 'vue'}/>
-              <span>Vue.js</span>
             </label>
           </div>
 
