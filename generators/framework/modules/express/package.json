@@ -13,6 +13,7 @@
     "express-validator": "^2.20.2",
     "morgan": "^1.5.1"
   },
+  "devDependencies": {},
   "engines": {
     "node": "4.4.1"
   }

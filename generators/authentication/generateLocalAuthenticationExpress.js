@@ -8,16 +8,16 @@ async function generateLocalAuthenticationExpress(params) {
   const passportRoutes = join(__dirname, 'modules', 'local', 'passport-routes.js');
   const jwtRoutes = join(__dirname, 'modules', 'local', 'jwt-routes.js');
 
+  await addNpmPackage('nodemailer', params);
+  await addNpmPackage('bcrypt-nodejs', params);
+  await addNpmPackage('async', params);
+  
   if (params.jsFramework) {
     await replaceCode(app, 'LOCAL_ROUTES', jwtRoutes);
   } else {
     await replaceCode(app, 'LOCAL_ROUTES', passportRoutes);
     await replaceCode(config, 'PASSPORT_LOCAL_REQUIRE', strategyRequire);
-
     await addNpmPackage('passport-local', params);
-    await addNpmPackage('nodemailer', params);
-    await addNpmPackage('bcrypt-nodejs', params);
-    await addNpmPackage('async', params);
 
     switch (params.database) {
       case 'mongodb':

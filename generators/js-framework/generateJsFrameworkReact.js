@@ -10,9 +10,12 @@ async function generateJsFrameworkReact(params) {
   const reactRoutesRequire = join(__dirname, 'modules', 'react', 'react-routes-require.js');
   const reactRoutes = join(__dirname, 'modules', 'react', 'routes.js');
   const serverRenderingWithRouting = join(__dirname, 'modules', 'react', 'server-rendering-with-routing.js');
+  const babelrc = join(__dirname, 'modules', 'react', '.babelrc');
 
   switch (params.framework) {
     case 'express':
+
+      await cpy([babelrc], build);
 
       await mkdirs(join(build, 'app', 'actions'));
       await mkdirs(join(build, 'app', 'components'));
@@ -31,6 +34,7 @@ async function generateJsFrameworkReact(params) {
 
       // Copy React components
       const components = join(__dirname, 'modules', 'react', 'components');
+
       await cpy([
         join(components, 'App.js'),
         join(components, 'Contact.js'),
@@ -40,6 +44,7 @@ async function generateJsFrameworkReact(params) {
         join(components, 'Messages.js'),
         join(components, 'NotFound.js')
       ], join(build, 'app', 'components'));
+
       await cpy([
         join(components, 'Account', 'Forgot.js'),
         join(components, 'Account', 'Login.js'),
@@ -106,6 +111,8 @@ async function generateJsFrameworkReact(params) {
     default:
   }
 
+  await addNpmPackage('babel-core', params);
+  await addNpmPackage('babel-polyfill', params);
   await addNpmPackage('react', params);
   await addNpmPackage('react-dom', params);
   await addNpmPackage('react-router', params);
@@ -113,6 +120,7 @@ async function generateJsFrameworkReact(params) {
   await addNpmPackage('react-redux', params);
   await addNpmPackage('redux-thunk', params);
   await addNpmPackage('whatwg-fetch', params);
+
   if (params.authentication.length) {
     await addNpmPackage('react-cookie', params);
     await addNpmPackage('jsonwebtoken', params);

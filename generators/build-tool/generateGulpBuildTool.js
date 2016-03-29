@@ -11,6 +11,7 @@ async function generateGulpBuildTool(params) {
 
   await addNpmPackage('gulp', params, true);
   await addNpmPackage('gulp-if', params, true);
+  await addNpmPackage('gulp-util', params, true);
   await addNpmPackage('yargs', params, true);
   await addNpmPackage('gulp-sourcemaps', params, true);
   await addNpmPackage('gulp-uglify', params, true);
@@ -60,6 +61,9 @@ async function generateGulpBuildTool(params) {
       await addNpmPackage('vinyl-source-stream', params, true);
       await addNpmPackage('babelify', params, true);
       await addNpmPackage('browserify', params, true);
+      await addNpmPackage('watchify', params, true);
+      await addNpmPackage('babel-preset-es2015', params, true);
+      await addNpmPackage('babel-preset-react', params, true);
 
       await replaceCode(join(build, 'gulpfile.js'), 'JS_FRAMEWORK_GULP_REQUIRE', reactGulpRequire);
       await replaceCode(join(build, 'gulpfile.js'), 'JS_FRAMEWORK_GULP_TASK', reactGulpTask, { leadingBlankLine: true });
