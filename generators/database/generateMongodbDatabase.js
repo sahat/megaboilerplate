@@ -1,5 +1,5 @@
 import { join } from 'path';
-import { replaceCode, mkdirs, appendFile, addNpmPackage } from '../utils';
+import { addEnv, replaceCode, mkdirs, addNpmPackage } from '../utils';
 
 async function generateMongodbDatabase(params) {
   switch (params.framework) {
@@ -15,7 +15,7 @@ async function generateMongodbDatabase(params) {
       await replaceCode(appExpress, 'DATABASE_CONNECTION', mongooseConnect);
 
       // Add MONGODB environment variable
-      await appendFile(join(__base, 'build', params.uuid, '.env'), '\nMONGODB=mongodb://localhost/test\n');
+      await addEnv(params, { MONGODB: 'localhost' });
 
       // Add mongoose to package.json
       await addNpmPackage('mongoose', params);
