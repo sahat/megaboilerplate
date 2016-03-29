@@ -12,5 +12,8 @@
     "express": "^4.12.2",
     "express-validator": "^2.20.2",
     "morgan": "^1.5.1"
+  },
+  "engines": {
+    "node": "4.4.1"
   }
 }
