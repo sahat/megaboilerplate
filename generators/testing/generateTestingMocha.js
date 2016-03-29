@@ -1,5 +1,5 @@
 import { join } from 'path';
-import { mkdirs, copy, replaceCode, addNpmPackage, addNpmScript } from '../utils';
+import { mkdirs, cpy, copy, replaceCode, addNpmPackage, addNpmScript } from '../utils';
 
 async function generateTestingMocha(params) {
   const build = join(__base, 'build', params.uuid);
@@ -19,7 +19,10 @@ async function generateTestingMocha(params) {
       await addNpmScript('test', 'mocha --reporter spec --timeout 5000', params, true);
 
       await mkdirs(join(build, 'test'));
-      await copy(join(__dirname, 'modules', 'mocha', 'app.test.js'), join(build, 'test'));
+
+      await cpy([
+        join(__dirname, 'modules', 'mocha', 'app.test.js')
+        ], join(build, 'test'));
       break;
     case 'hapi':
       break;
