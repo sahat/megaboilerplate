@@ -90,15 +90,17 @@ async function generateJadeTemplateEngine(params) {
       // Set "views dir" and "view engine"
       await replaceCode(appExpress, 'TEMPLATE_ENGINE', expressViewEngine);
       
-      // Require home controller and add home route, i.e. "GET /"
-      if (params.jsFramework === 'none') {
+      if (!params.jsFramework) {
+        
+        // Require home controller and add home route, i.e. "GET /"
         await replaceCode(appExpress, 'HOME_ROUTE', expressHomeRoute);
         await replaceCode(appExpress, 'HOME_CONTROLLER', homeControllerRequire);
+
+        // Copy home controller
+        await copy(expressHomeController, join(__base, 'build', params.uuid, 'controllers', 'home.js'));
       }
 
-      // Copy home controller
-      await copy(expressHomeController, join(__base, 'build', params.uuid, 'controllers', 'home.js'));
-
+      
       // Copy Jade templates, including header/footer partials
       await copyTemplates(params);
 
