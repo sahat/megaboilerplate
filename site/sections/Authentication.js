@@ -21,7 +21,6 @@ const Authentication = (props) => {
   ) : null;
 
   const isEmailChecked = props.authentication && (
-      props.authentication.has('email') ||
       props.authentication.has('facebook') ||
       props.authentication.has('google') ||
       props.authentication.has('twitter')
@@ -33,9 +32,9 @@ const Authentication = (props) => {
         <img className="btn-logo" src="/img/svg/none.png" alt="None" />
         <input type="checkbox" name="authenticationCheckboxes" value="none" onChange={props.handleChange} checked={props.authentication && props.authentication.size === 0} disabled={props.database === 'none'} /> None
       </label>
-      <label className="checkbox-inline">
+      <label className={cx('checkbox-inline', { 'locked': isEmailChecked })}>
         <img className="btn-logo" src="/img/svg/email-logo.svg" height="60" alt="Email" />
-        <input type="checkbox" name="authenticationCheckboxes" value="email" onChange={props.handleChange} checked={isEmailChecked} disabled={props.database === 'none'} /> Email & Password
+        <input type="checkbox" name="authenticationCheckboxes" value="email" onChange={props.handleChange} checked={props.authentication && props.authentication.has('email') || isEmailChecked} disabled={props.database === 'none'} /> Email & Password
       </label>
       <label className="checkbox-inline">
         <img className="btn-logo" src="/img/svg/facebook-logo.svg" alt="Facebook" />
