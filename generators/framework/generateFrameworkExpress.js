@@ -4,7 +4,8 @@ import { cpy, mkdirs, templateReplace, replaceCode, addNpmScript, addNpmPackage 
 async function generateFrameworkExpress(params) {
   const build = join(__base, 'build', params.uuid);
   const express = join(__dirname, 'modules', 'express');
-  const contactRoute = join(__dirname, 'modules', 'express', 'routes', 'contact.js');
+  const contactRouteJwt = join(__dirname, 'modules', 'express', 'routes', 'contact-jwt.js');
+  const contactRoutePassport = join(__dirname, 'modules', 'express', 'routes', 'contact-passport.js');
   const contactController = join(__dirname, 'modules', 'express', 'controllers', 'contact.js');
   const contactControllerRequire = join(__dirname, 'modules', 'express', 'controllers', 'contact-require.js');
   const sessionRequire = join(__dirname, 'modules', 'express', 'session-require.js');
@@ -48,7 +49,6 @@ async function generateFrameworkExpress(params) {
   // Add initial routes and controllers
   await cpy([contactController], join(build, 'controllers'));
   await replaceCode(app, 'CONTACT_CONTROLLER', contactControllerRequire);
-  await replaceCode(app, 'CONTACT_ROUTE', contactRoute);
 
   // Create public dirs
   await mkdirs(join(build, 'public', 'img'));
@@ -56,10 +56,12 @@ async function generateFrameworkExpress(params) {
   await mkdirs(join(build, 'public', 'js'));
 
   if (params.jsFramework) {
+    await replaceCode(app, 'CONTACT_ROUTE', contactRouteJwt);
     await replaceCode(app, 'COOKIE_PARSER_REQUIRE', cookieParserRequire);
     await replaceCode(app, 'COOKIE_PARSER_MIDDLEWARE', cookieParserMiddleware);
     await addNpmPackage('cookie-parser', params);
   } else {
+    await replaceCode(app, 'CONTACT_ROUTE', contactRoutePassport);
     await replaceCode(app, 'METHOD_OVERRIDE_REQUIRE', methodOverrideRequire);
     await replaceCode(app, 'METHOD_OVERRIDE_MIDDLEWARE', methodOverrideMiddleware);
     await replaceCode(app, 'SESSION_REQUIRE', sessionRequire);
