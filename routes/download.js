@@ -7,6 +7,7 @@ import generateTesting from '../generators/testing/generateTesting';
 import generateJsFramework from '../generators/js-framework/generateJsFramework';
 import generateDatabase from '../generators/database/generateDatabase';
 import generateAuthentication from '../generators/authentication/generateAuthentication';
+import generateDeployment from '../generators/deployment/generateDeployment';
 import { walkAndRemoveComments, prepare, cleanup } from '../generators/utils';
 
 async function download(req, res) {
@@ -21,6 +22,7 @@ async function download(req, res) {
     await generateTesting(params);
     await generateDatabase(params);
     await generateAuthentication(params);
+    await generateDeployment(params);
     await walkAndRemoveComments(params);
     res.end();
   } catch (err) {
