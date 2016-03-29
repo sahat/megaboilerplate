@@ -262,7 +262,7 @@ export async function addEnv(params, data) {
   const vars = [];
   for (const i in data) {
     if (data.hasOwnProperty(i)) {
-      vars.push([i, data[i]].join('='));
+      vars.push([i, `'${data[i]}'`].join('='));
     }
   }
   await appendFile(env, '\n' + vars.join('\n') + '\n');
