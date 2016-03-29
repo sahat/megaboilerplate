@@ -49,6 +49,10 @@ class Home extends React.Component {
     // Google Analytics event
     // ga("send","event","Customize","Download","Customize and Download")
 
+    this.setState({
+      showGettingStartedButton: true
+    });
+
     const data = clone(state);
     data.appName = haikunate({ tokenLength: 0 });
 
@@ -305,8 +309,20 @@ class Home extends React.Component {
     ) : null;
 
     const download = state.deployment ? (
-      <button ref="downloadBtn" className="btn btn-block btn-mega" onClick={this.clickDownload}>Compile and
+      <button ref="downloadBtn" className="btn btn-block btn-mega btn-success" onClick={this.clickDownload}>Compile and
         Download</button>
+    ) : null;
+
+    const consulting = state.deployment ? (
+      <div className="panel">
+        <div className="panel-body">
+          <i className="fa fa-phone"></i> Request 1-on-1 consulting service. Rates may vary.
+        </div>
+      </div>
+    ) : null;
+
+    const gettingStarted = state.showGettingStartedButton ? (
+      <a href="#" className="btn btn-block btn-mega btn-primary">Getting Started Instructions</a>
     ) : null;
 
     return (
@@ -326,9 +342,8 @@ class Home extends React.Component {
           <div ref="authentication">{authentication}</div>
           <div ref="deployment">{deployment}</div>
           <div ref="download">{download}</div>
-          <button ref="downloadBtn" className="btn btn-block btn-mega" onClick={this.clickDownload}>Compile and
-            Download
-          </button>
+          <div ref="getting-started">{gettingStarted}</div>
+          <div ref="consulting">{consulting}</div>
         </main>
         <Footer />
       </div>

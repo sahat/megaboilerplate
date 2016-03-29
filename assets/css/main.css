@@ -21,7 +21,7 @@ ol, ul {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  /*font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;*/
   font-weight: 300;
 }
 
@@ -349,14 +349,19 @@ i.arrow {
 }
 
 .btn-success {
+  border-color: #47b475;
   background-color: #47b475;
+}
+
+.btn-primary {
+  border-color: #1d7cf4;
+  background-color: #1d7cf4;
 }
 
 .btn-mega {
   height: 50px;
   line-height: 48px;
-  border: 2px solid #47b475;
-  background: #47b475;
+  border: 2px solid transparent;
   color: #fff;
   font-size: 11px;
   text-transform: uppercase;
@@ -364,13 +369,20 @@ i.arrow {
   letter-spacing: 1px;
   border-radius: 0;
   padding: 0;
+  margin-bottom: 20px;
   transition: all .2s ease;
 }
 
-.btn-mega:hover,
-.btn-mega:focus {
-  border-color: #398e5C;
-  background: #398e5c;
+.btn-mega.btn-success:hover,
+.btn-mega.btn-success:focus {
+  border-color: #3a925f;
+  background: #3a925f;
+  color: #fff;
+}
+.btn-mega.btn-primary:hover,
+.btn-mega.btn-primary:focus {
+  border-color: #0a64d6;
+  background: #0a64d6;
   color: #fff;
 }
 
