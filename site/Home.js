@@ -202,6 +202,9 @@ class Home extends React.Component {
             state.authentication.clear();
           } else {
             state.authentication.add(value);
+            if (value === 'facebook' || value === 'google' || value === 'twitter') {
+              state.authentication.add('email');
+            }
           }
         } else {
           if (value === 'email' && requiresEmail) { return; }
