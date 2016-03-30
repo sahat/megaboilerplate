@@ -4,10 +4,10 @@ Mega Boilerplate
 Table of Contents
 -----------------
 
-- [Getting Started](#)
- - [Express](#)
- - [Hapi](#)
- - [Meteor](#)
+- [Getting Started](#getting-started)
+ - [Express](#express)
+ - [Hapi](#hapi)
+ - [Meteor](#meteor)
 - [Database Setup](#)
  - [MongoDB](#)
  - [MySQL](#)
@@ -22,6 +22,33 @@ Table of Contents
 - [Contributing](#)
 - [License](#)
 
+Getting Started
+---------------
+
+### Express
+
+Download and extract the project. Then in your Terminal shell type the following:
+
+```shell
+$ cd myproject
+
+# Install NPM dependencies
+$ npm install
+
+$ node app.js
+```
+
+![](https://dl.dropboxusercontent.com/u/14131013/npm-install.png)
+
+:top: <sub>[**back to top**](#table-of-contents)</sub>
+
+### Hapi
+
+coming soon
+
+### Meteor
+
+coming soon
 License
 -------
 
