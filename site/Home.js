@@ -9,6 +9,7 @@ import Header from './Header';
 import Footer from './Footer';
 import Platform from './sections/Platform';
 import StaticSiteGenerator from './sections/StaticSiteGenerator';
+import JsLibrary from './sections/JsLibrary';
 import Framework from './sections/Framework';
 import TemplateEngine from './sections/TemplateEngine';
 import CssFramework from './sections/CssFramework';
@@ -63,9 +64,8 @@ class Home extends React.Component {
 
     // Convert ES6 set to array
     data.authentication = data.authentication ? Array.from(data.authentication) : [];
-
-    // Convert ES6 set to array
     data.frameworkOptions = data.frameworkOptions ? Array.from(data.frameworkOptions) : [];
+    data.jsLibraryOptions = data.jsLibraryOptions ? Array.from(data.jsLibraryOptions) : [];
 
     $.ajax({
       url: '/download',
@@ -121,6 +121,23 @@ class Home extends React.Component {
           $(refs.staticSiteGenerator).velocity('scroll');
         }
         state.staticSiteGenerator = value;
+        break;
+
+      case 'jsLibraryOptionsCheckboxes':
+        state.jsLibraryOptions = state.jsLibraryOptions || new Set();
+        if (isChecked) {
+          state.jsLibraryOptions.add(value);
+        } else {
+          state.jsLibraryOptions.delete(value);
+        }
+        break;
+
+      case 'jsLibraryName':
+        state.jsLibraryName = value;
+        break;
+
+      case 'jsLibraryLicenseRadios':
+        state.jsLibraryLicense = value;
         break;
 
       case 'frameworkRadios':
@@ -299,6 +316,10 @@ class Home extends React.Component {
       <StaticSiteGenerator {...state} handleChange={this.handleChange}/>
     ) : null;
 
+    const jsLibrary = state.platform === 'library' ? (
+      <JsLibrary {...state} handleChange={this.handleChange}/>
+    ) : null;
+
     const framework = state.platform === 'node' ? (
       <Framework {...state} handleChange={this.handleChange}/>
     ) : null;
@@ -315,15 +336,15 @@ class Home extends React.Component {
       <CssPreprocessor {...state} handleChange={this.handleChange}/>
     ) : null;
 
-    const jsFramework = state.cssPreprocessor ? (
+    const jsFramework = state.cssPreprocessor  && state.platform === 'node' ? (
       <JsFramework {...state} handleChange={this.handleChange}/>
     ) : null;
 
-    const buildTool = state.jsFramework ? (
+    const buildTool = state.jsFramework && state.platform === 'node' ? (
       <BuildTool {...state} handleChange={this.handleChange}/>
     ) : null;
 
-    const testing = state.buildTool ? (
+    const testing = state.buildTool && state.platform === 'node' ? (
       <Testing {...state} handleChange={this.handleChange}/>
     ) : null;
 
@@ -339,12 +360,12 @@ class Home extends React.Component {
       <Deployment {...state} handleChange={this.handleChange}/>
     ) : null;
 
-    const download = state.deployment ? (
+    const download = state.deployment || (state.staticSiteGenerator && state.cssPreprocessor) || state.platform === 'library' ? (
       <button ref="downloadBtn" className="btn btn-block btn-mega btn-success" onClick={this.clickDownload}>Compile and
         Download</button>
     ) : null;
 
-    const consulting = state.deployment ? (
+    const consulting = download ? (
       <div className="panel">
         <div className="panel-body">
           <i className="fa fa-phone"></i> Request 1-on-1 consulting service. Rates may vary.
@@ -364,6 +385,7 @@ class Home extends React.Component {
           <div ref="platform">{platform}</div>
           <div ref="framework">{framework}</div>
           <div ref="staticSiteGenerator">{staticSiteGenerator}</div>
+          <div ref="jsLibrary">{jsLibrary}</div>
           <div ref="templateEngine">{templateEngine}</div>
           <div ref="cssFramework">{cssFramework}</div>
           <div ref="cssPreprocessor">{cssPreprocessor}</div>
