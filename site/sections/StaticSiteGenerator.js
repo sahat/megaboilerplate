@@ -39,6 +39,19 @@ class StaticSiteGenerator extends React.Component {
         description = <div className="placeholder"> </div>;
     }
 
+    let note;
+
+    if (props.staticSiteGenerator) {
+      note = (
+        <div>
+          <strong>Note: </strong>
+          <span>Requires <a href="http://rubyinstaller.org/" target="_blank">Ruby 2.0.0</a> or higher.</span>
+        </div>
+      );
+    } else {
+      note = <div className="placeholder"> </div>;
+    }
+
     return (
       <div className={cx('zoomInBackwards panel', props.staticSiteGenerator)}>
         <div className="panel-heading">
@@ -61,6 +74,7 @@ class StaticSiteGenerator extends React.Component {
               <span>Middleman</span>
             </label>
           </div>
+          {note}
         </div>
       </div>
     );
