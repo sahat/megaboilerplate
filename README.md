@@ -23,7 +23,9 @@ Table of Contents
  - [Microsoft Azure](#)
  - [IBM Bluemix](#)
  - [Digital Ocean](#)
-- [**FAQ**](#)
+- [**FAQ**](#faq)
+ - [<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/React.js_logo.svg/50px-React.js_logo.svg.png" height="17"> React](#faq-react)
+ - [<img src="https://angular.io/resources/images/logos/standard/shield-large.png" height="17"> Angular](#faq-angular)
 - [**Changelog**](#)
 - [**Contributing**](#)
 - [**License**](#license)
@@ -177,9 +179,9 @@ Use database settings below in the `.env` file.
 | Key           | Value                                                             |
 | ------------- |:-----------------------------------------------------------------:|
 | `DB_HOST`     | localhost                                                         |
-| `DB_USER`     | postgres                                                              |
-| `DB_PASSWORD` | (use root password configured during installation) |
-| `DB_NAME`     | postgres                                                             |
+| `DB_USER`     | postgres                                                          |
+| `DB_PASSWORD` | (use root password configured during installation)                |
+| `DB_NAME`     | postgres                                                          |
 
 <img src="http://deluge-torrent.org/images/apple-logo.gif" height="17"> **Mac OS X**
 
@@ -403,7 +405,7 @@ class Person {
 #### Unix Timestamp (seconds)
 
 ```js
-Math.floor(Date.now() / 1000)
+Math.floor(Date.now() / 1000);
 ```
 
 #### Add 30 minutes to a Date object
@@ -438,13 +440,13 @@ console.log(MM + '-' + DD + '-' + YYYY); // 03-30-2016
 var now = new Date();
 var hours = now.getHours();
 var minutes = now.getMinutes();
-var ampm = hours >= 12 ? 'pm' : 'am';
+var amPm = hours >= 12 ? 'pm' : 'am';
 
 hours = hours % 12;
 hours = hours ? hours : 12;
-minutes = minutes < 10 ? '0'+minutes : minutes;
+minutes = minutes < 10 ? '0' + minutes : minutes;
 
-console.log(hours + ':' + minutes + ' ' + ampm); // 1:43 am
+console.log(hours + ':' + minutes + ' ' + amPm); // 1:43 am
 ```
 
 #### Next week Date object
@@ -462,6 +464,23 @@ var yesterday = date.setDate(date.getDate() - 1);
 ```
 
 :top: <sub>[**back to top**](#table-of-contents)</sub>
+
+FAQ
+---
+
+### <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/React.js_logo.svg/50px-React.js_logo.svg.png" align="top" height="34"> React
+
+#### Actions, reducers, stores, containers, provider...what? ಠ_ರೃ
+
+Despite being such a small library, [Redux](http://redux.js.org/) can be a little frustrating to understand for beginners. It actually took about three days until it "clicked" for me, even with my prior experience of React and Flux architecture. Here is a TL;DR: summary:
+
+| Concept       | Description                                                       |
+| ------------- |:-----------------------------------------------------------------:|
+| **Actions**   | Your application events, e.g. fetch data from server. Success and failure events of data fetching could also be actions. Actions are just plain JavaScript objects. They typically have some data associated with it. For example, `LOGIN_ERROR` action may contain an error message. Actions describe the fact that something happened, but don't specify how the application’s state changes in response. This is the job of a reducer. |
+| **Reducers**  | Basically your action handlers, internally implemented via [`Array.prototype.reduce()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce). This is where you specify how should the application state be updated when `LOGIN_ERROR` action is dispatched, for example. And that's it. How that state affects your application should still be managed in your components. One thing to note, **you never mutate the state**, but rather create a new copy of your current state + new changes using [`Object.assign()`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/assign). |
+| **Store**     | Brings **actions** and **reducers** together. Store holds entire application state, allows you access current state via `getState()`, and update application state via `dispatch(action)`. You typically have just one Redux store that is configured during the inital bootstrap stage. |
+| **Provider**     | Syntactic sugar from [react-redux](https://github.com/reactjs/react-redux) library. [`<Provider>`](https://github.com/reactjs/react-redux/blob/master/docs/api.md#provider-store) component wrapper makes the Redux store available to the [`connect()`](https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options) function. Alternatively, you can manually pass `store` as a prop to every `connect()`ed component. [`connect()`](https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options) is another syntactic sugar provided by react-redux which connects a React component to a Redux store. Alternatively, you can manually subscribe/unsubscribe to/from a store during `componentDidMount()` and `componentDidUnmount()` lifecycle of each component. |
+| **Container** | So-called smart components that are aware of Redux, whereas traditional components are now considered dumb components, which are not aware of Redux; they just render markup with given props. I intentionally combined containers and components into simply — *components* for the sake of simplicity.
 
 License
 -------
