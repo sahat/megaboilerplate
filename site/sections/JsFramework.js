@@ -39,13 +39,6 @@ class JsFramework extends React.Component {
           </div>
         );
         break;
-      case 'vue':
-        description = (
-          <div>
-            <strong><a href="http://vuejs.org/" target="_blank">Vue.js</a></strong> — Intuitive, Fast and Composable MVVM for building interactive interfaces.
-          </div>
-        );
-        break;
       default:
         description = <div className="placeholder"></div>;
     }
@@ -94,7 +87,7 @@ class JsFramework extends React.Component {
       note = (
         <div>
           <strong>Note: </strong>
-          <span>React comes with <a href="http://redux.js.org/" target="_blank">Redux</a>, <a href="https://github.com/reactjs/react-router" target="_blank">React Router</a> and <a href="http://babeljs.io/">Babel</a>.</span>
+          <span>React comes with <a href="http://redux.js.org/" target="_blank">Redux</a>, <a href="https://github.com/reactjs/react-router" target="_blank">React Router</a>, <a href="http://babeljs.io/">Babel</a> and server rendering enabled.</span>
         </div>
       );
     } else {

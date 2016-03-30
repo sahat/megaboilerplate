@@ -33,13 +33,6 @@ class Framework extends React.Component {
           </div>
         );
         break;
-      case 'hapi':
-        description = (
-          <div>
-            <strong><a href="http://hapijs.com/" target="_blank">Hapi</a></strong> — A simple to use configuration-centric framework with built-in support for input validation, caching, authentication, and other essential facilities for building web and services applications. Used by <a href="https://www.yahoo.com/" target="_blank">Yahoo</a>, <a href="http://www.walmart.com/" target="_blank">Walmart</a>, <a href="http://www.macys.com/" target="_blank">Macys</a>, <a href="http://disney.com/" target="_blank">Disney</a>, <a href="https://www.mozilla.org/" target="_blank">Mozilla</a>, <a href="https://www.paypal.com/" target="_blank">PayPal</a> and others.
-          </div>
-        );
-        break;
       case 'meteor':
         description = (
           <div>
@@ -78,11 +71,11 @@ class Framework extends React.Component {
       </div>
     ) : null;
 
-    const additionalOptionsButton = props.framework ? (
+    const additionalOptionsButton = props.framework === 'express' ? (
       <div>
         <span className="options" onClick={this.toggleAdditionalOptions}>
           <img className={cx('animated', { fast: state.showOptions })} src="/img/svg/options.svg"/>
-          <span>Additional Options</span>
+          <span>Express Options</span>
         </span>
         {additionalOptions}
       </div>
@@ -95,11 +88,6 @@ class Framework extends React.Component {
           <input type="radio" id="expressRadio" name="frameworkRadios" value="express" onChange={props.handleChange} checked={props.framework === 'express'}/>
           <span>Express</span>
           {recommended}
-        </label>
-        <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/hapi-logo.png" alt="Hapi.js"/>
-          <input type="radio" name="frameworkRadios" value="hapi" onChange={props.handleChange} checked={props.framework === 'hapi'}/>
-          <span>Hapi</span>
         </label>
         <label className="radio-inline">
           <img className="btn-logo" src="/img/svg/meteor-logo.png" alt="Meteor"/>

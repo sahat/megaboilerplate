@@ -51,16 +51,6 @@ class TemplateEngine extends React.Component {
       </div>
     ) : null;
 
-    const additionalOptionsButton = props.framework ? (
-      <div>
-        <span className="options" onClick={this.toggleAdditionalOptions}>
-          <img className={cx('animated', { fast: state.showOptions })} src="/img/svg/options.svg"/>
-          <span>Indentation Options</span>
-        </span>
-        {additionalOptions}
-      </div>
-    ) : null;
-
     const nodeTemplateEngines = (props.platform === 'node') ? (
       <div className="radio-group">
         <label className="radio-inline">
@@ -121,9 +111,6 @@ class TemplateEngine extends React.Component {
         <div className="panel-body">
           {description}
           {nodeTemplateEngines}
-          <VelocityTransitionGroup enter={{ animation: 'transition.fadeIn', duration: 1000 }}>
-            {additionalOptionsButton}
-          </VelocityTransitionGroup>
         </div>
       </div>
     );

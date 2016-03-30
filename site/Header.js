@@ -271,7 +271,7 @@ class Header extends React.Component {
           </VelocityComponent>
           <div className="lead">
             <VelocityComponent runOnMount animation="transition.slideUpIn" duration={1100} delay={200}>
-              <div>Hand-crafted starter kits optimized for <span className="highlight">simplicity</span> and <span className="highlight">ease of use</span>.¹</div>
+              <div>Hand-crafted starter projects, optimized for <span className="highlight">simplicity</span> and <span className="highlight">ease of use</span>.¹</div>
             </VelocityComponent>
             <VelocityComponent runOnMount animation="transition.slideUpIn" duration={1200} delay={400}>
               <div className="featuring">
