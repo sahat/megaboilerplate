@@ -36,14 +36,14 @@ async function copyTemplates(params) {
 
   // Copy initial Jade templates to "views" directory
   await copy(layout, join(viewsDir, 'layout.jade'));
-  await mkdirs(join(viewsDir, 'includes'));
 
-  // Copy header and footer partial templates
   switch (params.cssFramework) {
     case 'none':
       if (params.jsFramework) {
 
       } else {
+        // Copy header and footer partial templates
+        await mkdirs(join(viewsDir, 'includes'));
         await copy(plainCssHeader, join(viewsDir, 'includes', 'header.jade'));
         await copy(plainCssFooter, join(viewsDir, 'includes', 'footer.jade'));
       }
