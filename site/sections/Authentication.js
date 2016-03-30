@@ -23,7 +23,8 @@ const Authentication = (props) => {
   const isEmailRequired = props.authentication && (
       props.authentication.has('facebook') ||
       props.authentication.has('google') ||
-      props.authentication.has('twitter')
+      props.authentication.has('twitter') ||
+      props.authentication.has('vk')
     );
 
   let authenticationCheckboxes = !notSupportedJsFramework && !notSupportedNoDatabase ? (
@@ -47,6 +48,10 @@ const Authentication = (props) => {
       <label className="checkbox-inline">
         <img className="btn-logo" src="/img/svg/twitter-logo.svg" alt="Twitter" />
         <input type="checkbox" name="authenticationCheckboxes" value="twitter" onChange={props.handleChange} checked={props.authentication && props.authentication.has('twitter')} /> Twitter
+      </label>
+      <label className="checkbox-inline">
+        <img className="btn-logo" src="/img/svg/vk-logo.svg" alt="VK" />
+        <input type="checkbox" name="authenticationCheckboxes" value="vk" onChange={props.handleChange} checked={props.authentication && props.authentication.has('vk')} /> VK
       </label>
     </div>
   ) : null;

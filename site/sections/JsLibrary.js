@@ -17,7 +17,6 @@ class JsLibrary extends React.Component {
 
   render() {
     const props = this.props;
-    const state = this.state;
 
     let description;
 
@@ -44,7 +43,7 @@ class JsLibrary extends React.Component {
     }
 
     return (
-      <div className={cx('zoomInBackwards panel', props.library)}>
+      <div className='zoomInBackwards panel authentication'>
         <div className="panel-heading">
           <h6>{JS_LIBRARY_SVG}{props.library || 'JS Library Options'}</h6>
           <a href="#" className="stats-icon hint--top hint--rounded" data-hint="Download Stats">
@@ -64,25 +63,25 @@ class JsLibrary extends React.Component {
           <strong>Additional Features</strong>
 
           <div className="checkbox">
-            <label className="" data-hint="Advanced, production process manager with a built-in load balancer for Node.js.">
+            <label>
               <input type="checkbox" name="jsLibraryOptionsCheckboxes" value="babel" onChange={props.handleChange}/>
               <span>Babel</span>
             </label>
           </div>
           <div className="checkbox">
-            <label className="" data-hint="Advanced, production process manager with a built-in load balancer for Node.js.">
+            <label>
               <input type="checkbox" name="jsLibraryOptionsCheckboxes" value="eslint" onChange={props.handleChange}/>
               <span>ESLint</span>
             </label>
           </div>
           <div className="checkbox">
-            <label className="" data-hint="Advanced, production process manager with a built-in load balancer for Node.js.">
+            <label>
               <input type="checkbox" name="jsLibraryOptionsCheckboxes" value="codeCoverage" onChange={props.handleChange}/>
               <span>Code Coverage</span>
             </label>
           </div>
           <div className="checkbox">
-            <label className="" data-hint="Socket.IO enables realtime, bi-directional communication between web clients and servers.">
+            <label>
               <input type="checkbox" name="jsLibraryOptionsCheckboxes" value="shieldsio" onChange={props.handleChange}/>
               <span>Shields.io Badges</span>
             </label>
