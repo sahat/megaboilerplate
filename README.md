@@ -61,6 +61,11 @@ coming soon
 
 ## Database Setup
 
+- <img src="http://static.tumblr.com/lbtm3t2/8PAn0kziu/mongodb-logo.png" height="17"> [MongoDB](#-mongodb)
+- <img src="https://upload.wikimedia.org/wikipedia/en/thumb/6/62/MySQL.svg/640px-MySQL.svg.png" height="17"> [MySQL](#-mysql)
+- [PostgreSQL](#-postgresql)
+- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Sqlite-square-icon.svg/240px-Sqlite-square-icon.svg.png" height="17"> [SQLite](#-sqlite)
+
 ### <img src="http://static.tumblr.com/lbtm3t2/8PAn0kziu/mongodb-logo.png" height="34" align="top"> MongoDB
 
 <img src="http://deluge-torrent.org/images/apple-logo.gif" height="17"> **Mac OS X**
@@ -88,7 +93,6 @@ mongod
 
 1. Download and install the [current stable release](https://www.mongodb.org/downloads#production).
 2. Create the data directory: **C:\data\db**.
-![](https://dl.dropboxusercontent.com/u/14131013/mongodb-data-db.png)
 3. Run MongoDB Server by opening `mongod.exe` in **C:\Program Files\MongoDB\Server\3.2\bin**.
 
 <img src="https://lh5.googleusercontent.com/-2YS1ceHWyys/AAAAAAAAAAI/AAAAAAAAAAc/0LCb_tsTvmU/s46-c-k/photo.jpg" height="17"> **Ubuntu**
@@ -115,10 +119,15 @@ sudo service mongod start
 ### <img src="https://upload.wikimedia.org/wikipedia/en/thumb/6/62/MySQL.svg/640px-MySQL.svg.png" height="34" align="top"> MySQL
 
 Use database settings below in the `.env` file.
-- `DB_HOST`: *localhost*
-- `DB_USER`: *root*
-- `DB_PASSWORD`: *(use root password obtained during installation or leave blank)*
-- `DB_NAME`: *mysql*
+
+| Key           | Value                                                             |
+| ------------- |:-----------------------------------------------------------------:|
+| `DB_HOST`     | localhost                                                         |
+| `DB_USER`     | root                                                              |
+| `DB_PASSWORD` | (use root password configured during installation or leave blank) |
+| `DB_NAME`     | mysql                                                             |
+
+
 
 <img src="http://deluge-torrent.org/images/apple-logo.gif" height="17"> **Mac OS X**
 
@@ -154,6 +163,11 @@ sudo apt-get install mysql-server
 
 :top: <sub>[**back to top**](#table-of-contents)</sub>
 
+### <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Sqlite-square-icon.svg/240px-Sqlite-square-icon.svg.png" height="34" align="top"> SQLite
+
+No additional steps required. Package [`sqlite3`](https://www.npmjs.com/package/sqlite3) will be automatically installed during `npm install` in [**Getting Started**](#getting-started).
+
+:top: <sub>[**back to top**](#table-of-contents)</sub>
 
 License
 -------
