@@ -152,6 +152,10 @@ label span + i {
   cursor: help;
 }
 
+.help {
+  cursor: help;
+}
+
 .bd-booticon {
   display: block;
   width: 9rem;
@@ -319,10 +323,15 @@ i.arrow {
 .btn {
   font-size: 13px;
   border-radius: 2px;
+  transition: all 0.3s ease;
 }
 
 .btn:active, .btn.active {
   box-shadow: none;
+}
+
+.input-group-btn .btn {
+  padding: 7px 12px;
 }
 
 .btn-default {
@@ -340,7 +349,6 @@ i.arrow {
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: 700;
-  transition: all 0.3s ease;
 }
 
 .btn-group > .btn.active {

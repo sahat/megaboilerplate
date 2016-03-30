@@ -26,6 +26,7 @@ class Home extends React.Component {
     super(props);
     this.state = {};
     this.handleChange = this.handleChange.bind(this);
+    this.handleGenerateLibraryName = this.handleGenerateLibraryName.bind(this);
     this.handleAutoScroll = this.handleAutoScroll.bind(this);
     this.handleReduceAnimations = this.handleReduceAnimations.bind(this);
     this.clickDownload = this.clickDownload.bind(this);
@@ -87,6 +88,12 @@ class Home extends React.Component {
     }).fail((jqXHR) => {
       window.notie.alert(3, jqXHR.responseText, 2.5);
     });
+  }
+
+  handleGenerateLibraryName() {
+    const data = clone(this.state);
+    data.jsLibraryName = haikunate({ tokenLength: 0 });
+    this.setState(data);
   }
 
   handleChange(event) {
@@ -326,7 +333,7 @@ class Home extends React.Component {
     ) : null;
 
     const jsLibrary = state.platform === 'library' ? (
-      <JsLibrary {...state} handleChange={this.handleChange}/>
+      <JsLibrary {...state} handleChange={this.handleChange} handleGenerateLibraryName={this.handleGenerateLibraryName}/>
     ) : null;
 
     const framework = state.platform === 'node' ? (

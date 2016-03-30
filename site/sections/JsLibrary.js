@@ -13,6 +13,12 @@ class JsLibrary extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this.onGenerateClick = this.onGenerateClick.bind(this);
+  }
+
+  onGenerateClick(event) {
+    this.props.handleGenerateLibraryName(event.target.value);
+    this.refs.jsLibraryName.focus();
   }
 
   render() {
@@ -54,20 +60,24 @@ class JsLibrary extends React.Component {
           <div className="row">
             <div className="col-sm-4">
               <label htmlFor="jsLibraryName" className="">Library Name</label>
-              <input type="text" id="jsLibraryName" name="jsLibraryName" className="form-control" autoFocus
-                     value={props.jsLibraryName} onChange={props.handleChange}/>
+              <div className="input-group">
+                <input ref="jsLibraryName" type="text" id="jsLibraryName" name="jsLibraryName" className="form-control" autoFocus value={props.jsLibraryName} onChange={props.handleChange}/>
+                <span className="input-group-btn">
+                  <button className="btn btn-primary" type="button" onClick={this.onGenerateClick} tabIndex="-1">Generate</button>
+                </span>
+              </div>
             </div>
             <div className="col-sm-4">
 
               <label htmlFor="jsLibraryAuthor" className="">Author Name</label>&nbsp;
               <span className="help hint--top hint--rounded" data-hint="Your full name is used in the license file." ><i className="fa fa-question-circle"></i></span>
-              <input type="text" id="jsLibraryAuthor" name="jsLibraryAuthor" className="form-control" autoFocus
+              <input type="text" id="jsLibraryAuthor" name="jsLibraryAuthor" className="form-control"
                      value={props.jsLibraryAuthor} onChange={props.handleChange}/>
             </div>
             <div className="col-sm-4">
               <label htmlFor="jsLibraryGithubUsername" className="">GitHub Username</label>&nbsp;
               <span className="help hint--top hint--rounded" data-hint="Your username is used for the GitHub project path." ><i className="fa fa-question-circle"></i></span>
-              <input type="text" id="jsLibraryGithubUsername" name="jsLibraryGithubUsername" className="form-control" autoFocus
+              <input type="text" id="jsLibraryGithubUsername" name="jsLibraryGithubUsername" className="form-control"
                      value={props.jsLibraryGithubUsername} onChange={props.handleChange}/>
             </div>
           </div>
