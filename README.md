@@ -4,24 +4,29 @@ Mega Boilerplate
 Table of Contents
 -----------------
 
-- [Getting Started](#getting-started)
+- [**Getting Started**](#getting-started)
  - [Express](#express)
  - [Hapi](#hapi)
  - [Meteor](#meteor)
-- [Database Setup](#database-setup)
+- [**Database Setup**](#database-setup)
  - [MongoDB](#-mongodb)
  - [MySQL](#-mysql)
  - [PostgreSQL](#-postgresql)
  - [SQLite](#-sqlite)
-- [Obtaining API Keys](#obtaining-api-keys)
-- [Cheatsheets](#cheatsheets)
+- [**Obtaining API Keys**](#obtaining-api-keys)
+- [**Cheatsheets**](#cheatsheets)
  - [ES6](#-es6-cheatsheet)
  - [JavaScript Date](#-javascript-date-cheatsheet)
-- [Deployment](#deployment)
-- [FAQ](#)
-- [Changelog](#)
-- [Contributing](#)
-- [License](#)
+- [**Deployment**](#deployment)
+ - [Heroku](#)
+ - [OpenShift](#)
+ - [Microsoft Azure](#)
+ - [IBM Bluemix](#)
+ - [Digital Ocean](#)
+- [**FAQ**](#)
+- [**Changelog**](#)
+- [**Contributing**](#)
+- [**License**](#license)
 
 Getting Started
 ---------------
