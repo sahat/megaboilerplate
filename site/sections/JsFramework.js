@@ -51,18 +51,29 @@ class JsFramework extends React.Component {
     }
 
     const additionalOptions = (state.showOptions && props.jsFramework === 'react') ? (
-      <VelocityComponent runOnMount animation="transition.slideUpIn">
-        <div className="checkbox transparent">
-          <label className="hint--right hint--rounded" data-hint="Tweak React components in real time, while preserving the state.">
-            <input type="checkbox" name="reactOptionsCheckboxes" value="hotReload" onChange={props.handleChange} checked={props.reactOptions && props.reactOptions.has('hotReload')}/>
-            <span>React Hot Reloading (Requires Webpack)</span>
-          </label>
-        </div>
-      </VelocityComponent>
+      <div>
+        <VelocityComponent runOnMount animation="transition.slideUpIn">
+          <div className="checkbox transparent">
+            <label className="hint--right hint--rounded" data-hint="Tweak React components in real time, while preserving the state.">
+              <input type="checkbox" name="reactOptionsCheckboxes" value="hotReload" onChange={props.handleChange} checked={props.reactOptions && props.reactOptions.has('hotReload')}/>
+              <span>React Hot Reloading (Requires Webpack)</span>
+            </label>
+          </div>
+        </VelocityComponent>
+        <VelocityComponent runOnMount animation="transition.slideUpIn" delay={150}>
+          <div className="checkbox transparent">
+            <label className="hint--right hint--rounded" data-hint="A live-editing time travel environment for Redux.">
+              <input type="checkbox" name="reactOptionsCheckboxes" value="reduxDevTools" onChange={props.handleChange} checked={props.reactOptions && props.reactOptions.has('reduxDevTools')}/>
+              <span>Redux Dev Tools</span>
+            </label>
+          </div>
+        </VelocityComponent>
+      </div>
     ) : null;
 
     const additionalOptionsButton = (props.jsFramework === 'react') ? (
       <div>
+        <br/>
         <span className="options" onClick={this.toggleAdditionalOptions}>
           <img className={cx('animated', { fast: state.showOptions })} src="/img/svg/options.svg"/>
           <span>React Options</span>
@@ -76,6 +87,19 @@ class JsFramework extends React.Component {
         <img src="/img/svg/recommended.svg" alt="Recommended"/>
       </span>
     ) : null;
+
+    let note;
+
+    if (props.jsFramework === 'react') {
+      note = (
+        <div>
+          <strong>Note: </strong>
+          <span>React comes with <a href="http://redux.js.org/" target="_blank">Redux</a>, <a href="https://github.com/reactjs/react-router" target="_blank">React Router</a> and <a href="http://babeljs.io/">Babel</a>.</span>
+        </div>
+      );
+    } else {
+      note = <div className="placeholder"> </div>;
+    }
 
     return (
       <div className={cx('zoomInBackwards panel', props.jsFramework)}>
@@ -105,7 +129,7 @@ class JsFramework extends React.Component {
               <span>Angular 2</span>
             </label>
           </div>
-
+          {note}
           {additionalOptionsButton}
         </div>
       </div>
