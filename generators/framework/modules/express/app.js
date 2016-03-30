@@ -1,6 +1,7 @@
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
+var compression = require('compression');
 //= METHOD_OVERRIDE_REQUIRE
 //= COOKIE_PARSER_REQUIRE
 //= SESSION_REQUIRE
@@ -31,6 +32,7 @@ var app = express();
 //= DATABASE_CONNECTION
 //= TEMPLATE_ENGINE
 app.set('port', process.env.PORT || 3000);
+app.use(compression());
 //= CSS_PREPROCESSOR_MIDDLEWARE
 app.use(logger('dev'));
 app.use(bodyParser.json());
