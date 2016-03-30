@@ -62,6 +62,39 @@ coming soon
 
 ## Database Setup
 
+### <img src="http://static.tumblr.com/lbtm3t2/8PAn0kziu/mongodb-logo.png" height="34" align="top"> MongoDB
+
+<img src="http://deluge-torrent.org/images/apple-logo.gif" height="17"> **Mac OS X**
+
+Install [Homebrew](http://brew.sh/) package manager. Then follow the steps below to install and setup MongoDB.
+
+```shell
+# Update Homebrew's package database
+brew update
+
+# Install MongoDB
+brew install mongodb
+
+# Create the data directory
+sudo mkdir -p /data/db
+
+# Set permissions for the data directory
+sudo chown -R `whoami` /data/db
+
+# Run MongoDB
+mongod
+```
+
+For manual installation, see [Install MongoDB Community Edition on OS X](https://docs.mongodb.org/manual/tutorial/install-mongodb-on-os-x/#install-mongodb-community-edition-manually) official documentation.
+
+<img src="http://dc942d419843af05523b-ff74ae13537a01be6cfec5927837dcfe.r14.cf1.rackcdn.com/wp-content/uploads/windows-8-50x50.jpg" height="17"> **Windows**
+
+
+
+
+:top: <sub>[**back to top**](#table-of-contents)</sub>
+
+
 coming soon
 License
 -------
