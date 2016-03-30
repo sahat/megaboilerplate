@@ -13,6 +13,7 @@ Table of Contents
  - [MySQL](#-mysql)
  - [PostgreSQL](#-postgresql)
  - [SQLite](#-sqlite)
+- [**Project Structure**](#project-structure)
 - [**Obtaining API Keys**](#obtaining-api-keys)
 - [**Cheatsheets**](#cheatsheets)
  - [ES6](#-es6-cheatsheet)
@@ -221,6 +222,48 @@ sudo apt-get install postgresql postgresql-contrib
 ### <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Sqlite-square-icon.svg/240px-Sqlite-square-icon.svg.png" height="34" align="top"> SQLite
 
 No additional steps required. Package [`sqlite3`](https://www.npmjs.com/package/sqlite3) will be automatically installed during `npm install` in [**Getting Started**](#getting-started).
+
+:top: <sub>[**back to top**](#table-of-contents)</sub>
+
+Project Structure
+-----------------
+
+Due to the nature of this project, there are too many possible project structure variations to list here. For the sake of simplicity, let's consider just the following project types:
+
+- [Traditional Node.js Web App](#)
+- [React App](#-react-app)
+- [Angular 2 App](#)
+- [Meteor App](#)
+
+### <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/React.js_logo.svg/50px-React.js_logo.svg.png" align="top" height="34"> React App
+
+The new hotness of the web — Universal JavaScript app, powered by [React](http://facebook.github.io/react/), [Redux](http://redux.js.org/), [React Router](https://github.com/reactjs/react-router) and [Server Rendering](http://redux.js.org/docs/recipes/ServerRendering.html). 
+
+**Note:** Some files were ommited like `gulpfile.js` and `webpack.config.js`.
+
+```
+.
+├── app/                       # React application
+│   ├── actions/               # Redux actions
+│   ├── components/            # React components
+│   ├── reducers/              # Redux reducers
+│   ├── store/                 # Store initialization and configuration
+│   ├── main.js                # Client-side app entry-point
+│   ├── routes.js              # Universal application routes (React Router)
+├── controllers/               # Express route handlers
+├── models/                    # Express database models
+├── public/                    
+│   ├── css/                   # Sass/LESS/PostCSS/CSS stylesheets (both source and generated)
+│   ├── fonts/                 # Font Awesome web fonts
+│   ├── js/                    # Third-party vendor files and generated React app (bundle.js)
+├── views/                    
+│   ├── layout.jade            # Main container, into which React app is rendered
+│   ├── loading.jade           # Loading spinner animation for OAuth 1.0 / 2.0 authentication flow inside a popup
+├── .babelrc                   # Babel config
+├── .env                       # API keys, passwords, and other sensitive information
+├── app.js                     # Express application
+└── package.json               # NPM Dependencies
+```
 
 :top: <sub>[**back to top**](#table-of-contents)</sub>
 
@@ -496,7 +539,7 @@ Despite being such a small library, [Redux](http://redux.js.org/) can be a littl
 Contributing
 ------------
 
-Pull requests from beginners and seasoned JavaScript developers are welcome! Please follow [these steps](contributing.md) to contribute.
+Pull requests from beginners and seasoned JavaScript developers are welcome! Please follow [these steps](CONTRIBUTING.md) to contribute.
 
 :top: <sub>[**back to top**](#table-of-contents)</sub>
 
