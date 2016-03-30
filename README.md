@@ -220,7 +220,7 @@ To use any of the included OAuth providers (e.g. Facebook, Twitter, Google), you
 - Select **Website** platform, then click on **Skip and Create App ID** button.
 - Enter a **name** and choose a **category** for your app.
 - Click on **Create App ID** button.
-- Copy and paste **App ID** and **App Secret** keys into `.env`:
+- Copy and paste **App ID** and **App Secret** keys into `.env` file:
  - `FACEBOOK_ID='YOUR_APP_ID'`
  - `FACEBOOK_SECRET='YOUR_APP_SECRET'`
 - Click on the **Settings** tab, then click on **+ Add Platform** button.
@@ -238,21 +238,22 @@ To use any of the included OAuth providers (e.g. Facebook, Twitter, Google), you
  - **Authorized JavaScript origins**: `http://localhost:3000`
  - **Authorized redirect URIs**: `http://localhost:3000/auth/google/callback`
 - Click on **Create** button.
-- Copy and paste **client ID** and **client secret** keys into `.env`:
+- Copy and paste **client ID** and **client secret** keys into `.env` file:
  - `GOOGLE_ID='YOUR_CLIENT_ID'`
  - `GOOGLE_SECRET='YOUR_CLIENT_SECRET'`
 
 <img src="https://g.twimg.com/ios_homescreen_icon.png" width="90">
-- Sign in at [https://apps.twitter.com/](https://apps.twitter.com/)
-- Click **Create a new application**
-- Enter your application name, website and description
-- For **Callback URL**: http://127.0.0.1:3000/auth/twitter/callback
-- Go to **Settings** tab
-- Under *Application Type* select **Read and Write** access
-- Check the box **Allow this application to be used to Sign in with Twitter**
-- Click **Update this Twitter's applications settings**
-- Copy and paste *Consumer Key* and *Consumer Secret* keys into `.env` file
-
+- Go to [Twitter Application Management](https://apps.twitter.com/).
+- Click on **Create New App** button.
+- Fill out required fields.
+ - **Callback URL**: `http://127.0.0.1:3000/auth/twitter/callback`
+- Go to **Settings** tab.
+- Click on **Allow this application to be used to Sign in with Twitter** checkbox.
+- Click on **Update Settings** button.
+- Go to **Keys and Access Tokens** tab.
+- Copy and paste **Consumer Key** and **Consumer Secret** keys into `.env` file:
+ - `TWITTER_ID='YOUR_CONSUMER_KEY'`
+ - `TWITTER_SECRET='YOUR_CONSUMER_SECRET'`
 
 License
 -------
