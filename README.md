@@ -81,19 +81,35 @@ sudo mkdir -p /data/db
 # Set permissions for the data directory
 sudo chown -R `whoami` /data/db
 
-# Run MongoDB
+# Run MongoDB Server
 mongod
 ```
 
-For manual installation, see [Install MongoDB Community Edition on OS X](https://docs.mongodb.org/manual/tutorial/install-mongodb-on-os-x/#install-mongodb-community-edition-manually) official documentation.
-
 <img src="http://dc942d419843af05523b-ff74ae13537a01be6cfec5927837dcfe.r14.cf1.rackcdn.com/wp-content/uploads/windows-8-50x50.jpg" height="17"> **Windows**
 
-1. Download and install [current stable release](https://www.mongodb.org/downloads#production).
-2. Create the data directory in **C:\data\db**.
+1. Download and install the [current stable release](https://www.mongodb.org/downloads#production).
+2. Create the data directory: **C:\data\db**.
 ![](https://dl.dropboxusercontent.com/u/14131013/mongodb-data-db.png)
-3. Run MongoDB by opening `mongod.exe` in **C:\Program Files\MongoDB\Server\3.2\bin**.
+3. Run MongoDB Server by opening `mongod.exe` in **C:\Program Files\MongoDB\Server\3.2\bin**.
 
+<img src="https://lh5.googleusercontent.com/-2YS1ceHWyys/AAAAAAAAAAI/AAAAAAAAAAc/0LCb_tsTvmU/s46-c-k/photo.jpg" height="17"> **Ubuntu**
+
+```shell
+# Import the public key used by the package management system
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
+
+# Create a source list file for MongoDB
+echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
+
+# Update the repository
+sudo apt-get update
+
+# Install the latest stable version of MongoDB
+sudo apt-get install -y mongodb-org
+
+# Start MongoDB service
+sudo service mongod start
+```
 
 :top: <sub>[**back to top**](#table-of-contents)</sub>
 
