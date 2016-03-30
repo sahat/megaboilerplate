@@ -63,7 +63,7 @@ coming soon
 
 - <img src="http://static.tumblr.com/lbtm3t2/8PAn0kziu/mongodb-logo.png" height="17"> [MongoDB](#-mongodb)
 - <img src="https://upload.wikimedia.org/wikipedia/en/thumb/6/62/MySQL.svg/640px-MySQL.svg.png" height="17"> [MySQL](#-mysql)
-- [PostgreSQL](#-postgresql)
+- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Postgresql_elephant.svg/200px-Postgresql_elephant.svg.png" height="17"> [PostgreSQL](#-postgresql)
 - <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Sqlite-square-icon.svg/240px-Sqlite-square-icon.svg.png" height="17"> [SQLite](#-sqlite)
 
 ### <img src="http://static.tumblr.com/lbtm3t2/8PAn0kziu/mongodb-logo.png" height="34" align="top"> MongoDB
@@ -127,8 +127,6 @@ Use database settings below in the `.env` file.
 | `DB_PASSWORD` | (use root password configured during installation or leave blank) |
 | `DB_NAME`     | mysql                                                             |
 
-
-
 <img src="http://deluge-torrent.org/images/apple-logo.gif" height="17"> **Mac OS X**
 
 Install [Homebrew](http://brew.sh/) package manager. Then follow the steps below to install and start MySQL.
@@ -150,6 +148,8 @@ mysql.server start
 2. Start the installer and follow instructions until the installation is complete.
  - When prompted, choose *Server only* or *Developer Default* setup type.
 
+**Note**: Alternatively, you may use [XAMPP](https://www.apachefriends.org/index.html), which already comes bundled with MySQL and phpMyAdmin.
+
 <img src="https://lh5.googleusercontent.com/-2YS1ceHWyys/AAAAAAAAAAI/AAAAAAAAAAc/0LCb_tsTvmU/s46-c-k/photo.jpg" height="17"> **Ubuntu**
 
 ```shell
@@ -162,6 +162,53 @@ sudo apt-get install mysql-server
 ```
 
 :top: <sub>[**back to top**](#table-of-contents)</sub>
+
+### <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Postgresql_elephant.svg/200px-Postgresql_elephant.svg.png" height="34" align="top"> PostgreSQL
+
+Use database settings below in the `.env` file.
+
+| Key           | Value                                                             |
+| ------------- |:-----------------------------------------------------------------:|
+| `DB_HOST`     | localhost                                                         |
+| `DB_USER`     | postgres                                                              |
+| `DB_PASSWORD` | (use root password configured during installation) |
+| `DB_NAME`     | postgres                                                             |
+
+<img src="http://deluge-torrent.org/images/apple-logo.gif" height="17"> **Mac OS X**
+
+Install [Homebrew](http://brew.sh/) package manager. Then follow the steps below to install and start PostgreSQL.
+
+```shell
+# Update Homebrew's package database
+brew update
+
+# Install PostgreSQL
+brew install postgres
+
+# Start PostgreSQL Server
+postgres -D /usr/local/var/postgres
+
+# Optional: Configure PostgreSQL to start automatically
+mkdir -p ~/Library/LaunchAgents
+ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
+launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
+```
+
+<img src="http://dc942d419843af05523b-ff74ae13537a01be6cfec5927837dcfe.r14.cf1.rackcdn.com/wp-content/uploads/windows-8-50x50.jpg" height="17"> **Windows**
+
+1. Download the latest version of [PostgreSQL Installer](http://www.enterprisedb.com/products-services-training/pgdownload#windows).
+2. Start the installer and follow instructions until the installation is complete.
+
+<img src="https://lh5.googleusercontent.com/-2YS1ceHWyys/AAAAAAAAAAI/AAAAAAAAAAc/0LCb_tsTvmU/s46-c-k/photo.jpg" height="17"> **Ubuntu**
+
+```shell
+# Update the repository
+sudo apt-get update
+sudo apt-get upgrade
+
+# Install PostgreSQL
+sudo apt-get install postgresql postgresql-contrib
+```
 
 ### <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Sqlite-square-icon.svg/240px-Sqlite-square-icon.svg.png" height="34" align="top"> SQLite
 
