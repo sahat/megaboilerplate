@@ -16,8 +16,7 @@ Table of Contents
 - [Obtaining API Keys](#obtaining-api-keys)
 - [Cheatsheets](#cheatsheets)
  - [ES6](#-es6-cheatsheet)
- - [Mongoose (MongoDB)](#-mongoose-mongodb-cheatsheet)
- - [Knex.js (SQL)](#-knexjs-sql-cheatsheet)
+ - [JavaScript Date](#-javascript-date-cheatsheet)
 - [Deployment](#deployment)
 - [FAQ](#)
 - [Changelog](#)
@@ -260,10 +259,12 @@ To use any of the included OAuth providers (e.g. Facebook, Twitter, Google), you
  - `TWITTER_ID='YOUR_CONSUMER_KEY'`
  - `TWITTER_SECRET='YOUR_CONSUMER_SECRET'`
 
+:top: <sub>[**back to top**](#table-of-contents)</sub>
+
 Cheatsheets
 -----------
 
-### <img src="http://i.stack.imgur.com/Mmww2.png" height="34" align="top"> ES6 Cheatsheet
+### <img src="https://frontendmasters.com/assets/es6-logo.png" height="34" align="top"> ES6 Cheatsheet
 
 #### Declarations
 
@@ -388,14 +389,74 @@ class Person {
 }
 ```
 
-:gift: Credits: [DuckDuckGo](https://duckduckgo.com/?q=es6+cheatsheet&ia=cheatsheet&iax=1) and [@DrkSephy](https://github.com/DrkSephy/es6-cheatsheet).
+:gift: **Credits**: [DuckDuckGo](https://duckduckgo.com/?q=es6+cheatsheet&ia=cheatsheet&iax=1) and [@DrkSephy](https://github.com/DrkSephy/es6-cheatsheet).
 
+:top: <sub>[**back to top**](#table-of-contents)</sub>
 
-### Mongoose (MongoDB) Cheatsheet
-todo
+### <img src="http://i.stack.imgur.com/Mmww2.png" height="34" align="top"> JavaScript Date Cheatsheet
 
-### Knex.js (SQL) Cheatsheet
-todo
+#### Unix Timestamp (seconds)
+
+```js
+Math.floor(Date.now() / 1000)
+```
+
+#### Add 30 minutes to a Date object
+
+```js
+var now = new Date();
+now.setMinutes(now.getMinutes() + 30);
+```
+
+#### Date Formatting
+
+```js
+// DD-MM-YYYY
+var now = new Date();
+
+var DD = now.getDate();
+var MM = now.getMonth() + 1;
+var YYYY = now.getFullYear();
+
+if (DD < 10) {
+  DD = '0' + DD;
+} 
+
+if (MM < 10) {
+  MM = '0' + MM;
+}
+
+console.log(MM + '-' + DD + '-' + YYYY); // 03-30-2016
+```
+```js
+// hh:mm (12 hour time with am/pm)
+var now = new Date();
+var hours = now.getHours();
+var minutes = now.getMinutes();
+var ampm = hours >= 12 ? 'pm' : 'am';
+
+hours = hours % 12;
+hours = hours ? hours : 12;
+minutes = minutes < 10 ? '0'+minutes : minutes;
+
+console.log(hours + ':' + minutes + ' ' + ampm); // 1:43 am
+```
+
+#### Next week Date object
+
+```js
+var today = new Date();
+var nextWeek = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000);
+```
+
+#### Yesterday Date object
+
+```js
+var today = new Date();
+var yesterday = date.setDate(date.getDate() - 1);
+```
+
+:top: <sub>[**back to top**](#table-of-contents)</sub>
 
 License
 -------
