@@ -63,12 +63,11 @@ class JsLibrary extends React.Component {
               <div className="input-group">
                 <input ref="jsLibraryName" type="text" id="jsLibraryName" name="jsLibraryName" className="form-control" autoFocus value={props.jsLibraryName} onChange={props.handleChange}/>
                 <span className="input-group-btn">
-                  <button className="btn btn-primary" type="button" onClick={this.onGenerateClick} tabIndex="-1">Generate</button>
+                  <button className="btn btn-primary" type="button" onClick={this.onGenerateClick} tabIndex="-1"><i className="fa fa-random"></i></button>
                 </span>
               </div>
             </div>
             <div className="col-sm-4">
-
               <label htmlFor="jsLibraryAuthor" className="">Author Name</label>&nbsp;
               <span className="help hint--top hint--rounded" data-hint="Your full name is used in the license file." ><i className="fa fa-question-circle"></i></span>
               <input type="text" id="jsLibraryAuthor" name="jsLibraryAuthor" className="form-control"
@@ -95,6 +94,12 @@ class JsLibrary extends React.Component {
             <label>
               <input type="checkbox" name="jsLibraryOptionsCheckboxes" value="eslint" onChange={props.handleChange}/>
               <span>ESLint</span>
+            </label>
+          </div>
+          <div className="checkbox">
+            <label>
+              <input type="checkbox" name="jsLibraryOptionsCheckboxes" value="travis" onChange={props.handleChange}/>
+              <span>Travis CI</span>
             </label>
           </div>
           <div className="checkbox">
