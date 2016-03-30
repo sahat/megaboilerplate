@@ -725,7 +725,13 @@ canvas {
   border-color: transparent;
 }
 
-.html5 svg {
+.library .panel-heading {
+  color: #fff;
+  background: #3A33D1;
+  border-color: transparent;
+}
+
+.library svg {
   color: #fff;
   fill: currentColor;
 }
@@ -1120,8 +1126,8 @@ canvas {
 
 .panel-heading h6 svg {
   margin-right: 6px;
-  /*vertical-align: sub;*/
-  vertical-align: middle;
+  vertical-align: sub;
+  /*vertical-align: middle;*/
 }
 
 .panel-heading .stats-icon {

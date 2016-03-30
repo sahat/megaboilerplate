@@ -23,6 +23,17 @@ const Platform = (props) => {
             <input type="radio" id="nodeRadio" name="platformRadios" value="node" onChange={props.handleChange} checked={props.platform === 'node'} />
             <span>Node.js</span>
           </label>
+          <label className="radio-inline">
+            <img className="btn-logo" src="/img/svg/html5-logo.svg" alt="HTML5"/>
+            <input type="radio" id="staticSiteRadio" name="platformRadios" value="html5"
+                   onChange={props.handleChange} checked={props.platform === 'html5'}/>
+            <span>Static Site</span>
+          </label>
+          <label className="radio-inline">
+            <img className="btn-logo" src="/img/svg/eslint-logo.svg" alt="JavaScript Library"/>
+            <input type="radio" id="jsLibraryRadio" name="platformRadios" value="library" onChange={props.handleChange} checked={props.platform === 'library'} />
+            <span>JS Library</span>
+          </label>
         </div>
         <div><strong>Note: </strong>Support for other languages is on the roadmap. GitHub <a href="https://github.com/sahat/boilerplate/blob/master/CONTRIBUTING.md" target="_blank">contributions</a> are welcome.</div>
       </div>
