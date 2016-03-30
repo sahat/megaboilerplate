@@ -24,10 +24,10 @@ Table of Contents
  - [IBM Bluemix](#)
  - [Digital Ocean](#)
 - [**FAQ**](#faq)
- - [<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/React.js_logo.svg/50px-React.js_logo.svg.png" height="17"> React](#faq-react)
- - [<img src="https://angular.io/resources/images/logos/standard/shield-large.png" height="17"> Angular](#faq-angular)
+ - [<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/React.js_logo.svg/50px-React.js_logo.svg.png" height="17"> React](#-react)
+ - [<img src="https://angular.io/resources/images/logos/standard/shield-large.png" height="17"> Angular](#-angular)
 - [**Changelog**](#)
-- [**Contributing**](#)
+- [**Contributing**](#contributing)
 - [**License**](#license)
 
 Getting Started
@@ -64,7 +64,11 @@ $ node app.js
 
 coming soon
 
+:top: <sub>[**back to top**](#table-of-contents)</sub>
+
 ### Meteor
+
+:top: <sub>[**back to top**](#table-of-contents)</sub>
 
 ## Database Setup
 
@@ -468,6 +472,11 @@ var yesterday = date.setDate(date.getDate() - 1);
 FAQ
 ---
 
+- [React](#-react)
+ - [Actions, reducers, stores, containers, provider...what? ಠ_ರೃ](#user-content-actions-reducers-stores-containers-providerwhat-ಠ_ರೃ)
+ 
+:top: <sub>[**back to top**](#table-of-contents)</sub>
+
 ### <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/React.js_logo.svg/50px-React.js_logo.svg.png" align="top" height="34"> React
 
 #### Actions, reducers, stores, containers, provider...what? ಠ_ರೃ
@@ -481,6 +490,15 @@ Despite being such a small library, [Redux](http://redux.js.org/) can be a littl
 | **Store**     | Brings **actions** and **reducers** together. Store holds entire application state, allows you access current state via `getState()`, and update application state via `dispatch(action)`. You typically have just one Redux store that is configured during the inital bootstrap stage. |
 | **Provider**     | Syntactic sugar from [react-redux](https://github.com/reactjs/react-redux) library. [`<Provider>`](https://github.com/reactjs/react-redux/blob/master/docs/api.md#provider-store) component wrapper makes the Redux store available to the [`connect()`](https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options) function. Alternatively, you can manually pass `store` as a prop to every `connect()`ed component. [`connect()`](https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options) is another syntactic sugar provided by react-redux which connects a React component to a Redux store. Alternatively, you can manually subscribe/unsubscribe to/from a store during `componentDidMount()` and `componentDidUnmount()` lifecycle of each component. |
 | **Container** | So-called smart components that are aware of Redux, whereas traditional components are now considered dumb components, which are not aware of Redux; they just render markup with given props. I intentionally combined containers and components into simply — *components* for the sake of simplicity.
+
+:top: <sub>[**back to faq**](#faq)</sub>
+
+Contributing
+------------
+
+Pull requests from beginners and seasoned JavaScript developers are welcome! Please follow [these steps](contributing.md) to contribute.
+
+:top: <sub>[**back to top**](#table-of-contents)</sub>
 
 License
 -------
