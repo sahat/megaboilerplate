@@ -14,6 +14,11 @@ Table of Contents
  - [PostgreSQL](#-postgresql)
  - [SQLite](#-sqlite)
 - [Obtaining API Keys](#obtaining-api-keys)
+- [Cheatsheets](#cheatsheets)
+ - [ES6](#-es6-cheatsheet)
+ - [Mongoose (MongoDB)](#-mongoose-mongodb-cheatsheet)
+ - [Knex.js (SQL)](#-knexjs-sql-cheatsheet)
+- [Deployment](#deployment)
 - [FAQ](#)
 - [Changelog](#)
 - [Contributing](#)
@@ -254,6 +259,143 @@ To use any of the included OAuth providers (e.g. Facebook, Twitter, Google), you
 - Copy and paste **Consumer Key** and **Consumer Secret** keys into `.env` file:
  - `TWITTER_ID='YOUR_CONSUMER_KEY'`
  - `TWITTER_SECRET='YOUR_CONSUMER_SECRET'`
+
+Cheatsheets
+-----------
+
+### <img src="http://i.stack.imgur.com/Mmww2.png" height="34" align="top"> ES6 Cheatsheet
+
+#### Declarations
+
+Declares a read-only named constant.
+
+```js
+const name = 'yourName';
+```
+
+Declares a block scope local variable.
+```js
+let index = 0;
+```
+
+#### Template Strings
+
+Using the **\`${}\`** syntax, strings can embed expressions.
+
+```js
+const name = 'Oggy';
+const age = 3;
+
+console.log(`My cat is named ${name} and is ${age} years old.`);
+```
+
+#### Modules
+
+To import functions, objects or primitives exported from an external module. These are the most common types of importing.
+
+```js
+import name from 'module-name';
+```
+```js
+import * as name from 'module-name';
+```
+```js
+import { foo, bar } from 'module-name';
+```
+
+To export functions, objects or primitives from a given file or module.
+
+```js
+export { myFunction };
+```
+```js
+export const name = 'yourName';
+```
+```js
+export default myFunctionOrClass
+```
+
+#### Spread Operator
+
+The spread operator allows an expression to be expanded in places where multiple arguments (for function calls) or multiple elements (for array literals) are expected.
+
+```js
+myFunction(...iterableObject);
+```
+```jsx
+<ChildComponent {...this.props} />
+```
+
+#### Promises
+
+A Promise is used in asynchronous computations to represent an operation that hasn't completed yet, but is expected in the future.
+
+```js
+var p = new Promise(function(resolve, reject) { });
+```
+
+The `catch()` method returns a Promise and deals with rejected cases only.
+
+```js
+p.catch(function(reason) { /* handle rejection */ });
+```
+
+The `then()` method returns a Promise. It takes 2 arguments: callback for the success & failure cases.
+
+```js
+p.then(function(value) { /* handle fulfillment */, function(reason) { /* handle rejection */ });
+```
+
+The `Promise.all(iterable)` method returns a promise that resolves when all of the promises in the iterable argument have resolved, or rejects with the reason of the first passed promise that rejects.
+
+```js
+Promise.all([p1, p2, p3]).then(function(values) { console.log(values) });
+```
+
+#### Arrow Functions
+
+Arrow function expression. Shorter syntax & lexically binds the `this` value. Arrow functions are anonymous.
+
+```js
+singleParam => { statements }
+```
+```js
+() => { statements }
+```
+```js
+(param1, param2) => expression
+```
+```js
+const arr = [1, 2, 3, 4, 5];
+const squares = arr.map(x => x * x);
+```
+
+#### Classes
+
+The class declaration creates a new class using prototype-based inheritance.
+
+```js
+class Person {
+  constructor(name, age, gender) {
+    this.name   = name;
+    this.age    = age;
+    this.gender = gender;
+  }
+
+  incrementAge() {
+    this.age++;
+  }
+}
+```
+
+:gift: Credits: [DuckDuckGo](https://duckduckgo.com/?q=es6+cheatsheet&ia=cheatsheet&iax=1) and [@DrkSephy](https://github.com/DrkSephy/es6-cheatsheet).
+
+
+### Mongoose (MongoDB) Cheatsheet
+todo
+
+### Knex.js (SQL) Cheatsheet
+todo
 
 License
 -------
