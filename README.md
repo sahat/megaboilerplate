@@ -50,7 +50,6 @@ $ node app.js
 
 **Note**: If you have selected a database, please make sure it is up and running. For additional information, see [**Database Setup**](#database-setup).
 
-![](https://dl.dropboxusercontent.com/u/14131013/npm-install.png)
 
 :top: <sub>[**back to top**](#table-of-contents)</sub>
 
@@ -113,8 +112,49 @@ sudo service mongod start
 
 :top: <sub>[**back to top**](#table-of-contents)</sub>
 
+### <img src="https://upload.wikimedia.org/wikipedia/en/thumb/6/62/MySQL.svg/640px-MySQL.svg.png" height="34" align="top"> MySQL
 
-coming soon
+Use database settings below in the `.env` file.
+- `DB_HOST`: *localhost*
+- `DB_USER`: *root*
+- `DB_PASSWORD`: *(use root password obtained during installation or leave blank)*
+- `DB_NAME`: *mysql*
+
+<img src="http://deluge-torrent.org/images/apple-logo.gif" height="17"> **Mac OS X**
+
+Install [Homebrew](http://brew.sh/) package manager. Then follow the steps below to install and start MySQL.
+
+```shell
+# Update Homebrew's package database
+brew update
+
+# Install MySQL
+brew install mysql
+
+# Start MySQL Server
+mysql.server start
+```
+
+<img src="http://dc942d419843af05523b-ff74ae13537a01be6cfec5927837dcfe.r14.cf1.rackcdn.com/wp-content/uploads/windows-8-50x50.jpg" height="17"> **Windows**
+
+1. Download [MySQL Installer for Windows](http://dev.mysql.com/downloads/mysql/).
+2. Start the installer and follow instructions until the installation is complete.
+ - When prompted, choose *Server only* or *Developer Default* setup type.
+
+<img src="https://lh5.googleusercontent.com/-2YS1ceHWyys/AAAAAAAAAAI/AAAAAAAAAAc/0LCb_tsTvmU/s46-c-k/photo.jpg" height="17"> **Ubuntu**
+
+```shell
+# Update the repository
+sudo apt-get update
+sudo apt-get upgrade
+
+# Install MySQL
+sudo apt-get install mysql-server
+```
+
+:top: <sub>[**back to top**](#table-of-contents)</sub>
+
+
 License
 -------
 
