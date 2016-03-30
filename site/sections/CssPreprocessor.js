@@ -8,6 +8,10 @@ const CSS_PREPROCESSOR_SVG = (
 );
 
 const CssPreprocessor = (props) => {
+  const JEKYLL = props.staticSiteGenerator === 'jekyll';
+  const MIDDLEMAN = props.staticSiteGenerator === 'middleman';
+
+
   const NO_CSS_FRAMEWORK = props.cssFramework === 'none';
   const BOOTSTRAP = props.cssFramework === 'bootstrap';
   const FOUNDATION = props.cssFramework === 'foundation';
@@ -24,7 +28,7 @@ const CssPreprocessor = (props) => {
       </span>
   ) : null;
 
-  const cssRadio = (NO_CSS_FRAMEWORK || BOOTSTRAP || FOUNDATION) ? (
+  const cssRadio = (!BOURBON_NEAT && (NO_CSS_FRAMEWORK || JEKYLL || MIDDLEMAN || BOOTSTRAP || FOUNDATION)) ? (
     <label className="radio-inline">
       <img className="btn-logo" src="/img/svg/css3-logo.svg" alt="CSS"/>
       <input type="radio" name="cssPreprocessorRadios" value="css" onChange={props.handleChange} checked={CSS} />
@@ -33,7 +37,7 @@ const CssPreprocessor = (props) => {
     </label>
   ) : null;
 
-  const sassRadio = (NO_CSS_FRAMEWORK || BOOTSTRAP || FOUNDATION || BOURBON_NEAT) ? (
+  const sassRadio = (NO_CSS_FRAMEWORK || JEKYLL || MIDDLEMAN || BOOTSTRAP || FOUNDATION || BOURBON_NEAT) ? (
     <label className="radio-inline">
       <img className="btn-logo" src="/img/svg/sass-logo.svg" alt="Sass"/>
       <input type="radio" name="cssPreprocessorRadios" value="sass" onChange={props.handleChange} checked={SASS} />
@@ -41,7 +45,7 @@ const CssPreprocessor = (props) => {
     </label>
   ) : null;
 
-  const lessRadio = (NO_CSS_FRAMEWORK || BOOTSTRAP) ? (
+  const lessRadio = (!JEKYLL && !MIDDLEMAN && (NO_CSS_FRAMEWORK || BOOTSTRAP)) ? (
     <label className="radio-inline">
       <img className="btn-logo" src="/img/svg/less-logo.svg" alt="LESS"/>
       <input type="radio" name="cssPreprocessorRadios" value="less" onChange={props.handleChange} checked={LESS} />
@@ -49,7 +53,7 @@ const CssPreprocessor = (props) => {
     </label>
   ) : null;
 
-  const postcssRadio = (NO_CSS_FRAMEWORK) ? (
+  const postcssRadio = (!JEKYLL && !MIDDLEMAN && (NO_CSS_FRAMEWORK)) ? (
     <label className="radio-inline">
       <img className="btn-logo" src="/img/svg/postcss.svg" alt="PostCSS"/>
       <input type="radio" name="cssPreprocessorRadios" value="postcss" onChange={props.handleChange} checked={POSTCSS} />

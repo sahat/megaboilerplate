@@ -60,20 +60,24 @@ const CssFramework = (props) => {
         <div className="radio-group">
           <label className="radio-inline">
             <img className="btn-logo" src="/img/svg/none.png" alt="None"/>
-            <input type="radio" name="cssFrameworkRadios" value="none" onChange={props.handleChange} checked={NO_CSS_FRAMEWORK} /> None
+            <input type="radio" name="cssFrameworkRadios" value="none" onChange={props.handleChange}
+                   checked={NO_CSS_FRAMEWORK} /> None
           </label>
           <label className="radio-inline">
             <img className="btn-logo" src="/img/svg/bootstrap-logo.svg" alt="Bootstrap"/>
-            <input type="radio" name="cssFrameworkRadios" value="bootstrap" onChange={props.handleChange} checked={BOOTSTRAP} /> Bootstrap
+            <input type="radio" name="cssFrameworkRadios" value="bootstrap" onChange={props.handleChange}
+                   checked={BOOTSTRAP} /> Bootstrap
             {recommended}
           </label>
           <label className="radio-inline">
             <img className="btn-logo" src="/img/svg/foundation-logo.png" alt="Foundation"/>
-            <input type="radio" name="cssFrameworkRadios" value="foundation" onChange={props.handleChange} checked={FOUNDATION} /> Foundation
+            <input type="radio" name="cssFrameworkRadios" value="foundation" onChange={props.handleChange}
+                   checked={FOUNDATION} /> Foundation
           </label>
           <label className="radio-inline">
             <img className="btn-logo" src="/img/svg/bourbon-logo.svg" alt="Bourbon Neat"/>
-            <input type="radio" name="cssFrameworkRadios" value="bourbonNeat" onChange={props.handleChange} checked={BOURBON_NEAT} /> Bourbon Neat
+            <input type="radio" name="cssFrameworkRadios" value="bourbonNeat" onChange={props.handleChange}
+                   checked={BOURBON_NEAT} /> Bourbon Neat
           </label>
         </div>
       </div>

@@ -8,6 +8,7 @@ import { VelocityTransitionGroup } from 'velocity-react';
 import Header from './Header';
 import Footer from './Footer';
 import Platform from './sections/Platform';
+import StaticSiteGenerator from './sections/StaticSiteGenerator';
 import Framework from './sections/Framework';
 import TemplateEngine from './sections/TemplateEngine';
 import CssFramework from './sections/CssFramework';
@@ -101,10 +102,25 @@ class Home extends React.Component {
         break;
 
       case 'platformRadios':
+        const whitelist = ['beginner', 'showGettingStartedButton', 'autoScroll', 'reduceAnimations'];
+        for (const key in state) {
+          if (state.hasOwnProperty(key)) {
+            if (whitelist.indexOf(key) === -1) {
+              state[key] = null;
+            }
+          }
+        }
         state.platform = value;
         if (state.autoScroll) {
           $(refs.platform).velocity('scroll');
         }
+        break;
+
+      case 'staticSiteGeneratorRadios':
+        if (!state.staticSiteGenerator && state.autoScroll) {
+          $(refs.staticSiteGenerator).velocity('scroll');
+        }
+        state.staticSiteGenerator = value;
         break;
 
       case 'frameworkRadios':
@@ -279,7 +295,11 @@ class Home extends React.Component {
       <Platform platform={state.platform} handleChange={this.handleChange}/>
     );
 
-    const framework = state.platform ? (
+    const staticSiteGenerator = state.platform === 'html5' ? (
+      <StaticSiteGenerator {...state} handleChange={this.handleChange}/>
+    ) : null;
+
+    const framework = state.platform === 'node' ? (
       <Framework {...state} handleChange={this.handleChange}/>
     ) : null;
 
@@ -287,7 +307,7 @@ class Home extends React.Component {
       <TemplateEngine {...state} handleChange={this.handleChange}/>
     ) : null;
 
-    const cssFramework = state.templateEngine ? (
+    const cssFramework = state.templateEngine || state.staticSiteGenerator ? (
       <CssFramework {...state} handleChange={this.handleChange}/>
     ) : null;
 
@@ -343,6 +363,7 @@ class Home extends React.Component {
           {settingsCheckboxes}
           <div ref="platform">{platform}</div>
           <div ref="framework">{framework}</div>
+          <div ref="staticSiteGenerator">{staticSiteGenerator}</div>
           <div ref="templateEngine">{templateEngine}</div>
           <div ref="cssFramework">{cssFramework}</div>
           <div ref="cssPreprocessor">{cssPreprocessor}</div>

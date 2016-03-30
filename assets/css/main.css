@@ -725,6 +725,28 @@ canvas {
   border-color: transparent;
 }
 
+.jekyll .panel-heading {
+  color: #ddd;
+  background: #333;
+  border-color: transparent;
+}
+
+.jekyll svg {
+  color: #ddd;
+  fill: currentColor;
+}
+
+.middleman .panel-heading {
+  color: #4c515f;
+  background: #f3c859;
+  border-color: transparent;
+}
+
+.middleman svg {
+  color: #4c515f;
+  fill: currentColor;
+}
+
 .library .panel-heading {
   color: #fff;
   background: #3A33D1;
