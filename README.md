@@ -89,7 +89,10 @@ For manual installation, see [Install MongoDB Community Edition on OS X](https:/
 
 <img src="http://dc942d419843af05523b-ff74ae13537a01be6cfec5927837dcfe.r14.cf1.rackcdn.com/wp-content/uploads/windows-8-50x50.jpg" height="17"> **Windows**
 
-
+1. Download and install [current stable release](https://www.mongodb.org/downloads#production).
+2. Create the data directory in **C:\data\db**.
+![](https://dl.dropboxusercontent.com/u/14131013/mongodb-data-db.png)
+3. Run MongoDB by opening `mongod.exe` in **C:\Program Files\MongoDB\Server\3.2\bin**.
 
 
 :top: <sub>[**back to top**](#table-of-contents)</sub>
