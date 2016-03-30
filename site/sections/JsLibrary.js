@@ -46,7 +46,7 @@ class JsLibrary extends React.Component {
       <div className='zoomInBackwards panel authentication'>
         <div className="panel-heading">
           <h6>{JS_LIBRARY_SVG}{props.library || 'JS Library Options'}</h6>
-          <a href="#" className="stats-icon hint--top hint--rounded" data-hint="Download Stats">
+          <a href="#" className="stats-icon hint--top hinHomet--rounded" data-hint="Download Stats">
             <i className="fa fa-bar-chart"/>
           </a>
         </div>
@@ -56,6 +56,11 @@ class JsLibrary extends React.Component {
               <label htmlFor="jsLibraryName" className="">Library Name</label>
               <input type="text" id="jsLibraryName" name="jsLibraryName" className="form-control" autoFocus
                      value={props.jsLibraryName} onChange={props.handleChange}/>
+            </div>
+            <div className="col-sm-5">
+              <label htmlFor="jsLibraryAuthor" className="">Author Name</label>
+              <input type="text" id="jsLibraryAuthor" name="jsLibraryAuthor" className="form-control" autoFocus
+                     value={props.jsLibraryAuthor} onChange={props.handleChange}/>
             </div>
           </div>
           <br/>
@@ -76,13 +81,13 @@ class JsLibrary extends React.Component {
           </div>
           <div className="checkbox">
             <label>
-              <input type="checkbox" name="jsLibraryOptionsCheckboxes" value="codeCoverage" onChange={props.handleChange}/>
+              <input type="checkbox" name="jsLibraryOptionsCheckboxes" value="coverage" onChange={props.handleChange}/>
               <span>Code Coverage</span>
             </label>
           </div>
           <div className="checkbox">
             <label>
-              <input type="checkbox" name="jsLibraryOptionsCheckboxes" value="shieldsio" onChange={props.handleChange}/>
+              <input type="checkbox" name="jsLibraryOptionsCheckboxes" value="badges" onChange={props.handleChange}/>
               <span>Shields.io Badges</span>
             </label>
           </div>

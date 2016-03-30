@@ -136,6 +136,11 @@ class Home extends React.Component {
         state.jsLibraryName = value;
         break;
 
+      case 'jsLibraryAuthor':
+        state.jsLibraryAuthor = value;
+        break;
+
+
       case 'jsLibraryLicenseRadios':
         state.jsLibraryLicense = value;
         break;
