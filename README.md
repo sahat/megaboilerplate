@@ -9,14 +9,11 @@ Table of Contents
  - [Hapi](#hapi)
  - [Meteor](#meteor)
 - [Database Setup](#database-setup)
- - [MongoDB](#)
- - [MySQL](#)
- - [PostgreSQL](#)
- - [SQLite](#)
-- [Obtaining API Keys](#)
- - [Facebook](#)
- - [Twitter](#)
- - [Google](#)
+ - [MongoDB](#-mongodb)
+ - [MySQL](#-mysql)
+ - [PostgreSQL](#-postgresql)
+ - [SQLite](#-sqlite)
+- [Obtaining API Keys](#obtaining-api-keys)
 - [FAQ](#)
 - [Changelog](#)
 - [Contributing](#)
@@ -50,7 +47,6 @@ $ node app.js
 
 **Note**: If you have selected a database, please make sure it is up and running. For additional information, see [**Database Setup**](#database-setup).
 
-
 :top: <sub>[**back to top**](#table-of-contents)</sub>
 
 ### Hapi
@@ -61,10 +57,12 @@ coming soon
 
 ## Database Setup
 
-- <img src="http://static.tumblr.com/lbtm3t2/8PAn0kziu/mongodb-logo.png" height="17"> [MongoDB](#-mongodb)
-- <img src="https://upload.wikimedia.org/wikipedia/en/thumb/6/62/MySQL.svg/640px-MySQL.svg.png" height="17"> [MySQL](#-mysql)
-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Postgresql_elephant.svg/200px-Postgresql_elephant.svg.png" height="17"> [PostgreSQL](#-postgresql)
-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Sqlite-square-icon.svg/240px-Sqlite-square-icon.svg.png" height="17"> [SQLite](#-sqlite)
+- [MongoDB](#-mongodb)
+- [MySQL](#-mysql)
+- [PostgreSQL](#-postgresql)
+- [SQLite](#-sqlite)
+
+:top: <sub>[**back to top**](#table-of-contents)</sub>
 
 ### <img src="http://static.tumblr.com/lbtm3t2/8PAn0kziu/mongodb-logo.png" height="34" align="top"> MongoDB
 
@@ -187,11 +185,6 @@ brew install postgres
 
 # Start PostgreSQL Server
 postgres -D /usr/local/var/postgres
-
-# Optional: Configure PostgreSQL to start automatically
-mkdir -p ~/Library/LaunchAgents
-ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
-launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
 ```
 
 <img src="http://dc942d419843af05523b-ff74ae13537a01be6cfec5927837dcfe.r14.cf1.rackcdn.com/wp-content/uploads/windows-8-50x50.jpg" height="17"> **Windows**
@@ -215,6 +208,51 @@ sudo apt-get install postgresql postgresql-contrib
 No additional steps required. Package [`sqlite3`](https://www.npmjs.com/package/sqlite3) will be automatically installed during `npm install` in [**Getting Started**](#getting-started).
 
 :top: <sub>[**back to top**](#table-of-contents)</sub>
+
+Obtaining API Keys
+------------------
+
+To use any of the included OAuth providers (e.g. Facebook, Twitter, Google), you will need to obtain API keys. I have included "throw-away" API keys for all OAuth providers to get you up and running quickly, but be sure to update them with your own keys.
+
+<img src="http://www.doit.ba/img/facebook.jpg" width="200">
+- Go to [Facebook Developers](https://developers.facebook.com/).
+- Click on **My Apps** dropdown, then select **Add a New App**.
+- Select **Website** platform, then click on **Skip and Create App ID** button.
+- Enter a **name** and choose a **category** for your app.
+- Click on **Create App ID** button.
+- Copy and paste **App ID** and **App Secret** keys into `.env`:
+ - `FACEBOOK_ID='YOUR_APP_ID'`
+ - `FACEBOOK_SECRET='YOUR_APP_SECRET'`
+- Click on the **Settings** tab, then click on **+ Add Platform** button.
+- Select **Website**, then enter `http://localhost:3000/auth/callback` in the **Site URL**.
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/1000px-Google_2015_logo.svg.png" width="200">
+- Go to [Google Cloud Console](https://cloud.google.com/console/project)
+- Click on **Create project** button.
+- Enter a **Project name**, then click on **Create** button.
+- Click on **Use Google APIs** (Enable and manage APIs) panel.
+- Click on **Credentials** tab in the sidebar.
+- Client on **Create credentials** dropdown, then select **OAuth client ID**.
+- Select or enter the following:
+ - **Application type**: `Web application`
+ - **Authorized JavaScript origins**: `http://localhost:3000`
+ - **Authorized redirect URIs**: `http://localhost:3000/auth/google/callback`
+- Click on **Create** button.
+- Copy and paste **client ID** and **client secret** keys into `.env`:
+ - `GOOGLE_ID='YOUR_CLIENT_ID'`
+ - `GOOGLE_SECRET='YOUR_CLIENT_SECRET'`
+
+<img src="https://g.twimg.com/ios_homescreen_icon.png" width="90">
+- Sign in at [https://apps.twitter.com/](https://apps.twitter.com/)
+- Click **Create a new application**
+- Enter your application name, website and description
+- For **Callback URL**: http://127.0.0.1:3000/auth/twitter/callback
+- Go to **Settings** tab
+- Under *Application Type* select **Read and Write** access
+- Check the box **Allow this application to be used to Sign in with Twitter**
+- Click **Update this Twitter's applications settings**
+- Copy and paste *Consumer Key* and *Consumer Secret* keys into `.env` file
+
 
 License
 -------
