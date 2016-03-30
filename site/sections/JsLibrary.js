@@ -52,15 +52,23 @@ class JsLibrary extends React.Component {
         </div>
         <div className="panel-body">
           <div className="row">
-            <div className="col-sm-5">
+            <div className="col-sm-4">
               <label htmlFor="jsLibraryName" className="">Library Name</label>
               <input type="text" id="jsLibraryName" name="jsLibraryName" className="form-control" autoFocus
                      value={props.jsLibraryName} onChange={props.handleChange}/>
             </div>
-            <div className="col-sm-5">
-              <label htmlFor="jsLibraryAuthor" className="">Author Name</label>
+            <div className="col-sm-4">
+
+              <label htmlFor="jsLibraryAuthor" className="">Author Name</label>&nbsp;
+              <span className="help hint--top hint--rounded" data-hint="Your full name is used in the license file." ><i className="fa fa-question-circle"></i></span>
               <input type="text" id="jsLibraryAuthor" name="jsLibraryAuthor" className="form-control" autoFocus
                      value={props.jsLibraryAuthor} onChange={props.handleChange}/>
+            </div>
+            <div className="col-sm-4">
+              <label htmlFor="jsLibraryGithubUsername" className="">GitHub Username</label>&nbsp;
+              <span className="help hint--top hint--rounded" data-hint="Your username is used for the GitHub project path." ><i className="fa fa-question-circle"></i></span>
+              <input type="text" id="jsLibraryGithubUsername" name="jsLibraryGithubUsername" className="form-control" autoFocus
+                     value={props.jsLibraryGithubUsername} onChange={props.handleChange}/>
             </div>
           </div>
           <br/>

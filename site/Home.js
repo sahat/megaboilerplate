@@ -140,6 +140,10 @@ class Home extends React.Component {
         state.jsLibraryAuthor = value;
         break;
 
+      case 'jsLibraryGithubUsername':
+        state.jsLibraryGithubUsername = value;
+        break;
+
 
       case 'jsLibraryLicenseRadios':
         state.jsLibraryLicense = value;
