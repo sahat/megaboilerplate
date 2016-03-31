@@ -1,4 +1,5 @@
 import generateFramework from '../generators/framework/generateFramework';
+import generateJsLibrary from '../generators/js-library/generateJsLibrary';
 import generateTemplateEngine from '../generators/template-engine/generateTemplateEngine';
 import generateCssFramework from '../generators/css-framework/generateCssFramework';
 import generateCssPreprocessor from '../generators/css-preprocessor/generateCssPreprocessor';
@@ -13,16 +14,20 @@ import { walkAndRemoveComments, prepare, cleanup } from '../generators/utils';
 async function download(req, res) {
   let params = await prepare(req.body);
   try {
-    await generateFramework(params);
-    await generateTemplateEngine(params);
-    await generateCssFramework(params);
-    await generateCssPreprocessor(params);
-    await generateJsFramework(params);
-    await generateBuildTool(params);
-    await generateTesting(params);
-    await generateDatabase(params);
-    await generateAuthentication(params);
-    await generateDeployment(params);
+    if (params.platform === 'library') {
+      await generateJsLibrary(params);
+    } else {
+      await generateFramework(params);
+      await generateTemplateEngine(params);
+      await generateCssFramework(params);
+      await generateCssPreprocessor(params);
+      await generateJsFramework(params);
+      await generateBuildTool(params);
+      await generateTesting(params);
+      await generateDatabase(params);
+      await generateAuthentication(params);
+      await generateDeployment(params);
+    }
     await walkAndRemoveComments(params);
     res.end();
   } catch (err) {

@@ -1,5 +1,5 @@
 import { join } from 'path';
-import { cpy, copy, mkdirs, appendFile, templateReplace, addNpmScript, addNpmPackage } from '../utils';
+import { cpy, copy, mkdirs, replaceCode, templateReplace, addNpmScript, addNpmPackage } from '../utils';
 
 async function generateJsLibrary(params) {
   const build = join(__base, 'build', params.uuid);
@@ -8,7 +8,11 @@ async function generateJsLibrary(params) {
   const description = 'Library Description';
   const username = params.jsLibraryGithubUsername;
   const options = params.jsLibraryOptions;
-  const license = params.jsLibraryLicense;
+  const licenseMap = {
+    mit: 'MIT',
+    apache: 'Apache 2.0',
+    gplv3: 'GPLv3'
+  };
 
   await mkdirs(join(build, 'examples'));
   await mkdirs(join(build, 'src'));
@@ -38,12 +42,24 @@ async function generateJsLibrary(params) {
     join(__dirname, 'modules', 'webpack.config.js')
   ], build);
 
+  await templateReplace(join(build, 'CHANGELOG.md'), {
+    user: username,
+    repo: libraryName
+  });
+
+  await templateReplace(join(build, 'README.md'), {
+    name: libraryName,
+    user: username,
+    repo: libraryName
+  });
+
   await templateReplace(join(build, 'package.json'), {
     author: author,
     name: libraryName,
     description: description,
     username: username,
-    repo: libraryName
+    repo: libraryName,
+    license: licenseMap[params.jsLibraryLicense]
   });
 
   if (options.includes('eslint')) {
@@ -51,9 +67,9 @@ async function generateJsLibrary(params) {
       join(__dirname, 'modules', '.eslintrc'),
       join(__dirname, 'modules', '.eslintignore')
     ], build);
-    addNpmPackage(params, 'babel-eslint', true);
-    addNpmPackage(params, 'eslint', true);
-    addNpmScript('lint', 'eslint src test examples', params);
+    await addNpmPackage('babel-eslint', params, true);
+    await addNpmPackage('eslint', params, true);
+    await addNpmScript('lint', 'eslint src test examples', params);
   }
 
   if (options.includes('travis')) {
@@ -62,36 +78,31 @@ async function generateJsLibrary(params) {
 
   if (options.includes('coverage')) {
     await cpy([join(__dirname, 'modules', '.istanbul.yml')], build);
-    addNpmPackage(params, 'isparta', true);
-    addNpmScript('test:cov', 'babel-node ./node_modules/isparta/bin/isparta cover ./node_modules/mocha/bin/_mocha -- --recursive', params);
+    await addNpmPackage('isparta', params, true);
+    await addNpmScript('test:cov', 'babel-node ./node_modules/isparta/bin/isparta cover ./node_modules/mocha/bin/_mocha -- --recursive', params);
   }
 
 
   if (options.includes('badges')) {
-
+    await replaceCode(join(build, 'README.md'), 'BADGES', join(__dirname, 'modules', 'badges.md'));
   }
 
-  // todo: update readme
-  switch (license) {
+  switch (params.jsLibraryLicense) {
     case 'mit':
       await copy(join(__dirname, 'modules', 'license', 'mit'), join(build, 'LICENSE'));
       await templateReplace(join(build, 'LICENSE'), { author: author });
-      await templateReplace(join(build, 'package.json'), { license: 'MIT' });
       break;
     case 'apache':
       await copy(join(__dirname, 'modules', 'license', 'apache'), join(build, 'LICENSE'));
       await templateReplace(join(build, 'LICENSE'), { author: author });
-      await templateReplace(join(build, 'package.json'), { license: 'Apache License 2.0' });
-
       break;
     case 'gplv3':
       await copy(join(__dirname, 'modules', 'license', 'gplv3'), join(build, 'LICENSE'));
       await templateReplace(join(build, 'LICENSE'), {
         author: author,
         description: description,
-        libraryName: libraryName
+        name: libraryName
       });
-      await templateReplace(join(build, 'package.json'), { license: 'GNU GPLv3' });
       break;
     default:
   }
