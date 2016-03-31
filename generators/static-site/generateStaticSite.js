@@ -10,8 +10,10 @@ async function generateStaticSite(params) {
       );
       break;
     case 'middleman':
-      break;
-    case 'none':
+      await copy(
+        join(__dirname, 'modules', 'middleman'),
+        join(__base, 'build', params.uuid)
+      );
       break;
     default:
   }
