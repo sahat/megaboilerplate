@@ -1,7 +1,7 @@
 [Mega Boilerplate](https://github.com/sahat/boilerplate)
 ========================================================
 
-[![Paypal](https://img.shields.io/badge/donate-paypal-0070ba.svg?style=flat-square)](https://paypal.me/sahat)
+[![Paypal](https://img.shields.io/badge/donate-paypal-61dafb.svg?style=flat-square)](https://paypal.me/sahat)
 [![Build Status](https://img.shields.io/travis/sahat/boilerplate.svg?style=flat-square)](https://travis-ci.org/sahat/satellizer)
 [![Gitter](https://img.shields.io/gitter/room/sahat/boilerplate.svg?style=flat-square)](https://gitter.im/sahat/boilerplate)
 [![Issues](https://img.shields.io/github/issues/sahat/boilerplate.svg?style=flat-square)](https://github.com/sahat/boilerplate/issues)
@@ -571,7 +571,7 @@ FAQ
 
 #### Actions, reducers, stores, containers, provider...what? ಠ_ರೃ
 
-Despite being such a small library, [Redux](http://redux.js.org/) can be a little frustrating to understand for beginners. It actually took about three days until it "clicked" for me, even with my prior experience of React and Flux architecture. Here is a TL;DR: summary:
+Despite being such a small library, [Redux](http://redux.js.org/) can be difficult to grasp for beginners. It took me almost three days until Redux "clicked" for me, even with my prior experience of working with React and Flux. Here is a TL;DR: summary:
 
 | Concept       | Description                                                       |
 | ------------- |:-----------------------------------------------------------------:|
