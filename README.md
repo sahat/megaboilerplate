@@ -5,15 +5,17 @@
 [![Build Status](https://img.shields.io/travis/sahat/boilerplate.svg?style=flat-square)](https://travis-ci.org/sahat/satellizer)
 [![Gitter](https://img.shields.io/gitter/room/sahat/boilerplate.svg?style=flat-square)](https://gitter.im/sahat/boilerplate)
 [![Issues](https://img.shields.io/github/issues-raw/sahat/boilerplate.svg?style=flat-square)](https://github.com/sahat/boilerplate/issues)
-![License](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)]
+![License](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)
 
 Table of Contents
 -----------------
 
 - [**Getting Started**](#getting-started)
  - [Express](#express)
- - [Hapi](#hapi)
  - [Meteor](#meteor)
+ - [Jekyll](#jekyll)
+ - [Middleman](#middleman)
+ - [JS Library](#js-library)
 - [**Database Setup**](#database-setup)
  - [MongoDB](#-mongodb)
  - [MySQL](#-mysql)
