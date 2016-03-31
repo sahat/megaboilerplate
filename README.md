@@ -4,7 +4,7 @@
 [![Paypal](https://img.shields.io/badge/donate-paypal-0070ba.svg?style=flat-square)](https://paypal.me/sahat)
 [![Build Status](https://img.shields.io/travis/sahat/boilerplate.svg?style=flat-square)](https://travis-ci.org/sahat/satellizer)
 [![Gitter](https://img.shields.io/gitter/room/sahat/boilerplate.svg?style=flat-square)](https://gitter.im/sahat/boilerplate)
-[![Issues](https://img.shields.io/github/issues-raw/sahat/boilerplate.svg?style=flat-square)](https://github.com/sahat/boilerplate/issues)
+[![Issues](https://img.shields.io/github/issues/sahat/boilerplate.svg?style=flat-square)](https://github.com/sahat/boilerplate/issues)
 ![License](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)
 
 Table of Contents
@@ -13,7 +13,7 @@ Table of Contents
 - [**Getting Started**](#getting-started)
  - [Express](#express)
  - [Meteor](#meteor)
- - [Jekyll](#jekyll)
+ - [Jekyll](#-jekyll)
  - [Middleman](#middleman)
  - [JS Library](#js-library)
 - [**Database Setup**](#database-setup)
@@ -78,6 +78,26 @@ coming soon
 ### Meteor
 
 :top: <sub>[**back to top**](#table-of-contents)</sub>
+
+### <img src="http://build.prestashop.com/assets/images/2015/04/jekyll.png" height="34" align="top"> Jekyll
+
+#### Prerequisites
+
+- [Ruby 2.0](http://rubyinstaller.org) or higher
+- [Jekyll](https://jekyllrb.com/) Ruby Gem
+
+```shell
+cd myproject
+
+// Start Jekyll app
+jekyll serve
+
+# Server address: http://127.0.0.1:4000/
+# Server running... press ctrl-c to stop.
+```
+
+:top: <sub>[**back to top**](#table-of-contents)</sub>
+
 
 ## Database Setup
 
