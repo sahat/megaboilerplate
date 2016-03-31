@@ -1,0 +1,23 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="48px" height="48px" viewBox="0 0 48 48" enable-background="new 0 0 48 48" xml:space="preserve">
+<g>
+	<circle fill="#FFCDD2" cx="27" cy="40" r="5"></circle>
+	<circle fill="#FFCDD2" cx="32.5" cy="39.5" r="3.5"></circle>
+	<circle fill="#FFCDD2" cx="21" cy="40" r="5"></circle>
+	<circle fill="#FFCDD2" cx="15.5" cy="39.5" r="3.5"></circle>
+</g>
+<path fill="#FF3D00" d="M20,35c0-2.209,1.791-4,4-4s4,1.791,4,4s-4,7-4,7S20,37.209,20,35z"></path>
+<path fill="#FFEB3B" d="M22,35c0-1.104,0.896-2,2-2s2,0.896,2,2s-2,3-2,3S22,36.104,22,35z"></path>
+<path fill="#D1C4E9" d="M18,13c0,2.999,0,19,0,19h12c0,0,0-15.998,0-19c0-1.581-1.664-4.544-3.24-6.998h-5.519
+	C19.665,8.457,18,11.42,18,13z"></path>
+<g>
+	<polygon fill="#7E57C2" points="35,32 30,30.002 30,18.002 35,25 	"></polygon>
+	<polygon fill="#7E57C2" points="13,32 18,30.002 18,18.002 13,25 	"></polygon>
+	<path fill="#7E57C2" d="M21.241,6h5.519C25.344,3.796,24,2,24,2S22.656,3.796,21.241,6z"></path>
+	<polygon fill="#7E57C2" points="30,32 28,34 20,34 18,32 	"></polygon>
+</g>
+<g>
+	<circle fill="#311B92" cx="24" cy="14.002" r="2"></circle>
+	<circle fill="#311B92" cx="24" cy="20" r="2"></circle>
+	<circle fill="#311B92" cx="24" cy="26" r="2"></circle>
+</g>
+</svg>
