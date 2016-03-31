@@ -58,56 +58,66 @@ class JsLibrary extends React.Component {
         </div>
         <div className="panel-body">
           <div className="row">
-            <div className="col-sm-4">
-              <label htmlFor="jsLibraryName" className="">Library Name</label>
-              <div className="input-group">
-                <input ref="jsLibraryName" type="text" id="jsLibraryName" name="jsLibraryName" className="form-control" autoFocus value={props.jsLibraryName} onChange={props.handleChange}/>
+            <div className="col-sm-7">
+              <div className="form-group">
+                <label htmlFor="jsLibraryName" className="">Library Name</label>
+                <div className="input-group">
+                  <input ref="jsLibraryName" type="text" id="jsLibraryName" name="jsLibraryName" className="form-control" autoFocus value={props.jsLibraryName} onChange={props.handleChange}/>
                 <span className="input-group-btn">
-                  <button className="btn btn-primary" type="button" onClick={this.onGenerateClick} tabIndex="-1"><i className="fa fa-random"></i></button>
+                  <button className="btn btn-primary" type="button" onClick={this.onGenerateClick} tabIndex="-1">Generate</button>
                 </span>
+                </div>
+              </div>
+
+              <strong>Additional Features</strong>
+
+              <div className="checkbox">
+                <label>
+                  <input type="checkbox" name="jsLibraryOptionsCheckboxes" value="eslint" onChange={props.handleChange}/>
+                  <span>ESLint</span>
+                </label>
+              </div>
+              <div className="checkbox">
+                <label>
+                  <input type="checkbox" name="jsLibraryOptionsCheckboxes" value="travis" onChange={props.handleChange}/>
+                  <span>Travis CI</span>
+                </label>
+              </div>
+              <div className="checkbox">
+                <label>
+                  <input type="checkbox" name="jsLibraryOptionsCheckboxes" value="coverage" onChange={props.handleChange}/>
+                  <span>Code Coverage</span>
+                </label>
+              </div>
+              <div className="checkbox">
+                <label>
+                  <input type="checkbox" name="jsLibraryOptionsCheckboxes" value="badges" onChange={props.handleChange}/>
+                  <span>Shields.io Badges</span>
+                </label>
               </div>
             </div>
-            <div className="col-sm-4">
-              <label htmlFor="jsLibraryAuthor" className="">Author Name</label>&nbsp;
-              <span className="help hint--top hint--rounded" data-hint="Your full name is used in the license file." ><i className="fa fa-question-circle"></i></span>
-              <input type="text" id="jsLibraryAuthor" name="jsLibraryAuthor" className="form-control"
-                     value={props.jsLibraryAuthor} onChange={props.handleChange}/>
-            </div>
-            <div className="col-sm-4">
-              <label htmlFor="jsLibraryGithubUsername" className="">GitHub Username</label>&nbsp;
-              <span className="help hint--top hint--rounded" data-hint="Your username is used for the GitHub project path." ><i className="fa fa-question-circle"></i></span>
-              <input type="text" id="jsLibraryGithubUsername" name="jsLibraryGithubUsername" className="form-control"
-                     value={props.jsLibraryGithubUsername} onChange={props.handleChange}/>
+            <div className="col-sm-5">
+             <div className="row">
+               <div className="col-sm-12">
+                 <label htmlFor="jsLibraryAuthor" className="">Author Name</label>&nbsp;
+                 <span className="help hint--top hint--rounded" data-hint="Your full name is used in the license and package.json files." ><i className="fa fa-question-circle"></i></span>
+                 <input type="text" id="jsLibraryAuthor" name="jsLibraryAuthor" className="form-control"
+                        value={props.jsLibraryAuthor} onChange={props.handleChange}/>
+               </div>
+             </div>
+              <div className="row">
+                <div className="col-sm-12">
+                  <label htmlFor="jsLibraryGithubUsername" className="">GitHub Username</label>&nbsp;
+                  <span className="help hint--top hint--rounded" data-hint="Your username is used for the GitHub project path." ><i className="fa fa-question-circle"></i></span>
+                  <input type="text" id="jsLibraryGithubUsername" name="jsLibraryGithubUsername" className="form-control"
+                         value={props.jsLibraryGithubUsername} onChange={props.handleChange}/>
+                </div>
+              </div>
             </div>
           </div>
           <br/>
 
-          <strong>Additional Features</strong>
 
-          <div className="checkbox">
-            <label>
-              <input type="checkbox" name="jsLibraryOptionsCheckboxes" value="eslint" onChange={props.handleChange}/>
-              <span>ESLint</span>
-            </label>
-          </div>
-          <div className="checkbox">
-            <label>
-              <input type="checkbox" name="jsLibraryOptionsCheckboxes" value="travis" onChange={props.handleChange}/>
-              <span>Travis CI</span>
-            </label>
-          </div>
-          <div className="checkbox">
-            <label>
-              <input type="checkbox" name="jsLibraryOptionsCheckboxes" value="coverage" onChange={props.handleChange}/>
-              <span>Code Coverage</span>
-            </label>
-          </div>
-          <div className="checkbox">
-            <label>
-              <input type="checkbox" name="jsLibraryOptionsCheckboxes" value="badges" onChange={props.handleChange}/>
-              <span>Shields.io Badges</span>
-            </label>
-          </div>
 
           <strong>License</strong>
           <div className="radio-group">
