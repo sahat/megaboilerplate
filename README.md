@@ -52,7 +52,7 @@ Getting Started
  - <img src="http://i1-news.softpedia-static.com/images/extra/LINUX/small/slw218news1.png" height="17"> **Fedora**: `sudo dnf groupinstall "Development Tools"`
  - <img src="https://en.opensuse.org/images/b/be/Logo-geeko_head.png" height="17"> **OpenSUSE**: `sudo zypper install --type pattern devel_basis`
 
-### Express
+### <img src="http://mean.io/system/assets/img/logos/express.png" height="34" align="top" /> Express
 
 Download and extract the project. Then in your Terminal shell type the following:
 
