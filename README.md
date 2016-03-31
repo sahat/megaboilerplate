@@ -14,7 +14,7 @@ Table of Contents
  - [Express](#express)
  - [Meteor](#meteor)
  - [Jekyll](#-jekyll)
- - [Middleman](#middleman)
+ - [Middleman](#-middleman)
  - [JS Library](#js-library)
 - [**Database Setup**](#database-setup)
  - [MongoDB](#-mongodb)
@@ -89,7 +89,7 @@ coming soon
 ```shell
 cd myproject
 
-// Start Jekyll app
+# Start Jekyll app
 jekyll serve
 
 # Server address: http://127.0.0.1:4000/
@@ -98,6 +98,25 @@ jekyll serve
 
 :top: <sub>[**back to top**](#table-of-contents)</sub>
 
+
+### <img src="http://torspark.com/img/middleman-logo.png" height="34" align="top"> Middleman
+
+#### Prerequisites
+
+- [Ruby 2.0](http://rubyinstaller.org) or higher
+- [Middleman](https://middlemanapp.com/) Ruby Gem
+
+```shell
+cd myproject
+
+# Start Middleman app
+middleman
+
+# The Middleman is loading
+# View your site at "http://localhost:4567"
+```
+
+:top: <sub>[**back to top**](#table-of-contents)</sub>
 
 ## Database Setup
 
