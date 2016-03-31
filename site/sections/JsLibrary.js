@@ -86,12 +86,6 @@ class JsLibrary extends React.Component {
 
           <div className="checkbox">
             <label>
-              <input type="checkbox" name="jsLibraryOptionsCheckboxes" value="babel" onChange={props.handleChange}/>
-              <span>Babel</span>
-            </label>
-          </div>
-          <div className="checkbox">
-            <label>
               <input type="checkbox" name="jsLibraryOptionsCheckboxes" value="eslint" onChange={props.handleChange}/>
               <span>ESLint</span>
             </label>

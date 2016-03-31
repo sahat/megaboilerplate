@@ -7,12 +7,15 @@
   "socket.io": "^1.4.5",
   "pm2": "^1.0.2",
 
+  "eslint": "^2.5.3",
+  "babel-eslint": "^6.0.0",
+  "isparta": "^4.0.0",
+
   "jade": "^1.11.0",
   "handlebars": "^4.0.5",
   "nunjucks": "^2.4.1",
   "vision": "^4.0.1",
   "express-handlebars": "^3.0.0",
-
 
   "classnames": "2.2.3",
   "react": "15.0.0-rc.2",

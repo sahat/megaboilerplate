@@ -16,7 +16,7 @@ async function generateTestingMocha(params) {
       await addNpmPackage('sinon-chai', params, true);
       await addNpmPackage('supertest', params, true);
 
-      await addNpmScript('test', 'mocha --reporter spec --timeout 5000', params, true);
+      await addNpmScript('test', 'mocha --reporter spec --timeout 5000', params);
 
       await mkdirs(join(build, 'test'));
 
