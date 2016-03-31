@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+<body>
+2 + 2 = <span id="result"></span>
+</body>
+<script src="../dist/<%= name %>.min.js"></script>
+<script>
+  var result = document.getElementById('result');
+  result.innerHTML = MyLibrary.add(2, 2);
+</script>
+</html>
