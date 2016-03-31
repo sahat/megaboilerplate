@@ -35,7 +35,6 @@ const Platform = (props) => {
             <span>JS Library</span>
           </label>
         </div>
-        <div><strong>Note: </strong>Support for other languages is on the roadmap. GitHub <a href="https://github.com/sahat/boilerplate/blob/master/CONTRIBUTING.md" target="_blank">contributions</a> are welcome.</div>
       </div>
     </div>
   )
