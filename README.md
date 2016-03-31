@@ -69,13 +69,7 @@ $ node app.js
 
 :top: <sub>[**back to top**](#table-of-contents)</sub>
 
-### Hapi
-
-coming soon
-
-:top: <sub>[**back to top**](#table-of-contents)</sub>
-
-### Meteor
+### <img src="https://worldvectorlogo.com/logos/meteor-icon.svg" height="34" align="top"> Meteor
 
 :top: <sub>[**back to top**](#table-of-contents)</sub>
 
