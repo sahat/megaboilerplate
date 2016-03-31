@@ -12,9 +12,9 @@ const Platform = (props) => {
     <div className={cx('zoomInBackwards panel', props.platform)}>
       <div className="panel-heading">
         <h6>{PLATFORM_SVG}{props.platform || 'Platform'}</h6>
-        <a href="#" className="stats-icon hint--top hint--rounded" data-hint="Download Stats">
+        <button onClick={props.handleShowModal.bind(this, 'platform')} className="stats-icon hint--top hint--rounded" data-hint="Stats">
           <i className="fa fa-bar-chart" />
-        </a>
+        </button>
       </div>
       <div className="panel-body">
         <div className="radio-group">

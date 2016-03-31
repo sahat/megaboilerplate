@@ -3,8 +3,7 @@
 const haikunate = require('haikunator');
 import React from 'react';
 import { clone } from 'lodash';
-import { VelocityTransitionGroup } from 'velocity-react';
-
+import Modal from './Modal';
 import Header from './Header';
 import Footer from './Footer';
 import Platform from './sections/Platform';
@@ -24,12 +23,17 @@ import Deployment from './sections/Deployment';
 class Home extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
     this.handleChange = this.handleChange.bind(this);
     this.handleGenerateLibraryName = this.handleGenerateLibraryName.bind(this);
     this.handleAutoScroll = this.handleAutoScroll.bind(this);
     this.handleReduceAnimations = this.handleReduceAnimations.bind(this);
     this.clickDownload = this.clickDownload.bind(this);
+    this.handleHideModal = this.handleHideModal.bind(this);
+    this.handleShowModal= this.handleShowModal.bind(this);
+
+    this.state = {
+      showModal: false
+    };
   }
 
   componentDidMount() {
@@ -43,6 +47,17 @@ class Home extends React.Component {
     } catch (e) {
       console.warn(e);
     }
+  }
+
+  handleHideModal() {
+    this.setState({ showModal: false })
+  }
+
+  handleShowModal(category) {
+    this.setState({
+      showModal: true,
+      modalCategory: category
+    })
   }
 
   clickDownload() {
@@ -109,7 +124,7 @@ class Home extends React.Component {
         break;
 
       case 'platformRadios':
-        const whitelist = ['beginner', 'showGettingStartedButton', 'autoScroll', 'reduceAnimations'];
+        const whitelist = ['showModal', 'beginner', 'showGettingStartedButton', 'autoScroll', 'reduceAnimations'];
         for (const key in state) {
           if (state.hasOwnProperty(key)) {
             if (whitelist.indexOf(key) === -1) {
@@ -325,7 +340,7 @@ class Home extends React.Component {
     );
 
     const platform = (
-      <Platform platform={state.platform} handleChange={this.handleChange}/>
+      <Platform platform={state.platform} handleShowModal={this.handleShowModal} handleChange={this.handleChange}/>
     );
 
     const staticSiteGenerator = state.platform === 'html5' ? (
@@ -393,11 +408,13 @@ class Home extends React.Component {
       <a href="#" className="btn btn-block btn-mega btn-primary">Getting Started Instructions</a>
     ) : null;
 
+    console.log(state);
     return (
       <div>
         <Header />
         <main className="container">
           {settingsCheckboxes}
+          <button onClick={this.handleShowModal}>Show modal</button>
           <div ref="platform">{platform}</div>
           <div ref="framework">{framework}</div>
           <div ref="staticSiteGenerator">{staticSiteGenerator}</div>
@@ -416,6 +433,7 @@ class Home extends React.Component {
           <div ref="consulting">{consulting}</div>
         </main>
         <Footer />
+        {state.showModal ? <Modal {...state} handleHideModal={this.handleHideModal}/> : null}
       </div>
 
     );

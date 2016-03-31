@@ -1164,7 +1164,55 @@ canvas {
   color: inherit;
   line-height: 32px;
   float: right;
+  background: transparent;
+  border: 0;
+  outline: 0;
 }
+
+/*Semantic UI starts*/
+
+.ui.header>.image+.content, .ui.header>img+.content {
+  display: inline-block;
+  padding-left: 10px;
+  font-size: 15px;
+  font-weight: bold;
+  vertical-align: middle;
+  line-height: 19px;
+}
+
+.ui.basic.table td {
+  vertical-align: middle;
+}
+
+.ui.table tr.active, .ui.table td.active {
+  background: #f8ffff !important;
+}
+
+h3.ui.header, h4.ui.header {
+  margin: 0;
+}
+
+h3.ui.header .sub.header, h4.ui.header .sub.header {
+  font-size: 14px;
+  display: block;
+  font-weight: 400;
+  padding: 0;
+  margin: 0;
+  line-height: 1.2em;
+  color: rgba(0,0,0,.6);
+}
+
+.ui.mini.image, .ui.mini.images .image, .ui.mini.images img, .ui.mini.images svg {
+  max-width: 35px !important;
+  height: 35px;
+}
+
+.ui.table td {
+  padding: 10px;
+  text-align: inherit;
+}
+
+/*Semantic UI ends*/
 
 .panel-body {
   /*padding-bottom: 0;*/
