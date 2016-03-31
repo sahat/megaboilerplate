@@ -359,7 +359,7 @@ class Home extends React.Component {
       <TemplateEngine {...state} handleChange={this.handleChange}/>
     ) : null;
 
-    const cssFramework = state.templateEngine || state.staticSiteGenerator ? (
+    const cssFramework = state.templateEngine ? (
       <CssFramework {...state} handleChange={this.handleChange}/>
     ) : null;
 
@@ -391,7 +391,7 @@ class Home extends React.Component {
       <Deployment {...state} handleChange={this.handleChange}/>
     ) : null;
 
-    const download = state.deployment || (state.staticSiteGenerator && state.cssPreprocessor) || state.platform === 'library' ? (
+    const download = state.deployment || state.staticSiteGenerator || state.platform === 'library' ? (
       <button ref="downloadBtn" className="btn btn-block btn-mega btn-success" onClick={this.clickDownload}>Compile and
         Download</button>
     ) : null;

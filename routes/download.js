@@ -1,5 +1,6 @@
 import generateFramework from '../generators/framework/generateFramework';
 import generateJsLibrary from '../generators/js-library/generateJsLibrary';
+import generateStaticSite from '../generators/static-site/generateStaticSite';
 import generateTemplateEngine from '../generators/template-engine/generateTemplateEngine';
 import generateCssFramework from '../generators/css-framework/generateCssFramework';
 import generateCssPreprocessor from '../generators/css-preprocessor/generateCssPreprocessor';
@@ -16,6 +17,8 @@ async function download(req, res) {
   try {
     if (params.platform === 'library') {
       await generateJsLibrary(params);
+    } else if (params.platform === 'html5') {
+      await generateStaticSite(params);
     } else {
       await generateFramework(params);
       await generateTemplateEngine(params);
