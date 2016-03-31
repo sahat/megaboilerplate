@@ -291,13 +291,10 @@ i.arrow {
 /*}*/
 
 .navbar-icon {
-  padding-bottom: 8px !important;
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-}
-
-.navbar-icon svg {
-  fill: currentColor;
+  font-size: 32px !important;
+  line-height: 32px !important;
+  padding-top: 10px !important;
+  padding-bottom: 0 !important;
 }
 
 /** Labels **/
