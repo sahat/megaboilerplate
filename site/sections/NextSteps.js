@@ -46,33 +46,43 @@ const NextSteps = (props) => {
   return (
     <div className="panel zoomInBackwards">
       <div className="panel-body">
-        <h4>{CHECK_SVG} All Set!</h4>
-        <p>Your boilerplate project is now ready to be used.</p>
+        <VelocityComponent runOnMount animation="transition.fadeIn" duration={900} delay={700}>
+          <h4 style={{ opacity: 0 }}>{CHECK_SVG} All Set!</h4>
+        </VelocityComponent>
+        <VelocityComponent runOnMount animation="transition.fadeIn" duration={900} delay={1100}>
+          <p style={{ opacity: 0 }}>Your boilerplate project is now ready to be used.</p>
+        </VelocityComponent>
         <div className="row">
-          <div className="col-xs-4">
-            <div className="text-center">
-              <img className="next-steps-icon" src="/img/svg/rocket.svg" alt="Getting Started"/>
-              <p>
-                See how to <a href="/introduction/build-tools.html">get started</a> with <strong>Express</strong> and <a href="#">configure</a> a <strong>MySQL</strong> database.
-              </p>
-            </div>
+          <VelocityComponent runOnMount animation="transition.slideUpIn" duration={900} delay={1500}>
+            <div className="col-xs-4" style={{ opacity: 0 }}>
+              <div className="text-center">
+                <img className="next-steps-icon" src="/img/svg/rocket.svg" alt="Getting Started"/>
+                <p>
+                  See how to <a href="/introduction/build-tools.html">get started</a> with <strong>Express</strong> and <a href="#">setup</a> a <strong>MySQL</strong> database.
+                </p>
+              </div>
           </div>
-          <div className="col-xs-4 separator">
-            <div className="text-center">
-              <img className="next-steps-icon" src="/img/svg/learn.svg" alt="Learn"/>
-              <p>
-                Learn more about <strong>React</strong> and <strong>Redux</strong> using these curated <a href="/usage/theming.html">free resources</a>.
-              </p>
+          </VelocityComponent>
+          <VelocityComponent runOnMount animation="transition.slideUpIn" duration={900} delay={1800}>
+            <div className="col-xs-4 separator" style={{ opacity: 0 }}>
+              <div className="text-center">
+                <img className="next-steps-icon" src="/img/svg/learn.svg" alt="Learn"/>
+                <p>
+                  Learn more about <strong>React</strong> and <strong>Redux</strong> using these curated <a href="/usage/theming.html">free resources</a>.
+                </p>
+              </div>
             </div>
-          </div>
-          <div className="col-xs-4">
-            <div className="text-center">
-              <img className="next-steps-icon" src="/img/svg/faq.svg" alt="FAQ"/>
-              <p>
-                See <a href="#">frequently asked questions</a> about <strong>React</strong>.
-              </p>
+          </VelocityComponent>
+          <VelocityComponent runOnMount animation="transition.slideUpIn" duration={900} delay={2100}>
+            <div className="col-xs-4" style={{ opacity: 0 }}>
+              <div className="text-center">
+                <img className="next-steps-icon" src="/img/svg/faq.svg" alt="FAQ"/>
+                <p>
+                  See <a href="#">frequently asked questions</a> about <strong>React</strong>.
+                </p>
+              </div>
             </div>
-          </div>
+          </VelocityComponent>
         </div>
       </div>
     </div>
