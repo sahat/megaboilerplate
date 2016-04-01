@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux'
 import { login } from '../../actions/auth';
-import { facebookLogin, twitterLogin, googleLogin } from '../../actions/oauth';
+import { facebookLogin, twitterLogin, googleLogin, vkLogin } from '../../actions/oauth';
 import Messages from '../Messages';
 
 class Login extends React.Component {
@@ -32,6 +32,10 @@ class Login extends React.Component {
     this.props.dispatch(googleLogin())
   }
 
+  handleVk() {
+    this.props.dispatch(vkLogin())
+  }
+
   render() {
     return (
       <div className="login-container">
@@ -52,10 +56,11 @@ class Login extends React.Component {
               <button type="submit" className="btn btn-success">Log in</button>
             </form>
             <div className="hr-title"><abbr>or</abbr></div>
-            <div className="text-center">
-              <button onClick={this.handleFacebook.bind(this)} className="btn btn-facebook">Sign in with Facebook</button>{' '}
-              <button onClick={this.handleTwitter.bind(this)} className="btn btn-twitter">Sign in with Twitter</button>{' '}
+            <div className="btn-toolbar text-center">
+              <button onClick={this.handleFacebook.bind(this)} className="btn btn-facebook">Sign in with Facebook</button>
+              <button onClick={this.handleTwitter.bind(this)} className="btn btn-twitter">Sign in with Twitter</button>
               <button onClick={this.handleGoogle.bind(this)} className="btn btn-google">Sign in with Google</button>
+              <button onClick={this.handleVk.bind(this)} className="btn btn-vk">Sign in with VK</button>
             </div>
           </div>
         </div>

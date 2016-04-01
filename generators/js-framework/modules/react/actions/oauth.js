@@ -25,6 +25,24 @@ export function facebookLogin() {
   };
 }
 
+export function twitterLogin() {
+  const twitter = {
+    url: 'http://localhost:3000/auth/twitter',
+    redirectUri: 'http://localhost:3000/auth/twitter/callback',
+    authorizationUrl: 'https://api.twitter.com/oauth/authenticate'
+  };
+
+  return (dispatch) => {
+    oauth1(twitter, dispatch)
+      .then(openPopup)
+      .then(getRequestToken)
+      .then(pollPopup)
+      .then(exchangeCodeForToken)
+      .then(signIn)
+      .then(closePopup);
+  };
+}
+
 export function googleLogin() {
   const google = {
     url: 'http://localhost:3000/auth/google',
@@ -46,17 +64,20 @@ export function googleLogin() {
   };
 }
 
-export function twitterLogin() {
-  const twitter = {
-    url: 'http://localhost:3000/auth/twitter',
-    redirectUri: 'http://localhost:3000/auth/twitter/callback',
-    authorizationUrl: 'https://api.twitter.com/oauth/authenticate'
+export function vkLogin() {
+  const facebook = {
+    url: 'http://localhost:3000/auth/vkontakte',
+    clientId: '5389715',
+    redirectUri: 'http://localhost:3000/auth/vkontakte/callback',
+    authorizationUrl: 'https://oauth.vk.com/authorize',
+    scope: 'email',
+    width: 605,
+    height: 429
   };
 
   return (dispatch) => {
-    oauth1(twitter, dispatch)
+    oauth2(facebook, dispatch)
       .then(openPopup)
-      .then(getRequestToken)
       .then(pollPopup)
       .then(exchangeCodeForToken)
       .then(signIn)

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux'
 import { signup } from '../../actions/auth';
+import { facebookLogin, twitterLogin, googleLogin, vkLogin } from '../../actions/oauth';
 import Messages from '../Messages';
 
 class Signup extends React.Component {
@@ -17,6 +18,22 @@ class Signup extends React.Component {
   handleSignup(event) {
     event.preventDefault();
     this.props.dispatch(signup(this.state.name, this.state.email, this.state.password));
+  }
+
+  handleFacebook() {
+    this.props.dispatch(facebookLogin())
+  }
+
+  handleTwitter() {
+    this.props.dispatch(twitterLogin())
+  }
+
+  handleGoogle() {
+    this.props.dispatch(googleLogin())
+  }
+
+  handleVk() {
+    this.props.dispatch(vkLogin())
   }
 
   render() {
@@ -45,10 +62,12 @@ class Signup extends React.Component {
               <button type="submit" className="btn btn-success">Create an account</button>
             </form>
             <div className="hr-title"><abbr>or</abbr></div>
-            <div className="text-center">
-              <a href="/auth/facebook" className="btn btn-facebook">Sign in with Facebook</a>{' '}
-              <a href="/auth/twitter" className="btn btn-twitter">Sign in with Twitter</a>{' '}
-              <a href="/auth/google" className="btn btn-google">Sign in with Google</a></div>
+            <div className="btn-toolbar text-center">
+              <button onClick={this.handleFacebook.bind(this)} className="btn btn-facebook">Sign in with Facebook</button>
+              <button onClick={this.handleTwitter.bind(this)} className="btn btn-twitter">Sign in with Twitter</button>
+              <button onClick={this.handleGoogle.bind(this)} className="btn btn-google">Sign in with Google</button>
+              <button onClick={this.handleVk.bind(this)} className="btn btn-vk">Sign in with VK</button>
+            </div>
           </div>
         </div>
         <p className="text-center">
