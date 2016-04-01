@@ -87,7 +87,7 @@ class JsFramework extends React.Component {
       note = (
         <div>
           <strong>Note: </strong>
-          <span>React comes with <a href="http://redux.js.org/" target="_blank">Redux</a>, <a href="https://github.com/reactjs/react-router" target="_blank">React Router</a>, <a href="http://babeljs.io/">Babel</a> and server rendering enabled.</span>
+          <span>React app comes with <a href="http://redux.js.org/" target="_blank">Redux</a>, <a href="https://github.com/reactjs/react-router" target="_blank">React Router</a>, <a href="http://babeljs.io/">Babel</a> and server-side rendering.</span>
         </div>
       );
     } else {
