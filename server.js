@@ -13,16 +13,14 @@ let ReactDOM = require('react-dom/server');
 let Router = require('react-router');
 let nunjucks = require('nunjucks');
 let webpack = require('webpack');
-let config = require('./webpack.config.dev');
+let config = require('./webpack.config');
 const compression = require('compression');
 
 // Easy access to root directory
 global.__base = __dirname + '/';
 
 // Disable Bluebird warnings
-Promise.config({
-  warnings: false
-});
+Promise.config({ warnings: false });
 
 // Express routes
 let downloadHandler = require('./routes/download');
