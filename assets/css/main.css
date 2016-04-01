@@ -617,8 +617,9 @@ canvas {
   position: absolute;
   background: #cfd9db;
   z-index: 50;
+  border-radius: 15px;
   transform: rotate(-25deg) scale(0.5) skew(45deg);
-  box-shadow: -5px 5px 10px #333;
+  box-shadow: -5px 5px 10px rgba(51, 51, 51, .8);
   transition: all 0.25s ease;
 }
 
@@ -1178,15 +1179,6 @@ canvas {
   margin-right: 6px;
   vertical-align: sub;
   /*vertical-align: middle;*/
-}
-
-.panel-heading .stats-icon {
-  color: inherit;
-  line-height: 32px;
-  float: right;
-  background: transparent;
-  border: 0;
-  outline: 0;
 }
 
 /*Semantic UI starts*/
