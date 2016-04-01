@@ -228,7 +228,6 @@ class Header extends React.Component {
             <div id="navbar" className="navbar-collapse collapse">
               <ul className="nav navbar-nav">
                 <li><a href="https://github.com/sahat/boilerplate/issues" target="_blank"><i className="fa fa-bug"></i>Report Issues</a></li>
-                <li><a href="https://github.com/sahat/boilerplate/blob/master/CONTRIBUTING.md" target="_blank"><i className="fa fa-code-fork"></i>Contributing</a></li>
               </ul>
               <ul className="nav navbar-nav navbar-right">
                 <li className="tweet-button">

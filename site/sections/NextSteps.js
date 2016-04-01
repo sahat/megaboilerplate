@@ -56,14 +56,14 @@ const NextSteps = (props) => {
     library: `creating a <strong>JavaScript Library</strong> and best practices`,
     react: `<strong>React</strong> and <strong>Redux</strong>`,
     angular: `<strong>Angular 2</strong> and <strong>TypeScript</strong>`,
-    mysql: `<strong>Knex.js ORM</strong>`,
-    sqlite: `<strong>Knex.js ORM</strong>`,
-    postgresql: `<strong>Knex.js ORM</strong>`,
+    mysql: `<strong>Bookshelf.js ORM</strong>`,
+    sqlite: `<strong>Bookshelf.js ORM</strong>`,
+    postgresql: `<strong>Bookshelf.js ORM</strong>`,
     mongodb: `<strong>Mongoose</strong>`,
   };
 
-  const jsFramework = props.jsFramework !== 'none' ? props.jsFramework : null;
-  const database = props.database !== 'none' ? `${learnMap[props.framework]} and ${learnMap[props.database]}` : null;
+  const jsFramework = props.jsFramework && props.jsFramework !== 'none' ? props.jsFramework : null;
+  const database = props.database  && props.database !== 'none' ? `${learnMap[props.framework]} and ${learnMap[props.database]}` : null;
 
   let learningText = `Learn more about ${learnMap[jsFramework] || database || learnMap[props.framework || props.staticSiteGenerator || props.platform]} using these curated <a href="https://github.com/sahat/boilerplate/README.md#" target="_blank">free resources</a>.`;
 
@@ -99,7 +99,7 @@ const NextSteps = (props) => {
               <div className="text-center">
                 <img className="next-steps-icon" src="/img/svg/faq.svg" alt="FAQ"/>
                 <p>
-                  See <a href="https://github.com/sahat/boilerplate/README.md#faq" target="_blank">frequently asked questions</a> before opening an issue on GitHub. For general questions, visit our <a href="">Gitter</a> chat.
+                  See <a href="https://github.com/sahat/boilerplate/README.md#faq" target="_blank">frequently asked questions</a> before <a href="https://github.com/sahat/boilerplate/issues/new">opening an issue</a> on GitHub. For general questions, visit our <a href="">Gitter</a> chat.
                 </p>
               </div>
             </div>

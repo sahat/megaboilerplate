@@ -291,6 +291,7 @@ i.arrow {
   line-height: 32px !important;
   padding-top: 10px !important;
   padding-bottom: 0 !important;
+  padding-left: 0 !important
 }
 
 /** Labels **/
