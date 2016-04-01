@@ -19,6 +19,7 @@ import Database from './sections/Database';
 import Authentication from './sections/Authentication';
 import JsFramework from './sections/JsFramework';
 import Deployment from './sections/Deployment';
+import NextSteps from './sections/NextSteps';
 
 class Home extends React.Component {
   constructor(props) {
@@ -247,7 +248,6 @@ class Home extends React.Component {
         }
         if (value === 'none' && state.authentication) {
           state.authentication.clear();
-          state.authentication.add('none');
         }
         state.database = value;
         break;
@@ -408,7 +408,6 @@ class Home extends React.Component {
       <a href="#" className="btn btn-block btn-mega btn-primary">Getting Started Instructions</a>
     ) : null;
 
-    console.log(state);
     return (
       <div>
         <Header />
@@ -431,6 +430,7 @@ class Home extends React.Component {
           <div ref="download">{download}</div>
           <div ref="getting-started">{gettingStarted}</div>
           <div ref="consulting">{consulting}</div>
+          {<NextSteps {...state} />}
         </main>
         <Footer />
         {state.showModal ? <Modal {...state} handleHideModal={this.handleHideModal}/> : null}
