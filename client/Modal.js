@@ -39,7 +39,7 @@ class Modal extends React.Component {
                 </tr>
                 </thead>
                 <tbody>
-                <tr className="active">
+                <tr>
                   <td>
                     <h4 className="ui image header">
                       <img src="/img/svg/node-logo.svg" className="ui mini rounded image" />

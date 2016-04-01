@@ -316,7 +316,7 @@ class Home extends React.Component {
           <div className="checkbox">
             <label>
               <input type="checkbox" name="beginner" value={state.beginner} onChange={this.handleChange}/>
-              <span>I am Beginner</span>
+              <span>Beginner-friendly Stack</span>
             </label>
           </div>
         </li>

@@ -26,16 +26,15 @@ Promise.config({ warnings: false });
 let downloadHandler = require('./routes/download');
 
 // React routes
-let reactRoutes = require('./site/routes');
+let reactRoutes = require('./client/routes');
 
-let app = express();
-let compiler = webpack(config);
+const app = express();
+const compiler = webpack(config);
 
 app.use(compression());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'assets')));
-app.use(express.static(path.join(__dirname, 'modules')));
+app.use(express.static(path.join(__dirname, 'client', 'assets')));
 
 app.use(require('webpack-dev-middleware')(compiler, {
   noInfo: true,
