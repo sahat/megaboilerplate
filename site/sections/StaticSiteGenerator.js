@@ -56,9 +56,6 @@ class StaticSiteGenerator extends React.Component {
       <div className={cx('zoomInBackwards panel', props.staticSiteGenerator)}>
         <div className="panel-heading">
           <h6>{STATIC_SITE_SVG}{props.staticSiteGenerator || 'Static Site Generator'}</h6>
-          <a href="#" className="stats-icon hint--top hint--rounded" data-hint="Download Stats">
-            <i className="fa fa-bar-chart" />
-          </a>
         </div>
         <div className="panel-body">
           {description}

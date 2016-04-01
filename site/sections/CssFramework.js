@@ -51,9 +51,6 @@ const CssFramework = (props) => {
     <div className={cx('zoomInBackwards panel', props.cssFramework)}>
       <div className="panel-heading">
         <h6>{CSS_FRAMEWORK_SVG}{!props.cssFramework || props.cssFramework === 'none' ? 'CSS Framework' : props.cssFramework}</h6>
-        <a href="#" className="stats-icon hint--top hint--rounded" data-hint="Download Stats">
-          <i className="fa fa-bar-chart" />
-        </a>
       </div>
       <div className="panel-body">
         {description}

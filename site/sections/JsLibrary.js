@@ -52,9 +52,6 @@ class JsLibrary extends React.Component {
       <div className='zoomInBackwards panel authentication'>
         <div className="panel-heading">
           <h6>{JS_LIBRARY_SVG}{props.library || 'JS Library Options'}</h6>
-          <a href="#" className="stats-icon hint--top hinHomet--rounded" data-hint="Download Stats">
-            <i className="fa fa-bar-chart"/>
-          </a>
         </div>
         <div className="panel-body">
           <div className="row">

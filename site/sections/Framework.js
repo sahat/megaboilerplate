@@ -101,9 +101,6 @@ class Framework extends React.Component {
       <div className={cx('zoomInBackwards panel', props.framework)}>
         <div className="panel-heading">
           <h6>{FRAMEWORK_SVG}{props.framework || 'Framework'}</h6>
-          <a href="#" className="stats-icon hint--top hint--rounded" data-hint="Download Stats">
-            <i className="fa fa-bar-chart" />
-          </a>
         </div>
         <div className="panel-body">
           {description}

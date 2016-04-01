@@ -54,9 +54,6 @@ const Database = (props) => {
     <div className={cx('zoomInBackwards panel', props.database)}>
       <div className="panel-heading">
         <h6>{DATABASE_SVG}{!props.database || props.database === 'none' ? 'Database' : props.database}</h6>
-        <a href="#" className="stats-icon hint--top hint--rounded" data-hint="Download Stats">
-          <i className="fa fa-bar-chart" />
-        </a>
       </div>
       <div className="panel-body">
         {description}
