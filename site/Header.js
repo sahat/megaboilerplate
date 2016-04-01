@@ -226,9 +226,6 @@ class Header extends React.Component {
               </a>
             </div>
             <div id="navbar" className="navbar-collapse collapse">
-              <ul className="nav navbar-nav">
-                <li><a href="https://github.com/sahat/boilerplate/issues" target="_blank"><i className="fa fa-bug"></i>Report Issues</a></li>
-              </ul>
               <ul className="nav navbar-nav navbar-right">
                 <li className="tweet-button">
                   <a className="twitter-share-button" href="https://twitter.com/intent/tweet" />
@@ -277,9 +274,9 @@ class Header extends React.Component {
                 Featuring <span style={{ color: '#fff' }} ref="heroHeading"/>
               </div>
             </VelocityComponent>
-            <a href="#" className="btn btn-outline">{demoIcon} Live Demo</a> <a href="#" className="btn btn-outline">Project Examples</a>
+            <a href="#" className="btn btn-outline">{demoIcon} Live Demo</a> <a href="#" className="btn btn-outline">Code Examples</a>
           </div>
-          <iframe src="https://ghbtns.com/github-btn.html?user=twbs&repo=bootstrap&type=star&count=true&size=large" frameBorder="0" scrolling="0" width="160px" height="30px"></iframe>
+          <iframe src="https://ghbtns.com/github-btn.html?user=sahat&repo=boilerplate&type=star&count=true&size=large" frameBorder="0" scrolling="0" width="160px" height="30px"></iframe>
           <div ref="carbonAds"></div>
 
           <div className="footnote">¹ Inspired by <a href="https://github.com/sahat/hackathon-starter" target="_blank">Hackathon Starter</a></div>
