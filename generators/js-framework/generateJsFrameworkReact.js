@@ -12,6 +12,8 @@ async function generateJsFrameworkReact(params) {
   const serverRenderingWithRouting = join(__dirname, 'modules', 'react', 'server-rendering-with-routing.js');
   const babelrc = join(__dirname, 'modules', 'react', '.babelrc');
 
+  console.log(params);
+  
   switch (params.framework) {
     case 'express':
 
@@ -70,6 +72,16 @@ async function generateJsFrameworkReact(params) {
 
       const store = join(__dirname, 'modules', 'react', 'store');
       await cpy([join(store, 'configureStore.js')], join(build, 'app', 'store'));
+      const configureStore = join(build, 'app', 'store', 'configureStore.js');
+      const thunkAndDevTools = join(store, 'thunkAndDevTools.js');
+      const thunk = join(store, 'thunk.js');
+
+      // Optional: Redux Dev Tools
+      if (params.reactOptions.includes('reduxDevTools')) {
+        await replaceCode(configureStore, 'REDUX_STORE_ENHANCER', thunkAndDevTools, { indentLevel: 2 });
+      } else {
+        await replaceCode(configureStore, 'REDUX_STORE_ENHANCER', thunk, { indentLevel: 2 });
+      }
 
       // Copy entry file and React routes
       await copy(mainJs, join(build, 'app', 'main.js'));

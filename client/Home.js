@@ -82,6 +82,7 @@ class Home extends React.Component {
     // Convert ES6 set to array
     data.authentication = data.authentication ? Array.from(data.authentication) : [];
     data.frameworkOptions = data.frameworkOptions ? Array.from(data.frameworkOptions) : [];
+    data.reactOptions = data.reactOptions ? Array.from(data.reactOptions) : [];
     data.jsLibraryOptions = data.jsLibraryOptions ? Array.from(data.jsLibraryOptions) : [];
 
     $.ajax({
