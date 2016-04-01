@@ -18,6 +18,10 @@ const NextSteps = (props) => {
     mysql: 'MySQL',
     postgresql: 'PostgreSQL',
     sqlite: 'SQLite',
+    heroku: 'Heroku',
+    azure: 'Microsoft Azure',
+    bluemix: 'IBM Bluemix',
+    digitalOcean: 'Digital Ocean'
   };
 
   let urlMap = {
@@ -40,16 +44,28 @@ const NextSteps = (props) => {
     gettingStartedText += `.`;
   }
 
+  if (props.deployment && props.deployment !== 'none') {
+    gettingStartedText += ` When ready to deploy, see our <a href="https://github.com/sahat/boilerplate#" target="_blank"> ${nameMap[props.deployment]} deployment guide</a>.`
+  }
 
-  const learnMap = {
+    const learnMap = {
+    express: `<strong>Express</strong>`,
+    meteor: `<strong>Meteor</strong>`,
     jekyll: `<strong>Jekyll</strong>`,
     middleman: `<strong>Middleman</strong>`,
     library: `creating a <strong>JavaScript Library</strong> and best practices`,
     react: `<strong>React</strong> and <strong>Redux</strong>`,
     angular: `<strong>Angular 2</strong> and <strong>TypeScript</strong>`,
+    mysql: `<strong>Knex.js ORM</strong>`,
+    sqlite: `<strong>Knex.js ORM</strong>`,
+    postgresql: `<strong>Knex.js ORM</strong>`,
+    mongodb: `<strong>Mongoose</strong>`,
   };
 
-  let learningText = `Learn more about ${learnMap[props.jsFramework || props.staticSiteGenerator || props.platform]} using these curated <a href="https://github.com/sahat/boilerplate/README.md#" target="_blank">free resources</a>.`;
+  const jsFramework = props.jsFramework !== 'none' ? props.jsFramework : null;
+  const database = props.database !== 'none' ? `${learnMap[props.framework]} and ${learnMap[props.database]}` : null;
+
+  let learningText = `Learn more about ${learnMap[jsFramework] || database || learnMap[props.framework || props.staticSiteGenerator || props.platform]} using these curated <a href="https://github.com/sahat/boilerplate/README.md#" target="_blank">free resources</a>.`;
 
 
   return (
@@ -83,7 +99,7 @@ const NextSteps = (props) => {
               <div className="text-center">
                 <img className="next-steps-icon" src="/img/svg/faq.svg" alt="FAQ"/>
                 <p>
-                  See <a href="https://github.com/sahat/boilerplate/README.md#faq" target="_blank">frequently asked questions</a> before opening an issue on GitHub. For general questions visit our <a href="">Gitter</a> chat.
+                  See <a href="https://github.com/sahat/boilerplate/README.md#faq" target="_blank">frequently asked questions</a> before opening an issue on GitHub. For general questions, visit our <a href="">Gitter</a> chat.
                 </p>
               </div>
             </div>
