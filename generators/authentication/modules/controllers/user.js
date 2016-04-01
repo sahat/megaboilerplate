@@ -6,6 +6,7 @@ var nodemailer = require('nodemailer');
 //= JWT_REQUIRE
 var User = require('../models/user');
 //= ENSURE_AUTHENTICATED_MIDDLEWARE
+//= GENERATE_TOKEN
 //= USER_LOGIN_GET
 //= USER_LOGIN_POST
 //= USER_LOGOUT

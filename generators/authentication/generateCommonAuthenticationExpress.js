@@ -25,6 +25,7 @@ async function generateCommonAuthenticationExpress(params) {
   const userControllerRequire = join(__dirname, 'modules', 'controllers', 'user-require.js');
   const accountRoutesJwt = join(__dirname, 'modules', 'common', 'routes', 'account-routes-jwt.js');
   const accountRoutesPassport = join(__dirname, 'modules', 'common', 'routes', 'account-routes-passport.js');
+  const generateTokenHelper = join(__dirname, 'modules', 'common', 'generate-token.js');
 
   // Copy user controller
   await copy(userControllerModule, join(build, 'controllers', 'user.js'));
@@ -35,6 +36,7 @@ async function generateCommonAuthenticationExpress(params) {
     await replaceCode(app, 'IS_AUTHENTICATED_MIDDLEWARE', jwtIsAuthenticatedMiddleware);
     await replaceCode(userController, 'ENSURE_AUTHENTICATED_MIDDLEWARE', jwtEnsureAuthenticated);
     await replaceCode(userController, 'JWT_REQUIRE', jwtRequire);
+    await replaceCode(userController, 'GENERATE_TOKEN', generateTokenHelper);
   } else {
     await replaceCode(userController, 'ENSURE_AUTHENTICATED_MIDDLEWARE', passportEnsureAuthenticated);
     await replaceCode(userController, 'PASSPORT_REQUIRE', passportRequire);
