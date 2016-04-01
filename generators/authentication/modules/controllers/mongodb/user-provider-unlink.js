@@ -9,6 +9,9 @@ User.findById(req.user.id, function(err, user) {
     case 'twitter':
       user.twitter = undefined;
       break;
+    case 'vk':
+      user.vk = undefined;
+      break;
     default:
       //= PROVIDER_UNLINK_ERROR
   }

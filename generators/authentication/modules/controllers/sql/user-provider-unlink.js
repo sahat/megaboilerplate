@@ -11,6 +11,9 @@ new User({ id: req.user.id })
       case 'twitter':
         user.set('twitter', null);
         break;
+      case 'vk':
+        user.set('vk', null);
+        break;
       default:
         //= PROVIDER_UNLINK_ERROR
     }

@@ -35,7 +35,7 @@ const Authentication = (props) => {
       </label>
       <label className={cx('checkbox-inline', { 'locked': isEmailRequired })}>
         <img className="btn-logo" src="/img/svg/email-logo.svg" height="60" alt="Email" />
-        <input type="checkbox" name="authenticationCheckboxes" value="email" onChange={props.handleChange} checked={props.authentication && props.authentication.has('email') || isEmailRequired} /> Email & Password
+        <input type="checkbox" name="authenticationCheckboxes" value="email" onChange={props.handleChange} checked={props.authentication && props.authentication.has('email') || isEmailRequired} /> Email
       </label>
       <label className="checkbox-inline">
         <img className="btn-logo" src="/img/svg/facebook-logo.svg" alt="Facebook" />
@@ -49,7 +49,7 @@ const Authentication = (props) => {
         <img className="btn-logo" src="/img/svg/twitter-logo.svg" alt="Twitter" />
         <input type="checkbox" name="authenticationCheckboxes" value="twitter" onChange={props.handleChange} checked={props.authentication && props.authentication.has('twitter')} /> Twitter
       </label>
-      <label className="checkbox-inline">
+      <label className="checkbox-inline" title="VKontakte (ВКонтакте)">
         <img className="btn-logo" src="/img/svg/vk-logo.svg" alt="VK" />
         <input type="checkbox" name="authenticationCheckboxes" value="vk" onChange={props.handleChange} checked={props.authentication && props.authentication.has('vk')} /> VK
       </label>

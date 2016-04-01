@@ -3,6 +3,7 @@ import generateLocalAuthentication from './generateLocalAuthentication';
 import generateFacebookAuthentication from './generateFacebookAuthentication';
 import generateGoogleAuthentication from './generateGoogleAuthentication';
 import generateTwitterAuthentication from './generateTwitterAuthentication';
+import generateVkAuthentication from './generateVkAuthentication';
 
 async function generateAuthentication(params) {
   if (params.authentication.length) {
@@ -22,6 +23,10 @@ async function generateAuthentication(params) {
 
     if (params.authentication.includes('twitter')) {
       await generateTwitterAuthentication(params);
+    }
+
+    if (params.authentication.includes('vk')) {
+      await generateVkAuthentication(params);
     }
   }
 }

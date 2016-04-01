@@ -55,6 +55,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //= FACEBOOK_ROUTES
 //= GOOGLE_ROUTES
 //= TWITTER_ROUTES
+//= VK_ROUTES
 //= REACT_SERVER_RENDERING
 
 // production error handler
