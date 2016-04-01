@@ -84,7 +84,7 @@ class Framework extends React.Component {
     const nodeFrameworks = props.platform === 'node' ? (
       <div className="radio-group">
         <label className="radio-inline">
-          <span className="express-logo">Express</span>
+          <img className="btn-logo express" src="/img/svg/express-logo.png" alt="Express"/>
           <input type="radio" id="expressRadio" name="frameworkRadios" value="express" onChange={props.handleChange} checked={props.framework === 'express'}/>
           <span>Express</span>
           {recommended}

@@ -34,14 +34,10 @@ h3 {
 h6 {
   font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 12px;
-  line-height: 32px;
+  line-height: 34px;
   text-transform: uppercase;
   letter-spacing: 2px;
   font-weight: 700;
-  /*margin-bottom: 24px;*/
-  /*border-bottom: 1px solid #ccc;*/
-  /*padding-left: 5px;*/
-  /*padding-right: 5px;*/
 }
 
 hr {
@@ -392,15 +388,15 @@ i.arrow {
 }
 
 /*CSS Logos*/
-.express-logo {
-  display: block;
-  font-size: 32px;
-  font-weight: 100;
-  font-family: "Helvetica Neue", "Raleway", Helvetica, Arial, sans-serif;
-  line-height: 50px;
-  letter-spacing: 1px;
-  -webkit-font-smoothing: initial;
-}
+/*.express-logo {*/
+  /*display: block;*/
+  /*font-size: 32px;*/
+  /*font-weight: 100;*/
+  /*font-family: "Helvetica Neue", "Raleway", Helvetica, Arial, sans-serif;*/
+  /*line-height: 50px;*/
+  /*letter-spacing: 1px;*/
+  /*-webkit-font-smoothing: initial;*/
+/*}*/
 
 .btn-logo {
   max-height: 50px;
@@ -408,6 +404,10 @@ i.arrow {
   display: block;
   padding-bottom: 10px;
   margin: 0 auto;
+}
+
+.btn-logo.express {
+  padding-bottom: 0;
 }
 
 .btn-logo.small {
@@ -490,6 +490,24 @@ section {
 .category-panel.active {
   color: #fff;
   background-color: #47b475;
+}
+
+.separator {
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+}
+
+.next-steps-icon {
+  position: relative;
+  width: 80px;
+  height: auto;
+  margin-bottom: 10px;
+  transition: all 0.3s;
+}
+
+
+[class^="col-"]:hover .next-steps-icon {
+  transform: translateY(-10px);
 }
 
 /*Footer*/
@@ -1149,6 +1167,10 @@ canvas {
   display: inline-block;
   margin-top: 0;
   margin-bottom: 0;
+}
+
+.panel-body h4 {
+  margin-top: 0;
 }
 
 .panel-heading h6 svg {
