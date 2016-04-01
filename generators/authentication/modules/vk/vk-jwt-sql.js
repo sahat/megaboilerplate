@@ -1,5 +1,5 @@
 if (req.isAuthenticated()) {
-  new User({ vk: profile.id })
+  new User({ vk: profile.uid })
     .fetch()
     .then(function(user) {
       if (user) {

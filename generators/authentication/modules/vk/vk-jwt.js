@@ -2,7 +2,7 @@
  * POST /auth/vkontakte
  * Sign in with VK
  */
-exports.authVk = function(req, res) {
+exports.authVkontakte = function(req, res) {
   var profileFields = ['uid', 'first_name', 'last_name', 'screen_name', 'sex', 'photo'];
   var accessTokenUrl = 'https://oauth.vk.com/access_token';
   var profileUrl = 'https://api.vk.com/method/getProfiles?fields=' + profileFields.join(',');
@@ -31,12 +31,14 @@ exports.authVk = function(req, res) {
         return res.status(500).send({ msg: profile.error.message });
       }
 
+      profile = profile.response[0];
+
       // Step 3a. Link accounts if user is authenticated.
       //= AUTH_VK_JWT_DB
     });
   });
 };
 
-exports.authVkCallback = function(req, res) {
+exports.authVkontakteCallback = function(req, res) {
   res.render('loading');
 };

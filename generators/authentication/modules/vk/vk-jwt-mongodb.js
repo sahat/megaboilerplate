@@ -1,5 +1,5 @@
 if (req.isAuthenticated()) {
-  User.findOne({ vk: profile.id }, function(err, user) {
+  User.findOne({ vk: profile.uid }, function(err, user) {
     if (user) {
       return res.status(409).send({ msg: 'There is already an existing account linked with VK that belongs to you.' });
     }
