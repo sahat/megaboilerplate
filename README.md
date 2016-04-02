@@ -23,6 +23,8 @@ Table of Contents
  - [SQLite](#-sqlite)
 - [**Project Structure**](#project-structure)
 - [**Obtaining API Keys**](#obtaining-api-keys)
+- [**Learning Resources**](#learning-resources)
+ - [React / Redux](#react-redux)
 - [**Cheatsheets**](#cheatsheets)
  - [ES6](#-es6-cheatsheet)
  - [JavaScript Date](#-javascript-date-cheatsheet)
@@ -353,6 +355,17 @@ To use any of the included OAuth providers (e.g. Facebook, Twitter, Google), you
 - Copy and paste **Consumer Key** and **Consumer Secret** keys into `.env` file:
  - `TWITTER_ID='YOUR_CONSUMER_KEY'`
  - `TWITTER_SECRET='YOUR_CONSUMER_SECRET'`
+
+:top: <sub>[**back to top**](#table-of-contents)</sub>
+
+Learning Resources
+------------------
+
+### React / Redux
+- [[VIDEO] React in 7 Minutes](https://egghead.io/lessons/react-react-in-7-minutes)
+- [[VIDEO] Getting Started with Redux (30 free videos)](https://egghead.io/series/getting-started-with-redux)
+- [[TUTORIAL] Handcrafting an Isomorphic Redux Application](https://medium.com/front-end-developers/handcrafting-an-isomorphic-redux-application-with-love-40ada4468af4#.vft63avyi)
+- [[TUTORIAL] Create a character voting app using React, Node.js, MongoDB and Socket.IO](http://sahatyalkabov.com/create-a-character-voting-app-using-react-nodejs-mongodb-and-socketio/)
 
 :top: <sub>[**back to top**](#table-of-contents)</sub>
 
