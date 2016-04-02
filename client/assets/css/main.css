@@ -56,6 +56,10 @@ hr {
   position: relative;
 }
 
+.text-danger {
+  color: #db2828;
+}
+
 .footnote {
   position: absolute;
   bottom: 0;
@@ -421,7 +425,7 @@ i.arrow {
 }
 
 .btn-logo.express {
-  padding-bottom: 0;
+  padding-bottom: 5px;
 }
 
 .btn-logo.small {

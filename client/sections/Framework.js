@@ -33,6 +33,13 @@ class Framework extends React.Component {
           </div>
         );
         break;
+      case 'hapi':
+        description = (
+          <div>
+            <strong><a href="http://hapijs.com/" target="_blank">Hapi</a></strong> — Configuration-centric framework with built-in support for input validation, caching, authentication, and other essential facilities for building web and services applications.
+          </div>
+        );
+        break;
       case 'meteor':
         description = (
           <div>
@@ -90,8 +97,13 @@ class Framework extends React.Component {
           {recommended}
         </label>
         <label className="radio-inline">
-          <img className="btn-logo" src="/img/svg/meteor-logo.png" alt="Meteor"/>
-          <input type="radio" name="frameworkRadios" value="meteor" onChange={props.handleChange} checked={props.framework === 'meteor'}/>
+          <img className="btn-logo" src="/img/svg/hapi-logo.png" alt="Hapi.js"/>
+          <input type="radio" name="frameworkRadios" value="hapi" onChange={props.handleChange} checked={props.framework === 'hapi'}/>
+          <span>Hapi</span>
+        </label>
+        <label className="radio-inline hint--top hint--rounded" data-hint="(Coming soon) You can track status at https://github.com/sahat/boilerplate/issues/2">
+          <img className="btn-logo disabled" src="/img/svg/meteor-logo.png" alt="Meteor"/>
+          <input type="radio" name="frameworkRadios" value="meteor" disabled/>
           <span>Meteor</span>
         </label>
       </div>
