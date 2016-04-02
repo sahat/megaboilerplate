@@ -373,6 +373,7 @@ Learning Resources
 - [[VIDEO] Getting Started with Redux (30 free videos)](https://egghead.io/series/getting-started-with-redux)
 - [[TUTORIAL] Handcrafting an Isomorphic Redux Application](https://medium.com/front-end-developers/handcrafting-an-isomorphic-redux-application-with-love-40ada4468af4#.vft63avyi)
 - [[TUTORIAL] Create a character voting app using React, Node.js, MongoDB and Socket.IO](http://sahatyalkabov.com/create-a-character-voting-app-using-react-nodejs-mongodb-and-socketio/)
+- [[TUTORIAL] React.js Introduction For People Who Know Just Enough jQuery To Get By](http://reactfordesigners.com/labs/reactjs-introduction-for-people-who-know-just-enough-jquery-to-get-by/)
 
 :top: <sub>[**back to top**](#table-of-contents)</sub>
 
