@@ -383,8 +383,8 @@ Learning Resources
 
 :top: <sub>[**back to top**](#table-of-contents)</sub>
 
-### Testing
-- [Sinon Tutorial: JavaScript Testing with Mocks, Spies & Stubs](http://www.sitepoint.com/sinon-tutorial-javascript-testing-mocks-spies-stubs/)
+### AngularJS
+- [John Papa's Angular Style Guide](https://github.com/johnpapa/angular-styleguide/)
 
 :top: <sub>[**back to top**](#table-of-contents)</sub>
 
