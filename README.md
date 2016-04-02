@@ -24,7 +24,7 @@ Table of Contents
 - [**Project Structure**](#project-structure)
 - [**Obtaining API Keys**](#obtaining-api-keys)
 - [**Learning Resources**](#learning-resources)
- - [React / Redux](#react-redux)
+ - [React / Redux](#react--redux)
 - [**Cheatsheets**](#cheatsheets)
  - [ES6](#-es6-cheatsheet)
  - [JavaScript Date](#-javascript-date-cheatsheet)
@@ -361,6 +361,13 @@ To use any of the included OAuth providers (e.g. Facebook, Twitter, Google), you
 Learning Resources
 ------------------
 
+### Web Tools
+- [HTML to Jade converter](http://html2jade.aaron-powell.com/)
+- [SassMe - A Tool for Visualizing SASS Color Functions](http://sassme.arc90.com/)
+- [uiGradients](http://uigradients.com/)
+
+:top: <sub>[**back to top**](#table-of-contents)</sub>
+
 ### React / Redux
 - [[VIDEO] React in 7 Minutes](https://egghead.io/lessons/react-react-in-7-minutes)
 - [[VIDEO] Getting Started with Redux (30 free videos)](https://egghead.io/series/getting-started-with-redux)
@@ -368,6 +375,18 @@ Learning Resources
 - [[TUTORIAL] Create a character voting app using React, Node.js, MongoDB and Socket.IO](http://sahatyalkabov.com/create-a-character-voting-app-using-react-nodejs-mongodb-and-socketio/)
 
 :top: <sub>[**back to top**](#table-of-contents)</sub>
+
+### Performance and SEO
+- [Managing Mobile Performance Optimization](https://www.smashingmagazine.com/2016/03/managing-mobile-performance-optimization)
+- [A technical guide to SEO](https://ma.ttias.be/technical-guide-seo/)
+
+:top: <sub>[**back to top**](#table-of-contents)</sub>
+
+### Testing
+- [Sinon Tutorial: JavaScript Testing with Mocks, Spies & Stubs](http://www.sitepoint.com/sinon-tutorial-javascript-testing-mocks-spies-stubs/)
+
+:top: <sub>[**back to top**](#table-of-contents)</sub>
+
 
 Cheatsheets
 -----------
