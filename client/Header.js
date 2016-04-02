@@ -6,6 +6,7 @@ if (typeof window !== 'undefined') {
 }
 
 import React from 'react';
+import moment from 'moment';
 import { shuffle } from 'lodash/collection';
 import { VelocityComponent, VelocityTransitionGroup } from 'velocity-react';
 
@@ -46,11 +47,16 @@ const GITHUB_LOGO = (
 class Header extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      latestCommit: null
+    }
   }
 
   componentDidMount() {
+    this.getLastCommit();
+
      setTimeout(() => {
-       this.loadCarbonAds();
+       // this.loadCarbonAds();
      }, 500);
      // this.renderConnectedDots();
 
@@ -186,6 +192,18 @@ class Header extends React.Component {
     setInterval(createDots, 1000 / 30);
   }
 
+  getLastCommit() {
+    $.get('https://api.github.com/repos/sahat/boilerplate/commits', (data) => {
+      if (data && data.length) {
+        const commit = data[0].commit;
+        const date = commit.author.date;
+        this.setState({
+          latestCommit: moment(date).fromNow()
+        });
+      }
+    });
+  }
+
   render() {
     const isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
     const isFirefox = typeof InstallTrigger !== 'undefined';
@@ -280,7 +298,11 @@ class Header extends React.Component {
           <iframe src="https://ghbtns.com/github-btn.html?user=sahat&repo=boilerplate&type=star&count=true&size=large" frameBorder="0" scrolling="0" width="160px" height="30px"></iframe>
           <div ref="carbonAds"></div>
 
-          <div className="footnote">¹ Inspired by <a href="https://github.com/sahat/hackathon-starter" target="_blank">Hackathon Starter</a></div>
+          <div className="footnote left">¹ Inspired by <a href="https://github.com/sahat/hackathon-starter" target="_blank">Hackathon Starter</a></div>
+
+          <VelocityComponent runOnMount animation="transition.fadeIn" duration={1000} delay={850}>
+            <div style={{ opacity: 0 }} className="footnote right">Latest commit: <a href="https://github.com/sahat/boilerplate" target="_blank">{this.state.latestCommit}</a></div>
+          </VelocityComponent>
         </div>
       </header>
     );

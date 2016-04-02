@@ -57,9 +57,16 @@ hr {
 }
 
 .footnote {
-  text-align: left;
   position: absolute;
   bottom: 0;
+}
+
+.footnote.left {
+  left: 15px;
+}
+
+.footnote.right {
+  right: 15px;
 }
 
 .footnote a {
