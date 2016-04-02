@@ -113,9 +113,14 @@ class JsFramework extends React.Component {
               <input type="radio" name="jsFrameworkRadios" value="react" onChange={props.handleChange} checked={props.jsFramework === 'react'}/>
               <span>React</span>
             </label>
+            <label className="radio-inline">
+              <img className="btn-logo" src="/img/svg/angularjs-logo.svg" alt="AngularJS"/>
+              <input type="radio" name="jsFrameworkRadios" value="angularjs" onChange={props.handleChange} checked={props.jsFramework === 'angularjs'}/>
+              <span>AngularJS</span>
+            </label>
             <label className="radio-inline hint--right hint--rounded" data-hint="ETA shortly after Angular 2 Release Candidate">
-              <img className="btn-logo disabled" src="/img/svg/angular2.png" alt="Angular"/>
-              <input type="radio" name="jsFrameworkRadios" value="angular" disabled/>
+              <img className="btn-logo disabled" src="/img/svg/angular2.png" alt="Angular 2"/>
+              <input type="radio" name="jsFrameworkRadios" value="angular2" disabled/>
               <span>Angular 2</span>
             </label>
           </div>

@@ -425,7 +425,7 @@ i.arrow {
 }
 
 .btn-logo.express {
-  padding-bottom: 5px;
+  padding-bottom: 2px;
 }
 
 .btn-logo.small {
@@ -442,7 +442,7 @@ i.arrow {
 .checkbox-inline,
 .radio-inline {
   text-align: center;
-  /*line-height: 24px;*/
+  line-height: 22px;
   border-radius: 0;
   vertical-align: baseline;
 }
