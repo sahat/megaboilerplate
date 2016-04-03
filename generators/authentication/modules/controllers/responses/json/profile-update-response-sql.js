@@ -7,6 +7,6 @@ user.then(function(user) {
   res.redirect('/account');
 }).catch(function(err) {
   if (err.code === 'ER_DUP_ENTRY') {
-    res.status(409).send({ msg: 'The email address you have entered is already associated with an account.' });
+    res.status(409).send({ msg: 'The email address you have entered is already associated with another account.' });
   }
 });
