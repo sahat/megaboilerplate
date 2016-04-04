@@ -57,6 +57,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //= TWITTER_ROUTES
 //= VK_ROUTES
 //= REACT_SERVER_RENDERING
+//= ANGULARJS_ROUTES
 
 // production error handler
 if (app.get('env') === 'production') {
