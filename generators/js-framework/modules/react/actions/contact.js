@@ -15,14 +15,14 @@ export function submitContactForm(name, email, message) {
       if (response.ok) {
         response.json().then((json) => {
           dispatch({
-            type: 'SUBMIT_CONTACT_FORM_SUCCESS',
+            type: 'CONTACT_FORM_SUCCESS',
             messages: [json]
           });
         });
       } else {
         response.json().then((json) => {
           dispatch({
-            type: 'SUBMIT_CONTACT_FORM_FAILURE',
+            type: 'CONTACT_FORM_FAILURE',
             messages: Array.isArray(json) ? json : [json]
           });
         });
