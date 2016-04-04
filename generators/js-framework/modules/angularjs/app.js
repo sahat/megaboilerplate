@@ -1,42 +1,42 @@
-angular.module('MyApp', ['ngRoute', 'satellizer'])
+angular.module('MyApp', ['ngRoute', 'satellizer' <%= ngModuleDependencies])
   .config(function($routeProvider, $locationProvider, $authProvider) {
     $locationProvider.html5Mode(true);
 
     $routeProvider
       .when('/', {
-        templateUrl: 'partials/home.html'
+        templateUrl: 'views/partials/home.html'
       })
       .when('/contact', {
-        templateUrl: 'partials/contact.html',
+        templateUrl: 'views/partials/contact.html',
         controller: 'ContactCtrl'
       })
       .when('/login', {
-        templateUrl: 'partials/account/login.html',
+        templateUrl: 'views/partials/login.html',
         controller: 'LoginCtrl',
         resolve: { skipIfAuthenticated: skipIfAuthenticated }
       })
       .when('/signup', {
-        templateUrl: 'partials/account/signup.html',
+        templateUrl: 'views/partials/signup.html',
         controller: 'SignupCtrl',
         resolve: { skipIfAuthenticated: skipIfAuthenticated }
       })
       .when('/account', {
-        templateUrl: 'partials/account/profile.html',
+        templateUrl: 'views/partials/profile.html',
         controller: 'ProfileCtrl',
         resolve: { loginRequired: loginRequired }
       })
       .when('/forgot', {
-        templateUrl: 'partials/account/forgot.html',
+        templateUrl: 'views/partials/forgot.html',
         controller: 'ForgotCtrl',
         resolve: { skipIfAuthenticated: skipIfAuthenticated }
       })
       .when('/reset/:token', {
-        templateUrl: 'partials/account/reset.html',
+        templateUrl: 'views/partials/reset.html',
         controller: 'ResetCtrl',
         resolve: { skipIfAuthenticated: skipIfAuthenticated }
       })
       .otherwise({
-        templateUrl: 'partials/404.html'
+        templateUrl: 'views/partials/404.html'
       });
 
     $authProvider.loginUrl = '/login';
