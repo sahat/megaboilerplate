@@ -4,39 +4,39 @@ angular.module('MyApp', ['ngRoute', 'satellizer' <%= ngModuleDependencies])
 
     $routeProvider
       .when('/', {
-        templateUrl: 'views/partials/home.html'
+        templateUrl: 'views/home.html'
       })
       .when('/contact', {
-        templateUrl: 'views/partials/contact.html',
+        templateUrl: 'views/contact.html',
         controller: 'ContactCtrl'
       })
       .when('/login', {
-        templateUrl: 'views/partials/login.html',
+        templateUrl: 'views/login.html',
         controller: 'LoginCtrl',
         resolve: { skipIfAuthenticated: skipIfAuthenticated }
       })
       .when('/signup', {
-        templateUrl: 'views/partials/signup.html',
+        templateUrl: 'views/signup.html',
         controller: 'SignupCtrl',
         resolve: { skipIfAuthenticated: skipIfAuthenticated }
       })
       .when('/account', {
-        templateUrl: 'views/partials/profile.html',
+        templateUrl: 'views/profile.html',
         controller: 'ProfileCtrl',
         resolve: { loginRequired: loginRequired }
       })
       .when('/forgot', {
-        templateUrl: 'views/partials/forgot.html',
+        templateUrl: 'views/forgot.html',
         controller: 'ForgotCtrl',
         resolve: { skipIfAuthenticated: skipIfAuthenticated }
       })
       .when('/reset/:token', {
-        templateUrl: 'views/partials/reset.html',
+        templateUrl: 'views/reset.html',
         controller: 'ResetCtrl',
         resolve: { skipIfAuthenticated: skipIfAuthenticated }
       })
       .otherwise({
-        templateUrl: 'views/partials/404.html'
+        templateUrl: 'views/404.html'
       });
 
     $authProvider.loginUrl = '/login';

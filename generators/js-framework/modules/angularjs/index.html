@@ -11,26 +11,17 @@
 </head>
 <body ng-app="MyApp">
 
-<div ng-include src="'partials/header.html'"></div>
+<div ng-include src="'views/header.html'"></div>
 <div ng-view></div>
-<div ng-include src="'partials/footer.html'"></div>
+<div ng-include src="'views/footer.html'"></div>
 
 <script src="/js/vendor/jquery.js"></script>
 <script src="/js/vendor/bootstrap.js"></script>
 <script src="/js/vendor/angular.js"></script>
 <script src="/js/vendor/angular-route.js"></script>
-<script src="/js/vendor/satellizer.min.js"></script>
-<!--<script src="/js/app.js"></script>-->
-<script src="/main.js"></script>
-<script src="/controllers/profile.js"></script>
-<script src="/controllers/contact.js"></script>
-<script src="/controllers/forgot.js"></script>
-<script src="/controllers/login.js"></script>
-<script src="/controllers/reset.js"></script>
-<script src="/controllers/signup.js"></script>
-<script src="/controllers/header.js"></script>
-<script src="/services/account.js"></script>
-<script src="/services/contact.js"></script>
+<script src="/js/vendor/satellizer.js"></script>
+<script src="/js/bundle.js"></script>
+
 
 <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
 <script>
