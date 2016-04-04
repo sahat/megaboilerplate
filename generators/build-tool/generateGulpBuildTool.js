@@ -66,11 +66,20 @@ async function generateGulpBuildTool(params) {
       await addNpmPackage('babel-preset-react', params, true);
 
       await replaceCode(join(build, 'gulpfile.js'), 'JS_FRAMEWORK_GULP_REQUIRE', reactGulpRequire);
-      await replaceCode(join(build, 'gulpfile.js'), 'JS_FRAMEWORK_GULP_TASK', reactGulpTask, { leadingBlankLine: true });
+      await replaceCode(join(build, 'gulpfile.js'), 'JS_FRAMEWORK_GULP_TASK', reactGulpTask);
 
       break;
 
-    case 'angular':
+    case 'angularjs':
+      const angularjsGulpRequire = join(__dirname, 'modules', 'gulp', 'angularjs', 'angularjs-require.js');
+      const angularjsGulpTask = join(__dirname, 'modules', 'gulp', 'angularjs', 'angularjs-task.js');
+
+      await addNpmPackage('gulp-concat', params, true);
+      await addNpmPackage('gulp-ng-annotate', params, true);
+
+      await replaceCode(join(build, 'gulpfile.js'), 'JS_FRAMEWORK_GULP_REQUIRE', angularjsGulpRequire);
+      await replaceCode(join(build, 'gulpfile.js'), 'JS_FRAMEWORK_GULP_TASK', angularjsGulpTask);
+
       break;
 
     default:
