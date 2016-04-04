@@ -51,7 +51,6 @@ async function generateFrameworkExpress(params) {
   await replaceCode(app, 'CONTACT_CONTROLLER', contactControllerRequire);
 
   // Create public dirs
-  await mkdirs(join(build, 'public', 'img'));
   await mkdirs(join(build, 'public', 'css'));
   await mkdirs(join(build, 'public', 'js'));
 

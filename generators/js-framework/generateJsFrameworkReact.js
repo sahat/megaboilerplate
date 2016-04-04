@@ -12,13 +12,13 @@ async function generateJsFrameworkReact(params) {
   const serverRenderingWithRouting = join(__dirname, 'modules', 'react', 'server-rendering-with-routing.js');
   const babelrc = join(__dirname, 'modules', 'react', '.babelrc');
 
-  console.log(params);
-  
   switch (params.framework) {
     case 'express':
 
+      // Copy .babelrc
       await cpy([babelrc], build);
 
+      // Create initial project structure
       await mkdirs(join(build, 'app', 'actions'));
       await mkdirs(join(build, 'app', 'components'));
       await mkdirs(join(build, 'app', 'reducers'));
