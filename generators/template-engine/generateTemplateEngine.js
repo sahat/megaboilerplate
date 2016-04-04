@@ -3,6 +3,9 @@ import generateHandlebarsTemplateEngine from '../../generators/template-engine/g
 import generateNunjucksTemplateEngine from '../../generators/template-engine/generateNunjucksTemplateEngine';
 
 async function generateTemplateEngine(params) {
+  if (params.jsFramework === 'angularjs') {
+    return;
+  }
   switch (params.templateEngine) {
     case 'jade':
       await generateJadeTemplateEngine(params);
