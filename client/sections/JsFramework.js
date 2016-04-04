@@ -1,5 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
+import { capitalize } from 'lodash/string';
 import { VelocityComponent } from 'velocity-react';
 
 const JS_FRAMEWORK_SVG = (
@@ -87,9 +88,17 @@ class JsFramework extends React.Component {
       note = (
         <div>
           <strong>Note: </strong>
-          <span>React app comes with <a href="http://redux.js.org/" target="_blank">Redux</a>, <a href="https://github.com/reactjs/react-router" target="_blank">React Router</a>, <a href="http://babeljs.io/">Babel</a> and server-side rendering.</span>
+          <span>React app comes with <a href="http://redux.js.org/" target="_blank">Redux</a>, <a href="https://github.com/reactjs/react-router" target="_blank">React
+            Router</a>, <a href="http://babeljs.io/">Babel</a> and server-side rendering.</span>
         </div>
       );
+    } else if (props.jsFramework === 'angularjs') {
+      note = (
+        <div>
+          <strong>Note: </strong>
+          <span>Your choice of <strong>{capitalize(props.templateEngine)}</strong> template engine will have no effect with AngularJS.</span>
+        </div>
+      )
     } else {
       note = <div className="placeholder"> </div>;
     }
@@ -118,7 +127,7 @@ class JsFramework extends React.Component {
               <input type="radio" name="jsFrameworkRadios" value="angularjs" onChange={props.handleChange} checked={props.jsFramework === 'angularjs'}/>
               <span>AngularJS</span>
             </label>
-            <label className="radio-inline hint--right hint--rounded" data-hint="ETA shortly after Angular 2 Release Candidate">
+            <label className="radio-inline hint--right hint--rounded" data-hint="ETA after Angular 2 Release Candidate">
               <img className="btn-logo disabled" src="/img/svg/angular2.png" alt="Angular 2"/>
               <input type="radio" name="jsFrameworkRadios" value="angular2" disabled/>
               <span>Angular 2</span>
