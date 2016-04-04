@@ -811,17 +811,6 @@ canvas {
   fill: currentColor;
 }
 
-.hapi .panel-heading {
-  color: #3c3b30;
-  background: #f6941e;
-  border-color: transparent;
-}
-
-.hapi svg {
-  color: #3c3b30;
-  fill: currentColor;
-}
-
 .sails .panel-heading {
   color: #fff;
   background: #41bac2 linear-gradient(135deg, #41bac2 0, #0b8fa2 100%);
