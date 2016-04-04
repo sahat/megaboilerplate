@@ -96,7 +96,7 @@ class JsFramework extends React.Component {
       note = (
         <div>
           <strong>Note: </strong>
-          <span>Your choice of <strong>{capitalize(props.templateEngine)}</strong> template engine will have no effect with AngularJS.</span>
+          <span>Your choice of template engine above will have no effect with AngularJS, because the app comes with its own templates.</span>
         </div>
       )
     } else {
