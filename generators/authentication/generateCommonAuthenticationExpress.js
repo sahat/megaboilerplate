@@ -89,16 +89,6 @@ async function generateCommonAuthenticationExpress(params) {
 
       await copy(mongooseModel, join(build, 'models', 'user.js'));
 
-
-      if (params.jsFramework) {
-        await replaceCode(userController, 'USER_LOGIN_POST', join(__dirname, 'modules', 'controllers', 'mongodb', 'user-login-jwt-post.js'), { indentLevel: 1 });
-        await replaceCode(userController, 'PROFILE_UPDATE_RESPONSE', join(__dirname, 'modules', 'controllers', 'responses', 'json', 'profile-update-response-mongodb.js'), { indentLevel: 2 });
-      } else {
-        await replaceCode(app, 'USER_HELPER_MIDDLEWARE', userHelperMiddlewareForMongoDb);
-        await replaceCode(passportJs, 'PASSPORT_DESERIALIZER', passportDeserializerMongoDb);
-        await replaceCode(userController, 'PROFILE_UPDATE_RESPONSE', join(__dirname, 'modules', 'controllers', 'responses', 'session', 'profile-update-response-mongodb.js'), { indentLevel: 2 });
-      }
-
       await replaceCode(userController, 'USER_SIGNUP_POST', join(__dirname, 'modules', 'controllers', 'mongodb', 'user-signup-post.js'), { indentLevel: 1 });
       await replaceCode(userController, 'USER_ACCOUNT_PUT', join(__dirname, 'modules', 'controllers', 'mongodb', 'user-account-put.js'), { indentLevel: 1 });
       await replaceCode(userController, 'USER_ACCOUNT_DELETE', join(__dirname, 'modules', 'controllers', 'mongodb', 'user-account-delete.js'), { indentLevel: 1 });
@@ -106,6 +96,15 @@ async function generateCommonAuthenticationExpress(params) {
       await replaceCode(userController, 'USER_FORGOT_POST', join(__dirname, 'modules', 'controllers', 'mongodb', 'user-forgot-post.js'), { indentLevel: 3 });
       await replaceCode(userController, 'USER_RESET_GET', join(__dirname, 'modules', 'controllers', 'mongodb', 'user-reset-get.js'), { indentLevel: 1 });
       await replaceCode(userController, 'USER_RESET_POST', join(__dirname, 'modules', 'controllers', 'mongodb', 'user-reset-post.js'), { indentLevel: 3 });
+
+      if (params.jsFramework) {
+        await replaceCode(userController, 'USER_LOGIN_POST', join(__dirname, 'modules', 'controllers', 'mongodb', 'user-login-jwt-post.js'), { indentLevel: 1 });
+        await replaceCode(userController, 'PROFILE_UPDATE_RESPONSE', join(__dirname, 'modules', 'controllers', 'responses', 'json', 'profile-update-response-mongodb.js'), { indentLevel: 3 });
+      } else {
+        await replaceCode(app, 'USER_HELPER_MIDDLEWARE', userHelperMiddlewareForMongoDb);
+        await replaceCode(passportJs, 'PASSPORT_DESERIALIZER', passportDeserializerMongoDb);
+        await replaceCode(userController, 'PROFILE_UPDATE_RESPONSE', join(__dirname, 'modules', 'controllers', 'responses', 'session', 'profile-update-response-mongodb.js'), { indentLevel: 3 });
+      }
       break;
 
     case 'mysql':
@@ -117,6 +116,13 @@ async function generateCommonAuthenticationExpress(params) {
       await copy(bookshelfModel, join(build, 'models', 'user.js'));
       await copy(join(__dirname, 'modules', 'migrations'), join(build, 'migrations'));
 
+      await replaceCode(userController, 'USER_SIGNUP_POST', join(__dirname, 'modules', 'controllers', 'sql', 'user-signup-post.js'), { indentLevel: 1 });
+      await replaceCode(userController, 'USER_ACCOUNT_PUT', join(__dirname, 'modules', 'controllers', 'sql', 'user-account-put.js'), { indentLevel: 1 });
+      await replaceCode(userController, 'USER_ACCOUNT_DELETE', join(__dirname, 'modules', 'controllers', 'sql', 'user-account-delete.js'), { indentLevel: 1 });
+      await replaceCode(userController, 'USER_PROVIDER_UNLINK', join(__dirname, 'modules', 'controllers', 'sql', 'user-provider-unlink.js'), { indentLevel: 1 });
+      await replaceCode(userController, 'USER_FORGOT_POST', join(__dirname, 'modules', 'controllers', 'sql', 'user-forgot-post.js'), { indentLevel: 3 });
+      await replaceCode(userController, 'USER_RESET_GET', join(__dirname, 'modules', 'controllers', 'sql', 'user-reset-get.js'), { indentLevel: 1 });
+      await replaceCode(userController, 'USER_RESET_POST', join(__dirname, 'modules', 'controllers', 'sql', 'user-reset-post.js'), { indentLevel: 3 });
 
       if (params.jsFramework) {
         await replaceCode(userController, 'USER_LOGIN_POST', join(__dirname, 'modules', 'controllers', 'sql', 'user-login-jwt-post.js'), { indentLevel: 1 });
@@ -126,14 +132,6 @@ async function generateCommonAuthenticationExpress(params) {
         await replaceCode(passportJs, 'PASSPORT_DESERIALIZER', passportDeserializerSql);
         await replaceCode(userController, 'PROFILE_UPDATE_RESPONSE', join(__dirname, 'modules', 'controllers', 'responses', 'session', 'profile-update-response-sql.js'), { indentLevel: 2 });
       }
-
-      await replaceCode(userController, 'USER_SIGNUP_POST', join(__dirname, 'modules', 'controllers', 'sql', 'user-signup-post.js'), { indentLevel: 1 });
-      await replaceCode(userController, 'USER_ACCOUNT_PUT', join(__dirname, 'modules', 'controllers', 'sql', 'user-account-put.js'), { indentLevel: 1 });
-      await replaceCode(userController, 'USER_ACCOUNT_DELETE', join(__dirname, 'modules', 'controllers', 'sql', 'user-account-delete.js'), { indentLevel: 1 });
-      await replaceCode(userController, 'USER_PROVIDER_UNLINK', join(__dirname, 'modules', 'controllers', 'sql', 'user-provider-unlink.js'), { indentLevel: 1 });
-      await replaceCode(userController, 'USER_FORGOT_POST', join(__dirname, 'modules', 'controllers', 'sql', 'user-forgot-post.js'), { indentLevel: 3 });
-      await replaceCode(userController, 'USER_RESET_GET', join(__dirname, 'modules', 'controllers', 'sql', 'user-reset-get.js'), { indentLevel: 1 });
-      await replaceCode(userController, 'USER_RESET_POST', join(__dirname, 'modules', 'controllers', 'sql', 'user-reset-post.js'), { indentLevel: 3 });
       break;
 
     default:
