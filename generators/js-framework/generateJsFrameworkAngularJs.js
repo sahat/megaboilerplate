@@ -1,5 +1,5 @@
 import { join } from 'path';
-import { copy, cpy, mkdirs, addNpmPackage, replaceCode } from '../utils';
+import { copy, cpy, mkdirs, addNpmPackage, replaceCode, templateReplace } from '../utils';
 
 async function generateJsFrameworkAngularJs(params) {
   const build = join(__base, 'build', params.uuid);
@@ -71,7 +71,11 @@ async function generateJsFrameworkAngularJs(params) {
       // Copy entry file and React routes
       const mainJs = join(__dirname, 'modules', 'angularjs', 'app.js');
       await copy(mainJs, join(build, 'app', 'app.js'));
-
+      
+      // Add satellizer dependency
+      await templateReplace(join(build, 'app', 'app.js'), {
+        satellizer: params.authentication.length ? `, 'satellizer'` : null
+      });
 
       // Copy index.html and loading.html templates
       const indexHtml = join(__dirname, 'modules', 'angularjs', 'index.html');
