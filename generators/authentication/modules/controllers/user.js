@@ -82,8 +82,7 @@ exports.forgotPost = function(req, res, next) {
   var errors = req.validationErrors();
 
   if (errors) {
-    req.flash('error', errors);
-    return res.redirect('/forgot');
+    //= FORGOT_POST_VALIDATION_ERROR
   }
 
   async.waterfall([

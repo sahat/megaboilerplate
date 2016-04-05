@@ -3,8 +3,7 @@ new User({ passwordResetToken: req.params.token })
   .fetch()
   .then(function(user) {
     if (!user) {
-      req.flash('error', { msg: 'Password reset token is invalid or has expired.' });
-      return res.redirect('back');
+      //= RESET_POST_INVALID_TOKEN_ERROR
     }
     user.set('password', req.body.password);
     user.set('passwordResetToken', null);

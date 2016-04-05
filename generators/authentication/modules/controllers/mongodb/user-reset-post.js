@@ -2,8 +2,7 @@ User.findOne({ passwordResetToken: req.params.token })
   .where('passwordResetExpires').gt(Date.now())
   .exec(function(err, user) {
     if (!user) {
-      req.flash('error', { msg: 'Password reset token is invalid or has expired.' });
-      return res.redirect('back');
+      //= RESET_POST_INVALID_TOKEN_ERROR
     }
     user.password = req.body.password;
     user.passwordResetToken = undefined;
