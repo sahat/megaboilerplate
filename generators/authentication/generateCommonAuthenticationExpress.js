@@ -37,6 +37,7 @@ async function generateCommonAuthenticationExpress(params) {
 
   if (params.jsFramework) {
     await replaceCode(app, 'IS_AUTHENTICATED_MIDDLEWARE', jwtIsAuthenticatedMiddleware);
+    await replaceCode(app, 'JWT_REQUIRE', jwtRequire);
     await replaceCode(userController, 'ENSURE_AUTHENTICATED_MIDDLEWARE', jwtEnsureAuthenticated);
     await replaceCode(userController, 'JWT_REQUIRE', jwtRequire);
     await replaceCode(userController, 'GENERATE_TOKEN', generateTokenHelper);
