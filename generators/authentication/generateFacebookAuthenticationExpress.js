@@ -1,5 +1,5 @@
 import { join } from 'path';
-import { replaceCode, appendFile, addNpmPackage } from '../utils';
+import { replaceCode, appendFile, addNpmPackage, addEnv } from '../utils';
 
 async function generateFacebookAuthenticationExpress(params) {
   const build = join(__base, 'build', params.uuid);
@@ -48,8 +48,16 @@ async function generateFacebookAuthenticationExpress(params) {
       break;
   }
 
-  await appendFile(env, '\nFACEBOOK_ID=754220301289665');
-  await appendFile(env, '\nFACEBOOK_SECRET=41860e58c256a3d7ad8267d3c1939a4a\n');
+  if (params.jsFramework) {
+    await addEnv(params, {
+      FACEBOOK_SECRET: 'fb9416c436edd2690c6f6adbd94374d1'
+    });
+  } else {
+    await addEnv(params, {
+      FACEBOOK_ID: '980220002068787',
+      FACEBOOK_SECRET: 'fb9416c436edd2690c6f6adbd94374d1'
+    });
+  }
 }
 
 export default generateFacebookAuthenticationExpress;
