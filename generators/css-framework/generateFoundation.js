@@ -1,7 +1,7 @@
 import { join } from 'path';
 import { copy, replaceCode } from '../utils';
 
-async function generateFoundation(params) {
+async function generateCssFrameworkFoundation(params) {
   const foundationDir = join(__base, 'modules', 'css-framework', 'foundation');
   const jqueryDir = join(__base, 'modules', 'css-framework', 'jquery');
   const publicDir = join(__base, 'build', params.uuid, 'public');
@@ -48,4 +48,4 @@ async function generateFoundation(params) {
   await copy(join(jqueryDir, 'jquery.js'), join(publicDir, 'js', 'vendor', 'jquery.js'));
 }
 
-export default generateFoundation;
+export default generateCssFrameworkFoundation;

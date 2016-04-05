@@ -1,7 +1,7 @@
 import { join } from 'path';
 import { copy, replaceCode } from '../utils';
 
-async function generateBourbonNeat(params) {
+async function generateCssFrameworkBourbonNeat(params) {
   const bourbonNeatDir = join(__base, 'modules', 'css-framework', 'bourbon-neat');
   const publicDir = join(__base, 'build', params.uuid, 'public');
 
@@ -11,4 +11,4 @@ async function generateBourbonNeat(params) {
   await copy(join(bourbonNeatDir, 'neat'), join(publicDir, 'css', 'vendor', 'neat'));
 }
 
-export default generateBourbonNeat;
+export default generateCssFrameworkBourbonNeat;

@@ -1,20 +1,20 @@
-import generateBootstrap from './generateBootstrap';
-import generateFoundation from './generateFoundation';
-import generateBourbonNeat from './generateBourbonNeat';
+import generateCssFrameworkBootstrap from './generateCssFrameworkBootstrap';
+import generateCssFrameworkFoundation from './generateCssFrameworkFoundation';
+import generateCssFrameworkBourbonNeat from './generateCssFrameworkBourbonNeat';
 import generateCssFrameworkNone from './generateCssFrameworkNone';
 
 async function generateCssFramework(params) {
   switch (params.cssFramework) {
     case 'bootstrap':
-      await generateBootstrap(params);
+      await generateCssFrameworkBootstrap(params);
       break;
 
     case 'foundation':
-      await generateFoundation(params);
+      await generateCssFrameworkFoundation(params);
       break;
 
     case 'bourbonNeat':
-      await generateBourbonNeat(params);
+      await generateCssFrameworkBourbonNeat(params);
       break;
 
     case 'none':

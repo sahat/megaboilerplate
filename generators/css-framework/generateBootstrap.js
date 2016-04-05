@@ -41,7 +41,7 @@ async function addCssFrameworkImports(params) {
   }
 }
 
-async function generateBootstrap(params) {
+async function generateCssFrameworkBootstrap(params) {
   const bootstrapDir = join(__dirname, 'modules', 'bootstrap');
   const jqueryDir = join(__dirname, 'modules', 'jquery');
   const publicDir = join(__base, 'build', params.uuid, 'public');
@@ -76,4 +76,4 @@ async function generateBootstrap(params) {
   await copy(join(jqueryDir, 'jquery.js'), join(publicDir, 'js', 'vendor', 'jquery.js'));
 }
 
-export default generateBootstrap;
+export default generateCssFrameworkBootstrap;
