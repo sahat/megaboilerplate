@@ -8,19 +8,11 @@ async function generateJsFrameworkAngularJs(params) {
 
   switch (params.framework) {
     case 'express':
-
-      // Create initial project structure
-      await mkdirs(join(build, 'app', 'controllers'));
-      await mkdirs(join(build, 'app', 'views'));
-      await mkdirs(join(build, 'app', 'services'));
-      await mkdirs(join(build, 'app', 'vendor'));
-
       // Add AngularJS routes + html5 push state redirect
       await replaceCode(app, 'ANGULARJS_ROUTES', angularJsRoutes);
 
       // Copy controllers
       const controllersDir = join(__dirname, 'modules', 'angularjs', 'controllers');
-
       await cpy([
         join(controllersDir, 'contact.js'),
         join(controllersDir, 'forgot.js'),
@@ -40,15 +32,13 @@ async function generateJsFrameworkAngularJs(params) {
       ], join(build, 'app', 'services'));
 
       // Copy vendor files
-      const vendorDir = join(__dirname, 'modules', 'angularjs', 'vendor');
+      const libDir = join(__dirname, 'modules', 'angularjs', 'lib');
       await cpy([
-        join(vendorDir, 'angular.js'),
-        join(vendorDir, 'angular.min.js'),
-        join(vendorDir, 'angular-mocks.js'),
-        join(vendorDir, 'angular-route.js'),
-        join(vendorDir, 'angular-route.min.js'),
-        join(vendorDir, 'satellizer.js')
-      ], join(build, 'app', 'vendor'));
+        join(libDir, 'angular.js'),
+        join(libDir, 'angular-mocks.js'),
+        join(libDir, 'angular-route.js'),
+        join(libDir, 'satellizer.js')
+      ], join(build, 'public', 'js', 'lib'));
 
       // Copy templates
       await cpy([join(__dirname, 'modules', 'angularjs', 'index.html')], join(build, 'app'));

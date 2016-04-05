@@ -135,8 +135,6 @@ async function generateJsFrameworkReact(params) {
 
   if (params.authentication.length) {
     await addNpmPackage('react-cookie', params);
-    await addNpmPackage('jsonwebtoken', params);
-    await addNpmPackage('moment', params);
   }
 }
 

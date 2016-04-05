@@ -75,7 +75,6 @@ async function copyTemplates(params) {
 
 async function generateJadeTemplateEngine(params) {
   let app;
-  let viewEngineSetup;
 
   switch (params.framework) {
     case 'express':
@@ -99,23 +98,6 @@ async function generateJadeTemplateEngine(params) {
       }
 
       
-      // Copy Jade templates, including header/footer partials
-      await copyTemplates(params);
-
-      // Add/remove features to the newly generated layout file above
-      await updateLayoutTemplate(params);
-      break;
-
-    case 'hapi':
-      app = join(__base, 'build', params.uuid, 'app.js');
-      viewEngineSetup = join(__base, 'modules', 'template-engine', 'jade', 'jade-hapi.js');
-
-      // Register view engine
-      await replaceCode(app, 'TEMPLATE_ENGINE', viewEngineSetup, { leadingBlankLine: true });
-
-      // Add dependencies
-      await addNpmPackage('vision', params);
-
       // Copy Jade templates, including header/footer partials
       await copyTemplates(params);
 
