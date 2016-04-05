@@ -1,5 +1,6 @@
 import { join } from 'path';
-import { copy, cpy, mkdirs, addNpmPackage, replaceCode } from '../utils';
+import { copy, cpy, mkdirs, addNpmPackage, replaceCode, templateReplace } from '../utils';
+import { noneClassMap, bootstrapClassMap, foundationClassMap, bourbonNeatClassMap } from '../css-framework/modules/class-maps.js';
 
 async function generateJsFrameworkReact(params) {
   const build = join(__base, 'build', params.uuid);
@@ -17,12 +18,6 @@ async function generateJsFrameworkReact(params) {
 
       // Copy .babelrc
       await cpy([babelrc], build);
-
-      // Create initial project structure
-      await mkdirs(join(build, 'app', 'actions'));
-      await mkdirs(join(build, 'app', 'components'));
-      await mkdirs(join(build, 'app', 'reducers'));
-      await mkdirs(join(build, 'app', 'store'));
 
       // Require react, react-router, react-dom packages
       await replaceCode(server, 'REACT_REQUIRE', reactRequire);
@@ -54,6 +49,20 @@ async function generateJsFrameworkReact(params) {
         join(components, 'Account', 'Reset.js'),
         join(components, 'Account', 'Signup.js')
       ], join(build, 'app', 'components', 'Account'));
+
+      // Replace CSS classes based on CSS framework
+      await replaceCssClasses(params, join(build, 'app', 'components', 'App.js'));
+      await replaceCssClasses(params, join(build, 'app', 'components', 'Contact.js'));
+      await replaceCssClasses(params, join(build, 'app', 'components', 'Footer.js'));
+      await replaceCssClasses(params, join(build, 'app', 'components', 'Header.js'));
+      await replaceCssClasses(params, join(build, 'app', 'components', 'Home.js'));
+      await replaceCssClasses(params, join(build, 'app', 'components', 'Messages.js'));
+      await replaceCssClasses(params, join(build, 'app', 'components', 'NotFound.js'));
+      await replaceCssClasses(params, join(build, 'app', 'components', 'Account', 'Forgot.js'));
+      await replaceCssClasses(params, join(build, 'app', 'components', 'Account', 'Login.js'));
+      await replaceCssClasses(params, join(build, 'app', 'components', 'Account', 'Profile.js'));
+      await replaceCssClasses(params, join(build, 'app', 'components', 'Account', 'Reset.js'));
+      await replaceCssClasses(params, join(build, 'app', 'components', 'Account', 'Signup.js'));
 
       // Copy Redux actions, reducers, store
       const actions = join(__dirname, 'modules', 'react', 'actions');
@@ -139,3 +148,21 @@ async function generateJsFrameworkReact(params) {
 }
 
 export default generateJsFrameworkReact;
+
+async function replaceCssClasses(params, filePath) {
+
+  switch(params.cssFramework) {
+    case 'bootstrap':
+      await templateReplace(filePath, bootstrapClassMap);
+      break;
+    case 'foundation':
+      await templateReplace(filePath, foundationClassMap);
+      break;
+    case 'bourbonNeat':
+      break;
+    case 'none':
+      break;
+  }
+
+
+}
