@@ -68,7 +68,7 @@ async function generateJsFrameworkAngularJs(params) {
         join(viewsDir, 'signup.html')
       ], join(build, 'app', 'views'));
 
-      // Copy entry file and React routes
+      // Copy entry file for Angular app
       const mainJs = join(__dirname, 'modules', 'angularjs', 'app.js');
       await copy(mainJs, join(build, 'app', 'app.js'));
       
@@ -76,26 +76,12 @@ async function generateJsFrameworkAngularJs(params) {
       await templateReplace(join(build, 'app', 'app.js'), {
         satellizer: params.authentication.length ? `, 'satellizer'` : null
       });
-
-      // Copy index.html and loading.html templates
-      const indexHtml = join(__dirname, 'modules', 'angularjs', 'index.html');
-      const loadingHtml = join(__dirname, 'modules', 'angularjs', 'loading.html');
-      await cpy([indexHtml, loadingHtml], join(build, 'app'));
-      break;
-
-    case 'hapi':
       break;
 
     case 'meteor':
       break;
 
     default:
-  }
-
-  if (params.authentication.length) {
-    await addNpmPackage('react-cookie', params);
-    await addNpmPackage('jsonwebtoken', params);
-    await addNpmPackage('moment', params);
   }
 }
 
