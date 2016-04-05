@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { updateProfile, changePassword, deleteAccount } from '../../actions/auth';
+import { link, unlink } from '../../actions/oauth';
 import Messages from '../Messages';
 
 class Profile extends React.Component {
@@ -37,21 +38,34 @@ class Profile extends React.Component {
     this.props.dispatch(deleteAccount(this.props.token));
   }
 
+  handleLink(provider) {
+    this.props.dispatch(link(provider))
+  }
+
+  handleUnlink(provider) {
+    this.props.dispatch(unlink(provider));
+  }
+
   render() {
     const googleLinkedAccount = this.props.user.google ? (
-      <a href="/auth/unlink/google" className="text-danger">Unlink your Google account</a>
+      <a role="button" className="text-danger" onClick={this.handleUnlink.bind(this, 'google')}>Unlink your Google account</a>
     ) : (
-      <a href="/auth/google">Link your Google account</a>
+      <a role="button" onClick={this.handleLink.bind(this, 'google')}>Link your Google account</a>
     );
     const facebookLinkedAccount = this.props.user.facebook ? (
-      <a href="/unlink/facebook" className="text-danger">Unlink your Facebook account</a>
+      <a role="button" className="text-danger" onClick={this.handleUnlink.bind(this, 'facebook')}>Unlink your Facebook account</a>
     ) : (
-      <a href="/auth/facebook">Link your Facebook account</a>
+      <a role="button" onClick={this.handleLink.bind(this, 'facebook')}>Link your Facebook account</a>
     );
     const twitterLinkedAccount = this.props.user.twitter ? (
-      <a href="/unlink/twitter" className="text-danger">Unlink your Twitter account</a>
+      <a role="button" className="text-danger" onClick={this.handleUnlink.bind(this, 'twitter')}>Unlink your Twitter account</a>
     ) : (
-      <a href="/auth/twitter">Link your Twitter account</a>
+      <a role="button" onClick={this.handleLink.bind(this, 'twitter')}>Link your Twitter account</a>
+    );
+    const vkLinkedAccount = this.props.user.vk ? (
+      <a role="button" className="text-danger" onClick={this.handleUnlink.bind(this, 'vk')}>Unlink your VK account</a>
+    ) : (
+      <a role="button" onClick={this.handleLink.bind(this, 'vk')}>Link your VK account</a>
     );
 
     return (
@@ -143,6 +157,7 @@ class Profile extends React.Component {
                   <p>{googleLinkedAccount}</p>
                   <p>{facebookLinkedAccount}</p>
                   <p>{twitterLinkedAccount}</p>
+                  <p>{vkLinkedAccount}</p>
                 </div>
               </div>
             </div>
