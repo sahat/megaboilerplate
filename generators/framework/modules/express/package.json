@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "My app description",
   "scripts": {
-    "start": "node app.js"
+    "start": "node server.js"
   },
   "dependencies": {
     "body-parser": "^1.12.0",

@@ -2,7 +2,7 @@ import { join } from 'path';
 import { copy, replaceCode, addNpmPackage } from '../utils';
 
 async function generateHandlebarsTemplateEngine(params) {
-  let app;
+  let server;
   let viewEngineRequire;
   let viewEngineSetup;
   let baseRoute;
@@ -10,16 +10,16 @@ async function generateHandlebarsTemplateEngine(params) {
 
   switch (params.framework) {
     case 'express':
-      app = join(__base, 'build', params.uuid, 'app.js');
+      server = join(__base, 'build', params.uuid, 'server.js');
       viewEngineRequire = join(__base, 'modules', 'template-engine', 'handlebars', 'handlebars-require-express.js');
       viewEngineSetup = join(__base, 'modules', 'template-engine', 'handlebars', 'handlebars-express.js');
       baseRoute = join(__base, 'modules', 'template-engine', 'routes', 'express-route.js');
 
-      await replaceCode(app, 'TEMPLATE_ENGINE_REQUIRE', viewEngineRequire);
-      await replaceCode(app, 'TEMPLATE_ENGINE', viewEngineSetup, { leadingBlankLine: true });
+      await replaceCode(server, 'TEMPLATE_ENGINE_REQUIRE', viewEngineRequire);
+      await replaceCode(server, 'TEMPLATE_ENGINE', viewEngineSetup, { leadingBlankLine: true });
 
       // Set base route "/"
-      await replaceCode(app, 'BASE_ROUTE', baseRoute, { leadingBlankLine: true });
+      await replaceCode(server, 'BASE_ROUTE', baseRoute, { leadingBlankLine: true });
 
       // Add to package.json
       await addNpmPackage('express-handlebars', params);

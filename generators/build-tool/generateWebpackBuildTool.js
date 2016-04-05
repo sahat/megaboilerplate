@@ -2,25 +2,25 @@ import { join } from 'path';
 import { copy, replaceCode, addNpmPackage } from '../utils';
 
 async function generateMiddlewareBuildOptions(params) {
-  let appPath;
+  let server;
 
   switch (params.framework) {
     case 'express':
-      appPath = join(__base, 'build', params.uuid, 'app.js');
+      server = join(__base, 'build', params.uuid, 'server.js');
 
       if (params.cssPreprocessor === 'sass') {
-        await generateSassMiddleware(params, appPath);
+        await generateSassMiddleware(params, server);
       } else if (params.cssPreprocessor === 'less') {
-        await generateLessMiddleware(params, appPath);
+        await generateLessMiddleware(params, server);
       }
       break;
     case 'hapi':
-      appPath = join(__base, 'build', params.uuid, 'app.js');
+      server = join(__base, 'build', params.uuid, 'server.js');
 
       if (params.cssPreprocessor === 'sass') {
-        await generateSassMiddleware(params, appPath);
+        await generateSassMiddleware(params, server);
       } else if (params.cssPreprocessor === 'less') {
-        await generateLessMiddleware(params, appPath);
+        await generateLessMiddleware(params, server);
       }
       break;
     case 'meteor':

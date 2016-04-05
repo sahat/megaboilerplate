@@ -2,7 +2,7 @@ import { join } from 'path';
 import { replaceCode, removeCode, addNpmPackage } from '../utils';
 
 async function generateLocalAuthenticationExpress(params) {
-  const app = join(__base, 'build', params.uuid, 'app.js');
+  const server = join(__base, 'build', params.uuid, 'server.js');
   const config = join(__base, 'build', params.uuid, 'config', 'passport.js');
   const strategyRequire = join(__dirname, 'modules', 'local', 'passport-require.js');
   const passportRoutes = join(__dirname, 'modules', 'local', 'passport-routes.js');
@@ -13,9 +13,9 @@ async function generateLocalAuthenticationExpress(params) {
   await addNpmPackage('async', params);
   
   if (params.jsFramework) {
-    await replaceCode(app, 'LOCAL_ROUTES', jwtRoutes);
+    await replaceCode(server, 'LOCAL_ROUTES', jwtRoutes);
   } else {
-    await replaceCode(app, 'LOCAL_ROUTES', passportRoutes);
+    await replaceCode(server, 'LOCAL_ROUTES', passportRoutes);
     await replaceCode(config, 'PASSPORT_LOCAL_REQUIRE', strategyRequire);
     await addNpmPackage('passport-local', params);
 

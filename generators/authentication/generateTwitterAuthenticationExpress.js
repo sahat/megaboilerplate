@@ -3,7 +3,7 @@ import { replaceCode, appendFile, addNpmPackage } from '../utils';
 
 async function generateTwitterAuthenticationExpress(params) {
   const build = join(__base, 'build', params.uuid);
-  const app = join(build, 'app.js');
+  const server = join(build, 'server.js');
   const env = join(build, '.env');
   const config = join(build, 'config', 'passport.js');
   const userController = join(build, 'controllers', 'user.js');
@@ -12,11 +12,11 @@ async function generateTwitterAuthenticationExpress(params) {
   const jwtRoutes = join(__dirname, 'modules', 'twitter', 'jwt-routes.js');
   
   if (params.jsFramework) {
-    await replaceCode(app, 'TWITTER_ROUTES', jwtRoutes);
+    await replaceCode(server, 'TWITTER_ROUTES', jwtRoutes);
     await replaceCode(userController, 'AUTH_TWITTER_JWT', join(__dirname, 'modules', 'twitter', 'twitter-jwt.js'));
 
   } else {
-    await replaceCode(app, 'TWITTER_ROUTES', passportRoutes);
+    await replaceCode(server, 'TWITTER_ROUTES', passportRoutes);
     await replaceCode(config, 'PASSPORT_TWITTER_REQUIRE', strategyRequire);
 
     await addNpmPackage('passport-twitter', params);

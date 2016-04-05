@@ -3,7 +3,7 @@ import { replaceCode, appendFile, addNpmPackage } from '../utils';
 
 async function generateVkAuthenticationExpress(params) {
   const build = join(__base, 'build', params.uuid);
-  const app = join(build, 'app.js');
+  const server = join(build, 'server.js');
   const env = join(build, '.env');
   const config = join(build, 'config', 'passport.js');
   const userController = join(build, 'controllers', 'user.js');
@@ -12,10 +12,10 @@ async function generateVkAuthenticationExpress(params) {
   const jwtRoutes = join(__dirname, 'modules', 'vk', 'jwt-routes.js');
 
   if (params.jsFramework) {
-    await replaceCode(app, 'VK_ROUTES', jwtRoutes);
+    await replaceCode(server, 'VK_ROUTES', jwtRoutes);
     await replaceCode(userController, 'AUTH_VK_JWT', join(__dirname, 'modules', 'vk', 'vk-jwt.js'));
   } else {
-    await replaceCode(app, 'VK_ROUTES', passportRoutes);
+    await replaceCode(server, 'VK_ROUTES', passportRoutes);
     await replaceCode(config, 'PASSPORT_VK_REQUIRE', strategyRequire);
 
     await addNpmPackage('passport-vkontakte', params);

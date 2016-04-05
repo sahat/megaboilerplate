@@ -2,25 +2,25 @@ import { join } from 'path';
 import { copy, replaceCode, addNpmPackage } from '../utils';
 
 async function generateNunjucksTemplateEngine(params) {
-  let app;
+  let server;
   let viewEngineSetup;
   let viewEngineRequire;
   let baseRoute;
 
   switch (params.framework) {
     case 'express':
-      app = join(__base, 'build', params.uuid, 'app.js');
+      server = join(__base, 'build', params.uuid, 'server.js');
       viewEngineSetup = join(__base, 'modules', 'template-engine', 'nunjucks', 'nunjucks-express.js');
       viewEngineRequire = join(__base, 'modules', 'template-engine', 'nunjucks', 'nunjucks-require-express.js');
       baseRoute = join(__base, 'modules', 'template-engine', 'nunjucks', 'express-route.js');
 
       // Set "views dir" and "view engine" and require nunjucks
-      await replaceCode(app, 'TEMPLATE_ENGINE_REQUIRE', viewEngineRequire);
-      await replaceCode(app, 'TEMPLATE_ENGINE', viewEngineSetup, { leadingBlankLine: true });
+      await replaceCode(server, 'TEMPLATE_ENGINE_REQUIRE', viewEngineRequire);
+      await replaceCode(server, 'TEMPLATE_ENGINE', viewEngineSetup, { leadingBlankLine: true });
 
       // Set base route "/"
       if (!params.jsFramework) {
-        await replaceCode(app, 'BASE_ROUTE', baseRoute, { leadingBlankLine: true });
+        await replaceCode(server, 'BASE_ROUTE', baseRoute, { leadingBlankLine: true });
       }
 
       // Add Nunjucks to package.json

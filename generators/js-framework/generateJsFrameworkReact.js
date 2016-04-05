@@ -3,7 +3,7 @@ import { copy, cpy, mkdirs, addNpmPackage, replaceCode } from '../utils';
 
 async function generateJsFrameworkReact(params) {
   const build = join(__base, 'build', params.uuid);
-  const app = join(build, 'app.js');
+  const server = join(build, 'server.js');
   const es6Transpiler = join(__dirname, 'modules', 'react', 'es6-transpiler.js');
   const mainJs = join(__dirname, 'modules', 'react', 'main.js');
   const reactRequire = join(__dirname, 'modules', 'react', 'react-require.js');
@@ -25,14 +25,14 @@ async function generateJsFrameworkReact(params) {
       await mkdirs(join(build, 'app', 'store'));
 
       // Require react, react-router, react-dom packages
-      await replaceCode(app, 'REACT_REQUIRE', reactRequire);
-      await replaceCode(app, 'REACT_ROUTES_REQUIRE', reactRoutesRequire);
+      await replaceCode(server, 'REACT_REQUIRE', reactRequire);
+      await replaceCode(server, 'REACT_ROUTES_REQUIRE', reactRoutesRequire);
 
       // Add ES6 transpiler
-      await replaceCode(app, 'ES6_TRANSPILER', es6Transpiler);
+      await replaceCode(server, 'ES6_TRANSPILER', es6Transpiler);
 
       // Add server-rendering  middleware
-      await replaceCode(join(build, 'app.js'), 'REACT_SERVER_RENDERING', serverRenderingWithRouting);
+      await replaceCode(join(build, 'server.js'), 'REACT_SERVER_RENDERING', serverRenderingWithRouting);
 
       // Copy React components
       const components = join(__dirname, 'modules', 'react', 'components');
@@ -92,7 +92,7 @@ async function generateJsFrameworkReact(params) {
           const layoutJade = join(build, 'views', 'layout.jade');
           const bundleJsJadeImport = join(__dirname, 'modules', 'react', 'react-jade-import.jade');
           const renderFileJade = join(__dirname, 'modules', 'react', 'render-template-jade.js');
-          await replaceCode(app, 'RENDER_TEMPLATE', renderFileJade, { indentLevel: 3 });
+          await replaceCode(server, 'RENDER_TEMPLATE', renderFileJade, { indentLevel: 3 });
 
           await replaceCode(layoutJade, 'JS_FRAMEWORK_MAIN_IMPORT', bundleJsJadeImport, { indentLevel: 2 });
           break;
@@ -106,7 +106,7 @@ async function generateJsFrameworkReact(params) {
           const renderFileNunjucks = join(__dirname, 'modules', 'react', 'render-template-nunjucks.js');
 
           await replaceCode(layoutNunjucks, 'JS_FRAMEWORK_MAIN_IMPORT', bundleNunjucksImport, { indentLevel: 1 });
-          await replaceCode(app, 'RENDER_TEMPLATE', renderFileNunjucks);
+          await replaceCode(server, 'RENDER_TEMPLATE', renderFileNunjucks);
           break;
 
         default:

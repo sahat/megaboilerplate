@@ -17,30 +17,30 @@ async function generateFrameworkExpress(params) {
 
   // Copy initial Express files
   await cpy([
-    join(express, 'app.js'),
+    join(express, 'server.js'),
     join(express, 'package.json'),
     join(express, '.env'),
     join(express, '.gitignore')
   ], build);
   
-  const app = join(build, 'app.js');
+  const server = join(build, 'server.js');
 
   // Update app name package.json
-  templateReplace(join(build, 'package.json'), { name: params.appName });
+  await templateReplace(join(build, 'package.json'), { name: params.appName });
 
   // Optional: Socket.IO
   if (params.frameworkOptions.includes('socketio')) {
-    await replaceCode(app, 'SOCKETIO_REQUIRE', join(express, 'socketio-require.js'));
-    await replaceCode(app, 'SOCKETIO', join(express, 'socketio-init.js'));
+    await replaceCode(server, 'SOCKETIO_REQUIRE', join(express, 'socketio-require.js'));
+    await replaceCode(server, 'SOCKETIO', join(express, 'socketio-init.js'));
     await addNpmPackage('socket.io', params);
   } else {
-    await replaceCode(app, 'APP_LISTEN', join(express, 'app-listen.js'));
+    await replaceCode(server, 'APP_LISTEN', join(express, 'app-listen.js'));
   }
 
   // Optional: PM2
   if (params.frameworkOptions.includes('pm2')) {
     await addNpmPackage('pm2', params);
-    await addNpmScript('start-production', 'pm2 start app.js -i 4', params);
+    await addNpmScript('start-production', 'pm2 start server.js -i 4', params);
   }
 
   // Create controllers dir
@@ -48,7 +48,7 @@ async function generateFrameworkExpress(params) {
 
   // Add initial routes and controllers
   await cpy([contactController], join(build, 'controllers'));
-  await replaceCode(app, 'CONTACT_CONTROLLER', contactControllerRequire);
+  await replaceCode(server, 'CONTACT_CONTROLLER', contactControllerRequire);
 
   const contactJs = join(build, 'controllers', 'contact.js');
   if (params.jsFramework) {
@@ -59,21 +59,22 @@ async function generateFrameworkExpress(params) {
     await replaceCode(contactJs, 'CONTACT_SUCCESS', join(__dirname, 'modules', 'express', 'responses', 'session', 'contact-success.js'), { indentLevel: 2 });
   }
 
-  // Create public dirs
-  await mkdirs(join(build, 'public', 'css'));
-  await mkdirs(join(build, 'public', 'js'));
-
   if (params.jsFramework) {
-    await replaceCode(app, 'CONTACT_ROUTE', contactRouteJwt);
-    await replaceCode(app, 'COOKIE_PARSER_REQUIRE', cookieParserRequire);
-    await replaceCode(app, 'COOKIE_PARSER_MIDDLEWARE', cookieParserMiddleware);
-    await addNpmPackage('cookie-parser', params);
+    await replaceCode(server, 'CONTACT_ROUTE', contactRouteJwt);
+
+    if (params.jsFramework === 'react') {
+      await replaceCode(server, 'COOKIE_PARSER_REQUIRE', cookieParserRequire);
+      await replaceCode(server, 'COOKIE_PARSER_MIDDLEWARE', cookieParserMiddleware);
+
+      await addNpmPackage('cookie-parser', params);
+    }
   } else {
-    await replaceCode(app, 'CONTACT_ROUTE', contactRoutePassport);
-    await replaceCode(app, 'METHOD_OVERRIDE_REQUIRE', methodOverrideRequire);
-    await replaceCode(app, 'METHOD_OVERRIDE_MIDDLEWARE', methodOverrideMiddleware);
-    await replaceCode(app, 'SESSION_REQUIRE', sessionRequire);
-    await replaceCode(app, 'SESSION_MIDDLEWARE', sessionMiddleware);
+    await replaceCode(server, 'CONTACT_ROUTE', contactRoutePassport);
+    await replaceCode(server, 'METHOD_OVERRIDE_REQUIRE', methodOverrideRequire);
+    await replaceCode(server, 'METHOD_OVERRIDE_MIDDLEWARE', methodOverrideMiddleware);
+    await replaceCode(server, 'SESSION_REQUIRE', sessionRequire);
+    await replaceCode(server, 'SESSION_MIDDLEWARE', sessionMiddleware);
+
     await addNpmPackage('express-session', params);
     await addNpmPackage('express-flash', params);
     await addNpmPackage('method-override', params);

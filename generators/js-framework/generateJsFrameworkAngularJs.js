@@ -3,13 +3,13 @@ import { copy, cpy, mkdirs, addNpmPackage, replaceCode, templateReplace } from '
 
 async function generateJsFrameworkAngularJs(params) {
   const build = join(__base, 'build', params.uuid);
-  const app = join(build, 'app.js');
+  const server = join(build, 'server.js');
   const angularJsRoutes = join(__dirname, 'modules', 'angularjs', 'angularjs-routes.js');
 
   switch (params.framework) {
     case 'express':
       // Add AngularJS routes + html5 push state redirect
-      await replaceCode(app, 'ANGULARJS_ROUTES', angularJsRoutes);
+      await replaceCode(server, 'ANGULARJS_ROUTES', angularJsRoutes);
 
       // Copy controllers
       const controllersDir = join(__dirname, 'modules', 'angularjs', 'controllers');
@@ -59,8 +59,8 @@ async function generateJsFrameworkAngularJs(params) {
       ], join(build, 'app', 'views'));
 
       // Copy entry file for Angular app
-      const mainJs = join(__dirname, 'modules', 'angularjs', 'app.js');
-      await copy(mainJs, join(build, 'app', 'app.js'));
+      const appJs = join(__dirname, 'modules', 'angularjs', 'app.js');
+      await copy(appJs, join(build, 'app', 'app.js'));
       
       // Add satellizer dependency
       await templateReplace(join(build, 'app', 'app.js'), {

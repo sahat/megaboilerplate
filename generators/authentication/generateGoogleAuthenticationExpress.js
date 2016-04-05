@@ -3,7 +3,7 @@ import { replaceCode, appendFile, addNpmPackage } from '../utils';
 
 async function generateGoogleAuthenticationExpress(params) {
   const build = join(__base, 'build', params.uuid);
-  const app = join(build, 'app.js');
+  const server = join(build, 'server.js');
   const env = join(build, '.env');
   const config = join(build, 'config', 'passport.js');
   const userController = join(build, 'controllers', 'user.js');
@@ -12,11 +12,11 @@ async function generateGoogleAuthenticationExpress(params) {
   const jwtRoutes = join(__dirname, 'modules', 'google', 'jwt-routes.js');
 
   if (params.jsFramework) {
-    await replaceCode(app, 'GOOGLE_ROUTES', jwtRoutes);
+    await replaceCode(server, 'GOOGLE_ROUTES', jwtRoutes);
     await replaceCode(userController, 'AUTH_GOOGLE_JWT', join(__dirname, 'modules', 'google', 'google-jwt.js'));
 
   } else {
-    await replaceCode(app, 'GOOGLE_ROUTES', passportRoutes);
+    await replaceCode(server, 'GOOGLE_ROUTES', passportRoutes);
     await replaceCode(config, 'PASSPORT_GOOGLE_REQUIRE', strategyRequire);
 
     await addNpmPackage('passport-google-oauth', params);

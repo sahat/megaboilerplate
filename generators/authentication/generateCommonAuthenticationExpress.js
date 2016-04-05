@@ -3,7 +3,7 @@ import { cpy, copy, mkdirs, appendFile, replaceCode, addNpmPackage } from '../ut
 
 async function generateCommonAuthenticationExpress(params) {
   const build = join(__base, 'build', params.uuid);
-  const app = join(build, 'app.js');
+  const server = join(build, 'server.js');
   const env = join(build, '.env');
   const passportJs = join(build, 'config', 'passport.js');
   const passportConfigModule = join(__dirname, 'modules', 'common', 'passport-config.js');
@@ -36,29 +36,29 @@ async function generateCommonAuthenticationExpress(params) {
   const userController = join(build, 'controllers', 'user.js');
 
   if (params.jsFramework) {
-    await replaceCode(app, 'IS_AUTHENTICATED_MIDDLEWARE', jwtIsAuthenticatedMiddleware);
-    await replaceCode(app, 'JWT_REQUIRE', jwtRequire);
+    await replaceCode(server, 'IS_AUTHENTICATED_MIDDLEWARE', jwtIsAuthenticatedMiddleware);
+    await replaceCode(server, 'JWT_REQUIRE', jwtRequire);
     await replaceCode(userController, 'ENSURE_AUTHENTICATED_MIDDLEWARE', jwtEnsureAuthenticated);
     await replaceCode(userController, 'JWT_REQUIRE', jwtRequire);
     await replaceCode(userController, 'GENERATE_TOKEN', generateTokenHelper);
   } else {
     await replaceCode(userController, 'ENSURE_AUTHENTICATED_MIDDLEWARE', passportEnsureAuthenticated);
     await replaceCode(userController, 'PASSPORT_REQUIRE', passportRequire);
-    await replaceCode(app, 'PASSPORT_REQUIRE', passportRequire);
-    await replaceCode(app, 'PASSPORT_MIDDLEWARE', passportMiddleware);
-    await replaceCode(app, 'PASSPORT_CONFIG_REQUIRE', passportConfigRequire);
+    await replaceCode(server, 'PASSPORT_REQUIRE', passportRequire);
+    await replaceCode(server, 'PASSPORT_MIDDLEWARE', passportMiddleware);
+    await replaceCode(server, 'PASSPORT_CONFIG_REQUIRE', passportConfigRequire);
   }
 
   // Add User model reference to app.js
-  await replaceCode(app, 'USER_MODEL_REQUIRE', userModelAppRequire);
+  await replaceCode(server, 'USER_MODEL_REQUIRE', userModelAppRequire);
 
   // Add user controller reference
-  await replaceCode(app, 'USER_CONTROLLER', userControllerRequire);
+  await replaceCode(server, 'USER_CONTROLLER', userControllerRequire);
 
 
   if (params.jsFramework) {
-    await replaceCode(app, 'UNLINK_ROUTE', unlinkRoute);
-    await replaceCode(app, 'ACCOUNT_ROUTES', accountRoutesJwt);
+    await replaceCode(server, 'UNLINK_ROUTE', unlinkRoute);
+    await replaceCode(server, 'ACCOUNT_ROUTES', accountRoutesJwt);
 
     await addNpmPackage('jsonwebtoken', params);
     await addNpmPackage('moment', params);
@@ -72,9 +72,9 @@ async function generateCommonAuthenticationExpress(params) {
     await replaceCode(passportJs, 'PASSPORT_USER_MODEL', userModelPassportRequire);
 
     // Add app routes
-    await replaceCode(app, 'LOGOUT_ROUTE', logoutRoute);
-    await replaceCode(app, 'UNLINK_ROUTE', unlinkRoute);
-    await replaceCode(app, 'ACCOUNT_ROUTES', accountRoutesPassport);
+    await replaceCode(server, 'LOGOUT_ROUTE', logoutRoute);
+    await replaceCode(server, 'UNLINK_ROUTE', unlinkRoute);
+    await replaceCode(server, 'ACCOUNT_ROUTES', accountRoutesPassport);
     await replaceCode(userController, 'USER_SIGNUP_GET', join(__dirname, 'modules', 'controllers', 'user-signup-get.js'), { indentLevel: 1 });
     await replaceCode(userController, 'USER_LOGIN_GET', join(__dirname, 'modules', 'controllers', 'user-login-get.js'), { indentLevel: 1 });
     await replaceCode(userController, 'USER_LOGIN_POST', join(__dirname, 'modules', 'controllers', 'user-login-post.js'), { indentLevel: 1 });
@@ -105,7 +105,7 @@ async function generateCommonAuthenticationExpress(params) {
         await replaceCode(userController, 'USER_LOGIN_POST', join(__dirname, 'modules', 'controllers', 'mongodb', 'user-login-jwt-post.js'), { indentLevel: 1 });
         await replaceCode(userController, 'PROFILE_UPDATE_RESPONSE', join(__dirname, 'modules', 'controllers', 'responses', 'json', 'profile-update-response-mongodb.js'), { indentLevel: 3 });
       } else {
-        await replaceCode(app, 'USER_HELPER_MIDDLEWARE', userHelperMiddlewareForMongoDb);
+        await replaceCode(server, 'USER_HELPER_MIDDLEWARE', userHelperMiddlewareForMongoDb);
         await replaceCode(passportJs, 'PASSPORT_DESERIALIZER', passportDeserializerMongoDb);
         await replaceCode(userController, 'PROFILE_UPDATE_RESPONSE', join(__dirname, 'modules', 'controllers', 'responses', 'session', 'profile-update-response-mongodb.js'), { indentLevel: 3 });
       }
@@ -132,7 +132,7 @@ async function generateCommonAuthenticationExpress(params) {
         await replaceCode(userController, 'USER_LOGIN_POST', join(__dirname, 'modules', 'controllers', 'sql', 'user-login-jwt-post.js'), { indentLevel: 1 });
         await replaceCode(userController, 'PROFILE_UPDATE_RESPONSE', join(__dirname, 'modules', 'controllers', 'responses', 'json', 'profile-update-response-sql.js'), { indentLevel: 2 });
       } else {
-        await replaceCode(app, 'USER_HELPER_MIDDLEWARE', userHelperMiddlewareForSql);
+        await replaceCode(server, 'USER_HELPER_MIDDLEWARE', userHelperMiddlewareForSql);
         await replaceCode(passportJs, 'PASSPORT_DESERIALIZER', passportDeserializerSql);
         await replaceCode(userController, 'PROFILE_UPDATE_RESPONSE', join(__dirname, 'modules', 'controllers', 'responses', 'session', 'profile-update-response-sql.js'), { indentLevel: 2 });
       }

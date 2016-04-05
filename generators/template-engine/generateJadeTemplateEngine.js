@@ -74,24 +74,21 @@ async function copyTemplates(params) {
 }
 
 async function generateJadeTemplateEngine(params) {
-  let app;
-
   switch (params.framework) {
     case 'express':
-      const appExpress = join(__base, 'build', params.uuid, 'app.js');
+      const server = join(__base, 'build', params.uuid, 'server.js');
       const expressViewEngine = join(__dirname, 'modules', 'jade', 'jade-express.js');
       const expressHomeRoute = join(__dirname, 'modules', 'routes', 'home-route-express.js');
       const homeControllerRequire = join(__dirname, 'modules', 'controllers', 'home-require.js');
       const expressHomeController = join(__dirname, 'modules', 'controllers', 'home-controller-express.js');
 
       // Set "views dir" and "view engine"
-      await replaceCode(appExpress, 'TEMPLATE_ENGINE', expressViewEngine);
+      await replaceCode(server, 'TEMPLATE_ENGINE', expressViewEngine);
       
       if (!params.jsFramework) {
-        
         // Require home controller and add home route, i.e. "GET /"
-        await replaceCode(appExpress, 'HOME_ROUTE', expressHomeRoute);
-        await replaceCode(appExpress, 'HOME_CONTROLLER', homeControllerRequire);
+        await replaceCode(server, 'HOME_ROUTE', expressHomeRoute);
+        await replaceCode(server, 'HOME_CONTROLLER', homeControllerRequire);
 
         // Copy home controller
         await copy(expressHomeController, join(__base, 'build', params.uuid, 'controllers', 'home.js'));

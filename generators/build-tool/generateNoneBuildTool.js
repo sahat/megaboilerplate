@@ -2,7 +2,7 @@ import { join } from 'path';
 import { cpy, replaceCode, addNpmPackage } from '../utils';
 
 async function generateNoneBuildTool(params) {
-  const app = join(__base, 'build', params.uuid, 'app.js');
+  const server = join(__base, 'build', params.uuid, 'server.js');
 
   switch (params.cssPreprocessor) {
     case 'sass':
@@ -11,8 +11,8 @@ async function generateNoneBuildTool(params) {
 
       await addNpmPackage('node-sass-middleware', params);
 
-      await replaceCode(app, 'CSS_PREPROCESSOR_MIDDLEWARE_REQUIRE', sassMiddlewareRequire);
-      await replaceCode(app, 'CSS_PREPROCESSOR_MIDDLEWARE', sassMiddleware);
+      await replaceCode(server, 'CSS_PREPROCESSOR_MIDDLEWARE_REQUIRE', sassMiddlewareRequire);
+      await replaceCode(server, 'CSS_PREPROCESSOR_MIDDLEWARE', sassMiddleware);
       break;
 
     case 'less':
@@ -21,8 +21,8 @@ async function generateNoneBuildTool(params) {
 
       await addNpmPackage('node-sass-middleware', params);
 
-      await replaceCode(app, 'CSS_PREPROCESSOR_MIDDLEWARE_REQUIRE', lessMiddlewareRequire);
-      await replaceCode(app, 'CSS_PREPROCESSOR_MIDDLEWARE', lessMiddleware);
+      await replaceCode(server, 'CSS_PREPROCESSOR_MIDDLEWARE_REQUIRE', lessMiddlewareRequire);
+      await replaceCode(server, 'CSS_PREPROCESSOR_MIDDLEWARE', lessMiddleware);
       break;
 
     case 'postcss':
@@ -31,8 +31,8 @@ async function generateNoneBuildTool(params) {
 
       await addNpmPackage('postcss-middleware', params);
 
-      await replaceCode(app, 'CSS_PREPROCESSOR_MIDDLEWARE_REQUIRE', postcssMiddlewareRequire);
-      await replaceCode(app, 'CSS_PREPROCESSOR_MIDDLEWARE', postcssMiddleware);
+      await replaceCode(server, 'CSS_PREPROCESSOR_MIDDLEWARE_REQUIRE', postcssMiddlewareRequire);
+      await replaceCode(server, 'CSS_PREPROCESSOR_MIDDLEWARE', postcssMiddleware);
       break;
 
     default:
