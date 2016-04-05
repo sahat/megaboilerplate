@@ -31,12 +31,18 @@ export { writeJson };
 /**
  * @private
  * @param subStr {string} - what to indent
- * @param indentLevel {number} - how many levels to indent
+ * @param options {object} - how many levels (2 spaces per level) or how many spaces to indent
  * @returns {string}
  */
-function indentCode(subStr, indentLevel) {
-  let defaultIndentation = 2;
-  let indent = ' '.repeat(indentLevel * defaultIndentation);
+function indentCode(subStr, options) {
+  const defaultIndentation = 2;
+  let indent;
+
+  if (options.indentLevel) {
+    indent = ' '.repeat(options.indentLevel * defaultIndentation);
+  } else if (options.indentSpaces) {
+    indent = ' '.repeat(options.indentSpaces);
+  }
   let array = subStr.toString().split('\n').filter(Boolean);
   array.forEach((line, index) => {
     array[index] = indent + line;
@@ -220,7 +226,11 @@ export async function replaceCode(srcFile, subStr, newSrcFile, opts) {
 
     if (isMatch) {
       if (opts.indentLevel) {
-        newSrcData = indentCode(newSrcData, opts.indentLevel);
+        newSrcData = indentCode(newSrcData, { indentLevel: opts.indentLevel });
+      }
+
+      if (opts.indentSpaces) {
+        newSrcData = indentCode(newSrcData, { indentSpaces: opts.indentSpaces });
       }
 
       if (isEmpty(last(newSrcData.toString().split('\n')))) {
