@@ -26,7 +26,7 @@ if (req.isAuthenticated()) {
         name: profile.name,
         email: profile.email,
         gender: profile.gender,
-        location: profile.location.name,
+        location: profile.location && profile.location.name,
         picture: 'https://graph.facebook.com/' + profile.id + '/picture?type=large',
         facebook: profile.id
       });

@@ -32,7 +32,7 @@ if (req.isAuthenticated()) {
           user.set('name', profile.name);
           user.set('email', profile.email);
           user.set('gender', profile.gender);
-          user.set('location', profile.location.name);
+          user.set('location', profile.location && profile.location.name);
           user.set('picture', 'https://graph.facebook.com/' + profile.id + '/picture?type=large');
           user.set('facebook', profile.id);
           user.save().then(function(user) {
