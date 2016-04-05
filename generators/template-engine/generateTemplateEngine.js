@@ -1,11 +1,13 @@
-import generateJadeTemplateEngine from '../../generators/template-engine/generateJadeTemplateEngine';
-import generateHandlebarsTemplateEngine from '../../generators/template-engine/generateHandlebarsTemplateEngine';
-import generateNunjucksTemplateEngine from '../../generators/template-engine/generateNunjucksTemplateEngine';
+import generateJadeTemplateEngine from './generateJadeTemplateEngine';
+import generateHandlebarsTemplateEngine from './generateHandlebarsTemplateEngine';
+import generateNunjucksTemplateEngine from './generateNunjucksTemplateEngine';
+import generateAngularJsTemplate from './generateAngularJsTemplate'
 
 async function generateTemplateEngine(params) {
   if (params.jsFramework === 'angularjs') {
-    return;
+    return generateAngularJsTemplate(params);
   }
+
   switch (params.templateEngine) {
     case 'jade':
       await generateJadeTemplateEngine(params);
