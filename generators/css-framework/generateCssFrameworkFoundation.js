@@ -2,9 +2,9 @@ import { join } from 'path';
 import { copy, replaceCode } from '../utils';
 
 async function generateCssFrameworkFoundation(params) {
-  const foundationDir = join(__base, 'modules', 'css-framework', 'foundation');
-  const jqueryDir = join(__base, 'modules', 'css-framework', 'jquery');
-  const publicDir = join(__base, 'build', params.uuid, 'public');
+  const foundationDir = join(__dirname, 'modules', 'foundation');
+  const jqueryDir = join(__dirname, 'modules', 'jquery');
+  const publicDir = join(__dirname, 'build', params.uuid, 'public');
 
   switch (params.cssPreprocessor) {
     case 'css':
