@@ -76,6 +76,7 @@ async function generateGulpBuildTool(params) {
 
       await addNpmPackage('gulp-concat', params, true);
       await addNpmPackage('gulp-ng-annotate', params, true);
+      await addNpmPackage('gulp-angular-templatecache', params, true);
 
       await replaceCode(join(build, 'gulpfile.js'), 'JS_FRAMEWORK_GULP_REQUIRE', angularjsGulpRequire);
       await replaceCode(join(build, 'gulpfile.js'), 'JS_FRAMEWORK_GULP_TASK', angularjsGulpTask);
