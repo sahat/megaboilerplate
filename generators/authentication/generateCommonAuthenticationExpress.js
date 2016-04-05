@@ -56,6 +56,8 @@ async function generateCommonAuthenticationExpress(params) {
     await replaceCode(app, 'UNLINK_ROUTE', unlinkRoute);
     await replaceCode(app, 'ACCOUNT_ROUTES', accountRoutesJwt);
 
+    await addNpmPackage('jsonwebtoken', params);
+    await addNpmPackage('moment', params);
   } else {
     await copy(passportConfigModule, passportJs);
 
