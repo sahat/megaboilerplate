@@ -85,8 +85,8 @@ async function generateCssFrameworkBootstrap(params) {
 
   // Copy additional Bootstrap files
   await copy(join(bootstrapDir, 'fonts'), join(publicDir, 'fonts'));
-  await copy(join(bootstrapDir, 'js', 'bootstrap.js'), join(publicDir, 'js', 'vendor', 'bootstrap.js'));
-  await copy(join(jqueryDir, 'jquery.js'), join(publicDir, 'js', 'vendor', 'jquery.js'));
+  await copy(join(bootstrapDir, 'js', 'bootstrap.js'), join(publicDir, 'js', 'lib', 'bootstrap.js'));
+  await copy(join(jqueryDir, 'jquery.js'), join(publicDir, 'js', 'lib', 'jquery.js'));
 }
 
 export default generateCssFrameworkBootstrap;
