@@ -1,5 +1,5 @@
 import React from 'react';
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import Messages from './Messages';
 
 class Home extends React.Component {
@@ -14,8 +14,8 @@ class Home extends React.Component {
                 <h3>Heading</h3>
                 <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor
                   mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna
-                  mollis euismod. Donec sed odio dui.</p><a href="#" role="button" className="btn btn-default">View
-                details</a>
+                  mollis euismod. Donec sed odio dui.</p>
+                <a href="#" role="button" className="btn btn-default">View details</a>
               </div>
             </div>
           </div>
@@ -25,8 +25,8 @@ class Home extends React.Component {
                 <h3>Heading</h3>
                 <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor
                   mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna
-                  mollis euismod. Donec sed odio dui.</p><a href="#" role="button" className="btn btn-default">View
-                details</a>
+                  mollis euismod. Donec sed odio dui.</p>
+                <a href="#" role="button" className="btn btn-default">View details</a>
               </div>
             </div>
           </div>
@@ -36,8 +36,8 @@ class Home extends React.Component {
                 <h3>Heading</h3>
                 <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor
                   mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna
-                  mollis euismod. Donec sed odio dui.</p><a href="#" role="button" className="btn btn-default">View
-                details</a>
+                  mollis euismod. Donec sed odio dui.</p>
+                <a href="#" role="button" className="btn btn-default">View details</a>
               </div>
             </div>
           </div>
