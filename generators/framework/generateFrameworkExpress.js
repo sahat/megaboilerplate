@@ -50,6 +50,15 @@ async function generateFrameworkExpress(params) {
   await cpy([contactController], join(build, 'controllers'));
   await replaceCode(app, 'CONTACT_CONTROLLER', contactControllerRequire);
 
+  const contactJs = join(build, 'controllers', 'contact.js');
+  if (params.jsFramework) {
+    await replaceCode(contactJs, 'CONTACT_VALIDATION_ERROR', join(__dirname, 'modules', 'express', 'responses', 'json', 'contact-validation-error.js'), { indentLevel: 2 });
+    await replaceCode(contactJs, 'CONTACT_SUCCESS', join(__dirname, 'modules', 'express', 'responses', 'json', 'contact-success.js'), { indentLevel: 2 });
+  } else {
+    await replaceCode(contactJs, 'CONTACT_VALIDATION_ERROR', join(__dirname, 'modules', 'express', 'responses', 'session', 'contact-validation-error.js'), { indentLevel: 2 });
+    await replaceCode(contactJs, 'CONTACT_SUCCESS', join(__dirname, 'modules', 'express', 'responses', 'session', 'contact-success.js'), { indentLevel: 2 });
+  }
+
   // Create public dirs
   await mkdirs(join(build, 'public', 'css'));
   await mkdirs(join(build, 'public', 'js'));
