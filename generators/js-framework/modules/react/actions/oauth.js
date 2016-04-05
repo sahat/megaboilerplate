@@ -65,7 +65,7 @@ export function googleLogin() {
 }
 
 export function vkLogin() {
-  const facebook = {
+  const vk = {
     url: 'http://localhost:3000/auth/vkontakte',
     clientId: '5389715',
     redirectUri: 'http://localhost:3000/auth/vkontakte/callback',
@@ -76,7 +76,7 @@ export function vkLogin() {
   };
 
   return (dispatch) => {
-    oauth2(facebook, dispatch)
+    oauth2(vk, dispatch)
       .then(openPopup)
       .then(pollPopup)
       .then(exchangeCodeForToken)
