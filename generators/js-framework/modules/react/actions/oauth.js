@@ -4,6 +4,7 @@ import moment from 'moment';
 import cookie from 'react-cookie';
 import { browserHistory } from 'react-router';
 
+// Sign in with Facebook
 export function facebookLogin() {
   const facebook = {
     url: 'http://localhost:3000/auth/facebook',
@@ -25,6 +26,7 @@ export function facebookLogin() {
   };
 }
 
+// Sign in with Twitter
 export function twitterLogin() {
   const twitter = {
     url: 'http://localhost:3000/auth/twitter',
@@ -43,6 +45,7 @@ export function twitterLogin() {
   };
 }
 
+// Sign in with Google
 export function googleLogin() {
   const google = {
     url: 'http://localhost:3000/auth/google',
@@ -64,6 +67,7 @@ export function googleLogin() {
   };
 }
 
+// Sign in with VK
 export function vkLogin() {
   const vk = {
     url: 'http://localhost:3000/auth/vkontakte',
@@ -83,6 +87,48 @@ export function vkLogin() {
       .then(signIn)
       .then(closePopup);
   };
+}
+
+// Link account
+export function link(provider) {
+  switch (provider) {
+    case 'facebook':
+      return facebookLogin();
+    case 'twitter':
+      return twitterLogin();
+    case 'google':
+      return googleLogin();
+    case 'vk':
+      return vkLogin();
+    default:
+      return {
+        type: 'LINK_FAILURE',
+        messages: [{ msg: 'Invalid OAuth Provider' }]
+      }
+  }
+}
+
+// Unlink account
+export function unlink(provider) {
+  return (dispatch) => {
+    fetch('/unlink/' + provider).then((response) => {
+      if (response.ok) {
+        response.json().then((json) => {
+          dispatch({
+            type: 'UNLINK_SUCCESS',
+            messages: [json]
+          });
+        });
+      } else {
+        response.json().then((json) => {
+          dispatch({
+            type: 'UNLINK_FAILURE',
+            messages: [json]
+          });
+        });
+      }
+    });
+  }
 }
 
 function oauth2(config, dispatch) {

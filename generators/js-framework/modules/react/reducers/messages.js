@@ -8,6 +8,8 @@ export default function messages(state = {}, action) {
     case 'RESET_PASSWORD_FAILURE':
     case 'CONTACT_FORM_FAILURE':
     case 'OAUTH_FAILURE':
+    case 'UNLINK_FAILURE':
+    case 'LINK_FAILURE':
       return {
         error: action.messages
       };
@@ -20,6 +22,7 @@ export default function messages(state = {}, action) {
       };
     case 'FORGOT_PASSWORD_SUCCESS':
     case 'DELETE_ACCOUNT_SUCCESS':
+    case 'UNLINK_SUCCESS':
       return {
         info: action.messages
       };
