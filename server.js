@@ -70,5 +70,5 @@ app.listen(4000, 'localhost', function(err) {
 });
 
 process.on('unhandledRejection', function(reason, p) {
-  throw mError(reason);
+  throw Error(reason);
 });
