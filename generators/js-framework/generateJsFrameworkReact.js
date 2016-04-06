@@ -50,16 +50,20 @@ async function generateJsFrameworkReact(params) {
       ], join(build, 'app', 'components', 'Account'));
 
       const CONTACT = join(build, 'app', 'components', 'Contact.js');
-      const CONTACT_RENDER = join(build, 'app', 'components', `Contact-${params.cssFramework}.js`);
+      const CONTACT_RENDER = join(__dirname, 'modules', 'react', 'components', `Contact-${params.cssFramework}.js`);
       await replaceCode(CONTACT, 'CONTACT_RENDER', CONTACT_RENDER, { indentLevel: 3 });
 
       const HOME = join(build, 'app', 'components', 'Home.js');
-      const HOME_RENDER = join(build, 'app', 'components', `Home-${params.cssFramework}.js`);
+      const HOME_RENDER = join(__dirname, 'modules', 'react', 'components', `Home-${params.cssFramework}.js`);
       await replaceCode(HOME, 'HOME_RENDER', HOME_RENDER, { indentLevel: 3 });
 
       const HEADER = join(build, 'app', 'components', 'Header.js');
-      const HEADER_RENDER = join(build, 'app', 'components', `Header-${params.cssFramework}.js`);
+      const HEADER_RENDER = join(__dirname, 'modules', 'react', 'components', `Header-${params.cssFramework}.js`);
       await replaceCode(HEADER, 'HEADER_RENDER', HEADER_RENDER, { indentLevel: 3 });
+
+      const PROFILE = join(build, 'app', 'components', 'Account', 'Profile.js');
+      const PROFILE_RENDER = join(__dirname, 'modules', 'react', 'components', 'Account', `Profile-${params.cssFramework}.js`);
+      await replaceCode(PROFILE, 'PROFILE_RENDER', PROFILE_RENDER, { indentLevel: 3 });
 
 
       // Copy Redux actions, reducers, store

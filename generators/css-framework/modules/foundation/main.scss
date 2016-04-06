@@ -81,6 +81,14 @@
   margin: 0 auto;
 }
 
+.gravatar {
+  margin: 0 0 1rem;
+}
+
+.text-alert {
+  color: map-get($foundation-palette, alert);
+}
+
 // Buttons
 // -------------------------
 
