@@ -62,14 +62,7 @@ export function walkAndRemoveComments(params) {
       .on('data', (item) => {
         return stat(item.path).then((stats) => {
           if (stats.isFile()) {
-            return removeCode(item.path, '//=')
-              .then(() => {
-                const isComponent = item.path.includes('components');
-                const isHTML = item.path.includes('.html');
-                if (isComponent || isHTML) {
-                  return removeCssClass(item.path);
-                }
-              });
+            return removeCode(item.path, '//=');
           }
         });
       })
@@ -194,12 +187,17 @@ export async function prepare(params) {
 export async function removeCode(srcFile, subStr) {
   let srcData = await readFile(srcFile);
   let array = srcData.toString().split('\n');
-  const classAttr = ' class=""' || ' className=""';
+  const emptyClass = ' class=""';
+  const emptyClassName = ' className=""'; // React
 
   array.forEach((line, index) => {
-    if (line.includes(classAttr)) {
-      array[index] = line.split(classAttr).join('');
+    // Strip empty classes
+    if (line.includes(emptyClass)) {
+      array[index] = line.split(emptyClass).join('');
+    } else if (line.includes(emptyClassName)) {
+      array[index] = line.split(emptyClassName).join('');
     }
+    
     if (line.includes(subStr)) {
       array[index] = null;
     }
