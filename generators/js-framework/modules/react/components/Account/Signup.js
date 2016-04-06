@@ -61,7 +61,7 @@ class Signup extends React.Component {
               </div>
               <button type="submit" className="btn btn-success">Create an account</button>
             </form>
-            <div className="hr-title"><abbr>or</abbr></div>
+            <div className="hr-title"><span>or</span></div>
             <div className="btn-toolbar text-center">
               <button onClick={this.handleFacebook.bind(this)} className="btn btn-facebook">Sign in with Facebook</button>
               <button onClick={this.handleTwitter.bind(this)} className="btn btn-twitter">Sign in with Twitter</button>
