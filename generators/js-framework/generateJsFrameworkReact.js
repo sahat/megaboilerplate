@@ -41,7 +41,6 @@ async function generateJsFrameworkReact(params) {
         join(components, 'Messages.js'),
         join(components, 'NotFound.js')
       ], join(build, 'app', 'components'));
-
       await cpy([
         join(components, 'Account', 'Forgot.js'),
         join(components, 'Account', 'Login.js'),
@@ -50,19 +49,18 @@ async function generateJsFrameworkReact(params) {
         join(components, 'Account', 'Signup.js')
       ], join(build, 'app', 'components', 'Account'));
 
-      // Replace CSS classes based on CSS framework
-      await replaceCssClasses(params, join(build, 'app', 'components', 'App.js'));
-      await replaceCssClasses(params, join(build, 'app', 'components', 'Contact.js'));
-      await replaceCssClasses(params, join(build, 'app', 'components', 'Footer.js'));
-      await replaceCssClasses(params, join(build, 'app', 'components', 'Header.js'));
-      await replaceCssClasses(params, join(build, 'app', 'components', 'Home.js'));
-      await replaceCssClasses(params, join(build, 'app', 'components', 'Messages.js'));
-      await replaceCssClasses(params, join(build, 'app', 'components', 'NotFound.js'));
-      await replaceCssClasses(params, join(build, 'app', 'components', 'Account', 'Forgot.js'));
-      await replaceCssClasses(params, join(build, 'app', 'components', 'Account', 'Login.js'));
-      await replaceCssClasses(params, join(build, 'app', 'components', 'Account', 'Profile.js'));
-      await replaceCssClasses(params, join(build, 'app', 'components', 'Account', 'Reset.js'));
-      await replaceCssClasses(params, join(build, 'app', 'components', 'Account', 'Signup.js'));
+      const CONTACT = join(build, 'app', 'components', 'Contact.js');
+      const CONTACT_RENDER = join(build, 'app', 'components', `Contact-${params.cssFramework}.js`);
+      await replaceCode(CONTACT, 'CONTACT_RENDER', CONTACT_RENDER, { indentLevel: 3 });
+
+      const HOME = join(build, 'app', 'components', 'Home.js');
+      const HOME_RENDER = join(build, 'app', 'components', `Home-${params.cssFramework}.js`);
+      await replaceCode(HOME, 'HOME_RENDER', HOME_RENDER, { indentLevel: 3 });
+
+      const HEADER = join(build, 'app', 'components', 'Header.js');
+      const HEADER_RENDER = join(build, 'app', 'components', `Header-${params.cssFramework}.js`);
+      await replaceCode(HEADER, 'HEADER_RENDER', HEADER_RENDER, { indentLevel: 3 });
+
 
       // Copy Redux actions, reducers, store
       const actions = join(__dirname, 'modules', 'react', 'actions');
@@ -123,9 +121,6 @@ async function generateJsFrameworkReact(params) {
       }
       break;
 
-    case 'hapi':
-      break;
-
     case 'meteor':
       break;
 
@@ -148,18 +143,3 @@ async function generateJsFrameworkReact(params) {
 }
 
 export default generateJsFrameworkReact;
-
-async function replaceCssClasses(params, filePath) {
-  switch(params.cssFramework) {
-    case 'bootstrap':
-      await templateReplace(filePath, bootstrapClassMap);
-      break;
-    case 'foundation':
-      await templateReplace(filePath, foundationClassMap);
-      break;
-    case 'bourbonNeat':
-      break;
-    case 'none':
-      break;
-  }
-}
