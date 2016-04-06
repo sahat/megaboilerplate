@@ -150,7 +150,6 @@ async function generateJsFrameworkReact(params) {
 export default generateJsFrameworkReact;
 
 async function replaceCssClasses(params, filePath) {
-
   switch(params.cssFramework) {
     case 'bootstrap':
       await templateReplace(filePath, bootstrapClassMap);
@@ -163,6 +162,4 @@ async function replaceCssClasses(params, filePath) {
     case 'none':
       break;
   }
-
-
 }
