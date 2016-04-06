@@ -13,6 +13,7 @@ async function generateCssFrameworkFoundation(params) {
       break;
     case 'sass':
       await copy(join(foundationDir, 'main.scss'), join(publicDir, 'css', 'main.scss'));
+      await copy(join(foundationDir, '_settings.scss'), join(publicDir, 'css', '_settings.scss'));
       await copy(join(foundationDir, 'scss'), join(publicDir, 'css', 'vendor', 'foundation'));
       break;
     default:
