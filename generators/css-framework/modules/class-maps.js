@@ -1,14 +1,20 @@
-/**
- * No CSS Framework
- */
+// Base (No CSS Framework)
 export const noneClassMap = {
-  defaultButton: 'button default'
+  // Grid
+  row: '',
+  col4: '',
+  fluidContainer: '',
+
+  // Buttons
+  defaultButton: '',
+
+  // Components
+  panel: '',
+  panelBody: ''
 };
 
-/**
- * Bootstrap
- */
-export const bootstrapClassMap = {
+// Bootstrap
+export const bootstrapClassMap = Object.assign({}, noneClassMap, {
   // Grid
   row: 'row',
   col4: 'col-sm-4',
@@ -20,25 +26,14 @@ export const bootstrapClassMap = {
   // Components
   panel: 'panel',
   panelBody: 'panel-body'
-};
+});
 
-/**
- * Foundation
- */
-export const foundationClassMap = {
-  // Grid
-  // row: 'row',
-  // col4: 'col-sm-4',
-  //
-  // // Buttons
-  // defaultButton: 'button default',
-  //
-  // // Components
-  // panel: 'panel',
-  // panelBody: 'panel-body'
-};
+// Foundation
+export const foundationClassMap = Object.assign({}, noneClassMap, {
 
-/**
- * Bourbon Neat
- */
-export const bourbonNeatClassMap = {};
+});
+
+// Bourbon Neat
+export const bourbonNeatClassMap = Object.assign({}, noneClassMap, {
+
+});
