@@ -69,7 +69,7 @@ class Home extends React.Component {
     // ga("send","event","Customize","Download","Customize and Download")
 
     this.setState({
-      showGettingStartedButton: true
+      showNextSteps: true
     });
 
     const data = clone(state);
@@ -126,7 +126,7 @@ class Home extends React.Component {
         break;
 
       case 'platformRadios':
-        const whitelist = ['showModal', 'beginner', 'showGettingStartedButton', 'autoScroll', 'reduceAnimations'];
+        const whitelist = ['showModal', 'beginner', 'autoScroll', 'reduceAnimations'];
         for (const key in state) {
           if (state.hasOwnProperty(key)) {
             if (whitelist.indexOf(key) === -1) {
@@ -405,10 +405,9 @@ class Home extends React.Component {
       </div>
     ) : null;
 
-    const gettingStarted = state.showGettingStartedButton ? (
-      <a href="#" className="btn btn-block btn-mega btn-primary">Getting Started Instructions</a>
+    const nextSteps = state.showNextSteps ? (
+      <NextSteps {...state}/>
     ) : null;
-
     return (
       <div>
         <Header />
@@ -429,9 +428,8 @@ class Home extends React.Component {
           <div ref="authentication">{authentication}</div>
           <div ref="deployment">{deployment}</div>
           <div ref="download">{download}</div>
-          <div ref="getting-started">{gettingStarted}</div>
           <div ref="consulting">{consulting}</div>
-          {<NextSteps {...state} />}
+          <div ref="nextSteps">{nextSteps}</div>
         </main>
         <Footer />
         {state.showModal ? <Modal {...state} handleHideModal={this.handleHideModal}/> : null}
