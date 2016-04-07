@@ -47,6 +47,13 @@ const CssFramework = (props) => {
       </span>
   ) : null;
 
+  let note = props.cssFramework === 'none' ? (
+    <div>
+      <strong>Note: </strong>
+      <span>Only <a href="https://necolas.github.io/normalize.css/">normalize.css</a> and a simple Flexbox grid will be generated. All pages will be completely unstyled.</span>
+    </div>
+  ) : null;
+
   return (
     <div className={cx('zoomInBackwards panel', props.cssFramework)}>
       <div className="panel-heading">
@@ -71,12 +78,8 @@ const CssFramework = (props) => {
             <input type="radio" name="cssFrameworkRadios" value="foundation" onChange={props.handleChange}
                    checked={FOUNDATION} /> Foundation
           </label>
-          <label className="radio-inline">
-            <img className="btn-logo" src="/img/svg/bourbon-logo.svg" alt="Bourbon Neat"/>
-            <input type="radio" name="cssFrameworkRadios" value="bourbonNeat" onChange={props.handleChange}
-                   checked={BOURBON_NEAT} /> Bourbon Neat
-          </label>
         </div>
+        {note}
       </div>
     </div>
   );
