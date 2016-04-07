@@ -65,10 +65,6 @@ async function generateJsFrameworkReact(params) {
       const HEADER_RENDER = join(__dirname, 'modules', 'react', 'components', `Header-${params.cssFramework}.js`);
       await replaceCode(HEADER, 'HEADER_RENDER', HEADER_RENDER, { indentLevel: 3 });
 
-      const PROFILE = join(build, 'app', 'components', 'Account', 'Profile.js');
-      const PROFILE_RENDER = join(__dirname, 'modules', 'react', 'components', 'Account', `Profile-${params.cssFramework}.js`);
-      await replaceCode(PROFILE, 'PROFILE_RENDER', PROFILE_RENDER, { indentLevel: 3 });
-      
       const FORGOT = join(build, 'app', 'components', 'Account', 'Forgot.js');
       const FORGOT_RENDER = join(__dirname, 'modules', 'react', 'components', 'Account', `Forgot-${params.cssFramework}.js`);
       await replaceCode(FORGOT, 'FORGOT_RENDER', FORGOT_RENDER, { indentLevel: 3 });
@@ -76,6 +72,15 @@ async function generateJsFrameworkReact(params) {
       const LOGIN = join(build, 'app', 'components', 'Account', 'Login.js');
       const LOGIN_RENDER = join(__dirname, 'modules', 'react', 'components', 'Account', `Login-${params.cssFramework}.js`);
       await replaceCode(LOGIN, 'LOGIN_RENDER', LOGIN_RENDER, { indentLevel: 3 });
+
+      const PROFILE = join(build, 'app', 'components', 'Account', 'Profile.js');
+      const PROFILE_RENDER = join(__dirname, 'modules', 'react', 'components', 'Account', `Profile-${params.cssFramework}.js`);
+      await replaceCode(PROFILE, 'PROFILE_RENDER', PROFILE_RENDER, { indentLevel: 3 });
+
+      const RESET = join(build, 'app', 'components', 'Account', 'Reset.js');
+      const RESET_RENDER = join(__dirname, 'modules', 'react', 'components', 'Account', `Reset-${params.cssFramework}.js`);
+      await replaceCode(RESET, 'RESET_RENDER', RESET_RENDER, { indentLevel: 3 });
+
 
       const SIGNUP = join(build, 'app', 'components', 'Account', 'Signup.js');
       const SIGNUP_RENDER = join(__dirname, 'modules', 'react', 'components', 'Account', `Signup-${params.cssFramework}.js`);
