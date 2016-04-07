@@ -26,10 +26,8 @@ async function generateJsFrameworkAngularJs(params) {
       // Copy services
       const servicesDir = join(__dirname, 'modules', 'angularjs', 'services');
       await cpy([
-        join(servicesDir, 'auth.js'),
-        join(servicesDir, 'contact.js'),
-        join(servicesDir, 'oauth.js')
-      ], join(build, 'app', 'services'));
+        join(servicesDir, 'account.js'),
+        join(servicesDir, 'contact.js')], join(build, 'app', 'services'));
 
       // Copy vendor files
       const libDir = join(__dirname, 'modules', 'angularjs', 'lib');
