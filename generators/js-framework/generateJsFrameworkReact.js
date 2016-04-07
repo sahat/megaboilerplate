@@ -68,6 +68,10 @@ async function generateJsFrameworkReact(params) {
       const PROFILE = join(build, 'app', 'components', 'Account', 'Profile.js');
       const PROFILE_RENDER = join(__dirname, 'modules', 'react', 'components', 'Account', `Profile-${params.cssFramework}.js`);
       await replaceCode(PROFILE, 'PROFILE_RENDER', PROFILE_RENDER, { indentLevel: 3 });
+      
+      const FORGOT = join(build, 'app', 'components', 'Account', 'Forgot.js');
+      const FORGOT_RENDER = join(__dirname, 'modules', 'react', 'components', 'Account', `Forgot-${params.cssFramework}.js`);
+      await replaceCode(FORGOT, 'FORGOT_RENDER', FORGOT_RENDER, { indentLevel: 3 });
 
       const LOGIN = join(build, 'app', 'components', 'Account', 'Login.js');
       const LOGIN_RENDER = join(__dirname, 'modules', 'react', 'components', 'Account', `Login-${params.cssFramework}.js`);
