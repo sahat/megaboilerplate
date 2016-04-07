@@ -61,13 +61,10 @@ async function generateFrameworkExpress(params) {
 
   if (params.jsFramework) {
     await replaceCode(server, 'CONTACT_ROUTE', contactRouteJwt);
+    await replaceCode(server, 'COOKIE_PARSER_REQUIRE', cookieParserRequire);
+    await replaceCode(server, 'COOKIE_PARSER_MIDDLEWARE', cookieParserMiddleware);
 
-    if (params.jsFramework === 'react') {
-      await replaceCode(server, 'COOKIE_PARSER_REQUIRE', cookieParserRequire);
-      await replaceCode(server, 'COOKIE_PARSER_MIDDLEWARE', cookieParserMiddleware);
-
-      await addNpmPackage('cookie-parser', params);
-    }
+    await addNpmPackage('cookie-parser', params);
   } else {
     await replaceCode(server, 'CONTACT_ROUTE', contactRoutePassport);
     await replaceCode(server, 'METHOD_OVERRIDE_REQUIRE', methodOverrideRequire);
