@@ -58,7 +58,7 @@
 }
 
 .top-bar-title {
-  padding: 1rem 1rem;
+  padding: .9rem 1rem;
   line-height: 1;
   > a {
     margin-left: 10px;
@@ -76,6 +76,10 @@
 // Scaffolding
 // -------------------------
 
+footer {
+  padding: 0 1rem;
+}
+
 .login-container {
   width: 555px;
   margin: 0 auto;
@@ -91,48 +95,44 @@
 
 // Buttons
 // -------------------------
+.button-group > .button {
+  margin-bottom: 1px;
+}
 
 .button.facebook {
-  color: #fff;
-  border-color: #335190;
-  background: #3b5998 linear-gradient(to bottom, #4263a9, #3b5998);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.1), inset 0 -1px 4px rgba(59, 89, 152, 0.3);
+  background-color: #3b5998;
+  transition: background-color 0.25s ease-out, color 0.25s ease-out;
   &:hover,
   &:focus {
-    color: #fff;
+    background-color: scale-color(#3b5998, $lightness: -15%)
   }
 }
 
 .button.twitter {
-  color: #fff;
-  border-color: #009fdb;
-  background: #00aced linear-gradient(to bottom, #05baff, #00aced);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.1), inset 0 -1px 4px rgba(0, 172, 237, 0.3);
+  background-color: #00aced;
+  transition: background-color 0.25s ease-out, color 0.25s ease-out;
   &:hover,
   &:focus {
-    color: #fff;
+    background-color: scale-color(#00aced, $lightness: -15%)
   }
 }
 
 .button.google {
   color: #fff;
-  border-color: #d54331;
-  background: #dd4b39 linear-gradient(to bottom, #e05d4d, #dd4b39);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.1), inset 0 -1px 4px rgba(221, 75, 57, 0.3);
+  background-color: #dd4b39;
+  transition: background-color 0.25s ease-out, color 0.25s ease-out;
   &:hover,
   &:focus {
-    color: #fff;
+    background-color: scale-color(#dd4b39, $lightness: -15%)
   }
 }
 
 .button.vk {
-  color: #fff;
-  border-color: #4f7192;
-  background: #587ea3 linear-gradient(to bottom, #678aad, #587ea3);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.1), inset 0 -1px 4px rgba(79, 113, 146, 0.3);
+  background-color: #587ea3;
+  transition: background-color 0.25s ease-out, color 0.25s ease-out;
   &:hover,
   &:focus {
-    color: #fff;
+    background-color: scale-color(#587ea3, $lightness: -15%)
   }
 }
 
