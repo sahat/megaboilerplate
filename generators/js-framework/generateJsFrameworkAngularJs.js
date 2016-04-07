@@ -47,15 +47,15 @@ async function generateJsFrameworkAngularJs(params) {
       const viewsDir = join(__dirname, 'modules', 'angularjs', 'views');
       await cpy([
         join(viewsDir, '404.html'),
-        join(viewsDir, 'contact.html'),
+        join(viewsDir, `contact-${params.cssFramework}.html`),
         join(viewsDir, 'footer.html'),
-        join(viewsDir, 'forgot.html'),
-        join(viewsDir, 'header.html'),
-        join(viewsDir, 'home.html'),
-        join(viewsDir, 'login.html'),
-        join(viewsDir, 'profile.html'),
-        join(viewsDir, 'reset.html'),
-        join(viewsDir, 'signup.html')
+        join(viewsDir, `forgot-${params.cssFramework}.html`),
+        join(viewsDir, `header-${params.cssFramework}.html`),
+        join(viewsDir, `home-${params.cssFramework}.html`),
+        join(viewsDir, `login-${params.cssFramework}.html`),
+        join(viewsDir, `profile-${params.cssFramework}.html`),
+        join(viewsDir, `reset-${params.cssFramework}.html`),
+        join(viewsDir, `signup-${params.cssFramework}.html`)
       ], join(build, 'app', 'views'));
 
       // Copy entry file for Angular app
