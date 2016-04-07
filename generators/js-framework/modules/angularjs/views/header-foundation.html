@@ -1,0 +1,28 @@
+<div ng-controller="HeaderCtrl" class="top-bar">
+  <div class="top-bar-title">
+    <span data-responsive-toggle="responsive-menu" data-hide-for="medium">
+      <span class="menu-icon light" data-toggle></span>
+    </span>
+    <a href="/">Project name</a>
+  </div>
+  <div id="responsive-menu">
+    <div class="top-bar-left">
+      <ul class="menu">
+        <li><a href="/" ng-class="{ active: isActive('/')}">Home</a></li>
+        <li><a href="/contact" ng-class="{ active: isActive('/contact')}">Contact</a></li>
+      </ul>
+    </div>
+    <div ng-if="isAuthenticated()" class="top-bar-right">
+      <ul class="menu">
+        <li><a href="/account" ng-class="{ active: isActive('/account')}">My Account</a></li>
+        <li><a href="#" ng-click="logout()">Logout</a></li>
+      </ul>
+    </div>
+    <div ng-if="!isAuthenticated()" class="top-bar-right">
+      <ul class="menu">
+        <li><a href="/login" ng-class="{ active: isActive('/login')}">Log in</a></li>
+        <li><a href="/signup" ng-class="{ active: isActive('/signup')}">Sign up</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
