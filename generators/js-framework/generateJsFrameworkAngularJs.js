@@ -45,18 +45,17 @@ async function generateJsFrameworkAngularJs(params) {
 
       // Copy account and authentication templates
       const viewsDir = join(__dirname, 'modules', 'angularjs', 'views');
-      await cpy([
-        join(viewsDir, '404.html'),
-        join(viewsDir, `contact-${params.cssFramework}.html`),
-        join(viewsDir, 'footer.html'),
-        join(viewsDir, `forgot-${params.cssFramework}.html`),
-        join(viewsDir, `header-${params.cssFramework}.html`),
-        join(viewsDir, `home-${params.cssFramework}.html`),
-        join(viewsDir, `login-${params.cssFramework}.html`),
-        join(viewsDir, `profile-${params.cssFramework}.html`),
-        join(viewsDir, `reset-${params.cssFramework}.html`),
-        join(viewsDir, `signup-${params.cssFramework}.html`)
-      ], join(build, 'app', 'views'));
+
+      await copy(join(viewsDir, '404.html'), join(build, 'app', 'views', '404.html'));
+      await copy(join(viewsDir, `contact-${params.cssFramework}.html`), join(build, 'app', 'views', 'contact.html'));
+      await copy(join(viewsDir, 'footer.html'), join(build, 'app', 'views', 'footer.html'));
+      await copy(join(viewsDir, `forgot-${params.cssFramework}.html`), join(build, 'app', 'views', 'forgot.html'));
+      await copy(join(viewsDir, `header-${params.cssFramework}.html`), join(build, 'app', 'views', 'header.html'));
+      await copy(join(viewsDir, `home-${params.cssFramework}.html`), join(build, 'app', 'views', 'home.html'));
+      await copy(join(viewsDir, `login-${params.cssFramework}.html`), join(build, 'app', 'views', 'login.html'));
+      await copy(join(viewsDir, `profile-${params.cssFramework}.html`), join(build, 'app', 'views', 'profile.html'));
+      await copy(join(viewsDir, `reset-${params.cssFramework}.html`), join(build, 'app', 'views', 'reset.html'));
+      await copy(join(viewsDir, `signup-${params.cssFramework}.html`), join(build, 'app', 'views', 'signup.html'));
 
       // Copy entry file for Angular app
       const appJs = join(__dirname, 'modules', 'angularjs', 'app.js');
