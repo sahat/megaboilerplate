@@ -57,6 +57,10 @@ async function generateJsFrameworkReact(params) {
       const HOME_RENDER = join(__dirname, 'modules', 'react', 'components', `Home-${params.cssFramework}.js`);
       await replaceCode(HOME, 'HOME_RENDER', HOME_RENDER, { indentLevel: 3 });
 
+      const MESSAGES = join(build, 'app', 'components', 'Messages.js');
+      const MESSAGES_RENDER = join(__dirname, 'modules', 'react', 'components', `Messages-${params.cssFramework}.js`);
+      await replaceCode(MESSAGES, 'MESSAGES_RENDER', MESSAGES_RENDER, { indentLevel: 3 });
+
       const HEADER = join(build, 'app', 'components', 'Header.js');
       const HEADER_RENDER = join(__dirname, 'modules', 'react', 'components', `Header-${params.cssFramework}.js`);
       await replaceCode(HEADER, 'HEADER_RENDER', HEADER_RENDER, { indentLevel: 3 });
@@ -64,6 +68,15 @@ async function generateJsFrameworkReact(params) {
       const PROFILE = join(build, 'app', 'components', 'Account', 'Profile.js');
       const PROFILE_RENDER = join(__dirname, 'modules', 'react', 'components', 'Account', `Profile-${params.cssFramework}.js`);
       await replaceCode(PROFILE, 'PROFILE_RENDER', PROFILE_RENDER, { indentLevel: 3 });
+
+      const LOGIN = join(build, 'app', 'components', 'Account', 'Login.js');
+      const LOGIN_RENDER = join(__dirname, 'modules', 'react', 'components', 'Account', `Login-${params.cssFramework}.js`);
+      await replaceCode(LOGIN, 'LOGIN_RENDER', LOGIN_RENDER, { indentLevel: 3 });
+
+      const SIGNUP = join(build, 'app', 'components', 'Account', 'Signup.js');
+      const SIGNUP_RENDER = join(__dirname, 'modules', 'react', 'components', 'Account', `Signup-${params.cssFramework}.js`);
+      await replaceCode(SIGNUP, 'SIGNUP_RENDER', SIGNUP_RENDER, { indentLevel: 3 });
+
 
 
       // Copy Redux actions, reducers, store
