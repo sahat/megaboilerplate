@@ -1,0 +1,38 @@
+extends ../layout
+
+block content
+  .row
+    .medium-8.medium-offset-2.columns
+      .card
+        if messages.error
+          .callout.alert(role='alert')
+            for error in messages.error
+              div= error.msg
+
+        h4.card-title Create an account
+        form(method='POST')
+          label(for='name') Name
+          input(type='text', name='name', id='name', placeholder='Name', autofocus)
+
+          label(for='email') Email
+          input(type='email', name='email', id='email', placeholder='Email')
+
+          label(for='password') Password
+          input(type='password', name='password', id='password', placeholder='Password')
+
+          p By signing up, you agree to the <a href="/">Terms of Service</a>.
+
+          button.button.success(type='submit') Create an account
+
+        .hr-title
+          span or
+
+        .button-group.text-center
+          a.button.facebook(href='/auth/facebook') Sign in with Facebook
+          a.button.twitter(href='/auth/twitter') Sign in with Twitter
+          a.button.google(href='/auth/google') Sign in with Google
+          a.button.vk(href='/auth/vkontakte') Sign in with VK
+
+      p.text-center Already have an account?
+        a(href='/login')
+          strong  Log in

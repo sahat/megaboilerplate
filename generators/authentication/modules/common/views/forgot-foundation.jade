@@ -1,0 +1,21 @@
+extends ../layout
+
+block content
+  .row
+    .medium-8.medium-offset-2.columns
+      .card
+        if messages.info
+          .callout.primary(role='alert')
+            for info in messages.info
+              div= info.msg
+        if messages.error
+          .callout.alert(role='alert')
+            for error in messages.error
+              div= error.msg
+
+        h4.card-title Forgot Password
+        form(method='POST')
+          p Enter your email address below and we'll send you password reset instructions.
+          label(for='email') Email
+          input(type='email', name='email', id='email', placeholder='Email', autofocus)
+          button.button.secondary(type='submit') Reset Password

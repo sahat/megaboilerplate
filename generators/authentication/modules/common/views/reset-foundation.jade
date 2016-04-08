@@ -1,0 +1,24 @@
+extends ../layout
+
+block content
+  .row
+    .medium-8.medium-offset-2.columns
+      .card
+        if messages.info
+          .callout.primary(role='alert')
+            for info in messages.info
+              div= info.msg
+        if messages.error
+          .callout.alert(role='alert')
+            for error in messages.error
+              div= error.msg
+
+        h4.card-title Reset Password
+        form(method='POST')
+          label(for='password') New Password
+          input(type='password', name='password', id='password', placeholder='New password', autofocus)
+
+          label(for='confirm') Confirm Password
+          input(type='password', name='confirm', id='confirm', placeholder='Confirm password')
+
+          button.button(type='submit') Change Password
