@@ -3,6 +3,7 @@ import generateJsFrameworkReact from './generateJsFrameworkReact';
 import generateJsFrameworkAngularJs from './generateJsFrameworkAngularJs';
 
 async function generateJsFramework(params) {
+  console.log(params.jsFramework);
   switch (params.jsFramework) {
     case 'react':
       await generateJsFrameworkReact(params);
@@ -10,10 +11,8 @@ async function generateJsFramework(params) {
     case 'angularjs':
       await generateJsFrameworkAngularJs(params);
       break;
-    case 'none':
-      await generateJsFrameworkNone(params);
-      break;
     default:
+      await generateJsFrameworkNone(params);
   }
 }
 
