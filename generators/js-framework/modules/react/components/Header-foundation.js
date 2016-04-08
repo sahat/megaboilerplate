@@ -17,9 +17,9 @@ const rightNav = this.props.token ? (
 return (
   <div className="top-bar">
     <div className="top-bar-title">
-          <span data-responsive-toggle="responsive-menu" data-hide-for="medium">
-            <span className="menu-icon light" data-toggle></span>
-          </span>
+      <span data-responsive-toggle="responsive-menu" data-hide-for="medium">
+        <span className="menu-icon light" data-toggle></span>
+      </span>
       <IndexLink to="/">Project name</IndexLink>
     </div>
     <div id="responsive-menu">

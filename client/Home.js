@@ -68,9 +68,11 @@ class Home extends React.Component {
     // Google Analytics event
     // ga("send","event","Customize","Download","Customize and Download")
 
-    this.setState({
-      showNextSteps: true
-    });
+    // Show next steps component
+    this.setState({ showNextSteps: true });
+    if ( state.autoScroll) {
+      $(this.refs.nextSteps).velocity('scroll');
+    }
 
     const data = clone(state);
     data.appName = haikunate({ tokenLength: 0 });
@@ -408,12 +410,12 @@ class Home extends React.Component {
     const nextSteps = state.showNextSteps ? (
       <NextSteps {...state}/>
     ) : null;
+    
     return (
       <div>
         <Header />
         <main className="container">
           {settingsCheckboxes}
-          <button onClick={this.handleShowModal}>Show modal</button>
           <div ref="platform">{platform}</div>
           <div ref="framework">{framework}</div>
           <div ref="staticSiteGenerator">{staticSiteGenerator}</div>

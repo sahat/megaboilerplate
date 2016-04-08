@@ -87,7 +87,6 @@ async function generateJsFrameworkReact(params) {
       await replaceCode(SIGNUP, 'SIGNUP_RENDER', SIGNUP_RENDER, { indentLevel: 3 });
 
 
-
       // Copy Redux actions, reducers, store
       const actions = join(__dirname, 'modules', 'react', 'actions');
       await cpy([

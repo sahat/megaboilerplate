@@ -1156,12 +1156,14 @@ canvas {
   border: 1px solid #ddd;
   border-radius: 3px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
-
+  /*border: 0;*/
+  /*border-radius: 5px;*/
+  /*box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02);*/
   transition: box-shadow .2s linear;
 }
 
 .panel:hover {
-  box-shadow: 0 4px 9px rgba(0, 0, 0, .15);
+  box-shadow: 0 4px 9px rgba(0, 0, 0, .125);
   /*box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);*/
 }
 
