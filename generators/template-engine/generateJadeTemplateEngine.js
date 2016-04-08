@@ -27,49 +27,34 @@ async function updateLayoutTemplate(params) {
 async function copyTemplates(params) {
   const viewsDir = join(__base, 'build', params.uuid, 'views');
   const layout = join(__dirname, 'modules', 'jade', 'views', 'layout.jade');
-  const home = join(__dirname, 'modules', 'jade', 'views', 'home.jade');
   const plainCssHeader = join(__dirname, 'modules', 'jade', 'views', 'header.jade');
   const plainCssFooter = join(__dirname, 'modules', 'jade', 'views', 'footer.jade');
-  const bootstrapFooter = join(__dirname, 'modules', 'jade', 'views', 'footer-bootstrap.jade');
-  const bootstrapHome = join(__dirname, 'modules', 'jade', 'views', 'home-bootstrap.jade');
-  const bootstrapContact = join(__dirname, 'modules', 'jade', 'views', 'contact-bootstrap.jade');
 
   // Copy initial Jade templates to "views" directory
   await copy(layout, join(viewsDir, 'layout.jade'));
 
-  switch (params.cssFramework) {
-    case 'none':
-      if (params.jsFramework) {
 
-      } else {
-        // Copy header and footer partial templates
-        await mkdirs(join(viewsDir, 'includes'));
-        await copy(plainCssHeader, join(viewsDir, 'includes', 'header.jade'));
-        await copy(plainCssFooter, join(viewsDir, 'includes', 'footer.jade'));
-      }
-      break;
+  const footer = join(__dirname, 'modules', 'jade', 'views', 'footer.jade');
+  const header = join(__dirname, 'modules', 'jade', 'views', `header-${params.cssFramework}.jade`);
+  const headerAuth = join(__dirname, 'modules', 'jade', 'views', `header-auth-${params.cssFramework}.jade`);
+  const home = join(__dirname, 'modules', 'jade', 'views', `home-${params.cssFramework}.jade`);
+  const contact = join(__dirname, 'modules', 'jade', 'views', `contact-${params.cssFramework}.jade`);
 
-    case 'bootstrap':
-      const bootstrapHeader = join(__dirname, 'modules', 'jade', 'views', 'header-bootstrap.jade');
-      const bootstrapHeaderAuthLinks = join(__dirname, 'modules', 'jade', 'views', 'header-auth-bootstrap.jade');
+  // Copy view templates only for non-single page apps
+  if (!params.jsFramework) {
+    await copy(footer, join(viewsDir, 'includes', 'footer.jade'));
+    await copy(header, join(viewsDir, 'includes', 'header.jade'));
+    await copy(home, join(viewsDir, 'home.jade'));
+    await copy(contact, join(viewsDir, 'contact.jade'));
 
-      if (params.jsFramework) {
-
-      } else {
-        await copy(bootstrapFooter, join(viewsDir, 'includes', 'footer.jade'));
-        await copy(bootstrapHeader, join(viewsDir, 'includes', 'header.jade'));
-        await copy(bootstrapHome, join(viewsDir, 'home.jade'));
-        await copy(bootstrapContact, join(viewsDir, 'contact.jade'));
-
-        // Is authentication checked? Add "Log in" / "Sign up"/ "Logout" links to the header
-        if (params.authentication.length) {
-          await replaceCode(join(viewsDir, 'includes', 'header.jade'), 'HEADER_AUTH_LINKS', bootstrapHeaderAuthLinks, { indentLevel: 3 });
-        }
-      }
-      break;
-
-    default:
-      break;
+    // Is authentication checked? Then add log in, sign up, logout links to the header
+    if (params.authentication.length) {
+      const headerAuthIndent = {
+        bootstrap: 2,
+        foundation: 3
+      };
+      await replaceCode(join(viewsDir, 'includes', 'header.jade'), 'HEADER_AUTH', headerAuth, { indentLevel: headerAuthIndent[params.cssFramework] });
+    }
   }
 }
 
