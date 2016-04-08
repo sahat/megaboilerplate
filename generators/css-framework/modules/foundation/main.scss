@@ -23,7 +23,7 @@
 @include foundation-flex-video;
 @include foundation-label;
 @include foundation-media-object;
-@include foundation-off-canvas;
+//@include foundation-off-canvas;
 @include foundation-orbit;
 @include foundation-pagination;
 @include foundation-progress-bar;
@@ -43,42 +43,28 @@
 @include foundation-float-classes;
 // @include foundation-flex-classes;
 
-.top-bar {
-  margin: 0 0 1rem;
-}
-
-.top-bar a {
-  color: #fff;
-  font-size: 0.8125rem;
-  font-weight: bold;
-  &:hover,
-  &:focus {
-    color: #fff;
-  }
-}
-
-.top-bar-title {
-  padding-top: .8rem;
-  margin-left: 1rem;
-  line-height: 1;
-  > a {
-    margin-left: 10px;
-  }
-}
-
-.top-bar .menu > li > a {
-  padding: 1rem 1rem;
-}
-
-.top-bar li > a.active {
-  background-color: $black;
-}
-
 // Scaffolding
 // -------------------------
 
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin: 0 0 50px;
+}
+
 footer {
   padding: 0 1rem;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 50px;
+  width: 100%;
+  //background-color: #fff;
+  //border-top: 1px solid #e0e0e0;
+  line-height: 50px;
 }
 
 .login-container {
@@ -87,6 +73,7 @@ footer {
 }
 
 .gravatar {
+  display: block;
   margin: 0 0 1rem;
 }
 
@@ -94,10 +81,46 @@ footer {
   color: map-get($foundation-palette, alert);
 }
 
+textarea {
+  resize: none;
+}
+
+// Alerts
+// ------
+
+.callout.alert {
+  background-color: rgba(240, 80, 80, 0.2);
+  border-color: rgba(240, 80, 80, 0.3);
+  color: map-get($foundation-palette, alert);
+}
+
+.callout.success {
+  background-color: rgba(95, 190, 170, 0.3);
+  border-color: rgba(95, 190, 170, 0.4);
+  color: map-get($foundation-palette, success);
+}
+
+.callout.primary {
+  background-color: rgba(52, 211, 235, 0.2);
+  border-color: rgba(52, 211, 235, 0.3);
+  color: map-get($foundation-palette, info);
+}
+
+
+
 // Buttons
 // -------------------------
+.button {
+}
+
+.button-group .button:not(:last-child) {
+  border-right: 0;
+  margin-right: 5px;
+}
+
 .button-group > .button {
-  margin-bottom: 1px;
+  float: none;
+  margin-bottom: 5px;
 }
 
 .button.facebook {
@@ -137,6 +160,48 @@ footer {
   }
 }
 
+// Top bar
+// -------------------------
+
+.top-bar + .row{
+  margin: 2rem 0 0;
+}
+
+.top-bar li.avatar {
+  padding: 0 1rem;
+  color: #fff;
+  img {
+    margin-right: 5px;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.top-bar a {
+  color: #fff;
+  &:hover,
+  &:focus {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.07);
+  }
+}
+
+.top-bar-title {
+  margin: 1rem 1rem 0;
+  > a {
+    margin-left: 10px;
+  }
+}
+
+.top-bar .menu > li > a {
+  padding: 1.3rem 1rem;
+}
+
+.top-bar li > a.active {
+  background-color: $black;
+}
+
 // Forms
 // -------------------------
 
@@ -144,8 +209,8 @@ footer {
   height: auto;
   margin-top: 20px;
   border-top: 1px solid;
-  color: #bbb;
-  font-size: 16px;
+  color: rgba(152, 166, 173, 0.2);
+  font-size: 14px;
   text-align: center;
   line-height: 20px;
 }
@@ -154,8 +219,44 @@ footer {
   position: relative;
   padding: 2px 10px;
   top: -10px;
-  background-color: #fff;
+  color: $body-font-color;
+  background-color: #2f3e48;
   border-radius: 2px;
-  letter-spacing: .2em;
+  font-weight: 600;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
+}
+
+.card {
+  padding: 20px;
+  margin-bottom: 20px;
+  background-clip: padding-box;
+  background-color: #2f3e48;
+  border-radius: 5px;
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.06), 0 1px 0 0 rgba(0, 0, 0, .02);
+  &.primary {
+    border-top: 3px solid map-get($foundation-palette, primary);
+    .card-title { color: map-get($foundation-palette, primary); }
+  }
+  &.success {
+    border-top: 3px solid map-get($foundation-palette, success);
+    .card-title { color: map-get($foundation-palette, success); }
+  }
+  &.alert {
+    border-top: 3px solid map-get($foundation-palette, alert);
+    .card-title { color: map-get($foundation-palette, alert); }
+  }
+}
+
+.card-title {
+  color: #fff;
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 15px;
+  margin-top: 0;
+}
+
+label {
+  color: $body-font-color;
+  font-weight: 600;
 }
