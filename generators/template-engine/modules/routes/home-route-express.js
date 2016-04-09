@@ -1,2 +1,2 @@
 
-app.get('/', home.index);
+app.get('/', HomeController.index);
