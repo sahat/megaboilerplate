@@ -184,20 +184,19 @@ async function generateCommonAuthenticationExpress(params) {
         if (usingOAuth) {
           await cpy([join(__dirname, 'modules', 'common', 'views', 'loading.jade')], join(build, 'views'));
         }
-
       } else {
-        await mkdirs(join(build, 'views', 'account'));
-        await cpy([
-          join(__dirname, 'modules', 'common', 'views', 'login.jade'),
-          join(__dirname, 'modules', 'common', 'views', 'signup.jade'),
-          join(__dirname, 'modules', 'common', 'views', 'forgot.jade'),
-          join(__dirname, 'modules', 'common', 'views', 'reset.jade'),
-          join(__dirname, 'modules', 'common', 'views', 'profile.jade')
-        ], join(build, 'views', 'account'));
+        const login = join(__dirname, 'modules', 'common', 'views', `login-${params.cssFramework}.jade`);
+        const signup = join(__dirname, 'modules', 'common', 'views', `signup-${params.cssFramework}.jade`);
+        const forgot = join(__dirname, 'modules', 'common', 'views', `forgot-${params.cssFramework}.jade`);
+        const reset = join(__dirname, 'modules', 'common', 'views', `reset-${params.cssFramework}.jade`);
+        const profile = join(__dirname, 'modules', 'common', 'views', `profile-${params.cssFramework}.jade`);
+
+        await copy(login, join(build, 'views', 'account', 'login.jade'));
+        await copy(signup, join(build, 'views', 'account', 'signup.jade'));
+        await copy(forgot, join(build, 'views', 'account', 'forgot.jade'));
+        await copy(reset, join(build, 'views', 'account', 'reset.jade'));
+        await copy(profile, join(build, 'views', 'account', 'profile.jade'));
       }
-
-      // Local auth is always required, so if length is greater than 2, one of OAuth provider is selected
-
       break;
     case 'handlebars':
     case 'nunjucks':
