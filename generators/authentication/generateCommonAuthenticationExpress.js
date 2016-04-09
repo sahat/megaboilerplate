@@ -38,6 +38,7 @@ async function generateCommonAuthenticationExpress(params) {
   if (params.jsFramework) {
     await replaceCode(server, 'IS_AUTHENTICATED_MIDDLEWARE', jwtIsAuthenticatedMiddleware);
     await replaceCode(server, 'JWT_REQUIRE', jwtRequire);
+    await replaceCode(server, 'USER_MODEL_REQUIRE', userModelAppRequire);
     await replaceCode(userController, 'ENSURE_AUTHENTICATED_MIDDLEWARE', jwtEnsureAuthenticated);
     await replaceCode(userController, 'JWT_REQUIRE', jwtRequire);
     await replaceCode(userController, 'GENERATE_TOKEN', generateTokenHelper);
@@ -48,9 +49,6 @@ async function generateCommonAuthenticationExpress(params) {
     await replaceCode(server, 'PASSPORT_MIDDLEWARE', passportMiddleware);
     await replaceCode(server, 'PASSPORT_CONFIG_REQUIRE', passportConfigRequire);
   }
-
-  // Add User model reference to app.js
-  await replaceCode(server, 'USER_MODEL_REQUIRE', userModelAppRequire);
 
   // Add user controller reference
   await replaceCode(server, 'USER_CONTROLLER', userControllerRequire);
