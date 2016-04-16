@@ -1,0 +1,53 @@
+
+// Scaffolding
+// -------------------------
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 44px;
+}
+
+footer {
+  position: absolute;
+  height: 44px;
+  padding: 10px 30px;
+  bottom: 0;
+}
+
+label {
+  display: block;
+  line-height: 1.8;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+.list-inline {
+  padding-left: 0;
+  margin-left: -5px;
+  list-style: none;
+}
+
+.list-inline>li {
+  display: inline-block;
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+.container {
+  padding-right: 2rem;
+  padding-left: 2rem;
+}
+
+.text-success {
+  color: #29b35b;
+}
+
+.text-danger {
+  color: #b61b17;
+}
