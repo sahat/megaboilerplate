@@ -35,7 +35,7 @@ ul, ol {
   list-style: none;
 }
 
-.list-inline>li {
+.list-inline > li {
   display: inline-block;
   padding-right: 5px;
   padding-left: 5px;
@@ -59,13 +59,10 @@ ul, ol {
   margin: 0 0 1rem;
 }
 
-.avatar {
-  padding: 0 1rem;
-  color: #fff;
-  img {
-    margin-right: 5px;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-  }
+.avatar img {
+  margin-right: 5px;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  vertical-align: middle;
 }
