@@ -1,6 +1,5 @@
 import { join } from 'path';
 import { copy, cpy, mkdirs, addNpmPackage, replaceCode, templateReplace } from '../utils';
-import { noneClassMap, bootstrapClassMap, foundationClassMap, bourbonNeatClassMap } from '../css-framework/modules/class-maps.js';
 
 async function generateJsFrameworkReact(params) {
   const build = join(__base, 'build', params.uuid);
