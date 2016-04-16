@@ -1,3 +1,5 @@
+@import 'normalize.css';
+@import 'flexboxgrid.css';
 
 // Scaffolding
 // -------------------------
@@ -50,4 +52,20 @@ ul, ol {
 
 .text-danger {
   color: #b61b17;
+}
+
+.gravatar {
+  display: block;
+  margin: 0 0 1rem;
+}
+
+.avatar {
+  padding: 0 1rem;
+  color: #fff;
+  img {
+    margin-right: 5px;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+  }
 }
