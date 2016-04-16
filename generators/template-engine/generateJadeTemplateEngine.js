@@ -50,6 +50,7 @@ async function copyTemplates(params) {
     // Is authentication checked? Then add log in, sign up, logout links to the header
     if (params.authentication.length) {
       const headerAuthIndent = {
+        none: 2,
         bootstrap: 2,
         foundation: 3
       };
