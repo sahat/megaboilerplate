@@ -16,7 +16,7 @@ body {
 footer {
   position: absolute;
   height: 44px;
-  padding: 10px 30px;
+  padding: 0 30px;
   bottom: 0;
 }
 
@@ -54,9 +54,12 @@ ul, ol {
   color: #b61b17;
 }
 
+.text-info {
+  color: #31708f;
+}
+
 .gravatar {
   display: block;
-  margin: 0 0 1rem;
 }
 
 .avatar img {
@@ -65,4 +68,14 @@ ul, ol {
   width: 30px;
   height: 30px;
   vertical-align: middle;
+}
+
+input[type="radio"] + label,
+input[type="checkbox"] + label {
+  display: inline-block;
+  margin: 0 5px;
+}
+
+form button[type="submit"] {
+  margin-top: 1em;
 }
