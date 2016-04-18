@@ -3,15 +3,15 @@ extends layout
 block content
   .container
     if messages.error
-      .alert.alert-danger(role='alert')
+      div.text-danger(role='alert')
         for error in messages.error
           div= error.msg
     if messages.success
-      .alert.alert-success(role='alert')
+      div.text-success(role='alert')
         for success in messages.success
           div= success.msg
     if messages.info
-      .alert.alert-info(role='alert')
+      div.text-info(role='alert')
         for info in messages.info
           div= info.msg
 
