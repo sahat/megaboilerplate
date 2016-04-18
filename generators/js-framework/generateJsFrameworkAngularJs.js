@@ -11,6 +11,9 @@ async function generateJsFrameworkAngularJs(params) {
       // Add AngularJS routes + html5 push state redirect
       await replaceCode(server, 'ANGULARJS_ROUTES', angularJsRoutes);
 
+      // Copy app.js (entry file)
+      await copy(join(__dirname, 'modules', 'angularjs', 'app.js'), join(build, 'app', 'app.js'));
+
       // Copy controllers
       const controllersDir = join(__dirname, 'modules', 'angularjs', 'controllers');
       await cpy([
