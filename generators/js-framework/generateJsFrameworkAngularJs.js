@@ -46,23 +46,24 @@ async function generateJsFrameworkAngularJs(params) {
 
       await copy(join(viewsDir, '404.html'), join(build, 'app', 'views', '404.html'));
       await copy(join(viewsDir, `contact-${params.cssFramework}.html`), join(build, 'app', 'views', 'contact.html'));
-      await copy(join(viewsDir, 'footer.html'), join(build, 'app', 'views', 'footer.html'));
-      await copy(join(viewsDir, `forgot-${params.cssFramework}.html`), join(build, 'app', 'views', 'forgot.html'));
       await copy(join(viewsDir, `header-${params.cssFramework}.html`), join(build, 'app', 'views', 'header.html'));
-      await copy(join(viewsDir, `home-${params.cssFramework}.html`), join(build, 'app', 'views', 'home.html'));
-      await copy(join(viewsDir, `login-${params.cssFramework}.html`), join(build, 'app', 'views', 'login.html'));
-      await copy(join(viewsDir, `profile-${params.cssFramework}.html`), join(build, 'app', 'views', 'profile.html'));
-      await copy(join(viewsDir, `reset-${params.cssFramework}.html`), join(build, 'app', 'views', 'reset.html'));
-      await copy(join(viewsDir, `signup-${params.cssFramework}.html`), join(build, 'app', 'views', 'signup.html'));
+      await copy(join(viewsDir, 'footer.html'), join(build, 'app', 'views', 'footer.html'));
 
-      // Copy entry file for Angular app
-      const appJs = join(__dirname, 'modules', 'angularjs', 'app.js');
-      await copy(appJs, join(build, 'app', 'app.js'));
-      
-      // Add satellizer dependency
-      await templateReplace(join(build, 'app', 'app.js'), {
-        satellizer: params.authentication.length ? `, 'satellizer'` : null
-      });
+      if (params.authentication.length) {
+        await copy(join(viewsDir, `forgot-${params.cssFramework}.html`), join(build, 'app', 'views', 'forgot.html'));
+        await copy(join(viewsDir, `home-${params.cssFramework}.html`), join(build, 'app', 'views', 'home.html'));
+        await copy(join(viewsDir, `login-${params.cssFramework}.html`), join(build, 'app', 'views', 'login.html'));
+        await copy(join(viewsDir, `profile-${params.cssFramework}.html`), join(build, 'app', 'views', 'profile.html'));
+        await copy(join(viewsDir, `reset-${params.cssFramework}.html`), join(build, 'app', 'views', 'reset.html'));
+        await copy(join(viewsDir, `signup-${params.cssFramework}.html`), join(build, 'app', 'views', 'signup.html'));
+
+        // Add satellizer dependency
+        await templateReplace(join(build, 'app', 'app.js'), {
+          satellizer: params.authentication.length ? `, 'satellizer'` : null
+        });
+      }
+
+
       break;
 
     case 'meteor':
