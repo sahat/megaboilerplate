@@ -48,6 +48,34 @@ async function generateVkAuthenticationExpress(params) {
 
   await appendFile(env, '\nVKONTAKTE_ID=5389715');
   await appendFile(env, '\nVKONTAKTE_SECRET=W4MvuGuWZDqmDravgesY\n');
+
+  let loginPage;
+  let signupPage;
+  let signInButton;
+
+  if (params.jsFramework && params.jsFramework === 'angularjs') {
+    loginPage = join(build, 'app', 'views', 'login.html');
+    signupPage = join(build, 'app', 'views', 'signup.html');
+    signInButton = join(__dirname, 'modules', 'vk', 'views', `sign-in-button-angular-${params.cssFramework}.html`);
+    await replaceCode(loginPage, 'SIGN_IN_WITH_VK', signInButton, { indentLevel: 3 });
+    await replaceCode(signupPage, 'SIGN_IN_WITH_VK', signInButton, { indentLevel: 3 });
+  } else {
+    switch (params.templateEngine) {
+      case 'jade':
+        loginPage = join(build, 'views', 'account', 'login.jade');
+        signupPage = join(build, 'views', 'account', 'signup.jade');
+        signInButton = join(__dirname, 'modules', 'vk', 'views', `sign-in-button-${params.cssFramework}.jade`);
+        await replaceCode(loginPage, 'SIGN_IN_WITH_VK', signInButton, { indentLevel: 3 });
+        await replaceCode(signupPage, 'SIGN_IN_WITH_VK', signInButton, { indentLevel: 3 });
+        break;
+      case 'handlebars':
+        break;
+      case 'nunjucks':
+        break;
+      default:
+        break;
+    }
+  }
 }
 
 export default generateVkAuthenticationExpress;

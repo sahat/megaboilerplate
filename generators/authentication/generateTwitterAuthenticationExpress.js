@@ -53,6 +53,34 @@ async function generateTwitterAuthenticationExpress(params) {
 
   await appendFile(env, '\nTWITTER_KEY=6NNBDyJ2TavL407A3lWxPFKBI');
   await appendFile(env, '\nTWITTER_SECRET=ZHaYyK3DQCqv49Z9ofsYdqiUgeoICyh6uoBgFfu7OeYC7wTQKa\n');
+
+  let loginPage;
+  let signupPage;
+  let signInButton;
+
+  if (params.jsFramework && params.jsFramework === 'angularjs') {
+    loginPage = join(build, 'app', 'views', 'login.html');
+    signupPage = join(build, 'app', 'views', 'signup.html');
+    signInButton = join(__dirname, 'modules', 'twitter', 'views', `sign-in-button-angular-${params.cssFramework}.html`);
+    await replaceCode(loginPage, 'SIGN_IN_WITH_TWITTER', signInButton, { indentLevel: 3 });
+    await replaceCode(signupPage, 'SIGN_IN_WITH_TWITTER', signInButton, { indentLevel: 3 });
+  } else {
+    switch (params.templateEngine) {
+      case 'jade':
+        loginPage = join(build, 'views', 'account', 'login.jade');
+        signupPage = join(build, 'views', 'account', 'signup.jade');
+        signInButton = join(__dirname, 'modules', 'twitter', 'views', `sign-in-button-${params.cssFramework}.jade`);
+        await replaceCode(loginPage, 'SIGN_IN_WITH_TWITTER', signInButton, { indentLevel: 3 });
+        await replaceCode(signupPage, 'SIGN_IN_WITH_TWITTER', signInButton, { indentLevel: 3 });
+        break;
+      case 'handlebars':
+        break;
+      case 'nunjucks':
+        break;
+      default:
+        break;
+    }
+  }
 }
 
 export default generateTwitterAuthenticationExpress;

@@ -54,6 +54,34 @@ async function generateGoogleAuthenticationExpress(params) {
 
   await appendFile(env, '\nGOOGLE_ID=828110519058.apps.googleusercontent.com');
   await appendFile(env, '\nGOOGLE_SECRET=JdZsIaWhUFIchmC1a_IZzOHb\n');
+
+  let loginPage;
+  let signupPage;
+  let signInButton;
+
+  if (params.jsFramework && params.jsFramework === 'angularjs') {
+    loginPage = join(build, 'app', 'views', 'login.html');
+    signupPage = join(build, 'app', 'views', 'signup.html');
+    signInButton = join(__dirname, 'modules', 'google', 'views', `sign-in-button-angular-${params.cssFramework}.html`);
+    await replaceCode(loginPage, 'SIGN_IN_WITH_GOOGLE', signInButton, { indentLevel: 3 });
+    await replaceCode(signupPage, 'SIGN_IN_WITH_GOOGLE', signInButton, { indentLevel: 3 });
+  } else {
+    switch (params.templateEngine) {
+      case 'jade':
+        loginPage = join(build, 'views', 'account', 'login.jade');
+        signupPage = join(build, 'views', 'account', 'signup.jade');
+        signInButton = join(__dirname, 'modules', 'google', 'views', `sign-in-button-${params.cssFramework}.jade`);
+        await replaceCode(loginPage, 'SIGN_IN_WITH_GOOGLE', signInButton, { indentLevel: 3 });
+        await replaceCode(signupPage, 'SIGN_IN_WITH_GOOGLE', signInButton, { indentLevel: 3 });
+        break;
+      case 'handlebars':
+        break;
+      case 'nunjucks':
+        break;
+      default:
+        break;
+    }
+  }
 }
 
 

@@ -21,8 +21,6 @@ async function generateFacebookAuthenticationExpress(params) {
     await addNpmPackage('passport-facebook', params);
   }
 
-  
-
   switch (params.database) {
     case 'mongodb':
       if (params.jsFramework) {
@@ -57,6 +55,34 @@ async function generateFacebookAuthenticationExpress(params) {
       FACEBOOK_ID: '980220002068787',
       FACEBOOK_SECRET: 'fb9416c436edd2690c6f6adbd94374d1'
     });
+  }
+
+  let loginPage;
+  let signupPage;
+  let signInButton;
+  
+  if (params.jsFramework && params.jsFramework === 'angularjs') {
+    loginPage = join(build, 'app', 'views', 'login.html');
+    signupPage = join(build, 'app', 'views', 'signup.html');
+    signInButton = join(__dirname, 'modules', 'facebook', 'views', `sign-in-button-angular-${params.cssFramework}.html`);
+    await replaceCode(loginPage, 'SIGN_IN_WITH_FACEBOOK', signInButton, { indentLevel: 3 });
+    await replaceCode(signupPage, 'SIGN_IN_WITH_FACEBOOK', signInButton, { indentLevel: 3 });
+  } else {
+    switch (params.templateEngine) {
+      case 'jade':
+        loginPage = join(build, 'views', 'account', 'login.jade');
+        signupPage = join(build, 'views', 'account', 'signup.jade');
+        signInButton = join(__dirname, 'modules', 'facebook', 'views', `sign-in-button-${params.cssFramework}.jade`);
+        await replaceCode(loginPage, 'SIGN_IN_WITH_FACEBOOK', signInButton, { indentLevel: 3 });
+        await replaceCode(signupPage, 'SIGN_IN_WITH_FACEBOOK', signInButton, { indentLevel: 3 });
+        break;
+      case 'handlebars':
+        break;
+      case 'nunjucks':
+        break;
+      default:
+        break;
+    }
   }
 }
 
