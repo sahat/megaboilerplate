@@ -1,0 +1,16 @@
+<ul ng-if="isAuthenticated()" class="nav navbar-nav navbar-right">
+  <li class="dropdown">
+    <a href="#" data-toggle="dropdown" class="navbar-avatar dropdown-toggle">
+      <img ng-src="{{currentUser.picture || currentUser.gravatar}}"> {{currentUser.name || currentUser.email || currentUser.id}} <i class="caret"></i>
+    </a>
+    <ul class="dropdown-menu">
+      <li><a href="/account">My Account</a></li>
+      <li class="divider"></li>
+      <li><a href="#" ng-click="logout()"}>Logout</a></li>
+    </ul>
+  </li>
+</ul>
+<ul ng-if="!isAuthenticated()" class="nav navbar-nav navbar-right">
+  <li ng-class="{ active: isActive('/login')}"><a href="/login">Log in</a></li>
+  <li ng-class="{ active: isActive('/signup')}"><a href="/signup">Sign up</a></li>
+</ul>
