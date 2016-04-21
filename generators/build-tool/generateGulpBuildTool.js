@@ -63,8 +63,8 @@ async function generateGulpBuildTool(params) {
 
   switch (params.jsFramework) {
     case 'react':
-      const reactGulpRequire = join(__dirname, 'modules', 'gulp', 'react-gulp-require.js');
-      const reactGulpTask = join(__dirname, 'modules', 'gulp', 'react-gulp-task.js');
+      const reactGulpRequire = join(__dirname, 'modules', 'gulp', 'react', 'react-gulp-require.js');
+      const reactGulpTask = join(__dirname, 'modules', 'gulp', 'react', 'react-gulp-task.js');
 
       await addNpmPackage('vinyl-source-stream', params, true);
       await addNpmPackage('babelify', params, true);
