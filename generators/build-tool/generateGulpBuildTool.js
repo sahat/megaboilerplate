@@ -1,5 +1,5 @@
 import { join } from 'path';
-import { cpy, replaceCode, addNpmPackage, addNpmScript } from '../utils';
+import { cpy, replaceCode, templateReplace, addNpmPackage, addNpmScript } from '../utils';
 
 async function generateGulpBuildTool(params) {
   const build = join(__base, 'build', params.uuid);
@@ -20,6 +20,8 @@ async function generateGulpBuildTool(params) {
   await addNpmPackage('gulp-csso', params, true);
   await addNpmPackage('gulp-autoprefixer', params, true);
 
+  let buildTasks = [];
+
   switch (params.cssPreprocessor) {
     case 'sass':
       const sassGulpRequire = join(__dirname, 'modules', 'gulp', 'sass-gulp-require.js');
@@ -29,6 +31,8 @@ async function generateGulpBuildTool(params) {
 
       await replaceCode(join(build, 'gulpfile.js'), 'CSS_PREPROCESSOR_GULP_REQUIRE', sassGulpRequire);
       await replaceCode(join(build, 'gulpfile.js'), 'CSS_PREPROCESSOR_GULP_TASK', sassGulpTask);
+
+      buildTasks.push('sass');
       break;
 
     case 'less':
@@ -39,6 +43,8 @@ async function generateGulpBuildTool(params) {
 
       await replaceCode(join(build, 'gulpfile.js'), 'CSS_PREPROCESSOR_GULP_REQUIRE', lessGulpRequire);
       await replaceCode(join(build, 'gulpfile.js'), 'CSS_PREPROCESSOR_GULP_TASK', lessGulpTask);
+
+      buildTasks.push('less');
       break;
 
     case 'css':
@@ -47,6 +53,8 @@ async function generateGulpBuildTool(params) {
 
       await replaceCode(join(build, 'gulpfile.js'), 'CSS_PREPROCESSOR_GULP_REQUIRE', cssGulpRequire);
       await replaceCode(join(build, 'gulpfile.js'), 'CSS_PREPROCESSOR_GULP_TASK', cssGulpTask);
+
+      buildTasks.push('css');
       break;
 
     default:
@@ -68,6 +76,7 @@ async function generateGulpBuildTool(params) {
       await replaceCode(join(build, 'gulpfile.js'), 'JS_FRAMEWORK_GULP_REQUIRE', reactGulpRequire);
       await replaceCode(join(build, 'gulpfile.js'), 'JS_FRAMEWORK_GULP_TASK', reactGulpTask);
 
+      buildTasks.push('react');
       break;
 
     case 'angularjs':
@@ -81,11 +90,16 @@ async function generateGulpBuildTool(params) {
       await replaceCode(join(build, 'gulpfile.js'), 'JS_FRAMEWORK_GULP_REQUIRE', angularjsGulpRequire);
       await replaceCode(join(build, 'gulpfile.js'), 'JS_FRAMEWORK_GULP_TASK', angularjsGulpTask);
 
+      buildTasks.push('angular', 'templates');
       break;
 
     default:
       break;
   }
+
+  await templateReplace(join(build, 'gulpfile.js'), {
+    buildTasks: "'" + buildTasks.join("', '") + "'"
+  });
 }
 
 export default generateGulpBuildTool;

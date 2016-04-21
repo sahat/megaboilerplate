@@ -1,5 +1,5 @@
 
-gulp.task('build', function() {
+gulp.task('angular', function() {
   return gulp.src([
       'app/app.js',
       'app/controllers/*.js',
