@@ -64,6 +64,15 @@ async function generateJsFrameworkAngularJs(params) {
         await templateReplace(join(build, 'app', 'app.js'), {
           satellizer: params.authentication.length ? `, 'satellizer'` : null
         });
+
+        // Add log in, sign up, logout links to the header
+        const headerAuthIndent = {
+          none: 2,
+          bootstrap: 3,
+          foundation: 2
+        };
+        const headerAuth = join(__dirname, 'modules', 'angularjs', 'views', `header-auth-${params.cssFramework}.html`);
+        await replaceCode(join(viewsDir, 'views', 'header.html'), 'HEADER_AUTH', headerAuth, { indentLevel: headerAuthIndent[params.cssFramework] });
       }
 
 
