@@ -65,8 +65,8 @@ async function generateFacebookAuthenticationExpress(params) {
     loginPage = join(build, 'app', 'views', 'login.html');
     signupPage = join(build, 'app', 'views', 'signup.html');
     signInButton = join(__dirname, 'modules', 'facebook', 'views', `sign-in-button-angular-${params.cssFramework}.html`);
-    await replaceCode(loginPage, 'SIGN_IN_WITH_FACEBOOK', signInButton, { indentLevel: 3 });
-    await replaceCode(signupPage, 'SIGN_IN_WITH_FACEBOOK', signInButton, { indentLevel: 3 });
+    await replaceCode(loginPage, 'SIGN_IN_WITH_FACEBOOK', signInButton);
+    await replaceCode(signupPage, 'SIGN_IN_WITH_FACEBOOK', signInButton);
   } else {
     switch (params.templateEngine) {
       case 'jade':

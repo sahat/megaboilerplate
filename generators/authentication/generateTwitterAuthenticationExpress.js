@@ -62,8 +62,8 @@ async function generateTwitterAuthenticationExpress(params) {
     loginPage = join(build, 'app', 'views', 'login.html');
     signupPage = join(build, 'app', 'views', 'signup.html');
     signInButton = join(__dirname, 'modules', 'twitter', 'views', `sign-in-button-angular-${params.cssFramework}.html`);
-    await replaceCode(loginPage, 'SIGN_IN_WITH_TWITTER', signInButton, { indentLevel: 3 });
-    await replaceCode(signupPage, 'SIGN_IN_WITH_TWITTER', signInButton, { indentLevel: 3 });
+    await replaceCode(loginPage, 'SIGN_IN_WITH_TWITTER', signInButton);
+    await replaceCode(signupPage, 'SIGN_IN_WITH_TWITTER', signInButton);
   } else {
     switch (params.templateEngine) {
       case 'jade':

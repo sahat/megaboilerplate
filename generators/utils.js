@@ -230,7 +230,7 @@ export async function replaceCode(srcFile, subStr, newSrcFile, opts) {
   }
 
   array.forEach((line, index) => {
-    const re = new RegExp(subStr + '($|\r\n|\r|\n)');
+    const re = new RegExp(subStr + '(_INDENT[0-9]+)?' + '($|\r\n|\r|\n)');
     const isMatch = re.test(line);
 
     // Preserve whitespace if it detects //_ token
@@ -241,10 +241,16 @@ export async function replaceCode(srcFile, subStr, newSrcFile, opts) {
     if (opts.debug) {
       console.log(re, isMatch, line);
     }
-    
+
     if (isMatch) {
-      if (opts.indentLevel) {
-        newSrcData = indentCode(newSrcData, { indentLevel: opts.indentLevel });
+      let indentLevel;
+
+      if (line.includes('_INDENT')) {
+        indentLevel = line.split('_INDENT').pop();
+      }
+
+      if (indentLevel || opts.indentLevel) {
+        newSrcData = indentCode(newSrcData, { indentLevel: indentLevel || opts.indentLevel });
       }
 
       if (opts.indentSpaces) {

@@ -57,8 +57,8 @@ async function generateVkAuthenticationExpress(params) {
     loginPage = join(build, 'app', 'views', 'login.html');
     signupPage = join(build, 'app', 'views', 'signup.html');
     signInButton = join(__dirname, 'modules', 'vk', 'views', `sign-in-button-angular-${params.cssFramework}.html`);
-    await replaceCode(loginPage, 'SIGN_IN_WITH_VK', signInButton, { indentLevel: 3 });
-    await replaceCode(signupPage, 'SIGN_IN_WITH_VK', signInButton, { indentLevel: 3 });
+    await replaceCode(loginPage, 'SIGN_IN_WITH_VK', signInButton);
+    await replaceCode(signupPage, 'SIGN_IN_WITH_VK', signInButton);
   } else {
     switch (params.templateEngine) {
       case 'jade':
