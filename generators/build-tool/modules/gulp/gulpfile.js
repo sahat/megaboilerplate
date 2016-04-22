@@ -14,6 +14,7 @@ var plumber = require('gulp-plumber');
 
 gulp.task('watch', function() {
   gulp.watch('public/css/**/*.scss', gulp.series('sass'));
+  //= JS_FRAMEWORK_GULP_WATCH_INDENT1
 });
-gulp.task('build', gulp.parallel(<%= buildTasks %>));
-gulp.task('default', gulp.parallel('build', 'watch'));
+gulp.task('build', gulp.parallel('<%= buildTasks %>'));
+gulp.task('default', gulp.parallel('<%= defaultTasks %>'));

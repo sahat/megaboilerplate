@@ -21,7 +21,7 @@ async function generateGulpBuildTool(params) {
   await addNpmPackage('gulp-autoprefixer', params, true);
 
   let buildTasks = [];
-
+  let defaultTasks = ['build', 'watch'];
   switch (params.cssPreprocessor) {
     case 'sass':
       const sassGulpRequire = join(__dirname, 'modules', 'gulp', 'sass-gulp-require.js');
@@ -77,11 +77,13 @@ async function generateGulpBuildTool(params) {
       await replaceCode(join(build, 'gulpfile.js'), 'JS_FRAMEWORK_GULP_TASK', reactGulpTask);
 
       buildTasks.push('react');
+      defaultTasks.push('watchify');
       break;
 
     case 'angularjs':
       const angularjsGulpRequire = join(__dirname, 'modules', 'gulp', 'angularjs', 'angularjs-require.js');
       const angularjsGulpTask = join(__dirname, 'modules', 'gulp', 'angularjs', 'angularjs-task.js');
+      const angularjsGulpWatch = join(__dirname, 'modules', 'gulp', 'angularjs', 'angularjs-watch.js');
 
       await addNpmPackage('gulp-concat', params, true);
       await addNpmPackage('gulp-ng-annotate', params, true);
@@ -89,6 +91,7 @@ async function generateGulpBuildTool(params) {
 
       await replaceCode(join(build, 'gulpfile.js'), 'JS_FRAMEWORK_GULP_REQUIRE', angularjsGulpRequire);
       await replaceCode(join(build, 'gulpfile.js'), 'JS_FRAMEWORK_GULP_TASK', angularjsGulpTask);
+      await replaceCode(join(build, 'gulpfile.js'), 'JS_FRAMEWORK_GULP_WATCH', angularjsGulpWatch);
 
       buildTasks.push('angular', 'templates');
       break;
@@ -98,7 +101,8 @@ async function generateGulpBuildTool(params) {
   }
 
   await templateReplace(join(build, 'gulpfile.js'), {
-    buildTasks: "'" + buildTasks.join("', '") + "'"
+    buildTasks: buildTasks.join("', '"),
+    defaultTasks: defaultTasks.join("', '")
   });
 }
 
