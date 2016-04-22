@@ -72,7 +72,7 @@ async function generateJsFrameworkAngularJs(params) {
           foundation: 2
         };
         const headerAuth = join(viewsDir, `header-auth-${params.cssFramework}.html`);
-        await replaceCode(join(build, 'app', 'views', 'header.html'), 'HEADER_AUTH', headerAuth, { indentLevel: headerAuthIndent[params.cssFramework], debug: true });
+        await replaceCode(join(build, 'app', 'views', 'header.html'), 'HEADER_AUTH', headerAuth, { indentLevel: headerAuthIndent[params.cssFramework] });
       }
 
 

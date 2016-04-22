@@ -1,6 +1,6 @@
 <div class="container">
   <h3>Contact Form</h3>
-  <div ng-if="messages.error" role="alert" class="text-error">
+  <div ng-if="messages.error" role="alert" class="text-danger">
     <div ng-repeat="error in messages.error">{{error.msg}}</div>
   </div>
   <div ng-if="messages.success" role="alert" class="text-success">
@@ -13,6 +13,7 @@
     <input type="email" name="email" id="email" ng-model="contact.email">
     <label for="message">Body</label>
     <textarea name="message" id="message" rows="7" ng-model="contact.message"></textarea>
+    <br>
     <button type="submit">Send</button>
   </form>
 </div>

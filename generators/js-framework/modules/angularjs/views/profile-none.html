@@ -6,7 +6,7 @@
     <div ng-repeat="success in messages.success">{{success.msg}}</div>
   </div>
 
-  <h5>Profile Information</h5>
+  <h4>Profile Information</h4>
 
   <form ng-submit="updateProfile()">
     <label for="email">Email</label>
@@ -28,7 +28,7 @@
     <button type="submit">Update Profile</button>
   </form>
 
-  <h5>Change Password</h5>
+  <h4>Change Password</h4>
 
   <form ng-submit="changePassword()">
     <label for="password">New Password</label>
@@ -39,7 +39,7 @@
     <button type="submit">Change Password</button>
   </form>
 
-  <h5>Linked Accounts</h5>
+  <h4>Linked Accounts</h4>
 
   <p>
     <a href="#" ng-click="unlink('google')" ng-if="currentUser.google" class="text-danger">Unlink your Google account</a>
@@ -58,7 +58,7 @@
     <a href="#" ng-click="link('vkontakte')" ng-if="!currentUser.vk">Link your VK account</a>
   </p>
 
-  <h5>Delete Account</h5>
+  <h4>Delete Account</h4>
 
   <form ng-submit="deleteAccount()">
     <p>You can delete your account, but keep in mind this action is irreversible.</p>
