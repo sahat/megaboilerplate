@@ -17,10 +17,10 @@
       </form>
       <div className="hr-title"><span>or</span></div>
       <div className="btn-toolbar text-center">
-        <button onClick={this.handleFacebook.bind(this)} className="<%= facebookButton %>">Sign in with Facebook</button>
-        <button onClick={this.handleTwitter.bind(this)} className="<%= twitterButton %>">Sign in with Twitter</button>
-        <button onClick={this.handleGoogle.bind(this)} className="<%= googleButton %>">Sign in with Google</button>
-        <button onClick={this.handleVk.bind(this)} className="<%= vkButton %>">Sign in with VK</button>
+        //= SIGN_IN_WITH_FACEBOOK_INDENT4
+        //= SIGN_IN_WITH_TWITTER_INDENT4
+        //= SIGN_IN_WITH_GOOGLE_INDENT4
+        //= SIGN_IN_WITH_VK_INDENT4
       </div>
     </div>
   </div>
