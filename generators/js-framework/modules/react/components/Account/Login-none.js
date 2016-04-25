@@ -17,10 +17,10 @@
 
   <hr/>
 
-  //= SIGN_IN_WITH_FACEBOOK_INDENT2
-  //= SIGN_IN_WITH_TWITTER_INDENT2
-  //= SIGN_IN_WITH_GOOGLE_INDENT2
-  //= SIGN_IN_WITH_VK_INDENT2
+  //= SIGN_IN_WITH_FACEBOOK_INDENT4
+  //= SIGN_IN_WITH_TWITTER_INDENT4
+  //= SIGN_IN_WITH_GOOGLE_INDENT4
+  //= SIGN_IN_WITH_VK_INDENT4
 
   <p>Don't have an account? <Link to="/signup">Sign up</Link></p>
 </div>
