@@ -20,8 +20,6 @@ async function generateGoogleAuthenticationExpress(params) {
     await replaceCode(config, 'PASSPORT_GOOGLE_REQUIRE', strategyRequire);
 
     await addNpmPackage('passport-google-oauth', params);
-
-    
   }
 
 
@@ -63,6 +61,12 @@ async function generateGoogleAuthenticationExpress(params) {
     loginPage = join(build, 'app', 'views', 'login.html');
     signupPage = join(build, 'app', 'views', 'signup.html');
     signInButton = join(__dirname, 'modules', 'google', 'views', `sign-in-button-angular-${params.cssFramework}.html`);
+    await replaceCode(loginPage, 'SIGN_IN_WITH_GOOGLE', signInButton);
+    await replaceCode(signupPage, 'SIGN_IN_WITH_GOOGLE', signInButton);
+  } else if (params.jsFramework && params.jsFramework === 'react') {
+    loginPage = join(build, 'app', 'components', 'Account', 'Login.js');
+    signupPage = join(build, 'app', 'components', 'Account', 'Signup.js');
+    signInButton = join(__dirname, 'modules', 'google', 'views', `sign-in-button-react-${params.cssFramework}.js`);
     await replaceCode(loginPage, 'SIGN_IN_WITH_GOOGLE', signInButton);
     await replaceCode(signupPage, 'SIGN_IN_WITH_GOOGLE', signInButton);
   } else {
