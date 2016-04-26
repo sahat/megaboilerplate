@@ -13,7 +13,7 @@ var plumber = require('gulp-plumber');
 //= JS_FRAMEWORK_GULP_TASK
 
 gulp.task('watch', function() {
-  gulp.watch('public/css/**/*.scss', gulp.series('sass'));
+  //= CSS_PREPROCESSOR_GULP_WATCH_INDENT1
   //= JS_FRAMEWORK_GULP_WATCH_INDENT1
 });
 

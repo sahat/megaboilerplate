@@ -26,11 +26,13 @@ async function generateGulpBuildTool(params) {
     case 'sass':
       const sassGulpRequire = join(__dirname, 'modules', 'gulp', 'sass-gulp-require.js');
       const sassGulpTask = join(__dirname, 'modules', 'gulp', 'sass-gulp-task.js');
+      const sassGulpWatch = join(__dirname, 'modules', 'gulp', 'sass-gulp-watch.js');
 
       await addNpmPackage('gulp-sass', params, true);
 
       await replaceCode(join(build, 'gulpfile.js'), 'CSS_PREPROCESSOR_GULP_REQUIRE', sassGulpRequire);
       await replaceCode(join(build, 'gulpfile.js'), 'CSS_PREPROCESSOR_GULP_TASK', sassGulpTask);
+      await replaceCode(join(build, 'gulpfile.js'), 'CSS_PREPROCESSOR_GULP_WATCH', sassGulpWatch);
 
       buildTasks.push('sass');
       break;
@@ -38,11 +40,13 @@ async function generateGulpBuildTool(params) {
     case 'less':
       const lessGulpRequire = join(__dirname, 'modules', 'gulp', 'less-gulp-require.js');
       const lessGulpTask = join(__dirname, 'modules', 'gulp', 'less-gulp-task.js');
+      const lessGulpWatch = join(__dirname, 'modules', 'gulp', 'less-gulp-watch.js');
 
       await addNpmPackage('gulp-less', params, true);
 
       await replaceCode(join(build, 'gulpfile.js'), 'CSS_PREPROCESSOR_GULP_REQUIRE', lessGulpRequire);
       await replaceCode(join(build, 'gulpfile.js'), 'CSS_PREPROCESSOR_GULP_TASK', lessGulpTask);
+      await replaceCode(join(build, 'gulpfile.js'), 'CSS_PREPROCESSOR_GULP_WATCH', lessGulpWatch);
 
       buildTasks.push('less');
       break;
