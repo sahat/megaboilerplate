@@ -90,11 +90,18 @@ async function generateTwitterAuthenticationExpress(params) {
 
   if (params.jsFramework === 'react') {
     const reactModules = join(__base, 'generators', 'js-framework', 'modules', 'react');
-    const oauthActions = join(build, 'app', 'actions', 'oauth.js');
-    const twitterLogin = join(reactModules, 'actions', 'oauth', 'twitter.js');
-    const twitterLink = join(reactModules, 'actions', 'oauth', 'twitter-link.js');
-    await replaceCode(oauthActions, 'TWITTER_LOGIN_ACTION', twitterLogin);
-    await replaceCode(oauthActions, 'TWITTER_LINK_ACTION', twitterLink);
+    const oauthAction = join(build, 'app', 'actions', 'oauth.js');
+    const twitterLoginAction = join(reactModules, 'actions', 'oauth', 'twitter.js');
+    const twitterLinkAction = join(reactModules, 'actions', 'oauth', 'twitter-link.js');
+    await replaceCode(oauthAction, 'TWITTER_LOGIN_ACTION', twitterLoginAction);
+    await replaceCode(oauthAction, 'TWITTER_LINK_ACTION', twitterLinkAction);
+
+    // Add link/unlink button on profile page
+    const profileComponent = join(build, 'app', 'components', 'Account', 'Profile.js');
+    const twitterLinkRender = join(reactModules, 'components', 'Account', 'profile', `twitter-link-${params.cssFramework}.js`);
+    const twitterLinkReference = join(reactModules, 'components', 'Account', 'profile', 'twitter-link-reference.js');
+    await replaceCode(profileComponent, 'TWITTER_LINK', twitterLinkRender);
+    await replaceCode(profileComponent, 'TWITTER_LINK_REFERENCE', twitterLinkReference);
   }
 }
 
