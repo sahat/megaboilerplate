@@ -1,6 +1,6 @@
 const rightNav = this.props.token ? (
   <ul className="list-inline">
-      <li className="avatar">\
+      <li className="avatar">
         <img src={this.props.user.picture || this.props.user.gravatar}/>
         {' '}{this.props.user.name || this.props.user.email || this.props.user.id}{' '}
       </li>
