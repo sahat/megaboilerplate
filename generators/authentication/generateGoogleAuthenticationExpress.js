@@ -89,11 +89,18 @@ async function generateGoogleAuthenticationExpress(params) {
 
   if (params.jsFramework === 'react') {
     const reactModules = join(__base, 'generators', 'js-framework', 'modules', 'react');
-    const oauthActions = join(build, 'app', 'actions', 'oauth.js');
-    const googleLogin = join(reactModules, 'actions', 'oauth', 'google.js');
-    const googleLink = join(reactModules, 'actions', 'oauth', 'google-link.js');
-    await replaceCode(oauthActions, 'GOOGLE_LOGIN_ACTION', googleLogin);
-    await replaceCode(oauthActions, 'GOOGLE_LINK_ACTION', googleLink);
+    const oauthAction = join(build, 'app', 'actions', 'oauth.js');
+    const googleLoginAction = join(reactModules, 'actions', 'oauth', 'google.js');
+    const googleLinkAction = join(reactModules, 'actions', 'oauth', 'google-link.js');
+    await replaceCode(oauthAction, 'GOOGLE_LOGIN_ACTION', googleLoginAction);
+    await replaceCode(oauthAction, 'GOOGLE_LINK_ACTION', googleLinkAction);
+
+    // Add link/unlink button on profile page
+    const profileComponent = join(build, 'app', 'components', 'Account', 'Profile.js');
+    const googleLinkRender = join(reactModules, 'components', 'Account', 'profile', `google-link-${params.cssFramework}.js`);
+    const googleLinkReference = join(reactModules, 'components', 'Account', 'profile', 'google-link-reference.js');
+    await replaceCode(profileComponent, 'GOOGLE_LINK', googleLinkRender);
+    await replaceCode(profileComponent, 'GOOGLE_LINK_REFERENCE', googleLinkReference);
   }
 }
 
