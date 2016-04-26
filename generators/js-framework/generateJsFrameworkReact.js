@@ -76,7 +76,7 @@ async function generateJsFrameworkReact(params) {
 
         const PROFILE = join(build, 'app', 'components', 'Account', 'Profile.js');
         const PROFILE_RENDER = join(__dirname, 'modules', 'react', 'components', 'Account', `Profile-${params.cssFramework}.js`);
-        await replaceCode(PROFILE, 'PROFILE_RENDER', PROFILE_RENDER, { indentLevel: 3 });
+        await replaceCode(PROFILE, 'PROFILE_RENDER', PROFILE_RENDER);
 
         const RESET = join(build, 'app', 'components', 'Account', 'Reset.js');
         const RESET_RENDER = join(__dirname, 'modules', 'react', 'components', 'Account', `Reset-${params.cssFramework}.js`);
