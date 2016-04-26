@@ -129,6 +129,14 @@ async function generateJsFrameworkReact(params) {
       await copy(mainJs, join(build, 'app', 'main.js'));
       await copy(reactRoutes, join(build, 'app', 'routes.js'));
 
+      // Add React auth routes
+      if (params.authentication.length) {
+        const routes = join(build, 'app', 'routes.js');
+        await replaceCode(routes, 'AUTH_ROUTES_IMPORT', join(__dirname, 'modules', 'react', 'routes-auth-import.js'));
+        await replaceCode(routes, 'AUTH_MIDDLEWARE', join(__dirname, 'modules', 'react', 'routes-auth-middleware.js'));
+        await replaceCode(routes, 'AUTH_ROUTES', join(__dirname, 'modules', 'react', 'routes-auth.js'));
+      }
+
       switch (params.templateEngine) {
         case 'jade':
           const layoutJade = join(build, 'views', 'layout.jade');
