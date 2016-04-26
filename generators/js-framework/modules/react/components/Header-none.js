@@ -2,10 +2,10 @@
 
 return (
   <div className="container">
-    <ul class="list-inline">
+    <ul className="list-inline">
       <li><IndexLink to="/">Home</IndexLink></li>
       <li><Link to="/contact">Contact</Link></li>
-      //= HEADER_AUTH_REFERENCE_INDENT3
     </ul>
+    //= HEADER_AUTH_REFERENCE_INDENT2
   </div>
 );

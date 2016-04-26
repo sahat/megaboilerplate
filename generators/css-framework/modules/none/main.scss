@@ -30,8 +30,8 @@ ul, ol {
 }
 
 .list-inline {
+  display: inline-block;
   padding-left: 0;
-  margin-left: -5px;
   list-style: none;
 }
 
