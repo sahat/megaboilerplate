@@ -109,6 +109,7 @@ async function generateJsFrameworkReact(params) {
 
       if (params.authentication.length) {
         await copy(join(reducers, 'index-with-auth.js'), join(build, 'app', 'reducers', 'index.js'));
+        await copy(join(reducers, 'messages-with-auth.js'), join(build, 'app', 'reducers', 'messages.js'));
         await copy(join(reducers, 'auth.js'), join(build, 'app', 'reducers', 'auth.js'));
       }
 
