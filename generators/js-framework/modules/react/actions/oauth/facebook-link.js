@@ -1,0 +1,2 @@
+case 'facebook':
+  return facebookLogin();
