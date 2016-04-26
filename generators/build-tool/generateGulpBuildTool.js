@@ -47,16 +47,6 @@ async function generateGulpBuildTool(params) {
       buildTasks.push('less');
       break;
 
-    case 'css':
-      const cssGulpRequire = join(__dirname, 'modules', 'gulp', 'css-gulp-require.js');
-      const cssGulpTask = join(__dirname, 'modules', 'gulp', 'css-gulp-task.js');
-
-      await replaceCode(join(build, 'gulpfile.js'), 'CSS_PREPROCESSOR_GULP_REQUIRE', cssGulpRequire);
-      await replaceCode(join(build, 'gulpfile.js'), 'CSS_PREPROCESSOR_GULP_TASK', cssGulpTask);
-
-      buildTasks.push('css');
-      break;
-
     default:
       break;
   }
