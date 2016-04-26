@@ -38,10 +38,10 @@ return (
     </form>
 
     <h4>Linked Accounts</h4>
-    //= FACEBOOK_LINK_REFERENCE_INDENT5
-    //= TWITTER_LINK_REFERENCE_INDENT5
-    //= GOOGLE_LINK_REFERENCE_INDENT5
-    //= VK_LINK_REFERENCE_INDENT5
+    //= FACEBOOK_LINK_REFERENCE_INDENT4
+    //= TWITTER_LINK_REFERENCE_INDENT4
+    //= GOOGLE_LINK_REFERENCE_INDENT4
+    //= VK_LINK_REFERENCE_INDENT4
 
     <h4>Delete Account</h4>
     <form onSubmit={this.handleDeleteAccount.bind(this)}>
