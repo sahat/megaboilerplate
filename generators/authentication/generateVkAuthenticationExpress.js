@@ -104,7 +104,7 @@ async function generateVkAuthenticationExpress(params) {
 
     // Add link/unlink button on profile page
     const profileTemplate = join(build, 'app', 'views', 'profile.html');
-    const vkLink = join(angularjsModules, 'views', 'profile', `vk-link-${params.cssFramework}.js`);
+    const vkLink = join(angularjsModules, 'views', 'profile', `vk-link-${params.cssFramework}.html`);
     await replaceCode(profileTemplate, 'VK_LINK', vkLink);
   }
 }

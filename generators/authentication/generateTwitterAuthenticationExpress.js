@@ -109,7 +109,7 @@ async function generateTwitterAuthenticationExpress(params) {
 
     // Add link/unlink button on profile page
     const profileTemplate = join(build, 'app', 'views', 'profile.html');
-    const twitterLink = join(angularjsModules, 'views', 'profile', `twitter-link-${params.cssFramework}.js`);
+    const twitterLink = join(angularjsModules, 'views', 'profile', `twitter-link-${params.cssFramework}.html`);
     await replaceCode(profileTemplate, 'TWITTER_LINK', twitterLink);
   }
 }

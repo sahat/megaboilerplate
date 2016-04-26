@@ -112,7 +112,7 @@ async function generateFacebookAuthenticationExpress(params) {
  
     // Add link/unlink button on profile page
     const profileTemplate = join(build, 'app', 'views', 'profile.html');
-    const facebookLink = join(angularjsModules, 'views', 'profile', `facebook-link-${params.cssFramework}.js`);
+    const facebookLink = join(angularjsModules, 'views', 'profile', `facebook-link-${params.cssFramework}.html`);
     await replaceCode(profileTemplate, 'FACEBOOK_LINK', facebookLink);
   }
 }

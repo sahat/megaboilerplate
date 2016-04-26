@@ -108,7 +108,7 @@ async function generateGoogleAuthenticationExpress(params) {
 
     // Add link/unlink button on profile page
     const profileTemplate = join(build, 'app', 'views', 'profile.html');
-    const googleLink = join(angularjsModules, 'views', 'profile', `google-link-${params.cssFramework}.js`);
+    const googleLink = join(angularjsModules, 'views', 'profile', `google-link-${params.cssFramework}.html`);
     await replaceCode(profileTemplate, 'GOOGLE_LINK', googleLink);
   }
 }
