@@ -7,9 +7,9 @@
       <div ng-repeat="success in messages.success">{{success.msg}}</div>
     </div>
 
-    <form ng-submit="updateProfile()">
-      <h5>Profile Information</h5>
+    <h5>Profile Information</h5>
 
+    <form ng-submit="updateProfile()">
       <label for="email">Email</label>
       <input type="email" name="email" id="email" ng-model="profile.email">
 
@@ -35,9 +35,9 @@
       <button type="submit" class="success button">Update Profile</button>
     </form>
 
-    <form ng-submit="changePassword()">
-      <h5>Change Password</h5>
+    <h5>Change Password</h5>
 
+    <form ng-submit="changePassword()">
       <label for="password">New Password</label>
       <input type="password" name="password" id="password" ng-model="profile.password">
 
@@ -48,25 +48,15 @@
     </form>
 
     <h5>Linked Accounts</h5>
-    <p>
-      <a href="#" ng-click="unlink('google')" ng-if="currentUser.google" class="text-danger">Unlink your Google account</a>
-      <a href="#" ng-click="link('google')" ng-if="!currentUser.google">Link your Google account</a>
-    </p>
-    <p>
-      <a href="#" ng-click="unlink('facebook')" ng-if="currentUser.facebook" class="text-danger">Unlink your Facebook account</a>
-      <a href="#" ng-click="link('facebook')" ng-if="!currentUser.facebook">Link your Facebook account</a>
-    </p>
-    <p>
-      <a href="#" ng-click="unlink('twitter')" ng-if="currentUser.twitter" class="text-danger">Unlink your Twitter account</a>
-      <a href="#" ng-click="link('twitter')" ng-if="!currentUser.twitter">Link your Twitter account</a>
-    </p>
-    <p>
-      <a href="#" ng-click="unlink('vkontakte')" ng-if="currentUser.vk" class="text-danger">Unlink your VK account</a>
-      <a href="#" ng-click="link('vkontakte')" ng-if="!currentUser.vk">Link your VK account</a>
-    </p>
+
+    //= FACEBOOK_LINK_INDENT2
+    //= TWITTER_LINK_INDENT2
+    //= GOOGLE_LINK_INDENT2
+    //= VK_LINK_INDENT2
+
+    <h5>Delete Account</h5>
 
     <form ng-submit="deleteAccount()">
-      <h5>Delete Account</h5>
       <p>You can delete your account, but keep in mind this action is irreversible.</p>
       <button type="submit" class="alert button">Delete my account</button>
     </form>

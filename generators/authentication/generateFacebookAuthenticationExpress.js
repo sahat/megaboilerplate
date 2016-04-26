@@ -109,12 +109,7 @@ async function generateFacebookAuthenticationExpress(params) {
 
   if (params.jsFramework === 'angularjs') {
     const angularjsModules = join(__base, 'generators', 'js-framework', 'modules', 'angularjs');
-    // const oauthAction = join(build, 'app', 'actions', 'oauth.js');
-    // const facebookLoginAction = join(reactModules, 'actions', 'oauth', 'facebook.js');
-    // const facebookLinkAction = join(reactModules, 'actions', 'oauth', 'facebook-link.js');
-    // await replaceCode(oauthAction, 'FACEBOOK_LOGIN_ACTION', facebookLoginAction);
-    // await replaceCode(oauthAction, 'FACEBOOK_LINK_ACTION', facebookLinkAction);
-
+ 
     // Add link/unlink button on profile page
     const profileTemplate = join(build, 'app', 'views', 'profile.html');
     const facebookLink = join(angularjsModules, 'views', 'profile', `facebook-link-${params.cssFramework}.js`);
