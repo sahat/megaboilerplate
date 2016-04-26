@@ -1,23 +1,7 @@
-const googleLinkedAccount = this.props.user.google ? (
-  <a href="#" role="button" className="text-alert" onClick={this.handleUnlink.bind(this, 'google')}>Unlink your Google account</a>
-) : (
-  <a href="#" role="button" onClick={this.handleLink.bind(this, 'google')}>Link your Google account</a>
-);
-const facebookLinkedAccount = this.props.user.facebook ? (
-  <a href="#" role="button" className="text-alert" onClick={this.handleUnlink.bind(this, 'facebook')}>Unlink your Facebook account</a>
-) : (
-  <a href="#" role="button" onClick={this.handleLink.bind(this, 'facebook')}>Link your Facebook account</a>
-);
-const twitterLinkedAccount = this.props.user.twitter ? (
-  <a href="#" role="button" className="text-alert" onClick={this.handleUnlink.bind(this, 'twitter')}>Unlink your Twitter account</a>
-) : (
-  <a href="#" role="button" onClick={this.handleLink.bind(this, 'twitter')}>Link your Twitter account</a>
-);
-const vkLinkedAccount = this.props.user.vk ? (
-  <a href="#" role="button" className="text-alert" onClick={this.handleUnlink.bind(this, 'vk')}>Unlink your VK account</a>
-) : (
-  <a href="#" role="button" onClick={this.handleLink.bind(this, 'vk')}>Link your VK account</a>
-);
+//= FACEBOOK_LINK_INDENT2
+//= TWITTER_LINK_INDENT2
+//= GOOGLE_LINK_INDENT2
+//= VK_LINK_INDENT2
 
 return (
   <div className="container">
@@ -54,10 +38,10 @@ return (
     </form>
 
     <h4>Linked Accounts</h4>
-    <p>{googleLinkedAccount}</p>
-    <p>{facebookLinkedAccount}</p>
-    <p>{twitterLinkedAccount}</p>
-    <p>{vkLinkedAccount}</p>
+    //= FACEBOOK_LINK_REFERENCE_INDENT5
+    //= TWITTER_LINK_REFERENCE_INDENT5
+    //= GOOGLE_LINK_REFERENCE_INDENT5
+    //= VK_LINK_REFERENCE_INDENT5
 
     <h4>Delete Account</h4>
     <form onSubmit={this.handleDeleteAccount.bind(this)}>

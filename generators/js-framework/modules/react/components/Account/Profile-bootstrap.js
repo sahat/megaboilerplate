@@ -1,23 +1,7 @@
-const googleLinkedAccount = this.props.user.google ? (
-  <a role="button" className="text-danger" onClick={this.handleUnlink.bind(this, 'google')}>Unlink your Google account</a>
-) : (
-  <a role="button" onClick={this.handleLink.bind(this, 'google')}>Link your Google account</a>
-);
-const facebookLinkedAccount = this.props.user.facebook ? (
-  <a role="button" className="text-danger" onClick={this.handleUnlink.bind(this, 'facebook')}>Unlink your Facebook account</a>
-) : (
-  <a role="button" onClick={this.handleLink.bind(this, 'facebook')}>Link your Facebook account</a>
-);
-const twitterLinkedAccount = this.props.user.twitter ? (
-  <a role="button" className="text-danger" onClick={this.handleUnlink.bind(this, 'twitter')}>Unlink your Twitter account</a>
-) : (
-  <a role="button" onClick={this.handleLink.bind(this, 'twitter')}>Link your Twitter account</a>
-);
-const vkLinkedAccount = this.props.user.vk ? (
-  <a role="button" className="text-danger" onClick={this.handleUnlink.bind(this, 'vk')}>Unlink your VK account</a>
-) : (
-  <a role="button" onClick={this.handleLink.bind(this, 'vk')}>Link your VK account</a>
-);
+//= FACEBOOK_LINK_INDENT2
+//= TWITTER_LINK_INDENT2
+//= GOOGLE_LINK_INDENT2
+//= VK_LINK_INDENT2
 
 return (
   <div className="container">
@@ -105,10 +89,10 @@ return (
           <legend>Linked Accounts</legend>
           <div className="form-group">
             <div className="col-sm-offset-3 col-sm-4">
-              <p>{googleLinkedAccount}</p>
-              <p>{facebookLinkedAccount}</p>
-              <p>{twitterLinkedAccount}</p>
-              <p>{vkLinkedAccount}</p>
+              //= FACEBOOK_LINK_REFERENCE_INDENT9
+              //= TWITTER_LINK_REFERENCE_INDENT9
+              //= GOOGLE_LINK_REFERENCE_INDENT9
+              //= VK_LINK_REFERENCE_INDENT9
             </div>
           </div>
         </div>
