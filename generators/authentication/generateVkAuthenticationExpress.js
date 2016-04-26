@@ -85,11 +85,18 @@ async function generateVkAuthenticationExpress(params) {
 
   if (params.jsFramework === 'react') {
     const reactModules = join(__base, 'generators', 'js-framework', 'modules', 'react');
-    const oauthActions = join(build, 'app', 'actions', 'oauth.js');
-    const vkLogin = join(reactModules, 'actions', 'oauth', 'vk.js');
-    const vkLink = join(reactModules, 'actions', 'oauth', 'vk-link.js');
-    await replaceCode(oauthActions, 'VK_LOGIN_ACTION', vkLogin);
-    await replaceCode(oauthActions, 'VK_LINK_ACTION', vkLink);
+    const oauthAction = join(build, 'app', 'actions', 'oauth.js');
+    const vkLoginAction = join(reactModules, 'actions', 'oauth', 'vk.js');
+    const vkLinkAction = join(reactModules, 'actions', 'oauth', 'vk-link.js');
+    await replaceCode(oauthAction, 'VK_LOGIN_ACTION', vkLoginAction);
+    await replaceCode(oauthAction, 'VK_LINK_ACTION', vkLinkAction);
+
+    // Add link/unlink button on profile page
+    const profileComponent = join(build, 'app', 'components', 'Account', 'Profile.js');
+    const vkLinkRender = join(reactModules, 'components', 'Account', 'profile', `vk-link-${params.cssFramework}.js`);
+    const vkLinkReference = join(reactModules, 'components', 'Account', 'profile', 'vk-link-reference.js');
+    await replaceCode(profileComponent, 'VK_LINK', vkLinkRender);
+    await replaceCode(profileComponent, 'VK_LINK_REFERENCE', vkLinkReference);
   }
 }
 
