@@ -55,7 +55,7 @@ async function generateJsFrameworkReact(params) {
 
       const HEADER = join(build, 'app', 'components', 'Header.js');
       const HEADER_RENDER = join(__dirname, 'modules', 'react', 'components', `Header-${params.cssFramework}.js`);
-      await replaceCode(HEADER, 'HEADER_RENDER', HEADER_RENDER, { indentLevel: 3 });
+      await replaceCode(HEADER, 'HEADER_RENDER', HEADER_RENDER);
 
       if (params.authentication.length) {
         await cpy([
@@ -89,8 +89,8 @@ async function generateJsFrameworkReact(params) {
         // Add log in, sign up, logout links to the header
         const headerAuth = join(components, `Header-auth-${params.cssFramework}.js`);
         const headerAuthRef = join(components, 'Header-auth-reference.js');
-        await replaceCode(join(build, 'app', 'components', 'Account', 'Header.js'), 'HEADER_AUTH', headerAuth);
-        await replaceCode(join(build, 'app', 'components', 'Account', 'Header.js'), 'HEADER_AUTH_REFERENCE', headerAuthRef);
+        await replaceCode(join(build, 'app', 'components', 'Header.js'), 'HEADER_AUTH', headerAuth);
+        await replaceCode(join(build, 'app', 'components', 'Header.js'), 'HEADER_AUTH_REFERENCE', headerAuthRef);
       }
 
       // Copy Redux actions, reducers, store

@@ -1,6 +1,6 @@
 const active = { borderBottomColor: '#3f51b5' };
 
-//= HEADER_AUTH
+//= HEADER_AUTH_INDENT2
 
 return (
   <nav className="navbar navbar-default navbar-static-top">

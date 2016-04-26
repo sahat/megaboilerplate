@@ -1,4 +1,4 @@
-//= HEADER_AUTH
+//= HEADER_AUTH_INDENT2
 
 return (
   <div className="container">
