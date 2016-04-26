@@ -1,5 +1,5 @@
 import { join } from 'path';
-import { copy, cpy, mkdirs, addNpmPackage, replaceCode, templateReplace } from '../utils';
+import { copy, cpy, addNpmPackage, replaceCode, templateReplace } from '../utils';
 
 async function generateJsFrameworkReact(params) {
   const build = join(__base, 'build', params.uuid);
@@ -40,13 +40,6 @@ async function generateJsFrameworkReact(params) {
         join(components, 'Messages.js'),
         join(components, 'NotFound.js')
       ], join(build, 'app', 'components'));
-      await cpy([
-        join(components, 'Account', 'Forgot.js'),
-        join(components, 'Account', 'Login.js'),
-        join(components, 'Account', 'Profile.js'),
-        join(components, 'Account', 'Reset.js'),
-        join(components, 'Account', 'Signup.js')
-      ], join(build, 'app', 'components', 'Account'));
 
       const CONTACT = join(build, 'app', 'components', 'Contact.js');
       const CONTACT_RENDER = join(__dirname, 'modules', 'react', 'components', `Contact-${params.cssFramework}.js`);
@@ -64,42 +57,60 @@ async function generateJsFrameworkReact(params) {
       const HEADER_RENDER = join(__dirname, 'modules', 'react', 'components', `Header-${params.cssFramework}.js`);
       await replaceCode(HEADER, 'HEADER_RENDER', HEADER_RENDER, { indentLevel: 3 });
 
-      const FORGOT = join(build, 'app', 'components', 'Account', 'Forgot.js');
-      const FORGOT_RENDER = join(__dirname, 'modules', 'react', 'components', 'Account', `Forgot-${params.cssFramework}.js`);
-      await replaceCode(FORGOT, 'FORGOT_RENDER', FORGOT_RENDER, { indentLevel: 3 });
+      if (params.authentication.length) {
+        await cpy([
+          join(components, 'Account', 'Forgot.js'),
+          join(components, 'Account', 'Login.js'),
+          join(components, 'Account', 'Profile.js'),
+          join(components, 'Account', 'Reset.js'),
+          join(components, 'Account', 'Signup.js')
+        ], join(build, 'app', 'components', 'Account'));
 
-      const LOGIN = join(build, 'app', 'components', 'Account', 'Login.js');
-      const LOGIN_RENDER = join(__dirname, 'modules', 'react', 'components', 'Account', `Login-${params.cssFramework}.js`);
-      await replaceCode(LOGIN, 'LOGIN_RENDER', LOGIN_RENDER, { indentLevel: 3 });
+        const FORGOT = join(build, 'app', 'components', 'Account', 'Forgot.js');
+        const FORGOT_RENDER = join(__dirname, 'modules', 'react', 'components', 'Account', `Forgot-${params.cssFramework}.js`);
+        await replaceCode(FORGOT, 'FORGOT_RENDER', FORGOT_RENDER, { indentLevel: 3 });
 
-      const PROFILE = join(build, 'app', 'components', 'Account', 'Profile.js');
-      const PROFILE_RENDER = join(__dirname, 'modules', 'react', 'components', 'Account', `Profile-${params.cssFramework}.js`);
-      await replaceCode(PROFILE, 'PROFILE_RENDER', PROFILE_RENDER, { indentLevel: 3 });
+        const LOGIN = join(build, 'app', 'components', 'Account', 'Login.js');
+        const LOGIN_RENDER = join(__dirname, 'modules', 'react', 'components', 'Account', `Login-${params.cssFramework}.js`);
+        await replaceCode(LOGIN, 'LOGIN_RENDER', LOGIN_RENDER, { indentLevel: 3 });
 
-      const RESET = join(build, 'app', 'components', 'Account', 'Reset.js');
-      const RESET_RENDER = join(__dirname, 'modules', 'react', 'components', 'Account', `Reset-${params.cssFramework}.js`);
-      await replaceCode(RESET, 'RESET_RENDER', RESET_RENDER, { indentLevel: 3 });
+        const PROFILE = join(build, 'app', 'components', 'Account', 'Profile.js');
+        const PROFILE_RENDER = join(__dirname, 'modules', 'react', 'components', 'Account', `Profile-${params.cssFramework}.js`);
+        await replaceCode(PROFILE, 'PROFILE_RENDER', PROFILE_RENDER, { indentLevel: 3 });
 
+        const RESET = join(build, 'app', 'components', 'Account', 'Reset.js');
+        const RESET_RENDER = join(__dirname, 'modules', 'react', 'components', 'Account', `Reset-${params.cssFramework}.js`);
+        await replaceCode(RESET, 'RESET_RENDER', RESET_RENDER, { indentLevel: 3 });
 
-      const SIGNUP = join(build, 'app', 'components', 'Account', 'Signup.js');
-      const SIGNUP_RENDER = join(__dirname, 'modules', 'react', 'components', 'Account', `Signup-${params.cssFramework}.js`);
-      await replaceCode(SIGNUP, 'SIGNUP_RENDER', SIGNUP_RENDER, { indentLevel: 3 });
+        const SIGNUP = join(build, 'app', 'components', 'Account', 'Signup.js');
+        const SIGNUP_RENDER = join(__dirname, 'modules', 'react', 'components', 'Account', `Signup-${params.cssFramework}.js`);
+        await replaceCode(SIGNUP, 'SIGNUP_RENDER', SIGNUP_RENDER, { indentLevel: 3 });
 
+        // Add log in, sign up, logout links to the header
+        const headerAuth = join(components, `Header-auth-${params.cssFramework}.js`);
+        const headerAuthRef = join(components, 'Header-auth-reference.js');
+        await replaceCode(join(build, 'app', 'components', 'Account', 'Header.js'), 'HEADER_AUTH', headerAuth);
+        await replaceCode(join(build, 'app', 'components', 'Account', 'Header.js'), 'HEADER_AUTH_REFERENCE', headerAuthRef);
+      }
 
       // Copy Redux actions, reducers, store
       const actions = join(__dirname, 'modules', 'react', 'actions');
-      await cpy([
-        join(actions, 'auth.js'),
-        join(actions, 'contact.js'),
-        join(actions, 'oauth.js')
-      ], join(build, 'app', 'actions'));
+      await cpy([join(actions, 'contact.js')], join(build, 'app', 'actions'));
+
+      if (params.authentication.length) {
+        await cpy([join(actions, 'auth.js'), join(actions, 'oauth.js')], join(build, 'app', 'actions'));
+      }
 
       const reducers = join(__dirname, 'modules', 'react', 'reducers');
       await cpy([
-        join(reducers, 'auth.js'),
         join(reducers, 'index.js'),
         join(reducers, 'messages.js')
       ], join(build, 'app', 'reducers'));
+
+      if (params.authentication.length) {
+        await copy(join(reducers, 'index-with-auth.js'), join(build, 'app', 'reducers', 'index.js'));
+        await copy(join(reducers, 'auth.js'), join(build, 'app', 'reducers', 'auth.js'));
+      }
 
       const store = join(__dirname, 'modules', 'react', 'store');
       await cpy([join(store, 'configureStore.js')], join(build, 'app', 'store'));
