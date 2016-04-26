@@ -87,6 +87,15 @@ async function generateTwitterAuthenticationExpress(params) {
         break;
     }
   }
+
+  if (params.jsFramework === 'react') {
+    const reactModules = join(__base, 'generators', 'js-framework', 'modules', 'react');
+    const oauthActions = join(build, 'app', 'actions', 'oauth.js');
+    const twitterLogin = join(reactModules, 'actions', 'oauth', 'twitter.js');
+    const twitterLink = join(reactModules, 'actions', 'oauth', 'twitter-link.js');
+    await replaceCode(oauthActions, 'TWITTER_LOGIN_ACTION', twitterLogin);
+    await replaceCode(oauthActions, 'TWITTER_LINK_ACTION', twitterLink);
+  }
 }
 
 export default generateTwitterAuthenticationExpress;

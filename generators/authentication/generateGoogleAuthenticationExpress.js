@@ -86,6 +86,15 @@ async function generateGoogleAuthenticationExpress(params) {
         break;
     }
   }
+
+  if (params.jsFramework === 'react') {
+    const reactModules = join(__base, 'generators', 'js-framework', 'modules', 'react');
+    const oauthActions = join(build, 'app', 'actions', 'oauth.js');
+    const googleLogin = join(reactModules, 'actions', 'oauth', 'google.js');
+    const googleLink = join(reactModules, 'actions', 'oauth', 'google-link.js');
+    await replaceCode(oauthActions, 'GOOGLE_LOGIN_ACTION', googleLogin);
+    await replaceCode(oauthActions, 'GOOGLE_LINK_ACTION', googleLink);
+  }
 }
 
 

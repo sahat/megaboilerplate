@@ -82,6 +82,15 @@ async function generateVkAuthenticationExpress(params) {
         break;
     }
   }
+
+  if (params.jsFramework === 'react') {
+    const reactModules = join(__base, 'generators', 'js-framework', 'modules', 'react');
+    const oauthActions = join(build, 'app', 'actions', 'oauth.js');
+    const vkLogin = join(reactModules, 'actions', 'oauth', 'vk.js');
+    const vkLink = join(reactModules, 'actions', 'oauth', 'vk-link.js');
+    await replaceCode(oauthActions, 'VK_LOGIN_ACTION', vkLogin);
+    await replaceCode(oauthActions, 'VK_LINK_ACTION', vkLink);
+  }
 }
 
 export default generateVkAuthenticationExpress;

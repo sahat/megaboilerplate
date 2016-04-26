@@ -90,6 +90,15 @@ async function generateFacebookAuthenticationExpress(params) {
         break;
     }
   }
+
+  if (params.jsFramework === 'react') {
+    const reactModules = join(__base, 'generators', 'js-framework', 'modules', 'react');
+    const oauthActions = join(build, 'app', 'actions', 'oauth.js');
+    const facebookLogin = join(reactModules, 'actions', 'oauth', 'facebook.js');
+    const facebookLink = join(reactModules, 'actions', 'oauth', 'facebook-link.js');
+    await replaceCode(oauthActions, 'FACEBOOK_LOGIN_ACTION', facebookLogin);
+    await replaceCode(oauthActions, 'FACEBOOK_LINK_ACTION', facebookLink);
+  }
 }
 
 export default generateFacebookAuthenticationExpress;
