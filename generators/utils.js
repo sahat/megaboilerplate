@@ -168,6 +168,10 @@ export async function addNpmScript(name, value, params) {
   const packageJson = path.join(__base, 'build', params.uuid, 'package.json');
   const packageObj = await readJson(packageJson);
   packageObj.scripts[name] = value;
+
+  // Sort scripts alphabetically in package.json
+  packageObj.scripts = sortJson(packageObj.scripts);
+
   await writeJson(packageJson, packageObj, { spaces: 2 });
 }
 
