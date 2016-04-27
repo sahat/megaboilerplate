@@ -81,6 +81,11 @@ async function generateFacebookAuthenticationExpress(params) {
         signInButton = join(__dirname, 'modules', 'facebook', 'views', `sign-in-button-${params.cssFramework}.jade`);
         await replaceCode(loginPage, 'SIGN_IN_WITH_FACEBOOK', signInButton, { indentLevel: 3 });
         await replaceCode(signupPage, 'SIGN_IN_WITH_FACEBOOK', signInButton, { indentLevel: 3 });
+
+        // Add link/unlink button on profile page
+        const profileTemplate = join(build, 'views', 'account', 'profile.jade');
+        const facebookLink = join(__dirname, 'modules', 'common', 'views', 'profile', `facebook-link-${params.cssFramework}.jade`);
+        await replaceCode(profileTemplate, 'FACEBOOK_LINK', facebookLink);
         break;
       case 'handlebars':
         break;
