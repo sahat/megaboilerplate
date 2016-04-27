@@ -23,7 +23,6 @@ async function generateTwitterAuthenticationExpress(params) {
 
   }
 
-
   switch (params.database) {
     case 'mongodb':
       if (params.jsFramework) {
@@ -78,6 +77,11 @@ async function generateTwitterAuthenticationExpress(params) {
         signInButton = join(__dirname, 'modules', 'twitter', 'views', `sign-in-button-${params.cssFramework}.jade`);
         await replaceCode(loginPage, 'SIGN_IN_WITH_TWITTER', signInButton, { indentLevel: 3 });
         await replaceCode(signupPage, 'SIGN_IN_WITH_TWITTER', signInButton, { indentLevel: 3 });
+
+        // Add link/unlink button on profile page
+        const profileTemplate = join(build, 'views', 'account', 'profile.jade');
+        const twitterLink = join(__dirname, 'modules', 'common', 'views', 'profile', `twitter-link-${params.cssFramework}.jade`);
+        await replaceCode(profileTemplate, 'TWITTER_LINK', twitterLink);
         break;
       case 'handlebars':
         break;
