@@ -122,6 +122,10 @@ export function generateZip(req, res) {
  * @param isDev
  */
 export async function addNpmPackage(pkgName, params, isDev) {
+  if (!params) {
+    throw new Error(`Did you forget to pass params to addNpmPackage('${pkgName}')?`);
+  }
+
   const packageJson = path.join(__base, 'build', params.uuid, 'package.json');
   const packageObj = await readJson(packageJson);
   const pkgVersion = npmDependencies[pkgName];
@@ -154,6 +158,9 @@ function sortJson(obj) {
  * Add NPM script to package.json.
  */
 export async function addNpmScript(name, value, params) {
+  if (!params) {
+    throw new Error(`Did you forget to pass params to addNpmScript('${name}')?`);
+  }
   const packageJson = path.join(__base, 'build', params.uuid, 'package.json');
   const packageObj = await readJson(packageJson);
   packageObj.scripts[name] = value;
