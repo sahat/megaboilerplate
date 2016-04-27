@@ -126,6 +126,10 @@ export async function addNpmPackage(pkgName, params, isDev) {
     throw new Error(`Did you forget to pass params to addNpmPackage('${pkgName}')?`);
   }
 
+  if (!npmDependencies[pkgName]) {
+    throw new Error(`Package "${pkgName}" is missing in the npmDependencies.json`);
+  }
+
   const packageJson = path.join(__base, 'build', params.uuid, 'package.json');
   const packageObj = await readJson(packageJson);
   const pkgVersion = npmDependencies[pkgName];
