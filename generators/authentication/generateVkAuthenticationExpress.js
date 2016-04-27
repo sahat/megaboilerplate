@@ -73,6 +73,11 @@ async function generateVkAuthenticationExpress(params) {
         signInButton = join(__dirname, 'modules', 'vk', 'views', `sign-in-button-${params.cssFramework}.jade`);
         await replaceCode(loginPage, 'SIGN_IN_WITH_VK', signInButton, { indentLevel: 3 });
         await replaceCode(signupPage, 'SIGN_IN_WITH_VK', signInButton, { indentLevel: 3 });
+
+        // Add link/unlink button on profile page
+        const profileTemplate = join(build, 'views', 'account', 'profile.jade');
+        const vkLink = join(__dirname, 'modules', 'common', 'views', 'profile', `vk-link-${params.cssFramework}.jade`);
+        await replaceCode(profileTemplate, 'VK_LINK', vkLink);
         break;
       case 'handlebars':
         break;
