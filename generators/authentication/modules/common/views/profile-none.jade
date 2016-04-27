@@ -48,22 +48,10 @@ block content
       button(type='submit') Change Password
 
     h4 Linked Accounts
-    if user.google
-      p: a.text-danger(href='/unlink/google') Unlink your Google account
-    else
-      p: a(href='/auth/google') Link your Google account
-    if user.facebook
-      p: a.text-danger(href='/unlink/facebook') Unlink your Facebook account
-    else
-      p: a(href='/auth/facebook') Link your Facebook account
-    if user.twitter
-      p: a.text-danger(href='/unlink/twitter') Unlink your Twitter account
-    else
-      p: a(href='/auth/twitter') Link your Twitter account
-    if user.vk
-      p: a.text-danger(href='/unlink/vkontakte') Unlink your VK account
-    else
-      p: a(href='/auth/vkontakte') Link your VK account
+    //= FACEBOOK_LINK_INDENT2
+    //= TWITTER_LINK_INDENT2
+    //= GOOGLE_LINK_INDENT2
+    //= VK_LINK_INDENT2
 
     h4 Delete Account
     form(method='POST', action='/account?_method=DELETE')
