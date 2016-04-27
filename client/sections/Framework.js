@@ -89,7 +89,7 @@ class Framework extends React.Component {
           <span>Express</span>
           {recommended}
         </label>
-        <label className="radio-inline hint--top hint--rounded" data-hint="(Coming soon) You can track status at https://github.com/sahat/boilerplate/issues/2">
+        <label className="radio-inline hint--top hint--rounded" data-hint="Coming soon">
           <img className="btn-logo disabled" src="/img/svg/meteor-logo.png" alt="Meteor"/>
           <input type="radio" name="frameworkRadios" value="meteor" disabled/>
           <span>Meteor</span>
