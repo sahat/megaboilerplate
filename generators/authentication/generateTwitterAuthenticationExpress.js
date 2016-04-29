@@ -80,7 +80,7 @@ async function generateTwitterAuthenticationExpress(params) {
 
         // Add link/unlink button on profile page
         const profileTemplate = join(build, 'views', 'account', 'profile.jade');
-        const oauthLink = join(__dirname, 'modules', 'common', 'views', 'profile', `twitter-link-${params.cssFramework}.jade`);
+        const oauthLink = join(__dirname, 'modules', 'common', 'views', 'profile', 'oauth-link.jade');
         await replaceCode(profileTemplate, 'TWITTER_LINK', oauthLink);
         await templateReplace(profileTemplate, {
           providerPath: 'twitter',
@@ -88,6 +88,20 @@ async function generateTwitterAuthenticationExpress(params) {
         });
         break;
       case 'handlebars':
+        loginPage = join(build, 'views', 'login.handlebars');
+        signupPage = join(build, 'views', 'signup.handlebars');
+        signInButton = join(__dirname, 'modules', 'twitter', 'views', `sign-in-button-${params.cssFramework}.html`);
+        await replaceCode(loginPage, 'SIGN_IN_WITH_TWITTER', signInButton, { indentLevel: 3 });
+        await replaceCode(signupPage, 'SIGN_IN_WITH_TWITTER', signInButton, { indentLevel: 3 });
+
+        // Add link/unlink button on profile page
+        const profileTemplate = join(build, 'views', 'profile.handlebars');
+        const oauthLink = join(__dirname, 'modules', 'common', 'views', 'oauth-link.handlebars');
+        await replaceCode(profileTemplate, 'TWITTER_LINK', oauthLink);
+        await templateReplace(profileTemplate, {
+          providerPath: 'twitter',
+          providerName: 'Twitter'
+        });
         break;
       case 'nunjucks':
         break;

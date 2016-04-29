@@ -76,7 +76,7 @@ async function generateVkAuthenticationExpress(params) {
 
         // Add link/unlink button on profile page
         const profileTemplate = join(build, 'views', 'account', 'profile.jade');
-        const oauthLink = join(__dirname, 'modules', 'common', 'views', 'profile', `vk-link-${params.cssFramework}.jade`);
+        const oauthLink = join(__dirname, 'modules', 'common', 'views', 'profile', 'oauth-link.jade');
         await replaceCode(profileTemplate, 'VK_LINK', oauthLink);
         await templateReplace(profileTemplate, {
           providerPath: 'vk',
@@ -84,6 +84,20 @@ async function generateVkAuthenticationExpress(params) {
         });
         break;
       case 'handlebars':
+        loginPage = join(build, 'views', 'login.handlebars');
+        signupPage = join(build, 'views', 'signup.handlebars');
+        signInButton = join(__dirname, 'modules', 'vk', 'views', `sign-in-button-${params.cssFramework}.html`);
+        await replaceCode(loginPage, 'SIGN_IN_WITH_VK', signInButton, { indentLevel: 3 });
+        await replaceCode(signupPage, 'SIGN_IN_WITH_VK', signInButton, { indentLevel: 3 });
+
+        // Add link/unlink button on profile page
+        const profileTemplate = join(build, 'views', 'profile.handlebars');
+        const oauthLink = join(__dirname, 'modules', 'common', 'views', 'profile', 'oauth-link.handlebars');
+        await replaceCode(profileTemplate, 'VK_LINK', oauthLink);
+        await templateReplace(profileTemplate, {
+          providerPath: 'vk',
+          providerName: 'VK'
+        });
         break;
       case 'nunjucks':
         break;

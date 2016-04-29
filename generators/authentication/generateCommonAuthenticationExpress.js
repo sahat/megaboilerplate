@@ -199,6 +199,24 @@ async function generateCommonAuthenticationExpress(params) {
       }
       break;
     case 'handlebars':
+      if (params.jsFramework) {
+        if (usingOAuth) {
+          await cpy([join(__dirname, 'modules', 'common', 'views', 'loading.html')], join(build, 'views'));
+        }
+      } else {
+        const login = join(__dirname, 'modules', 'common', 'views', `login-${params.cssFramework}.handlebars`);
+        const signup = join(__dirname, 'modules', 'common', 'views', `signup-${params.cssFramework}.handlebars`);
+        const forgot = join(__dirname, 'modules', 'common', 'views', `forgot-${params.cssFramework}.handlebars`);
+        const reset = join(__dirname, 'modules', 'common', 'views', `reset-${params.cssFramework}.handlebars`);
+        const profile = join(__dirname, 'modules', 'common', 'views', `profile-${params.cssFramework}.handlebars`);
+
+        await copy(login, join(build, 'views', 'login.handlebars'));
+        await copy(signup, join(build, 'views', 'signup.handlebars'));
+        await copy(forgot, join(build, 'views', 'forgot.handlebars'));
+        await copy(reset, join(build, 'views', 'reset.handlebars'));
+        await copy(profile, join(build, 'views', 'profile.handlebars'));
+      }
+      break;
     case 'nunjucks':
       if (params.jsFramework) {
         if (usingOAuth) {
