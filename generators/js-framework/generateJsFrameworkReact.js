@@ -166,6 +166,11 @@ async function generateJsFrameworkReact(params) {
           break;
 
         case 'handlebars':
+          const layoutHandlebars = join(build, 'views', 'layouts', 'main.handlebars');
+          const bundleJsHandlebarsImport = join(__dirname, 'modules', 'react', 'react-html-import.html');
+          const renderFileHandlebars = join(__dirname, 'modules', 'react', 'render-template-handlebars.js');
+          await replaceCode(server, 'RENDER_TEMPLATE', renderFileHandlebars);
+          await replaceCode(layoutHandlebars, 'JS_FRAMEWORK_MAIN_IMPORT', bundleJsHandlebarsImport);
           break;
 
         case 'nunjucks':
