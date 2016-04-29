@@ -2,10 +2,10 @@ extends ../layout
 
 block content
   .container
-    if messages.success
-      div.text-success
-        for success in messages.success
-          div= success.msg
+    if messages.info
+      div.text-info
+        for info in messages.info
+          div= info.msg
     if messages.error
       div.text-danger
         for error in messages.error

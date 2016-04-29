@@ -1,14 +1,14 @@
 <div class="column row">
   <div class="medium-8 medium-offset-2 columns">
-    {{#if messages.success}}
-      <div role="alert" class="alert alert-success">
-        {{#each messages.success}}
+    {{#if messages.info}}
+      <div role="alert" class="callout primary">
+        {{#each messages.info}}
           <div>{{msg}}</div>
         {{/each}}
       </div>
     {{/if}}
     {{#if messages.error}}
-      <div role="alert" class="alert alert-danger">
+      <div role="alert" class="callout alert">
         {{#each messages.error}}
           <div>{{msg}}</div>
         {{/each}}
