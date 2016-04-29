@@ -1,0 +1,22 @@
+<ul class="list-inline">
+  {{#if user}}
+    <li class="avatar">
+      {{#if user.picture}}
+        <img src="{{user.picture}}">
+      {{else}}
+        <img src="{{user.gravatar}}">
+      {{/if}}
+      {{#if user.name}}
+        {{user.name}}
+      {{else}}
+        {{user.email}}
+      {{/if}}
+    </li>
+    <li><a href="/account" class="{{#ifeq title 'Home'}}active{{/ifeq}}">My Account</a></li>
+    <li><a href="/logout">Logout</a></li>
+  {{else}}
+    <li><a href="/login" class="{{#ifeq title 'Home'}}active{{/ifeq}}">Log in</a></li>
+    <li><a href="/signup" class="{{#ifeq title 'Home'}}active{{/ifeq}}">Sign up</a></li>
+  {{/if}}
+</ul>
+

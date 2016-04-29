@@ -7,16 +7,12 @@
         {{else}}
           <img src="{{user.gravatar}}">
         {{/if}}
-
         {{#if user.name}}
-          <span>{{user.name}}</span>
+          {{user.name}}
         {{else}}
-          {{#if user.email}}<span>{{user.email}}</span>{{/if}}
-          {{#if user.id}}<span>{{user.id}}</span>{{/if}}
+          {{user.email}}
         {{/if}}
-
         <i class="caret"></i>
-
       </a>
       <ul class="dropdown-menu">
         <li><a href="/account">My Account</a></li>
