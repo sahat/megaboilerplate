@@ -86,7 +86,7 @@ async function generateFacebookAuthenticationExpress(params) {
 
         // Add link/unlink button on profile page
         profileTemplate = join(build, 'views', 'account', 'profile.jade');
-        oauthLink = join(__dirname, 'modules', 'common', 'views', 'profile', 'oauth-link.jade');
+        oauthLink = join(__dirname, 'modules', 'common', 'views', 'oauth-link.jade');
         await replaceCode(profileTemplate, 'FACEBOOK_LINK', oauthLink);
         await templateReplace(profileTemplate, {
           providerPath: 'facebook',
@@ -102,7 +102,7 @@ async function generateFacebookAuthenticationExpress(params) {
 
         // Add link/unlink button on profile page
         profileTemplate = join(build, 'views', 'profile.handlebars');
-        oauthLink = join(__dirname, 'modules', 'common', 'views', 'profile', 'oauth-link.handlebars');
+        oauthLink = join(__dirname, 'modules', 'common', 'views', 'oauth-link.handlebars');
         await replaceCode(profileTemplate, 'FACEBOOK_LINK', oauthLink);
         await templateReplace(profileTemplate, {
           providerPath: 'facebook',

@@ -68,7 +68,7 @@ async function copyTemplates(params) {
   if (!params.jsFramework) {
     const footer = join(__dirname, 'modules', 'handlebars', 'views', 'partials', 'footer.handlebars');
     const header = join(__dirname, 'modules', 'handlebars', 'views', 'partials', `header-${params.cssFramework}.handlebars`);
-    const headerAuth = join(__dirname, 'modules', 'handlebars', 'views', `header-auth-${params.cssFramework}.handlebars`);
+    const headerAuth = join(__dirname, 'modules', 'handlebars', 'views', 'partials', `header-auth-${params.cssFramework}.handlebars`);
     const home = join(__dirname, 'modules', 'handlebars', 'views', `home-${params.cssFramework}.handlebars`);
     const contact = join(__dirname, 'modules', 'handlebars', 'views', `contact-${params.cssFramework}.handlebars`);
 

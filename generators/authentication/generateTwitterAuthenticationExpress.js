@@ -50,8 +50,16 @@ async function generateTwitterAuthenticationExpress(params) {
       break;
   }
 
-  await appendFile(env, '\nTWITTER_KEY=6NNBDyJ2TavL407A3lWxPFKBI');
-  await appendFile(env, '\nTWITTER_SECRET=ZHaYyK3DQCqv49Z9ofsYdqiUgeoICyh6uoBgFfu7OeYC7wTQKa\n');
+  if (params.jsFramework) {
+    await addEnv(params, {
+      GOOGLE_SECRET: '6NNBDyJ2TavL407A3lWxPFKBI'
+    });
+  } else {
+    await addEnv(params, {
+      GOOGLE_ID: '6NNBDyJ2TavL407A3lWxPFKBI',
+      GOOGLE_SECRET: 'ZHaYyK3DQCqv49Z9ofsYdqiUgeoICyh6uoBgFfu7OeYC7wTQKa'
+    });
+  }
 
   let loginPage;
   let signupPage;
@@ -82,7 +90,7 @@ async function generateTwitterAuthenticationExpress(params) {
 
         // Add link/unlink button on profile page
         profileTemplate = join(build, 'views', 'account', 'profile.jade');
-        oauthLink = join(__dirname, 'modules', 'common', 'views', 'profile', 'oauth-link.jade');
+        oauthLink = join(__dirname, 'modules', 'common', 'views', 'oauth-link.jade');
         await replaceCode(profileTemplate, 'TWITTER_LINK', oauthLink);
         await templateReplace(profileTemplate, {
           providerPath: 'twitter',

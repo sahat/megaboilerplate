@@ -50,8 +50,16 @@ async function generateGoogleAuthenticationExpress(params) {
       break;
   }
 
-  await appendFile(env, '\nGOOGLE_ID=828110519058.apps.googleusercontent.com');
-  await appendFile(env, '\nGOOGLE_SECRET=JdZsIaWhUFIchmC1a_IZzOHb\n');
+  if (params.jsFramework) {
+    await addEnv(params, {
+      GOOGLE_SECRET: '828110519058.apps.googleusercontent.com'
+    });
+  } else {
+    await addEnv(params, {
+      GOOGLE_ID: '828110519058.apps.googleusercontent.com',
+      GOOGLE_SECRET: 'JdZsIaWhUFIchmC1a_IZzOHb'
+    });
+  }
 
   let loginPage;
   let signupPage;
@@ -82,7 +90,7 @@ async function generateGoogleAuthenticationExpress(params) {
 
         // Add link/unlink button on profile page
         profileTemplate = join(build, 'views', 'account', 'profile.jade');
-        oauthLink = join(__dirname, 'modules', 'common', 'views', 'profile', 'oauth-link.jade');
+        oauthLink = join(__dirname, 'modules', 'common', 'views', 'oauth-link.jade');
         await replaceCode(profileTemplate, 'GOOGLE_LINK', oauthLink);
         await templateReplace(profileTemplate, {
           providerPath: 'google',
@@ -98,7 +106,7 @@ async function generateGoogleAuthenticationExpress(params) {
 
         // Add link/unlink button on profile page
         profileTemplate = join(build, 'views', 'profile.handlebars');
-        oauthLink = join(__dirname, 'modules', 'common', 'views', 'profile', 'oauth-link.handlebars');
+        oauthLink = join(__dirname, 'modules', 'common', 'views', 'oauth-link.handlebars');
         await replaceCode(profileTemplate, 'GOOGLE_LINK', oauthLink);
         await templateReplace(profileTemplate, {
           providerPath: 'google',

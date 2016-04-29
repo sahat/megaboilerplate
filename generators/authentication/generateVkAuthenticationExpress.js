@@ -46,8 +46,16 @@ async function generateVkAuthenticationExpress(params) {
       break;
   }
 
-  await appendFile(env, '\nVKONTAKTE_ID=5389715');
-  await appendFile(env, '\nVKONTAKTE_SECRET=W4MvuGuWZDqmDravgesY\n');
+  if (params.jsFramework) {
+    await addEnv(params, {
+      GOOGLE_SECRET: '5389715'
+    });
+  } else {
+    await addEnv(params, {
+      GOOGLE_ID: '5389715',
+      GOOGLE_SECRET: 'W4MvuGuWZDqmDravgesY'
+    });
+  }
 
   let loginPage;
   let signupPage;
@@ -78,7 +86,7 @@ async function generateVkAuthenticationExpress(params) {
 
         // Add link/unlink button on profile page
         profileTemplate = join(build, 'views', 'account', 'profile.jade');
-        oauthLink = join(__dirname, 'modules', 'common', 'views', 'profile', 'oauth-link.jade');
+        oauthLink = join(__dirname, 'modules', 'common', 'views', 'oauth-link.jade');
         await replaceCode(profileTemplate, 'VK_LINK', oauthLink);
         await templateReplace(profileTemplate, {
           providerPath: 'vk',
@@ -94,7 +102,7 @@ async function generateVkAuthenticationExpress(params) {
 
         // Add link/unlink button on profile page
         profileTemplate = join(build, 'views', 'profile.handlebars');
-        oauthLink = join(__dirname, 'modules', 'common', 'views', 'profile', 'oauth-link.handlebars');
+        oauthLink = join(__dirname, 'modules', 'common', 'views', 'oauth-link.handlebars');
         await replaceCode(profileTemplate, 'VK_LINK', oauthLink);
         await templateReplace(profileTemplate, {
           providerPath: 'vk',
