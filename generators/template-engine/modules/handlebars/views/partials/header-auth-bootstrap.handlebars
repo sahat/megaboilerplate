@@ -25,8 +25,8 @@
       </ul>
     </li>
   {{else}}
-    <li class="{{#if active}}active{{/if}}"><a href="/login">Log in</a></li>
-    <li class="{{#if active}}active{{/if}}"><a href="/signup">Sign up</a></li>
+    <li class="{{#ifeq title 'Log in'}}active{{/ifeq}}"><a href="/login">Log in</a></li>
+    <li class="{{#ifeq title 'Sign up'}}active{{/ifeq}}"><a href="/signup">Sign up</a></li>
   {{/if}}
 </ul>
 
