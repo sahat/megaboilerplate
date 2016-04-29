@@ -1,5 +1,5 @@
 import { join } from 'path';
-import { replaceCode, templateReplace, addNpmPackage } from '../utils';
+import { replaceCode, templateReplace, addNpmPackage, addEnv } from '../utils';
 
 async function generateVkAuthenticationExpress(params) {
   const build = join(__base, 'build', params.uuid);
@@ -48,12 +48,12 @@ async function generateVkAuthenticationExpress(params) {
 
   if (params.jsFramework) {
     await addEnv(params, {
-      GOOGLE_SECRET: '5389715'
+      VK_SECRET: 'W4MvuGuWZDqmDravgesY'
     });
   } else {
     await addEnv(params, {
-      GOOGLE_ID: '5389715',
-      GOOGLE_SECRET: 'W4MvuGuWZDqmDravgesY'
+      VK_ID: '5389715',
+      VK_SECRET: 'W4MvuGuWZDqmDravgesY'
     });
   }
 

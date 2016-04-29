@@ -1,5 +1,5 @@
 import { join } from 'path';
-import { replaceCode, templateReplace, addNpmPackage } from '../utils';
+import { replaceCode, templateReplace, addNpmPackage, addEnv } from '../utils';
 
 async function generateGoogleAuthenticationExpress(params) {
   const build = join(__base, 'build', params.uuid);
@@ -52,7 +52,7 @@ async function generateGoogleAuthenticationExpress(params) {
 
   if (params.jsFramework) {
     await addEnv(params, {
-      GOOGLE_SECRET: '828110519058.apps.googleusercontent.com'
+      GOOGLE_SECRET: 'JdZsIaWhUFIchmC1a_IZzOHb'
     });
   } else {
     await addEnv(params, {

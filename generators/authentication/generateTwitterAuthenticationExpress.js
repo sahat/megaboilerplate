@@ -1,5 +1,5 @@
 import { join } from 'path';
-import { replaceCode, templateReplace, addNpmPackage } from '../utils';
+import { replaceCode, templateReplace, addNpmPackage, addEnv } from '../utils';
 
 async function generateTwitterAuthenticationExpress(params) {
   const build = join(__base, 'build', params.uuid);
@@ -52,12 +52,12 @@ async function generateTwitterAuthenticationExpress(params) {
 
   if (params.jsFramework) {
     await addEnv(params, {
-      GOOGLE_SECRET: '6NNBDyJ2TavL407A3lWxPFKBI'
+      TWITTER_KEY: 'ZHaYyK3DQCqv49Z9ofsYdqiUgeoICyh6uoBgFfu7OeYC7wTQKa'
     });
   } else {
     await addEnv(params, {
-      GOOGLE_ID: '6NNBDyJ2TavL407A3lWxPFKBI',
-      GOOGLE_SECRET: 'ZHaYyK3DQCqv49Z9ofsYdqiUgeoICyh6uoBgFfu7OeYC7wTQKa'
+      TWITTER_KEY: '6NNBDyJ2TavL407A3lWxPFKBI',
+      TWITTER_SECRET: 'ZHaYyK3DQCqv49Z9ofsYdqiUgeoICyh6uoBgFfu7OeYC7wTQKa'
     });
   }
 
