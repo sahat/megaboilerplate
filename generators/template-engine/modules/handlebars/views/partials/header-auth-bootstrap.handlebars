@@ -1,0 +1,32 @@
+<ul class="nav navbar-nav navbar-right">
+  {{#if user}}
+    <li class="dropdown">
+      <a href="#" data-toggle="dropdown" class="navbar-avatar dropdown-toggle">
+        {{#if user.picture}}
+          <img src="{{user.picture}}">
+        {{else}}
+          <img src="{{user.gravatar}}">
+        {{/if}}
+
+        {{#if user.name}}
+          <span>{{user.name}}</span>
+        {{else}}
+          {{#if user.email}}<span>{{user.email}}</span>{{/if}}
+          {{#if user.id}}<span>{{user.id}}</span>{{/if}}
+        {{/if}}
+
+        <i class="caret"></i>
+
+      </a>
+      <ul class="dropdown-menu">
+        <li><a href="/account">My Account</a></li>
+        <li class="divider"></li>
+        <li><a href="/logout">Logout</a></li>
+      </ul>
+    </li>
+  {{else}}
+    <li class="{{#if active}}active{{/if}}"><a href="/login">Log in</a></li>
+    <li class="{{#if active}}active{{/if}}"><a href="/signup">Sign up</a></li>
+  {{/if}}
+</ul>
+
