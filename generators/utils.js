@@ -280,6 +280,10 @@ export async function replaceCode(srcFile, subStr, newSrcFile, opts) {
         newSrcData = ['\n', newSrcData].join('');
       }
 
+      if (opts.trailingBlankLine) {
+        newSrcData = [newSrcData, '\n'].join('');
+      }
+
       array[index] = newSrcData;
     }
   });
