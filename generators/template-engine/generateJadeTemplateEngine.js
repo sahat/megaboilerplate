@@ -9,12 +9,12 @@ async function updateLayoutTemplate(params) {
   const blockContent = join(__dirname, 'modules', 'jade', 'block-content.jade');
   const socketIoImport = join(__dirname, 'modules', 'jade', 'socketio-import.jade');
 
-  if (!params.jsFramework) {
-    // Use "block content" (traditional web app)
-    await replaceCode(layout, 'APP_CONTAINER_OR_BLOCK_CONTENT', blockContent, { indentLevel: 2 });
-  } else {
+  if (params.jsFramework) {
     // Use "#app-container" div element (single page app)
     await replaceCode(layout, 'APP_CONTAINER_OR_BLOCK_CONTENT', appContainer, { indentLevel: 2 });
+  } else {
+    // Use "block content" (traditional web app)
+    await replaceCode(layout, 'APP_CONTAINER_OR_BLOCK_CONTENT', blockContent, { indentLevel: 2 });
   }
 
   // Add Socket.IO <script> tag (optional)
@@ -25,27 +25,22 @@ async function updateLayoutTemplate(params) {
 
 // helper function
 async function copyTemplates(params) {
-  const viewsDir = join(__base, 'build', params.uuid, 'views');
+  const views = join(__base, 'build', params.uuid, 'views');
   const layout = join(__dirname, 'modules', 'jade', 'views', 'layout.jade');
-  const plainCssHeader = join(__dirname, 'modules', 'jade', 'views', 'header.jade');
-  const plainCssFooter = join(__dirname, 'modules', 'jade', 'views', 'footer.jade');
 
-  // Copy initial Jade templates to "views" directory
-  await copy(layout, join(viewsDir, 'layout.jade'));
+  await copy(layout, join(views, 'layout.jade'));
 
-
-  const footer = join(__dirname, 'modules', 'jade', 'views', 'footer.jade');
-  const header = join(__dirname, 'modules', 'jade', 'views', `header-${params.cssFramework}.jade`);
-  const headerAuth = join(__dirname, 'modules', 'jade', 'views', `header-auth-${params.cssFramework}.jade`);
-  const home = join(__dirname, 'modules', 'jade', 'views', `home-${params.cssFramework}.jade`);
-  const contact = join(__dirname, 'modules', 'jade', 'views', `contact-${params.cssFramework}.jade`);
-
-  // Copy view templates only for non-single page apps
   if (!params.jsFramework) {
-    await copy(footer, join(viewsDir, 'includes', 'footer.jade'));
-    await copy(header, join(viewsDir, 'includes', 'header.jade'));
-    await copy(home, join(viewsDir, 'home.jade'));
-    await copy(contact, join(viewsDir, 'contact.jade'));
+    const footer = join(__dirname, 'modules', 'jade', 'views', 'footer.jade');
+    const header = join(__dirname, 'modules', 'jade', 'views', `header-${params.cssFramework}.jade`);
+    const headerAuth = join(__dirname, 'modules', 'jade', 'views', `header-auth-${params.cssFramework}.jade`);
+    const home = join(__dirname, 'modules', 'jade', 'views', `home-${params.cssFramework}.jade`);
+    const contact = join(__dirname, 'modules', 'jade', 'views', `contact-${params.cssFramework}.jade`);
+    
+    await copy(footer, join(views, 'includes', 'footer.jade'));
+    await copy(header, join(views, 'includes', 'header.jade'));
+    await copy(home, join(views, 'home.jade'));
+    await copy(contact, join(views, 'contact.jade'));
 
     // Is authentication checked? Then add log in, sign up, logout links to the header
     if (params.authentication.length) {
@@ -54,7 +49,7 @@ async function copyTemplates(params) {
         bootstrap: 2,
         foundation: 3
       };
-      await replaceCode(join(viewsDir, 'includes', 'header.jade'), 'HEADER_AUTH', headerAuth, { indentLevel: headerAuthIndent[params.cssFramework] });
+      await replaceCode(join(views, 'includes', 'header.jade'), 'HEADER_AUTH', headerAuth, { indentLevel: headerAuthIndent[params.cssFramework] });
     }
   }
 }
@@ -68,20 +63,19 @@ async function generateJadeTemplateEngine(params) {
       const homeControllerRequire = join(__dirname, 'modules', 'controllers', 'home-require.js');
       const expressHomeController = join(__dirname, 'modules', 'controllers', 'home-controller-express.js');
 
-      // Set "views dir" and "view engine"
+      // Set "views dir" and "view engine" Express settings
       await replaceCode(server, 'TEMPLATE_ENGINE', expressViewEngine);
       
       if (!params.jsFramework) {
-        // Require home controller and add home route, i.e. "GET /"
+        // Require home controller and add "/" route
         await replaceCode(server, 'HOME_ROUTE', expressHomeRoute);
         await replaceCode(server, 'HOME_CONTROLLER', homeControllerRequire);
-
         // Copy home controller
         await copy(expressHomeController, join(__base, 'build', params.uuid, 'controllers', 'home.js'));
       }
 
       
-      // Copy Jade templates, including header/footer partials
+      // Copy Jade templates
       await copyTemplates(params);
 
       // Add/remove features to the newly generated layout file above
