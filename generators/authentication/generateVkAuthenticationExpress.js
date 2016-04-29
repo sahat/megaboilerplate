@@ -1,5 +1,5 @@
 import { join } from 'path';
-import { replaceCode, appendFile, addNpmPackage } from '../utils';
+import { replaceCode, templateReplace, addNpmPackage } from '../utils';
 
 async function generateVkAuthenticationExpress(params) {
   const build = join(__base, 'build', params.uuid);
@@ -76,8 +76,12 @@ async function generateVkAuthenticationExpress(params) {
 
         // Add link/unlink button on profile page
         const profileTemplate = join(build, 'views', 'account', 'profile.jade');
-        const vkLink = join(__dirname, 'modules', 'common', 'views', 'profile', `vk-link-${params.cssFramework}.jade`);
-        await replaceCode(profileTemplate, 'VK_LINK', vkLink);
+        const oauthLink = join(__dirname, 'modules', 'common', 'views', 'profile', `vk-link-${params.cssFramework}.jade`);
+        await replaceCode(profileTemplate, 'VK_LINK', oauthLink);
+        await templateReplace(profileTemplate, {
+          providerPath: 'vk',
+          providerName: 'VK'
+        });
         break;
       case 'handlebars':
         break;

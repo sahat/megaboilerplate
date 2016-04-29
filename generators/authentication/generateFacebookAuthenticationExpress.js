@@ -1,5 +1,5 @@
 import { join } from 'path';
-import { replaceCode, appendFile, addNpmPackage, addEnv } from '../utils';
+import { replaceCode, templateReplace, addNpmPackage, addEnv } from '../utils';
 
 async function generateFacebookAuthenticationExpress(params) {
   const build = join(__base, 'build', params.uuid);
@@ -84,8 +84,12 @@ async function generateFacebookAuthenticationExpress(params) {
 
         // Add link/unlink button on profile page
         const profileTemplate = join(build, 'views', 'account', 'profile.jade');
-        const facebookLink = join(__dirname, 'modules', 'common', 'views', 'profile', `facebook-link-${params.cssFramework}.jade`);
-        await replaceCode(profileTemplate, 'FACEBOOK_LINK', facebookLink);
+        const oauthLink = join(__dirname, 'modules', 'common', 'views', 'profile', `oauth-link-${params.cssFramework}.jade`);
+        await replaceCode(profileTemplate, 'FACEBOOK_LINK', oauthLink);
+        await templateReplace(profileTemplate, {
+          providerPath: 'facebook',
+          providerName: 'Facebook'
+        });
         break;
       case 'handlebars':
         break;

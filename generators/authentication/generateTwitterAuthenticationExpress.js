@@ -1,5 +1,5 @@
 import { join } from 'path';
-import { replaceCode, appendFile, addNpmPackage } from '../utils';
+import { replaceCode, templateReplace, addNpmPackage } from '../utils';
 
 async function generateTwitterAuthenticationExpress(params) {
   const build = join(__base, 'build', params.uuid);
@@ -80,8 +80,12 @@ async function generateTwitterAuthenticationExpress(params) {
 
         // Add link/unlink button on profile page
         const profileTemplate = join(build, 'views', 'account', 'profile.jade');
-        const twitterLink = join(__dirname, 'modules', 'common', 'views', 'profile', `twitter-link-${params.cssFramework}.jade`);
-        await replaceCode(profileTemplate, 'TWITTER_LINK', twitterLink);
+        const oauthLink = join(__dirname, 'modules', 'common', 'views', 'profile', `twitter-link-${params.cssFramework}.jade`);
+        await replaceCode(profileTemplate, 'TWITTER_LINK', oauthLink);
+        await templateReplace(profileTemplate, {
+          providerPath: 'twitter',
+          providerName: 'Twitter'
+        });
         break;
       case 'handlebars':
         break;
