@@ -4,10 +4,10 @@ block content
   .container
     .panel
       .panel-body
-        if messages.info
-          .alert.alert-info(role='alert')
-            for info in messages.info
-              div= info.msg
+        if messages.success
+          .alert.alert-success(role='alert')
+            for success in messages.success
+              div= success.msg
 
         if messages.error
           .alert.alert-danger(role='alert')
