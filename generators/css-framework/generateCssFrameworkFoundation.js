@@ -59,16 +59,16 @@ async function addCssFrameworkImports(params) {
         break;
 
       case 'handlebars':
-        // const handlebarsLayout = join(build, 'views', 'layout.html');
-        // const handlebarsFoundationCssImport = join(__dirname, 'modules', 'foundation', 'html-css-import.html');
-        // const handlebarsFoundationJsImport = join(__dirname, 'modules', 'foundation', 'html-js-import.html');
-        //
-        // if (params.cssPreprocessor === 'css') {
-        //   await replaceCode(handlebarsLayout, 'CSS_FRAMEWORK_IMPORT', handlebarsFoundationCssImport, { indentLevel: 1 });
-        // }
-        //
-        // await replaceCode(handlebarsLayout, 'JS_FRAMEWORK_LIB_IMPORT', handlebarsFoundationJsImport, { indentLevel: 1 });
-        // break;
+        const handlebarsLayout = join(build, 'views', 'layouts', 'main.handlebars');
+        const handlebarsFoundationCssImport = join(__dirname, 'modules', 'foundation', 'html-css-import.html');
+        const handlebarsFoundationJsImport = join(__dirname, 'modules', 'foundation', 'html-js-import.html');
+
+        if (params.cssPreprocessor === 'css') {
+          await replaceCode(handlebarsLayout, 'CSS_FRAMEWORK_IMPORT', handlebarsFoundationCssImport, { indentLevel: 1 });
+        }
+
+        await replaceCode(handlebarsLayout, 'JS_FRAMEWORK_LIB_IMPORT', handlebarsFoundationJsImport, { indentLevel: 1 });
+        break;
 
       case 'nunjucks':
         // const nunjucksLayout = join(build, 'views', 'layout.html');

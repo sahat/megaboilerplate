@@ -58,7 +58,7 @@ async function addCssFrameworkImports(params) {
         break;
 
       case 'handlebars':
-        const handlebarsLayout = join(build, 'views', 'layout.html');
+        const handlebarsLayout = join(build, 'views', 'layouts', 'main.handlebars');
         const handlebarsCssImport = join(__dirname, 'modules', 'none', 'html-css-import.html');
         if (params.cssPreprocessor === 'css') {
           await replaceCode(handlebarsLayout, 'CSS_FRAMEWORK_IMPORT', handlebarsCssImport, { indentLevel: 1 });
