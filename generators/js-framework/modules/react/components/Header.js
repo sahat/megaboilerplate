@@ -1,24 +1,13 @@
 import React from 'react';
 import { IndexLink, Link } from 'react-router';
-import { connect } from 'react-redux'
-import { logout } from '../actions/auth';
+//= HEADER_REACT_REDUX_REFERENCE
+//= HEADER_LOGOUT_REFERENCE
 
 class Header extends React.Component {
-  handleLogout(event) {
-    event.preventDefault();
-    this.props.dispatch(logout());
-  }
-
+  //= HEADER_LOGOUT_INDENT1
   render() {
     //= HEADER_RENDER_INDENT2
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    token: state.auth.token,
-    user: state.auth.user
-  };
-};
-
-export default connect(mapStateToProps)(Header);
+//= HEADER_EXPORT

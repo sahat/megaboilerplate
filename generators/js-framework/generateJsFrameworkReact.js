@@ -98,7 +98,24 @@ async function generateJsFrameworkReact(params) {
       await cpy([join(actions, 'contact.js')], join(build, 'app', 'actions'));
 
       if (params.authentication.length) {
+        // Add react-redux things and logout component method
+        const headerLogout = join(components, 'Header-logout.js');
+        const headerLogoutReference = join(components, 'Header-logout-reference.js');
+        const headerReactReduxReference = join(components, 'Header-react-redux-reference.js');
+        const headerExportRedux = join(components, 'Header-export-redux.js');
+
+        // Add logout and redux export
+        await replaceCode(join(build, 'app', 'components', 'Header.js'), 'HEADER_EXPORT_REDUX', headerExportRedux);
+        await replaceCode(join(build, 'app', 'components', 'Header.js'), 'HEADER_LOGOUT', headerLogout, { trailingBlankLine: true });
+        await replaceCode(join(build, 'app', 'components', 'Header.js'), 'HEADER_LOGOUT_REFERENCE', headerLogoutReference);
+        await replaceCode(join(build, 'app', 'components', 'Header.js'), 'HEADER_REACT_REDUX_REFERENCE', headerReactReduxReference);
+
+        // Copy oauth and auth redux actions
         await cpy([join(actions, 'auth.js'), join(actions, 'oauth.js')], join(build, 'app', 'actions'));
+      } else {
+        // Add normal export
+        const headerExport = join(components, 'Header-export.js');
+        await replaceCode(join(build, 'app', 'components', 'Header.js'), 'HEADER_EXPORT', headerExport);
       }
 
       const reducers = join(__dirname, 'modules', 'react', 'reducers');
