@@ -19,10 +19,10 @@
 
     <form method="POST" action="/account?_method=PUT">
       <label for="email">Email</label>
-      <input type="email" name="email" id="email">
+      <input type="email" name="email" id="email" value="{{user.email}}">
 
       <label for="name">Name</label>
-      <input type="text" name="name" id="name">
+      <input type="text" name="name" id="name" value="{{user.name}}">
 
       <label>Gender</label>
       <input type="radio" name="gender" id="male" value="male" checked="{{#ifeq profile.gender 'male'}}checked{{/ifeq}}">
@@ -31,13 +31,13 @@
       <label for="female">Female</label>
 
       <label for="location">Location</label>
-      <input type="text" name="location" id="location">
+      <input type="text" name="location" id="location" value="{{user.location}}">
 
       <label for="website">Website</label>
-      <input type="text" name="website" id="website">
+      <input type="text" name="website" id="website" value="{{user.website}}">
 
       <label>Gravatar</label>
-      <img src="{{profile.gravatar}}" class="gravatar" width="100" height="100">
+      <img src="{{user.gravatar}}" class="gravatar" width="100" height="100">
 
       <br>
       <button type="submit" class="success button">Update Profile</button>
@@ -47,20 +47,20 @@
 
     <form method="POST" action="/account?_method=PUT">
       <label for="password">New Password</label>
-      <input type="password" name="password" id="password" ng-model="profile.password">
+      <input type="password" name="password" id="password">
 
       <label for="confirm">Confirm Password</label>
-      <input type="password" name="confirm" id="confirm" ng-model="profile.confirm">
+      <input type="password" name="confirm" id="confirm">
 
       <button type="submit" class="success button">Change Password</button>
     </form>
 
     <h5>Linked Accounts</h5>
 
-    //= FACEBOOK_LINK_INDENT2
-    //= TWITTER_LINK_INDENT2
-    //= GOOGLE_LINK_INDENT2
-    //= VK_LINK_INDENT2
+    //= FACEBOOK_LINK_INDENT1
+    //= TWITTER_LINK_INDENT1
+    //= GOOGLE_LINK_INDENT1
+    //= VK_LINK_INDENT1
 
     <h5>Delete Account</h5>
 
