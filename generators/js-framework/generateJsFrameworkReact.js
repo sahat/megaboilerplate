@@ -10,6 +10,8 @@ async function generateJsFrameworkReact(params) {
   const reactRoutesRequire = join(__dirname, 'modules', 'react', 'react-routes-require.js');
   const reactRoutes = join(__dirname, 'modules', 'react', 'routes.js');
   const serverRenderingWithRouting = join(__dirname, 'modules', 'react', 'server-rendering-with-routing.js');
+  const initialState = join(__dirname, 'modules', 'react', 'initial-state.js');
+  const initialStateAuth = join(__dirname, 'modules', 'react', 'initial-state-auth.js');
   const babelrc = join(__dirname, 'modules', 'react', '.babelrc');
 
   switch (params.framework) {
@@ -27,6 +29,11 @@ async function generateJsFrameworkReact(params) {
 
       // Add server-rendering  middleware
       await replaceCode(join(build, 'server.js'), 'REACT_SERVER_RENDERING', serverRenderingWithRouting);
+      if (params.authentication.length) {
+        await replaceCode(join(build, 'server.js'), 'REDUX_INITIAL_STATE', initialStateAuth);
+      } else {
+        await replaceCode(join(build, 'server.js'), 'REDUX_INITIAL_STATE', initialState);
+      }
 
       // Copy React components
       const components = join(__dirname, 'modules', 'react', 'components');

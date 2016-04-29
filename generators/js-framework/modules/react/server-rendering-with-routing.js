@@ -1,10 +1,7 @@
 
 // React server rendering
 app.use(function(req, res) {
-  var initialState = {
-    auth: { token: req.cookies.token, user: req.user },
-    messages: {}
-  };
+  //= REDUX_INITIAL_STATE_INDENT1
 
   var store = configureStore(initialState);
 
