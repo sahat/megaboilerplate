@@ -74,6 +74,8 @@ async function generateFacebookAuthenticationExpress(params) {
     await replaceCode(loginPage, 'SIGN_IN_WITH_FACEBOOK', signInButton);
     await replaceCode(signupPage, 'SIGN_IN_WITH_FACEBOOK', signInButton);
   } else {
+    let profileTemplate;
+    let oauthLink;
     switch (params.templateEngine) {
       case 'jade':
         loginPage = join(build, 'views', 'account', 'login.jade');
@@ -83,8 +85,8 @@ async function generateFacebookAuthenticationExpress(params) {
         await replaceCode(signupPage, 'SIGN_IN_WITH_FACEBOOK', signInButton, { indentLevel: 3 });
 
         // Add link/unlink button on profile page
-        const profileTemplate = join(build, 'views', 'account', 'profile.jade');
-        const oauthLink = join(__dirname, 'modules', 'common', 'views', 'profile', 'oauth-link.jade');
+        profileTemplate = join(build, 'views', 'account', 'profile.jade');
+        oauthLink = join(__dirname, 'modules', 'common', 'views', 'profile', 'oauth-link.jade');
         await replaceCode(profileTemplate, 'FACEBOOK_LINK', oauthLink);
         await templateReplace(profileTemplate, {
           providerPath: 'facebook',
@@ -99,8 +101,8 @@ async function generateFacebookAuthenticationExpress(params) {
         await replaceCode(signupPage, 'SIGN_IN_WITH_FACEBOOK', signInButton, { indentLevel: 3 });
 
         // Add link/unlink button on profile page
-        const profileTemplate = join(build, 'views', 'profile.handlebars');
-        const oauthLink = join(__dirname, 'modules', 'common', 'views', 'profile', 'oauth-link.handlebars');
+        profileTemplate = join(build, 'views', 'profile.handlebars');
+        oauthLink = join(__dirname, 'modules', 'common', 'views', 'profile', 'oauth-link.handlebars');
         await replaceCode(profileTemplate, 'FACEBOOK_LINK', oauthLink);
         await templateReplace(profileTemplate, {
           providerPath: 'facebook',

@@ -70,6 +70,8 @@ async function generateTwitterAuthenticationExpress(params) {
     await replaceCode(loginPage, 'SIGN_IN_WITH_TWITTER', signInButton);
     await replaceCode(signupPage, 'SIGN_IN_WITH_TWITTER', signInButton);
   } else {
+    let profileTemplate;
+    let oauthLink;
     switch (params.templateEngine) {
       case 'jade':
         loginPage = join(build, 'views', 'account', 'login.jade');
@@ -79,8 +81,8 @@ async function generateTwitterAuthenticationExpress(params) {
         await replaceCode(signupPage, 'SIGN_IN_WITH_TWITTER', signInButton, { indentLevel: 3 });
 
         // Add link/unlink button on profile page
-        const profileTemplate = join(build, 'views', 'account', 'profile.jade');
-        const oauthLink = join(__dirname, 'modules', 'common', 'views', 'profile', 'oauth-link.jade');
+        profileTemplate = join(build, 'views', 'account', 'profile.jade');
+        oauthLink = join(__dirname, 'modules', 'common', 'views', 'profile', 'oauth-link.jade');
         await replaceCode(profileTemplate, 'TWITTER_LINK', oauthLink);
         await templateReplace(profileTemplate, {
           providerPath: 'twitter',
@@ -95,8 +97,8 @@ async function generateTwitterAuthenticationExpress(params) {
         await replaceCode(signupPage, 'SIGN_IN_WITH_TWITTER', signInButton, { indentLevel: 3 });
 
         // Add link/unlink button on profile page
-        const profileTemplate = join(build, 'views', 'profile.handlebars');
-        const oauthLink = join(__dirname, 'modules', 'common', 'views', 'oauth-link.handlebars');
+        profileTemplate = join(build, 'views', 'profile.handlebars');
+        oauthLink = join(__dirname, 'modules', 'common', 'views', 'oauth-link.handlebars');
         await replaceCode(profileTemplate, 'TWITTER_LINK', oauthLink);
         await templateReplace(profileTemplate, {
           providerPath: 'twitter',
