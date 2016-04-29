@@ -94,14 +94,14 @@ async function generateFacebookAuthenticationExpress(params) {
         });
         break;
       case 'handlebars':
-        loginPage = join(build, 'views', 'login.handlebars');
-        signupPage = join(build, 'views', 'signup.handlebars');
+        loginPage = join(build, 'views', 'account', 'login.handlebars');
+        signupPage = join(build, 'views', 'account', 'signup.handlebars');
         signInButton = join(__dirname, 'modules', 'facebook', 'views', `sign-in-button-${params.cssFramework}.html`);
         await replaceCode(loginPage, 'SIGN_IN_WITH_FACEBOOK', signInButton, { indentLevel: 3 });
         await replaceCode(signupPage, 'SIGN_IN_WITH_FACEBOOK', signInButton, { indentLevel: 3 });
 
         // Add link/unlink button on profile page
-        profileTemplate = join(build, 'views', 'profile.handlebars');
+        profileTemplate = join(build, 'views', 'account', 'profile.handlebars');
         oauthLink = join(__dirname, 'modules', 'common', 'views', 'oauth-link.handlebars');
         await replaceCode(profileTemplate, 'FACEBOOK_LINK', oauthLink);
         await templateReplace(profileTemplate, {

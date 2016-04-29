@@ -210,11 +210,11 @@ async function generateCommonAuthenticationExpress(params) {
         const reset = join(__dirname, 'modules', 'common', 'views', `reset-${params.cssFramework}.handlebars`);
         const profile = join(__dirname, 'modules', 'common', 'views', `profile-${params.cssFramework}.handlebars`);
 
-        await copy(login, join(build, 'views', 'login.handlebars'));
-        await copy(signup, join(build, 'views', 'signup.handlebars'));
-        await copy(forgot, join(build, 'views', 'forgot.handlebars'));
-        await copy(reset, join(build, 'views', 'reset.handlebars'));
-        await copy(profile, join(build, 'views', 'profile.handlebars'));
+        await copy(login, join(build, 'views', 'account', 'login.handlebars'));
+        await copy(signup, join(build, 'views', 'account', 'signup.handlebars'));
+        await copy(forgot, join(build, 'views', 'account', 'forgot.handlebars'));
+        await copy(reset, join(build, 'views', 'account', 'reset.handlebars'));
+        await copy(profile, join(build, 'views', 'account', 'profile.handlebars'));
       }
       break;
     case 'nunjucks':

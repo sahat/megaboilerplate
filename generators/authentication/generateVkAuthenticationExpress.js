@@ -48,12 +48,12 @@ async function generateVkAuthenticationExpress(params) {
 
   if (params.jsFramework) {
     await addEnv(params, {
-      VK_SECRET: 'W4MvuGuWZDqmDravgesY'
+      VKONTAKTE_SECRET: 'W4MvuGuWZDqmDravgesY'
     });
   } else {
     await addEnv(params, {
-      VK_ID: '5389715',
-      VK_SECRET: 'W4MvuGuWZDqmDravgesY'
+      VKONTAKTE_ID: '5389715',
+      VKONTAKTE_SECRET: 'W4MvuGuWZDqmDravgesY'
     });
   }
 
@@ -94,14 +94,14 @@ async function generateVkAuthenticationExpress(params) {
         });
         break;
       case 'handlebars':
-        loginPage = join(build, 'views', 'login.handlebars');
-        signupPage = join(build, 'views', 'signup.handlebars');
+        loginPage = join(build, 'views', 'account', 'login.handlebars');
+        signupPage = join(build, 'views', 'account', 'signup.handlebars');
         signInButton = join(__dirname, 'modules', 'vk', 'views', `sign-in-button-${params.cssFramework}.html`);
         await replaceCode(loginPage, 'SIGN_IN_WITH_VK', signInButton, { indentLevel: 3 });
         await replaceCode(signupPage, 'SIGN_IN_WITH_VK', signInButton, { indentLevel: 3 });
 
         // Add link/unlink button on profile page
-        profileTemplate = join(build, 'views', 'profile.handlebars');
+        profileTemplate = join(build, 'views', 'account', 'profile.handlebars');
         oauthLink = join(__dirname, 'modules', 'common', 'views', 'oauth-link.handlebars');
         await replaceCode(profileTemplate, 'VK_LINK', oauthLink);
         await templateReplace(profileTemplate, {
