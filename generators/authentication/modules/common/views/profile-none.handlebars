@@ -22,9 +22,9 @@
     <label for="name">Name</label>
     <input type="text" name="name" id="name" value="{{user.name}}">
     <label>Gender</label>
-    <input type="radio" name="gender" id="male" value="male" checked="{{#ifeq profile.gender 'male'}}checked{{/ifeq}}">
+    <input type="radio" name="gender" id="male" value="male" {{#ifeq user.gender 'male'}}checked{{/ifeq}}>
     <label for="male">Male</label>
-    <input type="radio" name="gender" id="female" value="female" checked="{{#ifeq profile.gender 'female'}}checked{{/ifeq}}">
+    <input type="radio" name="gender" id="female" value="female" {{#ifeq user.gender 'male'}}checked{{/ifeq}}>
     <label for="female">Female</label>
     <label for="location">Location</label>
     <input type="text" name="location" id="location" value="{{user.location}}">

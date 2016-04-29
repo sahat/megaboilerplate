@@ -33,10 +33,10 @@
           <label class="col-sm-3">Gender</label>
           <div class="col-sm-4">
             <label class="radio-inline radio col-sm-4">
-              <input type="radio" name="gender" value="male" checked="{{#ifeq profile.gender 'male'}}checked{{/ifeq}}" data-toggle='radio'><span>Male</span>
+              <input type="radio" name="gender" value="male" {{#ifeq user.gender 'male'}}checked{{/ifeq}}><span>Male</span>
             </label>
             <label class="radio-inline col-sm-4">
-              <input type="radio" name="gender" value="female" checked="{{#ifeq profile.gender 'female'}}checked{{/ifeq}}" data-toggle='radio'><span>Female</span>
+              <input type="radio" name="gender" value="female" {{#ifeq user.gender 'female'}}checked{{/ifeq}}><span>Female</span>
             </label>
           </div>
         </div>
