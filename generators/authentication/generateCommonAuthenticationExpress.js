@@ -221,19 +221,19 @@ async function generateCommonAuthenticationExpress(params) {
       if (params.jsFramework) {
         if (usingOAuth) {
           await cpy([join(__dirname, 'modules', 'common', 'views', 'nunjucks', 'loading.html')], join(build, 'views'));
-        } else {
-          const login = join(__dirname, 'modules', 'common', 'views', 'nunjucks', `login-${params.cssFramework}.html`);
-          const signup = join(__dirname, 'modules', 'common', 'views', 'nunjucks', `signup-${params.cssFramework}.html`);
-          const forgot = join(__dirname, 'modules', 'common', 'views', 'nunjucks', `forgot-${params.cssFramework}.html`);
-          const reset = join(__dirname, 'modules', 'common', 'views', 'nunjucks', `reset-${params.cssFramework}.html`);
-          const profile = join(__dirname, 'modules', 'common', 'views', 'nunjucks', `profile-${params.cssFramework}.html`);
-
-          await copy(login, join(build, 'views', 'account', 'login.html'));
-          await copy(signup, join(build, 'views', 'account', 'signup.html'));
-          await copy(forgot, join(build, 'views', 'account', 'forgot.html'));
-          await copy(reset, join(build, 'views', 'account', 'reset.html'));
-          await copy(profile, join(build, 'views', 'account', 'profile.html'));
         }
+      } else {
+        const login = join(__dirname, 'modules', 'common', 'views', 'nunjucks', `login-${params.cssFramework}.html`);
+        const signup = join(__dirname, 'modules', 'common', 'views', 'nunjucks', `signup-${params.cssFramework}.html`);
+        const forgot = join(__dirname, 'modules', 'common', 'views', 'nunjucks', `forgot-${params.cssFramework}.html`);
+        const reset = join(__dirname, 'modules', 'common', 'views', 'nunjucks', `reset-${params.cssFramework}.html`);
+        const profile = join(__dirname, 'modules', 'common', 'views', 'nunjucks', `profile-${params.cssFramework}.html`);
+
+        await copy(login, join(build, 'views', 'account', 'login.html'));
+        await copy(signup, join(build, 'views', 'account', 'signup.html'));
+        await copy(forgot, join(build, 'views', 'account', 'forgot.html'));
+        await copy(reset, join(build, 'views', 'account', 'reset.html'));
+        await copy(profile, join(build, 'views', 'account', 'profile.html'));
       }
       break;
     default:
