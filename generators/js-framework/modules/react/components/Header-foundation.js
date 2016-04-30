@@ -15,7 +15,7 @@ return (
           <li><Link to="/contact" activeClassName="active">Contact</Link></li>
         </ul>
       </div>
-      //= HEADER_AUTH_REFERENCE_INDENT3
+      //= HEADER_AUTH_REFERENCE_INDENT5
     </div>
   </div>
 );

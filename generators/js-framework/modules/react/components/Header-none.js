@@ -6,6 +6,6 @@ return (
       <li><IndexLink to="/">Home</IndexLink></li>
       <li><Link to="/contact">Contact</Link></li>
     </ul>
-    //= HEADER_AUTH_REFERENCE_INDENT2
+    //= HEADER_AUTH_REFERENCE_INDENT4
   </div>
 );

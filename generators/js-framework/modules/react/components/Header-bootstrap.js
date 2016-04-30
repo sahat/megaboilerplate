@@ -19,7 +19,7 @@ return (
           <li><IndexLink to="/" activeStyle={active}>Home</IndexLink></li>
           <li><Link to="/contact" activeStyle={active}>Contact</Link></li>
         </ul>
-        //= HEADER_AUTH_REFERENCE_INDENT4
+        //= HEADER_AUTH_REFERENCE_INDENT6
       </div>
     </div>
   </nav>
