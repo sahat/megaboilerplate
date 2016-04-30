@@ -112,7 +112,7 @@ async function generateJsFrameworkReact(params) {
         const headerExportRedux = join(components, 'Header-export-redux.js');
 
         // Add logout and redux export
-        await replaceCode(join(build, 'app', 'components', 'Header.js'), 'HEADER_EXPORT_REDUX', headerExportRedux);
+        await replaceCode(join(build, 'app', 'components', 'Header.js'), 'HEADER_EXPORT', headerExportRedux);
         await replaceCode(join(build, 'app', 'components', 'Header.js'), 'HEADER_LOGOUT', headerLogout, { trailingBlankLine: true });
         await replaceCode(join(build, 'app', 'components', 'Header.js'), 'HEADER_LOGOUT_REFERENCE', headerLogoutReference);
         await replaceCode(join(build, 'app', 'components', 'Header.js'), 'HEADER_REACT_REDUX_REFERENCE', headerReactReduxReference);

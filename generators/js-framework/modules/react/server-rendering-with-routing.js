@@ -14,7 +14,7 @@ app.use(function(req, res) {
       var html = ReactDOM.renderToString(React.createElement(Provider, { store: store },
         React.createElement(Router.RouterContext, renderProps)
       ));
-      //= RENDER_TEMPLATE
+      //= RENDER_TEMPLATE_INDENT3
     } else {
       res.sendStatus(404);
     }
