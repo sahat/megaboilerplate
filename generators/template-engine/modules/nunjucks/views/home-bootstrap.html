@@ -1,0 +1,62 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="container-fluid">
+  {% if messages.success %}
+  <div role="alert" class="alert alert-success">
+    {% for success in messages.success %}
+    <div>{{ success.msg }}</div>
+    {% endfor %}
+  </div>
+  {% endif %}
+  {% if messages.error %}
+  <div role="alert" class="alert alert-danger">
+    {% for error in messages.error %}
+    <div>{{ error.msg }}</div>
+    {% endfor %}
+  </div>
+  {% endif %}
+  {% if messages.info %}
+  <div role="alert" class="alert alert-info">
+    {% for info in messages.info %}
+    <div>{{ info.msg }}</div>
+    {% endfor %}
+  </div>
+  {% endif %}
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="panel">
+        <div class="panel-body">
+          <h3>Heading</h3>
+          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
+            condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod.
+            Donec sed odio dui.</p>
+          <a href="#" role="button" class="btn btn-default">View details</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="panel">
+        <div class="panel-body">
+          <h3>Heading</h3>
+          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
+            condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod.
+            Donec sed odio dui.</p>
+          <a href="#" role="button" class="btn btn-default">View details</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="panel">
+        <div class="panel-body">
+          <h3>Heading</h3>
+          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
+            condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod.
+            Donec sed odio dui.</p>
+          <a href="#" role="button" class="btn btn-default">View details</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
