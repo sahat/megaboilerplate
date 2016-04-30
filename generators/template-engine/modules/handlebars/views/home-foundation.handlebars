@@ -1,4 +1,25 @@
 <div class="expanded row">
+  {{#if messages.success}}
+    <div role="alert" class="callout success">
+      {{#each messages.success}}
+        <div>{{msg}}</div>
+      {{/each}}
+    </div>
+  {{/if}}
+  {{#if messages.error}}
+    <div role="alert" class="callout alert">
+      {{#each messages.error}}
+        <div>{{msg}}</div>
+      {{/each}}
+    </div>
+  {{/if}}
+  {{#if messages.info}}
+    <div role="alert" class="callout primary">
+      {{#each messages.info}}
+        <div>{{msg}}</div>
+      {{/each}}
+    </div>
+  {{/if}}
   <div class="row">
     <div class="medium-4 columns">
       <h3>Heading</h3>
