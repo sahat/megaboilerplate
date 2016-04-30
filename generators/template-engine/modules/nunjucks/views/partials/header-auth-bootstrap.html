@@ -1,0 +1,29 @@
+<ul class="nav navbar-nav navbar-right">
+{% if user %}
+  <li class="dropdown">
+    <a href="#" data-toggle="dropdown" class="navbar-avatar dropdown-toggle">
+      {% if user.picture %}
+        <img src="{{ user.picture }}">
+      {% else %}
+        <img src="{{ user.gravatar }}">
+      {% endif %}
+      {% if user.name %}
+        {{ user.name }}
+      {% elif user.email %}
+        {{ user.email }}
+      {% else %}
+        {{ user.id }}
+      {% endif %}
+      <i class="caret"></i>
+    </a>
+    <ul class="dropdown-menu">
+      <li><a href="/account">My Account</a></li>
+      <li class="divider"></li>
+      <li><a href="/logout">Logout</a></li>
+    </ul>
+  </li>
+{% else %}
+  <li class="{% if title == 'Log in' %}active{% endif %}"><a href="/login">Log in</a></li>
+  <li class="{% if title == 'Sign up' %}active{% endif %}"><a href="/signup">Sign up</a></li>
+{% endif %}
+</ul>
