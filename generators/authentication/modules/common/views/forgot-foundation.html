@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="column row">
+  <div class="medium-8 medium-offset-2 columns">
+    {% if messages.error %}
+    <div role="alert" class="callout alert">
+      {% for error in messages.error %}
+      <div>{{ error.msg }}</div>
+      {% endfor %}
+    </div>
+    {% endif %}
+    {% if messages.info %}
+    <div role="alert" class="callout primary">
+      {% for info in messages.info %}
+      <div>{{ error.info }}</div>
+      {% endfor %}
+    </div>
+    {% endif %}
+    <form method="POST">
+      <h4>Forgot Password</h4>
+
+      <p>Enter your email address below and we'll send you password reset instructions.</p>
+
+      <label for="email">Email</label>
+      <input type="email" name="email" id="email" placeholder="Email" autofocus>
+
+      <button type="submit" class="button success">Reset Password</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
