@@ -86,7 +86,7 @@ async function generateVkAuthenticationExpress(params) {
 
         // Add link/unlink button on profile page
         profileTemplate = join(build, 'views', 'account', 'profile.jade');
-        oauthLink = join(__dirname, 'modules', 'common', 'views', 'oauth-link.jade');
+        oauthLink = join(__dirname, 'modules', 'common', 'views', 'jade', 'oauth-link.jade');
         await replaceCode(profileTemplate, 'VK_LINK', oauthLink);
         await templateReplace(profileTemplate, {
           providerPath: 'vk',
@@ -102,7 +102,7 @@ async function generateVkAuthenticationExpress(params) {
 
         // Add link/unlink button on profile page
         profileTemplate = join(build, 'views', 'account', 'profile.handlebars');
-        oauthLink = join(__dirname, 'modules', 'common', 'views', 'oauth-link.handlebars');
+        oauthLink = join(__dirname, 'modules', 'common', 'views', 'handlebars', 'oauth-link.handlebars');
         await replaceCode(profileTemplate, 'VK_LINK', oauthLink);
         await templateReplace(profileTemplate, {
           providerPath: 'vk',
@@ -110,6 +110,20 @@ async function generateVkAuthenticationExpress(params) {
         });
         break;
       case 'nunjucks':
+        loginPage = join(build, 'views', 'account', 'login.html');
+        signupPage = join(build, 'views', 'account', 'signup.html');
+        signInButton = join(__dirname, 'modules', 'vk', 'views', `sign-in-button-${params.cssFramework}.html`);
+        await replaceCode(loginPage, 'SIGN_IN_WITH_VK', signInButton, { indentLevel: 3 });
+        await replaceCode(signupPage, 'SIGN_IN_WITH_VK', signInButton, { indentLevel: 3 });
+
+        // Add link/unlink button on profile page
+        profileTemplate = join(build, 'views', 'account', 'profile.html');
+        oauthLink = join(__dirname, 'modules', 'common', 'views', 'nunjucks', 'oauth-link.html');
+        await replaceCode(profileTemplate, 'VK_LINK', oauthLink);
+        await templateReplace(profileTemplate, {
+          providerPath: 'vk',
+          providerName: 'VK'
+        });
         break;
       default:
         break;

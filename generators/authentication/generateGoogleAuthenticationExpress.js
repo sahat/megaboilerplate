@@ -90,7 +90,7 @@ async function generateGoogleAuthenticationExpress(params) {
 
         // Add link/unlink button on profile page
         profileTemplate = join(build, 'views', 'account', 'profile.jade');
-        oauthLink = join(__dirname, 'modules', 'common', 'views', 'oauth-link.jade');
+        oauthLink = join(__dirname, 'modules', 'common', 'views', 'jade', 'oauth-link.jade');
         await replaceCode(profileTemplate, 'GOOGLE_LINK', oauthLink);
         await templateReplace(profileTemplate, {
           providerPath: 'google',
@@ -106,15 +106,28 @@ async function generateGoogleAuthenticationExpress(params) {
 
         // Add link/unlink button on profile page
         profileTemplate = join(build, 'views', 'account', 'profile.handlebars');
-        oauthLink = join(__dirname, 'modules', 'common', 'views', 'oauth-link.handlebars');
+        oauthLink = join(__dirname, 'modules', 'common', 'views', 'handlebars', 'oauth-link.handlebars');
         await replaceCode(profileTemplate, 'GOOGLE_LINK', oauthLink);
         await templateReplace(profileTemplate, {
           providerPath: 'google',
           providerName: 'Google'
         });
         break;
-        break;
       case 'nunjucks':
+        loginPage = join(build, 'views', 'account', 'login.html');
+        signupPage = join(build, 'views', 'account', 'signup.html');
+        signInButton = join(__dirname, 'modules', 'google', 'views', `sign-in-button-${params.cssFramework}.html`);
+        await replaceCode(loginPage, 'SIGN_IN_WITH_GOOGLE', signInButton, { indentLevel: 3 });
+        await replaceCode(signupPage, 'SIGN_IN_WITH_GOOGLE', signInButton, { indentLevel: 3 });
+
+        // Add link/unlink button on profile page
+        profileTemplate = join(build, 'views', 'account', 'profile.html');
+        oauthLink = join(__dirname, 'modules', 'common', 'views', 'nunjucks', 'oauth-link.html');
+        await replaceCode(profileTemplate, 'GOOGLE_LINK', oauthLink);
+        await templateReplace(profileTemplate, {
+          providerPath: 'google',
+          providerName: 'Google'
+        });
         break;
       default:
         break;

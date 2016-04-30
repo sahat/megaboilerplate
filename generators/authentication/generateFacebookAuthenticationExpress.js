@@ -86,7 +86,7 @@ async function generateFacebookAuthenticationExpress(params) {
 
         // Add link/unlink button on profile page
         profileTemplate = join(build, 'views', 'account', 'profile.jade');
-        oauthLink = join(__dirname, 'modules', 'common', 'views', 'oauth-link.jade');
+        oauthLink = join(__dirname, 'modules', 'common', 'views', 'jade', 'oauth-link.jade');
         await replaceCode(profileTemplate, 'FACEBOOK_LINK', oauthLink);
         await templateReplace(profileTemplate, {
           providerPath: 'facebook',
@@ -102,7 +102,7 @@ async function generateFacebookAuthenticationExpress(params) {
 
         // Add link/unlink button on profile page
         profileTemplate = join(build, 'views', 'account', 'profile.handlebars');
-        oauthLink = join(__dirname, 'modules', 'common', 'views', 'oauth-link.handlebars');
+        oauthLink = join(__dirname, 'modules', 'common', 'views', 'handlebars', 'oauth-link.handlebars');
         await replaceCode(profileTemplate, 'FACEBOOK_LINK', oauthLink);
         await templateReplace(profileTemplate, {
           providerPath: 'facebook',
@@ -110,6 +110,20 @@ async function generateFacebookAuthenticationExpress(params) {
         });
         break;
       case 'nunjucks':
+        loginPage = join(build, 'views', 'account', 'login.html');
+        signupPage = join(build, 'views', 'account', 'signup.html');
+        signInButton = join(__dirname, 'modules', 'facebook', 'views', `sign-in-button-${params.cssFramework}.html`);
+        await replaceCode(loginPage, 'SIGN_IN_WITH_FACEBOOK', signInButton, { indentLevel: 3 });
+        await replaceCode(signupPage, 'SIGN_IN_WITH_FACEBOOK', signInButton, { indentLevel: 3 });
+
+        // Add link/unlink button on profile page
+        profileTemplate = join(build, 'views', 'account', 'profile.html');
+        oauthLink = join(__dirname, 'modules', 'common', 'views', 'nunjucks', 'oauth-link.html');
+        await replaceCode(profileTemplate, 'FACEBOOK_LINK', oauthLink);
+        await templateReplace(profileTemplate, {
+          providerPath: 'facebook',
+          providerName: 'Facebook'
+        });
         break;
       default:
         break;

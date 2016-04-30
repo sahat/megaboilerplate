@@ -182,14 +182,14 @@ async function generateCommonAuthenticationExpress(params) {
     case 'jade':
       if (params.jsFramework) {
         if (usingOAuth) {
-          await cpy([join(__dirname, 'modules', 'common', 'views', 'loading.jade')], join(build, 'views'));
+          await cpy([join(__dirname, 'modules', 'common', 'views', 'jade', 'loading.jade')], join(build, 'views'));
         }
       } else {
-        const login = join(__dirname, 'modules', 'common', 'views', `login-${params.cssFramework}.jade`);
-        const signup = join(__dirname, 'modules', 'common', 'views', `signup-${params.cssFramework}.jade`);
-        const forgot = join(__dirname, 'modules', 'common', 'views', `forgot-${params.cssFramework}.jade`);
-        const reset = join(__dirname, 'modules', 'common', 'views', `reset-${params.cssFramework}.jade`);
-        const profile = join(__dirname, 'modules', 'common', 'views', `profile-${params.cssFramework}.jade`);
+        const login = join(__dirname, 'modules', 'common', 'views', 'jade', `login-${params.cssFramework}.jade`);
+        const signup = join(__dirname, 'modules', 'common', 'views', 'jade', `signup-${params.cssFramework}.jade`);
+        const forgot = join(__dirname, 'modules', 'common', 'views', 'jade', `forgot-${params.cssFramework}.jade`);
+        const reset = join(__dirname, 'modules', 'common', 'views', 'jade', `reset-${params.cssFramework}.jade`);
+        const profile = join(__dirname, 'modules', 'common', 'views', 'jade', `profile-${params.cssFramework}.jade`);
 
         await copy(login, join(build, 'views', 'account', 'login.jade'));
         await copy(signup, join(build, 'views', 'account', 'signup.jade'));
@@ -201,14 +201,14 @@ async function generateCommonAuthenticationExpress(params) {
     case 'handlebars':
       if (params.jsFramework) {
         if (usingOAuth) {
-          await cpy([join(__dirname, 'modules', 'common', 'views', 'loading.html')], join(build, 'views'));
+          await cpy([join(__dirname, 'modules', 'common', 'views', 'handlebars', 'loading.handlebars')], join(build, 'views'));
         }
       } else {
-        const login = join(__dirname, 'modules', 'common', 'views', `login-${params.cssFramework}.handlebars`);
-        const signup = join(__dirname, 'modules', 'common', 'views', `signup-${params.cssFramework}.handlebars`);
-        const forgot = join(__dirname, 'modules', 'common', 'views', `forgot-${params.cssFramework}.handlebars`);
-        const reset = join(__dirname, 'modules', 'common', 'views', `reset-${params.cssFramework}.handlebars`);
-        const profile = join(__dirname, 'modules', 'common', 'views', `profile-${params.cssFramework}.handlebars`);
+        const login = join(__dirname, 'modules', 'common', 'views', 'handlebars', `login-${params.cssFramework}.handlebars`);
+        const signup = join(__dirname, 'modules', 'common', 'views', 'handlebars', `signup-${params.cssFramework}.handlebars`);
+        const forgot = join(__dirname, 'modules', 'common', 'views', 'handlebars', `forgot-${params.cssFramework}.handlebars`);
+        const reset = join(__dirname, 'modules', 'common', 'views', 'handlebars', `reset-${params.cssFramework}.handlebars`);
+        const profile = join(__dirname, 'modules', 'common', 'views', 'handlebars', `profile-${params.cssFramework}.handlebars`);
 
         await copy(login, join(build, 'views', 'account', 'login.handlebars'));
         await copy(signup, join(build, 'views', 'account', 'signup.handlebars'));
@@ -220,7 +220,19 @@ async function generateCommonAuthenticationExpress(params) {
     case 'nunjucks':
       if (params.jsFramework) {
         if (usingOAuth) {
-          await cpy([join(__dirname, 'modules', 'common', 'views', 'loading.html')], join(build, 'views'));
+          await cpy([join(__dirname, 'modules', 'common', 'views', 'nunjucks', 'loading.html')], join(build, 'views'));
+        } else {
+          const login = join(__dirname, 'modules', 'common', 'views', 'nunjucks', `login-${params.cssFramework}.html`);
+          const signup = join(__dirname, 'modules', 'common', 'views', 'nunjucks', `signup-${params.cssFramework}.html`);
+          const forgot = join(__dirname, 'modules', 'common', 'views', 'nunjucks', `forgot-${params.cssFramework}.html`);
+          const reset = join(__dirname, 'modules', 'common', 'views', 'nunjucks', `reset-${params.cssFramework}.html`);
+          const profile = join(__dirname, 'modules', 'common', 'views', 'nunjucks', `profile-${params.cssFramework}.html`);
+
+          await copy(login, join(build, 'views', 'account', 'login.html'));
+          await copy(signup, join(build, 'views', 'account', 'signup.html'));
+          await copy(forgot, join(build, 'views', 'account', 'forgot.html'));
+          await copy(reset, join(build, 'views', 'account', 'reset.html'));
+          await copy(profile, join(build, 'views', 'account', 'profile.html'));
         }
       }
       break;

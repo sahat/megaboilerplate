@@ -90,7 +90,7 @@ async function generateTwitterAuthenticationExpress(params) {
 
         // Add link/unlink button on profile page
         profileTemplate = join(build, 'views', 'account', 'profile.jade');
-        oauthLink = join(__dirname, 'modules', 'common', 'views', 'oauth-link.jade');
+        oauthLink = join(__dirname, 'modules', 'common', 'views', 'jade', 'oauth-link.jade');
         await replaceCode(profileTemplate, 'TWITTER_LINK', oauthLink);
         await templateReplace(profileTemplate, {
           providerPath: 'twitter',
@@ -106,7 +106,7 @@ async function generateTwitterAuthenticationExpress(params) {
 
         // Add link/unlink button on profile page
         profileTemplate = join(build, 'views', 'account', 'profile.handlebars');
-        oauthLink = join(__dirname, 'modules', 'common', 'views', 'oauth-link.handlebars');
+        oauthLink = join(__dirname, 'modules', 'common', 'views', 'handlebars', 'oauth-link.handlebars');
         await replaceCode(profileTemplate, 'TWITTER_LINK', oauthLink);
         await templateReplace(profileTemplate, {
           providerPath: 'twitter',
@@ -114,6 +114,20 @@ async function generateTwitterAuthenticationExpress(params) {
         });
         break;
       case 'nunjucks':
+        loginPage = join(build, 'views', 'account', 'login.html');
+        signupPage = join(build, 'views', 'account', 'signup.html');
+        signInButton = join(__dirname, 'modules', 'twitter', 'views', `sign-in-button-${params.cssFramework}.html`);
+        await replaceCode(loginPage, 'SIGN_IN_WITH_TWITTER', signInButton, { indentLevel: 3 });
+        await replaceCode(signupPage, 'SIGN_IN_WITH_TWITTER', signInButton, { indentLevel: 3 });
+
+        // Add link/unlink button on profile page
+        profileTemplate = join(build, 'views', 'account', 'profile.html');
+        oauthLink = join(__dirname, 'modules', 'common', 'views', 'nunjucks', 'oauth-link.html');
+        await replaceCode(profileTemplate, 'TWITTER_LINK', oauthLink);
+        await templateReplace(profileTemplate, {
+          providerPath: 'twitter',
+          providerName: 'Twitter'
+        });
         break;
       default:
         break;
