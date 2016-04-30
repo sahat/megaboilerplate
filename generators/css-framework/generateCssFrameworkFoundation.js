@@ -50,11 +50,9 @@ async function addCssFrameworkImports(params) {
         const jadeLayout = join(build, 'views', 'layout.jade');
         const jadeFoundationCssImport = join(__dirname, 'modules', 'foundation', 'jade-css-import.jade');
         const jadeFoundationJsImport = join(__dirname, 'modules', 'foundation', 'jade-js-import.jade');
-
         if (params.cssPreprocessor === 'css') {
           await replaceCode(jadeLayout, 'CSS_FRAMEWORK_IMPORT', jadeFoundationCssImport, { indentLevel: 2 });
         }
-
         await replaceCode(jadeLayout, 'JS_FRAMEWORK_LIB_IMPORT', jadeFoundationJsImport, { indentLevel: 2 });
         break;
 
@@ -62,21 +60,21 @@ async function addCssFrameworkImports(params) {
         const handlebarsLayout = join(build, 'views', 'layouts', 'main.handlebars');
         const handlebarsFoundationCssImport = join(__dirname, 'modules', 'foundation', 'html-css-import.html');
         const handlebarsFoundationJsImport = join(__dirname, 'modules', 'foundation', 'html-js-import.html');
-
         if (params.cssPreprocessor === 'css') {
-          await replaceCode(handlebarsLayout, 'CSS_FRAMEWORK_IMPORT', handlebarsFoundationCssImport, { indentLevel: 1 });
+          await replaceCode(handlebarsLayout, 'CSS_FRAMEWORK_IMPORT', handlebarsFoundationCssImport);
         }
-
-        await replaceCode(handlebarsLayout, 'JS_FRAMEWORK_LIB_IMPORT', handlebarsFoundationJsImport, { indentLevel: 1 });
+        await replaceCode(handlebarsLayout, 'JS_FRAMEWORK_LIB_IMPORT', handlebarsFoundationJsImport);
         break;
 
       case 'nunjucks':
-        // const nunjucksLayout = join(build, 'views', 'layout.html');
-        // const nunjucksBootstrapCssImport = join(__dirname, 'modules', 'bootstrap', 'html-import.html');
-        // const nunjucksBootstrapJsImport = join(__dirname, 'modules', 'bootstrap', 'html-js-import.html');
-        //
-        // await replaceCode(nunjucksLayout, 'CSS_FRAMEWORK_IMPORT', nunjucksBootstrapCssImport, { indentLevel: 1 });
-        // break;
+        const nunjucksLayout = join(build, 'views', 'layouts', 'main.handlebars');
+        const nunjucksFoundationCssImport = join(__dirname, 'modules', 'foundation', 'html-css-import.html');
+        const nunjucksFoundationJsImport = join(__dirname, 'modules', 'foundation', 'html-js-import.html');
+        if (params.cssPreprocessor === 'css') {
+          await replaceCode(nunjucksLayout, 'CSS_FRAMEWORK_IMPORT', nunjucksFoundationCssImport);
+        }
+        await replaceCode(nunjucksLayout, 'JS_FRAMEWORK_LIB_IMPORT', nunjucksFoundationJsImport);
+        break;
 
       default:
         break;

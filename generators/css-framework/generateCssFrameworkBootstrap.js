@@ -57,11 +57,9 @@ async function addCssFrameworkImports(params) {
         const jadeLayout = join(build, 'views', 'layout.jade');
         const jadeBootstrapCssImport = join(__dirname, 'modules', 'bootstrap', 'jade-css-import.jade');
         const jadeBootstrapJsImport = join(__dirname, 'modules', 'bootstrap', 'jade-js-import.jade');
-
         if (params.cssPreprocessor === 'css') {
           await replaceCode(jadeLayout, 'CSS_FRAMEWORK_IMPORT', jadeBootstrapCssImport, { indentLevel: 2 });
         }
-
         await replaceCode(jadeLayout, 'JS_FRAMEWORK_LIB_IMPORT', jadeBootstrapJsImport, { indentLevel: 2 });
         break;
 
@@ -69,20 +67,20 @@ async function addCssFrameworkImports(params) {
         const handlebarsLayout = join(build, 'views', 'layouts', 'main.handlebars');
         const handlebarsBootstrapCssImport = join(__dirname, 'modules', 'bootstrap', 'html-css-import.html');
         const handlebarsBootstrapJsImport = join(__dirname, 'modules', 'bootstrap', 'html-js-import.html');
-
         if (params.cssPreprocessor === 'css') {
           await replaceCode(handlebarsLayout, 'CSS_FRAMEWORK_IMPORT', handlebarsBootstrapCssImport);
         }
-
         await replaceCode(handlebarsLayout, 'JS_FRAMEWORK_LIB_IMPORT', handlebarsBootstrapJsImport);
         break;
 
       case 'nunjucks':
         const nunjucksLayout = join(build, 'views', 'layout.html');
-        const nunjucksBootstrapCssImport = join(__dirname, 'modules', 'bootstrap', 'html-import.html');
-        const nunjucksBootstrapJsImport = join(__dirname, 'modules', 'bootstrap', 'html-js-import.html');
-
-        await replaceCode(nunjucksLayout, 'CSS_FRAMEWORK_IMPORT', nunjucksBootstrapCssImport);
+        const nunjucksBootstrapCssImport = join(__dirname, 'modules', 'bootstrap', 'html-css-import.html');
+        const nunjuckssBootstrapJsImport = join(__dirname, 'modules', 'bootstrap', 'html-js-import.html');
+        if (params.cssPreprocessor === 'css') {
+          await replaceCode(nunjucksLayout, 'CSS_FRAMEWORK_IMPORT', nunjucksBootstrapCssImport);
+        }
+        await replaceCode(nunjucksLayout, 'JS_FRAMEWORK_LIB_IMPORT', nunjuckssBootstrapJsImport);
         break;
 
       default:

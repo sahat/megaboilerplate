@@ -61,7 +61,7 @@ async function addCssFrameworkImports(params) {
         const handlebarsLayout = join(build, 'views', 'layouts', 'main.handlebars');
         const handlebarsCssImport = join(__dirname, 'modules', 'none', 'html-css-import.html');
         if (params.cssPreprocessor === 'css') {
-          await replaceCode(handlebarsLayout, 'CSS_FRAMEWORK_IMPORT', handlebarsCssImport, { indentLevel: 1 });
+          await replaceCode(handlebarsLayout, 'CSS_FRAMEWORK_IMPORT', handlebarsCssImport);
         }
         break;
 
@@ -69,7 +69,7 @@ async function addCssFrameworkImports(params) {
         const nunjucksLayout = join(build, 'views', 'layout.html');
         const nunjucksCssImport = join(__dirname, 'modules', 'none', 'html-css-import.html');
         if (params.cssPreprocessor === 'css') {
-          await replaceCode(nunjucksLayout, 'CSS_FRAMEWORK_IMPORT', nunjucksCssImport, { indentLevel: 1 });
+          await replaceCode(nunjucksLayout, 'CSS_FRAMEWORK_IMPORT', nunjucksCssImport);
         }
         break;
 
