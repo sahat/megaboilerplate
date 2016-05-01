@@ -1,1 +1,1 @@
-const compiler = webpack(config);
+var compiler = webpack(config);
