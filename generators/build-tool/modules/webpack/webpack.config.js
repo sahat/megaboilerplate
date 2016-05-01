@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 var config = {
   devtool: 'cheap-module-eval-source-map',
@@ -10,20 +11,29 @@ var config = {
   output: {
     path: path.join(__dirname, 'public', 'js'),
     filename: 'bundle.js',
-    publicPath: '/'
+    publicPath: '/js'
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
+    new ExtractTextPlugin("[name].css"),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+      'process.env': {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+        APP_ENV: JSON.stringify('browser')
+      }
     })
   ],
   module: {
     loaders: [
       { test: /\.js$/, loaders: ['babel-loader'], exclude: /node_modules/ },
-      { test: /\.scss$/, loaders: ['style', 'css', 'sass'] }
+      {
+        test: /\.scss$/,
+        // loader: ExtractTextPlugin.extract("style-loader", "css-loader", 'postcss-loader', 'sass-loader')
+        loaders: ['style', 'css', 'postcss', 'sass', 'isomorphic-style-loader']
+      },
+      { test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000' }
     ]
   }
 };
