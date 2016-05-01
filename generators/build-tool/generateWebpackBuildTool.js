@@ -12,6 +12,9 @@ async function genereateWebpackBuildTool(params) {
 
   await addNpmPackage('webpack', params, true);
   await addNpmPackage('webpack-hot-middleware', params, true);
+  await addNpmPackage('babel-core', params, true);
+  await addNpmPackage('babel-loader', params, true);
+  await addNpmPackage('babel-preset-es2015', params, true);
 
   switch (params.framework) {
     case 'express':
@@ -67,14 +70,24 @@ async function genereateWebpackBuildTool(params) {
       break;
   }
 
+  const webpackConfigJs = join(build, 'webpack.config.js');
+
   switch (params.jsFramework) {
     case 'react':
+      const reactLoader = join(__dirname, 'modules', 'webpack', 'webpack-react-loader.js');
+      await replaceCode(webpackConfigJs, 'WEBPACK_JAVASCRIPT_LOADER', reactLoader);
+
+      await addNpmPackage('babel-plugin-react-transform', params, true);
+      await addNpmPackage('react-transform-hmr', params, true);
+      await addNpmPackage('babel-preset-react', params, true);
       break;
 
     case 'angularjs':
       break;
 
     default:
+      const jsLoader = join(__dirname, 'modules', 'webpack', 'webpack-vanillajs-loader.js');
+      await replaceCode(webpackConfigJs, 'WEBPACK_JAVASCRIPT_LOADER', jsLoader);
       break;
   }
 }
