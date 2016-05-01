@@ -99,7 +99,7 @@ class JsLibrary extends React.Component {
                  <label htmlFor="jsLibraryAuthor" className="">Author Name</label>&nbsp;
                  <span className="help hint--top hint--rounded" data-hint="Your full name is used in the license and package.json files." ><i className="fa fa-question-circle"></i></span>
                  <input type="text" id="jsLibraryAuthor" name="jsLibraryAuthor" className="form-control"
-                        value={props.jsLibraryAuthor} onChange={props.handleChange}/>
+                        placeholder="optional" value={props.jsLibraryAuthor} onChange={props.handleChange}/>
                </div>
              </div>
               <div className="row">
@@ -107,7 +107,7 @@ class JsLibrary extends React.Component {
                   <label htmlFor="jsLibraryGithubUsername" className="">GitHub Username</label>&nbsp;
                   <span className="help hint--top hint--rounded" data-hint="Your username is used for the GitHub project path." ><i className="fa fa-question-circle"></i></span>
                   <input type="text" id="jsLibraryGithubUsername" name="jsLibraryGithubUsername" className="form-control"
-                         value={props.jsLibraryGithubUsername} onChange={props.handleChange}/>
+                         placeholder="optional" value={props.jsLibraryGithubUsername} onChange={props.handleChange}/>
                 </div>
               </div>
             </div>

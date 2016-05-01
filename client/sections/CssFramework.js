@@ -50,7 +50,7 @@ const CssFramework = (props) => {
   let note = props.cssFramework === 'none' ? (
     <div>
       <strong>Note: </strong>
-      <span>Only <a href="https://necolas.github.io/normalize.css/">normalize.css</a> and a simple Flexbox grid will be generated. All pages will be completely unstyled.</span>
+      <span>You still get <a href="https://necolas.github.io/normalize.css/">normalize.css</a> and <a href="http://flexboxgrid.com/">Flexbox Grid</a>, but all pages will be unstyled.</span>
     </div>
   ) : null;
 
