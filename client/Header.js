@@ -61,7 +61,7 @@ class Header extends React.Component {
      // this.renderConnectedDots();
 
     const strings = shuffle(['Express', 'Middleman', 'Jekyll', 'Meteor', 'React', 'Angular 2', 'Bootstrap', 'Foundation',
-      'Gulp', 'Webpack', 'Mocha', 'Jasmine', 'Node.js', 'Jade', 'Handlebars', 'Nunjucks', 'Bourbon Neat', 'Sass', 'LESS',
+      'Gulp', 'Mocha', 'Jasmine', 'Node.js', 'Jade', 'Handlebars', 'Nunjucks', 'Bourbon Neat', 'Sass', 'LESS',
       'Redux', 'React Router', 'ECMAScript 2015', 'Babel', 'React Hot Reloading', 'Browserify', 'Chai', 'Sinon',
       'MongoDB', 'MySQL', 'PostgreSQL', 'SQLite', 'Passport', 'PostCSS', 'Socket.IO', 'Karma', 'OAuth 2.0', 'OAuth 1.0',
       'JS Library Generator', 'ESLint'

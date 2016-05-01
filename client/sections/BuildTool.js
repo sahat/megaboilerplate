@@ -113,11 +113,11 @@ class BuildTool extends React.Component {
               <input type="radio" name="buildToolRadios" value="gulp" onChange={props.handleChange} checked={props.buildTool === 'gulp'}/>
               <span>Gulp + Browserify</span>
             </label>
-            <label className="radio-inline">
+            {/*<label className="radio-inline">
               <img className="btn-logo" src="/img/svg/webpack-logo.svg" alt="Webpack"/>
               <input type="radio" name="buildToolRadios" value="webpack" onChange={props.handleChange} checked={props.buildTool === 'webpack'}/>
               <span>Webpack</span>
-            </label>
+            </label>*/}
             <label className="radio-inline">
               <img className="btn-logo" src="/img/svg/npm-logo.svg" alt="NPM"/>
               <input type="radio" name="buildToolRadios" value="npm" onChange={props.handleChange} checked={props.buildTool === 'npm'}/>
