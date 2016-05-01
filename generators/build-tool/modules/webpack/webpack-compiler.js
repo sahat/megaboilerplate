@@ -1,0 +1,1 @@
+const compiler = webpack(config);
