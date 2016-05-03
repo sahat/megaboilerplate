@@ -3,7 +3,6 @@ import generateJsLibrary from '../generators/js-library/generateJsLibrary';
 import generateStaticSite from '../generators/static-site/generateStaticSite';
 import generateTemplateEngine from '../generators/template-engine/generateTemplateEngine';
 import generateCssFramework from '../generators/css-framework/generateCssFramework';
-import generateCssPreprocessor from '../generators/css-preprocessor/generateCssPreprocessor';
 import generateBuildTool from '../generators/build-tool/generateBuildTool';
 import generateTesting from '../generators/testing/generateTesting';
 import generateJsFramework from '../generators/js-framework/generateJsFramework';
@@ -23,7 +22,6 @@ async function download(req, res) {
       await generateFramework(params);
       await generateTemplateEngine(params);
       await generateCssFramework(params);
-      await generateCssPreprocessor(params);
       await generateJsFramework(params);
       await generateBuildTool(params);
       await generateTesting(params);
