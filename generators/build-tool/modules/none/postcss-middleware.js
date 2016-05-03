@@ -1,6 +1,6 @@
 app.use('/css', postcss({
   src: function(req) {
-    return path.join(__dirname, 'public', req.path);
+    return path.join(__dirname, 'public', 'css', req.path);
   },
-  plugins: [atImport, cssnext, autoprefixer]
+  plugins: [postcssImport(), cssnext()]
 }));

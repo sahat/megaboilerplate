@@ -65,7 +65,6 @@
   "nodemon": "^1.9.1",
   "node-sass": "^3.6.0",
   "ng-annotate": "^1.2.1",
-  "autoprefixer": "^6.3.6",
   "postcss-cssnext": "^2.5.2",
   "postcss-import": "8.1.0",
 
