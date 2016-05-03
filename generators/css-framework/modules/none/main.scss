@@ -1,8 +1,5 @@
-@import 'normalize.css';
-@import 'flexboxgrid.css';
-
-// Scaffolding
-// -------------------------
+@import 'normalize';
+@import 'flexboxgrid';
 
 html {
   position: relative;
@@ -13,11 +10,15 @@ body {
   margin-bottom: 44px;
 }
 
+ul, ol {
+  list-style: none;
+}
+
 footer {
   position: absolute;
   height: 44px;
-  padding: 0 30px;
   bottom: 0;
+  padding: 0 30px;
 }
 
 label {
@@ -25,8 +26,14 @@ label {
   line-height: 1.8;
 }
 
-ul, ol {
-  list-style: none;
+input[type="radio"] + label,
+input[type="checkbox"] + label {
+  display: inline-block;
+  margin: 0 5px;
+}
+
+form button[type="submit"] {
+  margin-top: 1em;
 }
 
 .list-inline {
@@ -37,8 +44,7 @@ ul, ol {
 
 .list-inline > li {
   display: inline-block;
-  padding-right: 5px;
-  padding-left: 5px;
+  padding: 0 5px;
 }
 
 .container {
@@ -58,24 +64,10 @@ ul, ol {
   color: #31708f;
 }
 
-.gravatar {
-  display: block;
-}
-
-.avatar img {
+.avatar {
   margin-right: 5px;
   border-radius: 50%;
   width: 30px;
   height: 30px;
   vertical-align: middle;
-}
-
-input[type="radio"] + label,
-input[type="checkbox"] + label {
-  display: inline-block;
-  margin: 0 5px;
-}
-
-form button[type="submit"] {
-  margin-top: 1em;
 }

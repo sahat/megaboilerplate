@@ -15,16 +15,16 @@ async function generateCssFrameworkNone(params) {
 
     case 'less':
       await cpy([
-        join(__dirname, 'modules', 'none', 'normalize.css'),
-        join(__dirname, 'modules', 'none', 'flexboxgrid.css'),
+        join(__dirname, 'modules', 'none', 'normalize.less'),
+        join(__dirname, 'modules', 'none', 'flexboxgrid.less'),
         join(__dirname, 'modules', 'none', 'main.less')
       ], join(build, 'public', 'css'));
       break;
 
     case 'sass':
       await cpy([
-        join(__dirname, 'modules', 'none', 'normalize.css'),
-        join(__dirname, 'modules', 'none', 'flexboxgrid.css'),
+        join(__dirname, 'modules', 'none', 'normalize.scss'),
+        join(__dirname, 'modules', 'none', 'flexboxgrid.scss'),
         join(__dirname, 'modules', 'none', 'main.scss')
       ], join(build, 'public', 'css'));
       break;
