@@ -99,6 +99,14 @@ class BuildTool extends React.Component {
       </label>
     ) : null;
 
+    const webpackRadio =  props.jsFramework === 'react' || props.jsFramework === 'angularjs' ? (
+      <label className="radio-inline">
+        <img className="btn-logo" src="/img/svg/webpack-logo.svg" alt="Webpack"/>
+        <input type="radio" name="buildToolRadios" value="webpack" onChange={props.handleChange} checked={props.buildTool === 'webpack'}/>
+        <span>Webpack</span>
+      </label>
+    ) : null;
+
     return (
       <div className={cx('zoomInBackwards panel', props.buildTool)}>
         <div className="panel-heading">
@@ -113,11 +121,7 @@ class BuildTool extends React.Component {
               <input type="radio" name="buildToolRadios" value="gulp" onChange={props.handleChange} checked={props.buildTool === 'gulp'}/>
               <span>Gulp + Browserify</span>
             </label>
-            <label className="radio-inline">
-              <img className="btn-logo" src="/img/svg/webpack-logo.svg" alt="Webpack"/>
-              <input type="radio" name="buildToolRadios" value="webpack" onChange={props.handleChange} checked={props.buildTool === 'webpack'}/>
-              <span>Webpack</span>
-            </label>
+            {webpackRadio}
             <label className="radio-inline">
               <img className="btn-logo" src="/img/svg/npm-logo.svg" alt="NPM"/>
               <input type="radio" name="buildToolRadios" value="npm" onChange={props.handleChange} checked={props.buildTool === 'npm'}/>
