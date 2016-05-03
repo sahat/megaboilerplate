@@ -1,11 +1,11 @@
 .top-bar-right
   ul.dropdown.menu(data-dropdown-menu)
     if user
-      li.avatar
+      li
         if user.picture
-          img(src=user.picture)
+          img.avatar(src=user.picture)
         else
-          img(src=user.gravatar)
+          img.avatar(src=user.gravatar)
         | <span> #{user.name || user.email || user.id} </span>
       li
         a(href='/account') My Account

@@ -1,10 +1,10 @@
 <ul class="list-inline">
   {% if user %}
-  <li class="avatar">
+  <li>
     {% if user.picture %}
-    <img src="{{ user.picture }}">
+    <img class="avatar" src="{{ user.picture }}">
     {% else %}
-    <img src="{{ user.gravatar }}">
+    <img class="avatar" src="{{ user.gravatar }}">
     {% endif %}
     {% if user.name %}
     {{ user.name }}
