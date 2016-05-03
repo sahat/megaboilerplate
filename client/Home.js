@@ -378,7 +378,7 @@ class Home extends React.Component {
       <BuildTool {...state} handleChange={this.handleChange}/>
     ) : null;
 
-    const testing = state.buildTool && state.platform === 'node' ? (
+    const testing = (state.buildTool || state.cssPreprocessor === 'css' && state.jsFramework === 'none') && state.platform === 'node' ? (
       <Testing {...state} handleChange={this.handleChange}/>
     ) : null;
 
