@@ -46,7 +46,7 @@ async function copyTemplates(params) {
     if (params.authentication.length) {
       const headerAuthIndent = {
         none: 2,
-        bootstrap: 2,
+        bootstrap: 3,
         foundation: 3
       };
       await replaceCode(join(views, 'includes', 'header.jade'), 'HEADER_AUTH', headerAuth, { indentLevel: headerAuthIndent[params.cssFramework] });
@@ -89,7 +89,7 @@ async function generateJadeTemplateEngine(params) {
   }
 
   // Add Jade to package.json
-  await addNpmPackage('jade', params);
+  await addNpmPackage('pug', params);
 }
 
 export default generateJadeTemplateEngine;
