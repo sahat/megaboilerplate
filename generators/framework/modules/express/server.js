@@ -14,6 +14,7 @@ var dotenv = require('dotenv');
 //= PASSPORT_REQUIRE
 //= JWT_REQUIRE
 //= CSS_PREPROCESSOR_MIDDLEWARE_REQUIRE
+//= WEBPACK_REQUIRE
 
 // Load environment variables from .env file
 dotenv.load();
@@ -28,6 +29,7 @@ dotenv.load();
 //= REACT_ROUTES_REQUIRE
 
 var app = express();
+//= WEBPACK_COMPILER
 //= SOCKETIO_REQUIRE
 //= DATABASE_CONNECTION
 //= TEMPLATE_ENGINE
@@ -45,6 +47,7 @@ app.use(expressValidator());
 //= USER_HELPER_MIDDLEWARE
 app.use(express.static(path.join(__dirname, 'public')));
 //= IS_AUTHENTICATED_MIDDLEWARE
+//= WEBPACK_MIDDLEWARE
 
 //= HOME_ROUTE
 //= CONTACT_ROUTE
