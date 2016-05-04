@@ -1,5 +1,7 @@
 $body-bg: #f4f4f4;
 $line-height-base: 1.57142857;
+$link-color: #1d7cf4;
+$link-hover-decoration: none;
 
 $brand-success: #29b35b;
 $brand-danger: #b61b17;
@@ -7,15 +9,10 @@ $brand-danger: #b61b17;
 $font-family-base: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 $headings-font-weight: 600;
 
-$link-color: #1d7cf4;
-$link-hover-decoration: none;
-
 $alert-info-border: #31708f;
-
 $alert-success-border: darken($brand-success, 12%);
 $alert-success-text: #fff;
 $alert-success-bg: $brand-success;
-
 $alert-danger-border: #b61b17;
 $alert-danger-text: #b61b17;
 $alert-danger-bg: #ffcdd2;
@@ -32,8 +29,8 @@ $navbar-default-link-active-color: #262626;
 $panel-heading-padding: 20px 30px;
 $panel-body-padding: 30px;
 
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CRaleway:100,300,600,700,800);
-@import 'vendor/bootstrap/bootstrap';
+@import url("//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CRaleway:100,300,600,700,800");
+@import "vendor/bootstrap/bootstrap";
 
 // Scaffolding
 // -------------------------
@@ -60,11 +57,6 @@ footer {
 .login-container {
   width: 555px;
   margin: 0 auto;
-}
-
-
-textarea {
-  resize: none;
 }
 
 // Alerts
@@ -213,6 +205,10 @@ textarea {
 // Forms
 // -------------------------
 
+textarea {
+  resize: none;
+}
+
 .form-control {
   height: auto;
   padding: 8px 12px;
@@ -242,6 +238,6 @@ textarea {
   top: -10px;
   background-color: #fff;
   border-radius: 2px;
-  letter-spacing: .2em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
 }
