@@ -20,14 +20,6 @@ module.exports = {
     loaders: [{
       test: /\.jsx?$/,
       loader: 'babel-loader',
-      //// Skip any files outside of these directories
-      //include: [
-      //  path.resolve(__dirname, 'src'),
-      //  path.resolve(__dirname, 'routes.js'),
-      //  path.resolve(__dirname, 'utils'),
-      //  path.resolve(__dirname, 'generators'),
-      //  path.resolve(__dirname, 'modules')
-      //],
       exclude: [
         path.resolve(__dirname, 'node_modules')
       ],
