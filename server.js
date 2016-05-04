@@ -1,19 +1,15 @@
-'use strict';
 
-// ES6/ES7 Transpiler
-require('babel-core/register');
-require('babel-polyfill');
 
-let Promise = require('bluebird');
-let path = require('path');
-let express = require('express');
-let bodyParser = require('body-parser');
-let React = require('react');
-let ReactDOM = require('react-dom/server');
-let Router = require('react-router');
-let nunjucks = require('nunjucks');
-let webpack = require('webpack');
-let config = require('./webpack.config');
+const Promise = require('bluebird');
+const path = require('path');
+const express = require('express');
+const bodyParser = require('body-parser');
+const React = require('react');
+const ReactDOM = require('react-dom/server');
+const Router = require('react-router');
+const nunjucks = require('nunjucks');
+const webpack = require('webpack');
+const config = require('./webpack.config');
 const compression = require('compression');
 
 // Easy access to root directory
@@ -21,6 +17,10 @@ global.__base = __dirname + '/';
 
 // Disable Bluebird warnings
 Promise.config({ warnings: false });
+
+// ES6/ES7 Transpiler
+require('babel-core/register');
+require('babel-polyfill');
 
 // Express routes
 let downloadHandler = require('./routes/download');

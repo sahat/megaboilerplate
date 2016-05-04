@@ -19,10 +19,8 @@ module.exports = {
   module: {
     loaders: [{
       test: /\.jsx?$/,
-      loader: 'babel-loader',
-      exclude: [
-        path.resolve(__dirname, 'node_modules')
-      ],
+      exclude: /node_modules/,
+      loader: 'babel',
       query: {
         plugins: [
           ['react-transform', {
