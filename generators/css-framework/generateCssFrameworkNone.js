@@ -1,5 +1,5 @@
 import { join } from 'path';
-import { cpy, replaceCode } from '../utils';
+import { copy, cpy, replaceCode } from '../utils';
 
 async function generateCssFrameworkNone(params) {
   const build = join(__base, 'build', params.uuid);
@@ -27,6 +27,17 @@ async function generateCssFrameworkNone(params) {
         join(__dirname, 'modules', 'none', 'flexboxgrid.scss'),
         join(__dirname, 'modules', 'none', 'main.scss')
       ], join(build, 'public', 'css'));
+      break;
+
+    case 'postcss':
+      await cpy([
+        join(__dirname, 'modules', 'none', 'normalize.css'),
+        join(__dirname, 'modules', 'none', 'flexboxgrid.css')
+      ], join(build, 'public', 'css'));
+      await copy(
+        join(__dirname, 'modules', 'none', 'main-postcss.css'),
+        join(build, 'public', 'css', 'main.css')
+      );
       break;
 
     default:
