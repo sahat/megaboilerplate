@@ -3,7 +3,6 @@
 import haikunate from 'haikunator';
 import React from 'react';
 import { clone } from 'lodash';
-import Modal from './Modal';
 import Header from './Header';
 import Footer from './Footer';
 import Platform from './sections/Platform';
@@ -29,11 +28,8 @@ class Home extends React.Component {
     this.handleAutoScroll = this.handleAutoScroll.bind(this);
     this.handleReduceAnimations = this.handleReduceAnimations.bind(this);
     this.clickDownload = this.clickDownload.bind(this);
-    this.handleHideModal = this.handleHideModal.bind(this);
-    this.handleShowModal= this.handleShowModal.bind(this);
-
     this.state = {
-      showModal: false
+      error: {}
     };
   }
 
@@ -50,23 +46,21 @@ class Home extends React.Component {
     }
   }
 
-  handleHideModal() {
-    this.setState({ showModal: false })
-  }
-
-  handleShowModal(category) {
-    this.setState({
-      showModal: true,
-      modalCategory: category
-    })
-  }
-
   clickDownload() {
     const state = this.state;
     const downloadBtn = this.refs.downloadBtn;
 
     // Google Analytics event
     // ga("send","event","Customize","Download","Customize and Download")
+
+    if (!state.platform) {
+      return this.setState({ errors: { platform: 'Please select a platform.' } });
+    }
+
+    //   !state.framework ||
+    // !state.templateEngine ||
+    // !state.cssFramework ||
+    // )
 
     // Show next steps component
     this.setState({ showNextSteps: true });
@@ -343,7 +337,7 @@ class Home extends React.Component {
     );
 
     const platform = (
-      <Platform platform={state.platform} handleShowModal={this.handleShowModal} handleChange={this.handleChange}/>
+      <Platform {...state} handleChange={this.handleChange}/>
     );
 
     const staticSiteGenerator = state.platform === 'html5' ? (
@@ -434,7 +428,6 @@ class Home extends React.Component {
           <div ref="nextSteps">{nextSteps}</div>
         </main>
         <Footer />
-        {state.showModal ? <Modal {...state} handleHideModal={this.handleHideModal}/> : null}
       </div>
 
     );
