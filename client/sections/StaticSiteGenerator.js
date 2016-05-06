@@ -52,8 +52,18 @@ class StaticSiteGenerator extends React.Component {
       note = <div className="placeholder"> </div>;
     }
 
+    const validationError = props.staticSiteGeneratorValidationError ? (
+      <div className="text-danger"><i className="fa fa-warning"></i> {props.staticSiteGeneratorValidationError}</div>
+    ) : null;
+
+    if (props.autoScroll) {
+      $(this.refs.staticSiteGenerator).velocity('scroll');
+    } else {
+      $(this.refs.staticSiteGenerator).velocity('scroll', { duration: 0 });
+    }
+    
     return (
-      <div className={cx('zoomInBackwards panel', props.staticSiteGenerator)}>
+      <div ref="staticSiteGenerator" className={cx('zoomInBackwards panel', props.staticSiteGenerator)}>
         <div className="panel-heading">
           <h6>{STATIC_SITE_SVG}{props.staticSiteGenerator || 'Static Site Generator'}</h6>
         </div>
@@ -72,6 +82,7 @@ class StaticSiteGenerator extends React.Component {
             </label>
           </div>
           {note}
+          {validationError}
         </div>
       </div>
     );

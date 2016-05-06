@@ -28,9 +28,7 @@ class Home extends React.Component {
     this.handleAutoScroll = this.handleAutoScroll.bind(this);
     this.handleReduceAnimations = this.handleReduceAnimations.bind(this);
     this.clickDownload = this.clickDownload.bind(this);
-    this.state = {
-      validationErrors: []
-    };
+    this.state = {};;
   }
 
   componentDidMount() {
@@ -57,7 +55,15 @@ class Home extends React.Component {
       return this.setState({ platformValidationError: 'Please select a platform.' });
     }
 
-    if (!state.framework) {
+    if (state.platform === 'html5' && !state.staticSiteGenerator) {
+      return this.setState( { staticSiteGeneratorValidationError: 'Please select a static site generator.' });
+    }
+
+    if (state.platform === 'library' && !state.jsLibraryName) {
+      return this.setState( { jsLibraryValidationError: 'Please enter or generate a library name.' });
+    }
+
+    if (state.platform === 'node' && !state.framework) {
       return this.setState({ frameworkValidationError: 'Please select a framework.' });
     }
 
@@ -108,9 +114,10 @@ class Home extends React.Component {
   }
 
   handleGenerateLibraryName() {
-    const data = clone(this.state);
-    data.jsLibraryName = haikunate({ tokenLength: 0 });
-    this.setState(data);
+    const newState = clone(this.state);
+    newState.jsLibraryName = haikunate({ tokenLength: 0 });
+    newState.jsLibraryValidationError = null;
+    this.setState(newState);
   }
 
   handleChange(event) {
@@ -146,6 +153,7 @@ class Home extends React.Component {
           $(refs.staticSiteGenerator).velocity('scroll');
         }
         state.staticSiteGenerator = value;
+        state.staticSiteGeneratorValidationError = null;
         break;
 
       case 'jsLibraryOptionsCheckboxes':
@@ -159,6 +167,7 @@ class Home extends React.Component {
 
       case 'jsLibraryName':
         state.jsLibraryName = value;
+        state.jsLibraryValidationError = null;
         break;
 
       case 'jsLibraryAuthor':

@@ -16,6 +16,17 @@ class JsLibrary extends React.Component {
     this.onGenerateClick = this.onGenerateClick.bind(this);
   }
 
+  componentDidMount() {
+    // Set default license type to "MIT"
+    this.props.handleChange({
+      target: {
+        name: 'jsLibraryLicenseRadios',
+        value: 'mit',
+        checked: true
+      }
+    })
+  }
+
   onGenerateClick(event) {
     this.props.handleGenerateLibraryName(event.target.value);
     this.refs.jsLibraryName.focus();
@@ -48,8 +59,18 @@ class JsLibrary extends React.Component {
         description = <div className="placeholder"></div>;
     }
 
+    const validationError = props.jsLibraryValidationError ? (
+      <div className="help-block text-danger"><i className="fa fa-warning"></i> {props.jsLibraryValidationError}</div>
+    ) : null;
+
+    if (props.autoScroll) {
+      $(this.refs.jsLibrary).velocity('scroll');
+    } else {
+      $(this.refs.jsLibrary).velocity('scroll', { duration: 0 });
+    }
+
     return (
-      <div className='zoomInBackwards panel authentication'>
+      <div ref="jsLibrary" className='zoomInBackwards panel authentication'>
         <div className="panel-heading">
           <h6>{JS_LIBRARY_SVG}{props.library || 'JS Library Options'}</h6>
         </div>
@@ -57,13 +78,14 @@ class JsLibrary extends React.Component {
           <div className="row">
             <div className="col-sm-7">
               <div className="form-group">
-                <label htmlFor="jsLibraryName" className="">Library Name</label>
+                <label htmlFor="jsLibraryName" className="">Library Name <span className="text-danger">*</span></label>
                 <div className="input-group">
-                  <input ref="jsLibraryName" type="text" id="jsLibraryName" name="jsLibraryName" className="form-control" autoFocus value={props.jsLibraryName} onChange={props.handleChange}/>
-                <span className="input-group-btn">
-                  <button className="btn btn-primary" type="button" onClick={this.onGenerateClick} tabIndex="-1">Generate</button>
-                </span>
+                  <input ref="jsLibraryName" type="text" id="jsLibraryName" name="jsLibraryName" className="form-control" value={props.jsLibraryName} onChange={props.handleChange} autoFocus/>
+                  <span className="input-group-btn">
+                    <button className="btn btn-primary" type="button" onClick={this.onGenerateClick} tabIndex="-1">Generate</button>
+                  </span>
                 </div>
+                {validationError}
               </div>
 
               <strong>Additional Features</strong>
@@ -113,8 +135,6 @@ class JsLibrary extends React.Component {
             </div>
           </div>
           <br/>
-
-
 
           <strong>License</strong>
           <div className="radio-group">
