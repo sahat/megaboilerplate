@@ -100,14 +100,25 @@ class TemplateEngine extends React.Component {
         description = <div className="placeholder"> </div>;
     }
 
+    const validationError = props.templateEngineValidationError ? (
+      <div className="text-danger"><i className="fa fa-warning"></i> {props.templateEngineValidationError}</div>
+    ) : null;
+
+    if (props.autoScroll) {
+      $(this.refs.templateEngine).velocity('scroll');
+    } else {
+      $(this.refs.templateEngine).velocity('scroll', { duration: 0 });
+    }
+
     return (
-      <div className={cx('zoomInBackwards panel', props.templateEngine)}>
+      <div ref="templateEngine" className={cx('zoomInBackwards panel', props.templateEngine)}>
         <div className="panel-heading">
           <h6>{TEMPLATE_ENGINE_SVG}{!props.templateEngine || props.templateEngine === 'none' ? 'Template Engine' : props.templateEngine}</h6>
         </div>
         <div className="panel-body">
           {description}
           {nodeTemplateEngines}
+          {validationError}
         </div>
       </div>
     );

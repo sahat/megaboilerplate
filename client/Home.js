@@ -67,10 +67,9 @@ class Home extends React.Component {
       return this.setState({ frameworkValidationError: 'Please select a framework.' });
     }
 
-    //   !state.framework ||
-    // !state.templateEngine ||
-    // !state.cssFramework ||
-    // )
+   if (state.platform === 'node' && state.framework === 'express' && !state.templateEngine) {
+     return this.setState({ templateEngineValidationError: 'Please select a template engine.' });
+   }
 
     // Show next steps component
     this.setState({ showNextSteps: true });
@@ -205,6 +204,7 @@ class Home extends React.Component {
         if (!state.templateEngine && state.autoScroll) {
           $(refs.templateEngine).velocity('scroll');
         }
+        state.templateEngineValidationError = null;
         state.templateEngine = value;
         break;
 
