@@ -1,5 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
+import { find } from 'lodash';
 
 const PLATFORM_SVG = (
   <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 50 50">
@@ -7,34 +8,64 @@ const PLATFORM_SVG = (
   </svg>
 );
 
-const Platform = (props) => {
-  return (
-    <div className={cx('zoomInBackwards panel', props.platform)}>
-      <div className="panel-heading">
-        <h6>{PLATFORM_SVG}{props.platform || 'Platform'}</h6>
-      </div>
-      <div className="panel-body">
-        <div className="radio-group">
-          <label className="radio-inline">
-            <img className="btn-logo" src="/img/svg/node-logo.svg" alt="Node.js"/>
-            <input type="radio" id="nodeRadio" name="platformRadios" value="node" onChange={props.handleChange} checked={props.platform === 'node'} />
-            <span>Node.js</span>
-          </label>
-          <label className="radio-inline">
-            <img className="btn-logo" src="/img/svg/html5-logo.svg" alt="HTML5"/>
-            <input type="radio" id="staticSiteRadio" name="platformRadios" value="html5"
-                   onChange={props.handleChange} checked={props.platform === 'html5'}/>
-            <span>Static Site</span>
-          </label>
-          <label className="radio-inline">
-            <img className="btn-logo" src="/img/svg/eslint-logo.svg" alt="JavaScript Library"/>
-            <input type="radio" id="jsLibraryRadio" name="platformRadios" value="library" onChange={props.handleChange} checked={props.platform === 'library'} />
-            <span>JS Library</span>
-          </label>
+class Platform extends React.Component {
+  render() {
+    const props = this.props;
+
+    const validationError = props.platformValidationError ? (
+      <div className="text-danger"><i className="fa fa-warning"></i> {props.platformValidationError}</div>
+    ) : null;
+
+    if (props.autoScroll) {
+      $(this.refs.platform).velocity('scroll');
+    } else {
+      $(this.refs.platform).velocity('scroll', { duration: 0 });
+    }
+
+    return (
+      <div ref="platform" className={cx('zoomInBackwards panel', props.platform)}>
+        <div className="panel-heading">
+          <h6>{PLATFORM_SVG}{props.platform || 'Platform'}</h6>
+        </div>
+        <div className="panel-body">
+          <div className="radio-group">
+            <label className="radio-inline">
+              <img className="btn-logo" src="/img/svg/node-logo.svg" alt="Node.js"/>
+              <input type="radio"
+                     id="nodeRadio"
+                     name="platformRadios"
+                     value="node"
+                     onClick={props.handleChange}
+                     checked={props.platform === 'node'}/>
+              <span>Node.js</span>
+            </label>
+            <label className="radio-inline">
+              <img className="btn-logo" src="/img/svg/html5-logo.svg" alt="HTML5"/>
+              <input type="radio"
+                     id="staticSiteRadio"
+                     name="platformRadios"
+                     value="html5"
+                     onClick={props.handleChange}
+                     checked={props.platform === 'html5'}/>
+              <span>Static Site</span>
+            </label>
+            <label className="radio-inline">
+              <img className="btn-logo" src="/img/svg/eslint-logo.svg" alt="JavaScript Library"/>
+              <input type="radio"
+                     id="jsLibraryRadio"
+                     name="platformRadios"
+                     value="library"
+                     onClick={props.handleChange}
+                     checked={props.platform === 'library'}/>
+              <span>JS Library</span>
+            </label>
+          </div>
+          {validationError}
         </div>
       </div>
-    </div>
-  )
-};
+    );
+  }
+
+}
 
 export default Platform;

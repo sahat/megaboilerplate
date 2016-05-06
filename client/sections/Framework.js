@@ -97,8 +97,18 @@ class Framework extends React.Component {
       </div>
     ) : null;
 
+    const validationError = props.frameworkValidationError ? (
+      <div className="text-danger"><i className="fa fa-warning"></i> {props.frameworkValidationError}</div>
+    ) : null;
+
+    if (props.autoScroll) {
+      $(this.refs.framework).velocity('scroll');
+    } else {
+      $(this.refs.framework).velocity('scroll', { duration: 0 });
+    }
+
     return (
-      <div className={cx('zoomInBackwards panel', props.framework)}>
+      <div ref="framework" className={cx('zoomInBackwards panel', props.framework)}>
         <div className="panel-heading">
           <h6>{FRAMEWORK_SVG}{props.framework || 'Framework'}</h6>
         </div>
@@ -108,6 +118,7 @@ class Framework extends React.Component {
           <VelocityTransitionGroup enter={{ animation: 'transition.fadeIn', duration: 1000 }}>
             {additionalOptionsButton}
           </VelocityTransitionGroup>
+          {validationError}
         </div>
       </div>
     );

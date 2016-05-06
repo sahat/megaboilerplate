@@ -29,7 +29,7 @@ class Home extends React.Component {
     this.handleReduceAnimations = this.handleReduceAnimations.bind(this);
     this.clickDownload = this.clickDownload.bind(this);
     this.state = {
-      error: {}
+      validationErrors: []
     };
   }
 
@@ -54,7 +54,11 @@ class Home extends React.Component {
     // ga("send","event","Customize","Download","Customize and Download")
 
     if (!state.platform) {
-      return this.setState({ errors: { platform: 'Please select a platform.' } });
+      return this.setState({ platformValidationError: 'Please select a platform.' });
+    }
+
+    if (!state.framework) {
+      return this.setState({ frameworkValidationError: 'Please select a framework.' });
     }
 
     //   !state.framework ||
@@ -64,7 +68,7 @@ class Home extends React.Component {
 
     // Show next steps component
     this.setState({ showNextSteps: true });
-    if ( state.autoScroll) {
+    if (state.autoScroll) {
       $(this.refs.nextSteps).velocity('scroll');
     }
 
@@ -134,6 +138,7 @@ class Home extends React.Component {
         if (state.autoScroll) {
           $(refs.platform).velocity('scroll');
         }
+        state.platformValidationError = null;
         break;
 
       case 'staticSiteGeneratorRadios':
@@ -174,6 +179,8 @@ class Home extends React.Component {
           $(refs.framework).velocity('scroll');
         }
         state.framework = value;
+        state.frameworkValidationError = null;
+
         break;
 
       case 'frameworkOptionsCheckboxes':
@@ -387,11 +394,17 @@ class Home extends React.Component {
     const deployment = (state.authentication || state.database === 'none') ? (
       <Deployment {...state} handleChange={this.handleChange}/>
     ) : null;
+    //
+    // const download = state.deployment || state.staticSiteGenerator || state.platform === 'library' ? (
+    //   <button ref="downloadBtn" className="btn btn-block btn-mega btn-success" onClick={this.clickDownload}>Compile and
+    //     Download</button>
+    // ) : null;
 
-    const download = state.deployment || state.staticSiteGenerator || state.platform === 'library' ? (
+
+    const download = (
       <button ref="downloadBtn" className="btn btn-block btn-mega btn-success" onClick={this.clickDownload}>Compile and
         Download</button>
-    ) : null;
+    );
 
     const consulting = download ? (
       <div className="panel">
