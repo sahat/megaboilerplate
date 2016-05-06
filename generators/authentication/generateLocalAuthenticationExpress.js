@@ -8,7 +8,6 @@ async function generateLocalAuthenticationExpress(params) {
   const passportRoutes = join(__dirname, 'modules', 'local', 'passport-routes.js');
   const jwtRoutes = join(__dirname, 'modules', 'local', 'jwt-routes.js');
 
-  await addNpmPackage('nodemailer', params);
   await addNpmPackage('bcrypt-nodejs', params);
   await addNpmPackage('async', params);
   

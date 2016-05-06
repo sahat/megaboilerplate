@@ -75,6 +75,8 @@ async function generateFrameworkExpress(params) {
     await addNpmPackage('express-session', params);
     await addNpmPackage('express-flash', params);
     await addNpmPackage('method-override', params);
+    await addNpmPackage('nodemailer', params);
+
   }
 }
 
