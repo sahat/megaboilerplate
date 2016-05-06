@@ -1,5 +1,5 @@
-@import 'settings';
-@import 'vendor/foundation/foundation';
+@import "settings";
+@import "vendor/foundation/foundation";
 
 @include foundation-global-styles;
 @include foundation-grid;
@@ -62,27 +62,12 @@ footer {
   bottom: 0;
   height: 50px;
   width: 100%;
-  //background-color: #fff;
-  //border-top: 1px solid #e0e0e0;
   line-height: 50px;
 }
 
-.login-container {
-  width: 555px;
-  margin: 0 auto;
-}
-
-.gravatar {
-  display: block;
-  margin: 0 0 1rem;
-}
-
+.text-danger,
 .text-alert {
   color: map-get($foundation-palette, alert);
-}
-
-textarea {
-  resize: none;
 }
 
 // Alerts
@@ -108,8 +93,6 @@ textarea {
 
 // Buttons
 // -------------------------
-.button {
-}
 
 .button-group .button:not(:last-child) {
   border-right: 0;
@@ -216,40 +199,11 @@ textarea {
   padding: 2px 10px;
   top: -10px;
   color: $body-font-color;
-  background-color: #2f3e48;
+  background-color: #fff;
   border-radius: 2px;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-}
-
-.card {
-  padding: 20px;
-  margin-bottom: 20px;
-  background-clip: padding-box;
-  background-color: #2f3e48;
-  border-radius: 5px;
-  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.06), 0 1px 0 0 rgba(0, 0, 0, .02);
-  &.primary {
-    border-top: 3px solid map-get($foundation-palette, primary);
-    .card-title { color: map-get($foundation-palette, primary); }
-  }
-  &.success {
-    border-top: 3px solid map-get($foundation-palette, success);
-    .card-title { color: map-get($foundation-palette, success); }
-  }
-  &.alert {
-    border-top: 3px solid map-get($foundation-palette, alert);
-    .card-title { color: map-get($foundation-palette, alert); }
-  }
-}
-
-.card-title {
-  color: #fff;
-  font-weight: 600;
-  font-size: 16px;
-  margin-bottom: 15px;
-  margin-top: 0;
 }
 
 label {
@@ -257,6 +211,14 @@ label {
   font-weight: 600;
 }
 
-.text-danger {
-  color: $alert-color;
+textarea {
+  resize: none;
+}
+
+// Other
+// -----
+
+.gravatar {
+  display: block;
+  margin: 0 0 1rem;
 }
