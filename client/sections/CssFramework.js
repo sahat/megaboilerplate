@@ -64,19 +64,19 @@ const CssFramework = (props) => {
         <div className="radio-group">
           <label className="radio-inline">
             <img className="btn-logo" src="/img/svg/none.png" alt="None"/>
-            <input type="radio" name="cssFrameworkRadios" value="none" onChange={props.handleChange}
-                   checked={NO_CSS_FRAMEWORK} /> None
+            <input type="radio" name="cssFrameworkRadios" value="none" onChange={props.handleChange} checked={NO_CSS_FRAMEWORK}/>
+            <span>None</span>
           </label>
           <label className="radio-inline">
             <img className="btn-logo" src="/img/svg/bootstrap-logo.svg" alt="Bootstrap"/>
-            <input type="radio" name="cssFrameworkRadios" value="bootstrap" onChange={props.handleChange}
-                   checked={BOOTSTRAP} /> Bootstrap
+            <input type="radio" name="cssFrameworkRadios" value="bootstrap" onChange={props.handleChange} checked={BOOTSTRAP}/>
+            <span>Bootstrap</span>
             {recommended}
           </label>
           <label className="radio-inline">
             <img className="btn-logo" src="/img/svg/foundation-logo.png" alt="Foundation"/>
-            <input type="radio" name="cssFrameworkRadios" value="foundation" onChange={props.handleChange}
-                   checked={FOUNDATION} /> Foundation
+            <input type="radio" name="cssFrameworkRadios" value="foundation" onChange={props.handleChange} checked={FOUNDATION}/>
+            <span>Foundation</span>
           </label>
         </div>
         {note}
