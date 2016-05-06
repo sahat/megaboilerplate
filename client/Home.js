@@ -1,6 +1,6 @@
 /* global $, localStorage */
 
-const haikunate = require('haikunator');
+import haikunate from 'haikunator';
 import React from 'react';
 import { clone } from 'lodash';
 import Modal from './Modal';
