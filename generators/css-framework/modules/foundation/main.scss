@@ -106,8 +106,6 @@ textarea {
   color: map-get($foundation-palette, info);
 }
 
-
-
 // Buttons
 // -------------------------
 .button {
@@ -163,19 +161,17 @@ textarea {
 // Top bar
 // -------------------------
 
-.top-bar + .row{
+.top-bar + .row {
   margin: 2rem 0 0;
 }
 
-.top-bar li.avatar {
+.top-bar .avatar {
   padding: 0 1rem;
   color: #fff;
-  img {
-    margin-right: 5px;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-  }
+  margin-right: 5px;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
 }
 
 .top-bar a {

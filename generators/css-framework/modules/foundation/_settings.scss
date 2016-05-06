@@ -1,44 +1,8 @@
-//  Foundation Settings
-//  -------------------
+//  Foundation for Sites Settings
+//  -----------------------------
 
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500,700);
 @import 'vendor/foundation/util/util';
 
-$foundation-palette: (
-  primary: #188ae2,
-  secondary: #5b69bc,
-  success: #10c469,
-  warning: #f9c851,
-  alert: #ff5b5b,
-  info: #35b8e0
-);
-
-$topbar-background: #253138;
+$global-width: rem-calc(940);
+$topbar-background: #333;
 $topbar-padding: 0;
-$menu-item-background-active: rgba(255, 255, 255, 0.07);
-
-
-$button-padding: 0.75em 1.5em;
-$button-radius: 4px;
-$button-sizes: (
-  tiny: 0.6rem,
-  small: 0.75rem,
-  default: 1rem,
-  large: 1.25rem,
-);
-
-$body-background: #253138;
-$body-font-color: #98a5ad;
-$body-font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-$global-font-size: 14px;
-
-$input-background: #394c57;
-$input-color: #fff;
-$input-background-focus: #435966;
-$input-border: 1px solid rgba(238, 238, 238, 0.1);
-$input-border-focus: 1px solid rgba(238, 238, 238, 0.3);
-$input-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 15px rgba(0, 0, 0, 0.05);
-$input-shadow-focus: inset 0 1px 2px rgba(0, 0, 0, 0.15), inset 0 1px 15px rgba(0, 0, 0, 0.075);
-$input-transition: all 0.3s linear;
-$input-radius: 4px;
-$input-font-size: rem-calc(14);
