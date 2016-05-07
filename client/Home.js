@@ -52,27 +52,24 @@ class Home extends React.Component {
     // ga("send","event","Customize","Download","Customize and Download")
 
     if (!state.platform) {
-      return this.setState({ platformValidationError: 'Please select a platform.' });
-    }
-
-    if (state.platform === 'html5' && !state.staticSiteGenerator) {
-      return this.setState( { staticSiteGeneratorValidationError: 'Please select a static site generator.' });
-    }
-
-    if (state.platform === 'library' && !state.jsLibraryName) {
-      return this.setState( { jsLibraryValidationError: 'Please enter or generate a library name.' });
-    }
-
-    if (state.platform === 'node' && !state.framework) {
+      return this.setState({ platformValidationError: 'Please select a platfsForm.' });
+    } else if (state.platform === 'html5' && !state.staticSiteGenerator) {
+      return this.setState({ staticSiteGeneratorValidationError: 'Please select a static site generator.' });
+    } else if (state.platform === 'library' && !state.jsLibraryName) {
+      return this.setState({ jsLibraryValidationError: 'Please enter a library name.' });
+    } else if (!state.framework) {
       return this.setState({ frameworkValidationError: 'Please select a framework.' });
+    } else if (!state.templateEngine) {
+      return this.setState({ templateEngineValidationError: 'Please select a template engine.' });
+    } else if (!state.cssFramework) {
+      return this.setState({ cssFrameworkValidationError: 'Please select a CSS framework.' });
+    } else if (!state.cssPreprocessor) {
+      return this.setState( { cssPreprocessorValidationError: 'Please select a CSS preprocessor.' });
     }
 
-   if (state.platform === 'node' && state.framework === 'express' && !state.templateEngine) {
-     return this.setState({ templateEngineValidationError: 'Please select a template engine.' });
-   }
 
     // Show next steps component
-    this.setState({ showNextSteps: true });
+      this.setState({ showNextSteps: true });
     if (state.autoScroll) {
       $(this.refs.nextSteps).velocity('scroll');
     }
@@ -215,6 +212,7 @@ class Home extends React.Component {
         if (state.cssPreprocessor) {
           state.cssPreprocessor = null;
         }
+        state.cssFrameworkValidationError = null;
         state.cssFramework = value;
         break;
 
@@ -223,6 +221,7 @@ class Home extends React.Component {
           $(refs.cssPreprocessor).velocity('scroll');
         }
         state.cssPreprocessor = value;
+        state.cssPreprocessorValidationError = null;
         break;
 
       case 'jsFrameworkRadios':

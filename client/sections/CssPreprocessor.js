@@ -7,75 +7,91 @@ const CSS_PREPROCESSOR_SVG = (
   </svg>
 );
 
-const CssPreprocessor = (props) => {
-  const JEKYLL = props.staticSiteGenerator === 'jekyll';
-  const MIDDLEMAN = props.staticSiteGenerator === 'middleman';
+class CssPreprocessor extends React.Component {
+  render() {
+    const props = this.props;
+
+    const JEKYLL = props.staticSiteGenerator === 'jekyll';
+    const MIDDLEMAN = props.staticSiteGenerator === 'middleman';
 
 
-  const NO_CSS_FRAMEWORK = props.cssFramework === 'none';
-  const BOOTSTRAP = props.cssFramework === 'bootstrap';
-  const FOUNDATION = props.cssFramework === 'foundation';
-  const BOURBON_NEAT = props.cssFramework === 'bourbonNeat';
+    const NO_CSS_FRAMEWORK = props.cssFramework === 'none';
+    const BOOTSTRAP = props.cssFramework === 'bootstrap';
+    const FOUNDATION = props.cssFramework === 'foundation';
+    const BOURBON_NEAT = props.cssFramework === 'bourbonNeat';
 
-  const CSS = props.cssPreprocessor === 'css';
-  const SASS = props.cssPreprocessor === 'sass';
-  const LESS = props.cssPreprocessor === 'less';
-  const POSTCSS = props.cssPreprocessor === 'postcss';
+    const CSS = props.cssPreprocessor === 'css';
+    const SASS = props.cssPreprocessor === 'sass';
+    const LESS = props.cssPreprocessor === 'less';
+    const POSTCSS = props.cssPreprocessor === 'postcss';
 
-  const recommended = props.beginner ? (
-    <span className="hint--top hint--rounded" data-hint="Recommended">
+    const recommended = props.beginner ? (
+      <span className="hint--top hint--rounded" data-hint="Recommended">
         <img src="/img/svg/recommended.svg" alt="Recommended" />
       </span>
-  ) : null;
+    ) : null;
 
-  const cssRadio = (!BOURBON_NEAT && (NO_CSS_FRAMEWORK || JEKYLL || MIDDLEMAN || BOOTSTRAP || FOUNDATION)) ? (
-    <label className="radio-inline">
-      <img className="btn-logo" src="/img/svg/css3-logo.svg" alt="CSS"/>
-      <input type="radio" name="cssPreprocessorRadios" value="css" onChange={props.handleChange} checked={CSS} />
-      <span>None / CSS</span>
-      {recommended}
-    </label>
-  ) : null;
+    const cssRadio = (!BOURBON_NEAT && (NO_CSS_FRAMEWORK || JEKYLL || MIDDLEMAN || BOOTSTRAP || FOUNDATION)) ? (
+      <label className="radio-inline">
+        <img className="btn-logo" src="/img/svg/css3-logo.svg" alt="CSS"/>
+        <input type="radio" name="cssPreprocessorRadios" value="css" onChange={props.handleChange} checked={CSS} />
+        <span>None / CSS</span>
+        {recommended}
+      </label>
+    ) : null;
 
-  const sassRadio = (NO_CSS_FRAMEWORK || JEKYLL || MIDDLEMAN || BOOTSTRAP || FOUNDATION || BOURBON_NEAT) ? (
-    <label className="radio-inline">
-      <img className="btn-logo" src="/img/svg/sass-logo.svg" alt="Sass"/>
-      <input type="radio" name="cssPreprocessorRadios" value="sass" onChange={props.handleChange} checked={SASS} />
-      <span>Sass</span>
-    </label>
-  ) : null;
+    const sassRadio = (NO_CSS_FRAMEWORK || JEKYLL || MIDDLEMAN || BOOTSTRAP || FOUNDATION || BOURBON_NEAT) ? (
+      <label className="radio-inline">
+        <img className="btn-logo" src="/img/svg/sass-logo.svg" alt="Sass"/>
+        <input type="radio" name="cssPreprocessorRadios" value="sass" onChange={props.handleChange} checked={SASS} />
+        <span>Sass</span>
+      </label>
+    ) : null;
 
-  const lessRadio = (!JEKYLL && !MIDDLEMAN && (NO_CSS_FRAMEWORK || BOOTSTRAP)) ? (
-    <label className="radio-inline">
-      <img className="btn-logo" src="/img/svg/less-logo.svg" alt="LESS"/>
-      <input type="radio" name="cssPreprocessorRadios" value="less" onChange={props.handleChange} checked={LESS} />
-      <span>LESS</span>
-    </label>
-  ) : null;
+    const lessRadio = (!JEKYLL && !MIDDLEMAN && (NO_CSS_FRAMEWORK || BOOTSTRAP)) ? (
+      <label className="radio-inline">
+        <img className="btn-logo" src="/img/svg/less-logo.svg" alt="LESS"/>
+        <input type="radio" name="cssPreprocessorRadios" value="less" onChange={props.handleChange} checked={LESS} />
+        <span>LESS</span>
+      </label>
+    ) : null;
 
-  const postcssRadio = (!JEKYLL && !MIDDLEMAN && (NO_CSS_FRAMEWORK)) ? (
-    <label className="radio-inline">
-      <img className="btn-logo" src="/img/svg/postcss.svg" alt="PostCSS"/>
-      <input type="radio" name="cssPreprocessorRadios" value="postcss" onChange={props.handleChange} checked={POSTCSS} />
-      <span>PostCSS</span>
-    </label>
-  ) : null;
+    const postcssRadio = (!JEKYLL && !MIDDLEMAN && (NO_CSS_FRAMEWORK)) ? (
+      <label className="radio-inline">
+        <img className="btn-logo" src="/img/svg/postcss.svg" alt="PostCSS"/>
+        <input type="radio" name="cssPreprocessorRadios" value="postcss" onChange={props.handleChange} checked={POSTCSS} />
+        <span>PostCSS</span>
+      </label>
+    ) : null;
 
-  return (
-    <div className={cx('zoomInBackwards panel', props.cssPreprocessor)}>
-      <div className="panel-heading">
-        <h6>{CSS_PREPROCESSOR_SVG}{!props.cssPreprocessor || props.cssPreprocessor === 'css' ? 'CSS Preprocessor' : props.cssPreprocessor}</h6>
-      </div>
-      <div className="panel-body">
-        <div className="radio-group">
-          {cssRadio}
-          {sassRadio}
-          {lessRadio}
-          {postcssRadio}
+    const validationError = props.cssPreprocessorValidationError ? (
+      <div className="text-danger"><i className="fa fa-warning"></i> {props.cssPreprocessorValidationError}</div>
+    ) : null;
+
+    if (props.autoScroll) {
+      $(this.refs.cssPreprocessor).velocity('scroll');
+    } else {
+      $(this.refs.cssPreprocessor).velocity('scroll', { duration: 0 });
+    }
+
+
+    return (
+      <div ref="cssPreprocessor" className={cx('zoomInBackwards panel', props.cssPreprocessor)}>
+        <div className="panel-heading">
+          <h6>{CSS_PREPROCESSOR_SVG}{!props.cssPreprocessor || props.cssPreprocessor === 'css' ? 'CSS Preprocessor' : props.cssPreprocessor}</h6>
+        </div>
+        <div className="panel-body">
+          <div className="radio-group">
+            {cssRadio}
+            {sassRadio}
+            {lessRadio}
+            {postcssRadio}
+          </div>
+          {validationError}
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 export default CssPreprocessor;
