@@ -67,6 +67,8 @@ class Home extends React.Component {
       return this.setState({ cssPreprocessorValidationError: 'Please select a CSS preprocessor.' });
     } else if (!state.jsFramework) {
       return this.setState({ jsFrameworkValidationError: 'Please make a selection.' });
+    } else if (!state.buildTool) {
+      return this.setState({ buildToolValidationError: 'Please select a build tool.' });
     }
 
 
@@ -248,6 +250,7 @@ class Home extends React.Component {
           $(refs.buildTool).velocity('scroll');
         }
         state.buildTool = value;
+        state.buildToolValidationError = null;
         break;
 
       case 'testingRadios':

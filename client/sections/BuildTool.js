@@ -107,8 +107,18 @@ class BuildTool extends React.Component {
       </label>
     ) : null;
 
+    const validationError = props.buildToolValidationError ? (
+      <div className="text-danger"><i className="fa fa-warning"></i> {props.buildToolValidationError}</div>
+    ) : null;
+
+    if (props.autoScroll) {
+      $(this.refs.buildTool).velocity('scroll');
+    } else {
+      $(this.refs.buildTool).velocity('scroll', { duration: 0 });
+    }
+    
     return (
-      <div className={cx('zoomInBackwards panel', props.buildTool)}>
+      <div ref="buildTool" className={cx('zoomInBackwards panel', props.buildTool)}>
         <div className="panel-heading">
           <h6>{BUILD_TOOL_SVG}{!props.buildTool || props.buildTool === 'none' ? 'Build Tool' : props.buildTool}</h6>
         </div>
@@ -129,6 +139,7 @@ class BuildTool extends React.Component {
               {recommended}
             </label>
           </div>
+          {validationError}
           <VelocityTransitionGroup enter={{ animation: 'transition.slideRightIn' }}>{reactNote}</VelocityTransitionGroup>
           <VelocityTransitionGroup enter={{ animation: 'transition.slideLeftIn' }}>{cssPreprocessorNote}</VelocityTransitionGroup>
         </div>
