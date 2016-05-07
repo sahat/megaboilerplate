@@ -103,8 +103,18 @@ class JsFramework extends React.Component {
       note = <div className="placeholder"> </div>;
     }
 
+    const validationError = props.jsFrameworkValidationError ? (
+      <div className="text-danger"><i className="fa fa-warning"></i> {props.jsFrameworkValidationError}</div>
+    ) : null;
+
+    if (props.autoScroll) {
+      $(this.refs.jsFramework).velocity('scroll');
+    } else {
+      $(this.refs.jsFramework).velocity('scroll', { duration: 0 });
+    }
+
     return (
-      <div className={cx('zoomInBackwards panel', props.jsFramework)}>
+      <div ref="jsFramework" className={cx('zoomInBackwards panel', props.jsFramework)}>
         <div className="panel-heading">
           <h6>{JS_FRAMEWORK_SVG}{!props.jsFramework || props.jsFramework === 'none' ? 'JavaScript Framework' : props.jsFramework}</h6>
         </div>
@@ -133,6 +143,7 @@ class JsFramework extends React.Component {
               <span>Angular 2</span>
             </label>
           </div>
+          {validationError}
           {note}
           {additionalOptionsButton}
         </div>

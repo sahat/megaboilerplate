@@ -64,7 +64,9 @@ class Home extends React.Component {
     } else if (!state.cssFramework) {
       return this.setState({ cssFrameworkValidationError: 'Please select a CSS framework.' });
     } else if (!state.cssPreprocessor) {
-      return this.setState( { cssPreprocessorValidationError: 'Please select a CSS preprocessor.' });
+      return this.setState({ cssPreprocessorValidationError: 'Please select a CSS preprocessor.' });
+    } else if (!state.jsFramework) {
+      return this.setState({ jsFrameworkValidationError: 'Please make a selection.' });
     }
 
 
@@ -229,6 +231,7 @@ class Home extends React.Component {
           $(refs.jsFramework).velocity('scroll');
         }
         state.jsFramework = value;
+        state.jsFrameworkValidationError = null;
         break;
 
       case 'reactOptionsCheckboxes':
