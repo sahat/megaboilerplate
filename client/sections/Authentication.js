@@ -7,72 +7,81 @@ const AUTHENTICATION_SVG = (
   </svg>
 );
 
-const Authentication = (props) => {
-  const notSupportedJsFramework = props.jsFramework && (props.jsFramework === 'angular') ? (
-    <div>
-      <strong>Note: </strong> Authentication is currently not compatible with Angular.
-    </div>
-  ) : null;
+class Authentication extends React.Component {
+  render() {
+    const props = this.props;
+    
+    const notSupportedNoDatabase = props.database === 'none' ? (
+      <div>
+        <strong>Note: </strong> To enable authentication you must select a database.
+      </div>
+    ) : null;
 
-  const notSupportedNoDatabase = props.database === 'none' ? (
-    <div>
-      <strong>Note: </strong> To enable authentication you must select a database.
-    </div>
-  ) : null;
+    const isEmailRequired = props.authentication && (
+        props.authentication.has('facebook') ||
+        props.authentication.has('google') ||
+        props.authentication.has('twitter') ||
+        props.authentication.has('vk')
+      );
 
-  const isEmailRequired = props.authentication && (
-      props.authentication.has('facebook') ||
-      props.authentication.has('google') ||
-      props.authentication.has('twitter') ||
-      props.authentication.has('vk')
+    let authenticationCheckboxes = !notSupportedNoDatabase ? (
+      <div className="radio-group">
+        <label className="checkbox-inline">
+          <img className="btn-logo" src="/img/svg/none.png" alt="None" />
+          <input type="checkbox" name="authenticationCheckboxes" value="none" onChange={props.handleChange} checked={props.authentication && props.authentication.size === 0}  />
+          <span>None</span>
+        </label>
+        <label className={cx('checkbox-inline', { 'locked': isEmailRequired })}>
+          <img className="btn-logo" src="/img/svg/email-logo.svg" height="60" alt="Email" />
+          <input type="checkbox" name="authenticationCheckboxes" value="email" onChange={props.handleChange} checked={props.authentication && props.authentication.has('email') || isEmailRequired} />
+          <span>Email</span>
+        </label>
+        <label className="checkbox-inline">
+          <img className="btn-logo" src="/img/svg/facebook-logo.svg" alt="Facebook" />
+          <input type="checkbox" name="authenticationCheckboxes" value="facebook" onChange={props.handleChange} checked={props.authentication && props.authentication.has('facebook')}  />
+          <span>Facebook</span>
+        </label>
+        <label className="checkbox-inline">
+          <img className="btn-logo" src="/img/svg/google-logo.svg" alt="Google" />
+          <input type="checkbox" name="authenticationCheckboxes" value="google" onChange={props.handleChange} checked={props.authentication && props.authentication.has('google')} />
+          <span>Google</span>
+        </label>
+        <label className="checkbox-inline">
+          <img className="btn-logo" src="/img/svg/twitter-logo.svg" alt="Twitter" />
+          <input type="checkbox" name="authenticationCheckboxes" value="twitter" onChange={props.handleChange} checked={props.authentication && props.authentication.has('twitter')} />
+          <span>Twitter</span>
+        </label>
+        <label className="checkbox-inline" title="VKontakte (ВКонтpакте)">
+          <img className="btn-logo" src="/img/svg/vk-logo.svg" alt="VK" />
+          <input type="checkbox" name="authenticationCheckboxes" value="vk" onChange={props.handleChange} checked={props.authentication && props.authentication.has('vk')} />
+          <span>VK</span>
+        </label>
+      </div>
+    ) : null;
+
+    const validationError = props.authenticationValidationError ? (
+      <div className="text-danger"><i className="fa fa-warning"></i> {props.authenticationValidationError}</div>
+    ) : null;
+
+    if (props.autoScroll) {
+      $(this.refs.authentication).velocity('scroll');
+    } else {
+      $(this.refs.authentication).velocity('scroll', { duration: 0 });
+    }
+
+    return (
+      <div ref="authentication" className={cx('zoomInBackwards panel', { authentication: props.authentication && props.authentication.size > 0 })}>
+        <div className="panel-heading">
+          <h6>{AUTHENTICATION_SVG}<span>Authentication</span></h6>
+        </div>
+        <div className="panel-body">
+          {notSupportedNoDatabase}
+          {authenticationCheckboxes}
+          {validationError}
+        </div>
+      </div>
     );
-
-  let authenticationCheckboxes = !notSupportedJsFramework && !notSupportedNoDatabase ? (
-    <div className="radio-group">
-      <label className="checkbox-inline">
-        <img className="btn-logo" src="/img/svg/none.png" alt="None" />
-        <input type="checkbox" name="authenticationCheckboxes" value="none" onChange={props.handleChange} checked={props.authentication && props.authentication.size === 0}  /> None
-      </label>
-      <label className={cx('checkbox-inline', { 'locked': isEmailRequired })}>
-        <img className="btn-logo" src="/img/svg/email-logo.svg" height="60" alt="Email" />
-        <input type="checkbox" name="authenticationCheckboxes" value="email" onChange={props.handleChange} checked={props.authentication && props.authentication.has('email') || isEmailRequired} />
-        <span>Email</span>
-      </label>
-      <label className="checkbox-inline">
-        <img className="btn-logo" src="/img/svg/facebook-logo.svg" alt="Facebook" />
-        <input type="checkbox" name="authenticationCheckboxes" value="facebook" onChange={props.handleChange} checked={props.authentication && props.authentication.has('facebook')}  />
-        <span>Facebook</span>
-      </label>
-      <label className="checkbox-inline">
-        <img className="btn-logo" src="/img/svg/google-logo.svg" alt="Google" />
-        <input type="checkbox" name="authenticationCheckboxes" value="google" onChange={props.handleChange} checked={props.authentication && props.authentication.has('google')} />
-        <span>Google</span>
-      </label>
-      <label className="checkbox-inline">
-        <img className="btn-logo" src="/img/svg/twitter-logo.svg" alt="Twitter" />
-        <input type="checkbox" name="authenticationCheckboxes" value="twitter" onChange={props.handleChange} checked={props.authentication && props.authentication.has('twitter')} />
-        <span>Twitter</span>
-      </label>
-      <label className="checkbox-inline" title="VKontakte (ВКонтакте)">
-        <img className="btn-logo" src="/img/svg/vk-logo.svg" alt="VK" />
-        <input type="checkbox" name="authenticationCheckboxes" value="vk" onChange={props.handleChange} checked={props.authentication && props.authentication.has('vk')} />
-        <span>VK</span>
-      </label>
-    </div>
-  ) : null;
-
-  return (
-    <div className={cx('zoomInBackwards panel', { authentication: props.authentication && props.authentication.size > 0 })}>
-      <div className="panel-heading">
-        <h6>{AUTHENTICATION_SVG}<span>Authentication</span></h6>
-      </div>
-      <div className="panel-body">
-        {notSupportedJsFramework}
-        {notSupportedNoDatabase}
-        {authenticationCheckboxes}
-      </div>
-    </div>
-  );
-};
+  } 
+}
 
 export default Authentication;

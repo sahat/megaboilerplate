@@ -73,6 +73,8 @@ class Home extends React.Component {
       return this.setState({ testingValidationError: 'Please select a testing framework.' });
     } else if (!state.database) {
       return this.setState({ databaseValidationError: 'Please select a database.' });
+    } else if (!state.authentication && state.database !== 'none') {
+      return this.setState({ authenticationValidationError: 'Please check all that apply.' });
     }
 
 
@@ -295,6 +297,7 @@ class Home extends React.Component {
               state.authentication.add('email');
             }
           }
+          state.authenticationValidationError = null;
         } else {
           if (value === 'email' && requiresEmail) { return; }
           state.authentication.delete(value);
