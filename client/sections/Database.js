@@ -8,86 +8,101 @@ const DATABASE_SVG = (
 );
 
 
-const Database = (props) => {
-  let description;
+class Database extends React.Component {
+  render() {
+    const props = this.props;
 
-  switch (props.database) {
-    case 'mongodb':
-      description = (
-        <div>
-          <strong><a href="http://mongodb.org/" target="_blank">MongoDB</a></strong> — Document-oriented, general purpose NoSQL database.
-        </div>
-      );
-      break;
-    case 'sqlite':
-      description = (
-        <div>
-          <strong><a href="https://www.sqlite.org/" target="_blank">SQLite</a></strong> — A self-contained, serverless, zero-configuration, transactional SQL database engine.
-        </div>
-      );
-      break;
-    case 'mysql':
-      description = (
-        <div>
-          <strong><a href="http://www.mysql.com/" target="_blank">MySQL</a></strong> — The world's most popular open source database.
-        </div>
-      );
-      break;
-    case 'postgresql':
-      description = (
-        <div>
-          <strong><a href="http://www.postgresql.org/" target="_blank">PostgreSQL </a></strong> — The world's most advanced open source database.
-        </div>
-      );
-      break;
-    default:
-      description = <div className="placeholder"> </div>;
-  }
+    let description;
 
-  const recommended = props.beginner ? (
-    <span className="hint--top hint--rounded" data-hint="Recommended">
+    switch (props.database) {
+      case 'mongodb':
+        description = (
+          <div>
+            <strong><a href="http://mongodb.org/" target="_blank">MongoDB</a></strong> — Document-oriented, general purpose NoSQL database.
+          </div>
+        );
+        break;
+      case 'sqlite':
+        description = (
+          <div>
+            <strong><a href="https://www.sqlite.org/" target="_blank">SQLite</a></strong> — A self-contained, serverless, zero-configuration, transactional SQL database engine.
+          </div>
+        );
+        break;
+      case 'mysql':
+        description = (
+          <div>
+            <strong><a href="http://www.mysql.com/" target="_blank">MySQL</a></strong> — The world's most popular open source database.
+          </div>
+        );
+        break;
+      case 'postgresql':
+        description = (
+          <div>
+            <strong><a href="http://www.postgresql.org/" target="_blank">PostgreSQL </a></strong> — The world's most advanced open source database.
+          </div>
+        );
+        break;
+      default:
+        description = <div className="placeholder"> </div>;
+    }
+
+    const recommended = props.beginner ? (
+      <span className="hint--top hint--rounded" data-hint="Recommended">
         <img src="/img/svg/recommended.svg" alt="Recommended" />
       </span>
-  ) : null;
+    ) : null;
 
-  return (
-    <div className={cx('zoomInBackwards panel', props.database)}>
-      <div className="panel-heading">
-        <h6>{DATABASE_SVG}{!props.database || props.database === 'none' ? 'Database' : props.database}</h6>
-      </div>
-      <div className="panel-body">
-        {description}
-        <div className="radio-group">
-          <label className="radio-inline">
-            <img className="btn-logo" src="/img/svg/none.png" alt="None" />
-            <input type="radio" name="databaseRadios" value="none" onChange={props.handleChange} checked={props.database === 'none'} />
-            <span>None</span>
-          </label>
-          <label className="radio-inline">
-            <img className="btn-logo" src="/img/svg/mongodb-logo.svg" alt="MongoDB" />
-            <input type="radio" name="databaseRadios" value="mongodb" onChange={props.handleChange} checked={props.database === 'mongodb'} />
-            <span>MongoDB</span>
-            {recommended}
-          </label>
-          <label className="radio-inline">
-            <img className="btn-logo" src="/img/svg/mysql-logo.svg" alt="MySQL" />
-            <input type="radio" name="databaseRadios" value="mysql" onChange={props.handleChange} checked={props.database === 'mysql'} />
-            <span>MySQL</span>
-          </label>
-          <label className="radio-inline">
-            <img className="btn-logo" src="/img/svg/postgresql-logo.svg" alt="PostgreSQL" />
-            <input type="radio" name="databaseRadios" value="postgresql" onChange={props.handleChange} checked={props.database === 'postgresql'} />
-            <span>PostgreSQL</span>
-          </label>
-          <label className="radio-inline">
-            <img className="btn-logo" src="/img/svg/sqlite-logo.svg" alt="SQLite3" />
-            <input type="radio" name="databaseRadios" value="sqlite" onChange={props.handleChange} checked={props.database === 'sqlite'} />
-            <span>SQLite</span>
-          </label>
+    const validationError = props.databaseValidationError ? (
+      <div className="text-danger"><i className="fa fa-warning"></i> {props.databaseValidationError}</div>
+    ) : null;
+
+    if (props.autoScroll) {
+      $(this.refs.database).velocity('scroll');
+    } else {
+      $(this.refs.database).velocity('scroll', { duration: 0 });
+    }
+
+    return (
+      <div ref="database" className={cx('zoomInBackwards panel', props.database)}>
+        <div className="panel-heading">
+          <h6>{DATABASE_SVG}{!props.database || props.database === 'none' ? 'Database' : props.database}</h6>
+        </div>
+        <div className="panel-body">
+          {description}
+          <div className="radio-group">
+            <label className="radio-inline">
+              <img className="btn-logo" src="/img/svg/none.png" alt="None" />
+              <input type="radio" name="databaseRadios" value="none" onChange={props.handleChange} checked={props.database === 'none'} />
+              <span>None</span>
+            </label>
+            <label className="radio-inline">
+              <img className="btn-logo" src="/img/svg/mongodb-logo.svg" alt="MongoDB" />
+              <input type="radio" name="databaseRadios" value="mongodb" onChange={props.handleChange} checked={props.database === 'mongodb'} />
+              <span>MongoDB</span>
+              {recommended}
+            </label>
+            <label className="radio-inline">
+              <img className="btn-logo" src="/img/svg/mysql-logo.svg" alt="MySQL" />
+              <input type="radio" name="databaseRadios" value="mysql" onChange={props.handleChange} checked={props.database === 'mysql'} />
+              <span>MySQL</span>
+            </label>
+            <label className="radio-inline">
+              <img className="btn-logo" src="/img/svg/postgresql-logo.svg" alt="PostgreSQL" />
+              <input type="radio" name="databaseRadios" value="postgresql" onChange={props.handleChange} checked={props.database === 'postgresql'} />
+              <span>PostgreSQL</span>
+            </label>
+            <label className="radio-inline">
+              <img className="btn-logo" src="/img/svg/sqlite-logo.svg" alt="SQLite3" />
+              <input type="radio" name="databaseRadios" value="sqlite" onChange={props.handleChange} checked={props.database === 'sqlite'} />
+              <span>SQLite</span>
+            </label>
+          </div>
+          {validationError}
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 export default Database;

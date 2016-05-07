@@ -44,8 +44,18 @@ class Testing extends React.Component {
       note = <div className="placeholder"> </div>;
     }
 
+    const validationError = props.testingValidationError ? (
+      <div className="text-danger"><i className="fa fa-warning"></i> {props.testingValidationError}</div>
+    ) : null;
+
+    if (props.autoScroll) {
+      $(this.refs.testing).velocity('scroll');
+    } else {
+      $(this.refs.testing).velocity('scroll', { duration: 0 });
+    }
+
     return (
-      <div className={cx('zoomInBackwards panel', props.testing)}>
+      <div ref="testing" className={cx('zoomInBackwards panel', props.testing)}>
         <div className="panel-heading">
           <h6>{TESTING_SVG}{!props.testing || props.testing === 'none' ? 'Unit Testing' : props.testing}</h6>
         </div>
@@ -68,6 +78,7 @@ class Testing extends React.Component {
               <span>Jasmine</span>
             </label>
           </div>
+          {validationError}
           {note}
         </div>
       </div>

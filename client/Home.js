@@ -28,7 +28,7 @@ class Home extends React.Component {
     this.handleAutoScroll = this.handleAutoScroll.bind(this);
     this.handleReduceAnimations = this.handleReduceAnimations.bind(this);
     this.clickDownload = this.clickDownload.bind(this);
-    this.state = {};;
+    this.state = {};
   }
 
   componentDidMount() {
@@ -69,7 +69,12 @@ class Home extends React.Component {
       return this.setState({ jsFrameworkValidationError: 'Please make a selection.' });
     } else if (!state.buildTool) {
       return this.setState({ buildToolValidationError: 'Please select a build tool.' });
+    } else if (!state.testing) {
+      return this.setState({ testingValidationError: 'Please select a testing framework.' });
+    } else if (!state.database) {
+      return this.setState({ databaseValidationError: 'Please select a database.' });
     }
+
 
 
     // Show next steps component
@@ -258,6 +263,7 @@ class Home extends React.Component {
           $(refs.testing).velocity('scroll');
         }
         state.testing = value;
+        state.testingValidationError = null;
         break;
 
       case 'databaseRadios':
@@ -268,6 +274,7 @@ class Home extends React.Component {
           state.authentication.clear();
         }
         state.database = value;
+        state.databaseValidationError = null;
         break;
 
       case 'authenticationCheckboxes':
