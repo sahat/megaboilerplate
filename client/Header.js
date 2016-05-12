@@ -233,6 +233,12 @@ class Header extends React.Component {
     // <img className="hero-arrow hidden-xs" src="/img/arrow.png" alt="Arrow"/>
     // <span>Don't forget to <i className="fa fa-star"/> on GitHub if you liked this project!</span>
 
+    const latestCommit = this.state.latestCommit ? (
+      <VelocityComponent runOnMount animation="transition.fadeIn" duration={1000}>
+        <div style={{ opacity: 0 }} className="footnote right">Latest commit: <a href="https://github.com/sahat/boilerplate" target="_blank">{this.state.latestCommit}</a></div>
+      </VelocityComponent>
+    ) : null;
+
     return (
       <header className="hero">
         <canvas ref="connectedDots"/>
@@ -300,9 +306,7 @@ class Header extends React.Component {
 
           <div className="footnote left">¹ Inspired by <a href="https://github.com/sahat/hackathon-starter" target="_blank">Hackathon Starter</a></div>
 
-          <VelocityComponent runOnMount animation="transition.fadeIn" duration={1000} delay={850}>
-            <div style={{ opacity: 0 }} className="footnote right">Latest commit: <a href="https://github.com/sahat/boilerplate" target="_blank">{this.state.latestCommit}</a></div>
-          </VelocityComponent>
+          {latestCommit}
         </div>
       </header>
     );
