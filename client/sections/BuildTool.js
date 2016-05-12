@@ -99,7 +99,7 @@ class BuildTool extends React.Component {
       </label>
     ) : null;
 
-    const webpackRadio =  props.jsFramework === 'react' || props.jsFramework === 'angularjs' ? (
+    const webpackRadio =  props.jsFramework === 'react' ? (
       <label className="radio-inline">
         <img className="btn-logo" src="/img/svg/webpack-logo.svg" alt="Webpack"/>
         <input type="radio" name="buildToolRadios" value="webpack" onChange={props.handleChange} checked={props.buildTool === 'webpack'}/>
