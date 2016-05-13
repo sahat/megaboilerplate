@@ -26,16 +26,16 @@ export function link(provider) {
 // Unlink account
 export function unlink(provider) {
   return (dispatch) => {
-    fetch('/unlink/' + provider).then((response) => {
+    return fetch('/unlink/' + provider).then((response) => {
       if (response.ok) {
-        response.json().then((json) => {
+        return response.json().then((json) => {
           dispatch({
             type: 'UNLINK_SUCCESS',
             messages: [json]
           });
         });
       } else {
-        response.json().then((json) => {
+        return response.json().then((json) => {
           dispatch({
             type: 'UNLINK_FAILURE',
             messages: [json]
@@ -88,7 +88,7 @@ function openPopup({ url, config, dispatch }) {
 
 function getRequestToken({ window, config, dispatch }) {
   return new Promise((resolve, reject) => {
-    fetch(config.url, {
+    return fetch(config.url, {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -96,7 +96,7 @@ function getRequestToken({ window, config, dispatch }) {
       })
     }).then((response) => {
       if (response.ok) {
-        response.json().then((json) => {
+        return response.json().then((json) => {
           resolve({ window: window, config: config, requestToken: json, dispatch: dispatch });
         });
       }
@@ -152,17 +152,17 @@ function exchangeCodeForToken({ oauthData, config, window, interval, dispatch })
   return new Promise((resolve, reject) => {
     const data = Object.assign({}, oauthData, config);
 
-    fetch(config.url, {
+    return fetch(config.url, {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
     }).then((response) => {
       if (response.ok) {
-        response.json().then((json) => {
+        return response.json().then((json) => {
           resolve({ token: json.token, user: json.user, window: window, interval: interval, dispatch: dispatch });
         });
       } else {
-        response.json().then((json) => {
+        return response.json().then((json) => {
           dispatch({
             type: 'OAUTH_FAILURE',
             messages: Array.isArray(json) ? json : [json]

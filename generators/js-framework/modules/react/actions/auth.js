@@ -7,7 +7,7 @@ export function login(email, password) {
     dispatch({
       type: 'CLEAR_MESSAGES'
     });
-    fetch('/login', {
+    return fetch('/login', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -16,7 +16,7 @@ export function login(email, password) {
       })
     }).then((response) => {
       if (response.ok) {
-        response.json().then((json) => {
+        return response.json().then((json) => {
           dispatch({
             type: 'LOGIN_SUCCESS',
             token: json.token,
@@ -26,7 +26,7 @@ export function login(email, password) {
           browserHistory.push('/account');
         });
       } else {
-        response.json().then((json) => {
+        return response.json().then((json) => {
           dispatch({
             type: 'LOGIN_FAILURE',
             messages: Array.isArray(json) ? json : [json]
@@ -42,12 +42,12 @@ export function signup(name, email, password) {
     dispatch({
       type: 'CLEAR_MESSAGES'
     });
-    fetch('/signup', {
+    return fetch('/signup', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name: name, email: email, password: password })
     }).then((response) => {
-      response.json().then((json) => {
+      return response.json().then((json) => {
         if (response.ok) {
           dispatch({
             type: 'SIGNUP_SUCCESS',
@@ -80,20 +80,20 @@ export function forgotPassword(email) {
     dispatch({
       type: 'CLEAR_MESSAGES'
     });
-    fetch('/forgot', {
+    return fetch('/forgot', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: email })
     }).then((response) => {
       if (response.ok) {
-        response.json().then((json) => {
+        return response.json().then((json) => {
           dispatch({
             type: 'FORGOT_PASSWORD_SUCCESS',
             messages: [json]
           });
         });
       } else {
-        response.json().then((json) => {
+        return response.json().then((json) => {
           dispatch({
             type: 'FORGOT_PASSWORD_FAILURE',
             messages: Array.isArray(json) ? json : [json]
@@ -109,7 +109,7 @@ export function resetPassword(password, confirm, pathToken) {
     dispatch({
       type: 'CLEAR_MESSAGES'
     });
-    fetch(`/reset/${pathToken}`, {
+    return fetch(`/reset/${pathToken}`, {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -118,7 +118,7 @@ export function resetPassword(password, confirm, pathToken) {
       })
     }).then((response) => {
       if (response.ok) {
-        response.json().then((json) => {
+        return response.json().then((json) => {
           browserHistory.push('/login');
           dispatch({
             type: 'RESET_PASSWORD_SUCCESS',
@@ -126,7 +126,7 @@ export function resetPassword(password, confirm, pathToken) {
           });
         });
       } else {
-        response.json().then((json) => {
+        return response.json().then((json) => {
           dispatch({
             type: 'RESET_PASSWORD_FAILURE',
             messages: Array.isArray(json) ? json : [json]
@@ -142,7 +142,7 @@ export function updateProfile(state, token) {
     dispatch({
       type: 'CLEAR_MESSAGES'
     });
-    fetch('/account', {
+    return fetch('/account', {
       method: 'put',
       headers: {
         'Content-Type': 'application/json',
@@ -157,14 +157,14 @@ export function updateProfile(state, token) {
       })
     }).then((response) => {
       if (response.ok) {
-        response.json().then((json) => {
+        return response.json().then((json) => {
           dispatch({
             type: 'UPDATE_PROFILE_SUCCESS',
             messages: [json]
           });
         });
       } else {
-        response.json().then((json) => {
+        return response.json().then((json) => {
           dispatch({
             type: 'UPDATE_PROFILE_FAILURE',
             messages: Array.isArray(json) ? json : [json]
@@ -180,7 +180,7 @@ export function changePassword(password, confirm, token) {
     dispatch({
       type: 'CLEAR_MESSAGES'
     });
-    fetch('/account', {
+    return fetch('/account', {
       method: 'put',
       headers: {
         'Content-Type': 'application/json',
@@ -192,14 +192,14 @@ export function changePassword(password, confirm, token) {
       })
     }).then((response) => {
       if (response.ok) {
-        response.json().then((json) => {
+        return response.json().then((json) => {
           dispatch({
             type: 'CHANGE_PASSWORD_SUCCESS',
             messages: [json]
           });
         });
       } else {
-        response.json().then((json) => {
+        return response.json().then((json) => {
           dispatch({
             type: 'CHANGE_PASSWORD_FAILURE',
             messages: Array.isArray(json) ? json : [json]
@@ -215,7 +215,7 @@ export function deleteAccount(token) {
     dispatch({
       type: 'CLEAR_MESSAGES'
     });
-    fetch('/account', {
+    return fetch('/account', {
       method: 'delete',
       headers: {
         'Content-Type': 'application/json',
@@ -223,7 +223,7 @@ export function deleteAccount(token) {
       }
     }).then((response) => {
       if (response.ok) {
-        response.json().then((json) => {
+        return response.json().then((json) => {
           dispatch(logout());
           dispatch({
             type: 'DELETE_ACCOUNT_SUCCESS',
