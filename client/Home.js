@@ -80,10 +80,10 @@ class Home extends React.Component {
 
 
     // Show next steps component
-      this.setState({ showNextSteps: true });
-    if (state.autoScroll) {
-      $(this.refs.nextSteps).velocity('scroll');
-    }
+    //   this.setState({ showNextSteps: true });
+    // if (state.autoScroll) {
+    //   $(this.refs.nextSteps).velocity('scroll');
+    // }
 
     const data = clone(state);
     data.appName = haikunate({ tokenLength: 0 });
@@ -433,7 +433,7 @@ class Home extends React.Component {
     const consulting = download ? (
       <div className="panel">
         <div className="panel-body">
-          <i className="fa fa-phone"></i> Request 1-on-1 consulting service. Rates may vary.
+          <i className="fa fa-phone"></i> Looking for additional help? Contact me directly by scheduling 1-on-1 help. Rates may vary.
         </div>
       </div>
     ) : null;
