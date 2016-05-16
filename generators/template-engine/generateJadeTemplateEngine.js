@@ -89,7 +89,7 @@ async function generateJadeTemplateEngine(params) {
   }
 
   // Add Jade to package.json
-  await addNpmPackage('pug', params);
+  await addNpmPackage('jade', params);
 }
 
 export default generateJadeTemplateEngine;
