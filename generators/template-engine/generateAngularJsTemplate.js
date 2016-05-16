@@ -17,10 +17,13 @@ async function generateAngularJsTemplate(params) {
         await replaceCode(indexHtml, 'SOCKETIO_IMPORT', socketIoImport, { indentLevel: 1 });
       }
 
+      const inlineScripts = join(__dirname, 'modules', 'angularjs', 'no-build-scripts.html');
+      const buildScripts = join(__dirname, 'modules', 'angularjs', 'build-scripts.html');
+      
       if (params.buildTool === 'none') {
-        await replaceCode(build, 'ANGULARJS_APP_IMPORT', join(__dirname, 'modules', 'angularjs', 'no-build-scripts.html'));
+        await replaceCode(join(build, 'app', 'index.html'), 'ANGULARJS_APP_IMPORT', inlineScripts);
       } else {
-        await replaceCode(build, 'ANGULARJS_APP_IMPORT', join(__dirname, 'modules', 'angularjs', 'build-scripts.html'));
+        await replaceCode(join(build, 'app', 'index.html'), 'ANGULARJS_APP_IMPORT', buildScripts);
       }
 
 
