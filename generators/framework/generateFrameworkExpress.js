@@ -67,6 +67,7 @@ async function generateFrameworkExpress(params) {
     await replaceCode(server, 'COOKIE_PARSER_MIDDLEWARE', cookieParserMiddleware);
 
     await addNpmPackage('cookie-parser', params);
+    await addNpmPackage('nodemailer', params);
   } else {
     await replaceCode(server, 'CONTACT_ROUTE', contactRoutePassport);
     await replaceCode(server, 'METHOD_OVERRIDE_REQUIRE', methodOverrideRequire);
