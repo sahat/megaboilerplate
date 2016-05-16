@@ -91,7 +91,7 @@ class BuildTool extends React.Component {
       </span>
     ) : null;
 
-    const noneRadio = props.jsFramework === 'none' ? (
+    const noneRadio = props.jsFramework === 'none' || props.jsFramework === 'angularjs' ? (
       <label className="radio-inline">
         <img className="btn-logo" src="/img/svg/none.png" alt="None"/>
         <input type="radio" name="buildToolRadios" value="none" onChange={props.handleChange} checked={props.buildTool === 'none'}/>
@@ -104,6 +104,15 @@ class BuildTool extends React.Component {
         <img className="btn-logo" src="/img/svg/webpack-logo.svg" alt="Webpack"/>
         <input type="radio" name="buildToolRadios" value="webpack" onChange={props.handleChange} checked={props.buildTool === 'webpack'}/>
         <span>Webpack</span>
+      </label>
+    ) : null;
+
+    const npmRadio = props.jsFramework !== 'angularjs' ? (
+      <label className="radio-inline">
+        <img className="btn-logo" src="/img/svg/npm-logo.svg" alt="NPM"/>
+        <input type="radio" name="buildToolRadios" value="npm" onChange={props.handleChange} checked={props.buildTool === 'npm'}/>
+        <span>NPM</span>
+        {recommended}
       </label>
     ) : null;
 
@@ -132,12 +141,7 @@ class BuildTool extends React.Component {
               <span>Gulp + Browserify</span>
             </label>
             {webpackRadio}
-            <label className="radio-inline">
-              <img className="btn-logo" src="/img/svg/npm-logo.svg" alt="NPM"/>
-              <input type="radio" name="buildToolRadios" value="npm" onChange={props.handleChange} checked={props.buildTool === 'npm'}/>
-              <span>NPM</span>
-              {recommended}
-            </label>
+            {npmRadio}
           </div>
           {validationError}
           <VelocityTransitionGroup enter={{ animation: 'transition.slideRightIn' }}>{reactNote}</VelocityTransitionGroup>
