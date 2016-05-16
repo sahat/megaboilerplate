@@ -33,10 +33,11 @@ class Home extends React.Component {
 
   componentDidMount() {
     try {
-      const autoScroll = localStorage.getItem('autoScroll');
+      const disableAutoScroll = localStorage.getItem('disableAutoScroll');
       const reduceAnimations = localStorage.getItem('reduceAnimations');
       this.setState({
-        autoScroll: autoScroll === 'true',
+        beginner: false,
+        disableAutoScroll: disableAutoScroll === 'true',
         reduceAnimations: reduceAnimations === 'true'
       });
     } catch (e) {
@@ -343,7 +344,7 @@ class Home extends React.Component {
         <li>
           <div className="checkbox">
             <label>
-              <input type="checkbox" name="beginner" value={state.beginner} onChange={this.handleChange}/>
+              <input type="checkbox" name="beginner" value="beginner" onChange={this.handleChange} checked={state.beginner} />
               <span>Beginner-friendly Stack</span>
             </label>
           </div>
@@ -351,7 +352,7 @@ class Home extends React.Component {
         <li>
           <div className="checkbox">
             <label>
-              <input type="checkbox" name="autoScroll" value={state.autoScroll} onChange={this.handleAutoScroll} checked={!state.autoScroll}/>
+              <input type="checkbox" name="disableAutoScroll" value="disableAutoScroll" onChange={this.handleAutoScroll} checked={state.disableAutoScroll}/>
               <span>Disable auto-scroll</span>
             </label>
           </div>
@@ -359,7 +360,7 @@ class Home extends React.Component {
         <li>
           <div className="checkbox">
             <label>
-              <input type="checkbox" name="reduceAnimations" value={state.reduceAnimations} onChange={this.handleReduceAnimations} checked={state.reduceAnimations}/>
+              <input type="checkbox" name="reduceAnimations" value="reduceAnimations" onChange={this.handleReduceAnimations} checked={state.reduceAnimations}/>
               <span>Reduce Animations</span>
             </label>
           </div>
