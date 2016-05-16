@@ -1,8 +1,10 @@
+import { randomBytes } from 'crypto';
 import { join } from 'path';
-import { cpy, mkdirs, templateReplace, replaceCode, addNpmScript, addNpmPackage } from '../utils';
+import { cpy, mkdirs, appendFile, templateReplace, replaceCode, addNpmScript, addNpmPackage } from '../utils';
 
 async function generateFrameworkExpress(params) {
   const build = join(__base, 'build', params.uuid);
+  const env = join(build, '.env');
   const express = join(__dirname, 'modules', 'express');
   const contactRouteJwt = join(__dirname, 'modules', 'express', 'routes', 'contact-jwt.js');
   const contactRoutePassport = join(__dirname, 'modules', 'express', 'routes', 'contact-passport.js');
@@ -77,6 +79,8 @@ async function generateFrameworkExpress(params) {
     await addNpmPackage('method-override', params);
     await addNpmPackage('nodemailer', params);
 
+    const sessionSecret = randomBytes(32).toString('hex');
+    await appendFile(env, `\nSESSION_SECRET='${sessionSecret}'\n`);
   }
 }
 
