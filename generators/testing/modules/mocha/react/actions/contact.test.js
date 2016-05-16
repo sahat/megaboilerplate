@@ -3,7 +3,7 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import fetchMock from 'fetch-mock';
 import { expect } from 'chai';
-import * as actions from '../../actions/contact';
+import * as actions from '../../app/actions/contact';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
