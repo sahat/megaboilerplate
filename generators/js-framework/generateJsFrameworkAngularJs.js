@@ -1,15 +1,22 @@
 import { join } from 'path';
-import { copy, cpy, mkdirs, addNpmPackage, replaceCode, templateReplace } from '../utils';
+import { copy, cpy, replaceCode, templateReplace } from '../utils';
 
 async function generateJsFrameworkAngularJs(params) {
   const build = join(__base, 'build', params.uuid);
   const server = join(build, 'server.js');
   const angularJsRoutes = join(__dirname, 'modules', 'angularjs', 'angularjs-routes.js');
+  const angularJsRoutesNoBuild = join(__dirname, 'modules', 'angularjs', 'angularjs-routes-no-build.js');
 
   switch (params.framework) {
     case 'express':
-      // Add AngularJS routes + html5 push state redirect
-      await replaceCode(server, 'ANGULARJS_ROUTES', angularJsRoutes);
+      if (params.buildTool === 'none') {
+        // Add html5 push state redirect
+        // File index.html will be loaded implicitly by Express from "public" directory
+        await replaceCode(server, 'ANGULARJS_ROUTES', angularJsRoutesNoBuild);
+      } else {
+        // Add AngularJS routes + html5 push state redirect
+        await replaceCode(server, 'ANGULARJS_ROUTES', angularJsRoutes);
+      }
 
       // Copy app.js (entry file)
       await copy(join(__dirname, 'modules', 'angularjs', 'app.js'), join(build, 'app', 'app.js'));
@@ -45,20 +52,20 @@ async function generateJsFrameworkAngularJs(params) {
       await cpy([join(__dirname, 'modules', 'angularjs', 'index.html')], join(build, 'app'));
 
       // Copy account and authentication templates
-      const viewsDir = join(__dirname, 'modules', 'angularjs', 'views');
+      const partialsDir = join(__dirname, 'modules', 'angularjs', 'partials');
 
-      await copy(join(viewsDir, '404.html'), join(build, 'app', 'views', '404.html'));
-      await copy(join(viewsDir, `contact-${params.cssFramework}.html`), join(build, 'app', 'views', 'contact.html'));
-      await copy(join(viewsDir, `header-${params.cssFramework}.html`), join(build, 'app', 'views', 'header.html'));
-      await copy(join(viewsDir, 'footer.html'), join(build, 'app', 'views', 'footer.html'));
+      await copy(join(partialsDir, '404.html'), join(build, 'app', 'partials', '404.html'));
+      await copy(join(partialsDir, `contact-${params.cssFramework}.html`), join(build, 'app', 'partials', 'contact.html'));
+      await copy(join(partialsDir, `header-${params.cssFramework}.html`), join(build, 'app', 'partials', 'header.html'));
+      await copy(join(partialsDir, 'footer.html'), join(build, 'app', 'partials', 'footer.html'));
 
       if (params.authentication.length) {
-        await copy(join(viewsDir, `forgot-${params.cssFramework}.html`), join(build, 'app', 'views', 'forgot.html'));
-        await copy(join(viewsDir, `home-${params.cssFramework}.html`), join(build, 'app', 'views', 'home.html'));
-        await copy(join(viewsDir, `login-${params.cssFramework}.html`), join(build, 'app', 'views', 'login.html'));
-        await copy(join(viewsDir, `profile-${params.cssFramework}.html`), join(build, 'app', 'views', 'profile.html'));
-        await copy(join(viewsDir, `reset-${params.cssFramework}.html`), join(build, 'app', 'views', 'reset.html'));
-        await copy(join(viewsDir, `signup-${params.cssFramework}.html`), join(build, 'app', 'views', 'signup.html'));
+        await copy(join(partialsDir, `forgot-${params.cssFramework}.html`), join(build, 'app', 'partials', 'forgot.html'));
+        await copy(join(partialsDir, `home-${params.cssFramework}.html`), join(build, 'app', 'partials', 'home.html'));
+        await copy(join(partialsDir, `login-${params.cssFramework}.html`), join(build, 'app', 'partials', 'login.html'));
+        await copy(join(partialsDir, `profile-${params.cssFramework}.html`), join(build, 'app', 'partials', 'profile.html'));
+        await copy(join(partialsDir, `reset-${params.cssFramework}.html`), join(build, 'app', 'partials', 'reset.html'));
+        await copy(join(partialsDir, `signup-${params.cssFramework}.html`), join(build, 'app', 'partials', 'signup.html'));
 
         // Add satellizer dependency
         await templateReplace(join(build, 'app', 'app.js'), {
@@ -71,8 +78,8 @@ async function generateJsFrameworkAngularJs(params) {
           bootstrap: 3,
           foundation: 2
         };
-        const headerAuth = join(viewsDir, `header-auth-${params.cssFramework}.html`);
-        await replaceCode(join(build, 'app', 'views', 'header.html'), 'HEADER_AUTH', headerAuth, { indentLevel: headerAuthIndent[params.cssFramework] });
+        const headerAuth = join(partialsDir, `header-auth-${params.cssFramework}.html`);
+        await replaceCode(join(build, 'app', 'partials', 'header.html'), 'HEADER_AUTH', headerAuth, { indentLevel: headerAuthIndent[params.cssFramework] });
       }
 
 
