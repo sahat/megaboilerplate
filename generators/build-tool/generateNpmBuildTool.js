@@ -37,13 +37,6 @@ async function generateNpmBuildTool(params) {
       await addNpmScript('watch:js', 'watchify app/main.js -t [ babelify --presets [es2015 react] ] -v -o public/js/bundle.js', params);
 
       break;
-
-    case 'angularjs':
-      await addNpmPackage('gulp-concat', params, true);
-      await addNpmPackage('gulp-ng-annotate', params, true);
-      await addNpmPackage('gulp-angular-templatecache', params, true);
-      break;
-
     default:
       break;
   }

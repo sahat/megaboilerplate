@@ -1,8 +1,9 @@
 import { join } from 'path';
-import { cpy, replaceCode, addNpmPackage } from '../utils';
+import { copy, move, replaceCode, addNpmPackage } from '../utils';
 
 async function generateNoneBuildTool(params) {
-  const server = join(__base, 'build', params.uuid, 'server.js');
+  const build = join(__base, 'build', params.uuid);
+  const server = join(build, 'server.js');
 
   switch (params.cssPreprocessor) {
     case 'sass':
