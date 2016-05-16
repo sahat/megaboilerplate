@@ -1,5 +1,6 @@
+import { randomBytes } from 'crypto';
 import { join } from 'path';
-import { cpy, copy, mkdirs, appendFile, replaceCode, addNpmPackage } from '../utils';
+import { cpy, copy, appendFile, replaceCode, addNpmPackage } from '../utils';
 
 async function generateCommonAuthenticationExpress(params) {
   const build = join(__base, 'build', params.uuid);
@@ -240,8 +241,10 @@ async function generateCommonAuthenticationExpress(params) {
       break;
   }
 
+  const tokenSecret = randomBytes(32).toString('hex');
+
   if (params.jsFramework) {
-    await appendFile(env, '\nTOKEN_SECRET=Secret key for signing and verifying JWT\n');
+    await appendFile(env, `\nTOKEN_SECRET='${tokenSecret}'\n`);
   }
 }
 
