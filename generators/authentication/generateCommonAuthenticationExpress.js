@@ -28,9 +28,6 @@ async function generateCommonAuthenticationExpress(params) {
   const accountRoutesPassport = join(__dirname, 'modules', 'common', 'routes', 'account-routes-passport.js');
   const generateTokenHelper = join(__dirname, 'modules', 'common', 'generate-token.js');
 
-  const SQL = params.database === 'mysql' || params.database === 'postgresql' || params.database === 'sqlite';
-  const MONGODB = params.database = 'mongodb';
-  
   // Copy user controller
   await copy(userControllerModule, join(build, 'controllers', 'user.js'));
 
