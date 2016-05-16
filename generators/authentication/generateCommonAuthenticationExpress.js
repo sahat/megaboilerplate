@@ -98,6 +98,7 @@ async function generateCommonAuthenticationExpress(params) {
       await replaceCode(userController, 'USER_RESET_POST', join(__dirname, 'modules', 'controllers', 'mongodb', 'user-reset-post.js'), { indentLevel: 3 });
 
       if (params.jsFramework) {
+        await replaceCode(server, 'IS_AUTHENTICATION_USER_QUERY', join(__dirname, 'modules', 'common', 'is-authenticated-jwt-mongodb.js'));
         await replaceCode(userController, 'USER_LOGIN_POST', join(__dirname, 'modules', 'controllers', 'mongodb', 'user-login-jwt-post.js'), { indentLevel: 1 });
         await replaceCode(userController, 'PROFILE_UPDATE_RESPONSE', join(__dirname, 'modules', 'controllers', 'responses', 'json', 'profile-update-response-mongodb.js'), { indentLevel: 3 });
       } else {
@@ -125,6 +126,7 @@ async function generateCommonAuthenticationExpress(params) {
       await replaceCode(userController, 'USER_RESET_POST', join(__dirname, 'modules', 'controllers', 'sql', 'user-reset-post.js'), { indentLevel: 3 });
 
       if (params.jsFramework) {
+        await replaceCode(server, 'IS_AUTHENTICATION_USER_QUERY', join(__dirname, 'modules', 'common', 'is-authenticated-jwt-sql.js'));
         await replaceCode(userController, 'USER_LOGIN_POST', join(__dirname, 'modules', 'controllers', 'sql', 'user-login-jwt-post.js'), { indentLevel: 1 });
         await replaceCode(userController, 'PROFILE_UPDATE_RESPONSE', join(__dirname, 'modules', 'controllers', 'responses', 'json', 'profile-update-response-sql.js'), { indentLevel: 2 });
       } else {
