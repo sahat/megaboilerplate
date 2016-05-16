@@ -4,39 +4,39 @@ angular.module('MyApp', ['ngRoute'<%= satellizer %>])
 
     $routeProvider
       .when('/', {
-        templateUrl: 'views/home.html'
+        templateUrl: 'partials/home.html'
       })
       .when('/contact', {
-        templateUrl: 'views/contact.html',
+        templateUrl: 'partials/contact.html',
         controller: 'ContactCtrl'
       })
       .when('/login', {
-        templateUrl: 'views/login.html',
+        templateUrl: 'partials/login.html',
         controller: 'LoginCtrl',
         resolve: { skipIfAuthenticated: skipIfAuthenticated }
       })
       .when('/signup', {
-        templateUrl: 'views/signup.html',
+        templateUrl: 'partials/signup.html',
         controller: 'SignupCtrl',
         resolve: { skipIfAuthenticated: skipIfAuthenticated }
       })
       .when('/account', {
-        templateUrl: 'views/profile.html',
+        templateUrl: 'partials/profile.html',
         controller: 'ProfileCtrl',
         resolve: { loginRequired: loginRequired }
       })
       .when('/forgot', {
-        templateUrl: 'views/forgot.html',
+        templateUrl: 'partials/forgot.html',
         controller: 'ForgotCtrl',
         resolve: { skipIfAuthenticated: skipIfAuthenticated }
       })
       .when('/reset/:token', {
-        templateUrl: 'views/reset.html',
+        templateUrl: 'partials/reset.html',
         controller: 'ResetCtrl',
         resolve: { skipIfAuthenticated: skipIfAuthenticated }
       })
       .otherwise({
-        templateUrl: 'views/404.html'
+        templateUrl: 'partials/404.html'
       });
 
     $authProvider.loginUrl = '/login';

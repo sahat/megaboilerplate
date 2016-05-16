@@ -12,7 +12,7 @@ gulp.task('angular', function() {
 });
 
 gulp.task('templates', function() {
-  return gulp.src('app/views/**/*.html')
-    .pipe(templateCache({ root: 'views', module: 'MyApp' }))
+  return gulp.src('app/partials/**/*.html')
+    .pipe(templateCache({ root: 'partials', module: 'MyApp' }))
     .pipe(gulp.dest('public/js'));
 });
