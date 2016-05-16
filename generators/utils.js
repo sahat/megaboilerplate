@@ -7,6 +7,7 @@ const fs = require('fs-extra');
 const Promise = require('bluebird');
 const cpy = require('cpy');
 const copy = Promise.promisify(fs.copy);
+const move = Promise.promisify(fs.move);
 const readFile = Promise.promisify(fs.readFile);
 const writeFile = Promise.promisify(fs.writeFile);
 const appendFile = Promise.promisify(fs.appendFile);
@@ -20,6 +21,7 @@ const npmDependencies = require('./npmDependencies.json');
 
 export { cpy };
 export { copy };
+export { move };
 export { remove };
 export { mkdirs };
 export { readFile };

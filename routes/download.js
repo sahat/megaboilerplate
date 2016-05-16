@@ -9,6 +9,7 @@ import generateJsFramework from '../generators/js-framework/generateJsFramework'
 import generateDatabase from '../generators/database/generateDatabase';
 import generateAuthentication from '../generators/authentication/generateAuthentication';
 import generateDeployment from '../generators/deployment/generateDeployment';
+import postprocessing from '../generators/postprocessing';
 import { walkAndRemoveComments, prepare, cleanup } from '../generators/utils';
 
 async function download(req, res) {
@@ -28,6 +29,7 @@ async function download(req, res) {
       await generateDatabase(params);
       await generateAuthentication(params);
       await generateDeployment(params);
+      await postprocessing(params);
     }
     await walkAndRemoveComments(params);
     res.end();
