@@ -66,8 +66,8 @@ async function generateGoogleAuthenticationExpress(params) {
   let signInButton;
 
   if (params.jsFramework && params.jsFramework === 'angularjs') {
-    loginPage = join(build, 'app', 'views', 'login.html');
-    signupPage = join(build, 'app', 'views', 'signup.html');
+    loginPage = join(build, 'app', 'partials', 'login.html');
+    signupPage = join(build, 'app', 'partials', 'signup.html');
     signInButton = join(__dirname, 'modules', 'google', 'views', `sign-in-button-angular-${params.cssFramework}.html`);
     await replaceCode(loginPage, 'SIGN_IN_WITH_GOOGLE', signInButton);
     await replaceCode(signupPage, 'SIGN_IN_WITH_GOOGLE', signInButton);
@@ -154,8 +154,8 @@ async function generateGoogleAuthenticationExpress(params) {
     const angularjsModules = join(__base, 'generators', 'js-framework', 'modules', 'angularjs');
 
     // Add link/unlink button on profile page
-    const profileTemplate = join(build, 'app', 'views', 'profile.html');
-    const googleLink = join(angularjsModules, 'views', 'profile', `google-link-${params.cssFramework}.html`);
+    const profileTemplate = join(build, 'app', 'partials', 'profile.html');
+    const googleLink = join(angularjsModules, 'partials', 'profile', `google-link-${params.cssFramework}.html`);
     await replaceCode(profileTemplate, 'GOOGLE_LINK', googleLink);
   }
 }

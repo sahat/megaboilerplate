@@ -62,8 +62,8 @@ async function generateVkAuthenticationExpress(params) {
   let signInButton;
 
   if (params.jsFramework && params.jsFramework === 'angularjs') {
-    loginPage = join(build, 'app', 'views', 'login.html');
-    signupPage = join(build, 'app', 'views', 'signup.html');
+    loginPage = join(build, 'app', 'partials', 'login.html');
+    signupPage = join(build, 'app', 'partials', 'signup.html');
     signInButton = join(__dirname, 'modules', 'vk', 'views', `sign-in-button-angular-${params.cssFramework}.html`);
     await replaceCode(loginPage, 'SIGN_IN_WITH_VK', signInButton);
     await replaceCode(signupPage, 'SIGN_IN_WITH_VK', signInButton);
@@ -150,8 +150,8 @@ async function generateVkAuthenticationExpress(params) {
     const angularjsModules = join(__base, 'generators', 'js-framework', 'modules', 'angularjs');
 
     // Add link/unlink button on profile page
-    const profileTemplate = join(build, 'app', 'views', 'profile.html');
-    const vkLink = join(angularjsModules, 'views', 'profile', `vk-link-${params.cssFramework}.html`);
+    const profileTemplate = join(build, 'app', 'partials', 'profile.html');
+    const vkLink = join(angularjsModules, 'partials', 'profile', `vk-link-${params.cssFramework}.html`);
     await replaceCode(profileTemplate, 'VK_LINK', vkLink);
   }
 }

@@ -66,8 +66,8 @@ async function generateTwitterAuthenticationExpress(params) {
   let signInButton;
 
   if (params.jsFramework && params.jsFramework === 'angularjs') {
-    loginPage = join(build, 'app', 'views', 'login.html');
-    signupPage = join(build, 'app', 'views', 'signup.html');
+    loginPage = join(build, 'app', 'partials', 'login.html');
+    signupPage = join(build, 'app', 'partials', 'signup.html');
     signInButton = join(__dirname, 'modules', 'twitter', 'views', `sign-in-button-angular-${params.cssFramework}.html`);
     await replaceCode(loginPage, 'SIGN_IN_WITH_TWITTER', signInButton);
     await replaceCode(signupPage, 'SIGN_IN_WITH_TWITTER', signInButton);
@@ -154,8 +154,8 @@ async function generateTwitterAuthenticationExpress(params) {
     const angularjsModules = join(__base, 'generators', 'js-framework', 'modules', 'angularjs');
 
     // Add link/unlink button on profile page
-    const profileTemplate = join(build, 'app', 'views', 'profile.html');
-    const twitterLink = join(angularjsModules, 'views', 'profile', `twitter-link-${params.cssFramework}.html`);
+    const profileTemplate = join(build, 'app', 'partials', 'profile.html');
+    const twitterLink = join(angularjsModules, 'partials', 'profile', `twitter-link-${params.cssFramework}.html`);
     await replaceCode(profileTemplate, 'TWITTER_LINK', twitterLink);
   }
 }

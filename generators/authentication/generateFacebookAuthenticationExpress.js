@@ -62,8 +62,8 @@ async function generateFacebookAuthenticationExpress(params) {
   let signInButton;
   
   if (params.jsFramework && params.jsFramework === 'angularjs') {
-    loginPage = join(build, 'app', 'views', 'login.html');
-    signupPage = join(build, 'app', 'views', 'signup.html');
+    loginPage = join(build, 'app', 'partials', 'login.html');
+    signupPage = join(build, 'app', 'partials', 'signup.html');
     signInButton = join(__dirname, 'modules', 'facebook', 'views', `sign-in-button-angular-${params.cssFramework}.html`);
     await replaceCode(loginPage, 'SIGN_IN_WITH_FACEBOOK', signInButton);
     await replaceCode(signupPage, 'SIGN_IN_WITH_FACEBOOK', signInButton);
@@ -150,8 +150,8 @@ async function generateFacebookAuthenticationExpress(params) {
     const angularjsModules = join(__base, 'generators', 'js-framework', 'modules', 'angularjs');
  
     // Add link/unlink button on profile page
-    const profileTemplate = join(build, 'app', 'views', 'profile.html');
-    const facebookLink = join(angularjsModules, 'views', 'profile', `facebook-link-${params.cssFramework}.html`);
+    const profileTemplate = join(build, 'app', 'partials', 'profile.html');
+    const facebookLink = join(angularjsModules, 'partials', 'profile', `facebook-link-${params.cssFramework}.html`);
     await replaceCode(profileTemplate, 'FACEBOOK_LINK', facebookLink);
   }
 }
