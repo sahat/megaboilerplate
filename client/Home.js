@@ -51,34 +51,44 @@ class Home extends React.Component {
 
     // Google Analytics event
     // ga("send","event","Customize","Download","Customize and Download")
-
+    
     if (!state.platform) {
-      return this.setState({ platformValidationError: 'Please select a platfsForm.' });
+      console.info('Please select a platform.');
+      return this.setState({ platformValidationError: 'Please select a platform.' });
     } else if (state.platform === 'html5' && !state.staticSiteGenerator) {
+      console.info('Please select a static site generator.');
       return this.setState({ staticSiteGeneratorValidationError: 'Please select a static site generator.' });
     } else if (state.platform === 'library' && !state.jsLibraryName) {
+      console.info('Please enter a library name.');
       return this.setState({ jsLibraryValidationError: 'Please enter a library name.' });
     } else if (!state.framework) {
+      console.info('Please select a framework.');
       return this.setState({ frameworkValidationError: 'Please select a framework.' });
     } else if (!state.templateEngine) {
+      console.info('Please select a template engine.');
       return this.setState({ templateEngineValidationError: 'Please select a template engine.' });
     } else if (!state.cssFramework) {
+      console.info('Please select a CSS framework.');
       return this.setState({ cssFrameworkValidationError: 'Please select a CSS framework.' });
     } else if (!state.cssPreprocessor) {
+      console.info('Please select a CSS preprocessor.');
       return this.setState({ cssPreprocessorValidationError: 'Please select a CSS preprocessor.' });
     } else if (!state.jsFramework) {
+      console.info('Please make a selection.');
       return this.setState({ jsFrameworkValidationError: 'Please make a selection.' });
-    } else if (!state.buildTool) {
+    } else if (state.jsFramework !== 'none' && !state.buildTool) {
+      console.info('Please select a build tool.');
       return this.setState({ buildToolValidationError: 'Please select a build tool.' });
     } else if (!state.testing) {
+      console.info('Please select a testing framework.');
       return this.setState({ testingValidationError: 'Please select a testing framework.' });
     } else if (!state.database) {
+      console.info('Please select a database.');
       return this.setState({ databaseValidationError: 'Please select a database.' });
     } else if (!state.authentication && state.database !== 'none') {
+      console.info('Please check all that apply.');
       return this.setState({ authenticationValidationError: 'Please check all that apply.' });
     }
-
-
 
     // Show next steps component
     this.setState({ showNextSteps: true });
@@ -135,7 +145,6 @@ class Home extends React.Component {
     const state = clone(this.state);
     const refs = this.refs;
 
-    console.log('if is running', !state.disableAutoScroll);
     switch (name) {
       case 'beginner':
         state.beginner = isChecked;
@@ -278,6 +287,7 @@ class Home extends React.Component {
           state.authentication.clear();
         }
         state.database = value;
+        state.authenticationValidationError = null;
         state.databaseValidationError = null;
         break;
 
