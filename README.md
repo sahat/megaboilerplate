@@ -1,11 +1,11 @@
 [Mega Boilerplate](https://github.com/sahat/boilerplate)
 ========================================================
 
-[![Paypal](https://img.shields.io/badge/donate-paypal-61dafb.svg?style=flat-square)](https://paypal.me/sahat)
+[![Paypal](https://img.shields.io/badge/donate-paypal-0070ba.svg?style=flat-square)](https://paypal.me/sahat)
+[![Gitter](https://img.shields.io/badge/chat-on%20gitter-61dafb.svg?style=flat-square)](https://gitter.im/sahat/boilerplate)
 [![Build Status](https://img.shields.io/travis/sahat/boilerplate.svg?style=flat-square)](https://travis-ci.org/sahat/satellizer)
-[![Gitter](https://img.shields.io/gitter/room/sahat/boilerplate.svg?style=flat-square)](https://gitter.im/sahat/boilerplate)
 [![Issues](https://img.shields.io/github/issues/sahat/boilerplate.svg?style=flat-square)](https://github.com/sahat/boilerplate/issues)
-![License](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)
+![License](https://img.shields.io/badge/license-mit-3da639.svg?style=flat-square)
 
 Table of Contents
 -----------------
