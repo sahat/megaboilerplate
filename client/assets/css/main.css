@@ -382,7 +382,7 @@ i.arrow {
   text-transform: uppercase;
   font-weight: bold;
   letter-spacing: 1px;
-  border-radius: 0;
+  border-radius: 2px;
   padding: 0;
   margin-bottom: 20px;
   transition: all .2s ease;
@@ -1331,12 +1331,12 @@ input[type=checkbox] + span::before {
   min-width: 18px;
   margin-right: 0.75em;
   margin-top: -5px;
-  transition: all .2s ease-out;
+  transition: all .1s ease-out;
   /*border-radius: 50%;*/
 }
 
 input[type=checkbox]:checked + span::before {
-  transition: all .2s ease-out;
+  transition: all .1s ease-out;
   display: inline-block;
   content: '\f00c';
   border-color: #398e5c;
@@ -1484,4 +1484,8 @@ input[type=checkbox].disabled + span::before {
 
 code {
   line-height: 1;
+}
+
+.form-control {
+  border-radius: 2px;
 }
