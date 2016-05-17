@@ -72,9 +72,9 @@ class Testing extends React.Component {
               <input type="radio" name="testingRadios" value="mocha" onChange={props.handleChange} checked={props.testing === 'mocha'}/>
               <span>Mocha</span>
             </label>
-            <label className="radio-inline">
-              <img className="btn-logo" src="/img/svg/jasmine.svg" alt="Jasmine"/>
-              <input type="radio" name="testingRadios" value="jasmine" onChange={props.handleChange} checked={props.testing === 'jasmine'}/>
+            <label className="radio-inline hint--top hint--rounded" data-hint="Coming soon">
+              <img className="btn-logo disabled" src="/img/svg/jasmine.svg" alt="Jasmine"/>
+              <input type="radio" name="testingRadios" value="jasmine" onChange={props.handleChange} checked={props.testing === 'jasmine'} disabled/>
               <span>Jasmine</span>
             </label>
           </div>
