@@ -62,7 +62,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //= REACT_SERVER_RENDERING
 //= ANGULARJS_ROUTES
 
-// production error handler
+// Production error handler
 if (app.get('env') === 'production') {
   app.use(function(err, req, res, next) {
     res.sendStatus(err.status || 500);
