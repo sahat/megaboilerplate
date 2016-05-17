@@ -14,7 +14,7 @@ async function generateTestingMocha(params) {
 
       if (params.jsFramework) {
         // Server-side tests
-        await copy([join(__dirname, 'modules', 'mocha', 'app.test-json.js')], join(build, 'test', 'server', 'app.test.js'));
+        await copy(join(__dirname, 'modules', 'mocha', 'app.test-json.js'), join(build, 'test', 'server', 'app.test.js'));
 
         // Client-side tests
         switch (params.jsFramework) {
