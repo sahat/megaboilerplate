@@ -1185,8 +1185,8 @@ canvas {
 
 .panel-heading h6 svg {
   margin-right: 6px;
-  vertical-align: sub;
-  /*vertical-align: middle;*/
+  /*vertical-align: sub;*/
+  vertical-align: middle;
 }
 
 /*Semantic UI starts*/
@@ -1236,6 +1236,10 @@ h3.ui.header .sub.header, h4.ui.header .sub.header {
 
 .panel-body {
   /*padding-bottom: 0;*/
+}
+
+.panel-body .fa {
+  margin-right: 5px;
 }
 
 .transparent {

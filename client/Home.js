@@ -346,7 +346,7 @@ class Home extends React.Component {
           <div className="checkbox">
             <label>
               <input type="checkbox" name="beginner" value="beginner" onChange={this.handleChange} checked={state.beginner} />
-              <span>Beginner-friendly Stack</span>
+              <span>Beginner</span>
             </label>
           </div>
         </li>
@@ -435,7 +435,7 @@ class Home extends React.Component {
     const consulting = download ? (
       <div className="panel">
         <div className="panel-body">
-          <i className="fa fa-phone"></i> Looking for additional help? Contact me directly by scheduling 1-on-1 help. Rates may vary.
+          <i className="fa fa-skype"></i> Looking for additional help? <a href="https://calendly.com/sahat" target="_blank">Book a 1-on-1 Skype call</a>. Rates may vary.
         </div>
       </div>
     ) : null;
