@@ -43,6 +43,13 @@ class Database extends React.Component {
           </div>
         );
         break;
+      case 'rethinkdb':
+        description = (
+          <div>
+            <strong><a href="https://www.rethinkdb.com/" target="_blank">RethinkDB </a></strong> — The open-source database for the realtime web.
+          </div>
+        );
+        break;
       default:
         description = <div className="placeholder"> </div>;
     }
@@ -98,6 +105,11 @@ class Database extends React.Component {
               <img className="btn-logo" src="/img/svg/sqlite-logo.svg" alt="SQLite3" />
               <input type="radio" name="databaseRadios" value="sqlite" onChange={props.handleChange} checked={props.database === 'sqlite'} />
               <span>SQLite</span>
+            </label>
+            <label className="radio-inline hint--top hint--rounded" data-hint="Coming soon">
+              <img className="btn-logo disabled" src="/img/svg/rethinkdb-logo.svg" alt="RethinkDB" />
+              <input type="radio" name="databaseRadios" value="rethinkdb" onChange={props.handleChange} checked={props.database === 'rethinkdb'} disabled />
+              <span>RethinkDB</span>
             </label>
           </div>
           {validationError}
