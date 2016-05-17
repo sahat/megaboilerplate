@@ -13,12 +13,17 @@ async function generateJsFrameworkReact(params) {
   const initialState = join(__dirname, 'modules', 'react', 'initial-state.js');
   const initialStateAuth = join(__dirname, 'modules', 'react', 'initial-state-auth.js');
   const babelrc = join(__dirname, 'modules', 'react', '.babelrc');
+  const babelrcWithRewire = join(__dirname, 'modules', 'react', '.babelrc-rewire');
 
   switch (params.framework) {
     case 'express':
 
       // Copy .babelrc
-      await cpy([babelrc], build);
+      if (params.testing) {
+        await copy(babelrcWithRewire, join(build, '.babelrc'));
+      } else {
+        await copy(babelrc, join(build, '.babelrc'));
+      }
 
       // Require react, react-router, react-dom packages
       await replaceCode(server, 'REACT_REQUIRE', reactRequire);
