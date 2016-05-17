@@ -3,7 +3,7 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import fetchMock from 'fetch-mock';
 import { expect } from 'chai';
-import { login, __RewireAPI__ as AuthActionsRewireAPI } from '../../app/actions/auth';
+import { login, __RewireAPI__ as AuthActionsRewireAPI } from '../../../app/actions/auth';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
