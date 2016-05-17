@@ -50,7 +50,7 @@ Getting Started
 
 ### Prerequisites
 
-- [Node.js **4.0+**](http://nodejs.org)
+- [Node.js 6.0+](http://nodejs.org)
 - Command Line Tools
  - <img src="http://deluge-torrent.org/images/apple-logo.gif" height="17"> **Mac OS X**: `xcode-select --install`
  - <img src="http://dc942d419843af05523b-ff74ae13537a01be6cfec5927837dcfe.r14.cf1.rackcdn.com/wp-content/uploads/windows-8-50x50.jpg" height="17"> **Windows**: [Visual Studio Community 2015](https://www.visualstudio.com/products/visual-studio-community-vs)
@@ -58,7 +58,7 @@ Getting Started
  - <img src="http://i1-news.softpedia-static.com/images/extra/LINUX/small/slw218news1.png" height="17"> **Fedora**: `sudo dnf groupinstall "Development Tools"`
  - <img src="https://en.opensuse.org/images/b/be/Logo-geeko_head.png" height="17"> **OpenSUSE**: `sudo zypper install --type pattern devel_basis`
 
-### <img src="http://mean.io/system/assets/img/logos/express.png" height="34" align="top" /> Express
+### Express
 
 Download and extract the project. Then in your Terminal shell type the following:
 
@@ -75,15 +75,15 @@ $ node app.js
 
 :top: <sub>[**back to top**](#table-of-contents)</sub>
 
-### <img src="https://worldvectorlogo.com/logos/meteor-icon.svg" height="34" align="top"> Meteor
+### Meteor
 
 :top: <sub>[**back to top**](#table-of-contents)</sub>
 
-### <img src="http://build.prestashop.com/assets/images/2015/04/jekyll.png" height="34" align="top"> Jekyll
+### Jekyll
 
 #### Prerequisites
 
-- [Ruby **2.0+**](http://rubyinstaller.org)
+- [Ruby 2.0+](http://rubyinstaller.org)
 - [Jekyll](https://jekyllrb.com/) Ruby Gem
 
 ```shell
@@ -99,7 +99,7 @@ jekyll serve
 :top: <sub>[**back to top**](#table-of-contents)</sub>
 
 
-### <img src="http://torspark.com/img/middleman-logo.png" height="34" align="top"> Middleman
+### Middleman
 
 #### Prerequisites
 
@@ -127,7 +127,7 @@ middleman
 
 :top: <sub>[**back to top**](#table-of-contents)</sub>
 
-### <img src="http://static.tumblr.com/lbtm3t2/8PAn0kziu/mongodb-logo.png" height="34" align="top"> MongoDB
+### MongoDB
 
 <img src="http://deluge-torrent.org/images/apple-logo.gif" height="17"> **Mac OS X**
 
@@ -177,7 +177,7 @@ sudo service mongod start
 
 :top: <sub>[**back to top**](#table-of-contents)</sub>
 
-### <img src="https://upload.wikimedia.org/wikipedia/en/thumb/6/62/MySQL.svg/640px-MySQL.svg.png" height="34" align="top"> MySQL
+### MySQL
 
 Use database settings below in the `.env` file.
 
@@ -224,7 +224,7 @@ sudo apt-get install mysql-server
 
 :top: <sub>[**back to top**](#table-of-contents)</sub>
 
-### <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Postgresql_elephant.svg/200px-Postgresql_elephant.svg.png" height="34" align="top"> PostgreSQL
+### PostgreSQL
 
 Use database settings below in the `.env` file.
 
@@ -266,7 +266,7 @@ sudo apt-get upgrade
 sudo apt-get install postgresql postgresql-contrib
 ```
 
-### <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Sqlite-square-icon.svg/240px-Sqlite-square-icon.svg.png" height="34" align="top"> SQLite
+### SQLite
 
 No additional steps required. Package [`sqlite3`](https://www.npmjs.com/package/sqlite3) will be automatically installed during `npm install` in [**Getting Started**](#getting-started).
 
