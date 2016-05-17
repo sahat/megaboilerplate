@@ -23,9 +23,14 @@ async function generateTestingMocha(params) {
 
             // Tests for Redux actions
             await cpy([
-              join(reactTests, 'actions', 'auth.test.js'),
               join(reactTests, 'actions', 'contact.test.js')
             ], join(build, 'test', 'client', 'actions'));
+
+            if (params.authentication.length) {
+              await cpy([
+                join(reactTests, 'actions', 'auth.test.js')
+              ], join(build, 'test', 'client', 'actions'));
+            }
 
             // Tests for React components
             await cpy([
