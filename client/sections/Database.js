@@ -106,11 +106,11 @@ class Database extends React.Component {
               <input type="radio" name="databaseRadios" value="sqlite" onChange={props.handleChange} checked={props.database === 'sqlite'} />
               <span>SQLite</span>
             </label>
-            <label className="radio-inline hint--top hint--rounded" data-hint="Coming soon">
+            {/*<label className="hidden radio-inline hint--top hint--rounded" data-hint="Coming soon">
               <img className="btn-logo disabled" src="/img/svg/rethinkdb-logo.svg" alt="RethinkDB" />
               <input type="radio" name="databaseRadios" value="rethinkdb" onChange={props.handleChange} checked={props.database === 'rethinkdb'} disabled />
               <span>RethinkDB</span>
-            </label>
+            </label>*/}
           </div>
           {validationError}
         </div>
