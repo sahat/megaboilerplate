@@ -20,7 +20,7 @@ exports.signupPost = function(req, res, next) {
   req.assert('email', 'Email is not valid').isEmail();
   req.assert('email', 'Email cannot be blank').notEmpty();
   req.assert('password', 'Password must be at least 4 characters long').len(4);
-  req.sanitize('email').normalizeEmail();
+  req.sanitize('email').normalizeEmail({ remove_dots: false });
 
   var errors = req.validationErrors();
 
@@ -44,7 +44,7 @@ exports.accountPut = function(req, res, next) {
   } else {
     req.assert('email', 'Email is not valid').isEmail();
     req.assert('email', 'Email cannot be blank').notEmpty();
-    req.sanitize('email').normalizeEmail();
+    req.sanitize('email').normalizeEmail({ remove_dots: false });
   }
 
   var errors = req.validationErrors();
@@ -77,7 +77,7 @@ exports.unlink = function(req, res, next) {
 exports.forgotPost = function(req, res, next) {
   req.assert('email', 'Email is not valid').isEmail();
   req.assert('email', 'Email cannot be blank').notEmpty();
-  req.sanitize('email').normalizeEmail();
+  req.sanitize('email').normalizeEmail({ remove_dots: false });
 
   var errors = req.validationErrors();
 
