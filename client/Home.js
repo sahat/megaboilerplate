@@ -25,7 +25,7 @@ class Home extends React.Component {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.handleGenerateLibraryName = this.handleGenerateLibraryName.bind(this);
-    this.handleAutoScroll = this.handleAutoScroll.bind(this);
+    this.handleDisableAutoScroll = this.handleDisableAutoScroll.bind(this);
     this.handleReduceAnimations = this.handleReduceAnimations.bind(this);
     this.clickDownload = this.clickDownload.bind(this);
     this.state = {};
@@ -81,10 +81,10 @@ class Home extends React.Component {
 
 
     // Show next steps component
-    //   this.setState({ showNextSteps: true });
-    // if (state.autoScroll) {
-    //   $(this.refs.nextSteps).velocity('scroll');
-    // }
+    this.setState({ showNextSteps: true });
+    if (!state.disableAutoScroll) {
+      $(this.refs.nextSteps).velocity('scroll');
+    }
 
     const data = clone(state);
     data.appName = haikunate({ tokenLength: 0 });
@@ -135,13 +135,14 @@ class Home extends React.Component {
     const state = clone(this.state);
     const refs = this.refs;
 
+    console.log('if is running', !state.disableAutoScroll);
     switch (name) {
       case 'beginner':
         state.beginner = isChecked;
         break;
 
       case 'platformRadios':
-        const whitelist = ['showModal', 'beginner', 'autoScroll', 'reduceAnimations'];
+        const whitelist = ['showModal', 'beginner', 'disableAutoScroll', 'reduceAnimations'];
         for (const key in state) {
           if (state.hasOwnProperty(key)) {
             if (whitelist.indexOf(key) === -1) {
@@ -150,14 +151,14 @@ class Home extends React.Component {
           }
         }
         state.platform = value;
-        if (state.autoScroll) {
+        if (!state.disableAutoScroll) {
           $(refs.platform).velocity('scroll');
         }
         state.platformValidationError = null;
         break;
 
       case 'staticSiteGeneratorRadios':
-        if (!state.staticSiteGenerator && state.autoScroll) {
+        if (!state.staticSiteGenerator && !state.disableAutoScroll) {
           $(refs.staticSiteGenerator).velocity('scroll');
         }
         state.staticSiteGenerator = value;
@@ -192,7 +193,7 @@ class Home extends React.Component {
         break;
 
       case 'frameworkRadios':
-        if (!state.framework && state.autoScroll) {
+        if (!state.framework && !state.disableAutoScroll) {
           $(refs.framework).velocity('scroll');
         }
         state.framework = value;
@@ -210,7 +211,7 @@ class Home extends React.Component {
         break;
 
       case 'templateEngineRadios':
-        if (!state.templateEngine && state.autoScroll) {
+        if (!state.templateEngine && !state.disableAutoScroll) {
           $(refs.templateEngine).velocity('scroll');
         }
         state.templateEngineValidationError = null;
@@ -218,7 +219,7 @@ class Home extends React.Component {
         break;
 
       case 'cssFrameworkRadios':
-        if (!state.cssFramework && state.autoScroll) {
+        if (!state.cssFramework && !state.disableAutoScroll) {
           $(refs.cssFramework).velocity('scroll');
         }
         if (state.cssPreprocessor) {
@@ -229,7 +230,7 @@ class Home extends React.Component {
         break;
 
       case 'cssPreprocessorRadios':
-        if (!state.cssPreprocessor && state.autoScroll) {
+        if (!state.cssPreprocessor && !state.disableAutoScroll) {
           $(refs.cssPreprocessor).velocity('scroll');
         }
         state.cssPreprocessor = value;
@@ -237,7 +238,7 @@ class Home extends React.Component {
         break;
 
       case 'jsFrameworkRadios':
-        if (!state.jsFramework && state.autoScroll) {
+        if (!state.jsFramework && !state.disableAutoScroll) {
           $(refs.jsFramework).velocity('scroll');
         }
         state.jsFramework = value;
@@ -254,7 +255,7 @@ class Home extends React.Component {
         break;
 
       case 'buildToolRadios':
-        if (!state.buildTool && state.autoScroll) {
+        if (!state.buildTool && !state.disableAutoScroll) {
           $(refs.buildTool).velocity('scroll');
         }
         state.buildTool = value;
@@ -262,7 +263,7 @@ class Home extends React.Component {
         break;
 
       case 'testingRadios':
-        if (!state.testing && state.autoScroll) {
+        if (!state.testing && !state.disableAutoScroll) {
           $(refs.testing).velocity('scroll');
         }
         state.testing = value;
@@ -270,7 +271,7 @@ class Home extends React.Component {
         break;
 
       case 'databaseRadios':
-        if (!state.database && state.autoScroll) {
+        if (!state.database && !state.disableAutoScroll) {
           $(refs.database).velocity('scroll');
         }
         if (value === 'none' && state.authentication) {
@@ -306,7 +307,7 @@ class Home extends React.Component {
         break;
 
       case 'deploymentRadios':
-        if (!state.deployment && state.autoScroll) {
+        if (!state.deployment && !state.disableAutoScroll) {
           $(refs.deployment).velocity('scroll');
         }
         state.deployment = value;
@@ -319,10 +320,10 @@ class Home extends React.Component {
     this.setState(state);
   }
 
-  handleAutoScroll(event) {
-    this.setState({ autoScroll: !event.target.checked });
+  handleDisableAutoScroll(event) {
+    this.setState({ disableAutoScroll: event.target.checked });
     try {
-      localStorage.setItem('autoScroll', !event.target.checked);
+      localStorage.setItem('disableAutoScroll', event.target.checked);
     } catch(e) {
       console.warn(e);
     }
@@ -352,7 +353,7 @@ class Home extends React.Component {
         <li>
           <div className="checkbox">
             <label>
-              <input type="checkbox" name="disableAutoScroll" value="disableAutoScroll" onChange={this.handleAutoScroll} checked={state.disableAutoScroll}/>
+              <input type="checkbox" name="disableAutoScroll" value="disableAutoScroll" onChange={this.handleDisableAutoScroll} checked={state.disableAutoScroll}/>
               <span>Disable auto-scroll</span>
             </label>
           </div>

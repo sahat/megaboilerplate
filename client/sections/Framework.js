@@ -101,10 +101,12 @@ class Framework extends React.Component {
       <div className="text-danger"><i className="fa fa-warning"></i> {props.frameworkValidationError}</div>
     ) : null;
 
-    if (props.autoScroll) {
-      $(this.refs.framework).velocity('scroll');
-    } else {
-      $(this.refs.framework).velocity('scroll', { duration: 0 });
+    if (props.frameworkValidationError) {
+      if (props.disableAutoScroll) {
+        $(this.refs.framework).velocity('scroll', { duration: 0 });
+      } else {
+        $(this.refs.framework).velocity('scroll');
+      }
     }
 
     return (

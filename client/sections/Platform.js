@@ -16,10 +16,12 @@ class Platform extends React.Component {
       <div className="text-danger"><i className="fa fa-warning"></i> {props.platformValidationError}</div>
     ) : null;
 
-    if (props.autoScroll) {
-      $(this.refs.platform).velocity('scroll');
-    } else {
-      $(this.refs.platform).velocity('scroll', { duration: 0 });
+    if (props.platformValidationError) {
+      if (props.disableAutoScroll) {
+        $(this.refs.platform).velocity('scroll', { duration: 0 });
+      } else {
+        $(this.refs.platform).velocity('scroll');
+      }
     }
 
     return (

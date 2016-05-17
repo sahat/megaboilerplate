@@ -29,28 +29,6 @@ class TemplateEngine extends React.Component {
       </span>
     ) : null;
 
-    const additionalOptions = state.showOptions ? (
-      <div>
-        <VelocityComponent runOnMount animation="transition.slideUpIn">
-          <div className="radio">
-            <label>
-              <input type="radio" name="templateEngineOptionsRadios" value="2" onChange={props.handleChange} defaultChecked={true}/>
-              <span>2 spaces</span>
-              {recommended}
-            </label>
-          </div>
-        </VelocityComponent>
-        <VelocityComponent runOnMount animation="transition.slideUpIn" delay={100}>
-          <div className="radio">
-            <label>
-              <input type="radio" name="templateEngineOptionsRadios" value="4" onChange={props.handleChange}/>
-              <span>4 spaces</span>
-            </label>
-          </div>
-        </VelocityComponent>
-      </div>
-    ) : null;
-
     const nodeTemplateEngines = (props.platform === 'node') ? (
       <div className="radio-group">
         <label className="radio-inline">
@@ -104,10 +82,12 @@ class TemplateEngine extends React.Component {
       <div className="text-danger"><i className="fa fa-warning"></i> {props.templateEngineValidationError}</div>
     ) : null;
 
-    if (props.autoScroll) {
-      $(this.refs.templateEngine).velocity('scroll');
-    } else {
-      $(this.refs.templateEngine).velocity('scroll', { duration: 0 });
+    if (props.templateEngineValidationError) {
+      if (props.disableAutoScroll) {
+        $(this.refs.templateEngine).velocity('scroll', { duration: 0 });
+      } else {
+        $(this.refs.templateEngine).velocity('scroll');
+      }
     }
 
     return (

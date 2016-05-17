@@ -63,10 +63,12 @@ class JsLibrary extends React.Component {
       <div className="help-block text-danger"><i className="fa fa-warning"></i> {props.jsLibraryValidationError}</div>
     ) : null;
 
-    if (props.autoScroll) {
-      $(this.refs.jsLibrary).velocity('scroll');
-    } else {
-      $(this.refs.jsLibrary).velocity('scroll', { duration: 0 });
+    if (props.jsLibraryValidationError) {
+      if (props.disableAutoScroll) {
+        $(this.refs.jsLibrary).velocity('scroll', { duration: 0 });
+      } else {
+        $(this.refs.jsLibrary).velocity('scroll');
+      }
     }
 
     return (

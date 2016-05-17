@@ -120,10 +120,12 @@ class BuildTool extends React.Component {
       <div className="text-danger"><i className="fa fa-warning"></i> {props.buildToolValidationError}</div>
     ) : null;
 
-    if (props.autoScroll) {
-      $(this.refs.buildTool).velocity('scroll');
-    } else {
-      $(this.refs.buildTool).velocity('scroll', { duration: 0 });
+    if (props.buildToolValidationError) {
+      if (props.disableAutoScroll) {
+        $(this.refs.buildTool).velocity('scroll', { duration: 0 });
+      } else {
+        $(this.refs.buildTool).velocity('scroll');
+      }
     }
     
     return (

@@ -56,10 +56,12 @@ class StaticSiteGenerator extends React.Component {
       <div className="text-danger"><i className="fa fa-warning"></i> {props.staticSiteGeneratorValidationError}</div>
     ) : null;
 
-    if (props.autoScroll) {
-      $(this.refs.staticSiteGenerator).velocity('scroll');
-    } else {
-      $(this.refs.staticSiteGenerator).velocity('scroll', { duration: 0 });
+    if (props.staticSiteGeneratorValidationError) {
+      if (props.disableAutoScroll) {
+        $(this.refs.staticSiteGenerator).velocity('scroll', { duration: 0 });
+      } else {
+        $(this.refs.staticSiteGenerator).velocity('scroll');
+      }
     }
     
     return (

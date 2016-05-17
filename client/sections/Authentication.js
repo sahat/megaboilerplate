@@ -63,10 +63,12 @@ class Authentication extends React.Component {
       <div className="text-danger"><i className="fa fa-warning"></i> {props.authenticationValidationError}</div>
     ) : null;
 
-    if (props.autoScroll) {
-      $(this.refs.authentication).velocity('scroll');
-    } else {
-      $(this.refs.authentication).velocity('scroll', { duration: 0 });
+    if (props.authenticationValidationError) {
+      if (props.disableAutoScroll) {
+        $(this.refs.authentication).velocity('scroll', { duration: 0 });
+      } else {
+        $(this.refs.authentication).velocity('scroll');
+      }
     }
 
     return (

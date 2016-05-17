@@ -57,10 +57,12 @@ class Database extends React.Component {
       <div className="text-danger"><i className="fa fa-warning"></i> {props.databaseValidationError}</div>
     ) : null;
 
-    if (props.autoScroll) {
-      $(this.refs.database).velocity('scroll');
-    } else {
-      $(this.refs.database).velocity('scroll', { duration: 0 });
+    if (props.databaseValidationError) {
+      if (props.disableAutoScroll) {
+        $(this.refs.database).velocity('scroll', { duration: 0 });
+      } else {
+        $(this.refs.database).velocity('scroll');
+      }
     }
 
     return (

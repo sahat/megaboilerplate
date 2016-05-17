@@ -48,10 +48,12 @@ class Testing extends React.Component {
       <div className="text-danger"><i className="fa fa-warning"></i> {props.testingValidationError}</div>
     ) : null;
 
-    if (props.autoScroll) {
-      $(this.refs.testing).velocity('scroll');
-    } else {
-      $(this.refs.testing).velocity('scroll', { duration: 0 });
+    if (props.testingValidationError) {
+      if (props.disableAutoScroll) {
+        $(this.refs.testing).velocity('scroll', { duration: 0 });
+      } else {
+        $(this.refs.testing).velocity('scroll');
+      }
     }
 
     return (

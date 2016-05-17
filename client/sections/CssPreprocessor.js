@@ -68,12 +68,13 @@ class CssPreprocessor extends React.Component {
       <div className="text-danger"><i className="fa fa-warning"></i> {props.cssPreprocessorValidationError}</div>
     ) : null;
 
-    if (props.autoScroll) {
-      $(this.refs.cssPreprocessor).velocity('scroll');
-    } else {
-      $(this.refs.cssPreprocessor).velocity('scroll', { duration: 0 });
+    if (props.cssPreprocessorValidationError) {
+      if (props.disableAutoScroll) {
+        $(this.refs.cssPreprocessor).velocity('scroll', { duration: 0 });
+      } else {
+        $(this.refs.cssPreprocessor).velocity('scroll');
+      }
     }
-
 
     return (
       <div ref="cssPreprocessor" className={cx('zoomInBackwards panel', props.cssPreprocessor)}>

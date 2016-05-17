@@ -45,7 +45,7 @@ const NextSteps = (props) => {
   }
 
   if (props.deployment && props.deployment !== 'none') {
-    gettingStartedText += ` When ready to deploy, see our <a href="https://github.com/sahat/boilerplate#" target="_blank"> ${nameMap[props.deployment]} deployment guide</a>.`
+    gettingStartedText += ` When ready to deploy, see <a href="https://github.com/sahat/boilerplate#" target="_blank"> ${nameMap[props.deployment]} deployment guide</a>.`
   }
 
     const learnMap = {
@@ -59,7 +59,7 @@ const NextSteps = (props) => {
     mysql: `<strong>Bookshelf.js ORM</strong>`,
     sqlite: `<strong>Bookshelf.js ORM</strong>`,
     postgresql: `<strong>Bookshelf.js ORM</strong>`,
-    mongodb: `<strong>Mongoose</strong>`,
+    mongodb: `<strong>Mongoose</strong>`
   };
 
   const jsFramework = props.jsFramework && props.jsFramework !== 'none' ? props.jsFramework : null;

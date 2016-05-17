@@ -60,10 +60,12 @@ class CssFramework extends React.Component {
       <div className="text-danger"><i className="fa fa-warning"></i> {props.cssFrameworkValidationError}</div>
     ) : null;
 
-    if (props.autoScroll) {
-      $(this.refs.cssFramework).velocity('scroll');
-    } else {
-      $(this.refs.cssFramework).velocity('scroll', { duration: 0 });
+    if (props.cssFrameworkValidationError) {
+      if (props.disableAutoScroll) {
+        $(this.refs.cssFramework).velocity('scroll', { duration: 0 });
+      } else {
+        $(this.refs.cssFramework).velocity('scroll');
+      }
     }
 
     return (
