@@ -64,12 +64,12 @@ const Deployment = (props) => {
           <label className="radio-inline">
             <img className="btn-logo" src="/img/svg/azure-logo.svg" height="60" alt="Microsoft Azure"/>
             <input type="radio" name="deploymentRadios" value="azure" onChange={props.handleChange} checked={props.deployment === 'azure'} />
-            <span>Microsoft Azure</span>
+            <span>Azure</span>
           </label>
           <label className="radio-inline">
             <img className="btn-logo" src="/img/svg/bluemix-logo.svg" alt="IBM Bluemix"/>
             <input type="radio" name="deploymentRadios" value="bluemix" onChange={props.handleChange} checked={props.deployment === 'bluemix'} />
-            <span>IBM Bluemix</span>
+            <span>Bluemix</span>
           </label>
           <label className="radio-inline">
             <img className="btn-logo" src="/img/svg/do-logo.png" alt="Digital Ocean"/>
