@@ -3,7 +3,7 @@ new User({ passwordResetToken: req.params.token })
   .fetch()
   .then(function(user) {
     if (!user) {
-      //= RESET_POST_INVALID_TOKEN_ERROR
+      //= RESET_POST_INVALID_TOKEN_ERROR_INDENT5
     }
     user.set('password', req.body.password);
     user.set('passwordResetToken', null);
