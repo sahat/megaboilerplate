@@ -55,7 +55,7 @@ async function updateLayoutTemplate(params) {
 
   // Add Socket.IO <script> tag (optional)
   if (params.frameworkOptions.includes('socketio')) {
-    await replaceCode(layout, 'SOCKETIO_IMPORT', socketIoImport, { indentLevel: 1 });
+    await replaceCode(layout, 'SOCKETIO_IMPORT', socketIoImport);
   }
 }
 
