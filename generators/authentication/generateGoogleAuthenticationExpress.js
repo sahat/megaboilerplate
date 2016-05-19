@@ -157,6 +157,10 @@ async function generateGoogleAuthenticationExpress(params) {
     const profileTemplate = join(build, 'app', 'partials', 'profile.html');
     const googleLink = join(angularjsModules, 'partials', 'profile', `google-link-${params.cssFramework}.html`);
     await replaceCode(profileTemplate, 'GOOGLE_LINK', googleLink);
+
+    const appJs = join(build, 'app', 'app.js');
+    const satellizerGoogleConfig = join(angularjsModules, 'satellizer-google.js');
+    await replaceCode(appJs, 'SATELLIZER_GOOGLE_CONFIG', satellizerGoogleConfig);
   }
 }
 

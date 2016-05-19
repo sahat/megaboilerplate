@@ -153,6 +153,10 @@ async function generateVkAuthenticationExpress(params) {
     const profileTemplate = join(build, 'app', 'partials', 'profile.html');
     const vkLink = join(angularjsModules, 'partials', 'profile', `vk-link-${params.cssFramework}.html`);
     await replaceCode(profileTemplate, 'VK_LINK', vkLink);
+
+    const appJs = join(build, 'app', 'app.js');
+    const satellizerVkConfig = join(angularjsModules, 'satellizer-vk.js');
+    await replaceCode(appJs, 'SATELLIZER_VK_CONFIG', satellizerVkConfig);
   }
 }
 

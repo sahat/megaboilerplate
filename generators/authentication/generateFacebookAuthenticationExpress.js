@@ -153,6 +153,10 @@ async function generateFacebookAuthenticationExpress(params) {
     const profileTemplate = join(build, 'app', 'partials', 'profile.html');
     const facebookLink = join(angularjsModules, 'partials', 'profile', `facebook-link-${params.cssFramework}.html`);
     await replaceCode(profileTemplate, 'FACEBOOK_LINK', facebookLink);
+
+    const appJs = join(build, 'app', 'app.js');
+    const satellizerFacebookConfig = join(angularjsModules, 'satellizer-facebook.js');
+    await replaceCode(appJs, 'SATELLIZER_FACEBOOK_CONFIG', satellizerFacebookConfig);
   }
 }
 

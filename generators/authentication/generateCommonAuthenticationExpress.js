@@ -168,8 +168,6 @@ async function generateCommonAuthenticationExpress(params) {
     await replaceCode(userController, 'RESET_POST_VALIDATION_ERROR', join(__dirname, 'modules', 'controllers', 'responses', 'session', 'reset-post-validation-error.js'), { indentLevel: 2 });
     await replaceCode(userController, 'RESET_POST_INVALID_TOKEN_ERROR', join(__dirname, 'modules', 'controllers', 'responses', 'session', 'reset-post-invalid-token-error.js'), { indentLevel: 5 });
     await replaceCode(userController, 'RESET_POST_SUCCESS', join(__dirname, 'modules', 'controllers', 'responses', 'session', 'reset-post-success.js'), { indentLevel: 4 });
-
-
   }
 
   const usingOAuth = (
@@ -238,6 +236,12 @@ async function generateCommonAuthenticationExpress(params) {
       break;
     default:
       break;
+  }
+
+  if (params.jsFramework === 'angularjs') {
+    const appJs = join(build, 'app', 'app.js');
+    const satellizerCommonConfig = join(__base, 'generators', 'js-framework', 'modules', 'angularjs', 'satellizer-common.js');
+    await replaceCode(appJs, 'SATELLIZER_COMMON_CONFIG', satellizerCommonConfig);
   }
 
   const tokenSecret = randomBytes(32).toString('hex');

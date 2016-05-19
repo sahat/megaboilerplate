@@ -157,6 +157,10 @@ async function generateTwitterAuthenticationExpress(params) {
     const profileTemplate = join(build, 'app', 'partials', 'profile.html');
     const twitterLink = join(angularjsModules, 'partials', 'profile', `twitter-link-${params.cssFramework}.html`);
     await replaceCode(profileTemplate, 'TWITTER_LINK', twitterLink);
+
+    const appJs = join(build, 'app', 'app.js');
+    const satellizerTwitterConfig = join(angularjsModules, 'satellizer-twitter.js');
+    await replaceCode(appJs, 'SATELLIZER_TWITTER_CONFIG', satellizerTwitterConfig);
   }
 }
 

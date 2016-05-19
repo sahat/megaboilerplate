@@ -39,29 +39,11 @@ angular.module('MyApp', ['ngRoute'<%= satellizer %>])
         templateUrl: 'partials/404.html'
       });
 
-    $authProvider.loginUrl = '/login';
-    $authProvider.signupUrl = '/signup';
-    $authProvider.facebook({
-      url: '/auth/facebook',
-      clientId: '980220002068787',
-      redirectUri: 'http://localhost:3000/auth/facebok/callback'
-    });
-    $authProvider.google({
-      url: '/auth/google',
-      clientId: '631036554609-v5hm2amv4pvico3asfi97f54sc51ji4o.apps.googleusercontent.com'
-    });
-    $authProvider.twitter({
-      url: '/auth/twitter'
-    });
-    $authProvider.oauth2({
-      name: 'vk',
-      url: '/auth/vkontakte',
-      clientId: 'MTCEJ3NGW2PNNB31WOSBFDSAD4MTHYVAZ1UKIULXZ2CVFC2K',
-      redirectUri: 'http://localhost:3000/auth/vkontakte/callback',
-      authorizationEndpoint: 'https://oauth.vk.com/authorize',
-      scope: 'email',
-      popupOptions: { width: 605, height: 429 }
-    });
+    //= SATELLIZER_COMMON_CONFIG_INDENT2
+    //= SATELLIZER_FACEBOOK_CONFIG_INDENT2
+    //= SATELLIZER_GOOGLE_CONFIG_INDENT2
+    //= SATELLIZER_TWITTER_CONFIG_INDENT2
+    //= SATELLIZER_VK_CONFIG_INDENT2
 
     function skipIfAuthenticated($location, $auth) {
       if ($auth.isAuthenticated()) {
