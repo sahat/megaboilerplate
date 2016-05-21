@@ -61,31 +61,31 @@ class Home extends React.Component {
     } else if (state.platform === 'library' && !state.jsLibraryName) {
       console.info('Please enter a library name.');
       return this.setState({ jsLibraryValidationError: 'Please enter a library name.' });
-    } else if (!state.framework) {
+    } else if (state.platform === 'node' && !state.framework) {
       console.info('Please select a framework.');
       return this.setState({ frameworkValidationError: 'Please select a framework.' });
-    } else if (!state.templateEngine) {
+    } else if (state.platform === 'node' && !state.templateEngine) {
       console.info('Please select a template engine.');
       return this.setState({ templateEngineValidationError: 'Please select a template engine.' });
-    } else if (!state.cssFramework) {
+    } else if (state.platform === 'node' && !state.cssFramework) {
       console.info('Please select a CSS framework.');
       return this.setState({ cssFrameworkValidationError: 'Please select a CSS framework.' });
-    } else if (!state.cssPreprocessor) {
+    } else if (state.platform === 'node' && !state.cssPreprocessor) {
       console.info('Please select a CSS preprocessor.');
       return this.setState({ cssPreprocessorValidationError: 'Please select a CSS preprocessor.' });
-    } else if (!state.jsFramework) {
+    } else if (state.platform === 'node' && !state.jsFramework) {
       console.info('Please make a selection.');
       return this.setState({ jsFrameworkValidationError: 'Please make a selection.' });
-    } else if (state.jsFramework !== 'none' && !state.buildTool) {
+    } else if (state.platform === 'node' && state.jsFramework !== 'none' && !state.buildTool) {
       console.info('Please select a build tool.');
       return this.setState({ buildToolValidationError: 'Please select a build tool.' });
-    } else if (!state.testing) {
+    } else if (state.platform === 'node' && !state.testing) {
       console.info('Please select a testing framework.');
       return this.setState({ testingValidationError: 'Please select a testing framework.' });
-    } else if (!state.database) {
+    } else if (state.platform === 'node' && !state.database) {
       console.info('Please select a database.');
       return this.setState({ databaseValidationError: 'Please select a database.' });
-    } else if (!state.authentication && state.database !== 'none') {
+    } else if (state.platform === 'node' && !state.authentication && state.database !== 'none') {
       console.info('Please check all that apply.');
       return this.setState({ authenticationValidationError: 'Please check all that apply.' });
     }
