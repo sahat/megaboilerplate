@@ -1,6 +1,5 @@
-import { template, last, isEmpty, dropRight } from 'lodash';
-
-const path = require('path');
+import { get, set, template, last, isEmpty, dropRight } from 'lodash';
+import { join } from 'path';
 const archiver = require('archiver');
 const shortid = require('shortid');
 const fs = require('fs-extra');
@@ -153,6 +152,36 @@ export async function addNpmPackage(pkgName, params, isDev) {
   await writeJson(packageJson, packageObj, { spaces: 2 });
 }
 
+export async function addNpmPackageMemory(pkgName, params, isDev) {
+  if (!params) {
+    throw new Error(`Did you forget to pass params to addNpmPackage('${pkgName}')?`);
+  }
+
+  if (!npmDependencies[pkgName]) {
+    throw new Error(`Package "${pkgName}" is missing in the npmDependencies.json`);
+  }
+
+  const packageJson = params.build['package.json'];
+  const packageObj = JSON.parse(packageJson.toString());
+  const pkgVersion = npmDependencies[pkgName];
+
+  if (isDev) {
+    packageObj.devDependencies = packageObj.devDependencies || {};
+    packageObj.devDependencies[pkgName] = pkgVersion;
+  } else {
+    packageObj.dependencies[pkgName] = pkgVersion;
+  }
+
+  // Sort dependencies alphabetically in package.json
+  packageObj.dependencies = sortJson(packageObj.dependencies);
+
+  if (packageObj.devDependencies) {
+    packageObj.devDependencies = sortJson(packageObj.devDependencies);
+  }
+
+  return Buffer.from(JSON.stringify(packageObj, null, 2));
+}
+
 function sortJson(obj) {
   return Object.keys(obj).sort().reduce((a, b) => {
     a[b] = obj[b];
@@ -177,6 +206,17 @@ export async function addNpmScript(name, value, params) {
   await writeJson(packageJson, packageObj, { spaces: 2 });
 }
 
+export async function addNpmScriptMemory(name, value, params) {
+  if (!params) {
+    throw new Error(`Did you forget to pass params to addNpmScript('${name}')?`);
+  }
+  const packageJson = params.build['package.json'];
+  const packageObj = JSON.parse(packageJson.toString());
+  packageObj.scripts[name] = value;
+  packageObj.scripts = sortJson(packageObj.scripts);
+  return Buffer.from(JSON.stringify(packageObj, null, 2));
+}
+
 /**
  * Cleanup build files.
  * @param params
@@ -186,13 +226,11 @@ export async function cleanup(params) {
 }
 
 export async function prepare(params) {
-  //params.uuid = shortid.generate();
-  // TODO: Remove
-  params.uuid = 'testing';
-  await remove(path.join(__base, 'build', params.uuid));
-
-  await mkdirs(path.join(__base, 'build', params.uuid));
-  console.info('Created', params.uuid);
+  params.uuid = shortid.generate();
+  // params.uuid = 'testing';
+  // await remove(path.join(__base, 'build', params.uuid));
+  // await mkdirs(path.join(__base, 'build', params.uuid));
+  // console.info('Created', params.uuid);
   return params;
 }
 
@@ -295,6 +333,67 @@ export async function replaceCode(srcFile, subStr, newSrcFile, opts) {
   await writeFile(srcFile, srcData);
 }
 
+export async function replaceCodeMemory(srcFile, subStr, newSrcFile, opts) {
+  opts = opts || {};
+
+  let srcData = await readFile(srcFile);
+  let newSrcData = await readFile(newSrcFile);
+
+  const array = srcData.toString().split('\n');
+
+  if (opts.debug) {
+    console.log(array);
+  }
+
+  array.forEach((line, index) => {
+    const re = new RegExp(subStr + '(_INDENT[0-9]+)?' + '($|\r\n|\r|\n)');
+    const isMatch = re.test(line);
+
+    // Preserve whitespace if it detects //_ token
+    if (line.indexOf('//_') > - 1) {
+      array[index] = '';
+    }
+
+    if (opts.debug) {
+      console.log(re, isMatch, line);
+    }
+
+    if (isMatch) {
+      let indentLevel;
+
+      if (line.includes('_INDENT')) {
+        indentLevel = line.split('_INDENT').pop();
+      }
+
+      if (indentLevel || opts.indentLevel) {
+        newSrcData = indentCode(newSrcData, { indentLevel: indentLevel || opts.indentLevel });
+      }
+
+      if (opts.indentSpaces) {
+        newSrcData = indentCode(newSrcData, { indentSpaces: opts.indentSpaces });
+      }
+
+      if (isEmpty(last(newSrcData.toString().split('\n')))) {
+        newSrcData = dropRight(newSrcData.toString().split('\n')).join('\n');
+      }
+
+      if (opts.leadingBlankLine) {
+        newSrcData = ['\n', newSrcData].join('');
+      }
+
+      if (opts.trailingBlankLine) {
+        newSrcData = [newSrcData, '\n'].join('');
+      }
+
+      array[index] = newSrcData;
+    }
+  });
+
+  srcData = array.join('\n');
+
+  await writeFile(srcFile, srcData);
+}
+
 /**
  * lodash _.template() function
  * @param srcFile
@@ -305,6 +404,11 @@ export async function templateReplace(srcFile, data) {
   const compiled = template(src.toString());
   const newSrc = compiled(data);
   await writeFile(srcFile, newSrc);
+}
+
+export async function templateReplaceMemory(src, data) {
+  const compiled = template(src.toString());
+  return Buffer.from(compiled(data));
 }
 
 /**
@@ -321,4 +425,20 @@ export async function addEnv(params, data) {
     }
   }
   await appendFile(env, '\n' + vars.join('\n') + '\n');
+}
+
+export async function getModule(path) {
+  if (!get(__modules, path)) {
+    set(__modules, path, await readFile(join(__base, 'generators', path[0], 'modules', ...path.slice(1))));
+  }
+  return get(__modules, path);
+}
+
+export function slugify(text) {
+  return text.toString().toLowerCase()
+    .replace(/\s+/g, '-')           // Replace spaces with -
+    .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+    .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+    .replace(/^-+/, '')             // Trim - from start of text
+    .replace(/-+$/, '');            // Trim - from end of text
 }
