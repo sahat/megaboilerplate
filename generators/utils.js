@@ -1,5 +1,6 @@
 import { get, set, template, last, isEmpty, dropRight } from 'lodash';
-import { join } from 'path';
+import { basename, join } from 'path';
+const path = require('path');
 const archiver = require('archiver');
 const shortid = require('shortid');
 const fs = require('fs-extra');
@@ -15,6 +16,7 @@ const readJson = Promise.promisify(fs.readJson);
 const writeJson = Promise.promisify(fs.writeJson);
 const stat = Promise.promisify(fs.stat);
 const mkdirs = Promise.promisify(fs.mkdirs);
+const traverse = require('traverse');
 
 const npmDependencies = require('./npmDependencies.json');
 
@@ -62,6 +64,9 @@ export function walkAndRemoveComments(params) {
     fs.walk(build)
       .on('data', (item) => {
         return stat(item.path).then((stats) => {
+          if (stats.isDirectory()) {
+            console.log(stats);
+          }
           if (stats.isFile()) {
             return removeCode(item.path, '//=');
           }
@@ -76,6 +81,43 @@ export function walkAndRemoveComments(params) {
   });
 }
 
+export function walkAndRemoveCommentsMemory(params) {
+
+  const traverse = (obj) => {
+    for (const i in obj) {
+      if (obj.hasOwnProperty(i)) {
+        if (obj[i] !== null && typeof(obj[i]) === "object") {
+          const isDir = !i.includes('.');
+          if (!isDir) {
+
+          }
+          traverse(obj[i]);
+        }
+      }
+    }
+  };
+
+  traverse(params.build);
+
+  return new Promise((resolve, reject) => {
+    fs.walk(build)
+      .on('data', (item) => {
+        return stat(item.path).then((stats) => {
+          if (stats.isFile()) {
+            return removeCode(item.path, '//=');
+          }
+        });
+      })
+      .on('error', (err) => {
+        reject(err);
+      })
+      .on('end', () => {
+        resolve();
+      });
+  });
+}
+
+
 export async function exists(filepath) {
   try {
     await stat(filepath);
@@ -87,32 +129,30 @@ export async function exists(filepath) {
   return true;
 }
 
-export function generateZip(req, res) {
-  let archive = archiver('zip');
+export function generateZip(res, params) {
+  const archive = archiver('zip');
+
+  archive.pipe(res);
 
   archive.on('error', function(err) {
     res.status(500).send(err.message);
   });
 
+  traverse(params.build).forEach(function(x) {
+    if (Buffer.isBuffer(this.node)) {
+      archive.append(this.node, { name: this.path.join('/') });
+    }
+  });
+
   res.on('close', function() {
     console.log('closing...');
     console.log('Archive wrote %d bytes', archive.pointer());
-    return res.status(200).send('OK').end();
+    return res.send('OK');
   });
 
   res.attachment('megaboilerplate-express.zip');
 
-  archive.pipe(res);
-
-  let files = [
-    __base + '/modules/express/app.js',
-    __base + '/modules/express/package.json'
-  ];
-
-  for (let i in files) {
-    archive.append(fs.createReadStream(files[i]), { name: path.basename(files[i]) });
-  }
-
+  console.log('finished');
   archive.finalize();
 }
 
@@ -131,7 +171,7 @@ export async function addNpmPackage(pkgName, params, isDev) {
     throw new Error(`Package "${pkgName}" is missing in the npmDependencies.json`);
   }
 
-  const packageJson = path.join(__base, 'build', params.uuid, 'package.json');
+  const packageJson = join(__base, 'build', params.uuid, 'package.json');
   const packageObj = await readJson(packageJson);
   const pkgVersion = npmDependencies[pkgName];
 
@@ -162,6 +202,7 @@ export async function addNpmPackageMemory(pkgName, params, isDev) {
   }
 
   const packageJson = params.build['package.json'];
+
   const packageObj = JSON.parse(packageJson.toString());
   const pkgVersion = npmDependencies[pkgName];
 
@@ -406,7 +447,7 @@ export async function templateReplace(srcFile, data) {
   await writeFile(srcFile, newSrc);
 }
 
-export async function templateReplaceMemory(src, data) {
+export function templateReplaceMemory(src, data) {
   const compiled = template(src.toString());
   return Buffer.from(compiled(data));
 }
@@ -429,8 +470,13 @@ export async function addEnv(params, data) {
 
 export async function getModule(path) {
   if (!get(__modules, path)) {
-    set(__modules, path, await readFile(join(__base, 'generators', path[0], 'modules', ...path.slice(1))));
+    try {
+      set(__modules, path, await readFile(join(__base, 'generators', path[0], 'modules', ...path.slice(1))));
+    } catch (e) {
+      console.log('BOOM ERROR', e);
+    }
   }
+
   return get(__modules, path);
 }
 
