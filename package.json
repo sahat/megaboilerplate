@@ -8,7 +8,25 @@
     "build": "npm run clean && npm run build:webpack",
     "start": "node server.js"
   },
-  "devDependencies": {
+  "dependencies": {
+    "archiver": "^1.0.0",
+    "bluebird": "^3.3.5",
+    "body-parser": "^1.15.0",
+    "classnames": "^2.2.5",
+    "compression": "^1.6.1",
+    "express": "^4.13.4",
+    "fs-extra": "^0.30.0",
+    "haikunator": "^1.2.0",
+    "lodash": "^4.11.2",
+    "moment": "^2.13.0",
+    "nunjucks": "^2.4.2",
+    "react": "^15.0",
+    "react-dom": "15.0",
+    "react-router": "^2.4.0",
+    "shortid": "^2.2.6",
+    "traverse": "^0.6.6",
+    "velocity": "^0.7.2",
+    "velocity-react": "^1.1.5",
     "babel-core": "^6.8.0",
     "babel-eslint": "^6.0.4",
     "babel-loader": "^6.2.4",
@@ -29,26 +47,6 @@
     "webpack": "^1.13.0",
     "webpack-dev-middleware": "^1.6.1",
     "webpack-hot-middleware": "^2.10.0"
-  },
-  "dependencies": {
-    "archiver": "^1.0.0",
-    "bluebird": "^3.3.5",
-    "body-parser": "^1.15.0",
-    "classnames": "^2.2.5",
-    "compression": "^1.6.1",
-    "express": "^4.13.4",
-    "fs-extra": "^0.30.0",
-    "haikunator": "^1.2.0",
-    "lodash": "^4.11.2",
-    "moment": "^2.13.0",
-    "nunjucks": "^2.4.2",
-    "react": "^15.0",
-    "react-dom": "15.0",
-    "react-router": "^2.4.0",
-    "shortid": "^2.2.6",
-    "traverse": "^0.6.6",
-    "velocity": "^0.7.2",
-    "velocity-react": "^1.1.5"
   },
   "babel": {
     "presets": [
