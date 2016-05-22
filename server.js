@@ -32,6 +32,7 @@ let reactRoutes = require('./client/routes');
 const app = express();
 const compiler = webpack(config);
 
+app.set('port', process.env.PORT || 4000);
 app.use(compression());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -66,8 +67,8 @@ app.use((req, res) => {
 //  });
 //});
 
-app.listen(4000, 'localhost', function(err) {
-  console.log('Listening at http://localhost:4000');
+app.listen(app.get('port'), 'localhost', function(err) {
+  console.log('Listening on port ', app.get('port'));
 });
 
 process.on('unhandledRejection', function(reason, p) {
