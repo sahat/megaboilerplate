@@ -56,5 +56,8 @@
       "es2015",
       "stage-0"
     ]
+  },
+  "engines": {
+    "node": "6.x.x"
   }
 }
