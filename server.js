@@ -12,8 +12,9 @@ const webpack = require('webpack');
 const config = require('./webpack.config');
 const compression = require('compression');
 
-// Easy access to root directory
+// App globals
 global.__base = __dirname + '/';
+global.__modules = {};
 
 // Disable Bluebird warnings
 Promise.config({ warnings: false });
