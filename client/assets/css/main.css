@@ -1,5 +1,6 @@
 body {
-  background-color: #f4f5f7;
+  /*background-color: #f4f5f7;*/
+  background-color: #e8e8e8;
   font-size: 13px;
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-rendering: optimizeLegibility;
@@ -75,6 +76,10 @@ hr {
 
 .footnote a {
   color: #fff;
+}
+
+.footnote .time-ago {
+  display: inline-block;
 }
 
 .hero {
@@ -1153,9 +1158,11 @@ canvas {
   position: relative;
   margin-bottom: 20px;
   background-color: #fff;
-  border: 1px solid #ddd;
+  /*border: 1px solid #ddd;*/
   border-radius: 3px;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+  /*box-shadow: 0 1px 1px rgba(0, 0, 0, .05);*/
+  box-shadow: 0 4px 8px rgba(0, 0, 0, .125);
+
   /*border: 0;*/
   /*border-radius: 5px;*/
   /*box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02);*/
