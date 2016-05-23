@@ -138,9 +138,10 @@ export function generateZip(res, params) {
     res.status(500).send(err.message);
   });
 
-  traverse(params.build).forEach(function(x) {
+  traverse(params.build).forEach(function() {
     if (Buffer.isBuffer(this.node)) {
       archive.append(this.node, { name: this.path.join('/') });
+    } else {
     }
   });
 
@@ -374,24 +375,19 @@ export async function replaceCode(srcFile, subStr, newSrcFile, opts) {
   await writeFile(srcFile, srcData);
 }
 
-export async function replaceCodeMemory(srcFile, subStr, newSrcFile, opts) {
-  opts = opts || {};
-
-  let srcData = await readFile(srcFile);
-  let newSrcData = await readFile(newSrcFile);
-
-  const array = srcData.toString().split('\n');
+export async function replaceCodeMemory(src, templateString, module, opts = {}) {
+  const array = src.toString().split('\n');
 
   if (opts.debug) {
     console.log(array);
   }
 
   array.forEach((line, index) => {
-    const re = new RegExp(subStr + '(_INDENT[0-9]+)?' + '($|\r\n|\r|\n)');
+    const re = new RegExp(templateString + '(_INDENT[0-9]+)?' + '($|\r\n|\r|\n)');
     const isMatch = re.test(line);
 
-    // Preserve whitespace if it detects //_ token
-    if (line.indexOf('//_') > - 1) {
+    // Preserve whitespace on //_ token
+    if (line.includes('//_')) {
       array[index] = '';
     }
 
@@ -401,38 +397,37 @@ export async function replaceCodeMemory(srcFile, subStr, newSrcFile, opts) {
 
     if (isMatch) {
       let indentLevel;
+      let tempModule;
 
       if (line.includes('_INDENT')) {
         indentLevel = line.split('_INDENT').pop();
       }
 
       if (indentLevel || opts.indentLevel) {
-        newSrcData = indentCode(newSrcData, { indentLevel: indentLevel || opts.indentLevel });
+        tempModule = indentCode(module, { indentLevel: indentLevel || opts.indentLevel });
       }
 
       if (opts.indentSpaces) {
-        newSrcData = indentCode(newSrcData, { indentSpaces: opts.indentSpaces });
+        tempModule = indentCode(module, { indentSpaces: opts.indentSpaces });
       }
 
-      if (isEmpty(last(newSrcData.toString().split('\n')))) {
-        newSrcData = dropRight(newSrcData.toString().split('\n')).join('\n');
+      if (isEmpty(last(module.toString().split('\n')))) {
+        tempModule = dropRight(module.toString().split('\n')).join('\n');
       }
 
       if (opts.leadingBlankLine) {
-        newSrcData = ['\n', newSrcData].join('');
+        tempModule = ['\n', module].join('');
       }
 
       if (opts.trailingBlankLine) {
-        newSrcData = [newSrcData, '\n'].join('');
+        tempModule = [module, '\n'].join('');
       }
 
-      array[index] = newSrcData;
+      array[index] = tempModule;
     }
   });
 
-  srcData = array.join('\n');
-
-  await writeFile(srcFile, srcData);
+  return Buffer.from(array.join('\n'));
 }
 
 /**
@@ -468,16 +463,12 @@ export async function addEnv(params, data) {
   await appendFile(env, '\n' + vars.join('\n') + '\n');
 }
 
-export async function getModule(path) {
-  if (!get(__modules, path)) {
-    try {
-      set(__modules, path, await readFile(join(__base, 'generators', path[0], 'modules', ...path.slice(1))));
-    } catch (e) {
-      console.log('BOOM ERROR', e);
-    }
+export async function getModule(str) {
+  const modulePath = str.split('/');
+  if (!get(__modules, modulePath)) {
+    set(__modules, modulePath, await readFile(join(__base, 'generators', modulePath[0], 'modules', ...modulePath.slice(1))));
   }
-
-  return get(__modules, path);
+  return get(__modules, modulePath);
 }
 
 export function slugify(text) {
