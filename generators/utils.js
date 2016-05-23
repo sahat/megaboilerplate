@@ -114,6 +114,7 @@ export function generateAndSendZip(res, params) {
   traverse(params.build).forEach(function() {
     if (Buffer.isBuffer(this.node)) {
       archive.append(this.node, { name: this.path.join('/') });
+      this.update(this.node, true);
     }
   });
 
