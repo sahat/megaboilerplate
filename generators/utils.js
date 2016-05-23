@@ -82,38 +82,11 @@ export function walkAndRemoveComments(params) {
 }
 
 export function walkAndRemoveCommentsMemory(params) {
-
-  const traverse = (obj) => {
-    for (const i in obj) {
-      if (obj.hasOwnProperty(i)) {
-        if (obj[i] !== null && typeof(obj[i]) === "object") {
-          const isDir = !i.includes('.');
-          if (!isDir) {
-
-          }
-          traverse(obj[i]);
-        }
-      }
+  traverse(params.build).forEach(function() {
+    if (Buffer.isBuffer(this.node)) {
+      const buf = removeCodeMemory(this.node, '//=');
+      set(params.build, this.path, buf);
     }
-  };
-
-  traverse(params.build);
-
-  return new Promise((resolve, reject) => {
-    fs.walk(build)
-      .on('data', (item) => {
-        return stat(item.path).then((stats) => {
-          if (stats.isFile()) {
-            return removeCode(item.path, '//=');
-          }
-        });
-      })
-      .on('error', (err) => {
-        reject(err);
-      })
-      .on('end', () => {
-        resolve();
-      });
   });
 }
 
@@ -129,7 +102,7 @@ export async function exists(filepath) {
   return true;
 }
 
-export function generateZip(res, params) {
+export function generateAndSendZip(res, params) {
   const archive = archiver('zip');
 
   archive.pipe(res);
@@ -141,7 +114,6 @@ export function generateZip(res, params) {
   traverse(params.build).forEach(function() {
     if (Buffer.isBuffer(this.node)) {
       archive.append(this.node, { name: this.path.join('/') });
-    } else {
     }
   });
 
@@ -304,6 +276,32 @@ export async function removeCode(srcFile, subStr) {
   });
   srcData = array.join('\n');
   await writeFile(srcFile, srcData);
+}
+
+export function removeCodeMemory(src, templateString) {
+  let array = src.toString().split('\n');
+  const emptyClass = ' class=""';
+  const emptyClassName = ' className=""'; // React
+
+  array.forEach((line, index) => {
+    // Strip empty css classes
+    if (line.includes(emptyClass)) {
+      array[index] = line.split(emptyClass).join('');
+    } else if (line.includes(emptyClassName)) {
+      array[index] = line.split(emptyClassName).join('');
+    }
+
+    if (line.includes(templateString)) {
+      array[index] = null;
+    }
+  });
+  
+  array = array.filter((value) => {
+    return value !== null;
+  });
+
+
+  return Buffer.from(array.join('\n'));
 }
 
 /**

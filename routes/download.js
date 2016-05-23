@@ -10,7 +10,7 @@ import generateDatabase from '../generators/database/generateDatabase';
 import generateAuthentication from '../generators/authentication/generateAuthentication';
 import generateDeployment from '../generators/deployment/generateDeployment';
 import postprocessing from '../generators/postprocessing';
-import { walkAndRemoveComments, prepare, cleanup } from '../generators/utils';
+import { walkAndRemoveComments, walkAndRemoveCommentsMemory, prepare, cleanup, generateAndSendZip } from '../generators/utils';
 
 async function download(req, res) {
   let params = await prepare(req.body);
@@ -31,8 +31,9 @@ async function download(req, res) {
       await generateDeployment(params);
       await postprocessing(params);
     }
-    await walkAndRemoveComments(params);
-    res.end();
+    await walkAndRemoveCommentsMemory(params);
+    await generateAndSendZip(res, params);
+    // res.end();
   } catch (err) {
     console.info(err.stack);
     console.info(params);
