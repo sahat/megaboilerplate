@@ -306,6 +306,32 @@ export function removeCodeMemory(src, templateString) {
   return Buffer.from(array.join('\n'));
 }
 
+export function appendCodeMemory(src, templateString) {
+  let array = src.toString().split('\n');
+  const emptyClass = ' class=""';
+  const emptyClassName = ' className=""'; // React
+
+  array.forEach((line, index) => {
+    // Strip empty css classes
+    if (line.includes(emptyClass)) {
+      array[index] = line.split(emptyClass).join('');
+    } else if (line.includes(emptyClassName)) {
+      array[index] = line.split(emptyClassName).join('');
+    }
+
+    if (line.includes(templateString)) {
+      array[index] = null;
+    }
+  });
+
+  array = array.filter((value) => {
+    return value !== null;
+  });
+
+
+  return Buffer.from(array.join('\n'));
+}
+
 /**
  *
  * @param srcFile {buffer} - where to replace
@@ -462,6 +488,21 @@ export async function addEnv(params, data) {
   }
   await appendFile(env, '\n' + vars.join('\n') + '\n');
 }
+
+export function addEnvMemory(params, data) {
+  if (!params.build['.env']) {
+    throw new Error('Cannot find .env file');
+  }
+  const env = params.build['.env'];
+  const vars = [];
+  for (const i in data) {
+    if (data.hasOwnProperty(i)) {
+      vars.push([i, `'${data[i]}'`].join('='));
+    }
+  }
+  params.build['.env'] = Buffer.concat([env, Buffer.from('\n' + vars.join('\n') + '\n')])
+}
+
 
 export async function getModule(str) {
   const modulePath = str.split('/');
