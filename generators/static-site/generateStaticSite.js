@@ -56,7 +56,59 @@ async function generateStaticSite(params) {
       };
       break;
     case 'middleman':
-      
+      params.build = {
+        source: {
+          images: {
+            'image.png': await getModule('static-site/middleman/source/images/image.png'),
+            'nan.jpg': await getModule('static-site/middleman/source/images/nan.jpg'),
+            'paragraph.png': await getModule('static-site/middleman/source/images/paragraph.png'),
+            'square-image.png': await getModule('static-site/middleman/source/images/square-image.png'),
+            'tom.jpg': await getModule('static-site/middleman/source/images/tom.jpg')
+          },
+          javascripts: {
+            'jquery.min.js': await getModule('static-site/middleman/source/javascripts/jquery.min.js'),
+            'main.js': await getModule('static-site/middleman/source/javascripts/main.js'),
+            'semantic.min.js': await getModule('static-site/middleman/source/javascripts/semantic.min.js')
+          },
+          layouts: {
+            'layout.erb': await getModule('static-site/middleman/source/layouts/layout.erb')
+          },
+          stylesheets: {
+            themes: {
+              basic: {
+                assets: {
+                  fonts: {
+                    'icons.eot': await getModule('static-site/middleman/source/stylesheets/themes/basic/assets/fonts/icons.eot'),
+                    'icons.svg': await getModule('static-site/middleman/source/stylesheets/themes/basic/assets/fonts/icons.svg'),
+                    'icons.ttf': await getModule('static-site/middleman/source/stylesheets/themes/basic/assets/fonts/icons.ttf'),
+                    'icons.woff': await getModule('static-site/middleman/source/stylesheets/themes/basic/assets/fonts/icons.woff')
+                  }
+                }
+              },
+              default: {
+                assets: {
+                  fonts: {
+                    'icons.eot': await getModule('static-site/middleman/source/stylesheets/themes/default/assets/fonts/icons.eot'),
+                    'icons.otf': await getModule('static-site/middleman/source/stylesheets/themes/default/assets/fonts/icons.otf'),
+                    'icons.svg': await getModule('static-site/middleman/source/stylesheets/themes/default/assets/fonts/icons.svg'),
+                    'icons.ttf': await getModule('static-site/middleman/source/stylesheets/themes/default/assets/fonts/icons.ttf'),
+                    'icons.woff': await getModule('static-site/middleman/source/stylesheets/themes/default/assets/fonts/icons.woff'),
+                    'icons.woff2': await getModule('static-site/middleman/source/stylesheets/themes/default/assets/fonts/icons.woff2')
+                  }
+                }
+              }
+            },
+            'semantic.min.css': await getModule('static-site/middleman/source/stylesheets/semantic.min.css'),
+            'site.css.scss': await getModule('static-site/middleman/source/stylesheets/site.css.scss')
+          },
+          'index.html.erb': await getModule('static-site/middleman/source/index.html.erb')
+        },
+        '.gitignore': await getModule('static-site/middleman/.gitignore'),
+        'config.rb': await getModule('static-site/middleman/config.rb'),
+        'config.ru': await getModule('static-site/middleman/config.ru'),
+        'Gemfile': await getModule('static-site/middleman/Gemfile'),
+        'Gemfile.lock': await getModule('static-site/middleman/Gemfile.lock')
+      };
       break;
     default:
   }
