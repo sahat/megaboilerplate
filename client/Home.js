@@ -39,7 +39,8 @@ class Home extends React.Component {
       this.setState({
         beginner: false,
         disableAutoScroll: disableAutoScroll === 'true',
-        reduceAnimations: reduceAnimations === 'true'
+        reduceAnimations: reduceAnimations === 'true',
+        copyClipboardText: 'Copy to clipboard'
       });
     } catch (e) {
       console.warn(e);
@@ -152,7 +153,7 @@ class Home extends React.Component {
         break;
 
       case 'platformRadios':
-        const whitelist = ['showModal', 'beginner', 'disableAutoScroll', 'reduceAnimations'];
+        const whitelist = ['showModal', 'beginner', 'disableAutoScroll', 'reduceAnimations', 'copyClipboardText'];
         for (const key in state) {
           if (state.hasOwnProperty(key)) {
             if (whitelist.indexOf(key) === -1) {
@@ -352,14 +353,22 @@ class Home extends React.Component {
   copyDownloadLink(event) {
     const input = this.refs.downloadLinkInput;
 
+    // select all text in the input
     $(input).select();
 
     try {
       document.execCommand('copy');
+      this.setState({ copyClipboardText: 'Copied!' });
     } catch (e) {
-      this.setState({ clipboardNotSupported: true });
+      this.setState({ copyClipboardText: 'Press ⌘ + C to copy' });
       console.warn('Copy to clipboard is not supported in Safari.')
     }
+  }
+
+  copyDownloadLinkMouseOut() {
+    setTimeout(() => {
+      this.setState({ copyClipboardText: 'Copy to clipboard' });
+    }, 300)
   }
 
   render() {
@@ -451,18 +460,32 @@ class Home extends React.Component {
     // ) : null;
 
 
-    const copyClipboardText = this.state.clipboardNotSupported ? 'Press ⌘ + C to copy' : 'Copy to clipboard';
+    let generateDownloadLink;
+
+    if (this.state.generateDownladLinkSuccess) {
+
+    } else if (this.state.generateDownloadLinkInProgress) {
+      generateDownloadLink = <p className="text-center"><i className="fa fa-spinner fa-spin"></i> Please wait...</p>;
+    } else {
+      generateDownloadLink = <p className="text-center">or <a href="#">Generate Download Link</a></p>;
+    }
+
+
     const download = (
       <div>
         <button ref="downloadBtn" className="btn btn-block btn-mega btn-success" onClick={this.clickDownload}>Compile and Download</button>
-        <p className="text-center">or <a href="#">Generate Download Link</a></p>
-        <div className="input-group">
-          <input type="text" ref="downloadLinkInput" className="form-control" value="https://megaboilerplate.blob.core.windows.net/megaboilerplate/megaboilerplate-foo.zip"/>
-          <span className="input-group-btn">
-            <button onClick={this.copyDownloadLink.bind(this)} className="btn btn-default hint--bottom hint--rounded" type="button" data-hint={copyClipboardText}>
-              <img className="clipboard" src="/img/svg/clippy.svg" width="13" alt="Copy to clipboard"/>
-            </button>
-          </span>
+        {generateDownloadLink}
+        <div className="row">
+          <div className="col-sm-8 col-sm-offset-2">
+            <div className="input-group">
+              <input type="text" ref="downloadLinkInput" className="form-control" value="https://megaboilerplate.blob.core.windows.net/megaboilerplate/megaboilerplate-foo.zip"/>
+                <span className="input-group-btn">
+                  <button onClick={this.copyDownloadLink.bind(this)} onMouseOut={this.copyDownloadLinkMouseOut.bind(this)} className="btn btn-default hint--bottom hint--rounded" type="button" data-hint={this.state.copyClipboardText}>
+                    <img className="clipboard" src="/img/svg/clippy.svg" width="13" alt="Copy to clipboard"/>
+                  </button>
+                </span>
+            </div>
+          </div>
         </div>
         <br/>
       </div>
