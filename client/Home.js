@@ -51,7 +51,7 @@ class Home extends React.Component {
 
     // Google Analytics event
     // ga("send","event","Customize","Download","Customize and Download")
-    
+
     if (!state.platform) {
       console.info('Please select a platform.');
       return this.setState({ platformValidationError: 'Please select a platform.' });
@@ -348,6 +348,19 @@ class Home extends React.Component {
     }
   }
 
+  copyDownloadLink(event) {
+    const input = this.refs.downloadLinkInput;
+
+    $(input).select();
+
+    try {
+      document.execCommand('copy');
+    } catch (e) {
+      this.setState({ clipboardNotSupported: true });
+      console.warn('Copy to clipboard is not supported in Safari.')
+    }
+  }
+
   render() {
     const state = this.state;
     const settingsCheckboxes = (
@@ -437,9 +450,21 @@ class Home extends React.Component {
     // ) : null;
 
 
+    const copyClipboardText = this.state.clipboardNotSupported ? 'Press ⌘ + C to copy' : 'Copy to clipboard';
     const download = (
-      <button ref="downloadBtn" className="btn btn-block btn-mega btn-success" onClick={this.clickDownload}>Compile and
-        Download</button>
+      <div>
+        <button ref="downloadBtn" className="btn btn-block btn-mega btn-success" onClick={this.clickDownload}>Compile and Download</button>
+        <p className="text-center">or <a href="#">Generate Download Link</a></p>
+        <div className="input-group">
+          <input type="text" ref="downloadLinkInput" className="form-control" value="http://megaboilerplate.azurewebsites.net"/>
+          <span className="input-group-btn">
+            <button onClick={this.copyDownloadLink.bind(this)} className="btn btn-default hint--bottom hint--rounded" type="button" data-hint={copyClipboardText}>
+              <img className="clipboard" src="/img/svg/clippy.svg" width="13" alt="Copy to clipboard"/>
+            </button>
+          </span>
+        </div>
+        <br/>
+      </div>
     );
 
     const consulting = download ? (
@@ -453,7 +478,7 @@ class Home extends React.Component {
     const nextSteps = state.showNextSteps ? (
       <NextSteps {...state}/>
     ) : null;
-    
+
     return (
       <div>
         <Header />
