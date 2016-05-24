@@ -350,6 +350,19 @@ class Home extends React.Component {
     }
   }
 
+  handleGenerateDownloadLink(event) {
+    event.preventDefault();
+    this.setState({ generateDownloadLinkInProgress: true });
+
+    setTimeout(() => {
+      this.setState({
+        generateDownloadLinkSuccess: true,
+        generateDownloadLinkInProgress: false
+      });
+    }, 1500)
+  }
+
+
   copyDownloadLink(event) {
     const input = this.refs.downloadLinkInput;
 
@@ -462,19 +475,8 @@ class Home extends React.Component {
 
     let generateDownloadLink;
 
-    if (this.state.generateDownladLinkSuccess) {
-
-    } else if (this.state.generateDownloadLinkInProgress) {
-      generateDownloadLink = <p className="text-center"><i className="fa fa-spinner fa-spin"></i> Please wait...</p>;
-    } else {
-      generateDownloadLink = <p className="text-center">or <a href="#">Generate Download Link</a></p>;
-    }
-
-
-    const download = (
-      <div>
-        <button ref="downloadBtn" className="btn btn-block btn-mega btn-success" onClick={this.clickDownload}>Compile and Download</button>
-        {generateDownloadLink}
+    if (this.state.generateDownloadLinkSuccess) {
+      generateDownloadLink = (
         <div className="row">
           <div className="col-sm-8 col-sm-offset-2">
             <div className="input-group">
@@ -485,9 +487,22 @@ class Home extends React.Component {
                   </button>
                 </span>
             </div>
+            <p className="small text-muted text-right">This link will stay active for 24 hours.</p>
           </div>
+          <br/>
         </div>
-        <br/>
+      );
+    } else if (this.state.generateDownloadLinkInProgress) {
+      generateDownloadLink = <p className="text-center"><i className="fa fa-spinner fa-spin"></i> Please wait...</p>;
+    } else {
+      generateDownloadLink = <p onClick={this.handleGenerateDownloadLink.bind(this)} className="text-center">or <a href="#" type="button">Generate Download Link</a></p>;
+    }
+
+
+    const download = (
+      <div>
+        <button ref="downloadBtn" className="btn btn-block btn-mega btn-success" onClick={this.clickDownload}>Compile and Download</button>
+        {generateDownloadLink}
       </div>
     );
 
