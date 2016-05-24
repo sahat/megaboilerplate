@@ -367,6 +367,7 @@ class Home extends React.Component {
     const input = this.refs.downloadLinkInput;
 
     // select all text in the input
+    $(input).focus();
     $(input).select();
 
     try {
