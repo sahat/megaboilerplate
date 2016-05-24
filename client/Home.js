@@ -19,6 +19,7 @@ import Authentication from './sections/Authentication';
 import JsFramework from './sections/JsFramework';
 import Deployment from './sections/Deployment';
 import NextSteps from './sections/NextSteps';
+import { VelocityComponent } from 'velocity-react';
 
 class Home extends React.Component {
   constructor(props) {
@@ -456,7 +457,7 @@ class Home extends React.Component {
         <button ref="downloadBtn" className="btn btn-block btn-mega btn-success" onClick={this.clickDownload}>Compile and Download</button>
         <p className="text-center">or <a href="#">Generate Download Link</a></p>
         <div className="input-group">
-          <input type="text" ref="downloadLinkInput" className="form-control" value="http://megaboilerplate.azurewebsites.net"/>
+          <input type="text" ref="downloadLinkInput" className="form-control" value="https://megaboilerplate.blob.core.windows.net/megaboilerplate/megaboilerplate-foo.zip"/>
           <span className="input-group-btn">
             <button onClick={this.copyDownloadLink.bind(this)} className="btn btn-default hint--bottom hint--rounded" type="button" data-hint={copyClipboardText}>
               <img className="clipboard" src="/img/svg/clippy.svg" width="13" alt="Copy to clipboard"/>
@@ -467,12 +468,14 @@ class Home extends React.Component {
       </div>
     );
 
-    const consulting = download ? (
-      <div className="panel">
-        <div className="panel-body">
-          <i className="fa fa-skype"></i> Looking for additional help? <a href="https://calendly.com/sahat" target="_blank">Book a 1-on-1 Skype call</a>. Rates may vary.
+    const consulting = this.state.showNextSteps ? (
+      <VelocityComponent runOnMount animation="transition.slideLeftIn" duration={900} delay={2100}>
+        <div className="panel" style={{ opacity: 0 }}>
+          <div className="panel-body">
+            <i className="fa fa-skype"></i> Looking for additional help? <a href="https://calendly.com/sahat" target="_blank">Book a 1-on-1 Skype call</a>. Rates may vary.
+          </div>
         </div>
-      </div>
+      </VelocityComponent>
     ) : null;
 
     const nextSteps = state.showNextSteps ? (
@@ -498,8 +501,8 @@ class Home extends React.Component {
           <div ref="authentication">{authentication}</div>
           <div ref="deployment">{deployment}</div>
           <div ref="download">{download}</div>
-          <div ref="consulting">{consulting}</div>
           <div ref="nextSteps">{nextSteps}</div>
+          <div ref="consulting">{consulting}</div>
         </main>
         <Footer />
       </div>
