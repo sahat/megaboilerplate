@@ -45,15 +45,23 @@ Table of Contents
 - [**Contributing**](#contributing)
 - [**License**](#license)
 
+Features
+--------
+
+- one
+- two
+- three
+- four
+
 Getting Started
 ---------------
 
 ### Prerequisites
 
-- [Node.js 6.0+](http://nodejs.org)
+- [Node.js 6.0](http://nodejs.org)
 - Command Line Tools
  - <img src="http://deluge-torrent.org/images/apple-logo.gif" height="17"> **Mac OS X**: `xcode-select --install`
- - <img src="http://dc942d419843af05523b-ff74ae13537a01be6cfec5927837dcfe.r14.cf1.rackcdn.com/wp-content/uploads/windows-8-50x50.jpg" height="17"> **Windows**: [Visual Studio Community 2015](https://www.visualstudio.com/products/visual-studio-community-vs)
+ - <img src="http://dc942d419843af05523b-ff74ae13537a01be6cfec5927837dcfe.r14.cf1.rackcdn.com/wp-content/uploads/windows-8-50x50.jpg" height="17"> **Windows**: [Visual C++ Build Tools 2015](http://go.microsoft.com/fwlink/?LinkId=691126)
  - <img src="https://lh5.googleusercontent.com/-2YS1ceHWyys/AAAAAAAAAAI/AAAAAAAAAAc/0LCb_tsTvmU/s46-c-k/photo.jpg" height="17"> **Ubuntu**: `sudo apt-get install build-essential`
  - <img src="http://i1-news.softpedia-static.com/images/extra/LINUX/small/slw218news1.png" height="17"> **Fedora**: `sudo dnf groupinstall "Development Tools"`
  - <img src="https://en.opensuse.org/images/b/be/Logo-geeko_head.png" height="17"> **OpenSUSE**: `sudo zypper install --type pattern devel_basis`
@@ -72,10 +80,6 @@ $ node app.js
 ```
 
 **Note**: If you have selected a database, please make sure it is up and running. For additional information, see [**Database Setup**](#database-setup).
-
-:top: <sub>[**back to top**](#table-of-contents)</sub>
-
-### Meteor
 
 :top: <sub>[**back to top**](#table-of-contents)</sub>
 
@@ -613,6 +617,13 @@ Despite being such a small library, [Redux](http://redux.js.org/) can be difficu
 | **Container** | So-called smart components that are aware of Redux, whereas traditional components are now considered dumb components, which are not aware of Redux; they just render markup with given props. I intentionally combined containers and components into simply — *components* for the sake of simplicity.
 
 :top: <sub>[**back to faq**](#faq)</sub>
+
+Sites Built with Mega Boilerplate
+---------------------------------
+
+*Check back later*. 
+
+If you have built something using Mega Boilerplate, please enter yourself here by sending a pull request.
 
 Contributing
 ------------
