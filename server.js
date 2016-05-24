@@ -11,6 +11,10 @@ const nunjucks = require('nunjucks');
 const webpack = require('webpack');
 const config = require('./webpack.config');
 const compression = require('compression');
+const dotenv = require('dotenv');
+
+// Load Azure environment variables
+dotenv.load();
 
 // App globals
 global.__base = __dirname + '/';
@@ -22,6 +26,8 @@ Promise.config({ warnings: false });
 // ES6/ES7 Transpiler
 require('babel-core/register');
 require('babel-polyfill');
+
+
 
 // Express routes
 let downloadHandler = require('./routes/download');
