@@ -475,33 +475,37 @@ export async function replaceCodeMemory(params, filepath, templateString, module
 
     if (isMatch) {
       let indentLevel;
-      let tempModule;
 
       if (line.includes('_INDENT')) {
         indentLevel = line.split('_INDENT').pop();
       }
 
       if (indentLevel || opts.indentLevel) {
-        tempModule = indentCode(module, { indentLevel: indentLevel || opts.indentLevel });
+        module = indentCode(module, { indentLevel: indentLevel || opts.indentLevel });
       }
 
       if (opts.indentSpaces) {
-        tempModule = indentCode(module, { indentSpaces: opts.indentSpaces });
+        module = indentCode(module, { indentSpaces: opts.indentSpaces });
       }
 
       if (isEmpty(last(module.toString().split('\n')))) {
-        tempModule = dropRight(module.toString().split('\n')).join('\n');
+        module = dropRight(module.toString().split('\n')).join('\n');
       }
 
+      // add blank line before module
       if (opts.leadingBlankLine) {
-        tempModule = ['\n', module].join('');
+        module = ['\n', module].join('');
       }
 
+      // add blank line after module
       if (opts.trailingBlankLine) {
-        tempModule = [module, '\n'].join('');
+        module = [module, '\n'].join('');
       }
 
-      array[index] = tempModule;
+      if (indentLevel || opts.indentLevel) {
+        console.log(module)
+      }
+      array[index] = module;
     }
   });
 

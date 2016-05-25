@@ -39,8 +39,8 @@ async function generateFrameworkExpress(params) {
     await replaceCodeMemory(params, 'server.js', 'COOKIE_PARSER_REQUIRE', await getModule('framework/express/routes/cookie-parser-require.js'));
     await replaceCodeMemory(params, 'server.js', 'COOKIE_PARSER_MIDDLEWARE', await getModule('framework/express/routes/cookie-parser-middleware.js'));
 
-    await replaceCodeMemory(params, 'controllers/contact.js', 'CONTACT_VALIDATION_ERROR', await getModule('framework/express/responses/json/contact-validation-error.js'), { indentLevel: 2 });
-    await replaceCodeMemory(params, 'controllers/contact.js', 'CONTACT_SUCCESS', await getModule('framework/express/responses/json/contact-success.js'), { indentLevel: 2 });
+    await replaceCodeMemory(params, 'controllers/contact.js', 'CONTACT_VALIDATION_ERROR', await getModule('framework/express/responses/json/contact-validation-error.js'));
+    await replaceCodeMemory(params, 'controllers/contact.js', 'CONTACT_SUCCESS', await getModule('framework/express/responses/json/contact-success.js'));
 
     await addNpmPackageMemory('cookie-parser', params);
     await addNpmPackageMemory('nodemailer', params);
@@ -52,8 +52,8 @@ async function generateFrameworkExpress(params) {
     await replaceCodeMemory(params, 'server.js', 'SESSION_REQUIRE', await getModule('framework/express/session-require.js'));
     await replaceCodeMemory(params, 'server.js', 'SESSION_MIDDLEWARE', await getModule('framework/express/session-middleware.js'));
 
-    await replaceCodeMemory(params, 'controllers/contact.js', 'CONTACT_VALIDATION_ERROR', await getModule('framework/express/responses/session/contact-validation-error.js'), { indentLevel: 2 });
-    await replaceCodeMemory(params, 'controllers/contact.js', 'CONTACT_SUCCESS', await getModule('framework/express/responses/session/contact-success.js'), { indentLevel: 2 });
+    await replaceCodeMemory(params, 'controllers/contact.js', 'CONTACT_VALIDATION_ERROR', await getModule('framework/express/responses/session/contact-validation-error.js'));
+    await replaceCodeMemory(params, 'controllers/contact.js', 'CONTACT_SUCCESS', await getModule('framework/express/responses/session/contact-success.js'));
 
     await addNpmPackageMemory('express-session', params);
     await addNpmPackageMemory('express-flash', params);

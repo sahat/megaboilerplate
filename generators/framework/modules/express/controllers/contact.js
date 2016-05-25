@@ -29,7 +29,7 @@ exports.contactPost = function(req, res) {
   var errors = req.validationErrors();
 
   if (errors) {
-    //= CONTACT_VALIDATION_ERROR
+    //= CONTACT_VALIDATION_ERROR_INDENT2
   }
 
   var mailOptions = {
@@ -40,6 +40,6 @@ exports.contactPost = function(req, res) {
   };
 
   transporter.sendMail(mailOptions, function(err) {
-    //= CONTACT_SUCCESS
+    //= CONTACT_SUCCESS_INDENT2
   });
 };
