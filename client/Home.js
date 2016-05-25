@@ -179,6 +179,7 @@ class Home extends React.Component {
           generateDownloadLinkSuccess: true,
           generateDownloadLinkInProgress: false
         });
+        $(this.refs.downloadLinkInput).focus();
       }
     }).fail((jqXHR) => {
       window.notie.alert(3, jqXHR.responseText, 2.5);
@@ -560,7 +561,7 @@ class Home extends React.Component {
                   </button>
                 </span>
             </div>
-            <p className="small text-muted text-right">This link will stay active for 24 hours.</p>
+            <p className="small text-muted text-right">This link will stay active for 24 hours</p>
           </div>
           <br/>
         </div>
@@ -573,10 +574,11 @@ class Home extends React.Component {
             <span>Please wait...</span>
           </div>
         </div>
-
       );
     } else {
-      generateDownloadLink = <p onClick={this.handleGenerateDownloadLink.bind(this)} className="text-center">or <a href="#" type="button">Generate Download Link</a></p>;
+      generateDownloadLink = (
+        <p onClick={this.handleGenerateDownloadLink.bind(this)} className="text-center">or <a href="#" type="button">Generate Download Link</a></p>
+      );
     }
     
     const download = (
