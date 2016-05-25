@@ -402,7 +402,7 @@ i.arrow {
   letter-spacing: 1px;
   border-radius: 2px;
   padding: 0;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   transition: all .2s ease;
 }
 
@@ -1508,4 +1508,14 @@ code {
 
 .form-control {
   border-radius: 2px;
+}
+
+.loader {
+  margin-bottom: 25px;
+}
+
+.loader svg {
+  position: relative;
+  top: 8px;
+  right: 4px;
 }

@@ -47,7 +47,7 @@ class Home extends React.Component {
     }
   }
 
-  clickDownload() {
+  clickDownload(options = {}) {
     const state = this.state;
     const downloadBtn = this.refs.downloadBtn;
 
@@ -56,46 +56,87 @@ class Home extends React.Component {
 
     if (!state.platform) {
       console.info('Please select a platform.');
-      return this.setState({ platformValidationError: 'Please select a platform.' });
+      return this.setState({
+        platformValidationError: 'Please select a platform.',
+        generateDownloadLinkInProgress: false
+      });
     } else if (state.platform === 'html5' && !state.staticSiteGenerator) {
       console.info('Please select a static site generator.');
-      return this.setState({ staticSiteGeneratorValidationError: 'Please select a static site generator.' });
+      return this.setState({
+        staticSiteGeneratorValidationError: 'Please select a static site generator.',
+        generateDownloadLinkInProgress: false
+      });
     } else if (state.platform === 'library' && !state.jsLibraryName) {
       console.info('Please enter a library name.');
-      return this.setState({ jsLibraryValidationError: 'Please enter a library name.' });
+      return this.setState({
+        jsLibraryValidationError: 'Please enter a library name.',
+        generateDownloadLinkInProgress: false
+      });
     } else if (state.platform === 'node' && !state.framework) {
       console.info('Please select a framework.');
-      return this.setState({ frameworkValidationError: 'Please select a framework.' });
+      return this.setState({
+        frameworkValidationError: 'Please select a framework.',
+        generateDownloadLinkInProgress: false
+      });
     } else if (state.platform === 'node' && !state.templateEngine) {
       console.info('Please select a template engine.');
-      return this.setState({ templateEngineValidationError: 'Please select a template engine.' });
+      return this.setState({
+        templateEngineValidationError: 'Please select a template engine.',
+        generateDownloadLinkInProgress: false
+      });
     } else if (state.platform === 'node' && !state.cssFramework) {
       console.info('Please select a CSS framework.');
-      return this.setState({ cssFrameworkValidationError: 'Please select a CSS framework.' });
+      return this.setState({
+        cssFrameworkValidationError: 'Please select a CSS framework.',
+        generateDownloadLinkInProgress: false
+      });
     } else if (state.platform === 'node' && !state.cssPreprocessor) {
       console.info('Please select a CSS preprocessor.');
-      return this.setState({ cssPreprocessorValidationError: 'Please select a CSS preprocessor.' });
+      return this.setState({
+        cssPreprocessorValidationError: 'Please select a CSS preprocessor.',
+        generateDownloadLinkInProgress: false
+      });
     } else if (state.platform === 'node' && !state.jsFramework) {
       console.info('Please make a selection.');
-      return this.setState({ jsFrameworkValidationError: 'Please make a selection.' });
+      return this.setState({
+        jsFrameworkValidationError: 'Please make a selection.',
+        generateDownloadLinkInProgress: false
+      });
     } else if (state.platform === 'node' && state.jsFramework !== 'none' && !state.buildTool) {
       console.info('Please select a build tool.');
-      return this.setState({ buildToolValidationError: 'Please select a build tool.' });
+      return this.setState({
+        buildToolValidationError: 'Please select a build tool.',
+        generateDownloadLinkInProgress: false
+      });
     } else if (state.platform === 'node' && !state.testing) {
       console.info('Please select a testing framework.');
-      return this.setState({ testingValidationError: 'Please select a testing framework.' });
+      return this.setState({
+        testingValidationError: 'Please select a testing framework.',
+        generateDownloadLinkInProgress: false
+      });
     } else if (state.platform === 'node' && !state.database) {
       console.info('Please select a database.');
-      return this.setState({ databaseValidationError: 'Please select a database.' });
+      return this.setState({
+        databaseValidationError: 'Please select a database.',
+        generateDownloadLinkInProgress: false
+      });
     } else if (state.platform === 'node' && !state.authentication && state.database !== 'none') {
       console.info('Please check all that apply.');
-      return this.setState({ authenticationValidationError: 'Please check all that apply.' });
+      return this.setState({
+        authenticationValidationError: 'Please check all that apply.',
+        generateDownloadLinkInProgress: false
+      });
     }
 
     // Show next steps component
     this.setState({ showNextSteps: true });
     if (!state.disableAutoScroll) {
-      $(this.refs.nextSteps).velocity('scroll');
+      if (options.generateDownloadLink) {
+        $(this.refs.download).velocity('scroll');
+      } else {
+        $(this.refs.nextSteps).velocity('scroll');
+
+      }
     }
 
     const data = clone(state);
@@ -105,11 +146,14 @@ class Home extends React.Component {
       data.jsFramework = null;
     }
 
+    data.generateDownloadLink = options.generateDownloadLink;
+
     // Convert ES6 set to array
     data.authentication = data.authentication ? Array.from(data.authentication) : [];
     data.frameworkOptions = data.frameworkOptions ? Array.from(data.frameworkOptions) : [];
     data.reactOptions = data.reactOptions ? Array.from(data.reactOptions) : [];
     data.jsLibraryOptions = data.jsLibraryOptions ? Array.from(data.jsLibraryOptions) : [];
+
 
     $.ajax({
       url: '/download',
@@ -119,14 +163,22 @@ class Home extends React.Component {
     }).done((response, status, request) => {
       $(downloadBtn).removeAttr('disabled');
 
-      const disp = request.getResponseHeader('Content-Disposition');
-      if (disp && disp.search('attachment') !== -1) {
+      const contentDisposition = request.getResponseHeader('Content-Disposition');
+
+      if (contentDisposition && contentDisposition.search('attachment') !== -1) {
         const form = $('<form method="POST" action="/download">');
         $.each(data, (k, v) => {
           form.append($(`<input type="hidden" name="${k}" value="${v}">`));
         });
         $('body').append(form);
         form.submit();
+      }
+
+      if (options.generateDownloadLink) {
+        this.setState({
+          generateDownloadLinkSuccess: true,
+          generateDownloadLinkInProgress: false
+        });
       }
     }).fail((jqXHR) => {
       window.notie.alert(3, jqXHR.responseText, 2.5);
@@ -355,18 +407,12 @@ class Home extends React.Component {
 
   handleGenerateDownloadLink(event) {
     event.preventDefault();
-    this.setState({
-      generateDownloadLink: true,
-      generateDownloadLinkInProgress: true
-    });
-    this.clickDownload();
 
-    setTimeout(() => {
-      this.setState({
-        generateDownloadLinkSuccess: true,
-        generateDownloadLinkInProgress: false
-      });
-    }, 1500)
+    this.setState({ generateDownloadLinkInProgress: true });
+
+    this.clickDownload({ generateDownloadLink: true });
+
+
   }
 
 
@@ -483,6 +529,25 @@ class Home extends React.Component {
 
     let generateDownloadLink;
 
+    const loadingSvg = (
+      <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+   width="28px" height="28px" viewBox="0 0 40 40">
+  <path opacity="0.2" fill="#000" d="M20.201,5.169c-8.254,0-14.946,6.692-14.946,14.946c0,8.255,6.692,14.946,14.946,14.946
+    s14.946-6.691,14.946-14.946C35.146,11.861,28.455,5.169,20.201,5.169z M20.201,31.749c-6.425,0-11.634-5.208-11.634-11.634
+    c0-6.425,5.209-11.634,11.634-11.634c6.425,0,11.633,5.209,11.633,11.634C31.834,26.541,26.626,31.749,20.201,31.749z"/>
+  <path fill="#000" d="M26.013,10.047l1.654-2.866c-2.198-1.272-4.743-2.012-7.466-2.012h0v3.312h0
+    C22.32,8.481,24.301,9.057,26.013,10.047z">
+    <animateTransform attributeType="xml"
+      attributeName="transform"
+      type="rotate"
+      from="0 20 20"
+      to="360 20 20"
+      dur="0.5s"
+      repeatCount="indefinite"/>
+    </path>
+  </svg>
+    );
+
     if (this.state.generateDownloadLinkSuccess) {
       generateDownloadLink = (
         <div className="row">
@@ -501,12 +566,19 @@ class Home extends React.Component {
         </div>
       );
     } else if (this.state.generateDownloadLinkInProgress) {
-      generateDownloadLink = <p className="text-center"><i className="fa fa-spinner fa-spin"></i> Please wait...</p>;
+      generateDownloadLink = (
+        <div className="text-center">
+          <div className="loader">
+            {loadingSvg}
+            <span>Please wait...</span>
+          </div>
+        </div>
+
+      );
     } else {
       generateDownloadLink = <p onClick={this.handleGenerateDownloadLink.bind(this)} className="text-center">or <a href="#" type="button">Generate Download Link</a></p>;
     }
-
-
+    
     const download = (
       <div>
         <button ref="downloadBtn" className="btn btn-block btn-mega btn-success" onClick={this.clickDownload}>Compile and Download</button>
