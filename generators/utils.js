@@ -87,8 +87,8 @@ export function walkAndRemoveCommentsMemory(params) {
   traverse(params.build).forEach(function() {
     if (Buffer.isBuffer(this.node)) {
       const buf = removeCodeMemory(this.node, '//=');
-      set(params.build, this.path, buf);
       this.update(this.node, true);
+      set(params, ['build'].concat(this.path), buf);
     }
   });
 }
