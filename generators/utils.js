@@ -17,6 +17,8 @@ const writeJson = Promise.promisify(fs.writeJson);
 const stat = Promise.promisify(fs.stat);
 const mkdirs = Promise.promisify(fs.mkdirs);
 const traverse = require('traverse');
+const azure = require('azure-storage');
+const stream = require('stream');
 
 const npmDependencies = require('./npmDependencies.json');
 
@@ -103,13 +105,57 @@ export async function exists(filepath) {
   return true;
 }
 
-export function generateAndSendZip(res, params) {
+function uploadAndReturnDownloadLink(archive) {
+  const blobService = azure.createBlobService();
+
+  return new Promise((resolve, reject) => {
+    blobService.createContainerIfNotExists('megaboilerplate', { publicAccessLevel: 'blob' }, function(error, result, response) {
+      if (error) {
+        return reject(error)
+      }
+      const container = 'megaboilerplate';
+      const blobName = `megaboilerplate-${shortid.generate()}.zip`;
+
+      const writeStream = blobService.createWriteStreamToBlockBlob(container, blobName, archive.pointer(), function(error, result, response) {
+        if (error) {
+          return reject(error);
+        }
+        console.log('Stream uploaded successfully', blobName);
+        console.log(result);
+        resolve(`https://megaboilerplate.blob.core.windows.net/megaboilerplate/${blobName}`)
+      });
+
+      archive.pipe(writeStream);
+    });
+  });
+}
+
+export function createZipArchive(res, params) {
   const archive = archiver('zip');
 
-  archive.pipe(res);
+  let uploadPromise;
 
   archive.on('error', function(err) {
     res.status(500).send(err.message);
+  });
+
+  archive.on('end', function() {
+    console.log('closing...');
+    console.log('Archive wrote %d bytes', archive.pointer());
+
+    if (params.generateDownloadLink) {
+      uploadPromise.then((link) => {
+        res.send({ link: link });
+      }).catch((err) => {
+        console.info(err.stack);
+        console.info(params);
+        res.status(500).send(err.message);
+      })
+    } else {
+      console.log('sending attachment via express')
+      res.end();
+    }
+
   });
 
   traverse(params.build).forEach(function() {
@@ -119,14 +165,14 @@ export function generateAndSendZip(res, params) {
     }
   });
 
-  res.on('close', function() {
-    console.log('closing...');
-    console.log('Archive wrote %d bytes', archive.pointer());
-    return res.send('OK');
-  });
+  if (params.generateDownloadLink) {
+    uploadPromise = uploadAndReturnDownloadLink(archive);
+  } else {
+    archive.pipe(res);
+    res.attachment(`megaboilerplate-${shortid.generate()}.zip`);
 
-  res.attachment('megaboilerplate-express.zip');
-
+  }
+  // Set the archive name
   console.log('finished');
   archive.finalize();
 }
