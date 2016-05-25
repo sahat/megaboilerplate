@@ -329,6 +329,9 @@ class Home extends React.Component {
       // Handle default case
     }
 
+    // reset download link state
+    state.generateDownloadLinkSuccess = false;
+
     this.setState(state);
   }
 
@@ -352,7 +355,11 @@ class Home extends React.Component {
 
   handleGenerateDownloadLink(event) {
     event.preventDefault();
-    this.setState({ generateDownloadLinkInProgress: true });
+    this.setState({
+      generateDownloadLink: true,
+      generateDownloadLinkInProgress: true
+    });
+    this.clickDownload();
 
     setTimeout(() => {
       this.setState({
