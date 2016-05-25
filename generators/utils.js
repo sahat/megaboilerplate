@@ -66,9 +66,6 @@ export function walkAndRemoveComments(params) {
     fs.walk(build)
       .on('data', (item) => {
         return stat(item.path).then((stats) => {
-          if (stats.isDirectory()) {
-            console.log(stats);
-          }
           if (stats.isFile()) {
             return removeCode(item.path, '//=');
           }
@@ -120,9 +117,7 @@ function uploadAndReturnDownloadLink(archive) {
         if (error) {
           return reject(error);
         }
-        // console.log('Stream uploaded successfully', blobName);
-        // console.log(result);
-        resolve(`https://megaboilerplate.blob.core.windows.net/megaboilerplate/${blobName}`)
+        resolve(`https://megaboilerplate.blob.core.windows.net/${container}/${blobName}`)
       });
 
       archive.pipe(writeStream);
@@ -140,9 +135,6 @@ export function createZipArchive(res, params) {
   });
 
   archive.on('end', function() {
-    // console.log('closing...');
-    // console.log('Archive wrote %d bytes', archive.pointer());
-
     if (params.generateDownloadLink) {
       uploadPromise.then((link) => {
         res.send({ link: link });
@@ -152,7 +144,6 @@ export function createZipArchive(res, params) {
         res.status(500).send(err.message);
       })
     } else {
-      // console.log('sending attachment via express')
       res.end();
     }
 
@@ -165,19 +156,13 @@ export function createZipArchive(res, params) {
     }
   });
 
-  console.log(typeof params.generateDownloadLink);
-
   if (params.generateDownloadLink) {
-    // console.log('upload')
     uploadPromise = uploadAndReturnDownloadLink(archive);
   } else {
-    // console.log('express')
     archive.pipe(res);
     res.attachment(`megaboilerplate-${shortid.generate()}.zip`);
-
   }
-  // Set the archive name
-  console.log('finished');
+
   archive.finalize();
 }
 
