@@ -1,90 +1,53 @@
-import { join } from 'path';
-import { copy, replaceCode, addNpmPackage } from '../utils';
+import { set } from 'lodash';
+import { getModule, replaceCodeMemory, addNpmPackageMemory } from '../utils';
 
 export default async function generateNunjucksTemplateEngine(params) {
   switch (params.framework) {
     case 'express':
-      const server = join(__base, 'build', params.uuid, 'server.js');
-      const expressViewEngineRequire = join(__dirname, 'modules', 'nunjucks', 'nunjucks-require-express.js');
-      const expressViewEngine = join(__dirname, 'modules', 'nunjucks', 'nunjucks-express.js');
-      const expressHomeRoute = join(__dirname, 'modules', 'routes', 'home-route-express.js');
-      const homeControllerRequire = join(__dirname, 'modules', 'controllers', 'home-require.js');
-      const expressHomeController = join(__dirname, 'modules', 'controllers', 'home-controller-express.js');
-
       // Require nunjucks and set "views dir" and "view engine" Express settings
-      await replaceCode(server, 'TEMPLATE_ENGINE_REQUIRE', expressViewEngineRequire);
-      await replaceCode(server, 'TEMPLATE_ENGINE', expressViewEngine);
+      await replaceCodeMemory(params, 'server.js', 'TEMPLATE_ENGINE_REQUIRE', await getModule('template-engine/nunjucks/nunjucks-require-express.js'));
+      await replaceCodeMemory(params, 'server.js', 'TEMPLATE_ENGINE', await getModule('template-engine/nunjucks/nunjucks-express.js'));
 
-      if (!params.jsFramework) {
+      // Add layout template
+      set(params, ['build', 'views', 'layout.html'], await getModule('template-engine/nunjucks/views/layout.html'));
+
+      if (params.jsFramework) {
+        // Use "#app-container" div element for single page app
+        await replaceCodeMemory(params, 'views/layout.html', 'APP_CONTAINER_OR_BLOCK_CONTENT', await getModule('template-engine/nunjucks/app-container.html'));
+
+      } else {
         // Require home controller and add "/" route
-        await replaceCode(server, 'HOME_ROUTE', expressHomeRoute);
-        await replaceCode(server, 'HOME_CONTROLLER', homeControllerRequire);
-        // Copy home controller
-        await copy(expressHomeController, join(__base, 'build', params.uuid, 'controllers', 'home.js'));
+        set(params, ['build', 'controllers', 'home.js'], await getModule('template-engine/controllers/home-controller-express.js'));
+        await replaceCodeMemory(params, 'server.js', 'HOME_ROUTE', await getModule('template-engine/routes/home-route-express.js'));
+        await replaceCodeMemory(params, 'server.js', 'HOME_CONTROLLER', await getModule('template-engine/controllers/home-require.js'));
+
+        // Use "block content" for traditional web app
+        await replaceCodeMemory(params, 'views/layout.html', 'APP_CONTAINER_OR_BLOCK_CONTENT', await getModule('template-engine/nunjucks/block-container.html'));
+
+        // Add initial page templates
+        set(params, ['build', 'views', 'home.html'], await getModule(`template-engine/nunjucks/views/home-${params.cssFramework}.html`));
+        set(params, ['build', 'views', 'contact.html'], await getModule(`template-engine/nunjucks/views/contact-${params.cssFramework}.html`));
+        set(params, ['build', 'views', 'partials', 'footer.html'], await getModule('template-engine/nunjucks/views/partials/footer.html'));
+        set(params, ['build', 'views', 'partials', 'header.html'], await getModule(`template-engine/nunjucks/views/partials/header-${params.cssFramework}.html`));
+
+        // If authentication is checked: add log in, sign up, logout links to the header
+        if (params.authentication.length) {
+          const headerAuthIndent = { none: 2, bootstrap: 2, foundation: 3 };
+          await replaceCodeMemory(params, 'views/partials/header.html', 'HEADER_AUTH', await getModule(`template-engine/nunjucks/views/partials/header-auth-${params.cssFramework}.html`), {
+            indentLevel: headerAuthIndent[params.cssFramework]
+          });
+        }
       }
 
-      // Copy nunjucks templates
-      await copyTemplates(params);
-
-      // Add/remove features to the newly generated layout file above
-      await updateLayoutTemplate(params);
+      // OPTIONAL: Add Socket.IO <script> import
+      if (params.frameworkOptions.includes('socketio')) {
+        await replaceCodeMemory(params, 'views/layout.html', 'SOCKETIO_IMPORT', await getModule('template-engine/nunjucks/socketio-import.html'), { indentLevel: 1 });
+      }
       break;
-
     case 'meteor':
       break;
-
     default:
   }
 
-  // Add nunjucks to package.json
-  await addNpmPackage('nunjucks', params);
-}
-
-async function updateLayoutTemplate(params) {
-  const layout = join(__base, 'build', params.uuid, 'views', 'layout.html');
-
-  const appContainer = join(__dirname, 'modules', 'nunjucks', 'app-container.html');
-  const blockContent = join(__dirname, 'modules', 'nunjucks', 'block-container.html');
-  const socketIoImport = join(__dirname, 'modules', 'nunjucks', 'socketio-import.html');
-
-  if (params.jsFramework) {
-    await replaceCode(layout, 'APP_CONTAINER_OR_BLOCK_CONTENT', appContainer);
-  } else {
-    await replaceCode(layout, 'APP_CONTAINER_OR_BLOCK_CONTENT', blockContent);
-  }
-
-  // Add Socket.IO <script> tag (optional)
-  if (params.frameworkOptions.includes('socketio')) {
-    await replaceCode(layout, 'SOCKETIO_IMPORT', socketIoImport, { indentLevel: 1 });
-  }
-}
-
-async function copyTemplates(params) {
-  const views = join(__base, 'build', params.uuid, 'views');
-  const layout = join(__dirname, 'modules', 'nunjucks', 'views', 'layout.html');
-
-  await copy(layout, join(views, 'layout.html'));
-
-  if (!params.jsFramework) {
-    const footer = join(__dirname, 'modules', 'nunjucks', 'views', 'partials', 'footer.html');
-    const header = join(__dirname, 'modules', 'nunjucks', 'views', 'partials', `header-${params.cssFramework}.html`);
-    const headerAuth = join(__dirname, 'modules', 'nunjucks', 'views', 'partials', `header-auth-${params.cssFramework}.html`);
-    const home = join(__dirname, 'modules', 'nunjucks', 'views', `home-${params.cssFramework}.html`);
-    const contact = join(__dirname, 'modules', 'nunjucks', 'views', `contact-${params.cssFramework}.html`);
-
-    await copy(footer, join(views, 'partials', 'footer.html'));
-    await copy(header, join(views, 'partials', 'header.html'));
-    await copy(home, join(views, 'home.html'));
-    await copy(contact, join(views, 'contact.html'));
-
-    // Is authentication checked? Then add log in, sign up, logout links to the header
-    if (params.authentication.length) {
-      const headerAuthIndent = {
-        none: 2,
-        bootstrap: 2,
-        foundation: 3
-      };
-      await replaceCode(join(views, 'partials', 'header.html'), 'HEADER_AUTH', headerAuth, { indentLevel: headerAuthIndent[params.cssFramework] });
-    }
-  }
+  await addNpmPackageMemory('nunjucks', params);
 }
