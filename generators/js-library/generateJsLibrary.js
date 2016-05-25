@@ -33,22 +33,22 @@ async function generateJsLibrary(params) {
     'webpack.config.js': await getModule('js-library/webpack.config.js')
   };
 
-  params.build.examples['browser.html'] = templateReplaceMemory(params.build.examples['browser.html'], {
+  templateReplaceMemory(params, 'examples/browser.html', {
     name: libraryName
   });
 
-  params.build['CHANGELOG.md'] = templateReplaceMemory(params.build['CHANGELOG.md'], {
+  templateReplaceMemory(params, 'CHANGELOG.md', {
     user: username,
     repo: libraryName
   });
 
-  params.build['README.md'] = templateReplaceMemory(params.build['README.md'], {
+  templateReplaceMemory(params, 'README.md', {
     name: libraryName,
     user: username,
     repo: libraryName
   });
 
-  params.build['package.json'] = templateReplaceMemory(params.build['package.json'], {
+  templateReplaceMemory(params, 'package.json', {
     author: author,
     name: libraryName,
     description: description,
@@ -57,41 +57,44 @@ async function generateJsLibrary(params) {
     license: licenseMap[params.jsLibraryLicense]
   });
 
+  // OPTIONAL: ESLint
   if (options.includes('eslint')) {
     params.build['.eslintrc'] = await getModule('js-library/.eslintrc');
     params.build['.eslintignore'] = await getModule('js-library/.eslintignore');
-    
     await addNpmPackageMemory('babel-eslint', params, true);
     await addNpmPackageMemory('eslint', params, true);
     await addNpmScriptMemory('lint', 'eslint src test examples', params);
   }
 
+  // OPTIONAL: Travis CI
   if (options.includes('travis')) {
     params.build['.travis.yml'] = await getModule('js-library/.travis.yml');
   }
 
+  // OPTIONAL: Istanbul code coverage
   if (options.includes('coverage')) {
     params.build['.istanbul.yml'] = await getModule('js-library/.istanbul.yml');
     await addNpmPackageMemory('isparta', params, true);
     await addNpmScriptMemory('test:cov', 'babel-node ./node_modules/isparta/bin/isparta cover ./node_modules/mocha/bin/_mocha -- --recursive', params);
   }
 
+  // OPTIONAL: Shields.io README badges
   if (options.includes('badges')) {
-    params.build['README.md'] = await replaceCodeMemory(params.build['README.md'], 'BADGES', await getModule('js-library/badges.md'));
+    await replaceCodeMemory(params, 'README.md', 'BADGES', await getModule('js-library/badges.md'));
   }
 
   switch (params.jsLibraryLicense) {
     case 'mit':
       params.build['LICENSE'] = await getModule('js-library/license/mit');
-      params.build['LICENSE'] = templateReplaceMemory(params.build['LICENSE'], { author: author });
+      templateReplaceMemory(params, 'LICENSE', { author: author });
       break;
     case 'apache':
       params.build['LICENSE'] = await getModule('js-library/license/apache');
-      params.build['LICENSE'] = templateReplaceMemory(params.build['LICENSE'], { author: author });
+      templateReplaceMemory(params, 'LICENSE', { author: author });
       break;
     case 'gplv3':
       params.build['LICENSE'] = await getModule('js-library/license/gplv3');
-      params.build['LICENSE'] = templateReplaceMemory(params.build['LICENSE'], {
+      templateReplaceMemory(params, 'LICENSE', {
         author: author,
         description: description,
         name: libraryName

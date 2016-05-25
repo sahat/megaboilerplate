@@ -120,8 +120,8 @@ function uploadAndReturnDownloadLink(archive) {
         if (error) {
           return reject(error);
         }
-        console.log('Stream uploaded successfully', blobName);
-        console.log(result);
+        // console.log('Stream uploaded successfully', blobName);
+        // console.log(result);
         resolve(`https://megaboilerplate.blob.core.windows.net/megaboilerplate/${blobName}`)
       });
 
@@ -140,8 +140,8 @@ export function createZipArchive(res, params) {
   });
 
   archive.on('end', function() {
-    console.log('closing...');
-    console.log('Archive wrote %d bytes', archive.pointer());
+    // console.log('closing...');
+    // console.log('Archive wrote %d bytes', archive.pointer());
 
     if (params.generateDownloadLink) {
       uploadPromise.then((link) => {
@@ -152,7 +152,7 @@ export function createZipArchive(res, params) {
         res.status(500).send(err.message);
       })
     } else {
-      console.log('sending attachment via express')
+      // console.log('sending attachment via express')
       res.end();
     }
 
@@ -165,9 +165,13 @@ export function createZipArchive(res, params) {
     }
   });
 
+  console.log(typeof params.generateDownloadLink);
+
   if (params.generateDownloadLink) {
+    // console.log('upload')
     uploadPromise = uploadAndReturnDownloadLink(archive);
   } else {
+    // console.log('express')
     archive.pipe(res);
     res.attachment(`megaboilerplate-${shortid.generate()}.zip`);
 
@@ -217,13 +221,11 @@ export async function addNpmPackageMemory(pkgName, params, isDev) {
   if (!params) {
     throw new Error(`Did you forget to pass params to addNpmPackage('${pkgName}')?`);
   }
-
   if (!npmDependencies[pkgName]) {
     throw new Error(`Package "${pkgName}" is missing in the npmDependencies.json`);
   }
 
   const packageJson = params.build['package.json'];
-
   const packageObj = JSON.parse(packageJson.toString());
   const pkgVersion = npmDependencies[pkgName];
 
@@ -241,7 +243,7 @@ export async function addNpmPackageMemory(pkgName, params, isDev) {
     packageObj.devDependencies = sortJson(packageObj.devDependencies);
   }
 
-  return Buffer.from(JSON.stringify(packageObj, null, 2));
+  params.build['package.json'] = Buffer.from(JSON.stringify(packageObj, null, 2));
 }
 
 function sortJson(obj) {
@@ -272,11 +274,14 @@ export async function addNpmScriptMemory(name, value, params) {
   if (!params) {
     throw new Error(`Did you forget to pass params to addNpmScript('${name}')?`);
   }
+
   const packageJson = params.build['package.json'];
   const packageObj = JSON.parse(packageJson.toString());
+
   packageObj.scripts[name] = value;
   packageObj.scripts = sortJson(packageObj.scripts);
-  return Buffer.from(JSON.stringify(packageObj, null, 2));
+
+  params.build['package.json'] = Buffer.from(JSON.stringify(packageObj, null, 2));
 }
 
 /**
@@ -447,7 +452,8 @@ export async function replaceCode(srcFile, subStr, newSrcFile, opts) {
   await writeFile(srcFile, srcData);
 }
 
-export async function replaceCodeMemory(src, templateString, module, opts = {}) {
+export async function replaceCodeMemory(params, filepath, templateString, module, opts = {}) {
+  const src = get(params, ['build'].concat(filepath.split('/')));
   const array = src.toString().split('\n');
 
   if (opts.debug) {
@@ -499,7 +505,7 @@ export async function replaceCodeMemory(src, templateString, module, opts = {}) 
     }
   });
 
-  return Buffer.from(array.join('\n'));
+  set(params, ['build', ...filepath.split('/')], Buffer.from(array.join('\n')));
 }
 
 /**
@@ -514,9 +520,10 @@ export async function templateReplace(srcFile, data) {
   await writeFile(srcFile, newSrc);
 }
 
-export function templateReplaceMemory(src, data) {
+export function templateReplaceMemory(params, filepath, data) {
+  const src = get(params, ['build'].concat(filepath.split('/')));
   const compiled = template(src.toString());
-  return Buffer.from(compiled(data));
+  set(params, ['build', ...filepath.split('/')], Buffer.from(compiled(data)));
 }
 
 /**
