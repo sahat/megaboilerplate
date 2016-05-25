@@ -113,7 +113,7 @@ function uploadAndReturnDownloadLink(archive) {
       if (error) {
         return reject(error)
       }
-      const container = 'megaboilerplate';
+      const container = 'archive';
       const blobName = `megaboilerplate-${shortid.generate()}.zip`;
 
       const writeStream = blobService.createWriteStreamToBlockBlob(container, blobName, archive.pointer(), function(error, result, response) {
@@ -502,9 +502,6 @@ export async function replaceCodeMemory(params, filepath, templateString, module
         module = [module, '\n'].join('');
       }
 
-      if (indentLevel || opts.indentLevel) {
-        console.log(module)
-      }
       array[index] = module;
     }
   });
