@@ -57,6 +57,14 @@ hr {
   position: relative;
 }
 
+.carbon-ads-blocked {
+  margin-bottom: 20px;
+}
+
+.carbon-ads-blocked .fa {
+  vertical-align: sub;
+}
+
 .text-danger {
   color: #db2828;
 }
@@ -148,7 +156,7 @@ hr {
   height: 32px;
   vertical-align: baseline;
   margin-right: 2px;
-  margin-left: 315px;
+  margin-left: 280px;
 }
 
 .hero-logo {

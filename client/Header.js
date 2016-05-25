@@ -78,12 +78,28 @@ class Header extends React.Component {
 
   loadCarbonAds() {
     let carbonAdsContainer = this.refs.carbonAds;
+    let carbonAdsBlocked = this.refs.carbonAdsBlocked;
     let script = document.createElement('script');
     script.defer = true;
     script.type = 'text/javascript';
     script.src = '//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=sahatyalkabovcom';
     script.id = '_carbonads_js';
     carbonAdsContainer.appendChild(script);
+
+    var tryMessage = function() {
+      setTimeout(function() {
+        if (!document.getElementById('carbonads')) {
+          $(carbonAdsBlocked).html('<i class="fa fa-2x fa-audio-description" /> Please consider disabling your ad blocker on this site');
+        }
+      }, 1800);
+    };
+    if (window.addEventListener) {
+      window.addEventListener('load', tryMessage, false);
+    } else {
+      window.attachEvent('onload', tryMessage);
+    }
+
+    tryMessage();
   }
 
   renderConnectedDots() {
@@ -230,9 +246,6 @@ class Header extends React.Component {
       demoIcon = <i className="fa fa-globe"/>;
     }
 
-    // <img className="hero-arrow hidden-xs" src="/img/arrow.png" alt="Arrow"/>
-    // <span>Don't forget to <i className="fa fa-star"/> on GitHub if you liked this project!</span>
-
     const latestCommit = this.state.latestCommit ? (
       <VelocityComponent runOnMount animation="transition.fadeIn" duration={1000}>
         <div style={{ opacity: 0 }} className="footnote right">Latest commit: <span className="time-ago"><a href="https://github.com/sahat/boilerplate" target="_blank">{this.state.latestCommit}</a></span></div>
@@ -301,7 +314,16 @@ class Header extends React.Component {
             </VelocityComponent>
             <a href="#" className="btn btn-outline">{demoIcon} Live Demo</a> <a href="#" className="btn btn-outline">Code Examples</a>
           </div>
+
+          <div ref="carbonAdsBlocked" className="carbon-ads-blocked"></div>
+
           <iframe src="https://ghbtns.com/github-btn.html?user=sahat&repo=boilerplate&type=star&count=true&size=large" frameBorder="0" scrolling="0" width="160px" height="30px"></iframe>
+
+          <div className="visible-lg">
+            <img className="hero-arrow" src="/img/arrow.png" alt="Arrow"/>
+            <span>Don't forget to <i className="fa fa-star"/> on GitHub if you liked this project!</span>
+          </div>
+
           <div ref="carbonAds"></div>
 
           <div className="footnote left">¹ Inspired by <a href="https://github.com/sahat/hackathon-starter" target="_blank">Hackathon Starter</a></div>
