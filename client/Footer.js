@@ -5,7 +5,8 @@ const Footer = (props) => {
     <footer className="container">
       <div className="panel">
         <div className="panel-body">
-          <div className="pull-left">© 2016 <a href="http://sahatyalkabov.com">Sahat Yalkabov</a>. MIT Licensed.
+          <div className="pull-left">
+            © 2016 <a href="http://sahatyalkabov.com">Sahat Yalkabov</a>. MIT Licensed.
             <br/>
           </div>
           <div className="pull-right">
@@ -13,6 +14,14 @@ const Footer = (props) => {
           </div>
         </div>
       </div>
+
+      <a className="twitter-follow-button" href="https://twitter.com/EvNowAndForever">Follow @EvNowAndForever</a>
+
+      <a className="github-button" href="https://github.com/sahat"
+         data-count-href="/sahat/followers"
+         data-count-api="/users/sahat#followers"
+         data-count-aria-label="# followers on GitHub"
+         aria-label="Follow @sahat on GitHub">Follow @sahat</a>
     </footer>
   );
 };
