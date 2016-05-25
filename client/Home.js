@@ -176,6 +176,7 @@ class Home extends React.Component {
 
       if (options.generateDownloadLink) {
         this.setState({
+          downloadLinkInputValue: response.link,
           generateDownloadLinkSuccess: true,
           generateDownloadLinkInProgress: false
         });
@@ -554,7 +555,7 @@ class Home extends React.Component {
         <div className="row">
           <div className="col-sm-8 col-sm-offset-2">
             <div className="input-group">
-              <input type="text" ref="downloadLinkInput" className="form-control" value="https://megaboilerplate.blob.core.windows.net/megaboilerplate/megaboilerplate-foo.zip"/>
+              <input type="text" ref="downloadLinkInput" className="form-control" defaultValue={state.downloadLinkInputValue} readOnly/>
                 <span className="input-group-btn">
                   <button onClick={this.copyDownloadLink.bind(this)} onMouseOut={this.copyDownloadLinkMouseOut.bind(this)} className="btn btn-default hint--bottom hint--rounded" type="button" data-hint={this.state.copyClipboardText}>
                     <img className="clipboard" src="/img/svg/clippy.svg" width="13" alt="Copy to clipboard"/>
