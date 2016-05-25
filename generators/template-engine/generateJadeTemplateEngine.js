@@ -11,7 +11,7 @@ export default async function generateJadeTemplateEngine(params) {
       set(params, ['build', 'views', 'layout.jade'], await getModule('template-engine/jade/views/layout.jade'));
 
       if (params.jsFramework) {
-        // Use "#app-container" div element for single page app
+        // Use <div id="app"> container element for single page app
         await replaceCodeMemory(params, 'views/layout.jade', 'APP_CONTAINER_OR_BLOCK_CONTENT', await getModule('template-engine/jade/app-container.jade'), { indentLevel: 2 });
       } else {
         // Require HomeController, add "/" route

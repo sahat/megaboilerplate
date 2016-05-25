@@ -12,9 +12,8 @@ export default async function generateNunjucksTemplateEngine(params) {
       set(params, ['build', 'views', 'layout.html'], await getModule('template-engine/nunjucks/views/layout.html'));
 
       if (params.jsFramework) {
-        // Use "#app-container" div element for single page app
+        // Use <div id="app"> container element for single page app
         await replaceCodeMemory(params, 'views/layout.html', 'APP_CONTAINER_OR_BLOCK_CONTENT', await getModule('template-engine/nunjucks/app-container.html'));
-
       } else {
         // Require home controller and add "/" route
         set(params, ['build', 'controllers', 'home.js'], await getModule('template-engine/controllers/home-controller-express.js'));
