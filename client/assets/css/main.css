@@ -334,6 +334,10 @@ i.arrow {
   background-color: #db2828;
 }
 
+.form-control[readonly] {
+  background-color: #fff;
+}
+
 /*Radios*/
 .radio input[type="radio"]:focus + label::before {
   outline: none;

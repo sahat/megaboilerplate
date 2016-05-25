@@ -99,7 +99,7 @@ const NextSteps = (props) => {
               <div className="text-center">
                 <img className="next-steps-icon" src="/img/svg/faq.svg" alt="FAQ"/>
                 <p>
-                  See <a href="https://github.com/sahat/boilerplate/README.md#faq" target="_blank">frequently asked questions</a> before <a href="https://github.com/sahat/boilerplate/issues/new">opening an issue</a> on GitHub. For general questions, visit our <a href="">Gitter</a> chat.
+                  See <a href="https://github.com/sahat/boilerplate/README.md#faq" target="_blank">FAQ</a> before <a href="https://github.com/sahat/boilerplate/issues/new">opening an issue</a> on GitHub. For general questions, please visit official <a href="">Gitter</a> chat.
                 </p>
               </div>
             </div>
