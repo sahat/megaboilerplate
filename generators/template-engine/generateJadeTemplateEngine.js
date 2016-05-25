@@ -1,3 +1,4 @@
+import { set } from 'lodash';
 import { getModule, replaceCodeMemory, addNpmPackageMemory } from '../utils';
 
 async function generateJadeTemplateEngine(params) {
@@ -10,9 +11,7 @@ async function generateJadeTemplateEngine(params) {
       await replaceCodeMemory(params, 'server.js', 'TEMPLATE_ENGINE', await getModule('template-engine/jade/jade-express.js'));
 
       // Add layout template
-      params.build.views = {
-        'layout.jade': await getModule('template-engine/jade/views/layout.jade')
-      };
+      set(params, ['build', 'views', 'layout.jade'], await getModule('template-engine/jade/views/layout.jade'));
 
       if (params.jsFramework) {
         // Use "#app-container" div element for single page app
@@ -29,12 +28,10 @@ async function generateJadeTemplateEngine(params) {
         await replaceCodeMemory(params, 'views/layout.jade', 'APP_CONTAINER_OR_BLOCK_CONTENT', await getModule('template-engine/jade/block-content.jade'), { indentLevel: 2 });
 
         // Add initial page templates
-        params.build.views['home.jade'] = await getModule(`template-engine/jade/views/home-${params.cssFramework}.jade`);
-        params.build.views['contact.jade'] = await getModule(`template-engine/jade/views/contact-${params.cssFramework}.jade`);
-        params.build.views.includes = {
-          'footer.jade': await getModule('template-engine/jade/views/footer.jade'),
-          'header.jade': await getModule(`template-engine/jade/views/header-${params.cssFramework}.jade`)
-        };
+        set(params, ['build', 'views', 'home.jade'], await getModule(`template-engine/jade/views/home-${params.cssFramework}.jade`));
+        set(params, ['build', 'views', 'contact.jade'], await getModule(`template-engine/jade/views/contact-${params.cssFramework}.jade`));
+        set(params, ['build', 'views', 'includes', 'footer.jade'], await getModule('template-engine/jade/views/footer.jade'));
+        set(params, ['build', 'views', 'includes', 'header.jade'], await getModule(`template-engine/jade/views/header-${params.cssFramework}.jade`));
 
         // If authentication is checked: add log in, sign up, logout links to the header
         if (params.authentication.length) {
