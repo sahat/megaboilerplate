@@ -49,7 +49,6 @@ class Home extends React.Component {
 
   clickDownload(options = {}) {
     const state = this.state;
-    const downloadBtn = this.refs.downloadBtn;
 
     // Google Analytics event
     // ga("send","event","Customize","Download","Customize and Download")
@@ -156,37 +155,30 @@ class Home extends React.Component {
     data.reactOptions = data.reactOptions ? Array.from(data.reactOptions) : [];
     data.jsLibraryOptions = data.jsLibraryOptions ? Array.from(data.jsLibraryOptions) : [];
 
-
-    $.ajax({
-      url: '/download',
-      method: 'POST',
-      contentType: 'application/json; charset=utf-8',
-      data: JSON.stringify(data)
-    }).done((response, status, request) => {
-      $(downloadBtn).removeAttr('disabled');
-
-      const contentDisposition = request.getResponseHeader('Content-Disposition');
-
-      if (contentDisposition && contentDisposition.search('attachment') !== -1) {
-        const form = $('<form method="POST" action="/download">');
-        $.each(data, (k, v) => {
-          form.append($(`<input type="hidden" name="${k}" value="${v}">`));
-        });
-        $('body').append(form);
-        form.submit();
-      }
-
-      if (options.generateDownloadLink) {
+    if (options.generateDownloadLink) {
+      $.ajax({
+        url: '/download',
+        method: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify(data)
+      }).done((response, status, request) => {
         this.setState({
           downloadLinkInputValue: response.link,
           generateDownloadLinkSuccess: true,
           generateDownloadLinkInProgress: false
         });
         $(this.refs.downloadLinkInput).focus();
-      }
-    }).fail((jqXHR) => {
-      window.notie.alert(3, jqXHR.responseText, 2.5);
-    });
+      })
+    } else {
+      console.log('submitting form');
+      const form = $('<form method="POST" action="/download">');
+      $.each(data, (k, v) => {
+        form.append($(`<input type="hidden" name="${k}" value="${v}">`));
+      });
+      $('body').append(form);
+      form.submit();
+      form.remove();
+    }
   }
 
   handleGenerateLibraryName() {
@@ -586,7 +578,7 @@ class Home extends React.Component {
     
     const download = (
       <div>
-        <button ref="downloadBtn" className="btn btn-block btn-mega btn-success" onClick={this.clickDownload}>Compile and Download</button>
+        <button ref="downloadBtn" className="btn btn-block btn-mega btn-success" onClick={this.clickDownload}><i className="fa fa-download"></i> Compile and Download</button>
         {generateDownloadLink}
       </div>
     );
