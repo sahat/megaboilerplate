@@ -38,9 +38,8 @@ app.set('port', process.env.PORT || 4000);
 app.use(compression());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'website', 'assets')));
 
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV !== 'production') {
   const webpack = require('webpack');
   const config = require('./webpack.config');
   const compiler = webpack(config);
@@ -51,7 +50,9 @@ if (process.env.NODE_ENV === 'development') {
   app.use(require('webpack-hot-middleware')(compiler));
 }
 
-// POST /download
+app.use(express.static(path.join(__dirname, 'website', 'assets')));
+
+
 app.post('/download', downloadHandler.default);
 
 // React server rendering
