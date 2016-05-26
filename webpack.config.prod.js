@@ -2,9 +2,10 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
+  context: path.resolve(__dirname, '..'),
   entry: './website/main',
   output: {
-    path: path.resolve(__dirname, 'website', 'assets', 'js'),
+    path: path.join(__dirname, 'website', 'assets', 'js'),
     filename: 'bundle.js',
     publicPath: '/js/'
   },
@@ -28,7 +29,12 @@ module.exports = {
       loaders: ['babel']
     }]
   },
+  progress: true,
   resolve: {
+    modulesDirectories: [
+      'src',
+      'node_modules'
+    ],
     extensions: ['', '.js', '.jsx'],
     fallback: path.join(__dirname, 'node_modules')
   },
