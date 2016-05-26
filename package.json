@@ -4,8 +4,7 @@
   "version": "1.0.0",
   "scripts": {
     "build": "webpack --config webpack.config.prod.js",
-    "start": "node server.js",
-    "postinstall": "npm run build:webpack"
+    "start": "node server.js"
   },
   "dependencies": {
     "archiver": "^1.0.0",
