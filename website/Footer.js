@@ -6,8 +6,7 @@ const Footer = (props) => {
       <div className="panel">
         <div className="panel-body">
           <div className="pull-left">
-            © 2016 <a href="http://sahatyalkabov.com">Sahat Yalkabov</a>. MIT Licensed.
-            <br/>
+            © 2016 <a href="http://sahatyalkabov.com">Sahat Yalkabov</a>. Code licensed under <a href="https://github.com/sahat/boilerplate/blob/master/LICENSE">MIT License</a>.
           </div>
           <div className="pull-right">
             <fa className="fa fa-code"></fa> <a href="https://github.com/sahat/boilerplate">Source Code</a>

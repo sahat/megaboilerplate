@@ -22,7 +22,7 @@ ol, ul {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  /*font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;*/
+  font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 300;
 }
 
@@ -404,6 +404,7 @@ i.arrow {
 }
 
 .btn-mega {
+  position: relative;
   height: 50px;
   line-height: 48px;
   border: 2px solid transparent;
@@ -416,13 +417,18 @@ i.arrow {
   padding: 0;
   margin-bottom: 15px;
   box-shadow: 0 2px 6px 0 rgba(0,0,0,.2);
-  transition: all .2s ease;
+  outline: 0 !important;
+  transition: all .35s cubic-bezier(.25,.25,.315,1.35);
+}
+
+.btn-mega:active {
+  top: 1px;
 }
 
 .btn-mega.btn-success:hover,
 .btn-mega.btn-success:focus {
-  border-color: #3a925f;
-  background: #3a925f;
+  border-color: #41a46b;
+  background: #41a46b;
   color: #fff;
 }
 .btn-mega.btn-primary:hover,
@@ -1350,7 +1356,7 @@ input[type=checkbox] + span::before {
   font-family: fontAwesome;
   font-weight: normal;
   font-size: 11px;
-  color: #fff;
+  color: #c2c7d0;
   content: '\f00c';
   background-color: #eff1f3;
   border: 2px solid #c2c7d0;
@@ -1372,6 +1378,7 @@ input[type=checkbox]:checked + span::before {
   transition: all .1s ease-out;
   display: inline-block;
   content: '\f00c';
+  color: #fff;
   border-color: #398e5c;
   background-color: #47b475;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1);
