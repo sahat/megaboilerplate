@@ -1,10 +1,10 @@
-![Mega Boilerplate](https://lh3.googleusercontent.com/9dAY4UPVJcK2uQfv1XMyDD_x2SzSSMxm6dH3l1MN5X3j-legelgbSaVIAtR2NpMiPQxvLLcaQsIz2V07lkTNglY2fb_zOWjy_z7lDYz8AtEOtNFRBs-eM-GnJDrzxnXo2BknPn9g2LP0uBB8ACi1jhbxAqGIOyPKeJ1Nsj_1b2d6tRI_HduaKrVVs7lTfuQQettJLkGZje_gYUnMc-ApZAxGS_Rr6skAOpUGnWjvuYfhB44pAbgw0U1JvdOsfgQqmqIq8kDDSEtBu_G5mGVS79DF5fO6QNWZ-IYz9LWfON3L1KRxxRQqBMmr-YKbBwgU89hvUFa2zDxwOOFfvlvI4xmTPukOpG2Zua4mS7sGVsv2AvdRqIYB9hdDZGOPdCJ5T_I1SFlJRE-GVVOAPZrFpG75vuK-EjUJVftd-4GZWk5Hqj2yn4XredhlfbQ9kb3WywOfQp59nHiNnJEhqfCJyWX9QZc8HmpGcSl8R2TszHPRiHUow_OnRrpRjl2LZFJrS7KvVF1r4SKPIit5Z5b6n1N3NYGsZOnM-dM_8qQcXGwHnWkqYbyCLh8jlHxZ3M4M_PNr8FST8a7FATlFESVJMdXzSdSA1fg=w1762-h753-no)
+<img src="http://i.imgur.com/Ruf4Uph.png" width="309" height="203" alt="Logo">
 
 [Mega Boilerplate](https://github.com/sahat/boilerplate)
 ========================================================
 
 [![Paypal](https://img.shields.io/badge/donate-paypal-0070ba.svg?style=flat-square)](https://paypal.me/sahat)
-[![Gitter](https://img.shields.io/badge/chat-on%20gitter-61dafb.svg?style=flat-square)](https://gitter.im/sahat/boilerplate)
+[![Gitter](https://img.shields.io/badge/chat-on%20gitter-46bc99.svg?style=flat-square)](https://gitter.im/sahat/boilerplate)
 [![Build Status](https://img.shields.io/travis/sahat/boilerplate.svg?style=flat-square)](https://travis-ci.org/sahat/satellizer)
 [![Issues](https://img.shields.io/github/issues/sahat/boilerplate.svg?style=flat-square)](https://github.com/sahat/boilerplate/issues)
 ![License](https://img.shields.io/badge/license-mit-3da639.svg?style=flat-square)
