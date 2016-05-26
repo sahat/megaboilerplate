@@ -2,7 +2,7 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-  entry: './website/main',
+  entry: './main',
   output: {
     path: path.join(__dirname, 'website', 'assets', 'js'),
     filename: 'bundle.js',
@@ -24,17 +24,13 @@ module.exports = {
   module: {
     loaders: [{
       test: /\.js$/,
-      include: path.join(__dirname, 'website'),
+      exclude: /node_modules/,
       loaders: ['babel']
     }]
   },
   progress: true,
   resolve: {
-    modulesDirectories: [
-      'src',
-      'node_modules'
-    ],
-    fallback: path.join(__dirname, 'node_modules')
-  },
-  resolveLoader: { fallback: path.join(__dirname, 'node_modules') }
+    root: path.join(__dirname, 'website'),
+    modulesDirectories: ['node_modules']
+  }
 };
