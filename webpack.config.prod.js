@@ -2,7 +2,6 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-  context: path.resolve(__dirname, '..'),
   entry: './website/main',
   output: {
     path: path.join(__dirname, 'website', 'assets', 'js'),
