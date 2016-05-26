@@ -1,15 +1,10 @@
 ![](http://i.imgur.com/DrmCGFc.jpg)
 
-[Mega Boilerplate](https://github.com/sahat/boilerplate)
-========================================================
+# Mega Boilerplate [![Paypal](https://img.shields.io/badge/donate-paypal-0070ba.svg?style=flat)](https://paypal.me/sahat) [![Gitter](https://img.shields.io/badge/chat-on%20gitter-46bc99.svg?style=flat)](https://gitter.im/sahat/boilerplate) [![Build Status](https://img.shields.io/travis/sahat/boilerplate.svg?style=flat)](https://travis-ci.org/sahat/satellizer) [![Issues](https://img.shields.io/github/issues/sahat/boilerplate.svg?style=flat)](https://github.com/sahat/boilerplate/issues)
 
-[![Paypal](https://img.shields.io/badge/donate-paypal-0070ba.svg?style=flat-square)](https://paypal.me/sahat)
-[![Gitter](https://img.shields.io/badge/chat-on%20gitter-46bc99.svg?style=flat-square)](https://gitter.im/sahat/boilerplate)
-[![Build Status](https://img.shields.io/travis/sahat/boilerplate.svg?style=flat-square)](https://travis-ci.org/sahat/satellizer)
-[![Issues](https://img.shields.io/github/issues/sahat/boilerplate.svg?style=flat-square)](https://github.com/sahat/boilerplate/issues)
-![License](https://img.shields.io/badge/license-mit-3da639.svg?style=flat-square)
+:space_invader: **Live Demo**: http://hackathonstarter.herokuapp.com
 
-
+TODO: One paragraph description, motivation behind the project, goals.
 
 Table of Contents
 -----------------
