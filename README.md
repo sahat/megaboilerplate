@@ -1,4 +1,4 @@
-<img src="http://i.imgur.com/Ruf4Uph.png" width="309" height="203" alt="Logo">
+![](http://i.imgur.com/DrmCGFc.jpg)
 
 [Mega Boilerplate](https://github.com/sahat/boilerplate)
 ========================================================
