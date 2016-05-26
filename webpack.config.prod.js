@@ -35,7 +35,6 @@ module.exports = {
       'src',
       'node_modules'
     ],
-    extensions: ['', '.js', '.jsx'],
     fallback: path.join(__dirname, 'node_modules')
   },
   resolveLoader: { fallback: path.join(__dirname, 'node_modules') }
