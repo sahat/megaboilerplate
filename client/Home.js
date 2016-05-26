@@ -146,7 +146,9 @@ class Home extends React.Component {
       data.jsFramework = null;
     }
 
-    data.generateDownloadLink = options.generateDownloadLink;
+    if (options.generateDownloadLink) {
+      data.generateDownloadLink = true;
+    }
 
     // Convert ES6 set to array
     data.authentication = data.authentication ? Array.from(data.authentication) : [];
@@ -589,15 +591,15 @@ class Home extends React.Component {
       </div>
     );
 
-    const consulting = this.state.showNextSteps ? (
-      <VelocityComponent runOnMount animation="transition.slideLeftIn" duration={900} delay={2100}>
+    const consulting = (
+      <VelocityComponent runOnMount animation="transition.slideLeftIn" duration={900}>
         <div className="panel" style={{ opacity: 0 }}>
           <div className="panel-body">
             <i className="fa fa-skype"></i> Looking for additional help? <a href="https://calendly.com/sahat" target="_blank">Book a 1-on-1 Skype call</a>. Rates may vary.
           </div>
         </div>
       </VelocityComponent>
-    ) : null;
+    );
 
     const nextSteps = state.showNextSteps ? (
       <NextSteps {...state}/>
@@ -621,9 +623,9 @@ class Home extends React.Component {
           <div ref="database">{database}</div>
           <div ref="authentication">{authentication}</div>
           <div ref="deployment">{deployment}</div>
+          <div ref="consulting">{consulting}</div>
           <div ref="download">{download}</div>
           <div ref="nextSteps">{nextSteps}</div>
-          <div ref="consulting">{consulting}</div>
         </main>
         <Footer />
       </div>
