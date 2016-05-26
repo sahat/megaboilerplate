@@ -19,6 +19,8 @@ const mkdirs = Promise.promisify(fs.mkdirs);
 const traverse = require('traverse');
 const azure = require('azure-storage');
 const stream = require('stream');
+const schedule = require('node-schedule');
+const moment = require('moment');
 
 const npmDependencies = require('./npmDependencies.json');
 
@@ -117,7 +119,16 @@ function uploadAndReturnDownloadLink(archive) {
         if (error) {
           return reject(error);
         }
-        resolve(`https://megaboilerplate.blob.core.windows.net/${container}/${blobName}`)
+
+        resolve(`https://megaboilerplate.blob.core.windows.net/${container}/${blobName}`);
+
+        // schedule for deletion
+        const date = moment().add(24, 'hours').toDate();
+        schedule.scheduleJob(date, function(){
+          blobService.deleteBlobIfExists(container, blobName, (errorOrResult) => {
+            // do nothing
+          });
+        });
       });
 
       archive.pipe(writeStream);
