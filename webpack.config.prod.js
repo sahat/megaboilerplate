@@ -24,7 +24,7 @@ module.exports = {
   module: {
     loaders: [{
       test: /\.js$/,
-      exclude: /node_modules/,
+      include: path.join(__dirname, 'website'),
       loaders: ['babel']
     }]
   },
