@@ -4,13 +4,12 @@ const Promise = require('bluebird');
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
+const compression = require('compression');
 const React = require('react');
 const ReactDOM = require('react-dom/server');
 const Router = require('react-router');
 const nunjucks = require('nunjucks');
-const webpack = require('webpack');
-const config = require('./webpack.config');
-const compression = require('compression');
+
 const dotenv = require('dotenv');
 
 // Load Azure environment variables
@@ -23,32 +22,34 @@ global.__modules = {};
 // Disable Bluebird warnings
 Promise.config({ warnings: false });
 
-// ES6/ES7 Transpiler
+// ES6 & ES7 Transpiler
 require('babel-core/register');
 require('babel-polyfill');
-
-
 
 // Express routes
 let downloadHandler = require('./routes/download');
 
 // React routes
-let reactRoutes = require('./client/routes');
+let reactRoutes = require('./website/routes');
 
 const app = express();
-const compiler = webpack(config);
 
 app.set('port', process.env.PORT || 4000);
 app.use(compression());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'client', 'assets')));
+app.use(express.static(path.join(__dirname, 'website', 'assets')));
 
-app.use(require('webpack-dev-middleware')(compiler, {
-  noInfo: true,
-  publicPath: config.output.publicPath
-}));
-app.use(require('webpack-hot-middleware')(compiler));
+if (process.env.NODE_ENV === 'development') {
+  const webpack = require('webpack');
+  const config = require('./webpack.config');
+  const compiler = webpack(config);
+  app.use(require('webpack-dev-middleware')(compiler, {
+    noInfo: true,
+    publicPath: config.output.publicPath
+  }));
+  app.use(require('webpack-hot-middleware')(compiler));
+}
 
 // POST /download
 app.post('/download', downloadHandler.default);
@@ -74,7 +75,7 @@ app.use((req, res) => {
 //});
 
 app.listen(app.get('port'), 'localhost', function(err) {
-  console.log('Listening on port ', app.get('port'));
+  console.log(`Express server listening on port ${app.get('port')}`);
 });
 
 process.on('unhandledRejection', function(reason, p) {

@@ -3,10 +3,9 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "lint": "eslint server.js site routes generators",
-    "build:webpack": "NODE_ENV=production webpack --config webpack.config.prod.js",
-    "build": "npm run clean && npm run build:webpack",
-    "start": "node server.js"
+    "build": "webpack --config webpack.config.prod.js",
+    "start": "node server.js",
+    "postinstall": "npm run build:webpack"
   },
   "dependencies": {
     "archiver": "^1.0.0",
