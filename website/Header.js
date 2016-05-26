@@ -292,7 +292,7 @@ class Header extends React.Component {
         </nav>
 
         <div className="container hero-container">
-          <div className="wrapper">
+          <div className="wrapper animate-float">
             <div className="box middle"></div>
             <div className="box upper"></div>
             <div className="box lower"></div>

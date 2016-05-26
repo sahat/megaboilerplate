@@ -27,7 +27,6 @@ class Home extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleGenerateLibraryName = this.handleGenerateLibraryName.bind(this);
     this.handleDisableAutoScroll = this.handleDisableAutoScroll.bind(this);
-    this.handleReduceAnimations = this.handleReduceAnimations.bind(this);
     this.clickDownload = this.clickDownload.bind(this);
     this.state = {};
   }
@@ -35,11 +34,9 @@ class Home extends React.Component {
   componentDidMount() {
     try {
       const disableAutoScroll = localStorage.getItem('disableAutoScroll');
-      const reduceAnimations = localStorage.getItem('reduceAnimations');
       this.setState({
         beginner: false,
         disableAutoScroll: disableAutoScroll === 'true',
-        reduceAnimations: reduceAnimations === 'true',
         copyClipboardText: 'Copy to clipboard'
       });
     } catch (e) {
@@ -201,7 +198,7 @@ class Home extends React.Component {
         break;
 
       case 'platformRadios':
-        const whitelist = ['showModal', 'beginner', 'disableAutoScroll', 'reduceAnimations', 'copyClipboardText'];
+        const whitelist = ['showModal', 'beginner', 'disableAutoScroll', 'copyClipboardText'];
         for (const key in state) {
           if (state.hasOwnProperty(key)) {
             if (whitelist.indexOf(key) === -1) {
@@ -392,23 +389,10 @@ class Home extends React.Component {
     }
   }
 
-  handleReduceAnimations(event) {
-    this.setState({ reduceAnimations: event.target.checked });
-    try {
-      localStorage.setItem('reduceAnimations', event.target.checked);
-    } catch (e) {
-      console.warn(e);
-    }
-  }
-
   handleGenerateDownloadLink(event) {
     event.preventDefault();
-
     this.setState({ generateDownloadLinkInProgress: true });
-
     this.clickDownload({ generateDownloadLink: true });
-
-
   }
 
 
@@ -417,7 +401,7 @@ class Home extends React.Component {
 
     // select all text in the input
     $(input).focus();
-    $(input).select();
+    input.setSelectionRange(0, 9999);
 
     try {
       document.execCommand('copy');
@@ -451,14 +435,6 @@ class Home extends React.Component {
             <label>
               <input type="checkbox" name="disableAutoScroll" value="disableAutoScroll" onChange={this.handleDisableAutoScroll} checked={state.disableAutoScroll}/>
               <span>Disable auto-scroll</span>
-            </label>
-          </div>
-        </li>
-        <li>
-          <div className="checkbox">
-            <label>
-              <input type="checkbox" name="reduceAnimations" value="reduceAnimations" onChange={this.handleReduceAnimations} checked={state.reduceAnimations}/>
-              <span>Reduce Animations</span>
             </label>
           </div>
         </li>
@@ -575,7 +551,7 @@ class Home extends React.Component {
         <p onClick={this.handleGenerateDownloadLink.bind(this)} className="text-center">or <a href="#" type="button">Generate Download Link</a></p>
       );
     }
-    
+
     const download = (
       <div>
         <button ref="downloadBtn" className="btn btn-block btn-mega btn-success" onClick={this.clickDownload}><i className="fa fa-download"></i> Compile and Download</button>

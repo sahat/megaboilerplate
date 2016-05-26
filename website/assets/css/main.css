@@ -1318,6 +1318,16 @@ h3.ui.header .sub.header, h4.ui.header .sub.header {
   animation-duration: 1000ms;
 }
 
+
+@-webkit-keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @keyframes spin {
   from {
     transform: rotate(0deg);
@@ -1514,11 +1524,20 @@ input[type=checkbox].disabled + span::before {
   }
 }
 
+@-webkit-keyframes zoomIn {
+  from {
+    transform: scale(1.05);
+    opacity: 0
+  }
+}
+
 .zoomIn {
+  -webkit-animation: 0.5s 0.2s zoomIn;
   animation: 0.5s 0.2s zoomIn;
 }
 
 .zoomInBackwards {
+  -webkit-animation: 0.5s 0.2s zoomIn backwards;
   animation: 0.5s 0.2s zoomIn backwards;
 }
 
@@ -1539,3 +1558,45 @@ code {
   top: 8px;
   right: 4px;
 }
+
+.animate-float {
+  -webkit-animation: float 2.8s forwards ease infinite;
+  animation: float 2.8s forwards ease infinite;
+}
+
+
+@keyframes float {
+  0% {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0)
+  }
+
+  40% {
+    -webkit-transform: translate3d(0,-6px,0);
+    transform: translate3d(0,-6px,0)
+  }
+
+  to {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0)
+  }
+}
+
+@-webkit-keyframes float {
+  0% {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0)
+  }
+
+  40% {
+    -webkit-transform: translate3d(0,-6px,0);
+    transform: translate3d(0,-6px,0)
+  }
+
+  to {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0)
+  }
+}
+
+
