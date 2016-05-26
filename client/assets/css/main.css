@@ -415,6 +415,7 @@ i.arrow {
   border-radius: 2px;
   padding: 0;
   margin-bottom: 15px;
+  box-shadow: 0 2px 6px 0 rgba(0,0,0,.2);
   transition: all .2s ease;
 }
 
