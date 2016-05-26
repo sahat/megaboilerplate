@@ -2,6 +2,7 @@
 
 const Promise = require('bluebird');
 const path = require('path');
+const logger = require('morgan');
 const express = require('express');
 const bodyParser = require('body-parser');
 const compression = require('compression');
@@ -48,6 +49,7 @@ if (process.env.NODE_ENV !== 'production') {
     publicPath: config.output.publicPath
   }));
   app.use(require('webpack-hot-middleware')(compiler));
+  app.use(logger('dev'));
 }
 
 app.use(express.static(path.join(__dirname, 'website', 'assets')));
