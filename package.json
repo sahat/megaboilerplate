@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "build": "./node_modules/.bin/webpack --config webpack.config.prod.js",
+    "build": "node ./node_modules/webpack/bin/webpack.js --config webpack.config.prod.js",
     "start": "node server.js",
     "postinstall": "npm run build"
   },
