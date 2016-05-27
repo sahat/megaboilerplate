@@ -1,5 +1,7 @@
 import React from 'react';
 import cx from 'classnames';
+import { capitalize } from 'lodash';
+import { VelocityComponent, VelocityTransitionGroup } from 'velocity-react';
 
 const CSS_PREPROCESSOR_SVG = (
   <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 26 26">
@@ -8,12 +10,22 @@ const CSS_PREPROCESSOR_SVG = (
 );
 
 class CssPreprocessor extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+    this.toggleAdditionalOptions = this.toggleAdditionalOptions.bind(this);
+  }
+
+  toggleAdditionalOptions() {
+    this.setState({ showOptions: !this.state.showOptions });
+  }
+
   render() {
     const props = this.props;
+    const state = this.state;
 
     const JEKYLL = props.staticSiteGenerator === 'jekyll';
     const MIDDLEMAN = props.staticSiteGenerator === 'middleman';
-
 
     const NO_CSS_FRAMEWORK = props.cssFramework === 'none';
     const BOOTSTRAP = props.cssFramework === 'bootstrap';
@@ -64,6 +76,41 @@ class CssPreprocessor extends React.Component {
       </label>
     ) : null;
 
+
+    const minifiedCssAdditionalOption = CSS ? (
+      <VelocityComponent runOnMount animation="transition.slideUpIn">
+        <div className="checkbox transparent">
+          <label className="hint--right hint--rounded" data-hint={props.cssFramework + '.min.css'}>
+            <input type="checkbox" name="cssPreprocessorOptionsCheckboxes" value="minifiedCss" onChange={props.handleChange}/>
+            <span>Minified CSS</span>
+          </label>
+        </div>
+      </VelocityComponent>
+    ) : null;
+    const additionalOptions = state.showOptions ? (
+      <div>
+        {minifiedCssAdditionalOption}
+        <VelocityComponent runOnMount animation="transition.slideUpIn" delay={100}>
+          <div className="checkbox transparent">
+            <label className="hint--right hint--rounded" data-hint={props.cssFramework + '.min.js'}>
+              <input type="checkbox" name="cssPreprocessorOptionsCheckboxes" value="minifiedJs" onChange={props.handleChange}/>
+              <span>Minified JS</span>
+            </label>
+          </div>
+        </VelocityComponent>
+      </div>
+    ) : null;
+
+    const additionalOptionsButton = (BOOTSTRAP || FOUNDATION) && (CSS || LESS || SASS) ? (
+      <div>
+        <span className="options" onClick={this.toggleAdditionalOptions}>
+          <img className={cx('animated', { fast: state.showOptions })} src="/img/svg/options.svg"/>
+          <span>{capitalize(props.cssFramework)} Options</span>
+        </span>
+        {additionalOptions}
+      </div>
+    ) : null;
+
     const validationError = props.cssPreprocessorValidationError ? (
       <div className="text-danger"><i className="fa fa-warning"></i> {props.cssPreprocessorValidationError}</div>
     ) : null;
@@ -88,6 +135,9 @@ class CssPreprocessor extends React.Component {
             {lessRadio}
             {postcssRadio}
           </div>
+          <VelocityTransitionGroup enter={{ animation: 'transition.fadeIn', duration: 1000 }}>
+            {additionalOptionsButton}
+          </VelocityTransitionGroup>
           {validationError}
         </div>
       </div>
