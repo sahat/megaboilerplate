@@ -1,91 +1,49 @@
-import { join } from 'path';
-import { copy, cpy, replaceCode } from '../utils';
+import { set } from 'lodash';
+import { getModule, replaceCodeMemory } from '../utils';
 
-async function generateCssFrameworkNone(params) {
-  const build = join(__base, 'build', params.uuid);
-
+export default async function generateCssFrameworkNone(params) {
   switch (params.cssPreprocessor) {
     case 'css':
-      await cpy([
-        join(__dirname, 'modules', 'none', 'normalize.css'),
-        join(__dirname, 'modules', 'none', 'flexboxgrid.css'),
-        join(__dirname, 'modules', 'none', 'main.css')
-      ], join(build, 'public', 'css'));
+      set(params.build, ['public', 'css', 'normalize.css'], await getModule('css-framework/none/normalize.css'));
+      set(params.build, ['public', 'css', 'flexboxgrid.css'], await getModule('css-framework/none/flexboxgrid.css'));
+      set(params.build, ['public', 'css', 'main.css'], await getModule('css-framework/none/main.css'));
       break;
-
     case 'less':
-      await cpy([
-        join(__dirname, 'modules', 'none', 'normalize.less'),
-        join(__dirname, 'modules', 'none', 'flexboxgrid.less'),
-        join(__dirname, 'modules', 'none', 'main.less')
-      ], join(build, 'public', 'css'));
+      set(params.build, ['public', 'css', 'normalize.less'], await getModule('css-framework/none/normalize.less'));
+      set(params.build, ['public', 'css', 'flexboxgrid.less'], await getModule('css-framework/none/flexboxgrid.less'));
+      set(params.build, ['public', 'css', 'main.less'], await getModule('css-framework/none/main.less'));
       break;
-
     case 'sass':
-      await cpy([
-        join(__dirname, 'modules', 'none', 'normalize.scss'),
-        join(__dirname, 'modules', 'none', 'flexboxgrid.scss'),
-        join(__dirname, 'modules', 'none', 'main.scss')
-      ], join(build, 'public', 'css'));
+      set(params.build, ['public', 'css', 'normalize.scss'], await getModule('css-framework/none/normalize.scss'));
+      set(params.build, ['public', 'css', 'flexboxgrid.scss'], await getModule('css-framework/none/flexboxgrid.scss'));
+      set(params.build, ['public', 'css', 'main.scss'], await getModule('css-framework/none/main.scss'));
       break;
-
     case 'postcss':
-      await cpy([
-        join(__dirname, 'modules', 'none', 'normalize.css'),
-        join(__dirname, 'modules', 'none', 'flexboxgrid.css')
-      ], join(build, 'public', 'css'));
-      await copy(
-        join(__dirname, 'modules', 'none', 'main-postcss.css'),
-        join(build, 'public', 'css', 'main.css')
-      );
+      set(params.build, ['public', 'css', 'normalize.css'], await getModule('css-framework/none/normalize.css'));
+      set(params.build, ['public', 'css', 'flexboxgrid.css'], await getModule('css-framework/none/flexboxgrid.css'));
+      set(params.build, ['public', 'css', 'main.css'], await getModule('css-framework/none/main-postcss.css'));
       break;
-
     default:
       break;
   }
 
-  // Add CSS imports
-  await addCssFrameworkImports(params);
-}
-
-export default generateCssFrameworkNone;
-
-async function addCssFrameworkImports(params) {
-  const build = join(__base, 'build', params.uuid);
-
-  // AngularJS has its "layout" file in a separate directory
-  if (params.jsFramework === 'angularjs' && params.cssPreprocessor === 'css') {
-    const indexHtml = join(build, 'app', 'index.html');
-    const cssImport = join(__dirname, 'modules', 'none', 'html-css-import.html');
-    await replaceCode(indexHtml, 'CSS_FRAMEWORK_IMPORT', cssImport, { indentLevel: 1 });
-  } else {
-    switch (params.templateEngine) {
-      case 'jade':
-        const jadeLayout = join(build, 'views', 'layout.jade');
-        const jadeCssImport = join(__dirname, 'modules', 'none', 'jade-css-import.jade');
-        if (params.cssPreprocessor === 'css') {
-          await replaceCode(jadeLayout, 'CSS_FRAMEWORK_IMPORT', jadeCssImport, { indentLevel: 2 });
-        }
-        break;
-
-      case 'handlebars':
-        const handlebarsLayout = join(build, 'views', 'layouts', 'main.handlebars');
-        const handlebarsCssImport = join(__dirname, 'modules', 'none', 'html-css-import.html');
-        if (params.cssPreprocessor === 'css') {
-          await replaceCode(handlebarsLayout, 'CSS_FRAMEWORK_IMPORT', handlebarsCssImport);
-        }
-        break;
-
-      case 'nunjucks':
-        const nunjucksLayout = join(build, 'views', 'layout.html');
-        const nunjucksCssImport = join(__dirname, 'modules', 'none', 'html-css-import.html');
-        if (params.cssPreprocessor === 'css') {
-          await replaceCode(nunjucksLayout, 'CSS_FRAMEWORK_IMPORT', nunjucksCssImport);
-        }
-        break;
-
-      default:
-        break;
+  if (params.cssPreprocessor === 'css') {
+    if (params.jsFramework === 'angularjs') {
+      await replaceCodeMemory(params, 'app/index.html', 'CSS_FRAMEWORK_IMPORT', await getModule('css-framework/none/html-css-import.html'), { indentLevel: 1 });
+    } else {
+      switch (params.templateEngine) {
+        case 'jade':
+          await replaceCodeMemory(params, 'views/layout.jade', 'CSS_FRAMEWORK_IMPORT', await getModule('css-framework/none/jade-css-import.jade'), { indentLevel: 2 });
+          break;
+        case 'handlebars':
+          await replaceCodeMemory(params, 'views/layouts/main.handlebars', 'CSS_FRAMEWORK_IMPORT', await getModule('css-framework/none/html-css-import.html'));
+          break;
+        case 'nunjucks':
+          await replaceCodeMemory(params, 'views/layout.html', 'CSS_FRAMEWORK_IMPORT', await getModule('css-framework/none/html-css-import.html'));
+          break;
+        default:
+          break;
+      }
     }
   }
 }
