@@ -1,4 +1,3 @@
-import swal from 'sweetalert';
 import haikunate from 'haikunator';
 import React from 'react';
 import { clone } from 'lodash';
@@ -30,6 +29,9 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
+    // require it here to avoid "window is not defined" error during server-side rendering
+    const swal = require('sweetalert');
+
     try {
       const disableAutoScroll = localStorage.getItem('disableAutoScroll');
       this.setState({
