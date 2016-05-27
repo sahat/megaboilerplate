@@ -248,7 +248,7 @@ class Header extends React.Component {
 
     const latestCommit = this.state.latestCommit ? (
       <VelocityComponent runOnMount animation="transition.fadeIn" duration={1000}>
-        <div style={{ opacity: 0 }} className="footnote right">Latest commit: <span className="time-ago"><a href="https://github.com/sahat/boilerplate" target="_blank">{this.state.latestCommit}</a></span></div>
+        <div style={{ opacity: 0 }} className="footnote right">Latest commit: <span className="time-ago"><a href="https://github.com/sahat/boilerplate/commits/master" target="_blank">{this.state.latestCommit}</a></span></div>
       </VelocityComponent>
     ) : null;
 

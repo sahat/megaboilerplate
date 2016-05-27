@@ -45,7 +45,7 @@ class JsFramework extends React.Component {
 
     const additionalOptions = (state.showOptions && props.jsFramework === 'react') ? (
       <div>
-        <VelocityComponent runOnMount animation="transition.slideUpIn">
+        <VelocityComponent runOnMount animation="transition.slideUpIn" duration={700}>
           <div className="checkbox transparent">
             <label className="hint--right hint--rounded" data-hint="Tweak React components in real time, while preserving the state.">
               <input type="checkbox" name="reactOptionsCheckboxes" value="hotReload" onChange={props.handleChange} checked={props.reactOptions && props.reactOptions.has('hotReload')}/>
@@ -53,7 +53,7 @@ class JsFramework extends React.Component {
             </label>
           </div>
         </VelocityComponent>
-        <VelocityComponent runOnMount animation="transition.slideUpIn" delay={150}>
+        <VelocityComponent runOnMount animation="transition.slideUpIn" duration={700} delay={100}>
           <div className="checkbox transparent">
             <label className="hint--right hint--rounded" data-hint="A live-editing time travel environment for Redux.">
               <input type="checkbox" name="reactOptionsCheckboxes" value="reduxDevTools" onChange={props.handleChange} checked={props.reactOptions && props.reactOptions.has('reduxDevTools')}/>

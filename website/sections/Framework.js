@@ -52,7 +52,7 @@ class Framework extends React.Component {
 
     const additionalOptions = state.showOptions ? (
       <div>
-        <VelocityComponent runOnMount animation="transition.slideUpIn">
+        <VelocityComponent runOnMount animation="transition.slideUpIn" duration={700}>
           <div className="checkbox transparent">
             <label className="hint--right hint--rounded" data-hint="Advanced, production process manager with a built-in load balancer for Node.js.">
               <input type="checkbox" name="frameworkOptionsCheckboxes" value="pm2" onChange={props.handleChange}/>
@@ -60,7 +60,7 @@ class Framework extends React.Component {
             </label>
           </div>
         </VelocityComponent>
-        <VelocityComponent runOnMount animation="transition.slideUpIn" delay={100}>
+        <VelocityComponent runOnMount animation="transition.slideUpIn" duration={700} delay={100}>
           <div className="checkbox transparent">
             <label className="hint--right hint--rounded" data-hint="Socket.IO enables realtime, bi-directional communication between web clients and servers.">
               <input type="checkbox" name="frameworkOptionsCheckboxes" value="socketio" onChange={props.handleChange}/>

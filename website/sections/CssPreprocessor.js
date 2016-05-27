@@ -78,7 +78,7 @@ class CssPreprocessor extends React.Component {
 
 
     const minifiedCssAdditionalOption = CSS ? (
-      <VelocityComponent runOnMount animation="transition.slideUpIn">
+      <VelocityComponent runOnMount animation="transition.slideUpIn" duration={700}>
         <div className="checkbox transparent">
           <label className="hint--right hint--rounded" data-hint={props.cssFramework + '.min.css'}>
             <input type="checkbox" name="cssPreprocessorOptionsCheckboxes" value="minifiedCss" onChange={props.handleChange}/>
@@ -90,7 +90,7 @@ class CssPreprocessor extends React.Component {
     const additionalOptions = state.showOptions ? (
       <div>
         {minifiedCssAdditionalOption}
-        <VelocityComponent runOnMount animation="transition.slideUpIn" delay={100}>
+        <VelocityComponent runOnMount animation="transition.slideUpIn" duration={700} delay={100}>
           <div className="checkbox transparent">
             <label className="hint--right hint--rounded" data-hint={props.cssFramework + '.min.js'}>
               <input type="checkbox" name="cssPreprocessorOptionsCheckboxes" value="minifiedJs" onChange={props.handleChange}/>
