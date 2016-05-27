@@ -2,14 +2,18 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-  entry: path.resolve('./website/main'),
+  entry: path.join(__dirname,'website', 'main'),
   output: {
     path: path.join(__dirname, 'website', 'assets', 'js'),
     filename: 'bundle.js',
     publicPath: '/js/'
   },
+  resolveLoader: {
+    modulesDirectories: ['node_modules']
+  },
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.optimize.DedupePlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('production')
@@ -24,13 +28,8 @@ module.exports = {
   module: {
     loaders: [{
       test: /\.js$/,
-      exclude: /node_modules/,
+      include: path.join(__dirname, 'website'),
       loaders: ['babel']
     }]
-  },
-  progress: true,
-  resolve: {
-    root: path.join(__dirname, 'website'),
-    modulesDirectories: ['node_modules']
   }
 };
