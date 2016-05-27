@@ -1,39 +1,24 @@
-import { join } from 'path';
-import { copy, replaceCode } from '../utils';
+import { set } from 'lodash';
+import { getModule, replaceCodeMemory } from '../utils';
 
-async function generateAngularJsTemplate(params) {
-  const build = join(__base, 'build', params.uuid);
+export default async function generateAngularJsTemplate(params) {
   switch (params.framework) {
     case 'express':
-      // Copy index.html layout to "app" directory
-      const indexHtml = join(__dirname, 'modules', 'angularjs', 'index.html');
-      await copy(indexHtml, join(build, 'app', 'index.html'));
+      set(params, ['build', 'app', 'index.html'], await getModule('template-engine/angularjs/index.html'));
 
-      // Add/remove features to the newly generated layout file above
-      const socketIoImport = join(__dirname, 'modules', 'html-common', 'socketio-import.html');
+      if (params.buildTool === 'none') {
+        await replaceCodeMemory(params, 'app/index.html', 'ANGULARJS_APP_IMPORT', await getModule('template-engine/angularjs/no-build-scripts.html'));
+      } else {
+        await replaceCodeMemory(params, 'app/index.html', 'ANGULARJS_APP_IMPORT', await getModule('template-engine/angularjs/build-scripts.html'));
+      }
 
       // Add Socket.IO <script> tag (optional)
       if (params.frameworkOptions.includes('socketio')) {
-        await replaceCode(indexHtml, 'SOCKETIO_IMPORT', socketIoImport, { indentLevel: 1 });
+        await replaceCodeMemory(params, 'app/index.html', 'SOCKETIO_IMPORT', await getModule('template-engine/angularjs/socketio-import.html'));
       }
-
-      const inlineScripts = join(__dirname, 'modules', 'angularjs', 'no-build-scripts.html');
-      const buildScripts = join(__dirname, 'modules', 'angularjs', 'build-scripts.html');
-      
-      if (params.buildTool === 'none') {
-        await replaceCode(join(build, 'app', 'index.html'), 'ANGULARJS_APP_IMPORT', inlineScripts);
-      } else {
-        await replaceCode(join(build, 'app', 'index.html'), 'ANGULARJS_APP_IMPORT', buildScripts);
-      }
-
-
       break;
-
     case 'meteor':
       break;
-
     default:
   }
 }
-
-export default generateAngularJsTemplate;
