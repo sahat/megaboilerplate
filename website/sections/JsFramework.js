@@ -1,6 +1,5 @@
 import React from 'react';
 import cx from 'classnames';
-import { capitalize } from 'lodash/string';
 import { VelocityComponent } from 'velocity-react';
 
 const JS_FRAMEWORK_SVG = (

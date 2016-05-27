@@ -40,7 +40,7 @@ app.use(compression());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-if (app.get('env') === 'production') {
+if (app.get('env') === 'development') {
   const webpack = require('webpack');
   const config = require('./webpack.config');
   const compiler = webpack(config);

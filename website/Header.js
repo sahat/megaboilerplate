@@ -7,7 +7,7 @@ if (typeof window !== 'undefined') {
 
 import React from 'react';
 import moment from 'moment';
-import { shuffle } from 'lodash/collection';
+import { shuffle } from 'lodash';
 import { VelocityComponent, VelocityTransitionGroup } from 'velocity-react';
 
 const BRAND_LOGO = (
