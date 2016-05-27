@@ -1,95 +1,57 @@
-import { join } from 'path';
-import { copy, cpy, replaceCode, templateReplace } from '../utils';
+import { set } from 'lodash';
+import { getModule, replaceCodeMemory, templateReplaceMemory } from '../utils';
 
-async function generateJsFrameworkAngularJs(params) {
-  const build = join(__base, 'build', params.uuid);
-  const server = join(build, 'server.js');
-  const angularJsRoutes = join(__dirname, 'modules', 'angularjs', 'angularjs-routes.js');
-  const angularJsRoutesNoBuild = join(__dirname, 'modules', 'angularjs', 'angularjs-routes-no-build.js');
-
+export default async function generateJsFrameworkAngularJs(params) {
   switch (params.framework) {
     case 'express':
       if (params.buildTool === 'none') {
-        // Add html5 push state redirect
-        // File index.html will be loaded implicitly by Express from "public" directory
-        await replaceCode(server, 'ANGULARJS_ROUTES', angularJsRoutesNoBuild);
+        await replaceCodeMemory(params, 'server.js', 'ANGULARJS_ROUTES', await getModule('js-framework/angularjs/angularjs-routes-no-build.js'));
       } else {
-        // Add AngularJS routes + html5 push state redirect
-        await replaceCode(server, 'ANGULARJS_ROUTES', angularJsRoutes);
+        await replaceCodeMemory(params, 'server.js', 'ANGULARJS_ROUTES', await getModule('js-framework/angularjs/angularjs-routes.js'));
       }
 
-      // Copy app.js (entry file)
-      await copy(join(__dirname, 'modules', 'angularjs', 'app.js'), join(build, 'app', 'app.js'));
+      set(params.build, ['app', 'app.js'], await getModule('js-framework/angularjs/app.js'));
+      set(params.build, ['app', 'controllers', 'contact.js'], await getModule('js-framework/angularjs/controllers/contact.js'));
+      set(params.build, ['app', 'controllers', 'forgot.js'], await getModule('js-framework/angularjs/controllers/forgot.js'));
+      set(params.build, ['app', 'controllers', 'header.js'], await getModule('js-framework/angularjs/controllers/header.js'));
+      set(params.build, ['app', 'controllers', 'login.js'], await getModule('js-framework/angularjs/controllers/login.js'));
+      set(params.build, ['app', 'controllers', 'profile.js'], await getModule('js-framework/angularjs/controllers/profile.js'));
+      set(params.build, ['app', 'controllers', 'reset.js'], await getModule('js-framework/angularjs/controllers/reset.js'));
+      set(params.build, ['app', 'controllers', 'signup.js'], await getModule('js-framework/angularjs/controllers/signup.js'));
 
-      // Copy controllers
-      const controllersDir = join(__dirname, 'modules', 'angularjs', 'controllers');
-      await cpy([
-        join(controllersDir, 'contact.js'),
-        join(controllersDir, 'forgot.js'),
-        join(controllersDir, 'header.js'),
-        join(controllersDir, 'login.js'),
-        join(controllersDir, 'profile.js'),
-        join(controllersDir, 'reset.js'),
-        join(controllersDir, 'signup.js')
-      ], join(build, 'app', 'controllers'));
+      set(params.build, ['app', 'services', 'account.js'], await getModule('js-framework/angularjs/services/account.js'));
+      set(params.build, ['app', 'services', 'contact.js'], await getModule('js-framework/angularjs/services/contact.js'));
 
-      // Copy services
-      const servicesDir = join(__dirname, 'modules', 'angularjs', 'services');
-      await cpy([
-        join(servicesDir, 'account.js'),
-        join(servicesDir, 'contact.js')], join(build, 'app', 'services'));
+      set(params.build, ['public', 'js', 'lib', 'angular.js'], await getModule('js-framework/angularjs/lib/angular.js'));
+      set(params.build, ['public', 'js', 'lib', 'angular-mocks.js'], await getModule('js-framework/angularjs/lib/angular-mocks.js'));
+      set(params.build, ['public', 'js', 'lib', 'angular-route.js'], await getModule('js-framework/angularjs/lib/angular-route.js'));
+      set(params.build, ['public', 'js', 'lib', 'satellizer.js'], await getModule('js-framework/angularjs/lib/satellizer.js'));
 
-      // Copy vendor files
-      const libDir = join(__dirname, 'modules', 'angularjs', 'lib');
-      await cpy([
-        join(libDir, 'angular.js'),
-        join(libDir, 'angular-mocks.js'),
-        join(libDir, 'angular-route.js'),
-        join(libDir, 'satellizer.js')
-      ], join(build, 'public', 'js', 'lib'));
-
-      // Copy templates
-      await cpy([join(__dirname, 'modules', 'angularjs', 'index.html')], join(build, 'app'));
-
-      // Copy account and authentication templates
-      const partialsDir = join(__dirname, 'modules', 'angularjs', 'partials');
-
-      await copy(join(partialsDir, '404.html'), join(build, 'app', 'partials', '404.html'));
-      await copy(join(partialsDir, `contact-${params.cssFramework}.html`), join(build, 'app', 'partials', 'contact.html'));
-      await copy(join(partialsDir, `header-${params.cssFramework}.html`), join(build, 'app', 'partials', 'header.html'));
-      await copy(join(partialsDir, 'footer.html'), join(build, 'app', 'partials', 'footer.html'));
+      set(params.build, ['app', 'partials', '404.html'], await getModule('js-framework/angularjs/partials/404.html'));
+      set(params.build, ['app', 'partials', 'home.html'], await getModule(`js-framework/angularjs/partials/home-${params.cssFramework}.html`));
+      set(params.build, ['app', 'partials', 'contact.html'], await getModule(`js-framework/angularjs/partials/contact-${params.cssFramework}.html`));
+      set(params.build, ['app', 'partials', 'header.html'], await getModule(`js-framework/angularjs/partials/header-${params.cssFramework}.html`));
+      set(params.build, ['app', 'partials', 'footer.html'], await getModule('js-framework/angularjs/partials/footer.html'));
 
       if (params.authentication.length) {
-        await copy(join(partialsDir, `forgot-${params.cssFramework}.html`), join(build, 'app', 'partials', 'forgot.html'));
-        await copy(join(partialsDir, `home-${params.cssFramework}.html`), join(build, 'app', 'partials', 'home.html'));
-        await copy(join(partialsDir, `login-${params.cssFramework}.html`), join(build, 'app', 'partials', 'login.html'));
-        await copy(join(partialsDir, `profile-${params.cssFramework}.html`), join(build, 'app', 'partials', 'profile.html'));
-        await copy(join(partialsDir, `reset-${params.cssFramework}.html`), join(build, 'app', 'partials', 'reset.html'));
-        await copy(join(partialsDir, `signup-${params.cssFramework}.html`), join(build, 'app', 'partials', 'signup.html'));
+        set(params.build, ['app', 'partials', 'forgot.html'], await getModule(`js-framework/angularjs/partials/forgot-${params.cssFramework}.html`));
+        set(params.build, ['app', 'partials', 'login.html'], await getModule(`js-framework/angularjs/partials/login-${params.cssFramework}.html`));
+        set(params.build, ['app', 'partials', 'profile.html'], await getModule(`js-framework/angularjs/partials/profile-${params.cssFramework}.html`));
+        set(params.build, ['app', 'partials', 'reset.html'], await getModule(`js-framework/angularjs/partials/reset-${params.cssFramework}.html`));
+        set(params.build, ['app', 'partials', 'signup.html'], await getModule(`js-framework/angularjs/partials/signup-${params.cssFramework}.html`));
 
-        // Add satellizer dependency
-        await templateReplace(join(build, 'app', 'app.js'), {
+        templateReplaceMemory(params, 'app/app.js', {
           satellizer: params.authentication.length ? `, 'satellizer'` : null
         });
 
-        // Add log in, sign up, logout links to the header
-        const headerAuthIndent = {
-          none: 2,
-          bootstrap: 3,
-          foundation: 2
-        };
-        const headerAuth = join(partialsDir, `header-auth-${params.cssFramework}.html`);
-        await replaceCode(join(build, 'app', 'partials', 'header.html'), 'HEADER_AUTH', headerAuth, { indentLevel: headerAuthIndent[params.cssFramework] });
+        const headerAuthIndent = { none: 2, bootstrap: 3, foundation: 2 };
+        await replaceCodeMemory(params, 'app/partials/header.html', 'HEADER_AUTH', await getModule(`js-framework/angularjs/partials/header-auth-${params.cssFramework}.html`), {
+          indentLevel: headerAuthIndent[params.cssFramework]
+        });
       }
-
-
       break;
-
     case 'meteor':
       break;
-
     default:
   }
 }
-
-export default generateJsFrameworkAngularJs;
