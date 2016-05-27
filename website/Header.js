@@ -6,9 +6,9 @@ if (typeof window !== 'undefined') {
 }
 
 import React from 'react';
+import moment from 'moment';
 import { shuffle } from 'lodash';
 import { VelocityComponent, VelocityTransitionGroup } from 'velocity-react';
-const moment = require('moment');
 
 const BRAND_LOGO = (
   <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="26" height="30" viewBox="0 0 213.5 246.5">

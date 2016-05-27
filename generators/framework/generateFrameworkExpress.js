@@ -36,8 +36,8 @@ async function generateFrameworkExpress(params) {
   if (params.jsFramework) {
     // Add contact route and cookie-parser middleware
     await replaceCodeMemory(params, 'server.js', 'CONTACT_ROUTE', await getModule('framework/express/routes/contact-jwt.js'));
-    await replaceCodeMemory(params, 'server.js', 'COOKIE_PARSER_REQUIRE', await getModule('framework/express/routes/cookie-parser-require.js'));
-    await replaceCodeMemory(params, 'server.js', 'COOKIE_PARSER_MIDDLEWARE', await getModule('framework/express/routes/cookie-parser-middleware.js'));
+    await replaceCodeMemory(params, 'server.js', 'COOKIE_PARSER_REQUIRE', await getModule('framework/express/cookie-parser-require.js'));
+    await replaceCodeMemory(params, 'server.js', 'COOKIE_PARSER_MIDDLEWARE', await getModule('framework/express/cookie-parser-middleware.js'));
 
     await replaceCodeMemory(params, 'controllers/contact.js', 'CONTACT_VALIDATION_ERROR', await getModule('framework/express/responses/json/contact-validation-error.js'));
     await replaceCodeMemory(params, 'controllers/contact.js', 'CONTACT_SUCCESS', await getModule('framework/express/responses/json/contact-success.js'));

@@ -8,13 +8,13 @@ export default async function generateJsFrameworkNone(params) {
     case 'express':
       switch (params.templateEngine) {
         case 'jade':
-          await replaceCodeMemory(params, ['build', 'views', 'layout.jade'], 'JS_FRAMEWORK_MAIN_IMPORT', await getModule('js-framework/none/express-jade-import.jade'), { indentLevel: 2 });
+          await replaceCodeMemory(params, 'views/layout.jade', 'JS_FRAMEWORK_MAIN_IMPORT', await getModule('js-framework/none/express-jade-import.jade'), { indentLevel: 2 });
           break;
         case 'handlebars':
-          await replaceCodeMemory(params, ['build', 'views', 'layouts', 'main.handlebars'], 'JS_FRAMEWORK_MAIN_IMPORT', await getModule('js-framework/none/express-html-import.html'));
+          await replaceCodeMemory(params, 'views/layouts/main.handlebars', 'JS_FRAMEWORK_MAIN_IMPORT', await getModule('js-framework/none/express-html-import.html'));
           break;
         case 'nunjucks':
-          await replaceCodeMemory(params, ['build', 'views', 'layout.html'], 'JS_FRAMEWORK_MAIN_IMPORT', await getModule('js-framework/none/express-html-import.html'));
+          await replaceCodeMemory(params, 'views/layout.html', 'JS_FRAMEWORK_MAIN_IMPORT', await getModule('js-framework/none/express-html-import.html'));
           break;
         default:
       }
