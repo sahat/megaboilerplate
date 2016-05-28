@@ -107,7 +107,7 @@ class BuildTool extends React.Component {
       </label>
     ) : null;
 
-    const npmRadio = props.jsFramework !== 'angularjs' ? (
+    const npmRadio = props.jsFramework !== 'angularjs' && props.cssPreprocessor !== 'postcss' ? (
       <label className="radio-inline">
         <img className="btn-logo" src="/img/svg/npm-logo.svg" alt="NPM"/>
         <input type="radio" name="buildToolRadios" value="npm" onChange={props.handleChange} checked={props.buildTool === 'npm'}/>
