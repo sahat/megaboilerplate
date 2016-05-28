@@ -1,103 +1,72 @@
-import { join } from 'path';
-import { cpy, replaceCode, templateReplace, addNpmPackage, addNpmScript } from '../utils';
+import { set } from 'lodash';
+import { getModule, replaceCodeMemory, templateReplaceMemory, addNpmScriptMemory, addNpmPackageMemory } from '../utils';
 
-async function generateGulpBuildTool(params) {
-  const build = join(__base, 'build', params.uuid);
-  const gulpfile = join(__dirname, 'modules', 'gulp', 'gulpfile.js');
+export default async function generateGulpBuildTool(params) {
+  set(params, ['build', 'gulpfile.js'], await getModule('build-tool/gulp/gulpfile.js'));
 
-  await cpy([gulpfile], build);
+  await addNpmScriptMemory('postinstall', 'gulp build', params);
 
-  await addNpmScript('postinstall', 'gulp build', params);
+  await addNpmPackageMemory('gulp', params, true);
+  await addNpmPackageMemory('gulp-if', params, true);
+  await addNpmPackageMemory('gulp-util', params, true);
+  await addNpmPackageMemory('yargs', params, true);
+  await addNpmPackageMemory('gulp-sourcemaps', params, true);
+  await addNpmPackageMemory('gulp-uglify', params, true);
+  await addNpmPackageMemory('vinyl-buffer', params, true);
+  await addNpmPackageMemory('gulp-plumber', params, true);
+  await addNpmPackageMemory('gulp-csso', params, true);
+  await addNpmPackageMemory('gulp-autoprefixer', params, true);
 
-  await addNpmPackage('gulp', params, true);
-  await addNpmPackage('gulp-if', params, true);
-  await addNpmPackage('gulp-util', params, true);
-  await addNpmPackage('yargs', params, true);
-  await addNpmPackage('gulp-sourcemaps', params, true);
-  await addNpmPackage('gulp-uglify', params, true);
-  await addNpmPackage('vinyl-buffer', params, true);
-  await addNpmPackage('gulp-plumber', params, true);
-  await addNpmPackage('gulp-csso', params, true);
-  await addNpmPackage('gulp-autoprefixer', params, true);
+  const buildTasks = [];
+  const defaultTasks = ['build', 'watch'];
 
-  let buildTasks = [];
-  let defaultTasks = ['build', 'watch'];
   switch (params.cssPreprocessor) {
     case 'sass':
-      const sassGulpRequire = join(__dirname, 'modules', 'gulp', 'sass-gulp-require.js');
-      const sassGulpTask = join(__dirname, 'modules', 'gulp', 'sass-gulp-task.js');
-      const sassGulpWatch = join(__dirname, 'modules', 'gulp', 'sass-gulp-watch.js');
-
-      await addNpmPackage('gulp-sass', params, true);
-
-      await replaceCode(join(build, 'gulpfile.js'), 'CSS_PREPROCESSOR_GULP_REQUIRE', sassGulpRequire);
-      await replaceCode(join(build, 'gulpfile.js'), 'CSS_PREPROCESSOR_GULP_TASK', sassGulpTask);
-      await replaceCode(join(build, 'gulpfile.js'), 'CSS_PREPROCESSOR_GULP_WATCH', sassGulpWatch);
-
+      await replaceCodeMemory(params, 'gulpfile.js', 'CSS_PREPROCESSOR_GULP_REQUIRE', await getModule('build-tool/gulp/sass-gulp-require.js'));
+      await replaceCodeMemory(params, 'gulpfile.js', 'CSS_PREPROCESSOR_GULP_TASK', await getModule('build-tool/gulp/sass-gulp-task.js'));
+      await replaceCodeMemory(params, 'gulpfile.js', 'CSS_PREPROCESSOR_GULP_WATCH', await getModule('build-tool/gulp/sass-gulp-watch.js'));
+      await addNpmPackageMemory('gulp-sass', params, true);
       buildTasks.push('sass');
       break;
-
     case 'less':
-      const lessGulpRequire = join(__dirname, 'modules', 'gulp', 'less-gulp-require.js');
-      const lessGulpTask = join(__dirname, 'modules', 'gulp', 'less-gulp-task.js');
-      const lessGulpWatch = join(__dirname, 'modules', 'gulp', 'less-gulp-watch.js');
-
+      await replaceCodeMemory(params, 'gulpfile.js', 'CSS_PREPROCESSOR_GULP_REQUIRE', await getModule('build-tool/gulp/less-gulp-require.js'));
+      await replaceCodeMemory(params, 'gulpfile.js', 'CSS_PREPROCESSOR_GULP_TASK', await getModule('build-tool/gulp/less-gulp-task.js'));
+      await replaceCodeMemory(params, 'gulpfile.js', 'CSS_PREPROCESSOR_GULP_WATCH', await getModule('build-tool/gulp/less-gulp-watch.js'));
       await addNpmPackage('gulp-less', params, true);
-
-      await replaceCode(join(build, 'gulpfile.js'), 'CSS_PREPROCESSOR_GULP_REQUIRE', lessGulpRequire);
-      await replaceCode(join(build, 'gulpfile.js'), 'CSS_PREPROCESSOR_GULP_TASK', lessGulpTask);
-      await replaceCode(join(build, 'gulpfile.js'), 'CSS_PREPROCESSOR_GULP_WATCH', lessGulpWatch);
-
       buildTasks.push('less');
       break;
-
     default:
       break;
   }
 
   switch (params.jsFramework) {
     case 'react':
-      const reactGulpRequire = join(__dirname, 'modules', 'gulp', 'react', 'react-gulp-require.js');
-      const reactGulpTask = join(__dirname, 'modules', 'gulp', 'react', 'react-gulp-task.js');
-
-      await addNpmPackage('vinyl-source-stream', params, true);
-      await addNpmPackage('babelify', params, true);
-      await addNpmPackage('browserify', params, true);
-      await addNpmPackage('watchify', params, true);
-      await addNpmPackage('babel-preset-es2015', params, true);
-      await addNpmPackage('babel-preset-react', params, true);
-
-      await replaceCode(join(build, 'gulpfile.js'), 'JS_FRAMEWORK_GULP_REQUIRE', reactGulpRequire);
-      await replaceCode(join(build, 'gulpfile.js'), 'JS_FRAMEWORK_GULP_TASK', reactGulpTask);
-
+      await replaceCodeMemory(params, 'gulpfile.js', 'JS_FRAMEWORK_GULP_REQUIRE', await getModule('build-tool/gulp/react/react-gulp-require.js'));
+      await replaceCodeMemory(params, 'gulpfile.js', 'JS_FRAMEWORK_GULP_TASK', await getModule('build-tool/gulp/react/react-gulp-task.js'));
+      await addNpmPackageMemory('vinyl-source-stream', params, true);
+      await addNpmPackageMemory('babelify', params, true);
+      await addNpmPackageMemory('browserify', params, true);
+      await addNpmPackageMemory('watchify', params, true);
+      await addNpmPackageMemory('babel-preset-es2015', params, true);
+      await addNpmPackageMemory('babel-preset-react', params, true);
       buildTasks.push('react');
       defaultTasks.push('watchify');
       break;
-
     case 'angularjs':
-      const angularjsGulpRequire = join(__dirname, 'modules', 'gulp', 'angularjs', 'angularjs-require.js');
-      const angularjsGulpTask = join(__dirname, 'modules', 'gulp', 'angularjs', 'angularjs-task.js');
-      const angularjsGulpWatch = join(__dirname, 'modules', 'gulp', 'angularjs', 'angularjs-watch.js');
-
-      await addNpmPackage('gulp-concat', params, true);
-      await addNpmPackage('gulp-ng-annotate', params, true);
-      await addNpmPackage('gulp-angular-templatecache', params, true);
-
-      await replaceCode(join(build, 'gulpfile.js'), 'JS_FRAMEWORK_GULP_REQUIRE', angularjsGulpRequire);
-      await replaceCode(join(build, 'gulpfile.js'), 'JS_FRAMEWORK_GULP_TASK', angularjsGulpTask);
-      await replaceCode(join(build, 'gulpfile.js'), 'JS_FRAMEWORK_GULP_WATCH', angularjsGulpWatch);
-
+      await replaceCodeMemory(params, 'gulpfile.js', 'JS_FRAMEWORK_GULP_REQUIRE', await getModule('build-tool/gulp/angularjs/angularjs-require.js'));
+      await replaceCodeMemory(params, 'gulpfile.js', 'JS_FRAMEWORK_GULP_TASK', await getModule('build-tool/gulp/angularjs/angularjs-task.js'));
+      await replaceCodeMemory(params, 'gulpfile.js', 'JS_FRAMEWORK_GULP_WATCH', await getModule('build-tool/gulp/angularjs/angularjs-watch.js'));
+      await addNpmPackageMemory('gulp-concat', params, true);
+      await addNpmPackageMemory('gulp-ng-annotate', params, true);
+      await addNpmPackageMemory('gulp-angular-templatecache', params, true);
       buildTasks.push('angular', 'templates');
       break;
-
     default:
       break;
   }
 
-  await templateReplace(join(build, 'gulpfile.js'), {
+  await templateReplaceMemory(params, 'gulpfile.js', {
     buildTasks: buildTasks.join("', '"),
     defaultTasks: defaultTasks.join("', '")
   });
 }
-
-export default generateGulpBuildTool;
