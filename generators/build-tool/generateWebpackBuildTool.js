@@ -1,95 +1,60 @@
-import { join } from 'path';
-import { cpy, replaceCode, addNpmPackage, addNpmScript } from '../utils';
+import { set } from 'lodash';
+import { getModule, replaceCodeMemory, addNpmScriptMemory, addNpmPackageMemory } from '../utils';
 
-async function genereateWebpackBuildTool(params) {
-  const build = join(__base, 'build', params.uuid);
-  const webpackConfig = join(__dirname, 'modules', 'webpack', 'webpack.config.js');
+export default async function genereateWebpackBuildTool(params) {
+  set(params, ['build', 'webpack.config.js'], await getModule('build-tool/webpack/webpack.config.js'));
 
-  await cpy([webpackConfig], build);
-
-  await addNpmScript('build', 'webpack', params);
-  await addNpmScript('postinstall', 'build', params);
-
-  await addNpmPackage('webpack', params, true);
-  await addNpmPackage('webpack-hot-middleware', params, true);
-  await addNpmPackage('babel-core', params, true);
-  await addNpmPackage('babel-loader', params, true);
-  await addNpmPackage('babel-preset-es2015', params, true);
+  await addNpmScriptMemory('build', 'webpack', params);
+  await addNpmScriptMemory('postinstall', 'build', params);
+  await addNpmPackageMemory('webpack', params, true);
+  await addNpmPackageMemory('webpack-hot-middleware', params, true);
+  await addNpmPackageMemory('babel-core', params, true);
+  await addNpmPackageMemory('babel-loader', params, true);
+  await addNpmPackageMemory('babel-preset-es2015', params, true);
 
   switch (params.framework) {
     case 'express':
-      const server = join(build, 'server.js');
-      const webpackRequire = join(__dirname, 'modules', 'webpack', 'webpack-require.js');
-      const webpackCompiler = join(__dirname, 'modules', 'webpack', 'webpack-compiler.js');
-      const webpackMiddleware = join(__dirname, 'modules', 'webpack', 'webpack-middleware.js');
-
-      await replaceCode(server, 'WEBPACK_REQUIRE', webpackRequire);
-      await replaceCode(server, 'WEBPACK_COMPILER', webpackCompiler);
-      await replaceCode(server, 'WEBPACK_MIDDLEWARE', webpackMiddleware);
-
+      await replaceCodeMemory(params, 'server.js', 'WEBPACK_REQUIRE', await getModule('build-tool/webpack/webpack-require.js'));
+      await replaceCodeMemory(params, 'server.js', 'WEBPACK_COMPILER', await getModule('build-tool/webpack/webpack-compiler.js'));
+      await replaceCodeMemory(params, 'server.js', 'WEBPACK_MIDDLEWARE', await getModule('build-tool/webpack/webpack-middleware.js'));
       break;
     case 'meteor':
       break;
-
     default:
       break;
   }
 
   switch (params.cssPreprocessor) {
     case 'sass':
-      const sassMiddlewareRequire = join(__dirname, 'modules', 'none', 'sass-middleware-require.js');
-      const sassMiddleware = join(__dirname, 'modules', 'none', 'sass-middleware.js');
-
-      await addNpmPackage('node-sass-middleware', params);
-
-      await replaceCode(server, 'CSS_PREPROCESSOR_MIDDLEWARE_REQUIRE', sassMiddlewareRequire);
-      await replaceCode(server, 'CSS_PREPROCESSOR_MIDDLEWARE', sassMiddleware);
+      await replaceCodeMemory(params, 'server.js', 'CSS_PREPROCESSOR_MIDDLEWARE_REQUIRE', await getModule('build-tool/none/sass-middleware-require.js'));
+      await replaceCodeMemory(params, 'server.js', 'CSS_PREPROCESSOR_MIDDLEWARE', await getModule('build-tool/none/sass-middleware.js'));
+      await addNpmPackageMemory('node-sass-middleware', params);
       break;
-
     case 'less':
-      const lessMiddlewareRequire = join(__dirname, 'modules', 'none', 'less-middleware-require.js');
-      const lessMiddleware = join(__dirname, 'modules', 'none', 'less-middleware.js');
-
-      await addNpmPackage('node-sass-middleware', params);
-
-      await replaceCode(server, 'CSS_PREPROCESSOR_MIDDLEWARE_REQUIRE', lessMiddlewareRequire);
-      await replaceCode(server, 'CSS_PREPROCESSOR_MIDDLEWARE', lessMiddleware);
+      await replaceCodeMemory(params, 'server.js', 'CSS_PREPROCESSOR_MIDDLEWARE_REQUIRE', await getModule('build-tool/none/less-middleware-require.js'));
+      await replaceCodeMemory(params, 'server.js', 'CSS_PREPROCESSOR_MIDDLEWARE', await getModule('build-tool/none/less-middleware.js'));
+      await addNpmPackageMemory('less-middleware', params);
       break;
-
     case 'postcss':
-      const postcssMiddlewareRequire = join(__dirname, 'modules', 'none', 'postcss-middleware-require.js');
-      const postcssMiddleware = join(__dirname, 'modules', 'none', 'postcss-middleware.js');
-
-      await addNpmPackage('postcss-middleware', params);
-
-      await replaceCode(server, 'CSS_PREPROCESSOR_MIDDLEWARE_REQUIRE', postcssMiddlewareRequire);
-      await replaceCode(server, 'CSS_PREPROCESSOR_MIDDLEWARE', postcssMiddleware);
+      await replaceCodeMemory(params, 'server.js', 'CSS_PREPROCESSOR_MIDDLEWARE_REQUIRE', await getModule('build-tool/none/postcss-middleware-require.js'));
+      await replaceCodeMemory(params, 'server.js', 'CSS_PREPROCESSOR_MIDDLEWARE', await getModule('build-tool/none/postcss-middleware.js'));
+      await addNpmPackageMemory('postcss-middleware', params);
       break;
-
     default:
       break;
   }
-
-  const webpackConfigJs = join(build, 'webpack.config.js');
 
   switch (params.jsFramework) {
     case 'react':
-      const reactLoader = join(__dirname, 'modules', 'webpack', 'webpack-react-loader.js');
-      await replaceCode(webpackConfigJs, 'WEBPACK_JAVASCRIPT_LOADER', reactLoader);
-
-      await addNpmPackage('babel-plugin-react-transform', params, true);
-      await addNpmPackage('react-transform-hmr', params, true);
-      await addNpmPackage('babel-preset-react', params, true);
+      await replaceCodeMemory(params, 'webpack.config.js', 'WEBPACK_JAVASCRIPT_LOADER', await getModule('build-tool/webpack/webpack-react-loader.js'));
+      await addNpmPackageMemory('babel-plugin-react-transform', params, true);
+      await addNpmPackageMemory('react-transform-hmr', params, true);
+      await addNpmPackageMemory('babel-preset-react', params, true);
       break;
-
     case 'angularjs':
       break;
-
     default:
-      const jsLoader = join(__dirname, 'modules', 'webpack', 'webpack-vanillajs-loader.js');
-      await replaceCode(webpackConfigJs, 'WEBPACK_JAVASCRIPT_LOADER', jsLoader);
+      await replaceCodeMemory(params, 'webpack.config.js', 'WEBPACK_JAVASCRIPT_LOADER', await getModule('build-tool/webpack/webpack-vanillajs-loader.js'));
       break;
   }
 }
-
-export default genereateWebpackBuildTool;
