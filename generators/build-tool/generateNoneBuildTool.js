@@ -1,44 +1,24 @@
-import { join } from 'path';
-import { copy, move, replaceCode, addNpmPackage } from '../utils';
+import { set } from 'lodash';
+import { getModule, replaceCodeMemory, addNpmPackageMemory } from '../utils';
 
-async function generateNoneBuildTool(params) {
-  const build = join(__base, 'build', params.uuid);
-  const server = join(build, 'server.js');
-
+export default async function generateNoneBuildTool(params) {
   switch (params.cssPreprocessor) {
     case 'sass':
-      const sassMiddlewareRequire = join(__dirname, 'modules', 'none', 'sass-middleware-require.js');
-      const sassMiddleware = join(__dirname, 'modules', 'none', 'sass-middleware.js');
-
-      await addNpmPackage('node-sass-middleware', params);
-
-      await replaceCode(server, 'CSS_PREPROCESSOR_MIDDLEWARE_REQUIRE', sassMiddlewareRequire);
-      await replaceCode(server, 'CSS_PREPROCESSOR_MIDDLEWARE', sassMiddleware);
+      await replaceCodeMemory(params, 'server.js', 'CSS_PREPROCESSOR_MIDDLEWARE_REQUIRE', await getModule('build-tool/none/sass-middleware-require.js'));
+      await replaceCodeMemory(params, 'server.js', 'CSS_PREPROCESSOR_MIDDLEWARE', await getModule('build-tool/none/sass-middleware.js'));
+      await addNpmPackageMemory('node-sass-middleware', params);
       break;
-
     case 'less':
-      const lessMiddlewareRequire = join(__dirname, 'modules', 'none', 'less-middleware-require.js');
-      const lessMiddleware = join(__dirname, 'modules', 'none', 'less-middleware.js');
-
-      await addNpmPackage('node-sass-middleware', params);
-
-      await replaceCode(server, 'CSS_PREPROCESSOR_MIDDLEWARE_REQUIRE', lessMiddlewareRequire);
-      await replaceCode(server, 'CSS_PREPROCESSOR_MIDDLEWARE', lessMiddleware);
+      await replaceCodeMemory(params, 'server.js', 'CSS_PREPROCESSOR_MIDDLEWARE_REQUIRE', await getModule('build-tool/none/less-middleware-require.js'));
+      await replaceCodeMemory(params, 'server.js', 'CSS_PREPROCESSOR_MIDDLEWARE', await getModule('build-tool/none/less-middleware.js'));
+      await addNpmPackageMemory('node-sass-middleware', params);
       break;
-
     case 'postcss':
-      const postcssMiddlewareRequire = join(__dirname, 'modules', 'none', 'postcss-middleware-require.js');
-      const postcssMiddleware = join(__dirname, 'modules', 'none', 'postcss-middleware.js');
-
-      await addNpmPackage('postcss-middleware', params);
-
-      await replaceCode(server, 'CSS_PREPROCESSOR_MIDDLEWARE_REQUIRE', postcssMiddlewareRequire);
-      await replaceCode(server, 'CSS_PREPROCESSOR_MIDDLEWARE', postcssMiddleware);
+      await replaceCodeMemory(params, 'server.js', 'CSS_PREPROCESSOR_MIDDLEWARE_REQUIRE', await getModule('build-tool/none/postcss-middleware-require.js'));
+      await replaceCodeMemory(params, 'server.js', 'CSS_PREPROCESSOR_MIDDLEWARE', await getModule('build-tool/none/postcss-middleware.js'));
+      await addNpmPackageMemory('postcss-middleware', params);
       break;
-
     default:
       break;
   }
 }
-
-export default generateNoneBuildTool;
