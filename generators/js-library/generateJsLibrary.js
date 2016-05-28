@@ -1,4 +1,3 @@
-import { join } from 'path';
 import { slugify, getModule, replaceCodeMemory, templateReplaceMemory, addNpmScriptMemory, addNpmPackageMemory } from '../utils';
 
 async function generateJsLibrary(params) {

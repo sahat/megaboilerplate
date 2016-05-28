@@ -450,6 +450,11 @@ export async function replaceCode(srcFile, subStr, newSrcFile, opts) {
 
 export async function replaceCodeMemory(params, filepath, templateString, module, opts = {}) {
   const src = get(params, ['build'].concat(filepath.split('/')));
+
+  if (!src) {
+    throw new Error('replaceCode FAILED: ' + ['build'].concat(filepath.split('/')));
+  }
+
   const array = src.toString().split('\n');
 
   if (opts.debug) {

@@ -1046,6 +1046,17 @@ canvas {
   fill: currentColor;
 }
 
+.angularjs .panel-heading {
+  color: #fff;
+  background: #1976d2;
+  border-color: transparent;
+}
+
+.angularjs svg {
+  color: #fff;
+  fill: currentColor;
+}
+
 .polymer .panel-heading {
   color: #fff;
   background: #3f51b5;
