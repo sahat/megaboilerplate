@@ -1,5 +1,3 @@
-
-
 const Promise = require('bluebird');
 const path = require('path');
 const logger = require('morgan');
@@ -27,11 +25,9 @@ Promise.config({ warnings: false });
 require('babel-core/register');
 require('babel-polyfill');
 
-// Express routes
-let downloadHandler = require('./routes/download');
-
-// React routes
-let reactRoutes = require('./website/routes');
+// Routes
+const expressRoutes = require('./routes');
+const reactRoutes = require('./website/routes');
 
 const app = express();
 
@@ -55,7 +51,7 @@ if (app.get('env') === 'development') {
 app.use(express.static(path.join(__dirname, 'website', 'assets')));
 
 
-app.post('/download', downloadHandler.default);
+app.post('/download', expressRoutes.download);
 
 // React server rendering
 app.use((req, res) => {
