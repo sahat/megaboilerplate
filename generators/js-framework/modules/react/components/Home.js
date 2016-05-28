@@ -5,7 +5,7 @@ import Messages from './Messages';
 class Home extends React.Component {
   render() {
     return (
-      //= HOME_RENDER
+      //= HOME_RENDER_INDENT3
     );
   }
 }
