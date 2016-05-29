@@ -5,7 +5,7 @@ import generateGoogleAuthentication from './generateGoogleAuthentication';
 import generateTwitterAuthentication from './generateTwitterAuthentication';
 import generateVkAuthentication from './generateVkAuthentication';
 
-async function generateAuthentication(params) {
+export default async function generateAuthentication(params) {
   if (params.authentication.length) {
     await generateCommonAuthentication(params);
 
@@ -30,5 +30,3 @@ async function generateAuthentication(params) {
     }
   }
 }
-
-export default generateAuthentication;
