@@ -60,9 +60,9 @@ async function generateFrameworkExpress(params) {
     await addNpmPackageMemory('method-override', params);
     await addNpmPackageMemory('nodemailer', params);
 
-    await addEnvMemory(params, {
+    addEnvMemory(params, {
       SESSION_SECRET: randomBytes(32).toString('hex')
-    })
+    });
   }
 }
 

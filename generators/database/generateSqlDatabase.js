@@ -14,9 +14,9 @@ export default async function generateSqlDatabase(params) {
         set(params, ['build', 'knexfile.js'], await getModule('database/sql/knexfile.js'));
       }
 
-      await templateReplaceMemory(params, 'knexfile.js', { dialect: params.database });
+      templateReplaceMemory(params, 'knexfile.js', { dialect: params.database });
 
-      await addEnvMemory(params, {
+      addEnvMemory(params, {
         DB_HOST: 'localhost',
         DB_USER: 'root',
         DB_PASSWORD: '',
@@ -24,17 +24,17 @@ export default async function generateSqlDatabase(params) {
       });
 
       if (params.database === 'mysql') {
-        await addNpmPackageMemory('mysql', params);
+        addNpmPackageMemory('mysql', params);
       }
       if (params.database === 'postgresql') {
-        await addNpmPackageMemory('pg', params);
+        addNpmPackageMemory('pg', params);
       }
       if (params.database === 'sqlite') {
-        await addNpmPackageMemory('sqlite3', params);
+        addNpmPackageMemory('sqlite3', params);
       }
 
-      await addNpmPackageMemory('knex', params);
-      await addNpmPackageMemory('bookshelf', params);
+      addNpmPackageMemory('knex', params);
+      addNpmPackageMemory('bookshelf', params);
       break;
     case 'meteor':
       break;

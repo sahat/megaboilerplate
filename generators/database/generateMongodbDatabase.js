@@ -6,8 +6,8 @@ export default async function generateMongodbDatabase(params) {
     case 'express':
       await replaceCodeMemory(params, 'server.js', 'DATABASE_REQUIRE', await getModule('database/mongodb/mongoose-require.js'));
       await replaceCodeMemory(params, 'server.js', 'DATABASE_CONNECTION', await getModule('database/mongodb/mongoose-connect.js'));
-      await addEnvMemory(params, { MONGODB: 'localhost' });
-      await addNpmPackageMemory('mongoose', params);
+      addEnvMemory(params, { MONGODB: 'localhost' });
+      addNpmPackageMemory('mongoose', params);
       break;
     case 'meteor':
       break;
