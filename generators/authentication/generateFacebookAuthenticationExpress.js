@@ -1,57 +1,42 @@
-import { join } from 'path';
-import { replaceCode, templateReplace, addNpmPackage, addEnv } from '../utils';
+import { getModule, replaceCodeMemory, templateReplaceMemory, addEnvMemory, addNpmPackageMemory } from '../utils';
 
-async function generateFacebookAuthenticationExpress(params) {
-  const build = join(__base, 'build', params.uuid);
-  const server = join(build, 'server.js');
-  const env = join(build, '.env');
-  const config = join(build, 'config', 'passport.js');
-  const userController = join(build, 'controllers', 'user.js');
-  const strategyRequire = join(__dirname, 'modules', 'facebook', 'passport-require.js');
-  const passportRoutes = join(__dirname, 'modules', 'facebook', 'passport-routes.js');
-  const jwtRoutes = join(__dirname, 'modules', 'facebook', 'jwt-routes.js');
-
+export default async function generateFacebookAuthenticationExpress(params) {
   if (params.jsFramework) {
-    await replaceCode(server, 'FACEBOOK_ROUTES', jwtRoutes);
-    await replaceCode(userController, 'AUTH_FACEBOOK_JWT', join(__dirname, 'modules', 'facebook', 'facebook-jwt.js'));
+    await replaceCodeMemory(params, 'server.js', 'FACEBOOK_ROUTES', await getModule('authentication/facebook/jwt-routes.js'));
+    await replaceCodeMemory(params, 'controllers/user.js', 'AUTH_FACEBOOK_JWT', await getModule('authentication/facebook/facebook-jwt.js'));
   } else {
-    await replaceCode(server, 'FACEBOOK_ROUTES', passportRoutes);
-    await replaceCode(config, 'PASSPORT_FACEBOOK_REQUIRE', strategyRequire);
-
-    await addNpmPackage('passport-facebook', params);
+    await replaceCodeMemory(params, 'server.js', 'FACEBOOK_ROUTES', await getModule('authentication/facebook/passport-routes.js'));
+    await replaceCodeMemory(params, 'config/passport.js', 'PASSPORT_FACEBOOK_REQUIRE', await getModule('authentication/facebook/passport-require.js'));
+    await addNpmPackageMemory('passport-facebook', params);
   }
 
   switch (params.database) {
     case 'mongodb':
       if (params.jsFramework) {
-        await replaceCode(userController, 'AUTH_FACEBOOK_JWT_DB', join(__dirname, 'modules', 'facebook', 'facebook-jwt-mongodb.js'), { indentLevel: 3 });
+        await replaceCodeMemory(params, 'controllers/user.js', 'AUTH_FACEBOOK_JWT_DB', await getModule('authentication/facebook/facebook-jwt-mongodb.js'), { indentLevel: 3 });
       } else {
-        const mongodbStrategy = join(__dirname, 'modules', 'facebook', 'facebook-strategy-mongodb.js');
-        await replaceCode(config, 'PASSPORT_FACEBOOK_STRATEGY', mongodbStrategy);
+        await replaceCodeMemory(params, 'config/passport.js', 'PASSPORT_FACEBOOK_STRATEGY', await getModule('authentication/facebook/facebook-strategy-mongodb.js'));
       }
       break;
-
     case 'mysql':
     case 'sqlite':
     case 'postgresql':
       if (params.jsFramework) {
-        await replaceCode(userController, 'AUTH_FACEBOOK_JWT_DB', join(__dirname, 'modules', 'facebook', 'facebook-jwt-sql.js'), { indentLevel: 3 });
+        await replaceCodeMemory(params, 'controllers/user.js', 'AUTH_FACEBOOK_JWT_DB', await getModule('authentication/facebook/facebook-jwt-sql.js'), { indentLevel: 3 });
       } else {
-        const sqlStrategy = join(__dirname, 'modules', 'facebook', 'facebook-strategy-sql.js');
-        await replaceCode(config, 'PASSPORT_FACEBOOK_STRATEGY', sqlStrategy);
+        await replaceCodeMemory(params, 'config/passport.js', 'PASSPORT_FACEBOOK_STRATEGY', await getModule('authentication/facebook/facebook-strategy-sql.js'));
       }
       break;
-    
     default:
       break;
   }
 
   if (params.jsFramework) {
-    await addEnv(params, {
+    await addEnvMemory(params, {
       FACEBOOK_SECRET: 'fb9416c436edd2690c6f6adbd94374d1'
     });
   } else {
-    await addEnv(params, {
+    await addEnvMemory(params, {
       FACEBOOK_ID: '980220002068787',
       FACEBOOK_SECRET: 'fb9416c436edd2690c6f6adbd94374d1'
     });
@@ -60,67 +45,38 @@ async function generateFacebookAuthenticationExpress(params) {
   let loginPage;
   let signupPage;
   let signInButton;
-  
+
   if (params.jsFramework && params.jsFramework === 'angularjs') {
-    loginPage = join(build, 'app', 'partials', 'login.html');
-    signupPage = join(build, 'app', 'partials', 'signup.html');
-    signInButton = join(__dirname, 'modules', 'facebook', 'views', `sign-in-button-angular-${params.cssFramework}.html`);
-    await replaceCode(loginPage, 'SIGN_IN_WITH_FACEBOOK', signInButton);
-    await replaceCode(signupPage, 'SIGN_IN_WITH_FACEBOOK', signInButton);
+    await replaceCodeMemory(params, 'app/partials/login.html', 'SIGN_IN_WITH_FACEBOOK', await getModule(`authentication/facebook/views/sign-in-button-angular-${params.cssFramework}.html`));
+    await replaceCodeMemory(params, 'app/partials/signup.html', 'SIGN_IN_WITH_FACEBOOK', await getModule(`authentication/facebook/views/sign-in-button-angular-${params.cssFramework}.html`));
   } else if (params.jsFramework && params.jsFramework === 'react') {
-    loginPage = join(build, 'app', 'components', 'Account', 'Login.js');
-    signupPage = join(build, 'app', 'components', 'Account', 'Signup.js');
-    signInButton = join(__dirname, 'modules', 'facebook', 'views', `sign-in-button-react-${params.cssFramework}.js`);
-    await replaceCode(loginPage, 'SIGN_IN_WITH_FACEBOOK', signInButton);
-    await replaceCode(signupPage, 'SIGN_IN_WITH_FACEBOOK', signInButton);
+    await replaceCodeMemory(params, 'app/components/Account/Login.js', 'SIGN_IN_WITH_FACEBOOK', await getModule(`authentication/facebook/views/sign-in-button-react-${params.cssFramework}.js`));
+    await replaceCodeMemory(params, 'app/components/Account/Signup.js', 'SIGN_IN_WITH_FACEBOOK', await getModule(`authentication/facebook/views/sign-in-button-react-${params.cssFramework}.js`));
   } else {
-    let profileTemplate;
-    let oauthLink;
     switch (params.templateEngine) {
       case 'jade':
-        loginPage = join(build, 'views', 'account', 'login.jade');
-        signupPage = join(build, 'views', 'account', 'signup.jade');
-        signInButton = join(__dirname, 'modules', 'facebook', 'views', `sign-in-button-${params.cssFramework}.jade`);
-        await replaceCode(loginPage, 'SIGN_IN_WITH_FACEBOOK', signInButton, { indentLevel: 3 });
-        await replaceCode(signupPage, 'SIGN_IN_WITH_FACEBOOK', signInButton, { indentLevel: 3 });
-
-        // Add link/unlink button on profile page
-        profileTemplate = join(build, 'views', 'account', 'profile.jade');
-        oauthLink = join(__dirname, 'modules', 'common', 'views', 'jade', 'oauth-link.jade');
-        await replaceCode(profileTemplate, 'FACEBOOK_LINK', oauthLink);
-        await templateReplace(profileTemplate, {
+        await replaceCodeMemory(params, 'views/account/login.jade', 'SIGN_IN_WITH_FACEBOOK', await getModule(`authentication/facebook/views/sign-in-button-${params.cssFramework}.jade`), { indentLevel: 3 });
+        await replaceCodeMemory(params, 'views/account/signup.jade', 'SIGN_IN_WITH_FACEBOOK', await getModule(`authentication/facebook/views/sign-in-button-${params.cssFramework}.jade`), { indentLevel: 3 });
+        await replaceCodeMemory(params, 'views/account/profile.jade', 'FACEBOOK_LINK', await getModule('authentication/common/views/jade/oauth-link.jade'));
+        templateReplaceMemory(params, 'views/account/profile.jade', {
           providerPath: 'facebook',
           providerName: 'Facebook'
         });
         break;
       case 'handlebars':
-        loginPage = join(build, 'views', 'account', 'login.handlebars');
-        signupPage = join(build, 'views', 'account', 'signup.handlebars');
-        signInButton = join(__dirname, 'modules', 'facebook', 'views', `sign-in-button-${params.cssFramework}.html`);
-        await replaceCode(loginPage, 'SIGN_IN_WITH_FACEBOOK', signInButton, { indentLevel: 3 });
-        await replaceCode(signupPage, 'SIGN_IN_WITH_FACEBOOK', signInButton, { indentLevel: 3 });
-
-        // Add link/unlink button on profile page
-        profileTemplate = join(build, 'views', 'account', 'profile.handlebars');
-        oauthLink = join(__dirname, 'modules', 'common', 'views', 'handlebars', 'oauth-link.handlebars');
-        await replaceCode(profileTemplate, 'FACEBOOK_LINK', oauthLink);
-        await templateReplace(profileTemplate, {
+        await replaceCodeMemory(params, 'views/account/login.handlebars', 'SIGN_IN_WITH_FACEBOOK', await getModule(`authentication/facebook/views/sign-in-button-${params.cssFramework}.html`), { indentLevel: 3 });
+        await replaceCodeMemory(params, 'views/account/signup.handlebars', 'SIGN_IN_WITH_FACEBOOK', await getModule(`authentication/facebook/views/sign-in-button-${params.cssFramework}.html`), { indentLevel: 3 });
+        await replaceCodeMemory(params, 'views/account/profile.handlebars', 'FACEBOOK_LINK', await getModule('authentication/common/views/handlebars/oauth-link.handlebars'));
+        templateReplaceMemory(params, 'views/account/profile.handlebars', {
           providerPath: 'facebook',
           providerName: 'Facebook'
         });
         break;
       case 'nunjucks':
-        loginPage = join(build, 'views', 'account', 'login.html');
-        signupPage = join(build, 'views', 'account', 'signup.html');
-        signInButton = join(__dirname, 'modules', 'facebook', 'views', `sign-in-button-${params.cssFramework}.html`);
-        await replaceCode(loginPage, 'SIGN_IN_WITH_FACEBOOK', signInButton, { indentLevel: 3 });
-        await replaceCode(signupPage, 'SIGN_IN_WITH_FACEBOOK', signInButton, { indentLevel: 3 });
-
-        // Add link/unlink button on profile page
-        profileTemplate = join(build, 'views', 'account', 'profile.html');
-        oauthLink = join(__dirname, 'modules', 'common', 'views', 'nunjucks', 'oauth-link.html');
-        await replaceCode(profileTemplate, 'FACEBOOK_LINK', oauthLink);
-        await templateReplace(profileTemplate, {
+        await replaceCodeMemory(params, 'views/account/login.html', 'SIGN_IN_WITH_FACEBOOK', await getModule(`authentication/facebook/views/sign-in-button-${params.cssFramework}.html`), { indentLevel: 3 });
+        await replaceCodeMemory(params, 'views/account/signup.html', 'SIGN_IN_WITH_FACEBOOK', await getModule(`authentication/facebook/views/sign-in-button-${params.cssFramework}.html`), { indentLevel: 3 });
+        await replaceCodeMemory(params, 'views/account/profile.html', 'FACEBOOK_LINK', await getModule('authentication/common/views/nunjucks/oauth-link.html'));
+        templateReplaceMemory(params, 'views/account/profile.html', {
           providerPath: 'facebook',
           providerName: 'Facebook'
         });
@@ -131,33 +87,14 @@ async function generateFacebookAuthenticationExpress(params) {
   }
 
   if (params.jsFramework === 'react') {
-    const reactModules = join(__base, 'generators', 'js-framework', 'modules', 'react');
-    const oauthAction = join(build, 'app', 'actions', 'oauth.js');
-    const facebookLoginAction = join(reactModules, 'actions', 'oauth', 'facebook.js');
-    const facebookLinkAction = join(reactModules, 'actions', 'oauth', 'facebook-link.js');
-    await replaceCode(oauthAction, 'FACEBOOK_LOGIN_ACTION', facebookLoginAction);
-    await replaceCode(oauthAction, 'FACEBOOK_LINK_ACTION', facebookLinkAction);
-
-    // Add link/unlink button on profile page
-    const profileComponent = join(build, 'app', 'components', 'Account', 'Profile.js');
-    const facebookLinkRender = join(reactModules, 'components', 'Account', 'profile', `facebook-link-${params.cssFramework}.js`);
-    const facebookLinkReference = join(reactModules, 'components', 'Account', 'profile', 'facebook-link-reference.js');
-    await replaceCode(profileComponent, 'FACEBOOK_LINK', facebookLinkRender);
-    await replaceCode(profileComponent, 'FACEBOOK_LINK_REFERENCE', facebookLinkReference);
+    await replaceCodeMemory(params, 'app/actions/oauth.js', 'FACEBOOK_LOGIN_ACTION', await getModule('js-framework/react/actions/oauth/facebook.js'));
+    await replaceCodeMemory(params, 'app/actions/oauth.js', 'FACEBOOK_LINK_ACTION', await getModule('js-framework/react/actions/oauth/facebook-link.js'));
+    await replaceCodeMemory(params, 'app/components/Account/Profile.js', 'FACEBOOK_LINK', await getModule(`js-framework/react/components/Account/profile/facebook-link-${params.cssFramework}.js`));
+    await replaceCodeMemory(params, 'app/components/Account/Profile.js', 'FACEBOOK_LINK_REFERENCE', await getModule('js-framework/react/components/Account/profile/facebook-link-reference.js'));
   }
 
   if (params.jsFramework === 'angularjs') {
-    const angularjsModules = join(__base, 'generators', 'js-framework', 'modules', 'angularjs');
- 
-    // Add link/unlink button on profile page
-    const profileTemplate = join(build, 'app', 'partials', 'profile.html');
-    const facebookLink = join(angularjsModules, 'partials', 'profile', `facebook-link-${params.cssFramework}.html`);
-    await replaceCode(profileTemplate, 'FACEBOOK_LINK', facebookLink);
-
-    const appJs = join(build, 'app', 'app.js');
-    const satellizerFacebookConfig = join(angularjsModules, 'satellizer-facebook.js');
-    await replaceCode(appJs, 'SATELLIZER_FACEBOOK_CONFIG', satellizerFacebookConfig);
+    await replaceCodeMemory(params, 'app/partials/profile.html', 'FACEBOOK_LINK', await getModule(`js-framework/angularjs/partials/profile/facebook-link-${params.cssFramework}.html`));
+    await replaceCodeMemory(params, 'app/app.js', 'SATELLIZER_FACEBOOK_CONFIG', await getModule('js-framework/angularjs/satellizer-facebook.js'));
   }
 }
-
-export default generateFacebookAuthenticationExpress;
