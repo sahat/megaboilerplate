@@ -4,6 +4,12 @@ export default async function generateVkAuthenticationExpress(params) {
   if (params.jsFramework) {
     await replaceCodeMemory(params, 'server.js', 'VK_ROUTES', await getModule('authentication/vk/jwt-routes.js'));
     await replaceCodeMemory(params, 'controllers/user.js', 'AUTH_VK_JWT', await getModule('authentication/vk/vk-jwt.js'));
+
+    if (params.jsFramework === 'react') {
+      await replaceCodeMemory(params, 'controllers/user.js', 'AUTH_JWT_CALLBACK', await getModule('authentication/controllers/jwt-callback-render.js'));
+    } else if (params.jsFramework === 'angularjs') {
+      await replaceCodeMemory(params, 'controllers/user.js', 'AUTH_JWT_CALLBACK', await getModule('authentication/controllers/jwt-callback-send.js'));
+    }
   } else {
     await replaceCodeMemory(params, 'server.js', 'VK_ROUTES', await getModule('authentication/vk/passport-routes.js'));
     await replaceCodeMemory(params, 'config/passport.js', 'PASSPORT_VK_REQUIRE', await getModule('authentication/vk/passport-require.js'));

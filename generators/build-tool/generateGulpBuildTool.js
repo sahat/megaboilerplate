@@ -5,6 +5,8 @@ export default async function generateGulpBuildTool(params) {
   set(params, ['build', 'gulpfile.js'], await getModule('build-tool/gulp/gulpfile.js'));
 
   await addNpmScriptMemory('postinstall', 'gulp build', params);
+  await addNpmScriptMemory('build', 'gulp build', params);
+  await addNpmScriptMemory('watch', 'gulp', params);
 
   await addNpmPackageMemory('gulp', params, true);
   await addNpmPackageMemory('gulp-if', params, true);
@@ -32,7 +34,7 @@ export default async function generateGulpBuildTool(params) {
       await replaceCodeMemory(params, 'gulpfile.js', 'CSS_PREPROCESSOR_GULP_REQUIRE', await getModule('build-tool/gulp/less-gulp-require.js'));
       await replaceCodeMemory(params, 'gulpfile.js', 'CSS_PREPROCESSOR_GULP_TASK', await getModule('build-tool/gulp/less-gulp-task.js'));
       await replaceCodeMemory(params, 'gulpfile.js', 'CSS_PREPROCESSOR_GULP_WATCH', await getModule('build-tool/gulp/less-gulp-watch.js'));
-      await addNpmPackage('gulp-less', params, true);
+      await addNpmPackageMemory('gulp-less', params, true);
       buildTasks.push('less');
       break;
     default:

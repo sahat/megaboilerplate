@@ -4,6 +4,12 @@ export default async function generateGoogleAuthenticationExpress(params) {
   if (params.jsFramework) {
     await replaceCodeMemory(params, 'server.js', 'GOOGLE_ROUTES', await getModule('authentication/google/jwt-routes.js'));
     await replaceCodeMemory(params, 'controllers/user.js', 'AUTH_GOOGLE_JWT', await getModule('authentication/google/google-jwt.js'));
+    
+    if (params.jsFramework === 'react') {
+      await replaceCodeMemory(params, 'controllers/user.js', 'AUTH_JWT_CALLBACK', await getModule('authentication/controllers/jwt-callback-render.js'));
+    } else if (params.jsFramework === 'angularjs') {
+      await replaceCodeMemory(params, 'controllers/user.js', 'AUTH_JWT_CALLBACK', await getModule('authentication/controllers/jwt-callback-send.js'));
+    }
   } else {
     await replaceCodeMemory(params, 'server.js', 'GOOGLE_ROUTES', await getModule('authentication/google/passport-routes.js'));
     await replaceCodeMemory(params, 'config/passport.js', 'PASSPORT_GOOGLE_REQUIRE', await getModule('authentication/google/passport-require.js'));

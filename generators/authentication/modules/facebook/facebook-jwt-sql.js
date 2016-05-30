@@ -22,7 +22,7 @@ if (req.isAuthenticated()) {
       if (user) {
         return res.send({ token: generateToken(user), user: user });
       }
-      new User({ email: profile._json.email })
+      new User({ email: profile.email })
         .fetch()
         .then(function(user) {
           if (user) {

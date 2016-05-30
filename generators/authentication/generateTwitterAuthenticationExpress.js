@@ -4,6 +4,12 @@ export default async function generateTwitterAuthenticationExpress(params) {
   if (params.jsFramework) {
     await replaceCodeMemory(params, 'server.js', 'TWITTER_ROUTES', await getModule('authentication/twitter/jwt-routes.js'));
     await replaceCodeMemory(params, 'controllers/user.js', 'AUTH_TWITTER_JWT', await getModule('authentication/twitter/twitter-jwt.js'));
+
+    if (params.jsFramework === 'react') {
+      await replaceCodeMemory(params, 'controllers/user.js', 'AUTH_JWT_CALLBACK', await getModule('authentication/controllers/jwt-callback-render.js'));
+    } else if (params.jsFramework === 'angularjs') {
+      await replaceCodeMemory(params, 'controllers/user.js', 'AUTH_JWT_CALLBACK', await getModule('authentication/controllers/jwt-callback-send.js'));
+    }
   } else {
     await replaceCodeMemory(params, 'server.js', 'TWITTER_ROUTES', await getModule('authentication/twitter/passport-routes.js'));
     await replaceCodeMemory(params, 'config/passport.js', 'PASSPORT_TWITTER_REQUIRE', await getModule('authentication/twitter/passport-require.js'));
@@ -31,16 +37,10 @@ export default async function generateTwitterAuthenticationExpress(params) {
       break;
   }
 
-  if (params.jsFramework) {
-    await addEnvMemory(params, {
-      TWITTER_KEY: 'ZHaYyK3DQCqv49Z9ofsYdqiUgeoICyh6uoBgFfu7OeYC7wTQKa'
-    });
-  } else {
-    await addEnvMemory(params, {
-      TWITTER_KEY: '6NNBDyJ2TavL407A3lWxPFKBI',
-      TWITTER_SECRET: 'ZHaYyK3DQCqv49Z9ofsYdqiUgeoICyh6uoBgFfu7OeYC7wTQKa'
-    });
-  }
+  await addEnvMemory(params, {
+    TWITTER_KEY: '6NNBDyJ2TavL407A3lWxPFKBI',
+    TWITTER_SECRET: 'ZHaYyK3DQCqv49Z9ofsYdqiUgeoICyh6uoBgFfu7OeYC7wTQKa'
+  });
 
   if (params.jsFramework && params.jsFramework === 'angularjs') {
     await replaceCodeMemory(params, 'app/partials/login.html', 'SIGN_IN_WITH_TWITTER', await getModule(`authentication/twitter/views/sign-in-button-angular-${params.cssFramework}.html`));

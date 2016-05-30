@@ -4,6 +4,12 @@ export default async function generateFacebookAuthenticationExpress(params) {
   if (params.jsFramework) {
     await replaceCodeMemory(params, 'server.js', 'FACEBOOK_ROUTES', await getModule('authentication/facebook/jwt-routes.js'));
     await replaceCodeMemory(params, 'controllers/user.js', 'AUTH_FACEBOOK_JWT', await getModule('authentication/facebook/facebook-jwt.js'));
+
+    if (params.jsFramework === 'react') {
+      await replaceCodeMemory(params, 'controllers/user.js', 'AUTH_JWT_CALLBACK', await getModule('authentication/controllers/jwt-callback-render.js'));
+    } else if (params.jsFramework === 'angularjs') {
+      await replaceCodeMemory(params, 'controllers/user.js', 'AUTH_JWT_CALLBACK', await getModule('authentication/controllers/jwt-callback-send.js'));
+    }
   } else {
     await replaceCodeMemory(params, 'server.js', 'FACEBOOK_ROUTES', await getModule('authentication/facebook/passport-routes.js'));
     await replaceCodeMemory(params, 'config/passport.js', 'PASSPORT_FACEBOOK_REQUIRE', await getModule('authentication/facebook/passport-require.js'));

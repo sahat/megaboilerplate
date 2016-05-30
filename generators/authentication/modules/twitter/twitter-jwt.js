@@ -56,5 +56,5 @@ exports.authTwitter = function(req, res) {
 };
 
 exports.authTwitterCallback = function(req, res) {
-  res.render('loading');
+  //= AUTH_JWT_CALLBACK_INDENT1
 };

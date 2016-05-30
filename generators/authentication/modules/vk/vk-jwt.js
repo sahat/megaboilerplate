@@ -40,5 +40,5 @@ exports.authVkontakte = function(req, res) {
 };
 
 exports.authVkontakteCallback = function(req, res) {
-  res.render('loading');
+  //= AUTH_JWT_CALLBACK_INDENT1
 };
