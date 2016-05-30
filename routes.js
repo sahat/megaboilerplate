@@ -25,12 +25,11 @@ export async function download(req, res) {
       await generateTemplateEngine(params);
       await generateCssFramework(params);
       await generateJsFramework(params);
-      // await generateBuildTool(params);
-      // await generateTesting(params);
-      // await generateDatabase(params);
-      // await generateAuthentication(params);
-      // await generateDeployment(params);
-      // await postprocessing(params);
+      await generateBuildTool(params);
+      await generateTesting(params);
+      await generateDatabase(params);
+      await generateAuthentication(params);
+      await generateDeployment(params);
     }
     await walkAndRemoveCommentsMemory(params);
     await createZipArchive(res, params);
