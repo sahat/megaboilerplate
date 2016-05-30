@@ -65,6 +65,7 @@
   "watchify": "^3.7.0",
   "yargs": "^4.3.2",
   "webpack": "^1.12.14",
+  "webpack-dev-middleware": "^1.6.1",
   "webpack-hot-middleware": "^2.10.0",
   "npm-run-all": "^1.8.0",
   "nodemon": "^1.9.1",

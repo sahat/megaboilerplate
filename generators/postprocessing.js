@@ -3,9 +3,7 @@ import { get, set } from 'lodash';
 /**
  * Special cases handling
  */
-async function postprocessing(params) {
-
-  console.log('doing postprocessing')
+export default async function postprocessing(params) {
   // Move AngularJS app into 'public' directory
   if (params.buildTool === 'none') {
     if (params.jsFramework === 'angularjs') {
@@ -17,12 +15,6 @@ async function postprocessing(params) {
 
       set(params, ['build', 'public', 'js'], get(params, ['build', 'app']));
       set(params, ['build', 'app'], undefined);
-
-      // await move(join(build, 'app', 'index.html'), join(build, 'public', 'index.html'));
-      // await move(join(build, 'app', 'partials'), join(build, 'public', 'partials'));
-      // await move(join(build, 'app'), join(build, 'public', 'js'));
     }
   }
 }
-
-export default postprocessing;

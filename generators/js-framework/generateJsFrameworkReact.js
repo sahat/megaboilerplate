@@ -45,10 +45,10 @@ async function generateJsFrameworkReact(params) {
       await replaceCodeMemory(params, 'app/components/Header.js', 'HEADER_RENDER', await getModule(`js-framework/react/components/Header-${params.cssFramework}.js`));
 
       if (params.authentication.length) {
-        set(params.build, ['app', 'components', 'Account', 'Forgot.js'], await getModule('js-framework/react/components/Account/Signup.js'));
-        set(params.build, ['app', 'components', 'Account', 'Login.js'], await getModule('js-framework/react/components/Account/Signup.js'));
-        set(params.build, ['app', 'components', 'Account', 'Profile.js'], await getModule('js-framework/react/components/Account/Signup.js'));
-        set(params.build, ['app', 'components', 'Account', 'Reset.js'], await getModule('js-framework/react/components/Account/Signup.js'));
+        set(params.build, ['app', 'components', 'Account', 'Forgot.js'], await getModule('js-framework/react/components/Account/Forgot.js'));
+        set(params.build, ['app', 'components', 'Account', 'Login.js'], await getModule('js-framework/react/components/Account/Login.js'));
+        set(params.build, ['app', 'components', 'Account', 'Profile.js'], await getModule('js-framework/react/components/Account/Profile.js'));
+        set(params.build, ['app', 'components', 'Account', 'Reset.js'], await getModule('js-framework/react/components/Account/Reset.js'));
         set(params.build, ['app', 'components', 'Account', 'Signup.js'], await getModule('js-framework/react/components/Account/Signup.js'));
 
         await replaceCodeMemory(params, 'app/components/Account/Forgot.js', 'FORGOT_RENDER', await getModule(`js-framework/react/components/Account/Forgot-${params.cssFramework}.js`), { indentLevel: 3 });
