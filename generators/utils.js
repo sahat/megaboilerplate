@@ -213,7 +213,7 @@ export async function addNpmPackage(pkgName, params, isDev) {
   await writeJson(packageJson, packageObj, { spaces: 2 });
 }
 
-export async function addNpmPackageMemory(pkgName, params, isDev) {
+export function addNpmPackageMemory(pkgName, params, isDev) {
   if (!params) {
     throw new Error(`Did you forget to pass params to addNpmPackage('${pkgName}')?`);
   }

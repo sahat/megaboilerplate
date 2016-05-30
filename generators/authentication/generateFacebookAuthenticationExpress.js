@@ -7,7 +7,7 @@ export default async function generateFacebookAuthenticationExpress(params) {
   } else {
     await replaceCodeMemory(params, 'server.js', 'FACEBOOK_ROUTES', await getModule('authentication/facebook/passport-routes.js'));
     await replaceCodeMemory(params, 'config/passport.js', 'PASSPORT_FACEBOOK_REQUIRE', await getModule('authentication/facebook/passport-require.js'));
-    await addNpmPackageMemory('passport-facebook', params);
+    addNpmPackageMemory('passport-facebook', params);
   }
 
   switch (params.database) {
@@ -32,19 +32,15 @@ export default async function generateFacebookAuthenticationExpress(params) {
   }
 
   if (params.jsFramework) {
-    await addEnvMemory(params, {
+    addEnvMemory(params, {
       FACEBOOK_SECRET: 'fb9416c436edd2690c6f6adbd94374d1'
     });
   } else {
-    await addEnvMemory(params, {
+    addEnvMemory(params, {
       FACEBOOK_ID: '980220002068787',
       FACEBOOK_SECRET: 'fb9416c436edd2690c6f6adbd94374d1'
     });
   }
-
-  let loginPage;
-  let signupPage;
-  let signInButton;
 
   if (params.jsFramework && params.jsFramework === 'angularjs') {
     await replaceCodeMemory(params, 'app/partials/login.html', 'SIGN_IN_WITH_FACEBOOK', await getModule(`authentication/facebook/views/sign-in-button-angular-${params.cssFramework}.html`));
