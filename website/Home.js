@@ -180,7 +180,9 @@ class Home extends React.Component {
         if (disp && disp.search('attachment') !== -1) {
           const form = $('<form method="POST" action="/download">');
           $.each(data, (k, v) => {
-            form.append($(`<input type="hidden" name="${k}" value="${v}">`));
+            if (v) {
+              form.append($(`<input type="hidden" name="${k}" value="${v}">`));
+            }
           });
           $('body').append(form);
           form.submit();
