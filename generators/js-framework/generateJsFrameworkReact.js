@@ -17,7 +17,7 @@ async function generateJsFrameworkReact(params) {
 
       // Require react, react-router, react-dom packages
       await replaceCodeMemory(params, 'server.js', 'REACT_REQUIRE', await getModule('js-framework/react/react-require.js'));
-      await replaceCodeMemory(params, 'server.js', 'REACT_ROUTES_REQUIRE', await getModule('js-framework/react/routes.js'));
+      await replaceCodeMemory(params, 'server.js', 'REACT_ROUTES_REQUIRE', await getModule('js-framework/react/react-routes-require.js'));
 
       // Add ES6 transpiler
       await replaceCodeMemory(params, 'server.js', 'ES6_TRANSPILER', await getModule('js-framework/react/es6-transpiler.js'));
@@ -78,6 +78,11 @@ async function generateJsFrameworkReact(params) {
         // Redux actions
         set(params.build, ['app', 'actions', 'auth.js'], await getModule('js-framework/react/actions/auth.js'));
         set(params.build, ['app', 'actions', 'oauth.js'], await getModule('js-framework/react/actions/oauth.js'));
+
+        // Auth routes
+        await replaceCodeMemory(params, 'app/routes.js', 'AUTH_ROUTES_IMPORT', await getModule('js-framework/react/routes-auth-import.js'));
+        await replaceCodeMemory(params, 'app/routes.js', 'AUTH_MIDDLEWARE', await getModule('js-framework/react/routes-auth-middleware.js'));
+        await replaceCodeMemory(params, 'app/routes.js', 'AUTH_ROUTES', await getModule('js-framework/react/routes-auth.js'));
       } else {
         // Add standard module export
         await replaceCodeMemory(params, 'app/components/Header.js', 'HEADER_EXPORT', await getModule('js-framework/react/components/Header-export.js'));
@@ -85,11 +90,6 @@ async function generateJsFrameworkReact(params) {
         // Redux reducers (without auth)
         set(params.build, ['app', 'reducers', 'index.js'], await getModule('js-framework/react/reducers/index.js'));
         set(params.build, ['app', 'reducers', 'messages.js'], await getModule('js-framework/react/reducers/messages.js'));
-
-        // Auth routes
-        await replaceCodeMemory(params, 'app/routes.js', 'AUTH_ROUTES_IMPORT', await getModule('js-framework/react/routes-auth-import.js'));
-        await replaceCodeMemory(params, 'app/routes.js', 'AUTH_MIDDLEWARE', await getModule('js-framework/react/routes-auth-middleware.js'));
-        await replaceCodeMemory(params, 'app/routes.js', 'AUTH_ROUTES', await getModule('js-framework/react/routes-auth.js'));
       }
 
       // Add store
