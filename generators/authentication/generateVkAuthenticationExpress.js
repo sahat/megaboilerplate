@@ -1,126 +1,78 @@
-import { join } from 'path';
-import { replaceCode, templateReplace, addNpmPackage, addEnv } from '../utils';
+import { getModule, replaceCodeMemory, templateReplaceMemory, addEnvMemory, addNpmPackageMemory } from '../utils';
 
-async function generateVkAuthenticationExpress(params) {
-  const build = join(__base, 'build', params.uuid);
-  const server = join(build, 'server.js');
-  const env = join(build, '.env');
-  const config = join(build, 'config', 'passport.js');
-  const userController = join(build, 'controllers', 'user.js');
-  const strategyRequire = join(__dirname, 'modules', 'vk', 'passport-require.js');
-  const passportRoutes = join(__dirname, 'modules', 'vk', 'passport-routes.js');
-  const jwtRoutes = join(__dirname, 'modules', 'vk', 'jwt-routes.js');
-
+export default async function generateVkAuthenticationExpress(params) {
   if (params.jsFramework) {
-    await replaceCode(server, 'VK_ROUTES', jwtRoutes);
-    await replaceCode(userController, 'AUTH_VK_JWT', join(__dirname, 'modules', 'vk', 'vk-jwt.js'));
+    await replaceCodeMemory(params, 'server.js', 'VK_ROUTES', await getModule('authentication/vk/jwt-routes.js'));
+    await replaceCodeMemory(params, 'controllers/user.js', 'AUTH_VK_JWT', await getModule('authentication/vk/vk-jwt.js'));
   } else {
-    await replaceCode(server, 'VK_ROUTES', passportRoutes);
-    await replaceCode(config, 'PASSPORT_VK_REQUIRE', strategyRequire);
-
-    await addNpmPackage('passport-vkontakte', params);
+    await replaceCodeMemory(params, 'server.js', 'VK_ROUTES', await getModule('authentication/vk/passport-routes.js'));
+    await replaceCodeMemory(params, 'config/passport.js', 'PASSPORT_VK_REQUIRE', await getModule('authentication/vk/passport-require.js'));
+    addNpmPackageMemory('passport-vkontakte', params);
   }
-  
+
   switch (params.database) {
     case 'mongodb':
       if (params.jsFramework) {
-        await replaceCode(userController, 'AUTH_VK_JWT_DB', join(__dirname, 'modules', 'vk', 'vk-jwt-mongodb.js'), { indentLevel: 3 });
+        await replaceCodeMemory(params, 'controllers/user.js', 'AUTH_VK_JWT_DB', await getModule('authentication/vk/vk-jwt-mongodb.js'), { indentLevel: 3 });
       } else {
-        const mongodbStrategy = join(__dirname, 'modules', 'vk', 'vk-strategy-mongodb.js');
-        await replaceCode(config, 'PASSPORT_VK_STRATEGY', mongodbStrategy);
+        await replaceCodeMemory(params, 'config/passport.js', 'PASSPORT_VK_STRATEGY', await getModule('authentication/vk/vk-strategy-mongodb.js'));
       }
       break;
-
     case 'mysql':
     case 'sqlite':
     case 'postgresql':
       if (params.jsFramework) {
-        await replaceCode(userController, 'AUTH_VK_JWT_DB', join(__dirname, 'modules', 'vk', 'vk-jwt-sql.js'), { indentLevel: 3 });
+        await replaceCodeMemory(params, 'controllers/user.js', 'AUTH_VK_JWT_DB', await getModule('authentication/vk/vk-jwt-sql.js'), { indentLevel: 3 });
       } else {
-        const sqlStrategy = join(__dirname, 'modules', 'vk', 'vk-strategy-sql.js');
-        await replaceCode(config, 'PASSPORT_VK_STRATEGY', sqlStrategy);
+        await replaceCodeMemory(params, 'config/passport.js', 'PASSPORT_VK_STRATEGY', await getModule('authentication/vk/vk-strategy-sql.js'));
       }
       break;
-    
     default:
       break;
   }
 
   if (params.jsFramework) {
-    await addEnv(params, {
+    await addEnvMemory(params, {
       VKONTAKTE_SECRET: 'W4MvuGuWZDqmDravgesY'
     });
   } else {
-    await addEnv(params, {
+    await addEnvMemory(params, {
       VKONTAKTE_ID: '5389715',
       VKONTAKTE_SECRET: 'W4MvuGuWZDqmDravgesY'
     });
   }
 
-  let loginPage;
-  let signupPage;
-  let signInButton;
-
   if (params.jsFramework && params.jsFramework === 'angularjs') {
-    loginPage = join(build, 'app', 'partials', 'login.html');
-    signupPage = join(build, 'app', 'partials', 'signup.html');
-    signInButton = join(__dirname, 'modules', 'vk', 'views', `sign-in-button-angular-${params.cssFramework}.html`);
-    await replaceCode(loginPage, 'SIGN_IN_WITH_VK', signInButton);
-    await replaceCode(signupPage, 'SIGN_IN_WITH_VK', signInButton);
+    await replaceCodeMemory(params, 'app/partials/login.html', 'SIGN_IN_WITH_VK', await getModule(`authentication/vk/views/sign-in-button-angular-${params.cssFramework}.html`));
+    await replaceCodeMemory(params, 'app/partials/signup.html', 'SIGN_IN_WITH_VK', await getModule(`authentication/vk/views/sign-in-button-angular-${params.cssFramework}.html`));
   } else if (params.jsFramework && params.jsFramework === 'react') {
-    loginPage = join(build, 'app', 'components', 'Account', 'Login.js');
-    signupPage = join(build, 'app', 'components', 'Account', 'Signup.js');
-    signInButton = join(__dirname, 'modules', 'vk', 'views', `sign-in-button-react-${params.cssFramework}.js`);
-    await replaceCode(loginPage, 'SIGN_IN_WITH_VK', signInButton);
-    await replaceCode(signupPage, 'SIGN_IN_WITH_VK', signInButton);
+    await replaceCodeMemory(params, 'app/components/Account/Login.js', 'SIGN_IN_WITH_VK', await getModule(`authentication/vk/views/sign-in-button-react-${params.cssFramework}.js`));
+    await replaceCodeMemory(params, 'app/components/Account/Signup.js', 'SIGN_IN_WITH_VK', await getModule(`authentication/vk/views/sign-in-button-react-${params.cssFramework}.js`));
   } else {
-    let profileTemplate;
-    let oauthLink;
     switch (params.templateEngine) {
       case 'jade':
-        loginPage = join(build, 'views', 'account', 'login.jade');
-        signupPage = join(build, 'views', 'account', 'signup.jade');
-        signInButton = join(__dirname, 'modules', 'vk', 'views', `sign-in-button-${params.cssFramework}.jade`);
-        await replaceCode(loginPage, 'SIGN_IN_WITH_VK', signInButton, { indentLevel: 3 });
-        await replaceCode(signupPage, 'SIGN_IN_WITH_VK', signInButton, { indentLevel: 3 });
-
-        // Add link/unlink button on profile page
-        profileTemplate = join(build, 'views', 'account', 'profile.jade');
-        oauthLink = join(__dirname, 'modules', 'common', 'views', 'jade', 'oauth-link.jade');
-        await replaceCode(profileTemplate, 'VK_LINK', oauthLink);
-        await templateReplace(profileTemplate, {
+        await replaceCodeMemory(params, 'views/account/login.jade', 'SIGN_IN_WITH_VK', await getModule(`authentication/vk/views/sign-in-button-${params.cssFramework}.jade`), { indentLevel: 3 });
+        await replaceCodeMemory(params, 'views/account/signup.jade', 'SIGN_IN_WITH_VK', await getModule(`authentication/vk/views/sign-in-button-${params.cssFramework}.jade`), { indentLevel: 3 });
+        await replaceCodeMemory(params, 'views/account/profile.jade', 'VK_LINK', await getModule('authentication/common/views/jade/oauth-link.jade'));
+        templateReplaceMemory(params, 'views/account/profile.jade', {
           providerPath: 'vk',
           providerName: 'VK'
         });
         break;
       case 'handlebars':
-        loginPage = join(build, 'views', 'account', 'login.handlebars');
-        signupPage = join(build, 'views', 'account', 'signup.handlebars');
-        signInButton = join(__dirname, 'modules', 'vk', 'views', `sign-in-button-${params.cssFramework}.html`);
-        await replaceCode(loginPage, 'SIGN_IN_WITH_VK', signInButton, { indentLevel: 3 });
-        await replaceCode(signupPage, 'SIGN_IN_WITH_VK', signInButton, { indentLevel: 3 });
-
-        // Add link/unlink button on profile page
-        profileTemplate = join(build, 'views', 'account', 'profile.handlebars');
-        oauthLink = join(__dirname, 'modules', 'common', 'views', 'handlebars', 'oauth-link.handlebars');
-        await replaceCode(profileTemplate, 'VK_LINK', oauthLink);
-        await templateReplace(profileTemplate, {
+        await replaceCodeMemory(params, 'views/account/login.handlebars', 'SIGN_IN_WITH_VK', await getModule(`authentication/vk/views/sign-in-button-${params.cssFramework}.html`), { indentLevel: 3 });
+        await replaceCodeMemory(params, 'views/account/signup.handlebars', 'SIGN_IN_WITH_VK', await getModule(`authentication/vk/views/sign-in-button-${params.cssFramework}.html`), { indentLevel: 3 });
+        await replaceCodeMemory(params, 'views/account/profile.handlebars', 'VK_LINK', await getModule('authentication/common/views/handlebars/oauth-link.handlebars'));
+        templateReplaceMemory(params, 'views/account/profile.handlebars', {
           providerPath: 'vk',
           providerName: 'VK'
         });
         break;
       case 'nunjucks':
-        loginPage = join(build, 'views', 'account', 'login.html');
-        signupPage = join(build, 'views', 'account', 'signup.html');
-        signInButton = join(__dirname, 'modules', 'vk', 'views', `sign-in-button-${params.cssFramework}.html`);
-        await replaceCode(loginPage, 'SIGN_IN_WITH_VK', signInButton, { indentLevel: 3 });
-        await replaceCode(signupPage, 'SIGN_IN_WITH_VK', signInButton, { indentLevel: 3 });
-
-        // Add link/unlink button on profile page
-        profileTemplate = join(build, 'views', 'account', 'profile.html');
-        oauthLink = join(__dirname, 'modules', 'common', 'views', 'nunjucks', 'oauth-link.html');
-        await replaceCode(profileTemplate, 'VK_LINK', oauthLink);
-        await templateReplace(profileTemplate, {
+        await replaceCodeMemory(params, 'views/account/login.html', 'SIGN_IN_WITH_VK', await getModule(`authentication/vk/views/sign-in-button-${params.cssFramework}.html`), { indentLevel: 3 });
+        await replaceCodeMemory(params, 'views/account/signup.html', 'SIGN_IN_WITH_VK', await getModule(`authentication/vk/views/sign-in-button-${params.cssFramework}.html`), { indentLevel: 3 });
+        await replaceCodeMemory(params, 'views/account/profile.html', 'VK_LINK', await getModule('authentication/common/views/nunjucks/oauth-link.html'));
+        templateReplaceMemory(params, 'views/account/profile.html', {
           providerPath: 'vk',
           providerName: 'VK'
         });
@@ -131,33 +83,14 @@ async function generateVkAuthenticationExpress(params) {
   }
 
   if (params.jsFramework === 'react') {
-    const reactModules = join(__base, 'generators', 'js-framework', 'modules', 'react');
-    const oauthAction = join(build, 'app', 'actions', 'oauth.js');
-    const vkLoginAction = join(reactModules, 'actions', 'oauth', 'vk.js');
-    const vkLinkAction = join(reactModules, 'actions', 'oauth', 'vk-link.js');
-    await replaceCode(oauthAction, 'VK_LOGIN_ACTION', vkLoginAction);
-    await replaceCode(oauthAction, 'VK_LINK_ACTION', vkLinkAction);
-
-    // Add link/unlink button on profile page
-    const profileComponent = join(build, 'app', 'components', 'Account', 'Profile.js');
-    const vkLinkRender = join(reactModules, 'components', 'Account', 'profile', `vk-link-${params.cssFramework}.js`);
-    const vkLinkReference = join(reactModules, 'components', 'Account', 'profile', 'vk-link-reference.js');
-    await replaceCode(profileComponent, 'VK_LINK', vkLinkRender);
-    await replaceCode(profileComponent, 'VK_LINK_REFERENCE', vkLinkReference);
+    await replaceCodeMemory(params, 'app/actions/oauth.js', 'VK_LOGIN_ACTION', await getModule('js-framework/react/actions/oauth/vk.js'));
+    await replaceCodeMemory(params, 'app/actions/oauth.js', 'VK_LINK_ACTION', await getModule('js-framework/react/actions/oauth/vk-link.js'));
+    await replaceCodeMemory(params, 'app/components/Account/Profile.js', 'VK_LINK', await getModule(`js-framework/react/components/Account/profile/vk-link-${params.cssFramework}.js`));
+    await replaceCodeMemory(params, 'app/components/Account/Profile.js', 'VK_LINK_REFERENCE', await getModule('js-framework/react/components/Account/profile/vk-link-reference.js'));
   }
 
   if (params.jsFramework === 'angularjs') {
-    const angularjsModules = join(__base, 'generators', 'js-framework', 'modules', 'angularjs');
-
-    // Add link/unlink button on profile page
-    const profileTemplate = join(build, 'app', 'partials', 'profile.html');
-    const vkLink = join(angularjsModules, 'partials', 'profile', `vk-link-${params.cssFramework}.html`);
-    await replaceCode(profileTemplate, 'VK_LINK', vkLink);
-
-    const appJs = join(build, 'app', 'app.js');
-    const satellizerVkConfig = join(angularjsModules, 'satellizer-vk.js');
-    await replaceCode(appJs, 'SATELLIZER_VK_CONFIG', satellizerVkConfig);
+    await replaceCodeMemory(params, 'app/partials/profile.html', 'VK_LINK', await getModule(`js-framework/angularjs/partials/profile/vk-link-${params.cssFramework}.html`));
+    await replaceCodeMemory(params, 'app/app.js', 'SATELLIZER_VK_CONFIG', await getModule('js-framework/angularjs/satellizer-vk.js'));
   }
 }
-
-export default generateVkAuthenticationExpress;
