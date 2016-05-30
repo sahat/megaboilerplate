@@ -47,14 +47,6 @@ class JsFramework extends React.Component {
       <div>
         <VelocityComponent runOnMount animation="transition.slideUpIn" duration={700}>
           <div className="checkbox transparent">
-            <label className="hint--right hint--rounded" data-hint="Tweak React components in real time, while preserving the state.">
-              <input type="checkbox" name="reactOptionsCheckboxes" value="hotReload" onChange={props.handleChange} checked={props.reactOptions && props.reactOptions.has('hotReload')}/>
-              <span>React Hot Reloading (Requires Webpack)</span>
-            </label>
-          </div>
-        </VelocityComponent>
-        <VelocityComponent runOnMount animation="transition.slideUpIn" duration={700} delay={100}>
-          <div className="checkbox transparent">
             <label className="hint--right hint--rounded" data-hint="A live-editing time travel environment for Redux.">
               <input type="checkbox" name="reactOptionsCheckboxes" value="reduxDevTools" onChange={props.handleChange} checked={props.reactOptions && props.reactOptions.has('reduxDevTools')}/>
               <span>Redux Dev Tools</span>

@@ -48,8 +48,8 @@ export default async function genereateWebpackBuildTool(params) {
     case 'react':
       await replaceCodeMemory(params, 'webpack.config.js', 'WEBPACK_JAVASCRIPT_LOADER', await getModule('build-tool/webpack/webpack-react-loader.js'));
       await addNpmPackageMemory('babel-plugin-react-transform', params, true);
-      await addNpmPackageMemory('react-transform-catch-errors', params, true);
       await addNpmPackageMemory('react-transform-hmr', params, true);
+      await addNpmPackageMemory('react-transform-catch-errors', params, true);
       await addNpmPackageMemory('babel-preset-react', params, true);
       await addNpmPackageMemory('redbox-react', params, true);
       break;
