@@ -10,7 +10,7 @@ import generateDatabase from './generators/database/generateDatabase';
 import generateAuthentication from './generators/authentication/generateAuthentication';
 import generateDeployment from './generators/deployment/generateDeployment';
 import postprocessing from './generators/postprocessing';
-import { walkAndRemoveComments, walkAndRemoveCommentsMemory, prepare, cleanup, createZipArchive } from './generators/utils';
+import { walkAndRemoveCommentsMemory, createZipArchive } from './generators/utils';
 
 export async function download(req, res) {
   const params = req.body;
@@ -30,6 +30,7 @@ export async function download(req, res) {
       await generateDatabase(params);
       await generateAuthentication(params);
       await generateDeployment(params);
+      await postprocessing(params);
     }
     await walkAndRemoveCommentsMemory(params);
     await createZipArchive(res, params);

@@ -1,4 +1,5 @@
 import { set } from 'lodash';
+import { randomBytes } from 'crypto';
 import { getModule, replaceCodeMemory, addNpmPackageMemory, addEnvMemory } from '../utils';
 
 export default async function generateCommonAuthenticationExpress(params) {
@@ -60,8 +61,8 @@ export default async function generateCommonAuthenticationExpress(params) {
       set(params.build, ['models', 'user.js'], await getModule('authentication/models/mongodb/user.js'));
 
       await replaceCodeMemory(params, 'controllers/user.js', 'USER_SIGNUP_POST', await getModule('authentication/controllers/mongodb/user-signup-post.js'), { indentLevel: 1 });
-      await replaceCodeMemory(params, 'controllers/user.js', 'USER_ACCOUNT_PUT', await getModule('authentication/controllers/mongodb/user-signup-put.js'), { indentLevel: 1 });
-      await replaceCodeMemory(params, 'controllers/user.js', 'USER_ACCOUNT_DELETE', await getModule('authentication/controllers/mongodb/user-signup-delete.js'), { indentLevel: 1 });
+      await replaceCodeMemory(params, 'controllers/user.js', 'USER_ACCOUNT_PUT', await getModule('authentication/controllers/mongodb/user-account-put.js'), { indentLevel: 1 });
+      await replaceCodeMemory(params, 'controllers/user.js', 'USER_ACCOUNT_DELETE', await getModule('authentication/controllers/mongodb/user-account-delete.js'), { indentLevel: 1 });
       await replaceCodeMemory(params, 'controllers/user.js', 'USER_PROVIDER_UNLINK', await getModule('authentication/controllers/mongodb/user-provider-unlink.js'), { indentLevel: 1 });
       await replaceCodeMemory(params, 'controllers/user.js', 'USER_FORGOT_POST', await getModule('authentication/controllers/mongodb/user-forgot-post.js'), { indentLevel: 3 });
       await replaceCodeMemory(params, 'controllers/user.js', 'USER_RESET_GET', await getModule('authentication/controllers/mongodb/user-reset-get.js'), { indentLevel: 1 });
