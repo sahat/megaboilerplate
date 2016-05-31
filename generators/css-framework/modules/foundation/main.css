@@ -20,6 +20,10 @@ footer {
   line-height: 50px;
 }
 
+.row.expanded {
+  max-width: 940px;
+}
+
 .text-danger,
 .text-alert {
   color: #ec5840;
@@ -104,12 +108,9 @@ footer {
 
 .top-bar {
   padding: 0;
+  margin-bottom: 2rem;
   color: #fff;
   background-color: #333;
-}
-
-.top-bar + .row {
-  margin: 2rem 0 0;
 }
 
 .top-bar .avatar {
