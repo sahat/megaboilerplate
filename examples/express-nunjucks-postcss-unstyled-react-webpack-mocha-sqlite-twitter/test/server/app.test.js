@@ -1,5 +1,4 @@
 var request = require('supertest');
-
 var server = require('../../server');
 
 describe('GET /', function() {
