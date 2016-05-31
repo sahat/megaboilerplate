@@ -56,11 +56,7 @@ async function generateStaticSite(params) {
       params.build = {
         source: {
           images: {
-            'image.png': await getModule('static-site/middleman/source/images/image.png'),
-            'nan.jpg': await getModule('static-site/middleman/source/images/nan.jpg'),
-            'paragraph.png': await getModule('static-site/middleman/source/images/paragraph.png'),
-            'square-image.png': await getModule('static-site/middleman/source/images/square-image.png'),
-            'tom.jpg': await getModule('static-site/middleman/source/images/tom.jpg')
+            '.gitkeep': await getModule('static-site/middleman/source/images/.gitkeep')
           },
           javascripts: {
             'jquery.min.js': await getModule('static-site/middleman/source/javascripts/jquery.min.js'),
