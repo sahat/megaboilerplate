@@ -1,6 +1,5 @@
 import React from 'react';
 import cx from 'classnames';
-import { VelocityComponent, VelocityTransitionGroup } from 'velocity-react';
 
 const STATIC_SITE_SVG = (
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 26 26">
@@ -16,7 +15,6 @@ class StaticSiteGenerator extends React.Component {
 
   render() {
     const props = this.props;
-    const state = this.state;
 
     let description;
 
@@ -24,7 +22,7 @@ class StaticSiteGenerator extends React.Component {
       case 'jekyll':
         description = (
           <div>
-            <strong><a href="http://jekyllrb.com/" target="_blank">Jekyll</a></strong> — Simple, blog-aware, static site generator. The engine behind GitHub Pages.
+            <strong><a href="http://jekyllrb.com/" target="_blank">Jekyll</a></strong> — Simple, blog-aware, static site generator. The engine behind GitHub Pages. (Theme by <a href="https://github.com/vormwald/joon">@vormwald</a>)
           </div>
         );
         break;
