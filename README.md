@@ -2,7 +2,7 @@
 
 # Mega Boilerplate 
 
-[![PayPal Donate](https://img.shields.io/badge/donate-paypal-0070ba.svg?style=flat)](https://paypal.me/sahat) [![Gitter](https://img.shields.io/badge/chat-on%20gitter-46bc99.svg?style=flat)](https://gitter.im/sahat/boilerplate) [![Issues](https://img.shields.io/github/issues/sahat/boilerplate.svg?style=flat)](https://github.com/sahat/boilerplate/issues)
+[![PayPal Donate](https://img.shields.io/badge/donate-paypal-0070ba.svg?style=flat)](https://paypal.me/sahat) [![Gitter](https://badges.gitter.im/sahat/megaboilerplate.svg)](https://gitter.im/sahat/megaboilerplate) [![Issues](https://img.shields.io/github/issues/sahat/boilerplate.svg?style=flat)](https://github.com/sahat/boilerplate/issues)
 
 **Live Demo**: http://megaboilerplate.com
 
