@@ -185,7 +185,7 @@ class Header extends React.Component {
   }
 
   getLastCommit() {
-    $.get('https://api.github.com/repos/sahat/boilerplate/commits', (data) => {
+    $.get('https://api.github.com/repos/sahat/megaboilerplate/commits', (data) => {
       if (data && data.length) {
         const commit = data[0].commit;
         const date = commit.author.date;
@@ -226,7 +226,7 @@ class Header extends React.Component {
   render() {
     const latestCommit = this.state.latestCommit ? (
       <VelocityComponent runOnMount animation="transition.fadeIn" duration={1000}>
-        <div style={{ opacity: 0 }} className="footnote right">Latest commit: <span className="time-ago"><a href="https://github.com/sahat/boilerplate/commits/master" target="_blank">{this.state.latestCommit}</a></span></div>
+        <div style={{ opacity: 0 }} className="footnote right">Latest commit: <span className="time-ago"><a href="https://github.com/sahat/megaboilerplate/commits/master" target="_blank">{this.state.latestCommit}</a></span></div>
       </VelocityComponent>
     ) : null;
 
@@ -260,7 +260,7 @@ class Header extends React.Component {
                 </li>
 
                 <li>
-                  <a href="https://github.com/sahat/boilerplate" className="navbar-icon">
+                  <a href="https://github.com/sahat/megaboilerplate" className="navbar-icon">
                     <i className="fa fa-github"></i>
                   </a>
                 </li>

@@ -6,10 +6,10 @@ const Footer = (props) => {
       <div className="panel">
         <div className="panel-body">
           <div className="pull-left">
-            © 2016 <a href="http://sahatyalkabov.com">Sahat Yalkabov</a>. Code licensed under <a href="https://github.com/sahat/boilerplate/blob/master/LICENSE">MIT License</a>.
+            © 2016 <a href="http://sahatyalkabov.com">Sahat Yalkabov</a>. Code licensed under <a href="https://github.com/sahat/megaboilerplate/blob/master/LICENSE">MIT License</a>.
           </div>
           <div className="pull-right">
-            <fa className="fa fa-code"></fa> <a href="https://github.com/sahat/boilerplate">Source Code</a>
+            <fa className="fa fa-code"></fa> <a href="https://github.com/sahat/megaboilerplate">Source Code</a>
           </div>
         </div>
       </div>
