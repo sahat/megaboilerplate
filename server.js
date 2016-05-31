@@ -12,11 +12,7 @@ const nunjucks = require('nunjucks');
 const dotenv = require('dotenv');
 
 // Load Azure Storage environment variables
-try {
-  dotenv.load();
-} catch (e) {
-  console.warn('Could not find .env file.')
-}
+dotenv.load({ silent: true });
 
 // App globals
 global.__base = __dirname + '/';
