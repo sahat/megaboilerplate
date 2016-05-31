@@ -47,82 +47,79 @@ class Home extends React.Component {
   clickDownload(options = {}) {
     const state = this.state;
 
-    // Google Analytics event
-    // ga("send","event","Customize","Download","Customize and Download")
-
-    // if (!state.platform) {
-    //   console.info('Please select a platform.');
-    //   return this.setState({
-    //     platformValidationError: 'Please select a platform.',
-    //     generateDownloadLinkInProgress: false
-    //   });
-    // } else if (state.platform === 'html5' && !state.staticSiteGenerator) {
-    //   console.info('Please select a static site generator.');
-    //   return this.setState({
-    //     staticSiteGeneratorValidationError: 'Please select a static site generator.',
-    //     generateDownloadLinkInProgress: false
-    //   });
-    // } else if (state.platform === 'library' && !state.jsLibraryName) {
-    //   console.info('Please enter a library name.');
-    //   return this.setState({
-    //     jsLibraryValidationError: 'Please enter a library name.',
-    //     generateDownloadLinkInProgress: false
-    //   });
-    // } else if (state.platform === 'node' && !state.framework) {
-    //   console.info('Please select a framework.');
-    //   return this.setState({
-    //     frameworkValidationError: 'Please select a framework.',
-    //     generateDownloadLinkInProgress: false
-    //   });
-    // } else if (state.platform === 'node' && !state.templateEngine) {
-    //   console.info('Please select a template engine.');
-    //   return this.setState({
-    //     templateEngineValidationError: 'Please select a template engine.',
-    //     generateDownloadLinkInProgress: false
-    //   });
-    // } else if (state.platform === 'node' && !state.cssFramework) {
-    //   console.info('Please select a CSS framework.');
-    //   return this.setState({
-    //     cssFrameworkValidationError: 'Please select a CSS framework.',
-    //     generateDownloadLinkInProgress: false
-    //   });
-    // } else if (state.platform === 'node' && !state.cssPreprocessor) {
-    //   console.info('Please select a CSS preprocessor.');
-    //   return this.setState({
-    //     cssPreprocessorValidationError: 'Please select a CSS preprocessor.',
-    //     generateDownloadLinkInProgress: false
-    //   });
-    // } else if (state.platform === 'node' && !state.jsFramework) {
-    //   console.info('Please make a selection.');
-    //   return this.setState({
-    //     jsFrameworkValidationError: 'Please make a selection.',
-    //     generateDownloadLinkInProgress: false
-    //   });
-    // } else if (state.platform === 'node' && state.jsFramework !== 'none' && !state.buildTool) {
-    //   console.info('Please select a build tool.');
-    //   return this.setState({
-    //     buildToolValidationError: 'Please select a build tool.',
-    //     generateDownloadLinkInProgress: false
-    //   });
-    // } else if (state.platform === 'node' && !state.testing) {
-    //   console.info('Please select a testing framework.');
-    //   return this.setState({
-    //     testingValidationError: 'Please select a testing framework.',
-    //     generateDownloadLinkInProgress: false
-    //   });
-    // } else if (state.platform === 'node' && !state.database) {
-    //   console.info('Please select a database.');
-    //   return this.setState({
-    //     databaseValidationError: 'Please select a database.',
-    //     generateDownloadLinkInProgress: false
-    //   });
-    // } else if (state.platform === 'node' && !state.authentication && state.database !== 'none') {
-    //   console.info('Please check all that apply.');
-    //   return this.setState({
-    //     authenticationValidationError: 'Please check all that apply.',
-    //     generateDownloadLinkInProgress: false
-    //   });
-    // }
+    if (!state.platform) {
+      console.info('Please select a platform.');
+      return this.setState({
+        platformValidationError: 'Please select a platform.',
+        generateDownloadLinkInProgress: false
+      });
+    } else if (state.platform === 'html5' && !state.staticSiteGenerator) {
+      console.info('Please select a static site generator.');
+      return this.setState({
+        staticSiteGeneratorValidationError: 'Please select a static site generator.',
+        generateDownloadLinkInProgress: false
+      });
+    } else if (state.platform === 'library' && !state.jsLibraryName) {
+      console.info('Please enter a library name.');
+      return this.setState({
+        jsLibraryValidationError: 'Please enter a library name.',
+        generateDownloadLinkInProgress: false
+      });
+    } else if (state.platform === 'node' && !state.framework) {
+      console.info('Please select a framework.');
+      return this.setState({
+        frameworkValidationError: 'Please select a framework.',
+        generateDownloadLinkInProgress: false
+      });
+    } else if (state.platform === 'node' && !state.templateEngine) {
+      console.info('Please select a template engine.');
+      return this.setState({
+        templateEngineValidationError: 'Please select a template engine.',
+        generateDownloadLinkInProgress: false
+      });
+    } else if (state.platform === 'node' && !state.cssFramework) {
+      console.info('Please select a CSS framework.');
+      return this.setState({
+        cssFrameworkValidationError: 'Please select a CSS framework.',
+        generateDownloadLinkInProgress: false
+      });
+    } else if (state.platform === 'node' && !state.cssPreprocessor) {
+      console.info('Please select a CSS preprocessor.');
+      return this.setState({
+        cssPreprocessorValidationError: 'Please select a CSS preprocessor.',
+        generateDownloadLinkInProgress: false
+      });
+    } else if (state.platform === 'node' && !state.jsFramework) {
+      console.info('Please make a selection.');
+      return this.setState({
+        jsFrameworkValidationError: 'Please make a selection.',
+        generateDownloadLinkInProgress: false
+      });
+    } else if (state.platform === 'node' && state.jsFramework !== 'none' && !state.buildTool) {
+      console.info('Please select a build tool.');
+      return this.setState({
+        buildToolValidationError: 'Please select a build tool.',
+        generateDownloadLinkInProgress: false
+      });
+    } else if (state.platform === 'node' && !state.testing) {
+      console.info('Please select a testing framework.');
+      return this.setState({
+        testingValidationError: 'Please select a testing framework.',
+        generateDownloadLinkInProgress: false
+      });
+    } else if (state.platform === 'node' && !state.database) {
+      console.info('Please select a database.');
+      return this.setState({
+        databaseValidationError: 'Please select a database.',
+        generateDownloadLinkInProgress: false
+      });
+    } else if (state.platform === 'node' && !state.authentication && state.database !== 'none') {
+      console.info('Please check all that apply.');
+      return this.setState({
+        authenticationValidationError: 'Please check all that apply.',
+        generateDownloadLinkInProgress: false
+      });
+    }
 
     // Show next steps component
     this.setState({ showNextSteps: true });
@@ -152,6 +149,9 @@ class Home extends React.Component {
     data.cssPreprocessorOptions = data.cssPreprocessorOptions ? Array.from(data.cssPreprocessorOptions) : [];
     data.reactOptions = data.reactOptions ? Array.from(data.reactOptions) : [];
     data.jsLibraryOptions = data.jsLibraryOptions ? Array.from(data.jsLibraryOptions) : [];
+
+    // Google Analytics event
+    ga('send', 'event', 'Mega Boilerplate', 'Download', data);
 
     if (options.generateDownloadLink) {
       $.ajax({

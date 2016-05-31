@@ -8,7 +8,7 @@ if (typeof window !== 'undefined') {
 import React from 'react';
 import moment from 'moment';
 import { shuffle } from 'lodash';
-import { VelocityComponent, VelocityTransitionGroup } from 'velocity-react';
+import { VelocityComponent } from 'velocity-react';
 
 const BRAND_LOGO = (
   <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="26" height="30" viewBox="0 0 213.5 246.5">
@@ -17,42 +17,18 @@ const BRAND_LOGO = (
   </svg>
 );
 
-const GITHUB_LOGO = (
-  <svg viewBox="0 0 620.25 180.34375" xmlns="http://www.w3.org/2000/svg" width="68px" height="20px" version="1.1">
-    <defs>
-      <clipPath clipPathUnits="userSpaceOnUse">
-        <path d="m 0,0 4802,0 0,1298.75 -4802,0 L 0,0 z"/>
-      </clipPath>
-    </defs>
-    <g transform="translate(-85.589293,-376.9046)">
-      <g transform="matrix(1.25,0,0,-1.25,85.589293,539.24835)">
-        <g transform="scale(0.1,0.1)">
-          <g>
-            <g clipPath="url(#clipPath3020)">
-              <path d="m 924.973,742.875 -403.567,0 c -10.41,0 -18.855,-8.449 -18.855,-18.867 l 0,-197.305 c 0,-10.41 8.445,-18.887 18.855,-18.887 l 157.434,0 0,-245.136 c 0,0 -35.356,-12.051 -133.078,-12.051 -115.301,0 -276.367,42.133 -276.367,396.312 0,354.259 167.714,400.869 325.175,400.869 136.297,0 195.02,-24 232.383,-35.56 11.738,-3.6 22.598,8.09 22.598,18.51 l 45.019,190.64 c 0,4.87 -1.648,10.74 -7.207,14.73 -15.175,10.82 -107.746,62.62 -341.601,62.62 C 276.348,1298.75 0,1184.13 0,633.129 0,82.1094 316.395,0 583.02,0 c 220.757,0 354.683,94.3398 354.683,94.3398 5.52,3.0508 6.113,10.7622 6.113,14.3012 l 0,615.367 c 0,10.418 -8.433,18.867 -18.843,18.867"/>
-              <path d="m 3004.75,1232.73 c 0,10.5 -8.32,18.97 -18.73,18.97 l -227.23,0 c -10.38,0 -18.82,-8.47 -18.82,-18.97 0,-0.05 0.06,-439.125 0.06,-439.125 l -354.19,0 0,439.125 c 0,10.5 -8.36,18.97 -18.75,18.97 l -227.22,0 c -10.34,0 -18.77,-8.47 -18.77,-18.97 l 0,-1189.0308 c 0,-10.4883 8.43,-19.0273 18.77,-19.0273 l 227.22,0 c 10.39,0 18.75,8.539 18.75,19.0273 l 0,508.5898 354.19,0 c 0,0 -0.62,-508.5507 -0.62,-508.5898 0,-10.4883 8.43,-19.0273 18.82,-19.0273 l 227.77,0 c 10.41,0 18.73,8.539 18.75,19.0273 l 0,1189.0308"/>
-              <path d="m 1353.76,1076.7 c 0,81.82 -65.6,147.94 -146.53,147.94 -80.85,0 -146.5,-66.12 -146.5,-147.94 0,-81.735 65.65,-148.032 146.5,-148.032 80.93,0 146.53,66.297 146.53,148.032"/>
-              <path d="m 1337.51,294.52 c 0,30.464 0,548.859 0,548.859 0,10.422 -8.41,18.941 -18.8,18.941 l -226.51,0 c -10.39,0 -19.69,-10.718 -19.69,-21.136 0,0 0,-660.454 0,-786.352 0,-23.1132 14.4,-29.9804 33.04,-29.9804 0,0 96.68,0 204.08,0 22.39,0 27.88,10.9882 27.88,30.3476 0,42.1524 0,207.2698 0,239.3208"/>
-              <path d="m 3868.32,860.531 -225.49,0 c -10.34,0 -18.76,-8.523 -18.76,-19.011 l 0,-583.02 c 0,0 -57.28,-41.91 -138.59,-41.91 -81.3,0 -102.88,36.89 -102.88,116.5 0,79.707 0,508.43 0,508.43 0,10.488 -8.4,19.011 -18.75,19.011 l -228.85,0 c -10.33,0 -18.79,-8.523 -18.79,-19.011 0,0 0,-310.481 0,-546.93 0,-236.4611 131.79,-294.30875 313.09,-294.30875 148.73,0 268.65,82.16795 268.65,82.16795 0,0 5.71,-43.3008 8.29,-48.4375 2.59,-5.1211 9.32,-10.2929 16.59,-10.2929 l 145.59,0.6406 c 10.33,0 18.79,8.539 18.79,18.9804 l -0.07,798.1802 c 0,10.488 -8.43,19.011 -18.82,19.011"/>
-              <path d="m 4395.67,217.309 c -78.21,2.382 -131.26,37.871 -131.26,37.871 l 0,376.543 c 0,0 52.34,32.078 116.55,37.812 81.2,7.274 159.44,-17.254 159.44,-210.957 0,-204.258 -35.31,-244.566 -144.73,-241.269 z m 88.94,669.933 c -128.07,0 -215.18,-57.14 -215.18,-57.14 l 0,402.628 c 0,10.5 -8.39,18.97 -18.75,18.97 l -227.87,0 c -10.36,0 -18.78,-8.47 -18.78,-18.97 l 0,-1189.0308 c 0,-10.4883 8.42,-19.0273 18.81,-19.0273 0.02,0 158.05,0 158.1,0 7.12,0 12.51,3.6679 16.49,10.0976 3.93,6.3907 9.6,54.8203 9.6,54.8203 0,0 93.18,-88.30074 269.57,-88.30074 207.08,0 325.84,105.04294 325.84,471.54694 0,366.512 -189.67,414.406 -317.83,414.406"/>
-              <path d="m 1990.58,862.426 -170.45,0 c 0,0 -0.26,225.134 -0.26,225.184 0,8.52 -4.39,12.78 -14.24,12.78 l -232.28,0 c -9.03,0 -13.88,-3.97 -13.88,-12.65 l 0,-232.697 c 0,0 -116.4,-28.102 -124.27,-30.371 -7.84,-2.274 -13.61,-9.5 -13.61,-18.125 l 0,-146.227 c 0,-10.515 8.4,-18.996 18.79,-18.996 l 119.09,0 c 0,0 0,-152.941 0,-351.785 0,-261.289 183.28,-286.96088 306.96,-286.96088 56.51,0 124.11,18.15238 135.27,22.27348 6.75,2.4804 10.67,9.4687 10.67,17.0468 l 0.19,160.8636 c 0,10.488 -8.86,18.976 -18.84,18.976 -9.93,0 -35.34,-4.039 -61.5,-4.039 -83.72,0 -112.09,38.93 -112.09,89.317 0,50.351 -0.01,334.308 -0.01,334.308 l 170.46,0 c 10.39,0 18.8,8.481 18.8,18.996 l 0,183.16 c 0,10.497 -8.41,18.946 -18.8,18.946"/>
-            </g>
-          </g>
-        </g>
-      </g>
-    </g>
-  </svg>
-);
-
 class Header extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      latestCommit: null
+      latestCommit: null,
+      browserIcon: 'globe'
     }
   }
 
   componentDidMount() {
+    this.getBrowserIcon();
+
     this.getLastCommit();
 
      setTimeout(() => {
@@ -220,7 +196,7 @@ class Header extends React.Component {
     });
   }
 
-  render() {
+  getBrowserIcon() {
     const isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
     const isFirefox = typeof InstallTrigger !== 'undefined';
     const isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
@@ -228,24 +204,26 @@ class Header extends React.Component {
     const isEdge = !isIE && !!window.StyleMedia;
     const isChrome = !!window.chrome && !!window.chrome.webstore;
 
-    let demoIcon;
+    let browserIcon;
 
     if (isFirefox) {
-      demoIcon = <i className="fa fa-firefox"/>;
+      browserIcon = 'firefox';
     } else if (isIE) {
-      demoIcon = <i className="fa fa-internet-explorer"/>;
+      browserIcon = 'internet-explorer';
     } else if (isEdge) {
-      demoIcon = <i className="fa fa-edge"/>;
+      browserIcon = 'edge';
     } else if (isChrome) {
-      demoIcon = <i className="fa fa-chrome"/>;
+      browserIcon = 'chrome';
     } else if (isOpera) {
-      demoIcon = <i className="fa fa-opera"/>;
+      browserIcon = 'opera';
     } else if (isSafari) {
-      demoIcon = <i className="fa fa-safari"/>;
-    } else {
-      demoIcon = <i className="fa fa-globe"/>;
+      browserIcon = 'safari';
     }
 
+    this.setState({ browserIcon: browserIcon });
+  }
+
+  render() {
     const latestCommit = this.state.latestCommit ? (
       <VelocityComponent runOnMount animation="transition.fadeIn" duration={1000}>
         <div style={{ opacity: 0 }} className="footnote right">Latest commit: <span className="time-ago"><a href="https://github.com/sahat/boilerplate/commits/master" target="_blank">{this.state.latestCommit}</a></span></div>
@@ -312,7 +290,7 @@ class Header extends React.Component {
                 Featuring <span style={{ color: '#fff' }} ref="heroHeading"/>
               </div>
             </VelocityComponent>
-            <a href="#" className="btn btn-outline">{demoIcon} Live Demo</a> <a href="#" className="btn btn-outline">Code Examples</a>
+            <a href="#" className="btn btn-outline"><i className={'fa fa-' + this.state.browserIcon}/> Live Demo</a> <a href="#" className="btn btn-outline">Code Examples</a>
           </div>
 
           <div ref="carbonAdsBlocked" className="carbon-ads-blocked"></div>

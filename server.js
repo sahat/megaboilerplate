@@ -54,24 +54,21 @@ app.use(express.static(path.join(__dirname, 'website', 'assets')));
 app.post('/download', expressRoutes.download);
 
 // React server rendering
-app.use((req, res) => {
-  return res.sendFile(path.join(__dirname, 'index.html'));
+app.use(function(req, res) {
+ Router.match({ routes: reactRoutes.default, location: req.url }, function(err, redirectLocation, renderProps) {
+   if (err) {
+     res.status(500).send(err.message)
+   } else if (redirectLocation) {
+     res.status(302).redirect(redirectLocation.pathname + redirectLocation.search)
+   } else if (renderProps) {
+     let html = ReactDOM.renderToString(React.createElement(Router.RouterContext, renderProps));
+     let page = nunjucks.render('index.html', { html: html });
+     res.status(200).send(page);
+   } else {
+     res.status(404).send('Page Not Found')
+   }
+ });
 });
-//app.use(function(req, res) {
-//  Router.match({ routes: reactRoutes.default, location: req.url }, function(err, redirectLocation, renderProps) {
-//    if (err) {
-//      res.status(500).send(err.message)
-//    } else if (redirectLocation) {
-//      res.status(302).redirect(redirectLocation.pathname + redirectLocation.search)
-//    } else if (renderProps) {
-//      let html = ReactDOM.renderToString(React.createElement(Router.RoutingContext, renderProps));
-//      let page = nunjucks.render(path.join(__dirname, 'index.html'), { html: html });
-//      res.status(200).send(page);
-//    } else {
-//      res.status(404).send('Page Not Found')
-//    }
-//  });
-//});
 
 app.listen(app.get('port'), 'localhost', function(err) {
   console.log(`Express server listening on port ${app.get('port')}`);
