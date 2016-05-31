@@ -1,0 +1,67 @@
+<div class="column row">
+  <div class="medium-7 columns">
+    <div ng-if="messages.error" role="alert" class="callout alert">
+      <div ng-repeat="error in messages.error">{{error.msg}}</div>
+    </div>
+    <div ng-if="messages.success" role="alert" class="callout success">
+      <div ng-repeat="success in messages.success">{{success.msg}}</div>
+    </div>
+
+    <h5>Profile Information</h5>
+
+    <form ng-submit="updateProfile()">
+      <label for="email">Email</label>
+      <input type="email" name="email" id="email" ng-model="profile.email">
+
+      <label for="name">Name</label>
+      <input type="text" name="name" id="name" ng-model="profile.name">
+
+      <label>Gender</label>
+      <input type="radio" name="gender" id="male" value="male" ng-checked="profile.gender === 'male'">
+      <label for="male">Male</label>
+      <input type="radio" name="gender" id="female" value="female" ng-checked="profile.gender === 'female'">
+      <label for="female">Female</label>
+
+      <label for="location">Location</label>
+      <input type="text" name="location" id="location" ng-model="profile.location">
+
+      <label for="website">Website</label>
+      <input type="text" name="website" id="website" ng-model="profile.website">
+
+      <label>Gravatar</label>
+      <img ng-src="{{profile.gravatar}}" class="gravatar" width="100" height="100">
+
+      <button type="submit" class="success button">Update Profile</button>
+    </form>
+
+    <h5>Change Password</h5>
+
+    <form ng-submit="changePassword()">
+      <label for="password">New Password</label>
+      <input type="password" name="password" id="password" ng-model="profile.password">
+
+      <label for="confirm">Confirm Password</label>
+      <input type="password" name="confirm" id="confirm" ng-model="profile.confirm">
+
+      <button type="submit" class="success button">Change Password</button>
+    </form>
+
+    <h5>Linked Accounts</h5>
+
+    <p>
+      <a href="#" ng-click="unlink('facebook')" ng-if="currentUser.facebook" class="text-danger">Unlink your Facebook account</a>
+      <a href="#" ng-click="link('facebook')" ng-if="!currentUser.facebook">Link your Facebook account</a>
+    </p>
+    <p>
+      <a href="#" ng-click="unlink('google')" ng-if="currentUser.google" class="text-danger">Unlink your Google account</a>
+      <a href="#" ng-click="link('google')" ng-if="!currentUser.google">Link your Google account</a>
+    </p>
+
+    <h5>Delete Account</h5>
+
+    <form ng-submit="deleteAccount()">
+      <p>You can delete your account, but keep in mind this action is irreversible.</p>
+      <button type="submit" class="alert button">Delete my account</button>
+    </form>
+  </div>
+</div>

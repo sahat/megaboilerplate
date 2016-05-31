@@ -1,0 +1,35 @@
+{
+  "name": "silent-wildflower",
+  "version": "1.0.0",
+  "description": "My app description",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "async": "^1.5.2",
+    "bcrypt-nodejs": "^0.0.3",
+    "body-parser": "^1.15.1",
+    "compression": "^1.6.2",
+    "dotenv": "^2.0.0",
+    "express": "^4.13.4",
+    "express-flash": "0.0.2",
+    "express-handlebars": "^3.0.0",
+    "express-session": "^1.2.1",
+    "express-validator": "^2.20.4",
+    "method-override": "^2.3.5",
+    "mongoose": "^4.4.8",
+    "morgan": "^1.7.0",
+    "node-sass-middleware": "^0.9.7",
+    "nodemailer": "^2.3.0",
+    "passport": "^0.3.2",
+    "passport-facebook": "^2.1.0",
+    "passport-google-oauth": "^1.0.0",
+    "passport-local": "^1.0.0",
+    "passport-twitter": "^1.0.4",
+    "passport-vkontakte": "^0.2.1"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": "6.1.0"
+  }
+}

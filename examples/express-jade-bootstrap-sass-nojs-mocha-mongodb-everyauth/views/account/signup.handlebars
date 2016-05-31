@@ -1,0 +1,42 @@
+<div class="login-container">
+  <div class="panel">
+    <div class="panel-body">
+      {{#if messages.error}}
+        <div role="alert" class="alert alert-danger">
+          {{#each messages.error}}
+            <div>{{msg}}</div>
+          {{/each}}
+        </div>
+      {{/if}}
+      <form method="POST">
+        <legend>Create an account</legend>
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" name="name" id="name" placeholder="Name" class="form-control" autofocus>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email" placeholder="Email" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" name="password" id="password" placeholder="Password" class="form-control">
+        </div>
+        <div class="form-group">
+          <small class="text-muted">By signing up, you agree to the <a href="/">Terms of Service</a>.</small>
+        </div>
+        <button type="submit" class="btn btn-success">Create an account</button>
+      </form>
+      <div class="hr-title"><span>or</span></div>
+      <div class="btn-toolbar text-center">
+        <a href="/auth/facebook" class="btn btn-facebook">Sign in with Facebook</a>
+        <a href="/auth/twitter" class="btn btn-twitter">Sign in with Twitter</a>
+        <a href="/auth/google" class="btn btn-google">Sign in with Google</a>
+        <a href="/auth/vkontakte" class="btn btn-vk">Sign in with VK</a>
+      </div>
+    </div>
+  </div>
+  <p class="text-center">
+    Already have an account? <a href="/login"><strong>Log in</strong></a>
+  </p>
+</div>

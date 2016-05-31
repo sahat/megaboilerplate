@@ -1,0 +1,35 @@
+<div class="column row">
+  <div class="row">
+    <div class="medium-8 medium-offset-2 columns">
+      <div ng-if="messages.error" role="alert" class="callout alert">
+        <div ng-repeat="error in messages.error">{{error.msg}}</div>
+      </div>
+
+      <form ng-submit="signup()">
+        <h4>Create an account</h4>
+
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" placeholder="Email" ng-model="user.email" autofocus>
+
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" placeholder="Name" ng-model="user.name">
+
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" placeholder="Password" ng-model="user.password">
+
+        <p class="help-text">By signing up, you agree to the <a href="/">Terms of Service</a>.</p>
+
+        <button type="submit" class="button">Create an account</button>
+      </form>
+
+      <div class="hr-title"><span>or</span></div>
+
+      <div class="button-group">
+        <button class="button facebook" ng-click="authenticate('facebook')">Sign in with Facebook</button>
+        <button class="button google" ng-click="authenticate('google')">Sign in with Google</button>
+      </div>
+
+      <p>Already have an account? <a href="/login">Log in</a></p>
+    </div>
+  </div>
+</div>

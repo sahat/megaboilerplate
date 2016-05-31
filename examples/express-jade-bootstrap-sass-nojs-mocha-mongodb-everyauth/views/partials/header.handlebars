@@ -1,0 +1,46 @@
+<nav class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" data-toggle="collapse" data-target="#navbar" class="navbar-toggle collapsed">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="/" class="navbar-brand">Project name</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="{{#ifeq title 'Home'}}active{{/ifeq}}"><a href="/">Home</a></li>
+        <li class="{{#ifeq title 'Contact'}}active{{/ifeq}}"><a href="/contact">Contact</a></li>
+      </ul>
+    <ul class="nav navbar-nav navbar-right">
+    {{#if user}}
+      <li class="dropdown">
+        <a href="#" data-toggle="dropdown" class="navbar-avatar dropdown-toggle">
+          {{#if user.picture}}
+            <img src="{{user.picture}}">
+          {{else}}
+            <img src="{{user.gravatar}}">
+          {{/if}}
+          {{#if user.name}}
+            {{user.name}}
+          {{else}}
+            {{user.email}}
+          {{/if}}
+          <i class="caret"></i>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="/account">My Account</a></li>
+          <li class="divider"></li>
+          <li><a href="/logout">Logout</a></li>
+        </ul>
+      </li>
+    {{else}}
+      <li class="{{#ifeq title 'Log in'}}active{{/ifeq}}"><a href="/login">Log in</a></li>
+      <li class="{{#ifeq title 'Sign up'}}active{{/ifeq}}"><a href="/signup">Sign up</a></li>
+    {{/if}}
+    </ul>
+    </div>
+  </div>
+</nav>
