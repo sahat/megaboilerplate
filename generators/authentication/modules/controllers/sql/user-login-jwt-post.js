@@ -7,14 +7,14 @@ exports.loginPost = function(req, res, next) {
   req.assert('email', 'Email is not valid').isEmail();
   req.assert('email', 'Email cannot be blank').notEmpty();
   req.assert('password', 'Password cannot be blank').notEmpty();
-  req.sanitize('email').normalizeEmail();
-
+  req.sanitize('email').normalizeEmail({ remove_dots: false });
+  //_
   var errors = req.validationErrors();
-
+  //_
   if (errors) {
     return res.status(400).send(errors);
   }
-
+  //_
   new User({ email: req.body.email })
     .fetch()
     .then(function(user) {

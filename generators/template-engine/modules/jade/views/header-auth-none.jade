@@ -1,0 +1,17 @@
+ul.list-inline
+  if user
+    li
+      if user.picture
+        img.avatar(src=user.picture)
+      else
+        img.avatar(src=user.gravatar)
+      | <span> #{user.name || user.email || user.id} </span>
+    li
+      a(href='/account') My Account
+    li
+      a(href='/logout') Logout
+  else
+    li
+      a(href='/login') Log in
+    li
+      a(href='/signup') Sign up

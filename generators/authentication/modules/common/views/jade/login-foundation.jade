@@ -1,0 +1,37 @@
+extends ../layout
+
+block content
+  .row
+    .medium-8.medium-offset-2.columns
+      .card
+        if messages.error
+          .callout.alert(role='alert')
+            for error in messages.error
+              div= error.msg
+
+        h4.card-title Log In
+        form(method='POST')
+          label(for='email') Email
+          input(type='email', name='email', id='email', placeholder='Email', autofocus)
+
+          label(for='password') Password
+          input(type='password', name='password', id='password', placeholder='Password')
+
+          p
+            a(href='/forgot')
+              strong Forgot your password?
+
+          button.button(type='submit') Log in
+
+        .hr-title
+          span or
+
+        .button-group.text-center
+          //= SIGN_IN_WITH_FACEBOOK
+          //= SIGN_IN_WITH_TWITTER
+          //= SIGN_IN_WITH_GOOGLE
+          //= SIGN_IN_WITH_VK
+
+      p.text-center Don't have an account?
+        a(href='/signup')
+          strong  Sign up

@@ -1,1 +1,224 @@
-@import 'vendor/foundation/foundation';
+@import "settings";
+@import "vendor/foundation/foundation";
+
+@include foundation-global-styles;
+@include foundation-grid;
+// @include foundation-flex-grid;
+@include foundation-typography;
+@include foundation-button;
+@include foundation-forms;
+// @include foundation-range-input;
+@include foundation-accordion;
+@include foundation-accordion-menu;
+@include foundation-badge;
+@include foundation-breadcrumbs;
+@include foundation-button-group;
+@include foundation-callout;
+@include foundation-close-button;
+@include foundation-menu;
+@include foundation-menu-icon;
+@include foundation-drilldown-menu;
+@include foundation-dropdown;
+@include foundation-dropdown-menu;
+@include foundation-flex-video;
+@include foundation-label;
+@include foundation-media-object;
+//@include foundation-off-canvas;
+@include foundation-orbit;
+@include foundation-pagination;
+@include foundation-progress-bar;
+// @include foundation-progress-element;
+// @include foundation-meter-element;
+@include foundation-slider;
+@include foundation-sticky;
+@include foundation-reveal;
+@include foundation-switch;
+@include foundation-table;
+@include foundation-tabs;
+@include foundation-thumbnail;
+@include foundation-title-bar;
+@include foundation-tooltip;
+@include foundation-top-bar;
+@include foundation-visibility-classes;
+@include foundation-float-classes;
+// @include foundation-flex-classes;
+
+// Scaffolding
+// -------------------------
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin: 0 0 50px;
+}
+
+footer {
+  padding: 0 1rem;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 50px;
+  width: 100%;
+  line-height: 50px;
+}
+
+.text-danger,
+.text-alert {
+  color: map-get($foundation-palette, alert);
+}
+
+// Alerts
+// ------
+
+.callout.alert {
+  background-color: rgba(240, 80, 80, 0.2);
+  border-color: rgba(240, 80, 80, 0.3);
+  color: map-get($foundation-palette, alert);
+}
+
+.callout.success {
+  background-color: rgba(95, 190, 170, 0.3);
+  border-color: rgba(95, 190, 170, 0.4);
+  color: map-get($foundation-palette, success);
+}
+
+.callout.primary {
+  background-color: rgba(52, 211, 235, 0.2);
+  border-color: rgba(52, 211, 235, 0.3);
+  color: map-get($foundation-palette, info);
+}
+
+// Buttons
+// -------------------------
+
+.button-group .button:not(:last-child) {
+  border-right: 0;
+  margin-right: 5px;
+}
+
+.button-group > .button {
+  float: none;
+  margin-bottom: 5px;
+}
+
+.button.facebook {
+  background-color: #3b5998;
+  transition: background-color 0.25s ease-out, color 0.25s ease-out;
+  &:hover,
+  &:focus {
+    background-color: scale-color(#3b5998, $lightness: -15%)
+  }
+}
+
+.button.twitter {
+  background-color: #00aced;
+  transition: background-color 0.25s ease-out, color 0.25s ease-out;
+  &:hover,
+  &:focus {
+    background-color: scale-color(#00aced, $lightness: -15%)
+  }
+}
+
+.button.google {
+  color: #fff;
+  background-color: #dd4b39;
+  transition: background-color 0.25s ease-out, color 0.25s ease-out;
+  &:hover,
+  &:focus {
+    background-color: scale-color(#dd4b39, $lightness: -15%)
+  }
+}
+
+.button.vk {
+  background-color: #587ea3;
+  transition: background-color 0.25s ease-out, color 0.25s ease-out;
+  &:hover,
+  &:focus {
+    background-color: scale-color(#587ea3, $lightness: -15%)
+  }
+}
+
+// Top bar
+// -------------------------
+
+.top-bar + .row {
+  margin: 2rem 0 0;
+}
+
+.top-bar .avatar {
+  padding: 0 1rem;
+  color: #fff;
+  margin-right: 5px;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+}
+
+.top-bar a {
+  color: #fff;
+  &:hover,
+  &:focus {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.07);
+  }
+}
+
+.top-bar-title {
+  margin: 1rem 1rem 0;
+  > a {
+    margin-left: 10px;
+  }
+}
+
+.top-bar .menu > li > a {
+  padding: 1.3rem 1rem;
+}
+
+.top-bar li > a.active {
+  background-color: $black;
+}
+
+// Forms
+// -------------------------
+
+.hr-title {
+  height: auto;
+  margin-top: 20px;
+  border-top: 1px solid;
+  color: rgba(152, 166, 173, 0.2);
+  font-size: 14px;
+  text-align: center;
+  line-height: 20px;
+}
+
+.hr-title span {
+  position: relative;
+  padding: 2px 10px;
+  top: -10px;
+  color: $body-font-color;
+  background-color: #fff;
+  border-radius: 2px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+label {
+  color: $body-font-color;
+  font-weight: 600;
+}
+
+textarea {
+  resize: none;
+}
+
+// Other
+// -----
+
+.gravatar {
+  display: block;
+  margin: 0 0 1rem;
+}

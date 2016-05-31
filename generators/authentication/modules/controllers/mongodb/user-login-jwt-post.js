@@ -7,14 +7,14 @@ exports.loginPost = function(req, res, next) {
   req.assert('email', 'Email is not valid').isEmail();
   req.assert('email', 'Email cannot be blank').notEmpty();
   req.assert('password', 'Password cannot be blank').notEmpty();
-  req.sanitize('email').normalizeEmail();
-
+  req.sanitize('email').normalizeEmail({ remove_dots: false });
+  //_
   var errors = req.validationErrors();
-
+  //_
   if (errors) {
     return res.status(400).send(errors);
   }
-
+  //_
   User.findOne({ email: req.body.email }, function(err, user) {
     if (!user) {
       return res.status(401).send({ msg: 'The email address ' + req.body.email + ' is not associated with any account. ' +

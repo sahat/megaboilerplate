@@ -1,0 +1,70 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 44px;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+footer {
+  position: absolute;
+  height: 44px;
+  bottom: 0;
+  padding: 0 30px;
+}
+
+label {
+  display: block;
+  line-height: 1.8;
+}
+
+input[type="radio"] + label,
+input[type="checkbox"] + label {
+  display: inline-block;
+  margin: 0 5px;
+}
+
+form button[type="submit"] {
+  margin-top: 1em;
+}
+
+.list-inline {
+  display: inline-block;
+  padding-left: 0;
+  list-style: none;
+}
+
+.list-inline > li {
+  display: inline-block;
+  padding: 0 5px;
+}
+
+.container {
+  padding-right: 2rem;
+  padding-left: 2rem;
+}
+
+.text-success {
+  color: #29b35b;
+}
+
+.text-danger {
+  color: #b61b17;
+}
+
+.text-info {
+  color: #31708f;
+}
+
+.avatar {
+  margin-right: 5px;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  vertical-align: middle;
+}

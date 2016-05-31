@@ -1,1 +1,1 @@
-var home = require('./controllers/home');
+var HomeController = require('./controllers/home');

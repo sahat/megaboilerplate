@@ -1,0 +1,5 @@
+{{#if user.<%= providerPath %>}}
+  <p><a href="/unlink/<%= providerPath %>" class="text-danger">Unlink your <%= providerName %> account</a></p>
+{{else}}
+  <p><a href="/auth/<%= providerPath %>">Link your <%= providerName %> account</a></p>
+{{/if}}

@@ -9,6 +9,6 @@ User.findById(req.user.id, function(err, user) {
     user.website = req.body.website;
   }
   user.save(function(err) {
-    //= PROFILE_UPDATE_SUCCESS
+    //= PROFILE_UPDATE_RESPONSE
   });
 });

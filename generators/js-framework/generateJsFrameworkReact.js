@@ -1,130 +1,140 @@
-import { join } from 'path';
-import { copy, cpy, mkdirs, addNpmPackage, replaceCode } from '../utils';
+import { set } from 'lodash';
+import { getModule, replaceCodeMemory, addNpmPackageMemory } from '../utils';
 
 async function generateJsFrameworkReact(params) {
-  const build = join(__base, 'build', params.uuid);
-  const app = join(build, 'app.js');
-  const es6Transpiler = join(__dirname, 'modules', 'react', 'es6-transpiler.js');
-  const mainJs = join(__dirname, 'modules', 'react', 'main.js');
-  const reactRequire = join(__dirname, 'modules', 'react', 'react-require.js');
-  const reactRoutesRequire = join(__dirname, 'modules', 'react', 'react-routes-require.js');
-  const reactRoutes = join(__dirname, 'modules', 'react', 'routes.js');
-  const serverRenderingWithRouting = join(__dirname, 'modules', 'react', 'server-rendering-with-routing.js');
-  const babelrc = join(__dirname, 'modules', 'react', '.babelrc');
-
   switch (params.framework) {
     case 'express':
+      // .babelrc
+      if (params.testing) {
+        set(params, ['build', '.babelrc'], await getModule('js-framework/react/.babelrc-rewire'));
+      } else {
+        set(params, ['build', '.babelrc'], await getModule('js-framework/react/.babelrc'));
+      }
 
-      await cpy([babelrc], build);
-
-      await mkdirs(join(build, 'app', 'actions'));
-      await mkdirs(join(build, 'app', 'components'));
-      await mkdirs(join(build, 'app', 'reducers'));
-      await mkdirs(join(build, 'app', 'store'));
+      // Add entry file and React routes
+      set(params.build, ['app', 'main.js'], await getModule('js-framework/react/main.js'));
+      set(params.build, ['app', 'routes.js'], await getModule('js-framework/react/routes.js'));
 
       // Require react, react-router, react-dom packages
-      await replaceCode(app, 'REACT_REQUIRE', reactRequire);
-      await replaceCode(app, 'REACT_ROUTES_REQUIRE', reactRoutesRequire);
+      await replaceCodeMemory(params, 'server.js', 'REACT_REQUIRE', await getModule('js-framework/react/react-require.js'));
+      await replaceCodeMemory(params, 'server.js', 'REACT_ROUTES_REQUIRE', await getModule('js-framework/react/react-routes-require.js'));
 
       // Add ES6 transpiler
-      await replaceCode(app, 'ES6_TRANSPILER', es6Transpiler);
+      await replaceCodeMemory(params, 'server.js', 'ES6_TRANSPILER', await getModule('js-framework/react/es6-transpiler.js'));
 
       // Add server-rendering  middleware
-      await replaceCode(join(build, 'app.js'), 'REACT_SERVER_RENDERING', serverRenderingWithRouting);
+      await replaceCodeMemory(params, 'server.js', 'REACT_SERVER_RENDERING', await getModule('js-framework/react/server-rendering-with-routing.js'));
+      if (params.authentication.length) {
+        await replaceCodeMemory(params, 'server.js', 'REDUX_INITIAL_STATE', await getModule('js-framework/react/initial-state-auth.js'));
+      } else {
+        await replaceCodeMemory(params, 'server.js', 'REDUX_INITIAL_STATE', await getModule('js-framework/react/initial-state.js'));
+      }
 
-      // Copy React components
-      const components = join(__dirname, 'modules', 'react', 'components');
+      // React components
+      set(params.build, ['app', 'components', 'App.js'], await getModule('js-framework/react/components/App.js'));
+      set(params.build, ['app', 'components', 'Contact.js'], await getModule('js-framework/react/components/Contact.js'));
+      set(params.build, ['app', 'components', 'Footer.js'], await getModule('js-framework/react/components/Footer.js'));
+      set(params.build, ['app', 'components', 'Header.js'], await getModule('js-framework/react/components/Header.js'));
+      set(params.build, ['app', 'components', 'Home.js'], await getModule('js-framework/react/components/Home.js'));
+      set(params.build, ['app', 'components', 'Messages.js'], await getModule('js-framework/react/components/Messages.js'));
+      set(params.build, ['app', 'components', 'NotFound.js'], await getModule('js-framework/react/components/NotFound.js'));
 
-      await cpy([
-        join(components, 'App.js'),
-        join(components, 'Contact.js'),
-        join(components, 'Footer.js'),
-        join(components, 'Header.js'),
-        join(components, 'Home.js'),
-        join(components, 'Messages.js'),
-        join(components, 'NotFound.js')
-      ], join(build, 'app', 'components'));
+      await replaceCodeMemory(params, 'app/components/Contact.js', 'CONTACT_RENDER', await getModule(`js-framework/react/components/Contact-${params.cssFramework}.js`));
+      await replaceCodeMemory(params, 'app/components/Home.js', 'HOME_RENDER', await getModule(`js-framework/react/components/Home-${params.cssFramework}.js`));
+      await replaceCodeMemory(params, 'app/components/Messages.js', 'MESSAGES_RENDER', await getModule(`js-framework/react/components/Messages-${params.cssFramework}.js`));
+      await replaceCodeMemory(params, 'app/components/Header.js', 'HEADER_RENDER', await getModule(`js-framework/react/components/Header-${params.cssFramework}.js`));
 
-      await cpy([
-        join(components, 'Account', 'Forgot.js'),
-        join(components, 'Account', 'Login.js'),
-        join(components, 'Account', 'Profile.js'),
-        join(components, 'Account', 'Reset.js'),
-        join(components, 'Account', 'Signup.js')
-      ], join(build, 'app', 'components', 'Account'));
+      if (params.authentication.length) {
+        set(params.build, ['app', 'components', 'Account', 'Forgot.js'], await getModule('js-framework/react/components/Account/Forgot.js'));
+        set(params.build, ['app', 'components', 'Account', 'Login.js'], await getModule('js-framework/react/components/Account/Login.js'));
+        set(params.build, ['app', 'components', 'Account', 'Profile.js'], await getModule('js-framework/react/components/Account/Profile.js'));
+        set(params.build, ['app', 'components', 'Account', 'Reset.js'], await getModule('js-framework/react/components/Account/Reset.js'));
+        set(params.build, ['app', 'components', 'Account', 'Signup.js'], await getModule('js-framework/react/components/Account/Signup.js'));
+
+        await replaceCodeMemory(params, 'app/components/Account/Forgot.js', 'FORGOT_RENDER', await getModule(`js-framework/react/components/Account/Forgot-${params.cssFramework}.js`), { indentLevel: 3 });
+        await replaceCodeMemory(params, 'app/components/Account/Login.js', 'LOGIN_RENDER', await getModule(`js-framework/react/components/Account/Login-${params.cssFramework}.js`));
+        await replaceCodeMemory(params, 'app/components/Account/Profile.js', 'PROFILE_RENDER', await getModule(`js-framework/react/components/Account/Profile-${params.cssFramework}.js`));
+        await replaceCodeMemory(params, 'app/components/Account/Reset.js', 'RESET_RENDER', await getModule(`js-framework/react/components/Account/Reset-${params.cssFramework}.js`));
+        await replaceCodeMemory(params, 'app/components/Account/Signup.js', 'SIGNUP_RENDER', await getModule(`js-framework/react/components/Account/Signup-${params.cssFramework}.js`));
+        await replaceCodeMemory(params, 'app/components/Header.js', 'HEADER_AUTH', await getModule(`js-framework/react/components/Header-auth-${params.cssFramework}.js`));
+        await replaceCodeMemory(params, 'app/components/Header.js', 'HEADER_AUTH_REFERENCE', await getModule('js-framework/react/components/Header-auth-reference.js'));
+      }
 
       // Copy Redux actions, reducers, store
-      const actions = join(__dirname, 'modules', 'react', 'actions');
-      await cpy([
-        join(actions, 'auth.js'),
-        join(actions, 'contact.js'),
-        join(actions, 'oauth.js')
-      ], join(build, 'app', 'actions'));
+      set(params.build, ['app', 'actions', 'contact.js'], await getModule('js-framework/react/actions/contact.js'));
 
-      const reducers = join(__dirname, 'modules', 'react', 'reducers');
-      await cpy([
-        join(reducers, 'auth.js'),
-        join(reducers, 'index.js'),
-        join(reducers, 'messages.js')
-      ], join(build, 'app', 'reducers'));
+      if (params.authentication.length) {
+        // Add react-redux things and logout component method
+        await replaceCodeMemory(params, 'app/components/Header.js', 'HEADER_EXPORT', await getModule('js-framework/react/components/Header-export-redux.js'));
+        await replaceCodeMemory(params, 'app/components/Header.js', 'HEADER_LOGOUT', await getModule('js-framework/react/components/Header-logout.js'), { trailingBlankLine: true });
+        await replaceCodeMemory(params, 'app/components/Header.js', 'HEADER_LOGOUT_REFERENCE', await getModule('js-framework/react/components/Header-logout-reference.js'));
+        await replaceCodeMemory(params, 'app/components/Header.js', 'HEADER_REACT_REDUX_REFERENCE', await getModule('js-framework/react/components/Header-react-redux-reference.js'));
 
-      const store = join(__dirname, 'modules', 'react', 'store');
-      await cpy([join(store, 'configureStore.js')], join(build, 'app', 'store'));
+        // Redux reducers
+        set(params.build, ['app', 'reducers', 'index.js'], await getModule('js-framework/react/reducers/index-with-auth.js'));
+        set(params.build, ['app', 'reducers', 'messages.js'], await getModule('js-framework/react/reducers/messages-with-auth.js'));
+        set(params.build, ['app', 'reducers', 'auth.js'], await getModule('js-framework/react/reducers/auth.js'));
 
-      // Copy entry file and React routes
-      await copy(mainJs, join(build, 'app', 'main.js'));
-      await copy(reactRoutes, join(build, 'app', 'routes.js'));
+        // Redux actions
+        set(params.build, ['app', 'actions', 'auth.js'], await getModule('js-framework/react/actions/auth.js'));
+        set(params.build, ['app', 'actions', 'oauth.js'], await getModule('js-framework/react/actions/oauth.js'));
+
+        // Auth routes
+        await replaceCodeMemory(params, 'app/routes.js', 'AUTH_ROUTES_IMPORT', await getModule('js-framework/react/routes-auth-import.js'));
+        await replaceCodeMemory(params, 'app/routes.js', 'AUTH_MIDDLEWARE', await getModule('js-framework/react/routes-auth-middleware.js'));
+        await replaceCodeMemory(params, 'app/routes.js', 'AUTH_ROUTES', await getModule('js-framework/react/routes-auth.js'));
+      } else {
+        // Add standard module export
+        await replaceCodeMemory(params, 'app/components/Header.js', 'HEADER_EXPORT', await getModule('js-framework/react/components/Header-export.js'));
+
+        // Redux reducers (without auth)
+        set(params.build, ['app', 'reducers', 'index.js'], await getModule('js-framework/react/reducers/index.js'));
+        set(params.build, ['app', 'reducers', 'messages.js'], await getModule('js-framework/react/reducers/messages.js'));
+      }
+
+      // Add store
+      set(params.build, ['app', 'store', 'configureStore.js'], await getModule('js-framework/react/store/configureStore.js'));
+
+      // Optional: Redux Dev Tools
+      if (params.reactOptions.includes('reduxDevTools')) {
+        await replaceCodeMemory(params, 'app/store/configureStore.js', 'REDUX_STORE_ENHANCER', await getModule('js-framework/react/store/thunkAndDevTools.js'));
+      } else {
+        await replaceCodeMemory(params, 'app/store/configureStore.js', 'REDUX_STORE_ENHANCER', await getModule('js-framework/react/store/thunk.js'));
+      }
 
       switch (params.templateEngine) {
         case 'jade':
-          const layoutJade = join(build, 'views', 'layout.jade');
-          const bundleJsJadeImport = join(__dirname, 'modules', 'react', 'react-jade-import.jade');
-          const renderFileJade = join(__dirname, 'modules', 'react', 'render-template-jade.js');
-          await replaceCode(app, 'RENDER_TEMPLATE', renderFileJade, { indentLevel: 3 });
-
-          await replaceCode(layoutJade, 'JS_FRAMEWORK_MAIN_IMPORT', bundleJsJadeImport, { indentLevel: 2 });
+          await replaceCodeMemory(params, 'server.js', 'RENDER_TEMPLATE', await getModule('js-framework/react/render-template-jade.js'));
+          await replaceCodeMemory(params, 'views/layout.jade', 'JS_FRAMEWORK_MAIN_IMPORT', await getModule('js-framework/react/react-jade-import.jade'));
           break;
-
         case 'handlebars':
+          await replaceCodeMemory(params, 'server.js', 'RENDER_TEMPLATE', await getModule('js-framework/react/render-template-handlebars.js'));
+          await replaceCodeMemory(params, 'views/layouts/main.handlebars', 'JS_FRAMEWORK_MAIN_IMPORT', await getModule('js-framework/react/react-html-import.html'));
           break;
-
         case 'nunjucks':
-          const layoutNunjucks = join(build, 'views', 'layout.html');
-          const bundleNunjucksImport = join(__dirname, 'modules', 'react', 'react-html-import.html');
-          const renderFileNunjucks = join(__dirname, 'modules', 'react', 'render-template-nunjucks.js');
-
-          await replaceCode(layoutNunjucks, 'JS_FRAMEWORK_MAIN_IMPORT', bundleNunjucksImport, { indentLevel: 1 });
-          await replaceCode(app, 'RENDER_TEMPLATE', renderFileNunjucks);
+          await replaceCodeMemory(params, 'server.js', 'RENDER_TEMPLATE', await getModule('js-framework/react/render-template-nunjucks.js'));
+          await replaceCodeMemory(params, 'views/layout.html', 'JS_FRAMEWORK_MAIN_IMPORT', await getModule('js-framework/react/react-html-import.html'));
           break;
-
         default:
           break;
       }
       break;
-
-    case 'hapi':
-      break;
-
     case 'meteor':
       break;
-
     default:
   }
 
-  await addNpmPackage('babel-core', params);
-  await addNpmPackage('babel-polyfill', params);
-  await addNpmPackage('react', params);
-  await addNpmPackage('react-dom', params);
-  await addNpmPackage('react-router', params);
-  await addNpmPackage('redux', params);
-  await addNpmPackage('react-redux', params);
-  await addNpmPackage('redux-thunk', params);
-  await addNpmPackage('whatwg-fetch', params);
-
+  await addNpmPackageMemory('babel-core', params);
+  await addNpmPackageMemory('babel-polyfill', params);
+  await addNpmPackageMemory('react', params);
+  await addNpmPackageMemory('react-dom', params);
+  await addNpmPackageMemory('react-router', params);
+  await addNpmPackageMemory('redux', params);
+  await addNpmPackageMemory('react-redux', params);
+  await addNpmPackageMemory('redux-thunk', params);
+  await addNpmPackageMemory('whatwg-fetch', params);
   if (params.authentication.length) {
-    await addNpmPackage('react-cookie', params);
-    await addNpmPackage('jsonwebtoken', params);
-    await addNpmPackage('moment', params);
+    await addNpmPackageMemory('react-cookie', params);
   }
 }
 

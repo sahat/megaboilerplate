@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="container">
+  {% if messages.success %}
+  <div class="text-success">
+    {% for success in messages.success %}
+    <div>{{ success.msg }}</div>
+    {% endfor %}
+  </div>
+  {% endif %}
+  {% if messages.error %}
+  <div class="text-danger">
+    {% for error in messages.error %}
+    <div>{{ error.msg }}</div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <h4>Reset Password</h4>
+
+  <form method="POST">
+    <label for="password">New Password</label>
+    <input type="password" name="password" id="password" placeholder="New password" autofocus>
+    <label for="confirm">Confirm Password</label>
+    <input type="password" name="confirm" id="confirm" placeholder="Confirm password">
+    <br>
+    <button type="submit">Change Password</button>
+  </form>
+</div>
+{% endblock %}

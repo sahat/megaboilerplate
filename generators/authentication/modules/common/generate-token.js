@@ -1,3 +1,4 @@
+
 function generateToken(user) {
   var payload = {
     iss: 'my.domain.com',

@@ -1,0 +1,31 @@
+<div class="container">
+  {{#if messages.error}}
+    <div class="text-danger">
+      {{#each messages.error}}
+        <div>{{msg}}</div>
+      {{/each}}
+    </div>
+  {{/if}}
+
+  <h4>Create an account</h4>
+
+  <form method="POST">
+    <label for="email">Email</label>
+    <input type="email" name="email" id="email" placeholder="Email" autofocus>
+    <label for="name">Name</label>
+    <input type="text" name="name" id="name" placeholder="Name">
+    <label for="password">Password</label>
+    <input type="password" name="password" id="password" placeholder="Password">
+    <p>By signing up, you agree to the <a href="/">Terms of Service</a>.</p>
+    <button type="submit">Create an account</button>
+  </form>
+
+  <hr>
+
+  //= SIGN_IN_WITH_FACEBOOK_INDENT1
+  //= SIGN_IN_WITH_TWITTER_INDENT1
+  //= SIGN_IN_WITH_GOOGLE_INDENT1
+  //= SIGN_IN_WITH_VK_INDENT1
+
+  <p>Already have an account? <a href="/login">Log in</a></p>
+</div>

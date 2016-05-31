@@ -1,0 +1,1 @@
+res.render('loading');

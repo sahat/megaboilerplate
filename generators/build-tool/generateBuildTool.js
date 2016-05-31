@@ -8,19 +8,15 @@ async function generateBuildTool(params) {
     case 'gulp':
       await generateGulpBuildTool(params);
       break;
-
     case 'webpack':
       await generateWebpackBuildTool(params);
       break;
-
     case 'npm':
       await generateNpmBuildTool(params);
       break;
-
     case 'none':
       await generateNoneBuildTool(params);
       break;
-
     default:
   }
 }

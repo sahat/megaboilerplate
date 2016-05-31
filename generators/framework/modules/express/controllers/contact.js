@@ -24,13 +24,12 @@ exports.contactPost = function(req, res) {
   req.assert('email', 'Email is not valid').isEmail();
   req.assert('email', 'Email cannot be blank').notEmpty();
   req.assert('message', 'Message cannot be blank').notEmpty();
-  req.sanitize('email').normalizeEmail();
+  req.sanitize('email').normalizeEmail({ remove_dots: false });
 
   var errors = req.validationErrors();
 
   if (errors) {
-    req.flash('error', errors);
-    return res.redirect('/contact');
+    //= CONTACT_VALIDATION_ERROR_INDENT2
   }
 
   var mailOptions = {
@@ -41,7 +40,6 @@ exports.contactPost = function(req, res) {
   };
 
   transporter.sendMail(mailOptions, function(err) {
-    req.flash('success', { msg: 'Thank you! Your feedback has been submitted.' });
-    res.redirect('/contact');
+    //= CONTACT_SUCCESS_INDENT2
   });
 };

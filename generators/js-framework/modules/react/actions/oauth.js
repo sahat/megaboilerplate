@@ -3,65 +3,47 @@ import qs from 'querystring';
 import moment from 'moment';
 import cookie from 'react-cookie';
 import { browserHistory } from 'react-router';
+//= FACEBOOK_LOGIN_ACTION
+//= TWITTER_LOGIN_ACTION
+//= GOOGLE_LOGIN_ACTION
+//= VK_LOGIN_ACTION
 
-export function facebookLogin() {
-  const facebook = {
-    url: 'http://localhost:3000/auth/facebook',
-    clientId: '603122136500203',
-    redirectUri: 'http://localhost:3000/auth/facebook/callback',
-    authorizationUrl: 'https://www.facebook.com/v2.5/dialog/oauth',
-    scope: 'email,user_location',
-    width: 580,
-    height: 400
-  };
-
-  return (dispatch) => {
-    oauth2(facebook, dispatch)
-      .then(openPopup)
-      .then(pollPopup)
-      .then(exchangeCodeForToken)
-      .then(signIn)
-      .then(closePopup);
-  };
+// Link account
+export function link(provider) {
+  switch (provider) {
+    //= FACEBOOK_LINK_ACTION_INDENT2
+    //= TWITTER_LINK_ACTION_INDENT2
+    //= GOOGLE_LINK_ACTION_INDENT2
+    //= VK_LINK_ACTION_INDENT2
+    default:
+      return {
+        type: 'LINK_FAILURE',
+        messages: [{ msg: 'Invalid OAuth Provider' }]
+      }
+  }
 }
 
-export function googleLogin() {
-  const google = {
-    url: 'http://localhost:3000/auth/google',
-    clientId: '771417488024-ltua6b8msfo6ipdcnk2ahcpd0qrpdu61.apps.googleusercontent.com',
-    redirectUri: 'http://localhost:3000/auth/google/callback',
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth',
-    scope: 'openid profile email',
-    width: 452,
-    height: 633
-  };
-
+// Unlink account
+export function unlink(provider) {
   return (dispatch) => {
-    oauth2(google, dispatch)
-      .then(openPopup)
-      .then(pollPopup)
-      .then(exchangeCodeForToken)
-      .then(signIn)
-      .then(closePopup);
-  };
-}
-
-export function twitterLogin() {
-  const twitter = {
-    url: 'http://localhost:3000/auth/twitter',
-    redirectUri: 'http://localhost:3000/auth/twitter/callback',
-    authorizationUrl: 'https://api.twitter.com/oauth/authenticate'
-  };
-
-  return (dispatch) => {
-    oauth1(twitter, dispatch)
-      .then(openPopup)
-      .then(getRequestToken)
-      .then(pollPopup)
-      .then(exchangeCodeForToken)
-      .then(signIn)
-      .then(closePopup);
-  };
+    return fetch('/unlink/' + provider).then((response) => {
+      if (response.ok) {
+        return response.json().then((json) => {
+          dispatch({
+            type: 'UNLINK_SUCCESS',
+            messages: [json]
+          });
+        });
+      } else {
+        return response.json().then((json) => {
+          dispatch({
+            type: 'UNLINK_FAILURE',
+            messages: [json]
+          });
+        });
+      }
+    });
+  }
 }
 
 function oauth2(config, dispatch) {
@@ -106,7 +88,7 @@ function openPopup({ url, config, dispatch }) {
 
 function getRequestToken({ window, config, dispatch }) {
   return new Promise((resolve, reject) => {
-    fetch(config.url, {
+    return fetch(config.url, {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -114,7 +96,7 @@ function getRequestToken({ window, config, dispatch }) {
       })
     }).then((response) => {
       if (response.ok) {
-        response.json().then((json) => {
+        return response.json().then((json) => {
           resolve({ window: window, config: config, requestToken: json, dispatch: dispatch });
         });
       }
@@ -170,17 +152,17 @@ function exchangeCodeForToken({ oauthData, config, window, interval, dispatch })
   return new Promise((resolve, reject) => {
     const data = Object.assign({}, oauthData, config);
 
-    fetch(config.url, {
+    return fetch(config.url, {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
     }).then((response) => {
       if (response.ok) {
-        response.json().then((json) => {
+        return response.json().then((json) => {
           resolve({ token: json.token, user: json.user, window: window, interval: interval, dispatch: dispatch });
         });
       } else {
-        response.json().then((json) => {
+        return response.json().then((json) => {
           dispatch({
             type: 'OAUTH_FAILURE',
             messages: Array.isArray(json) ? json : [json]

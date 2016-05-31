@@ -34,5 +34,5 @@ exports.authFacebook = function(req, res) {
 };
 
 exports.authFacebookCallback = function(req, res) {
-  res.render('loading');
+  //= AUTH_JWT_CALLBACK_INDENT1
 };

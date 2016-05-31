@@ -1,0 +1,30 @@
+extends layout
+
+block content
+  .container
+    if messages.error
+      div.text-danger(role='alert')
+        for error in messages.error
+          div= error.msg
+    if messages.success
+      div.text-success(role='alert')
+        for success in messages.success
+          div= success.msg
+    if messages.info
+      div.text-info(role='alert')
+        for info in messages.info
+          div= info.msg
+
+    .row
+      .col-sm
+        h3 Heading
+        p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+        a(href='#', role='button') View details
+      .col-sm
+        h3 Heading
+        p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+        a(href='#', role='button') View details
+      .col-sm
+        h3 Heading
+        p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+        a(href='#', role='button') View details

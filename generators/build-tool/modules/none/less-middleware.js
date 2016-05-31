@@ -1,1 +1,1 @@
-app.use(less({ src: __dirname + '/public', compress: true }));
+app.use(less(path.join(__dirname, 'public')));

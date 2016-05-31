@@ -1,0 +1,26 @@
+extends ../layout
+
+block content
+  .container
+    .panel
+      .panel-body
+        if messages.success
+          .alert.alert-success(role='alert')
+            for success in messages.success
+              div= success.msg
+
+        if messages.error
+          .alert.alert-danger(role='alert')
+            for error in messages.error
+              div= error.msg
+
+        form(method='POST')
+          legend Reset Password
+          .form-group
+            label(for='password') New Password
+            input.form-control(type='password', name='password', id='password', placeholder='New password', autofocus=true)
+          .form-group
+            label(for='confirm') Confirm Password
+            input.form-control(type='password', name='confirm', id='confirm', placeholder='Confirm password')
+          .form-group
+            button.btn.btn-success(type='submit') Change Password

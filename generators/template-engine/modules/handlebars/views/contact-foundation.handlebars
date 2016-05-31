@@ -1,0 +1,40 @@
+<div class="expanded row">
+  <div class="row">
+    <h3>Contact Form</h3>
+    {{#if messages.success}}
+      <div class="callout success">
+        {{#each messages.success}}
+          <div>{{msg}}</div>
+        {{/each}}
+      </div>
+    {{/if}}
+    {{#if messages.error}}
+      <div class="callout alert">
+        {{#each messages.error}}
+          <div>{{msg}}</div>
+        {{/each}}
+      </div>
+    {{/if}}
+    <form method="POST">
+      <div class="row">
+        <div class="medium-8 columns">
+          <label for="name">Name</label>
+          <input type="text" name="name" id="name" autofocus>
+        </div>
+      </div>
+      <div class="row">
+        <div class="medium-8 columns">
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email">
+        </div>
+      </div>
+      <div class="row">
+        <div class="medium-8 columns">
+          <label for="message">Body</label>
+          <textarea name="message" id="message" rows="7"></textarea>
+        </div>
+      </div>
+      <button type="submit" class="button">Send</button>
+    </form>
+  </div>
+</div>

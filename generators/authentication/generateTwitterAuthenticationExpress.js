@@ -1,58 +1,96 @@
-import { join } from 'path';
-import { replaceCode, appendFile, addNpmPackage } from '../utils';
+import { getModule, replaceCodeMemory, templateReplaceMemory, addEnvMemory, addNpmPackageMemory } from '../utils';
 
-async function generateTwitterAuthenticationExpress(params) {
-  const build = join(__base, 'build', params.uuid);
-  const app = join(build, 'app.js');
-  const env = join(build, '.env');
-  const config = join(build, 'config', 'passport.js');
-  const userController = join(build, 'controllers', 'user.js');
-  const strategyRequire = join(__dirname, 'modules', 'twitter', 'passport-require.js');
-  const passportRoutes = join(__dirname, 'modules', 'twitter', 'passport-routes.js');
-  const jwtRoutes = join(__dirname, 'modules', 'twitter', 'jwt-routes.js');
-  
+export default async function generateTwitterAuthenticationExpress(params) {
   if (params.jsFramework) {
-    await replaceCode(app, 'TWITTER_ROUTES', jwtRoutes);
-    await replaceCode(userController, 'AUTH_TWITTER_JWT', join(__dirname, 'modules', 'twitter', 'twitter-jwt.js'));
+    await replaceCodeMemory(params, 'server.js', 'TWITTER_ROUTES', await getModule('authentication/twitter/jwt-routes.js'));
+    await replaceCodeMemory(params, 'controllers/user.js', 'AUTH_TWITTER_JWT', await getModule('authentication/twitter/twitter-jwt.js'));
 
+    if (params.jsFramework === 'react') {
+      await replaceCodeMemory(params, 'controllers/user.js', 'AUTH_JWT_CALLBACK', await getModule('authentication/controllers/jwt-callback-render.js'));
+    } else if (params.jsFramework === 'angularjs') {
+      await replaceCodeMemory(params, 'controllers/user.js', 'AUTH_JWT_CALLBACK', await getModule('authentication/controllers/jwt-callback-send.js'));
+    }
   } else {
-    await replaceCode(app, 'TWITTER_ROUTES', passportRoutes);
-    await replaceCode(config, 'PASSPORT_TWITTER_REQUIRE', strategyRequire);
-
-    await addNpmPackage('passport-twitter', params);
-
+    await replaceCodeMemory(params, 'server.js', 'TWITTER_ROUTES', await getModule('authentication/twitter/passport-routes.js'));
+    await replaceCodeMemory(params, 'config/passport.js', 'PASSPORT_TWITTER_REQUIRE', await getModule('authentication/twitter/passport-require.js'));
+    await addNpmPackageMemory('passport-twitter', params);
   }
-
 
   switch (params.database) {
     case 'mongodb':
       if (params.jsFramework) {
-        await replaceCode(userController, 'AUTH_TWITTER_JWT_DB', join(__dirname, 'modules', 'twitter', 'twitter-jwt-sql.js'), { indentLevel: 3 });
+        await replaceCodeMemory(params, 'controllers/user.js', 'AUTH_TWITTER_JWT_DB', await getModule('authentication/twitter/twitter-jwt-mongodb.js'), { indentLevel: 3 });
       } else {
-        const mongodbStrategy = join(__dirname, 'modules', 'twitter', 'twitter-strategy-mongodb.js');
-        await replaceCode(config, 'PASSPORT_TWITTER_STRATEGY', mongodbStrategy);
+        await replaceCodeMemory(params, 'config/passport.js', 'PASSPORT_TWITTER_STRATEGY', await getModule('authentication/twitter/twitter-strategy-mongodb.js'));
       }
-
       break;
-
     case 'mysql':
     case 'sqlite':
     case 'postgresql':
       if (params.jsFramework) {
-        await replaceCode(userController, 'AUTH_TWITTER_JWT_DB', join(__dirname, 'modules', 'twitter', 'twitter-jwt-sql.js'), { indentLevel: 3 });
+        await replaceCodeMemory(params, 'controllers/user.js', 'AUTH_TWITTER_JWT_DB', await getModule('authentication/twitter/twitter-jwt-sql.js'), { indentLevel: 3 });
       } else {
-        const sqlStrategy = join(__dirname, 'modules', 'twitter', 'twitter-strategy-sql.js');
-        await replaceCode(config, 'PASSPORT_TWITTER_STRATEGY', sqlStrategy);
+        await replaceCodeMemory(params, 'config/passport.js', 'PASSPORT_TWITTER_STRATEGY', await getModule('authentication/twitter/twitter-strategy-sql.js'));
       }
-
       break;
-
     default:
       break;
   }
 
-  await appendFile(env, '\nTWITTER_KEY=6NNBDyJ2TavL407A3lWxPFKBI');
-  await appendFile(env, '\nTWITTER_SECRET=ZHaYyK3DQCqv49Z9ofsYdqiUgeoICyh6uoBgFfu7OeYC7wTQKa\n');
-}
+  await addEnvMemory(params, {
+    TWITTER_KEY: '6NNBDyJ2TavL407A3lWxPFKBI',
+    TWITTER_SECRET: 'ZHaYyK3DQCqv49Z9ofsYdqiUgeoICyh6uoBgFfu7OeYC7wTQKa'
+  });
 
-export default generateTwitterAuthenticationExpress;
+  if (params.jsFramework && params.jsFramework === 'angularjs') {
+    await replaceCodeMemory(params, 'app/partials/login.html', 'SIGN_IN_WITH_TWITTER', await getModule(`authentication/twitter/views/sign-in-button-angular-${params.cssFramework}.html`));
+    await replaceCodeMemory(params, 'app/partials/signup.html', 'SIGN_IN_WITH_TWITTER', await getModule(`authentication/twitter/views/sign-in-button-angular-${params.cssFramework}.html`));
+  } else if (params.jsFramework && params.jsFramework === 'react') {
+    await replaceCodeMemory(params, 'app/components/Account/Login.js', 'SIGN_IN_WITH_TWITTER', await getModule(`authentication/twitter/views/sign-in-button-react-${params.cssFramework}.js`));
+    await replaceCodeMemory(params, 'app/components/Account/Signup.js', 'SIGN_IN_WITH_TWITTER', await getModule(`authentication/twitter/views/sign-in-button-react-${params.cssFramework}.js`));
+  } else {
+    switch (params.templateEngine) {
+      case 'jade':
+        await replaceCodeMemory(params, 'views/account/login.jade', 'SIGN_IN_WITH_TWITTER', await getModule(`authentication/twitter/views/sign-in-button-${params.cssFramework}.jade`), { indentLevel: 3 });
+        await replaceCodeMemory(params, 'views/account/signup.jade', 'SIGN_IN_WITH_TWITTER', await getModule(`authentication/twitter/views/sign-in-button-${params.cssFramework}.jade`), { indentLevel: 3 });
+        await replaceCodeMemory(params, 'views/account/profile.jade', 'TWITTER_LINK', await getModule('authentication/common/views/jade/oauth-link.jade'));
+        templateReplaceMemory(params, 'views/account/profile.jade', {
+          providerPath: 'twitter',
+          providerName: 'Twitter'
+        });
+        break;
+      case 'handlebars':
+        await replaceCodeMemory(params, 'views/account/login.handlebars', 'SIGN_IN_WITH_TWITTER', await getModule(`authentication/twitter/views/sign-in-button-${params.cssFramework}.html`), { indentLevel: 3 });
+        await replaceCodeMemory(params, 'views/account/signup.handlebars', 'SIGN_IN_WITH_TWITTER', await getModule(`authentication/twitter/views/sign-in-button-${params.cssFramework}.html`), { indentLevel: 3 });
+        await replaceCodeMemory(params, 'views/account/profile.handlebars', 'TWITTER_LINK', await getModule('authentication/common/views/handlebars/oauth-link.handlebars'));
+        templateReplaceMemory(params, 'views/account/profile.handlebars', {
+          providerPath: 'twitter',
+          providerName: 'Twitter'
+        });
+        break;
+      case 'nunjucks':
+        await replaceCodeMemory(params, 'views/account/login.html', 'SIGN_IN_WITH_TWITTER', await getModule(`authentication/twitter/views/sign-in-button-${params.cssFramework}.html`), { indentLevel: 3 });
+        await replaceCodeMemory(params, 'views/account/signup.html', 'SIGN_IN_WITH_TWITTER', await getModule(`authentication/twitter/views/sign-in-button-${params.cssFramework}.html`), { indentLevel: 3 });
+        await replaceCodeMemory(params, 'views/account/profile.html', 'TWITTER_LINK', await getModule('authentication/common/views/nunjucks/oauth-link.html'));
+        templateReplaceMemory(params, 'views/account/profile.html', {
+          providerPath: 'twitter',
+          providerName: 'Twitter'
+        });
+        break;
+      default:
+        break;
+    }
+  }
+
+  if (params.jsFramework === 'react') {
+    await replaceCodeMemory(params, 'app/actions/oauth.js', 'TWITTER_LOGIN_ACTION', await getModule('js-framework/react/actions/oauth/twitter.js'));
+    await replaceCodeMemory(params, 'app/actions/oauth.js', 'TWITTER_LINK_ACTION', await getModule('js-framework/react/actions/oauth/twitter-link.js'));
+    await replaceCodeMemory(params, 'app/components/Account/Profile.js', 'TWITTER_LINK', await getModule(`js-framework/react/components/Account/profile/twitter-link-${params.cssFramework}.js`));
+    await replaceCodeMemory(params, 'app/components/Account/Profile.js', 'TWITTER_LINK_REFERENCE', await getModule('js-framework/react/components/Account/profile/twitter-link-reference.js'));
+  }
+
+  if (params.jsFramework === 'angularjs') {
+    await replaceCodeMemory(params, 'app/partials/profile.html', 'TWITTER_LINK', await getModule(`js-framework/angularjs/partials/profile/twitter-link-${params.cssFramework}.html`));
+    await replaceCodeMemory(params, 'app/app.js', 'SATELLIZER_TWITTER_CONFIG', await getModule('js-framework/angularjs/satellizer-twitter.js'));
+  }
+}

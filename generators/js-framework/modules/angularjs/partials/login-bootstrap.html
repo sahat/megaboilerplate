@@ -1,0 +1,32 @@
+<div class="login-container">
+  <div class="panel">
+    <div class="panel-body">
+      <div ng-if="messages.error" role="alert" class="alert alert-danger">
+        <div ng-repeat="error in messages.error">{{error.msg}}</div>
+      </div>
+      <form ng-submit="login()">
+        <legend>Log In</legend>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email" placeholder="Email" class="form-control" ng-model="user.email" autofocus>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" name="password" id="password" placeholder="Password" class="form-control" ng-model="user.password">
+        </div>
+        <div class="form-group"><a href="/forgot"><strong>Forgot your password?</strong></a></div>
+        <button type="submit" class="btn btn-success">Log in</button>
+      </form>
+      <div class="hr-title"><span>or</span></div>
+      <div class="btn-toolbar text-center">
+        //= SIGN_IN_WITH_FACEBOOK_INDENT4
+        //= SIGN_IN_WITH_TWITTER_INDENT4
+        //= SIGN_IN_WITH_GOOGLE_INDENT4
+        //= SIGN_IN_WITH_VK_INDENT4
+      </div>
+    </div>
+  </div>
+  <p class="text-center">
+    Don't have an account? <a href="/signup"><strong>Sign up</strong></a>
+  </p>
+</div>

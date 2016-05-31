@@ -1,0 +1,4 @@
+if user.<%= providerPath %>
+  p: a.text-danger(href='/unlink/<%= providerPath %>') Unlink your <%= providerName %> account
+else
+  p: a(href='/auth/<%= providerPath %>') Link your <%= providerName %> account

@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="panel">
+    <div class="panel-body">
+      {{#if messages.success}}
+        <div role="alert" class="alert alert-success">
+          {{#each messages.success}}
+            <div>{{msg}}</div>
+          {{/each}}
+        </div>
+      {{/if}}
+      {{#if messages.error}}
+        <div role="alert" class="alert alert-danger">
+          {{#each messages.error}}
+            <div>{{msg}}</div>
+          {{/each}}
+        </div>
+      {{/if}}
+      <form method="POST">
+        <legend>Reset Password</legend>
+        <div class="form-group">
+          <label for="password">New Password</label>
+          <input type="password" name="password" id="password" placeholder="New password" class="form-control" autofocus>
+        </div>
+        <div class="form-group">
+          <label for="confirm">Confirm Password</label>
+          <input type="password" name="confirm" id="confirm" placeholder="Confirm password" class="form-control">
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-success">Change Password</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

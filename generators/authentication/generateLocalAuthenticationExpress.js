@@ -1,41 +1,28 @@
-import { join } from 'path';
-import { replaceCode, removeCode, addNpmPackage } from '../utils';
+import { getModule, replaceCodeMemory, addNpmPackageMemory } from '../utils';
 
-async function generateLocalAuthenticationExpress(params) {
-  const app = join(__base, 'build', params.uuid, 'app.js');
-  const config = join(__base, 'build', params.uuid, 'config', 'passport.js');
-  const strategyRequire = join(__dirname, 'modules', 'local', 'passport-require.js');
-  const passportRoutes = join(__dirname, 'modules', 'local', 'passport-routes.js');
-  const jwtRoutes = join(__dirname, 'modules', 'local', 'jwt-routes.js');
+export default async function generateLocalAuthenticationExpress(params) {
+  await addNpmPackageMemory('bcrypt-nodejs', params);
+  await addNpmPackageMemory('async', params);
 
-  await addNpmPackage('nodemailer', params);
-  await addNpmPackage('bcrypt-nodejs', params);
-  await addNpmPackage('async', params);
-  
   if (params.jsFramework) {
-    await replaceCode(app, 'LOCAL_ROUTES', jwtRoutes);
+    await replaceCodeMemory(params, 'server.js', 'LOCAL_ROUTES', await getModule('authentication/local/jwt-routes.js'));
   } else {
-    await replaceCode(app, 'LOCAL_ROUTES', passportRoutes);
-    await replaceCode(config, 'PASSPORT_LOCAL_REQUIRE', strategyRequire);
-    await addNpmPackage('passport-local', params);
+    await replaceCodeMemory(params, 'server.js', 'LOCAL_ROUTES', await getModule('authentication/local/passport-routes.js'));
+    await replaceCodeMemory(params, 'config/passport.js', 'PASSPORT_LOCAL_REQUIRE', await getModule('authentication/local/passport-require.js'));
+
+    await addNpmPackageMemory('passport-local', params);
 
     switch (params.database) {
       case 'mongodb':
-        const mongodbStrategy = join(__dirname, 'modules', 'local', 'local-strategy-mongodb.js');
-        await replaceCode(config, 'PASSPORT_LOCAL_STRATEGY', mongodbStrategy);
+        await replaceCodeMemory(params, 'config/passport.js', 'PASSPORT_LOCAL_STRATEGY', await getModule('authentication/local/local-strategy-mongodb.js'));
         break;
-
       case 'mysql':
       case 'sqlite':
       case 'postgresql':
-        const sqlStrategy = join(__dirname, 'modules', 'local', 'local-strategy-sql.js');
-        await replaceCode(config, 'PASSPORT_LOCAL_STRATEGY', sqlStrategy);
+        await replaceCodeMemory(params, 'config/passport.js', 'PASSPORT_LOCAL_STRATEGY', await getModule('authentication/local/local-strategy-sql.js'));
         break;
-
       default:
         break;
     }
   }
 }
-
-export default generateLocalAuthenticationExpress;

@@ -1,0 +1,24 @@
+<ul class="list-inline">
+  {% if user %}
+  <li>
+    {% if user.picture %}
+    <img class="avatar" src="{{ user.picture }}">
+    {% else %}
+    <img class="avatar" src="{{ user.gravatar }}">
+    {% endif %}
+    {% if user.name %}
+    {{ user.name }}
+    {% elif user.email %}
+    {{ user.email }}
+    {% else %}
+    {{ user.id }}
+    {% endif %}
+  </li>
+  <li><a href="/account">My Account</a></li>
+  <li><a href="/logout">Logout</a></li>
+  { %else %}
+  <li><a href="/login">Log in</a></li>
+  <li><a href="/signup">Sign up</a></li>
+  {% endif %}
+</ul>
+

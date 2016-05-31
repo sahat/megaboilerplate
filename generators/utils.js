@@ -1,5 +1,5 @@
-import { template, last, isEmpty, dropRight } from 'lodash';
-
+import { get, set, template, last, isEmpty, dropRight } from 'lodash';
+import { basename, join } from 'path';
 const path = require('path');
 const archiver = require('archiver');
 const shortid = require('shortid');
@@ -7,6 +7,7 @@ const fs = require('fs-extra');
 const Promise = require('bluebird');
 const cpy = require('cpy');
 const copy = Promise.promisify(fs.copy);
+const move = Promise.promisify(fs.move);
 const readFile = Promise.promisify(fs.readFile);
 const writeFile = Promise.promisify(fs.writeFile);
 const appendFile = Promise.promisify(fs.appendFile);
@@ -15,11 +16,17 @@ const readJson = Promise.promisify(fs.readJson);
 const writeJson = Promise.promisify(fs.writeJson);
 const stat = Promise.promisify(fs.stat);
 const mkdirs = Promise.promisify(fs.mkdirs);
+const traverse = require('traverse');
+const azure = require('azure-storage');
+const stream = require('stream');
+const schedule = require('node-schedule');
+const moment = require('moment');
 
 const npmDependencies = require('./npmDependencies.json');
 
 export { cpy };
 export { copy };
+export { move };
 export { remove };
 export { mkdirs };
 export { readFile };
@@ -31,12 +38,18 @@ export { writeJson };
 /**
  * @private
  * @param subStr {string} - what to indent
- * @param indentLevel {number} - how many levels to indent
+ * @param options {object} - how many levels (2 spaces per level) or how many spaces to indent
  * @returns {string}
  */
-function indentCode(subStr, indentLevel) {
-  let defaultIndentation = 2;
-  let indent = ' '.repeat(indentLevel * defaultIndentation);
+function indentCode(subStr, options) {
+  const defaultIndentation = 2;
+  let indent;
+
+  if (options.indentLevel) {
+    indent = ' '.repeat(options.indentLevel * defaultIndentation);
+  } else if (options.indentSpaces) {
+    indent = ' '.repeat(options.indentSpaces);
+  }
   let array = subStr.toString().split('\n').filter(Boolean);
   array.forEach((line, index) => {
     array[index] = indent + line;
@@ -69,6 +82,17 @@ export function walkAndRemoveComments(params) {
   });
 }
 
+export function walkAndRemoveCommentsMemory(params) {
+  traverse(params.build).forEach(function() {
+    if (Buffer.isBuffer(this.node)) {
+      const buf = removeCodeMemory(this.node, '//=');
+      this.update(this.node, true);
+      set(params, ['build'].concat(this.path), buf);
+    }
+  });
+}
+
+
 export async function exists(filepath) {
   try {
     await stat(filepath);
@@ -80,30 +104,74 @@ export async function exists(filepath) {
   return true;
 }
 
-export function generateZip(req, res) {
-  let archive = archiver('zip');
+function uploadAndReturnDownloadLink(archive) {
+  const blobService = azure.createBlobService();
+
+  return new Promise((resolve, reject) => {
+    blobService.createContainerIfNotExists('megaboilerplate', { publicAccessLevel: 'blob' }, function(error, result, response) {
+      if (error) {
+        return reject(error)
+      }
+      const container = 'archive';
+      const blobName = `megaboilerplate-${shortid.generate()}.zip`;
+
+      const writeStream = blobService.createWriteStreamToBlockBlob(container, blobName, archive.pointer(), function(error, result, response) {
+        if (error) {
+          return reject(error);
+        }
+
+        resolve(`https://megaboilerplate.blob.core.windows.net/${container}/${blobName}`);
+
+        // schedule for deletion
+        const date = moment().add(24, 'hours').toDate();
+        schedule.scheduleJob(date, function(){
+          blobService.deleteBlobIfExists(container, blobName, (errorOrResult) => {
+            // do nothing
+          });
+        });
+      });
+
+      archive.pipe(writeStream);
+    });
+  });
+}
+
+export function createZipArchive(res, params) {
+  const archive = archiver('zip');
+
+  let uploadPromise;
 
   archive.on('error', function(err) {
     res.status(500).send(err.message);
   });
 
-  res.on('close', function() {
-    console.log('closing...');
-    console.log('Archive wrote %d bytes', archive.pointer());
-    return res.status(200).send('OK').end();
+  archive.on('end', function() {
+    if (params.generateDownloadLink) {
+      uploadPromise.then((link) => {
+        res.send({ link: link });
+      }).catch((err) => {
+        console.info(err.stack);
+        console.info(params);
+        res.status(500).send(err.message);
+      })
+    } else {
+      res.end();
+    }
+
   });
 
-  res.attachment('megaboilerplate-express.zip');
+  traverse(params.build).forEach(function() {
+    if (Buffer.isBuffer(this.node)) {
+      archive.append(this.node, { name: this.path.join('/') });
+      this.update(this.node, true);
+    }
+  });
 
-  archive.pipe(res);
-
-  let files = [
-    __base + '/modules/express/app.js',
-    __base + '/modules/express/package.json'
-  ];
-
-  for (let i in files) {
-    archive.append(fs.createReadStream(files[i]), { name: path.basename(files[i]) });
+  if (params.generateDownloadLink) {
+    uploadPromise = uploadAndReturnDownloadLink(archive);
+  } else {
+    archive.pipe(res);
+    res.attachment(`megaboilerplate-${shortid.generate()}.zip`);
   }
 
   archive.finalize();
@@ -116,7 +184,15 @@ export function generateZip(req, res) {
  * @param isDev
  */
 export async function addNpmPackage(pkgName, params, isDev) {
-  const packageJson = path.join(__base, 'build', params.uuid, 'package.json');
+  if (!params) {
+    throw new Error(`Did you forget to pass params to addNpmPackage('${pkgName}')?`);
+  }
+
+  if (!npmDependencies[pkgName]) {
+    throw new Error(`Package "${pkgName}" is missing in the npmDependencies.json`);
+  }
+
+  const packageJson = join(__base, 'build', params.uuid, 'package.json');
   const packageObj = await readJson(packageJson);
   const pkgVersion = npmDependencies[pkgName];
 
@@ -137,6 +213,35 @@ export async function addNpmPackage(pkgName, params, isDev) {
   await writeJson(packageJson, packageObj, { spaces: 2 });
 }
 
+export function addNpmPackageMemory(pkgName, params, isDev) {
+  if (!params) {
+    throw new Error(`Did you forget to pass params to addNpmPackage('${pkgName}')?`);
+  }
+  if (!npmDependencies[pkgName]) {
+    throw new Error(`Package "${pkgName}" is missing in the npmDependencies.json`);
+  }
+
+  const packageJson = params.build['package.json'];
+  const packageObj = JSON.parse(packageJson.toString());
+  const pkgVersion = npmDependencies[pkgName];
+
+  if (isDev) {
+    packageObj.devDependencies = packageObj.devDependencies || {};
+    packageObj.devDependencies[pkgName] = pkgVersion;
+  } else {
+    packageObj.dependencies[pkgName] = pkgVersion;
+  }
+
+  // Sort dependencies alphabetically in package.json
+  packageObj.dependencies = sortJson(packageObj.dependencies);
+
+  if (packageObj.devDependencies) {
+    packageObj.devDependencies = sortJson(packageObj.devDependencies);
+  }
+
+  params.build['package.json'] = Buffer.from(JSON.stringify(packageObj, null, 2));
+}
+
 function sortJson(obj) {
   return Object.keys(obj).sort().reduce((a, b) => {
     a[b] = obj[b];
@@ -148,10 +253,31 @@ function sortJson(obj) {
  * Add NPM script to package.json.
  */
 export async function addNpmScript(name, value, params) {
+  if (!params) {
+    throw new Error(`Did you forget to pass params to addNpmScript('${name}')?`);
+  }
   const packageJson = path.join(__base, 'build', params.uuid, 'package.json');
   const packageObj = await readJson(packageJson);
   packageObj.scripts[name] = value;
+
+  // Sort scripts alphabetically in package.json
+  packageObj.scripts = sortJson(packageObj.scripts);
+
   await writeJson(packageJson, packageObj, { spaces: 2 });
+}
+
+export async function addNpmScriptMemory(name, value, params) {
+  if (!params) {
+    throw new Error(`Did you forget to pass params to addNpmScript('${name}')?`);
+  }
+
+  const packageJson = params.build['package.json'];
+  const packageObj = JSON.parse(packageJson.toString());
+
+  packageObj.scripts[name] = value;
+  packageObj.scripts = sortJson(packageObj.scripts);
+
+  params.build['package.json'] = Buffer.from(JSON.stringify(packageObj, null, 2));
 }
 
 /**
@@ -163,13 +289,11 @@ export async function cleanup(params) {
 }
 
 export async function prepare(params) {
-  //params.uuid = shortid.generate();
-  // TODO: Remove
-  params.uuid = 'testing';
-  await remove(path.join(__base, 'build', params.uuid));
-
-  await mkdirs(path.join(__base, 'build', params.uuid));
-  console.info('Created', params.uuid);
+  params.uuid = shortid.generate();
+  // params.uuid = 'testing';
+  // await remove(path.join(__base, 'build', params.uuid));
+  // await mkdirs(path.join(__base, 'build', params.uuid));
+  // console.info('Created', params.uuid);
   return params;
 }
 
@@ -181,7 +305,17 @@ export async function prepare(params) {
 export async function removeCode(srcFile, subStr) {
   let srcData = await readFile(srcFile);
   let array = srcData.toString().split('\n');
+  const emptyClass = ' class=""';
+  const emptyClassName = ' className=""'; // React
+
   array.forEach((line, index) => {
+    // Strip empty classes
+    if (line.includes(emptyClass)) {
+      array[index] = line.split(emptyClass).join('');
+    } else if (line.includes(emptyClassName)) {
+      array[index] = line.split(emptyClassName).join('');
+    }
+    
     if (line.includes(subStr)) {
       array[index] = null;
     }
@@ -191,6 +325,58 @@ export async function removeCode(srcFile, subStr) {
   });
   srcData = array.join('\n');
   await writeFile(srcFile, srcData);
+}
+
+export function removeCodeMemory(src, templateString) {
+  let array = src.toString().split('\n');
+  const emptyClass = ' class=""';
+  const emptyClassName = ' className=""'; // React
+
+  array.forEach((line, index) => {
+    // Strip empty css classes
+    if (line.includes(emptyClass)) {
+      array[index] = line.split(emptyClass).join('');
+    } else if (line.includes(emptyClassName)) {
+      array[index] = line.split(emptyClassName).join('');
+    }
+
+    if (line.includes(templateString)) {
+      array[index] = null;
+    }
+  });
+  
+  array = array.filter((value) => {
+    return value !== null;
+  });
+
+
+  return Buffer.from(array.join('\n'));
+}
+
+export function appendCodeMemory(src, templateString) {
+  let array = src.toString().split('\n');
+  const emptyClass = ' class=""';
+  const emptyClassName = ' className=""'; // React
+
+  array.forEach((line, index) => {
+    // Strip empty css classes
+    if (line.includes(emptyClass)) {
+      array[index] = line.split(emptyClass).join('');
+    } else if (line.includes(emptyClassName)) {
+      array[index] = line.split(emptyClassName).join('');
+    }
+
+    if (line.includes(templateString)) {
+      array[index] = null;
+    }
+  });
+
+  array = array.filter((value) => {
+    return value !== null;
+  });
+
+
+  return Buffer.from(array.join('\n'));
 }
 
 /**
@@ -209,8 +395,12 @@ export async function replaceCode(srcFile, subStr, newSrcFile, opts) {
 
   const array = srcData.toString().split('\n');
 
+  if (opts.debug) {
+    console.log(array);
+  }
+
   array.forEach((line, index) => {
-    const re = new RegExp(subStr + '$|(\r\n|\r|\n)');
+    const re = new RegExp(subStr + '(_INDENT[0-9]+)?' + '($|\r\n|\r|\n)');
     const isMatch = re.test(line);
 
     // Preserve whitespace if it detects //_ token
@@ -218,9 +408,23 @@ export async function replaceCode(srcFile, subStr, newSrcFile, opts) {
       array[index] = '';
     }
 
+    if (opts.debug) {
+      console.log(re, isMatch, line);
+    }
+
     if (isMatch) {
-      if (opts.indentLevel) {
-        newSrcData = indentCode(newSrcData, opts.indentLevel);
+      let indentLevel;
+
+      if (line.includes('_INDENT')) {
+        indentLevel = line.split('_INDENT').pop();
+      }
+
+      if (indentLevel || opts.indentLevel) {
+        newSrcData = indentCode(newSrcData, { indentLevel: indentLevel || opts.indentLevel });
+      }
+
+      if (opts.indentSpaces) {
+        newSrcData = indentCode(newSrcData, { indentSpaces: opts.indentSpaces });
       }
 
       if (isEmpty(last(newSrcData.toString().split('\n')))) {
@@ -231,6 +435,10 @@ export async function replaceCode(srcFile, subStr, newSrcFile, opts) {
         newSrcData = ['\n', newSrcData].join('');
       }
 
+      if (opts.trailingBlankLine) {
+        newSrcData = [newSrcData, '\n'].join('');
+      }
+
       array[index] = newSrcData;
     }
   });
@@ -238,6 +446,68 @@ export async function replaceCode(srcFile, subStr, newSrcFile, opts) {
   srcData = array.join('\n');
 
   await writeFile(srcFile, srcData);
+}
+
+export async function replaceCodeMemory(params, filepath, templateString, module, opts = {}) {
+  const src = get(params, ['build'].concat(filepath.split('/')));
+
+  if (!src) {
+    throw new Error('replaceCode FAILED: ' + ['build'].concat(filepath.split('/')));
+  }
+
+  const array = src.toString().split('\n');
+
+  if (opts.debug) {
+    console.log(array);
+  }
+
+  array.forEach((line, index) => {
+    const re = new RegExp(templateString + '(_INDENT[0-9]+)?' + '($|\r\n|\r|\n)');
+    const isMatch = re.test(line);
+
+    // Preserve whitespace on //_ token
+    if (line.includes('//_')) {
+      array[index] = '';
+    }
+
+    if (opts.debug) {
+      console.log(re, isMatch, line);
+    }
+
+    if (isMatch) {
+      let indentLevel;
+
+      if (line.includes('_INDENT')) {
+        indentLevel = line.split('_INDENT').pop();
+      }
+
+      if (indentLevel || opts.indentLevel) {
+        module = indentCode(module, { indentLevel: indentLevel || opts.indentLevel });
+      }
+
+      if (opts.indentSpaces) {
+        module = indentCode(module, { indentSpaces: opts.indentSpaces });
+      }
+
+      if (isEmpty(last(module.toString().split('\n')))) {
+        module = dropRight(module.toString().split('\n')).join('\n');
+      }
+
+      // add blank line before module
+      if (opts.leadingBlankLine) {
+        module = ['\n', module].join('');
+      }
+
+      // add blank line after module
+      if (opts.trailingBlankLine) {
+        module = [module, '\n'].join('');
+      }
+
+      array[index] = module;
+    }
+  });
+
+  set(params, ['build', ...filepath.split('/')], Buffer.from(array.join('\n')));
 }
 
 /**
@@ -250,6 +520,12 @@ export async function templateReplace(srcFile, data) {
   const compiled = template(src.toString());
   const newSrc = compiled(data);
   await writeFile(srcFile, newSrc);
+}
+
+export function templateReplaceMemory(params, filepath, data) {
+  const src = get(params, ['build'].concat(filepath.split('/')));
+  const compiled = template(src.toString());
+  set(params, ['build', ...filepath.split('/')], Buffer.from(compiled(data)));
 }
 
 /**
@@ -266,4 +542,36 @@ export async function addEnv(params, data) {
     }
   }
   await appendFile(env, '\n' + vars.join('\n') + '\n');
+}
+
+export function addEnvMemory(params, data) {
+  if (!params.build['.env']) {
+    throw new Error('Cannot find .env file');
+  }
+  const env = params.build['.env'];
+  const vars = [];
+  for (const i in data) {
+    if (data.hasOwnProperty(i)) {
+      vars.push([i, `'${data[i]}'`].join('='));
+    }
+  }
+  params.build['.env'] = Buffer.concat([env, Buffer.from('\n' + vars.join('\n') + '\n')])
+}
+
+
+export async function getModule(str) {
+  const modulePath = str.split('/');
+  if (!get(__modules, modulePath)) {
+    set(__modules, modulePath, await readFile(join(__base, 'generators', modulePath[0], 'modules', ...modulePath.slice(1))));
+  }
+  return get(__modules, modulePath);
+}
+
+export function slugify(text) {
+  return text.toString().toLowerCase()
+    .replace(/\s+/g, '-')           // Replace spaces with -
+    .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+    .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+    .replace(/^-+/, '')             // Trim - from start of text
+    .replace(/-+$/, '');            // Trim - from end of text
 }

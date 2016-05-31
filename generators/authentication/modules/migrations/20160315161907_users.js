@@ -14,6 +14,7 @@ exports.up = function(knex, Promise) {
       table.string('facebook');
       table.string('twitter');
       table.string('google');
+      table.string('vk');
       table.timestamps();
     })
   ]);

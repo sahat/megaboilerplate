@@ -1,0 +1,19 @@
+<div class="container">
+  <div ng-if="messages.error" role="alert" class="text-danger">
+    <div ng-repeat="error in messages.error">{{error.msg}}</div>
+  </div>
+  <div ng-if="messages.success" role="alert" class="text-success">
+    <div ng-repeat="success in messages.success">{{success.msg}}</div>
+  </div>
+
+  <h4>Reset Password</h4>
+
+  <form ng-submit="resetPassword()">
+    <label for="password">New Password</label>
+    <input type="password" name="password" id="password" placeholder="New password" ng-model="user.password" autofocus>
+    <label for="confirm">Confirm Password</label>
+    <input type="password" name="confirm" id="confirm" placeholder="Confirm password" ng-model="user.confirm">
+    <br>
+    <button type="submit">Change Password</button>
+  </form>
+</div>

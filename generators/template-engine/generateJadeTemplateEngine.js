@@ -1,136 +1,51 @@
-import { join } from 'path';
-import { mkdirs, copy, replaceCode, addNpmPackage } from '../utils';
+import { set } from 'lodash';
+import { getModule, replaceCodeMemory, addNpmPackageMemory } from '../utils';
 
-// helper function
-async function updateLayoutTemplate(params) {
-  const layout = join(__base, 'build', params.uuid, 'views', 'layout.jade');
-
-  const appContainer = join(__dirname, 'modules', 'jade', 'app-container.jade');
-  const blockContent = join(__dirname, 'modules', 'jade', 'block-content.jade');
-  const socketIoImport = join(__dirname, 'modules', 'jade', 'socketio-import.jade');
-
-  if (!params.jsFramework) {
-    // Use "block content" (traditional web app)
-    await replaceCode(layout, 'APP_CONTAINER_OR_BLOCK_CONTENT', blockContent, { indentLevel: 2 });
-  } else {
-    // Use "#app-container" div element (single page app)
-    await replaceCode(layout, 'APP_CONTAINER_OR_BLOCK_CONTENT', appContainer, { indentLevel: 2 });
-  }
-
-  // Add Socket.IO <script> tag (optional)
-  if (params.frameworkOptions.includes('socketio')) {
-    await replaceCode(layout, 'SOCKETIO_IMPORT', socketIoImport, { indentLevel: 2 });
-  }
-}
-
-// helper function
-async function copyTemplates(params) {
-  const viewsDir = join(__base, 'build', params.uuid, 'views');
-  const layout = join(__dirname, 'modules', 'jade', 'views', 'layout.jade');
-  const home = join(__dirname, 'modules', 'jade', 'views', 'home.jade');
-  const plainCssHeader = join(__dirname, 'modules', 'jade', 'views', 'header.jade');
-  const plainCssFooter = join(__dirname, 'modules', 'jade', 'views', 'footer.jade');
-  const bootstrapFooter = join(__dirname, 'modules', 'jade', 'views', 'footer-bootstrap.jade');
-  const bootstrapHome = join(__dirname, 'modules', 'jade', 'views', 'home-bootstrap.jade');
-  const bootstrapContact = join(__dirname, 'modules', 'jade', 'views', 'contact-bootstrap.jade');
-
-  // Copy initial Jade templates to "views" directory
-  await copy(layout, join(viewsDir, 'layout.jade'));
-  await mkdirs(join(viewsDir, 'includes'));
-
-  // Copy header and footer partial templates
-  switch (params.cssFramework) {
-    case 'none':
-      if (params.jsFramework) {
-
-      } else {
-        await copy(plainCssHeader, join(viewsDir, 'includes', 'header.jade'));
-        await copy(plainCssFooter, join(viewsDir, 'includes', 'footer.jade'));
-      }
-      break;
-
-    case 'bootstrap':
-      const bootstrapHeader = join(__dirname, 'modules', 'jade', 'views', 'header-bootstrap.jade');
-      const bootstrapHeaderAuthLinks = join(__dirname, 'modules', 'jade', 'views', 'header-auth-bootstrap.jade');
-
-      if (params.jsFramework) {
-
-      } else {
-        await copy(bootstrapFooter, join(viewsDir, 'includes', 'footer.jade'));
-        await copy(bootstrapHeader, join(viewsDir, 'includes', 'header.jade'));
-        await copy(bootstrapHome, join(viewsDir, 'home.jade'));
-        await copy(bootstrapContact, join(viewsDir, 'contact.jade'));
-
-        // Is authentication checked? Add "Log in" / "Sign up"/ "Logout" links to the header
-        if (params.authentication.length) {
-          await replaceCode(join(viewsDir, 'includes', 'header.jade'), 'HEADER_AUTH_LINKS', bootstrapHeaderAuthLinks, { indentLevel: 3 });
-        }
-      }
-      break;
-
-    default:
-      break;
-  }
-}
-
-async function generateJadeTemplateEngine(params) {
-  let app;
-  let viewEngineSetup;
-
+export default async function generateJadeTemplateEngine(params) {
   switch (params.framework) {
     case 'express':
-      const appExpress = join(__base, 'build', params.uuid, 'app.js');
-      const expressViewEngine = join(__dirname, 'modules', 'jade', 'jade-express.js');
-      const expressHomeRoute = join(__dirname, 'modules', 'routes', 'home-route-express.js');
-      const homeControllerRequire = join(__dirname, 'modules', 'controllers', 'home-require.js');
-      const expressHomeController = join(__dirname, 'modules', 'controllers', 'home-controller-express.js');
+      // Set "views dir" and "view engine" Express settings
+      await replaceCodeMemory(params, 'server.js', 'TEMPLATE_ENGINE', await getModule('template-engine/jade/jade-express.js'));
 
-      // Set "views dir" and "view engine"
-      await replaceCode(appExpress, 'TEMPLATE_ENGINE', expressViewEngine);
-      
-      if (!params.jsFramework) {
-        
-        // Require home controller and add home route, i.e. "GET /"
-        await replaceCode(appExpress, 'HOME_ROUTE', expressHomeRoute);
-        await replaceCode(appExpress, 'HOME_CONTROLLER', homeControllerRequire);
+      // Add layout template
+      set(params, ['build', 'views', 'layout.jade'], await getModule('template-engine/jade/views/layout.jade'));
 
-        // Copy home controller
-        await copy(expressHomeController, join(__base, 'build', params.uuid, 'controllers', 'home.js'));
+      if (params.jsFramework) {
+        // Use <div id="app"> container element for single page app
+        await replaceCodeMemory(params, 'views/layout.jade', 'APP_CONTAINER_OR_BLOCK_CONTENT', await getModule('template-engine/jade/app-container.jade'), { indentLevel: 2 });
+      } else {
+        // Require HomeController, add "/" route
+        set(params, ['build', 'controllers', 'home.js'], await getModule('template-engine/controllers/home-controller-express.js'));
+        await replaceCodeMemory(params, 'server.js', 'HOME_ROUTE', await getModule('template-engine/routes/home-route-express.js'));
+        await replaceCodeMemory(params, 'server.js', 'HOME_CONTROLLER', await getModule('template-engine/controllers/home-require.js'));
+
+        // Use "block content" for traditional web app
+        await replaceCodeMemory(params, 'views/layout.jade', 'APP_CONTAINER_OR_BLOCK_CONTENT', await getModule('template-engine/jade/block-content.jade'), { indentLevel: 2 });
+
+        // Add initial page templates
+        set(params, ['build', 'views', 'home.jade'], await getModule(`template-engine/jade/views/home-${params.cssFramework}.jade`));
+        set(params, ['build', 'views', 'contact.jade'], await getModule(`template-engine/jade/views/contact-${params.cssFramework}.jade`));
+        set(params, ['build', 'views', 'includes', 'footer.jade'], await getModule('template-engine/jade/views/footer.jade'));
+        set(params, ['build', 'views', 'includes', 'header.jade'], await getModule(`template-engine/jade/views/header-${params.cssFramework}.jade`));
+
+        // If authentication is checked: add log in, sign up, logout links to the header
+        if (params.authentication.length) {
+          const headerAuthIndent = { none: 2, bootstrap: 3, foundation: 3 };
+          await replaceCodeMemory(params, 'views/includes/header.jade', 'HEADER_AUTH', await getModule(`template-engine/jade/views/header-auth-${params.cssFramework}.jade`), {
+            indentLevel: headerAuthIndent[params.cssFramework]
+          });
+        }
       }
 
+      // OPTIONAL: Add Socket.IO <script> import
+      if (params.frameworkOptions.includes('socketio')) {
+        await replaceCodeMemory(params, 'views/layout.jade', 'SOCKETIO_IMPORT', await getModule('template-engine/jade/socketio-import.jade'), { indentLevel: 2 });
+      }
       
-      // Copy Jade templates, including header/footer partials
-      await copyTemplates(params);
-
-      // Add/remove features to the newly generated layout file above
-      await updateLayoutTemplate(params);
+      await addNpmPackageMemory('jade', params);
       break;
-
-    case 'hapi':
-      app = join(__base, 'build', params.uuid, 'app.js');
-      viewEngineSetup = join(__base, 'modules', 'template-engine', 'jade', 'jade-hapi.js');
-
-      // Register view engine
-      await replaceCode(app, 'TEMPLATE_ENGINE', viewEngineSetup, { leadingBlankLine: true });
-
-      // Add dependencies
-      await addNpmPackage('vision', params);
-
-      // Copy Jade templates, including header/footer partials
-      await copyTemplates(params);
-
-      // Add/remove features to the newly generated layout file above
-      await updateLayoutTemplate(params);
-      break;
-
     case 'meteor':
       break;
-
     default:
   }
-
-  // Add Jade to package.json
-  await addNpmPackage('jade', params);
 }
-
-export default generateJadeTemplateEngine;

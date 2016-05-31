@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  .container
+    if messages.success
+      div.text-success
+        for success in messages.success
+          div= success.msg
+    if messages.error
+      div.text-danger
+        for error in messages.error
+          div= error.msg
+
+    h3 Contact Form
+
+    form(method='POST')
+      label(for='name') Name
+      input(type='text', name='name', id='name', autofocus)
+      label(for='email') Email
+      input(type='email', name='email', id='email')
+      label(for='message') Body
+      textarea(name='message', id='message', rows='7')
+      br
+      button(type='submit') Send

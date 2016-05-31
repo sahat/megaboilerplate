@@ -1,0 +1,20 @@
+<div class="column row">
+  <div class="medium-8 medium-offset-2 columns">
+    <div ng-if="messages.error" role="alert" class="callout alert">
+      <div ng-repeat="error in messages.error">{{error.msg}}</div>
+    </div>
+    <div ng-if="messages.success" role="alert" class="callout success">
+      <div ng-repeat="success in messages.success">{{success.msg}}</div>
+    </div>
+    <form ng-submit="forgotPassword()">
+      <h4>Forgot Password</h4>
+
+      <p>Enter your email address below and we'll send you password reset instructions.</p>
+
+      <label for="email">Email</label>
+      <input type="email" name="email" id="email" placeholder="Email" ng-model="user.email" autofocus>
+
+      <button type="submit" class="button success">Reset Password</button>
+    </form>
+  </div>
+</div>

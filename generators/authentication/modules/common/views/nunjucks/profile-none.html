@@ -1,0 +1,67 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="container">
+  {% if messages.success %}
+  <div class="text-success">
+    {% for success in messages.success %}
+    <div>{{ success.msg }}</div>
+    {% endfor %}
+  </div>
+  {% endif %}
+  {% if messages.error %}
+  <div class="text-danger">
+    {% for error in messages.error %}
+    <div>{{ error.msg }}</div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <h4>Profile Information</h4>
+
+  <form method="POST" action="/account?_method=PUT">
+    <label for="email">Email</label>
+    <input type="email" name="email" id="email" value="{{user.email}}">
+    <label for="name">Name</label>
+    <input type="text" name="name" id="name" value="{{user.name}}">
+    <label>Gender</label>
+    <input type="radio" name="gender" id="male" value="male" {% if user.gender == 'male' %}checked{% endif %}>
+    <label for="male">Male</label>
+    <input type="radio" name="gender" id="female" value="female" {% if user.gender == 'female' %}checked{% endif %}>
+    <label for="female">Female</label>
+    <label for="location">Location</label>
+    <input type="text" name="location" id="location" value="{{ user.location }}">
+    <label for="website">Website</label>
+    <input type="text" name="website" id="website" value="{{ user.website }}">
+    <label>Gravatar</label>
+    <img src="{{ user.gravatar }}" class="gravatar" width="100" height="100">
+    <br>
+    <button type="submit">Update Profile</button>
+  </form>
+
+  <h4>Change Password</h4>
+
+  <form method="POST" action="/account?_method=PUT">
+    <label for="password">New Password</label>
+    <input type="password" name="password" id="password">
+    <label for="confirm">Confirm Password</label>
+    <input type="password" name="confirm" id="confirm">
+    <br>
+    <button type="submit">Change Password</button>
+  </form>
+
+  <h4>Linked Accounts</h4>
+
+  //= FACEBOOK_LINK
+  //= TWITTER_LINK
+  //= GOOGLE_LINK
+  //= VK_LINK
+
+  <h4>Delete Account</h4>
+
+  <form method="POST" action="/account?_method=DELETE">
+    <p>You can delete your account, but keep in mind this action is irreversible.</p>
+    <button type="submit">Delete my account</button>
+  </form>
+</div>
+{% endblock %}

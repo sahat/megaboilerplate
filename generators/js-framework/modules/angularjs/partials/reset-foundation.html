@@ -1,0 +1,21 @@
+<div class="column row">
+  <div class="medium-8 medium-offset-2 columns">
+    <div ng-if="messages.error" role="alert" class="callout alert">
+      <div ng-repeat="error in messages.error">{{error.msg}}</div>
+    </div>
+    <div ng-if="messages.success" role="alert" class="callout success">
+      <div ng-repeat="success in messages.success">{{success.msg}}</div>
+    </div>
+    <form ng-submit="resetPassword()">
+      <h4>Reset Password</h4>
+
+      <label for="password">New Password</label>
+      <input type="password" name="password" id="password" placeholder="New password" ng-model="user.password" autofocus>
+
+      <label for="confirm">Confirm Password</label>
+      <input type="password" name="confirm" id="confirm" placeholder="Confirm password" ng-model="user.confirm">
+
+      <button type="submit" class="success button">Change Password</button>
+    </form>
+  </div>
+</div>

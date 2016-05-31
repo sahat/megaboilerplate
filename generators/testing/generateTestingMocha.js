@@ -1,35 +1,57 @@
-import { join } from 'path';
-import { mkdirs, cpy, copy, replaceCode, addNpmPackage, addNpmScript } from '../utils';
+import { set } from 'lodash';
+import { getModule, addNpmScriptMemory, addNpmPackageMemory } from '../utils';
 
-async function generateTestingMocha(params) {
-  const build = join(__base, 'build', params.uuid);
-
+export default async function generateTestingMocha(params) {
   switch (params.framework) {
     case 'express':
-      await addNpmPackage('chai', params, true);
-      await addNpmPackage('mocha', params, true);
-      await addNpmPackage('karma', params, true);
-      await addNpmPackage('karma-chai', params, true);
-      await addNpmPackage('karma-coverage', params, true);
-      await addNpmPackage('karma-mocha', params, true);
-      await addNpmPackage('sinon', params, true);
-      await addNpmPackage('sinon-chai', params, true);
-      await addNpmPackage('supertest', params, true);
+      await addNpmPackageMemory('chai', params, true);
+      await addNpmPackageMemory('mocha', params, true);
+      await addNpmPackageMemory('sinon', params, true);
+      await addNpmPackageMemory('sinon-chai', params, true);
+      await addNpmPackageMemory('supertest', params, true);
 
-      await addNpmScript('test', 'mocha --reporter spec --timeout 5000', params, true);
+      if (params.jsFramework) {
+        // Server-side tests
+        set(params, ['build', 'test', 'server', 'app.test.js'], await getModule('testing/mocha/app.test-json.js'));
 
-      await mkdirs(join(build, 'test'));
+        // Client-side tests
+        switch (params.jsFramework) {
+          case 'react':
+            set(params, ['build', 'test', 'client', 'components', 'Home.test.js'], await getModule('testing/mocha/react/components/Home.test.js'));
+            set(params, ['build', 'test', 'client', 'actions', 'contact.test.js'], await getModule('testing/mocha/react/actions/contact.test.js'));
 
-      await cpy([
-        join(__dirname, 'modules', 'mocha', 'app.test.js')
-        ], join(build, 'test'));
-      break;
-    case 'hapi':
+            if (params.authentication.length) {
+              set(params, ['build', 'test', 'client', 'actions', 'auth.test.js'], await getModule('testing/mocha/react/actions/auth.test.js'));
+            }
+
+            addNpmPackageMemory('babel-register', params, true);
+            addNpmPackageMemory('babel-plugin-rewire', params, true);
+            addNpmPackageMemory('redux-mock-store', params, true);
+            addNpmPackageMemory('fetch-mock', params, true);
+            addNpmPackageMemory('enzyme', params, true);
+            addNpmPackageMemory('react-addons-test-utils', params, true);
+
+            await addNpmScriptMemory('test', 'npm-run-all test:*', params);
+            await addNpmScriptMemory('test:client', 'mocha test/client --recursive --compilers js:babel-register', params);
+            await addNpmScriptMemory('test:server', 'mocha test/server --recursive', params);
+            break;
+          case 'angularjs':
+            await addNpmPackageMemory('karma', params, true);
+            await addNpmPackageMemory('karma-chai', params, true);
+            await addNpmPackageMemory('karma-coverage', params, true);
+            await addNpmPackageMemory('karma-mocha', params, true);
+            break;
+          default:
+            break;
+        }
+      } else {
+        // Server-side tests
+        set(params, ['build', 'test', 'app.test.js'], await getModule('testing/mocha/app.test.js'));
+        await addNpmScriptMemory('test', 'mocha', params);
+      }
       break;
     case 'meteor':
       break;
     default:
   }
 }
-
-export default generateTestingMocha;

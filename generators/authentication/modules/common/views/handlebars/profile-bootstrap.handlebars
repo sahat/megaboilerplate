@@ -1,0 +1,121 @@
+<div class="container">
+  <div class="panel">
+    <div class="panel-body">
+      {{#if messages.success}}
+        <div role="alert" class="alert alert-success">
+          {{#each messages.success}}
+            <div>{{msg}}</div>
+          {{/each}}
+        </div>
+      {{/if}}
+      {{#if messages.error}}
+        <div role="alert" class="alert alert-danger">
+          {{#each messages.error}}
+            <div>{{msg}}</div>
+          {{/each}}
+        </div>
+      {{/if}}
+      <form method="POST" action="/account?_method=PUT" class="form-horizontal">
+        <legend>Profile Information</legend>
+        <div class="form-group">
+          <label for="email" class="col-sm-3">Email</label>
+          <div class="col-sm-7">
+            <input type="email" name="email" id="email" class="form-control" value="{{user.email}}">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="name" class="col-sm-3">Name</label>
+          <div class="col-sm-7">
+            <input type="text" name="name" id="name" class="form-control" value="{{user.name}}">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3">Gender</label>
+          <div class="col-sm-4">
+            <label class="radio-inline radio col-sm-4">
+              <input type="radio" name="gender" value="male" {{#ifeq user.gender 'male'}}checked{{/ifeq}}><span>Male</span>
+            </label>
+            <label class="radio-inline col-sm-4">
+              <input type="radio" name="gender" value="female" {{#ifeq user.gender 'female'}}checked{{/ifeq}}><span>Female</span>
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="location" class="col-sm-3">Location</label>
+          <div class="col-sm-7">
+            <input type="text" name="location" id="location" class="form-control" value="{{user.location}}">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="website" class="col-sm-3">Website</label>
+          <div class="col-sm-7">
+            <input type="text" name="website" id="website" class="form-control" value="{{user.website}}">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3">Gravatar</label>
+          <div class="col-sm-4">
+            <img src="{{user.gravatar}}" class="profile" width="100" height="100">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-3 col-sm-4">
+            <button type="submit" class="btn btn-success">Update Profile</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="panel">
+    <div class="panel-body">
+      <form method="POST" action="/account?_method=PUT" class="form-horizontal">
+        <legend>Change Password</legend>
+        <div class="form-group">
+          <label for="password" class="col-sm-3">New Password</label>
+          <div class="col-sm-7">
+            <input type="password" name="password" id="password" class="form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="confirm" class="col-sm-3">Confirm Password</label>
+          <div class="col-sm-7">
+            <input type="password" name="confirm" id="confirm" class="form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-4 col-sm-offset-3">
+            <button type="submit" class="btn btn-success">Change Password</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="panel">
+    <div class="panel-body">
+      <div class="form-horizontal">
+        <legend>Linked Accounts</legend>
+        <div class="form-group">
+          <div class="col-sm-offset-3 col-sm-4">
+            //= FACEBOOK_LINK_INDENT5
+            //= TWITTER_LINK_INDENT5
+            //= GOOGLE_LINK_INDENT5
+            //= VK_LINK_INDENT5
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel">
+    <div class="panel-body">
+      <form method="POST" action="/account?_method=DELETE" class="form-horizontal">
+        <legend>Delete Account</legend>
+        <div class="form-group">
+          <p class="col-sm-offset-3 col-sm-9">You can delete your account, but keep in mind this action is irreversible.</p>
+          <div class="col-sm-offset-3 col-sm-9">
+            <button type="submit" class="btn btn-danger">Delete my account</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

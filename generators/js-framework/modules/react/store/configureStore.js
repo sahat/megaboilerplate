@@ -6,10 +6,7 @@ export default function configureStore(initialState) {
   const store = createStore(
     rootReducer,
     initialState,
-    compose(
-      applyMiddleware(thunk),
-      typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : f => f
-    )
+    //= REDUX_STORE_ENHANCER_INDENT2
   );
 
   return store;

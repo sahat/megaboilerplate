@@ -13,7 +13,9 @@ var plumber = require('gulp-plumber');
 //= JS_FRAMEWORK_GULP_TASK
 
 gulp.task('watch', function() {
-  gulp.watch('public/css/**/*.scss', ['sass']);
+  //= CSS_PREPROCESSOR_GULP_WATCH_INDENT1
+  //= JS_FRAMEWORK_GULP_WATCH_INDENT1
 });
 
-gulp.task('default', gulp.parallel('sass', 'build'));
+gulp.task('build', gulp.parallel('<%= buildTasks %>'));
+gulp.task('default', gulp.parallel('<%= defaultTasks %>'));

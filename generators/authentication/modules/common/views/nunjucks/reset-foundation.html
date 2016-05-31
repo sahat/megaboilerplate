@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="column row">
+  <div class="medium-8 medium-offset-2 columns">
+    {% if messages.success %}
+    <div role="alert" class="callout success">
+      {% for success in messages.success %}
+      <div>{{ success.msg }}</div>
+      {% endfor %}
+    </div>
+    {% endif %}
+    {% if messages.error %}
+    <div role="alert" class="callout alert">
+      {% for error in messages.error %}
+      <div>{{ error.msg }}</div>
+      {% endfor %}
+    </div>
+    {% endif %}
+    <form method="POST">
+      <h4>Reset Password</h4>
+
+      <label for="password">New Password</label>
+      <input type="password" name="password" id="password" placeholder="New password" autoFocus>
+
+      <label for="confirm">Confirm Password</label>
+      <input type="password" name="confirm" id="confirm" placeholder="Confirm password">
+
+      <button type="submit" class="success button">Change Password</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

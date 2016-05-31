@@ -1,0 +1,18 @@
+.top-bar-right
+  ul.dropdown.menu(data-dropdown-menu)
+    if user
+      li
+        if user.picture
+          img.avatar(src=user.picture)
+        else
+          img.avatar(src=user.gravatar)
+        | <span> #{user.name || user.email || user.id} </span>
+      li
+        a(href='/account') My Account
+      li
+        a(href='/logout') Logout
+    else
+      li(class=(title == 'Log in') ? 'active' : null)
+        a(href='/login') Log in
+      li(class=(title == 'Sign up') ? 'active' : null)
+        a(href='/signup') Sign up

@@ -1,0 +1,34 @@
+extends layout
+
+block content
+  .row
+    if messages.error
+      .callout.alert(role='alert')
+        for error in messages.error
+          div= error.msg
+    if messages.success
+      .callout.success(role='alert')
+        for success in messages.success
+          div= success.msg
+    if messages.info
+      .callout.primary(role='alert')
+        for info in messages.info
+          div= info.msg
+
+  .row
+    .medium-3.columns
+      .card
+        h3.card-title Normal
+        p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+    .medium-3.columns
+      .card.primary
+        h3.card-title Primary
+        p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+    .medium-3.columns
+      .card.success
+        h3.card-title Success
+        p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+    .medium-3.columns
+      .card.alert
+        h3.card-title Alert
+        p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.

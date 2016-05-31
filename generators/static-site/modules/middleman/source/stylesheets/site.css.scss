@@ -1,0 +1,61 @@
+@charset "utf-8";
+@import "semantic.min.css";
+
+body {
+  padding: 1em;
+}
+
+body > .ui.container {
+  margin-top: 3em;
+}
+
+.ui.container > h1 {
+  font-size: 3em;
+  text-align: center;
+  font-weight: normal;
+}
+
+.ui.container > h2.dividing.header {
+  font-size: 2em;
+  font-weight: normal;
+  margin: 4em 0 3em;
+}
+
+.ui.table {
+  table-layout: fixed;
+}
+
+.color.grid {
+  margin: -1.5em;
+  width: 400px;
+}
+
+.ui.table {
+  table-layout: fixed;
+}
+
+.color.grid .column {
+  margin: 0.5em;
+  width: 50px;
+  height: 50px;
+}
+
+.ui.menu {
+  margin: 3em 0;
+}
+
+.ui.menu:last-child {
+  margin-bottom: 110px;
+}
+
+.spaced > .button {
+  margin-bottom: 1em;
+}
+
+.ui.table {
+  table-layout: fixed;
+}
+
+.ui.input + .ui.input {
+  margin-left: 1em;
+}

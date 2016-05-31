@@ -1,0 +1,35 @@
+extends ../layout
+
+block content
+  .container
+    if messages.success
+      div.text-success
+        for success in messages.success
+          div= success.msg
+    if messages.error
+      div.text-danger
+        for error in messages.error
+          div= error.msg
+
+    h4 Log In
+
+    form(method='POST')
+      label(for='email') Email
+      input(type='email', name='email', id='email', placeholder='Email', autofocus)
+      label(for='password') Password
+      input(type='password', name='password', id='password', placeholder='Password')
+      p
+        a(href='/forgot')
+          strong Forgot your password?
+      button(type='submit') Log in
+
+      hr
+
+      //= SIGN_IN_WITH_FACEBOOK
+      //= SIGN_IN_WITH_TWITTER
+      //= SIGN_IN_WITH_GOOGLE
+      //= SIGN_IN_WITH_VK
+
+    p Don't have an account?
+      a(href='/signup')
+        strong  Sign up

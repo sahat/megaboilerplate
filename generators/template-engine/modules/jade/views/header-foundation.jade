@@ -1,0 +1,13 @@
+.top-bar
+  .top-bar-title
+    span(data-responsive-toggle='responsive-menu', data-hide-for='medium')
+      span.menu-icon.light(data-toggle)
+    a(href='/') Project name
+  #responsive-menu
+    .top-bar-left
+      ul.menu
+        li(class=(title == 'Home') ? 'active' : null)
+          a(href='/') Home
+        li(class=(title == 'Contact') ? 'active' : null)
+          a(href='/contact') Contact
+    //= HEADER_AUTH

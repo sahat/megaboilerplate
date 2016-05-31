@@ -1,10 +1,7 @@
 
 // React server rendering
 app.use(function(req, res) {
-  var initialState = {
-    auth: { token: req.cookies.token, user: req.user },
-    messages: {}
-  };
+  //= REDUX_INITIAL_STATE_INDENT1
 
   var store = configureStore(initialState);
 
@@ -17,7 +14,7 @@ app.use(function(req, res) {
       var html = ReactDOM.renderToString(React.createElement(Provider, { store: store },
         React.createElement(Router.RouterContext, renderProps)
       ));
-      //= RENDER_TEMPLATE
+      //= RENDER_TEMPLATE_INDENT3
     } else {
       res.sendStatus(404);
     }

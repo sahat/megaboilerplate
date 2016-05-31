@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="container">
+  <div class="panel">
+    <div class="panel-body">
+      {% if messages.error %}
+      <div role="alert" class="alert alert-danger">
+        {% for error in messages.error %}
+        <div>{{ error.msg }}</div>
+        {% endfor %}
+      </div>
+      {% endif %}
+      {% if messages.info %}
+      <div role="alert" class="alert alert-info">
+        {% for info in messages.info %}
+        <div>{{ info.msg }}</div>
+        {% endfor %}
+      </div>
+      {% endif %}
+      <form method="POST">
+        <legend>Forgot Password</legend>
+        <div class="form-group">
+          <p>Enter your email address below and we'll send you password reset instructions.</p>
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email" placeholder="Email" class="form-control" autofocus>
+        </div>
+        <button type="submit" class="btn btn-success">Reset Password</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

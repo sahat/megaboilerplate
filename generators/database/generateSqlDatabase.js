@@ -1,30 +1,22 @@
-import { join } from 'path';
-import { copy, mkdirs, templateReplace, addEnv, addNpmPackage } from '../utils';
+import { set } from 'lodash';
+import { getModule, addEnvMemory, templateReplaceMemory, addNpmPackageMemory } from '../utils';
 
-async function generateSqlDatabase(params) {
-  const build = join(__base, 'build', params.uuid);
-  const knexfile = join(__dirname, 'modules', 'sql', 'knexfile.js');
-  const knexfileSqlite = join(__dirname, 'modules', 'sql', 'knexfile-sqlite.js');
-  const sqliteDb = join(__dirname, 'modules', 'sql', 'dev.sqlite3');
-  const bookshelf = join(__dirname, 'modules', 'sql', 'bookshelf.js');
-
+export default async function generateSqlDatabase(params) {
   switch (params.framework) {
     case 'express':
-      await mkdirs(join(build, 'models'));
-      await mkdirs(join(build, 'config'));
-
-      await copy(bookshelf, join(build, 'config', 'bookshelf.js'));
+      set(params, ['build', 'config', 'knexfile.js'], await getModule('database/sql/knexfile.js'));
+      set(params, ['build', 'config', 'bookshelf.js'], await getModule('database/sql/bookshelf.js'));
 
       if (params.database === 'sqlite') {
-        await copy(knexfileSqlite, join(build, 'knexfile.js'));
-        await copy(sqliteDb, join(build, 'dev.sqlite3'));
+        set(params, ['build', 'knexfile.js'], await getModule('database/sql/knexfile-sqlite.js'));
+        set(params, ['build', 'dev.sqlite3'], await getModule('database/sql/dev.sqlite3'));
       } else {
-        await copy(knexfile, join(build, 'knexfile.js'));
+        set(params, ['build', 'knexfile.js'], await getModule('database/sql/knexfile.js'));
       }
 
-      await templateReplace(join(build, 'knexfile.js'), { dialect: params.database });
+      templateReplaceMemory(params, 'knexfile.js', { dialect: params.database });
 
-      await addEnv(params, {
+      addEnvMemory(params, {
         DB_HOST: 'localhost',
         DB_USER: 'root',
         DB_PASSWORD: '',
@@ -32,27 +24,21 @@ async function generateSqlDatabase(params) {
       });
 
       if (params.database === 'mysql') {
-        await addNpmPackage('mysql', params);
+        addNpmPackageMemory('mysql', params);
       }
       if (params.database === 'postgresql') {
-        await addNpmPackage('pg', params);
+        addNpmPackageMemory('pg', params);
       }
       if (params.database === 'sqlite') {
-        await addNpmPackage('sqlite3', params);
+        addNpmPackageMemory('sqlite3', params);
       }
 
-      await addNpmPackage('knex', params);
-      await addNpmPackage('bookshelf', params);
+      addNpmPackageMemory('knex', params);
+      addNpmPackageMemory('bookshelf', params);
       break;
-
-    case 'hapi':
-      break;
-
     case 'meteor':
       break;
-
     default:
   }
 }
 
-export default generateSqlDatabase;

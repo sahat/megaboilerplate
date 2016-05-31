@@ -31,5 +31,5 @@ exports.authGoogle = function(req, res) {
 };
 
 exports.authGoogleCallback = function(req, res) {
-  res.render('loading');
+  //= AUTH_JWT_CALLBACK_INDENT1
 };

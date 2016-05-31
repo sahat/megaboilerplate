@@ -1,0 +1,38 @@
+<div class="login-container">
+  <div class="panel">
+    <div class="panel-body">
+      <div ng-if="messages.error" role="alert" class="alert alert-danger">
+        <div ng-repeat="error in messages.error">{{error.msg}}</div>
+      </div>
+      <form ng-submit="signup()">
+        <legend>Create an account</legend>
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" name="name" id="name" placeholder="Name" class="form-control" ng-model="user.name" autofocus>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email" placeholder="Email" class="form-control" ng-model="user.email">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" name="password" id="password" placeholder="Password" class="form-control" ng-model="user.password">
+        </div>
+        <div class="form-group">
+          <small class="text-muted">By signing up, you agree to the <a href="/">Terms of Service</a>.</small>
+        </div>
+        <button type="submit" class="btn btn-success">Create an account</button>
+      </form>
+      <div class="hr-title"><span>or</span></div>
+      <div class="btn-toolbar text-center">
+        //= SIGN_IN_WITH_FACEBOOK_INDENT4
+        //= SIGN_IN_WITH_TWITTER_INDENT4
+        //= SIGN_IN_WITH_GOOGLE_INDENT4
+        //= SIGN_IN_WITH_VK_INDENT4
+      </div>
+    </div>
+  </div>
+  <p class="text-center">
+    Already have an account? <a href="/login"><strong>Log in</strong></a>
+  </p>
+</div>

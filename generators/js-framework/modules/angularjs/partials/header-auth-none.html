@@ -1,0 +1,9 @@
+<ul ng-if="isAuthenticated()" class="list-inline">
+  <li><a href="/account" ng-class="{ active: isActive('/account')}">My Account</a></li>
+  <li><a href="#" ng-click="logout()">Logout</a></li>
+</ul>
+<ul ng-if="!isAuthenticated()" class="list-inline">
+  <li><a href="/login" ng-class="{ active: isActive('/login')}">Log in</a></li>
+  <li><a href="/signup" ng-class="{ active: isActive('/signup')}">Sign up</a></li>
+</ul>
+

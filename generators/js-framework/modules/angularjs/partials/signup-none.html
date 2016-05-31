@@ -1,0 +1,27 @@
+<div class="container">
+  <div ng-if="messages.error" role="alert" class="text-danger">
+    <div ng-repeat="error in messages.error">{{error.msg}}</div>
+  </div>
+
+  <h4>Create an account</h4>
+
+  <form ng-submit="signup()">
+    <label for="email">Email</label>
+    <input type="email" name="email" id="email" placeholder="Email" ng-model="user.email" autofocus>
+    <label for="name">Name</label>
+    <input type="text" name="name" id="name" placeholder="Name" ng-model="user.name">
+    <label for="password">Password</label>
+    <input type="password" name="password" id="password" placeholder="Password" ng-model="user.password">
+    <p>By signing up, you agree to the <a href="/">Terms of Service</a>.</p>
+    <button type="submit">Create an account</button>
+  </form>
+
+  <hr>
+
+  //= SIGN_IN_WITH_FACEBOOK_INDENT1
+  //= SIGN_IN_WITH_TWITTER_INDENT1
+  //= SIGN_IN_WITH_GOOGLE_INDENT1
+  //= SIGN_IN_WITH_VK_INDENT1
+
+  <p>Already have an account? <a href="/login">Log in</a></p>
+</div>

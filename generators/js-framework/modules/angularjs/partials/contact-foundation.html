@@ -1,0 +1,32 @@
+<div class="expanded row">
+  <div class="row">
+    <h3>Contact Form</h3>
+    <div ng-if="messages.error" role="alert" class="callout alert">
+      <div ng-repeat="error in messages.error">{{error.msg}}</div>
+    </div>
+    <div ng-if="messages.success" role="alert" class="callout success">
+      <div ng-repeat="success in messages.success">{{success.msg}}</div>
+    </div>
+    <form ng-submit="sendContactForm()">
+      <div class="row">
+        <div class="medium-8 columns">
+          <label for="name">Name</label>
+          <input type="text" name="name" id="name" ng-model="contact.name" autofocus>
+        </div>
+      </div>
+      <div class="row">
+        <div class="medium-8 columns">
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email" ng-model="contact.email">
+        </div>
+      </div>
+      <div class="row">
+        <div class="medium-8 columns">
+          <label for="message">Body</label>
+          <textarea name="message" id="message" rows="7" ng-model="contact.message"></textarea>
+        </div>
+      </div>
+      <button type="submit" class="button">Send</button>
+    </form>
+  </div>
+</div>

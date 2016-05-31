@@ -1,0 +1,21 @@
+extends ../layout
+
+block content
+  .container
+    if messages.info
+      div.text-info
+        for info in messages.info
+          div= info.msg
+    if messages.error
+      div.text-danger
+        for error in messages.error
+          div= error.msg
+
+    h3 Forgot Password
+
+    form(method='POST')
+      p Enter your email address below and we'll send you password reset instructions.
+      label(for='email') Email
+      input(type='email', name='email', id='email', placeholder='Email', autofocus)
+      br
+      button(type='submit') Reset Password

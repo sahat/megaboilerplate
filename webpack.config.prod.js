@@ -2,17 +2,18 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-  devtool: 'source-map',
-  entry: [
-    './site/main'
-  ],
+  entry: path.join(__dirname,'website', 'main'),
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, 'website', 'assets', 'js'),
     filename: 'bundle.js',
-    publicPath: '/static/'
+    publicPath: '/js/'
+  },
+  resolveLoader: {
+    modulesDirectories: ['node_modules']
   },
   plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.optimize.DedupePlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('production')
@@ -27,8 +28,8 @@ module.exports = {
   module: {
     loaders: [{
       test: /\.js$/,
-      loaders: ['babel'],
-      include: path.join(__dirname, 'src')
+      include: path.join(__dirname, 'website'),
+      loaders: ['babel']
     }]
   }
 };
