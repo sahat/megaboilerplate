@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Style Test"
-image: header.jpg
+image: http://i.imgur.com/q0TrvWG.jpg
 video: false
 ---
 

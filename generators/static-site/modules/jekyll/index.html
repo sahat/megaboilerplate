@@ -11,8 +11,8 @@ body_class: "home-template user"
       <article class="{%comment%}post_class{%endcomment%}">
         {% if post.image %}
         <div class="image-holder show">
-          <a href="{{ post.url | prepend: site.baseurl }}" class="inner" style="background-image: url('{{ site.baseurl }}/content/images/{{ post.image }}');">
-            <img src="{{ site.baseurl }}/content/images/{{ post.image }}">
+          <a href="{{ post.url | prepend: site.baseurl }}" class="inner" style="background-image: url('{{ post.image }}');">
+            <img src="{{ post.image }}">
           </a>
         </div>
         {% endif %}

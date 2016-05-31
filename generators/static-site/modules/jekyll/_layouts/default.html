@@ -5,8 +5,8 @@
     {{ content }}
     {{ if site.logo}}
     <a href="{{ site.baseurl | prepend: site.url }}" id="blog_badge">
-      <span style="background-image: url('{{ site.baseurl }}/assets/images/{{ site.logo }}')">{{ site.name }}</span>
-        </a>
+      <span style="background-image: url('{{ site.logo }}')">{{ site.name }}</span>
+    </a>
     {{/if}}
     <script src="{{ '/assets/javascripts/jquery.min.js' | prepend: site.baseurl }}"></script>
     <script src="{{ '/assets/javascripts/main.js' | prepend: site.baseurl }}"></script>

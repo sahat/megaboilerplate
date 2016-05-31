@@ -30,7 +30,7 @@ async function generateStaticSite(params) {
             'pictos_custom.woff': await getModule('static-site/jekyll/assets/fonts/pictos_custom.woff')
           },
           images: {
-            'logo.png': await getModule('static-site/jekyll/assets/images/logo.png')
+            '.gitkeep': await getModule('static-site/jekyll/assets/images/.gitkeep')
           },
           javascripts: {
             'jquery.min.js': await getModule('static-site/jekyll/assets/javascripts/jquery.min.js'),
@@ -39,10 +39,7 @@ async function generateStaticSite(params) {
         },
         content: {
           images: {
-            'header.jpg': await getModule('static-site/jekyll/content/images/header.jpg'),
-            'joon-big.jpg': await getModule('static-site/jekyll/content/images/joon-big.jpg'),
-            'joon-small.jpg': await getModule('static-site/jekyll/content/images/joon-small.jpg'),
-            'roon3.jpeg': await getModule('static-site/jekyll/content/images/roon3.jpeg')
+            '.gitkeep': await getModule('static-site/jekyll/content/images/.gitkeep')
           }
         },
         css: {
