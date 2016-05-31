@@ -1,25 +1,29 @@
 ![](http://i.imgur.com/DrmCGFc.jpg)
 
-# Mega Boilerplate [![Paypal](https://img.shields.io/badge/donate-paypal-0070ba.svg?style=flat)](https://paypal.me/sahat) [![Gitter](https://img.shields.io/badge/chat-on%20gitter-46bc99.svg?style=flat)](https://gitter.im/sahat/boilerplate) [![Build Status](https://img.shields.io/travis/sahat/boilerplate.svg?style=flat)](https://travis-ci.org/sahat/satellizer) [![Issues](https://img.shields.io/github/issues/sahat/boilerplate.svg?style=flat)](https://github.com/sahat/boilerplate/issues)
+# Mega Boilerplate 
 
-:space_invader: **Live Demo**: http://hackathonstarter.herokuapp.com
+[![PayPal Donate](https://img.shields.io/badge/donate-paypal-0070ba.svg?style=flat)](https://paypal.me/sahat) [![Gitter](https://img.shields.io/badge/chat-on%20gitter-46bc99.svg?style=flat)](https://gitter.im/sahat/boilerplate) [![Issues](https://img.shields.io/github/issues/sahat/boilerplate.svg?style=flat)](https://github.com/sahat/boilerplate/issues)
 
-TODO: One paragraph description, motivation behind the project, goals.
+**Live Demo**: http://megaboilerplate.com
+
+Mega Boilerplate is a starter project generator that focuses on simplicity and ease of use, while providing you with flexibility of choices. It was inspired by [Hackathon Starter](https://github.com/sahat/hackathon-starter), but unlike it, you are free to customize any part of your stack from web framework and database to CSS preprocessor and client-side JavaScript framework. Currently, generators are primarily limited to Node.js web apps, but I would like to expand it to other platforms and programming languages in the future.
+
 
 Table of Contents
 -----------------
 
+- [**Features**](#features)
 - [**Getting Started**](#getting-started)
  - [Express](#express)
  - [Meteor](#meteor)
- - [Jekyll](#-jekyll)
- - [Middleman](#-middleman)
+ - [Jekyll](#jekyll)
+ - [Middleman](#middleman)
  - [JS Library](#js-library)
 - [**Database Setup**](#database-setup)
- - [MongoDB](#-mongodb)
- - [MySQL](#-mysql)
- - [PostgreSQL](#-postgresql)
- - [SQLite](#-sqlite)
+ - [MongoDB](#mongodb)
+ - [MySQL](#mysql)
+ - [PostgreSQL](#postgresql)
+ - [SQLite](#sqlite)
 - [**Project Structure**](#project-structure)
 - [**Obtaining API Keys**](#obtaining-api-keys)
 - [**Learning Resources**](#learning-resources)
@@ -28,25 +32,31 @@ Table of Contents
  - [ES6](#-es6-cheatsheet)
  - [JavaScript Date](#-javascript-date-cheatsheet)
 - [**Deployment**](#deployment)
- - [Heroku](#)
- - [OpenShift](#)
- - [Microsoft Azure](#)
- - [IBM Bluemix](#)
- - [Digital Ocean](#)
 - [**FAQ**](#faq)
  - [<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/React.js_logo.svg/50px-React.js_logo.svg.png" height="17"> React](#-react)
  - [<img src="https://angular.io/resources/images/logos/standard/shield-large.png" height="17"> Angular](#-angular)
-- [**Changelog**](#)
+- [**Changelog**](#changelog)
 - [**Contributing**](#contributing)
 - [**License**](#license)
 
 Features
 --------
 
-- one
-- two
-- three
-- four
+- Generate your perfect boilerplate from hundreds of possible permutations!
+- Jade, Handlebars and Nunjucks template engines
+- Sass, LESS, PostCSS and vanilla CSS stylesheets
+- Bootstrap 3.5 and Foundation 6 CSS frameworks
+- Mocha and Jasmine testing frameworks
+- Gulp, Webpack and NPM scripts as build tools
+- PostgreSQL, MySQL, SQLite and MongoDB databases
+- React with server-side rendering and hot reloading, AngularJS and jQuery on the client-side
+- **Generated application includes**:
+ - Local Authentication using Email and Password
+ - OAuth Authentication via Twitter, Facebook, Google, VK (Passport.js and JWT)
+ - Flash notifications
+ - Contact form (powered by Mailgun)
+ - **Account Management**
+   - Gravatar, Profile Details, Change Password, Forgot Password, Reset Password, Delete Account, Link multiple OAuth strategies to one account
 
 Getting Started
 ---------------
@@ -63,18 +73,22 @@ Getting Started
 
 ### Express
 
-Download and extract the project. Then in your Terminal shell type the following:
+Download and extract the project. Then in your Terminal type the following:
 
 ```shell
-$ cd myproject
+cd megaboilerplate-<hash>
 
 # Install NPM dependencies
-$ npm install
+npm install
 
-$ node app.js
+node server.js
 ```
 
+**Note**: If you have selected **Gulp** or **NPM** build tool, you may also need to run `npm run build` command.
+
 **Note**: If you have selected a database, please make sure it is up and running. For additional information, see [**Database Setup**](#database-setup).
+
+
 
 :top: <sub>[**back to top**](#table-of-contents)</sub>
 
@@ -86,7 +100,7 @@ $ node app.js
 - [Jekyll](https://jekyllrb.com/) Ruby Gem
 
 ```shell
-cd myproject
+cd megaboilerplate-<hash>
 
 # Start Jekyll app
 jekyll serve
@@ -108,8 +122,11 @@ jekyll serve
 ```shell
 cd myproject
 
+# Install Ruby dependencies
+bundle install
+
 # Start Middleman app
-middleman
+bundle exec middleman
 
 # The Middleman is loading
 # View your site at "http://localhost:4567"
@@ -119,10 +136,10 @@ middleman
 
 ## Database Setup
 
-- [MongoDB](#-mongodb)
-- [MySQL](#-mysql)
-- [PostgreSQL](#-postgresql)
-- [SQLite](#-sqlite)
+- [MongoDB](#mongodb)
+- [MySQL](#mysql)
+- [PostgreSQL](#postgresql)
+- [SQLite](#sqlite)
 
 :top: <sub>[**back to top**](#table-of-contents)</sub>
 
@@ -307,7 +324,7 @@ The new hotness of the web — Universal JavaScript app, powered by [React](http
 │   ├── loading.jade           # Loading spinner animation for OAuth 1.0 / 2.0 authentication flow inside a popup
 ├── .babelrc                   # Babel config
 ├── .env                       # API keys, passwords, and other sensitive information
-├── app.js                     # Express application
+├── server.js                     # Express application
 └── package.json               # NPM Dependencies
 ```
 
@@ -346,7 +363,7 @@ To use any of the included OAuth providers (e.g. Facebook, Twitter, Google), you
  - `GOOGLE_ID='YOUR_CLIENT_ID'`
  - `GOOGLE_SECRET='YOUR_CLIENT_SECRET'`
 
-<img src="https://g.twimg.com/ios_homescreen_icon.png" width="90">
+<img src="https://g.twimg.com/ios_homescreen_icon.png" width="75">
 - Go to [Twitter Application Management](https://apps.twitter.com/).
 - Click on **Create New App** button.
 - Fill out required fields.
@@ -359,6 +376,20 @@ To use any of the included OAuth providers (e.g. Facebook, Twitter, Google), you
  - `TWITTER_ID='YOUR_CONSUMER_KEY'`
  - `TWITTER_SECRET='YOUR_CONSUMER_SECRET'`
 
+<img src="https://cdn2.iconfinder.com/data/icons/social-flat-buttons-3/512/vkontakte-256.png" height="75">
+- Go to [Developers | VK](http://new.vk.com/dev)
+- Click on **Create an Application** button.
+- Enter a **Title** and select a **Category** (Website), then click on **Connect Application** button.
+- Confirm activation code via your mobile number.
+- Click on **Settings** tab in the sidebar.
+- Select or enter the following:
+ - **Application status**: `Application on and visible to all`
+ - **Site address**: `http://localhost:3000`
+ - **Authorized redirect URI**: `http://localhost:3000/auth/vkontakte/callback`
+- Copy and paste **Application ID** and **Secure key** into `.env` file:
+ - `VK_ID='YOUR_APPLICATION_ID'`
+ - `VK_SECRET='YOUR_SECURE_KEY'`
+
 :top: <sub>[**back to top**](#table-of-contents)</sub>
 
 Learning Resources
@@ -369,28 +400,21 @@ Learning Resources
 - [SassMe - A Tool for Visualizing SASS Color Functions](http://sassme.arc90.com/)
 - [uiGradients](http://uigradients.com/)
 
-:top: <sub>[**back to top**](#table-of-contents)</sub>
-
 ### React / Redux
-- [[VIDEO] React in 7 Minutes](https://egghead.io/lessons/react-react-in-7-minutes)
-- [[VIDEO] Getting Started with Redux (30 free videos)](https://egghead.io/series/getting-started-with-redux)
-- [[TUTORIAL] Handcrafting an Isomorphic Redux Application](https://medium.com/front-end-developers/handcrafting-an-isomorphic-redux-application-with-love-40ada4468af4#.vft63avyi)
-- [[TUTORIAL] Create a character voting app using React, Node.js, MongoDB and Socket.IO](http://sahatyalkabov.com/create-a-character-voting-app-using-react-nodejs-mongodb-and-socketio/)
-- [[TUTORIAL] React.js Introduction For People Who Know Just Enough jQuery To Get By](http://reactfordesigners.com/labs/reactjs-introduction-for-people-who-know-just-enough-jquery-to-get-by/)
-
-:top: <sub>[**back to top**](#table-of-contents)</sub>
+- [:movie_camera: React in 7 Minutes](https://egghead.io/lessons/react-react-in-7-minutes)
+- [:movie_camera: Getting Started with Redux (30 free videos)](https://egghead.io/series/getting-started-with-redux)
+- [:notebook_with_decorative_cover: Handcrafting an Isomorphic Redux Application](https://medium.com/front-end-developers/handcrafting-an-isomorphic-redux-application-with-love-40ada4468af4#.vft63avyi)
+- [:notebook_with_decorative_cover: Create a character voting app using React, Node.js, MongoDB and Socket.IO](http://sahatyalkabov.com/create-a-character-voting-app-using-react-nodejs-mongodb-and-socketio/)
+- [:notebook_with_decorative_cover: React.js Introduction For People Who Know Just Enough jQuery To Get By](http://reactfordesigners.com/labs/reactjs-introduction-for-people-who-know-just-enough-jquery-to-get-by/)
 
 ### Performance and SEO
 - [Managing Mobile Performance Optimization](https://www.smashingmagazine.com/2016/03/managing-mobile-performance-optimization)
 - [A technical guide to SEO](https://ma.ttias.be/technical-guide-seo/)
 
-:top: <sub>[**back to top**](#table-of-contents)</sub>
-
 ### AngularJS
 - [John Papa's Angular Style Guide](https://github.com/johnpapa/angular-styleguide/)
 
 :top: <sub>[**back to top**](#table-of-contents)</sub>
-
 
 Cheatsheets
 -----------
@@ -589,6 +613,104 @@ var yesterday = date.setDate(date.getDate() - 1);
 
 :top: <sub>[**back to top**](#table-of-contents)</sub>
 
+
+Deployment
+----------
+
+Once you are ready to deploy your app, you will need to create an account with
+a cloud platform to host it. These are not the only choices you have, but they are my top
+picks. From my experience, **Heroku** is the easiest to get started with, it will
+automatically restart your Node.js process when it crashes, zero-downtime
+deployments and custom domain support on free accounts.
+
+<img src="http://blog.exadel.com/wp-content/uploads/2013/10/heroku-Logo-1.jpg" width="200">
+
+- Download and install [Heroku Toolbelt](https://toolbelt.heroku.com/)
+- In terminal, run `heroku login` and enter your Heroku credentials
+- From *your app* directory run `heroku create`
+- Run `heroku addons:create mongolab`.  This will set up the mLab add-on and configure the `MONGOLAB_URI` environment variable in your Heroku app for you.
+- Lastly, do `git push heroku master`.  Done!
+
+**Note:** To install Heroku add-ons your account must be verified.
+
+<img src="http://www.opencloudconf.com/images/openshift_logo.png" width="200">
+
+- First, install this Ruby gem: `sudo gem install rhc` :gem:
+- Run `rhc login` and enter your OpenShift credentials
+- From your app directory run `rhc app create MyApp nodejs-0.10`
+ - **Note:** *MyApp* is the name your app (no spaces)
+- Once that is done, you will be provided with **URL**, **SSH** and **Git Remote** links
+- Visit provided **URL** and you should see the *Welcome to your Node.js application on OpenShift* page
+- Copy and and paste **Git Remote** into `git remote add openshift YOUR_GIT_REMOTE`
+- Before you push your app, you need to do a few modifications to your code
+
+Add these two lines to `app.js`, just place them anywhere before `app.listen()`:
+```js
+var IP_ADDRESS = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
+var PORT = process.env.OPENSHIFT_NODEJS_PORT || 8080;
+```
+
+Then change `app.listen()` to:
+```js
+app.listen(PORT, IP_ADDRESS,() => {
+  console.log(`Express server listening on port ${PORT} in ${app.settings.env} mode`);
+});
+```
+Add this to `package.json`, after *name* and *version*. This is necessary because, by default, OpenShift looks for `server.js` file. And by specifying `supervisor app.js` it will automatically restart the server when node.js process crashes.
+
+```js
+"main": "app.js",
+"scripts": {
+  "start": "supervisor app.js"
+},
+```
+
+- Finally, you can now push your code to OpenShift by running `git push -f openshift master`
+ - **Note:** The first time you run this command, you have to pass `-f` (force) flag because OpenShift creates a dummy server with the welcome page when you create a new Node.js app. Passing `-f` flag will override everything with your *Hackathon Starter* project repository. **Do not** run `git pull` as it will create unnecessary merge conflicts.
+- And you are done!
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Windows_Azure_logo.png" width="200">
+
+- Login to [Windows Azure Management Portal](https://manage.windowsazure.com/)
+- Click the **+ NEW** button on the bottom left of the portal
+- Click **COMPUTE**, then **WEB APP**, then **QUICK CREATE**
+- Enter a name for **URL** and select the datacenter **REGION** for your web site
+- Click on **CREATE WEB APP** button
+- Once the web site status changes to *Running*, click on the name of the web site to access the Dashboard
+- At the bottom right of the Quickstart page, select **Set up a deployment from source control**
+- Select **Local Git repository** from the list, and then click the arrow
+- To enable Git publishing, Azure will ask you to create a user name and password
+- Once the Git repository is ready, you will be presented with a **GIT URL**
+- Inside your *Hackathon Starter* directory, run `git remote add azure [Azure Git URL]`
+- To push your changes simply run `git push azure master`
+ - **Note:** *You will be prompted for the password you created earlier*
+- On **Deployments** tab of your Windows Azure Web App, you will see the deployment history
+
+<img src="http://www.comparethecloud.net/wp-content/uploads/2014/06/ibm-bluemix_pr-030514.jpg" width="200">
+
+- Go to [Codename: Bluemix](http://bluemix.net) to signup for the free trial, or login with your *IBM id*
+- Install [Cloud Foundry CLI](https://github.com/cloudfoundry/cli)
+- Navigate to your **hackathon-starter** directory and then run `cf push [your-app-name] -m 512m` command to deploy the application
+ - **Note:** You must specify a unique application name in place of `[your-app-name]`
+- Run `cf create-service mongodb 100 [your-service-name]` to create a [MongoDB service](https://www.ng.bluemix.net/docs/#services/MongoDB/index.html#MongoDB)
+- Run `cf bind-service [your-app-name] [your-service-name]` to associate your application with a service created above
+- Run `cf files [your-app-name] logs/env.log` to see the *environment variables created for MongoDB.
+- Copy the **MongoDB URI** that should look something like the following: `mongodb://68638358-a3c6-42a1-bae9-645b607d55e8:46fb97e6-5ce7-4146-9a5d-d623c64ff1fe@192.155.243.23:10123/db`
+- Then set it as an environment variable for your application by running `cf set-env [your-app-name] MONGODB [your-mongodb-uri]`
+- Run `cf restart [your-app-name]` for the changes to take effect.
+- Visit your starter app at **http://[your-app-name].ng.bluemix.net**
+- Done!
+
+**Note:** Alternative directions, including how to setup the project with a DevOps pipeline are available at [http://ibm.biz/hackstart](http://ibm.biz/hackstart).
+A longer version of these instructions with screenshots is available at [http://ibm.biz/hackstart2](http://ibm.biz/hackstart2).
+Also, be sure to check out the [Jump-start your hackathon efforts with DevOps Services and Bluemix](https://www.youtube.com/watch?v=twvyqRnutss) video.
+
+<img src="https://www.digitalocean.com/assets/images/logos-badges/png/DO_Logo_Vertical_Blue-2c654e19.png" width="200">
+
+### TODO
+
+:top: <sub>[**back to top**](#table-of-contents)</sub>
+
 FAQ
 ---
 
@@ -616,14 +738,20 @@ Despite being such a small library, [Redux](http://redux.js.org/) can be difficu
 Sites Built with Mega Boilerplate
 ---------------------------------
 
-*Check back later*. 
-
 If you have built something using Mega Boilerplate, please enter yourself here by sending a pull request.
+
+Changelog
+---------
+
+### 1.0.0 (June 7, 2016)
+- Initial release.
 
 Contributing
 ------------
 
-Pull requests from beginners and seasoned JavaScript developers are welcome! Please follow [these steps](CONTRIBUTING.md) to contribute.
+Pull requests from beginners and seasoned JavaScript developers are welcome! Mega Boilerplate is already pretty large in scope to be maintained just by one person, so I am asking for your help to contribute where you can, be it a small fix in README or adding a whole new generator type, e.g. Meteor, React Native, Electron.
+
+If you are making changes to the website, run `npm run build` and check in updated version of *bundle.js* into the repository. 
 
 :top: <sub>[**back to top**](#table-of-contents)</sub>
 
