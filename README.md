@@ -116,7 +116,7 @@ jekyll serve
 
 #### Prerequisites
 
-- [Ruby **2.0+**](http://rubyinstaller.org)
+- [Ruby 2.0+](http://rubyinstaller.org)
 - [Middleman](https://middlemanapp.com/) Ruby Gem
 
 ```shell

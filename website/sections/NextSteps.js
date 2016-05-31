@@ -25,15 +25,15 @@ const NextSteps = (props) => {
   };
 
   let urlMap = {
-    express: '-express',
-    meteor: '-meteor',
-    jekyll: '-jekyll',
-    middleman: '-middleman',
-    library: '-js-library',
-    mongodb: '-mongodb',
-    mysql: '-mysql',
-    postgresql: '-postgresql',
-    sqlite: '-sqlite',
+    express: 'express',
+    meteor: 'meteor',
+    jekyll: 'jekyll',
+    middleman: 'middleman',
+    library: 'js-library',
+    mongodb: 'mongodb',
+    mysql: 'mysql',
+    postgresql: 'postgresql',
+    sqlite: 'sqlite'
   };
 
   let gettingStartedText = `See how to <a href="https://github.com/sahat/megaboilerplate#${urlMap[props.framework || props.staticSiteGenerator || props.platform]}" target="_blank">get started</a> with <strong>${nameMap[props.framework || props.staticSiteGenerator || props.platform]}</strong>`;
@@ -45,7 +45,7 @@ const NextSteps = (props) => {
   }
 
   if (props.deployment && props.deployment !== 'none') {
-    gettingStartedText += ` When ready to deploy, see <a href="https://github.com/sahat/megaboilerplate#" target="_blank"> ${nameMap[props.deployment]} deployment guide</a>.`
+    gettingStartedText += ` When ready to deploy, see <a href="https://github.com/sahat/megaboilerplate#deployment" target="_blank"> ${nameMap[props.deployment]} deployment guide</a>.`
   }
 
     const learnMap = {
@@ -65,7 +65,7 @@ const NextSteps = (props) => {
   const jsFramework = props.jsFramework && props.jsFramework !== 'none' ? props.jsFramework : null;
   const database = props.database  && props.database !== 'none' ? `${learnMap[props.framework]} and ${learnMap[props.database]}` : null;
 
-  let learningText = `Learn more about ${learnMap[jsFramework] || database || learnMap[props.framework || props.staticSiteGenerator || props.platform]} using these curated <a href="https://github.com/sahat/megaboilerplate/README.md#" target="_blank">free resources</a>.`;
+  let learningText = `Learn more about ${learnMap[jsFramework] || database || learnMap[props.framework || props.staticSiteGenerator || props.platform]} using these curated <a href="https://github.com/sahat/megaboilerplate#learning-resources" target="_blank">free resources</a>.`;
 
 
   return (
@@ -99,7 +99,7 @@ const NextSteps = (props) => {
               <div className="text-center">
                 <img className="next-steps-icon" src="/img/svg/faq.svg" alt="FAQ"/>
                 <p>
-                  See <a href="https://github.com/sahat/megaboilerplate/README.md#faq" target="_blank">FAQ</a> before <a href="https://github.com/sahat/megaboilerplate/issues/new">opening an issue</a> on GitHub. For general questions, please visit official <a href="">Gitter</a> chat.
+                  See <a href="https://github.com/sahat/megaboilerplate/README.md#faq" target="_blank">FAQ</a> before <a href="https://github.com/sahat/megaboilerplate/issues/new" target="_blank">opening an issue</a> on GitHub. For general questions, please visit the <a href="https://gitter.im/sahat/megaboilerplate" target="_blank">official Gitter chat</a>.
                 </p>
               </div>
             </div>
