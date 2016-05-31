@@ -99,6 +99,14 @@ class BuildTool extends React.Component {
       </label>
     ) : null;
 
+    const gulpRadio = props.jsFramework && props.jsFramework !== 'none' ? (
+      <label className="radio-inline">
+        <img className="btn-logo" src="/img/svg/gulp-logo.svg" alt="Gulp + Browserify"/>
+        <input type="radio" name="buildToolRadios" value="gulp" onChange={props.handleChange} checked={props.buildTool === 'gulp'}/>
+        <span>Gulp + Browserify</span>
+      </label>
+    ) : null;
+
     const webpackRadio =  props.jsFramework === 'react' ? (
       <label className="radio-inline">
         <img className="btn-logo" src="/img/svg/webpack-logo.svg" alt="Webpack"/>
@@ -137,11 +145,7 @@ class BuildTool extends React.Component {
           {description}
           <div className="radio-group">
             {noneRadio}
-            <label className="radio-inline">
-              <img className="btn-logo" src="/img/svg/gulp-logo.svg" alt="Gulp + Browserify"/>
-              <input type="radio" name="buildToolRadios" value="gulp" onChange={props.handleChange} checked={props.buildTool === 'gulp'}/>
-              <span>Gulp + Browserify</span>
-            </label>
+            {gulpRadio}
             {webpackRadio}
             {npmRadio}
           </div>
