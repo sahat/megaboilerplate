@@ -290,7 +290,7 @@ class Header extends React.Component {
                 Featuring <span style={{ color: '#fff' }} ref="heroHeading"/>
               </div>
             </VelocityComponent>
-            <a href="#" className="btn btn-outline"><i className={'fa fa-' + this.state.browserIcon}/> Live Demo</a> <a href="#" className="btn btn-outline">Code Examples</a>
+            <a href="/demos" target="_blank" className="btn btn-outline"><i className={'fa fa-' + this.state.browserIcon}/> Live Demo</a> <a href="https://github.com/sahat/megaboilerplate/tree/master/examples" target="_blank" className="btn btn-outline">Code Examples</a>
           </div>
 
           <div ref="carbonAdsBlocked" className="carbon-ads-blocked"></div>
