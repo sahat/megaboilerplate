@@ -1,0 +1,20 @@
+title: "Joon: Roon for Jekyll"
+logo: http://i.imgur.com/S99Sd2W.png
+email: your-email@domain.com
+description: >
+  Roon was an excellent service, with a beautiful understated design. After
+  being acquired by <a href='https://ghost.org'>Ghost</a>, the Roon theme was
+  open sourced.<br> This is my Jekyll port of the Roon theme.
+url: "http://yourdomain.com"
+twitter_username: jekyllrb
+github_username:  jekyll
+
+permalink: pretty
+paginate: 5
+
+markdown: kramdown
+highlighter: rouge
+
+gems:
+  - jekyll-sitemap
+  - jekyll-paginate

@@ -1,0 +1,28 @@
+<footer role="contentinfo" class='post-footer'>
+  <div class="inner">
+    <div class="vcard">
+      <a href="{{ site.baseurl }}/feed.xml" id="btn_feed" class="btn" title="Feed" target="_blank">
+        <span aria-hidden="true" data-icon=")"></span>
+        <strong>Feed</strong>
+      </a>
+      {% if site.logo %}
+      <a href="{{ site.baseurl }}" class="photo circle">
+        <span style="background-image: url('{{ site.logo }}')">
+          <img src="{{ site.logo }}" alt="{{ site.title }}"/>
+        </span>
+      </a>
+      {% endif %}
+      <div class="details">
+        <h4><a href="{{ site.url }}" class="url n">{{ site.title }}</a></h4>
+        <a href="{{ site.baseurl | prepend: site.url }}" class="js-remove-domain-schema">{{ site.url }}{{ site.baseurl }}</a><br>
+        <span>Published with <a href="https://jekyllrb.com">Jekyll</a></span><br>
+        <span><a href='https://github.com/vormwald/joon'>Source code</a></span>
+      </div>
+    </div>
+    <div id="user_bio">
+      <div class="inner">
+        {{ site.description }}
+      </div>
+    </div>
+  </div>
+</footer>

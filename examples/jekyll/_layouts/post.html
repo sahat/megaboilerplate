@@ -1,0 +1,28 @@
+---
+layout: default
+body_class: post-template
+---
+
+{% if page.image %}
+<div id="feature_image">
+  <div class="inner" style="background-image: url('{{ page.image }}')">
+    <img src='{{ page.image }}'>
+  </div>
+</div>
+{% endif %}
+
+<article role="main" class="{% if page.image %}image{% endif %}">
+  <header>
+    <a href="{{ site.baseurl }}/" id="home_link">«</a>
+    <div class="meta">
+      <time datetime="{{ page.date | date:'%Y-%m-%d' }}"><a href="{{ page.url }}">{{ page.date | date: "%B %d, %Y" }}</a></time>
+      <span class="count" id="js-reading-time">&nbsp;</span>
+    </div>
+    <h1>{{ page.title }}</h1>
+  </header>
+  <div class="text" id="js-post-content">
+    {{ content }}
+  </div>
+</article>
+
+{% include footer.html %}
