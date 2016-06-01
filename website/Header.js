@@ -56,9 +56,9 @@ class Header extends React.Component {
     let carbonAdsContainer = this.refs.carbonAds;
     let carbonAdsBlocked = this.refs.carbonAdsBlocked;
     let script = document.createElement('script');
-    script.defer = true;
+    script.async = true;
     script.type = 'text/javascript';
-    script.src = '//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=sahatyalkabovcom';
+    script.src = '//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=megaboilerplatecom';
     script.id = '_carbonads_js';
     carbonAdsContainer.appendChild(script);
 
