@@ -415,7 +415,7 @@ i.arrow {
   letter-spacing: 1px;
   border-radius: 2px;
   padding: 0;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   box-shadow: 0 2px 6px 0 rgba(0,0,0,.2);
   outline: 0 !important;
   transition: all .35s cubic-bezier(.25,.25,.315,1.35);
@@ -436,6 +436,10 @@ i.arrow {
   border-color: #0a64d6;
   background: #0a64d6;
   color: #fff;
+}
+
+.btn-mega svg {
+  margin-top: 8px;
 }
 
 /*CSS Logos*/
@@ -1600,8 +1604,8 @@ code {
   }
 
   40% {
-    -webkit-transform: translate3d(0,-6px,0);
-    transform: translate3d(0,-6px,0)
+    -webkit-transform: translate3d(0, -6px, 0);
+    transform: translate3d(0, -6px, 0)
   }
 
   to {
@@ -1609,5 +1613,3 @@ code {
     transform: translateZ(0)
   }
 }
-
-

@@ -37,7 +37,8 @@ class Home extends React.Component {
       this.setState({
         beginner: false,
         disableAutoScroll: disableAutoScroll === 'true',
-        copyClipboardText: 'Copy to clipboard'
+        copyClipboardText: 'Copy to clipboard',
+        isDownloadLoading: false,
       });
     } catch (e) {
       console.warn(e);
@@ -121,6 +122,11 @@ class Home extends React.Component {
       });
     }
 
+    // Show download button spinner
+    if (!options.generateDownloadLink) {
+     this.setState({ isDownloadLoading: true });
+   }
+
     // Show next steps component
     this.setState({ showNextSteps: true });
     if (!state.disableAutoScroll) {
@@ -178,6 +184,8 @@ class Home extends React.Component {
       }).done((response, status, request) => {
         const disp = request.getResponseHeader('Content-Disposition');
         if (disp && disp.search('attachment') !== -1) {
+          this.setState({ isDownloadLoading: false });
+
           const form = $('<form method="POST" action="/download">');
           $.each(data, (k, v) => {
             if (v) {
@@ -189,6 +197,7 @@ class Home extends React.Component {
         }
       }).fail((jqXHR) => {
         swal('Server Error', jqXHR.responseText, 'error');
+        this.setState({ isDownloadLoading: false });
       });
     }
   }
@@ -213,7 +222,7 @@ class Home extends React.Component {
         break;
 
       case 'platformRadios':
-        const whitelist = ['showModal', 'beginner', 'disableAutoScroll', 'copyClipboardText'];
+        const whitelist = ['beginner', 'disableAutoScroll', 'copyClipboardText', 'isDownloadLoading'];
         for (const key in state) {
           if (state.hasOwnProperty(key)) {
             if (whitelist.indexOf(key) === -1) {
@@ -527,23 +536,23 @@ class Home extends React.Component {
 
     let generateDownloadLink;
 
+    const loadingSvgColor = state.isDownloadLoading ? '#fff' : '#000';
     const loadingSvg = (
-      <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-   width="28px" height="28px" viewBox="0 0 40 40">
-  <path opacity="0.2" fill="#000" d="M20.201,5.169c-8.254,0-14.946,6.692-14.946,14.946c0,8.255,6.692,14.946,14.946,14.946
-    s14.946-6.691,14.946-14.946C35.146,11.861,28.455,5.169,20.201,5.169z M20.201,31.749c-6.425,0-11.634-5.208-11.634-11.634
-    c0-6.425,5.209-11.634,11.634-11.634c6.425,0,11.633,5.209,11.633,11.634C31.834,26.541,26.626,31.749,20.201,31.749z"/>
-  <path fill="#000" d="M26.013,10.047l1.654-2.866c-2.198-1.272-4.743-2.012-7.466-2.012h0v3.312h0
-    C22.32,8.481,24.301,9.057,26.013,10.047z">
-    <animateTransform attributeType="xml"
-      attributeName="transform"
-      type="rotate"
-      from="0 20 20"
-      to="360 20 20"
-      dur="0.5s"
-      repeatCount="indefinite"/>
-    </path>
-  </svg>
+      <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="28px" height="28px" viewBox="0 0 40 40">
+        <path opacity="0.2" fill={loadingSvgColor} d="M20.201,5.169c-8.254,0-14.946,6.692-14.946,14.946c0,8.255,6.692,14.946,14.946,14.946
+          s14.946-6.691,14.946-14.946C35.146,11.861,28.455,5.169,20.201,5.169z M20.201,31.749c-6.425,0-11.634-5.208-11.634-11.634
+          c0-6.425,5.209-11.634,11.634-11.634c6.425,0,11.633,5.209,11.633,11.634C31.834,26.541,26.626,31.749,20.201,31.749z"/>
+        <path fill={loadingSvgColor} d="M26.013,10.047l1.654-2.866c-2.198-1.272-4.743-2.012-7.466-2.012h0v3.312h0
+          C22.32,8.481,24.301,9.057,26.013,10.047z">
+          <animateTransform attributeType="xml"
+            attributeName="transform"
+            type="rotate"
+            from="0 20 20"
+            to="360 20 20"
+            dur="0.5s"
+            repeatCount="indefinite"/>
+        </path>
+      </svg>
     );
 
     if (this.state.generateDownloadLinkSuccess) {
@@ -578,9 +587,12 @@ class Home extends React.Component {
       );
     }
 
+    const downloadText = state.isDownloadLoading ? loadingSvg : (
+      <span><i className="fa fa-download"></i> Compile and Download</span>
+    );
     const download = (
       <div>
-        <button ref="downloadBtn" className="btn btn-block btn-mega btn-success" onClick={this.clickDownload}><i className="fa fa-download"></i> Compile and Download</button>
+        <button ref="downloadBtn" className="btn btn-block btn-mega btn-success" onClick={this.clickDownload}>{downloadText}</button>
         {generateDownloadLink}
       </div>
     );
