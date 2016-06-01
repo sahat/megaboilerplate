@@ -293,7 +293,7 @@ Project Structure
 
 Due to the nature of this project, there are too many possible project structure variations to list here. For the sake of simplicity, let's consider just the following project types:
 
-- [Traditional Node.js Web App](#-traditional-nodejs-app)
+- [Traditional Node.js Web App](#-traditional-nodejs-web-app)
 - [React App](#-react-app)
 - [AngularJS App](#-angularjs-app)
 - Meteor App
@@ -345,6 +345,30 @@ The new hotness of the web — Universal JavaScript app, powered by [React](http
 │   ├── loading.jade           # Loading spinner animation for OAuth 1.0 / 2.0 authentication flow inside a popup
 ├── .babelrc                   # Babel config
 ├── .env                       # API keys, passwords, and other sensitive information
+├── server.js                  # Express application
+└── package.json               # NPM Dependencies and scripts
+```
+
+### <img src="https://avatars0.githubusercontent.com/u/139426?v=3&s=400" align="top" height="34"> AngularJS App
+
+Your typical MEAN stack (MongoDB, Express, AngularJS, Node). Originally I didn't plan on adding AngularJS 1.x generator, but since I did, I kept it real simple: **no Browserify, no ES6 classes, no AngularJS 1.5 components**. Admittedly, My experience with this framework is limited to a brief encounter in 2014, so I don't know a whole lot about modern AngularJS best practices. I would love your contributions here!
+
+```
+.
+├── app/                       # Angular app directory
+│   ├── controllers/           # Angular controllers
+│   ├── partials/              # Angular view templates
+│   ├── services/              # Angular services
+│   ├── store/                 # Store initialization and configuration
+│   ├── app.js                 # Main Angular app file
+│   ├── index.html             # Main layout template
+├── controllers/               # Express route handlers
+├── models/                    # Express database models
+├── public/                    
+│   ├── css/                   # Sass/LESS/PostCSS/CSS stylesheets (both source and generated)
+│   ├── js/                    # Compiled Angular app and third-party vendor files, e.g. angular.js, angular-route.js
+├── .env                       # API keys, passwords, and other sensitive information
+├── gulpfile.js                # Compiles Angular application and templates
 ├── server.js                  # Express application
 └── package.json               # NPM Dependencies and scripts
 ```
