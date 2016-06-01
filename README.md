@@ -293,10 +293,31 @@ Project Structure
 
 Due to the nature of this project, there are too many possible project structure variations to list here. For the sake of simplicity, let's consider just the following project types:
 
-- [Traditional Node.js Web App](#)
+- [Traditional Node.js Web App](#-traditional-nodejs-app)
 - [React App](#-react-app)
-- [Angular 2 App](#)
-- [Meteor App](#)
+- [AngularJS App](#-angularjs-app)
+- Meteor App
+
+### <img src="https://nodejs.org/static/apple-touch-icon.png" align="top" height="34"> Traditional Node.js Web App
+
+This is perhaps the most straightforward web app type that does not use any client-side JavaScript frameworks or build tools. Is also the closest thing to [Hackathon Starter](https://github.com/sahat/hackathon-starter) project.
+
+```
+.
+├── config/                    # Configuration files for OAuth, database, etc.
+│   ├── passport.js/           # Passport strategies
+├── controllers/               # Express route handlers
+├── models/                    # Express database models
+├── public/                            
+│   ├── css/                   # Sass/LESS/PostCSS/CSS stylesheets (both source and generated)
+│   ├── fonts/                 # Web fonts
+│   ├── js/                    # Client-side JavaScript and third-party vendor files
+├── views/                     # Templates
+├── test/                      # Unit tests                    
+├── .env                       # API keys, passwords, and other sensitive information
+├── server.js                  # Express application
+└── package.json               # NPM Dependencies and scripts
+```
 
 ### <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/React.js_logo.svg/50px-React.js_logo.svg.png" align="top" height="34"> React App
 
@@ -324,8 +345,8 @@ The new hotness of the web — Universal JavaScript app, powered by [React](http
 │   ├── loading.jade           # Loading spinner animation for OAuth 1.0 / 2.0 authentication flow inside a popup
 ├── .babelrc                   # Babel config
 ├── .env                       # API keys, passwords, and other sensitive information
-├── server.js                     # Express application
-└── package.json               # NPM Dependencies
+├── server.js                  # Express application
+└── package.json               # NPM Dependencies and scripts
 ```
 
 :top: <sub>[**back to top**](#table-of-contents)</sub>
