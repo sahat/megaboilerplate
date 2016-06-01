@@ -146,8 +146,8 @@ export default async function generateCommonAuthenticationExpress(params) {
 
   switch (params.templateEngine) {
     case 'jade':
-      if (params.jsFramework === 'react') {
-        if (isUsingOauth) {
+      if (params.jsFramework) {
+        if (isUsingOauth && params.jsFramework === 'react') {
           set(params, ['build', 'views', 'loading.jade'], await getModule('authentication/common/views/jade/loading.jade'));
         }
       } else {
@@ -159,8 +159,8 @@ export default async function generateCommonAuthenticationExpress(params) {
       }
       break;
     case 'handlebars':
-      if (params.jsFramework === 'react') {
-        if (isUsingOauth) {
+      if (params.jsFramework) {
+        if (isUsingOauth && params.jsFramework === 'react') {
           set(params, ['build', 'views', 'loading.handlebars'], await getModule('authentication/common/views/handlebars/loading.handlebars'));
         }
       } else {
@@ -172,8 +172,8 @@ export default async function generateCommonAuthenticationExpress(params) {
       }
       break;
     case 'nunjucks':
-      if (params.jsFramework === 'react') {
-        if (isUsingOauth) {
+      if (params.jsFramework) {
+        if (isUsingOauth && params.jsFramework === 'react') {
           set(params, ['build', 'views', 'loading.html'], await getModule('authentication/common/views/nunjucks/loading.html'));
         }
       } else {
