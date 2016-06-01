@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+  <head>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+
+    <!-- Use title if it's in the page YAML frontmatter -->
+    <title><%= current_page.data.title || "Middleman" %></title>
+
+    <link href='//fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>
+
+    <%= stylesheet_link_tag :site %>
+  </head>
+
+  <body class="<%= page_classes %>">
+    <%= yield %>
+    <%= javascript_include_tag "jquery.min.js" %>
+    <%= javascript_include_tag "semantic.min.js" %>
+    <%= javascript_include_tag "main.js" %>
+  </body>
+</html>
