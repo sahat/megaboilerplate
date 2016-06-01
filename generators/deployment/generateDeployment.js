@@ -4,11 +4,11 @@ export default async function generateDeployment(params) {
   switch (params.deployment) {
     case 'heroku':
       if (params.testing) {
-        addNpmScriptMemory('deploy', 'npm test && git push heroku master');
+        addNpmScriptMemory('deploy', 'npm test && git push heroku master', params);
       } else {
-        addNpmScriptMemory('deploy', 'git push heroku master');
+        addNpmScriptMemory('deploy', 'git push heroku master', params);
       }
-      addNpmScriptMemory('postdeploy', 'echo Succesfully deployed to Heroku!');
+      addNpmScriptMemory('postdeploy', 'echo Succesfully deployed to Heroku!', params);
       break;
     case 'azure':
       break;

@@ -31,6 +31,7 @@ class Testing extends React.Component {
       default:
         description = <div className="placeholder"> </div>;
     }
+
     let note;
 
     if (props.testing === 'mocha') {
@@ -43,6 +44,34 @@ class Testing extends React.Component {
     } else {
       note = <div className="placeholder"> </div>;
     }
+
+    const mochaRadio = props.jsFramework !== 'angularjs' ? (
+      <label className="radio-inline">
+        <img className="btn-logo" src="/img/svg/mocha.svg" alt="Mocha"/>
+        <input type="radio" name="testingRadios" value="mocha" onChange={props.handleChange} checked={props.testing === 'mocha'}/>
+        <span>Mocha</span>
+      </label>
+    ) : (
+      <label className="radio-inline hint--top hint--rounded" data-hint="Coming soon">
+        <img className="btn-logo disabled" src="/img/svg/mocha.svg" alt="Mocha"/>
+        <input type="radio" name="testingRadios" value="mocha" onChange={props.handleChange} checked={props.testing === 'mocha'} disabled/>
+        <span>Mocha</span>
+      </label>
+    );
+
+    const jasmineRadio = props.jsFramework === 'angularjs' ? (
+      <label className="radio-inline">
+        <img className="btn-logo" src="/img/svg/jasmine.svg" alt="Jasmine"/>
+        <input type="radio" name="testingRadios" value="jasmine" onChange={props.handleChange} checked={props.testing === 'jasmine'}/>
+        <span>Jasmine</span>
+      </label>
+    ) : (
+      <label className="radio-inline hint--top hint--rounded" data-hint="Coming soon">
+        <img className="btn-logo disabled" src="/img/svg/jasmine.svg" alt="Jasmine"/>
+        <input type="radio" name="testingRadios" value="jasmine" onChange={props.handleChange} checked={props.testing === 'jasmine'} disabled/>
+        <span>Jasmine</span>
+      </label>
+    )
 
     const validationError = props.testingValidationError ? (
       <div className="text-danger"><i className="fa fa-warning"></i> {props.testingValidationError}</div>
@@ -69,16 +98,8 @@ class Testing extends React.Component {
               <input type="radio" name="testingRadios" value="none" onChange={props.handleChange} checked={props.testing === 'none'}/>
               <span>None</span>
             </label>
-            <label className="radio-inline">
-              <img className="btn-logo" src="/img/svg/mocha.svg" alt="Mocha"/>
-              <input type="radio" name="testingRadios" value="mocha" onChange={props.handleChange} checked={props.testing === 'mocha'}/>
-              <span>Mocha</span>
-            </label>
-            <label className="radio-inline hint--top hint--rounded" data-hint="Coming soon">
-              <img className="btn-logo disabled" src="/img/svg/jasmine.svg" alt="Jasmine"/>
-              <input type="radio" name="testingRadios" value="jasmine" onChange={props.handleChange} checked={props.testing === 'jasmine'} disabled/>
-              <span>Jasmine</span>
-            </label>
+            {mochaRadio}
+            {jasmineRadio}
           </div>
           {validationError}
           {note}

@@ -323,6 +323,7 @@ class Home extends React.Component {
         }
         state.jsFramework = value;
         state.jsFrameworkValidationError = null;
+        state.testing = null;
         break;
 
       case 'reactOptionsCheckboxes':
