@@ -606,7 +606,8 @@ class Home extends React.Component {
       <VelocityComponent runOnMount animation="transition.slideLeftIn" duration={900}>
         <div className="panel" style={{ opacity: 0 }}>
           <div className="panel-body">
-            <i className="fa fa-skype"></i> Looking for additional help? <a href="https://calendly.com/sahat" target="_blank">I am available</a> for Skype business consulting. Rates may vary.
+            <p><a href="https://www.codementor.io/sahat"><img src="https://cdn.codementor.io/badges/get_help_github.svg" alt="Codementor"/></a></p>
+            <i className="fa fa-calendar"></i> Looking for additional help? <a href="https://calendly.com/sahat" target="_blank">I am available</a> for business consulting. Rates may vary.
           </div>
         </div>
       </VelocityComponent>
