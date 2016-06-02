@@ -5,6 +5,7 @@
   "scripts": {
     "build": "node ./node_modules/webpack/bin/webpack.js --config webpack.config.prod.js --display-error-details",
     "start": "node server.js",
+    "test": "mocha --recursive --compilers js:babel-register",
     "postinstall": "npm run build"
   },
   "dependencies": {
@@ -61,5 +62,9 @@
   },
   "engines": {
     "node": "6.1.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.5.3"
   }
 }
