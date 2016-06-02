@@ -112,7 +112,7 @@ IF EXIST "%DEPLOYMENT_TARGET%\webpack.config.prod.js" (
   echo "=================="
   echo %DEPLOYMENT_TARGET%
   echo "=================="
-  call :ExecuteCmd !NODE_EXE! ./node_modules/webpack/bin/webpack.js --config webpack.config.prod.js --display-error-details
+  call :ExecuteCmd "!NODE_EXE!" ./node_modules/webpack/bin/webpack.js --config webpack.config.prod.js --display-error-details
   if !ERRORLEVEL! NEQ 0 goto error
   popd
 )
