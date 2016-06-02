@@ -295,7 +295,7 @@ class Header extends React.Component {
 
           <div ref="carbonAdsBlocked" className="carbon-ads-blocked"></div>
 
-          <iframe src="https://ghbtns.com/github-btn.html?user=sahat&repo=boilerplate&type=star&count=true&size=large" frameBorder="0" scrolling="0" width="160px" height="30px"></iframe>
+          <iframe src="https://ghbtns.com/github-btn.html?user=sahat&repo=megaboilerplate&type=star&count=true&size=large" frameBorder="0" scrolling="0" width="160px" height="30px"></iframe>
 
           <div className="visible-lg">
             <img className="hero-arrow" src="/img/arrow.png" alt="Arrow"/>
