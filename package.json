@@ -1,12 +1,11 @@
 {
-  "name": "boilerplate",
+  "name": "megaboilerplate",
   "private": true,
   "version": "1.0.0",
   "scripts": {
     "build": "node ./node_modules/webpack/bin/webpack.js --config webpack.config.prod.js --display-error-details",
     "start": "node server.js",
-    "test": "mocha --recursive --compilers js:babel-register",
-    "postinstall": "npm run build"
+    "test": "mocha --recursive --compilers js:babel-register"
   },
   "dependencies": {
     "archiver": "^1.0.0",
