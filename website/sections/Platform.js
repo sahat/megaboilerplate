@@ -1,6 +1,5 @@
 import React from 'react';
 import cx from 'classnames';
-import { find } from 'lodash';
 
 const PLATFORM_SVG = (
   <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 50 50">
