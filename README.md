@@ -1,4 +1,4 @@
-# <a href="http://megaboilerplate.com"><img src="https://lh3.googleusercontent.com/i7QG0eXA71Y8rYFjLta75VWGu3EEthm7_vNx-oaNL4DhyGGadOaS7ZsnTbmqBUIjnK1X8UKEbeplC-aAB4yKwU4UDaPhREM5Utj2v1wRt5Ru5fUqHszdme19pRcLLQoaaop_1PYioKJOYTurAC_gg1F2C3dWUnHtyE1HyJeZ1JVDGwqrTelnKeUJrHlfXI1pjfGshPpCOgvj-e48exR0aKU5jf9CPydOkHRQQYVdIVpg2doWsvpi99MUzkG5kRj1re_YXiFY5PAzqwDZT1VCeljxTov7J9uoytfaVt2lZt-AOh3szxYU4H09wxwGiEzRvcBdSlcgM06k69cmlJykhLXJuWxgYLhr8eejFIyfRQl6ZuXMEfV884tfUEhiPrvMIe7bHCGYPjKtsendiiEDPSxUzYHDU7BKfTOD5AcMXCeRubKpR-C2pD7kN_vsolregrAXib8MCectMd6wOyJIh-FuEPSgzCTDPUjjUOnGHxYXWzyCGpfQABmxDHxSbs3U1gkFw4jc55dX_kOMsN-91aSrB8BuOGnntIss7vWp4R_jqoCHZcGbtqkJFkj17PXrtX-7WM-k-IcZ_IUwPtjWaEY5gFnwx7Y=w923-h119-no" height="60"></a> 
+# <a href="http://megaboilerplate.com"><img src="http://i.imgur.com/UNyLl3s.png" height="60"></a> 
  
 [![PayPal Donate](https://img.shields.io/badge/donate-PayPal-0070ba.svg?style=flat)](https://paypal.me/sahat) [![Gitter](https://badges.gitter.im/sahat/megaboilerplate.svg)](https://gitter.im/sahat/megaboilerplate)
 [![Build Status](https://travis-ci.org/sahat/megaboilerplate.svg?branch=master)](https://travis-ci.org/sahat/megaboilerplate)
@@ -43,20 +43,20 @@ Table of Contents
 Features
 --------
 
-- ✓ Generate your perfect boilerplate from hundreds of possible permutations!
-- ✓ Jade, Handlebars and Nunjucks template engines
-- ✓ Sass, LESS, PostCSS and vanilla CSS stylesheets
-- ✓ Bootstrap 3.5 and Foundation 6 CSS frameworks
-- ✓ Mocha and Jasmine testing frameworks
-- ✓ Gulp, Webpack and NPM scripts as build tools
-- ✓ PostgreSQL, MySQL, SQLite and MongoDB databases
-- ✓ React with server-side rendering and hot reloading, AngularJS and jQuery on the client-side
+- :white_check_mark: Generate your perfect boilerplate from hundreds of possible permutations!
+- :white_check_mark: Jade, Handlebars and Nunjucks template engines
+- :white_check_mark: Sass, LESS, PostCSS and vanilla CSS stylesheets
+- :white_check_mark: Bootstrap 3.5 and Foundation 6 CSS frameworks
+- :white_check_mark: Mocha and Jasmine testing frameworks
+- :white_check_mark: Gulp, Webpack and NPM scripts as build tools
+- :white_check_mark: PostgreSQL, MySQL, SQLite and MongoDB databases
+- :white_check_mark: React with server-side rendering and hot reloading, AngularJS and jQuery on the client-side
 - **Generated application includes**:
- - ✓ Local Authentication using Email and Password
- - ✓ OAuth Authentication via Twitter, Facebook, Google, VK (Passport.js and JWT)
- - ✓ Flash notifications
- - ✓ Contact form (powered by Mailgun)
- - ✓ **Account Management**
+ - :white_check_mark: Local Authentication using Email and Password
+ - :white_check_mark: OAuth Authentication via Twitter, Facebook, Google, VK (Passport.js and JWT)
+ - :white_check_mark: Flash notifications
+ - :white_check_mark: Contact form (powered by Mailgun)
+ - :white_check_mark: **Account Management**
    - Gravatar, Profile Details, Change Password, Forgot Password, Reset Password, Delete Account, Link multiple OAuth strategies to one account
 
 Getting Started
