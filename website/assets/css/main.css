@@ -1,3 +1,8 @@
+@import "bootstrap.min.css";
+@import "hint.css";
+@import "animate.css";
+@import "sweetalert.css";
+
 body {
   /*background-color: #f4f5f7;*/
   background-color: #e8e8e8;
@@ -10,7 +15,7 @@ body {
 }
 
 a {
-  color: rgb(29, 124, 244);
+  color: #1d7cf4;
 }
 
 main {
@@ -682,10 +687,9 @@ canvas {
 }
 
 .upper {
-  background: #617d8c;
   top: -2em;
   z-index: 60;
-  background-image: -webkit-linear-gradient(bottom, #ffffff, #d9d9d9);
+  background-color: #617d8c;
   background-image: linear-gradient(to top, #ffffff, #d9d9d9);
   border-color: #d6d6d6;
 }
@@ -697,7 +701,6 @@ canvas {
 
 .middle {
   background-color: #1ad28f;
-  background-image: -webkit-linear-gradient(bottom, #1ad28f, #128e61);
   background-image: linear-gradient(to top, #1ad28f, #128e61);
   border-color: #11895e;
 }
@@ -708,11 +711,9 @@ canvas {
 }
 
 .lower {
-  background: #455963;
   top: 2em;
   z-index: 45;
   background-color: #28ace2;
-  background-image: -webkit-linear-gradient(bottom, #28ace2, #177da7);
   background-image: linear-gradient(to top, #28ace2, #177da7);
   border-color: #167aa2;
 }
@@ -1213,11 +1214,11 @@ canvas {
   /*border: 0;*/
   /*border-radius: 5px;*/
   /*box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02);*/
-  transition: box-shadow .2s linear;
+  transition: box-shadow .125s linear;
 }
 
 .panel:hover {
-  box-shadow: 0 4px 9px rgba(0, 0, 0, .125);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, .175);
   /*box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);*/
 }
 
@@ -1491,36 +1492,10 @@ input[type=checkbox].disabled + span::before {
 
 .typed-cursor {
   opacity: 1;
-  -webkit-animation: blink 0.7s infinite;
-  -moz-animation: blink 0.7s infinite;
   animation: blink 0.7s infinite;
 }
 
 @keyframes blink {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@-webkit-keyframes blink {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@-moz-keyframes blink {
   0% {
     opacity: 1;
   }
@@ -1539,20 +1514,11 @@ input[type=checkbox].disabled + span::before {
   }
 }
 
-@-webkit-keyframes zoomIn {
-  from {
-    transform: scale(1.05);
-    opacity: 0
-  }
-}
-
 .zoomIn {
-  -webkit-animation: 0.5s 0.2s zoomIn;
   animation: 0.5s 0.2s zoomIn;
 }
 
 .zoomInBackwards {
-  -webkit-animation: 0.5s 0.2s zoomIn backwards;
   animation: 0.5s 0.2s zoomIn backwards;
 }
 
@@ -1575,41 +1541,34 @@ code {
 }
 
 .animate-float {
-  -webkit-animation: float 2.8s forwards ease infinite;
   animation: float 2.8s forwards ease infinite;
 }
 
 
 @keyframes float {
   0% {
-    -webkit-transform: translateZ(0);
     transform: translateZ(0)
   }
 
   40% {
-    -webkit-transform: translate3d(0,-6px,0);
     transform: translate3d(0,-6px,0)
   }
 
   to {
-    -webkit-transform: translateZ(0);
     transform: translateZ(0)
   }
 }
 
 @-webkit-keyframes float {
   0% {
-    -webkit-transform: translateZ(0);
     transform: translateZ(0)
   }
 
   40% {
-    -webkit-transform: translate3d(0, -6px, 0);
     transform: translate3d(0, -6px, 0)
   }
 
   to {
-    -webkit-transform: translateZ(0);
     transform: translateZ(0)
   }
 }

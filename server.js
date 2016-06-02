@@ -8,6 +8,9 @@ const React = require('react');
 const ReactDOM = require('react-dom/server');
 const Router = require('react-router');
 const nunjucks = require('nunjucks');
+var postcss = require('postcss-middleware');
+var cssnext = require('postcss-cssnext');
+var atImport = require('postcss-import');
 
 const dotenv = require('dotenv');
 
@@ -35,7 +38,6 @@ app.set('port', process.env.PORT || 4000);
 app.use(compression());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
 if (app.get('env') === 'development') {
   const webpack = require('webpack');
   const config = require('./webpack.config');
@@ -47,8 +49,13 @@ if (app.get('env') === 'development') {
   app.use(require('webpack-hot-middleware')(compiler));
   app.use(logger('dev'));
 }
-
-app.use(express.static(path.join(__dirname, 'website', 'assets')));
+app.use('/css', postcss({
+  src: function(req) {
+    return path.join(__dirname, 'website', 'assets', 'css', req.path);
+  },
+  plugins: [atImport(), cssnext()]
+}));
+app.use(express.static(path.join(__dirname, 'website', 'assets'), { maxAge: 31557600000 }));
 
 
 app.post('/download', expressRoutes.download);
