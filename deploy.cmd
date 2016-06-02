@@ -109,7 +109,7 @@ IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
 IF EXIST "%DEPLOYMENT_TARGET%\webpack.config.prod.js" (
   pushd "%DEPLOYMENT_TARGET%"
   echo "Building website using Webpack"
-  call :ExecuteCmd "node ./node_modules/webpack/bin/webpack.js --config webpack.config.prod.js --display-error-details"
+  call :ExecuteCmd !NPM_CMD! run build
   if !ERRORLEVEL! NEQ 0 goto error
   popd
 )
