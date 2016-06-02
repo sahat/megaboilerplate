@@ -1,12 +1,13 @@
-![](http://i.imgur.com/DrmCGFc.jpg)
+# <a href="http://megaboilerplate.com"><img src="https://lh3.googleusercontent.com/i7QG0eXA71Y8rYFjLta75VWGu3EEthm7_vNx-oaNL4DhyGGadOaS7ZsnTbmqBUIjnK1X8UKEbeplC-aAB4yKwU4UDaPhREM5Utj2v1wRt5Ru5fUqHszdme19pRcLLQoaaop_1PYioKJOYTurAC_gg1F2C3dWUnHtyE1HyJeZ1JVDGwqrTelnKeUJrHlfXI1pjfGshPpCOgvj-e48exR0aKU5jf9CPydOkHRQQYVdIVpg2doWsvpi99MUzkG5kRj1re_YXiFY5PAzqwDZT1VCeljxTov7J9uoytfaVt2lZt-AOh3szxYU4H09wxwGiEzRvcBdSlcgM06k69cmlJykhLXJuWxgYLhr8eejFIyfRQl6ZuXMEfV884tfUEhiPrvMIe7bHCGYPjKtsendiiEDPSxUzYHDU7BKfTOD5AcMXCeRubKpR-C2pD7kN_vsolregrAXib8MCectMd6wOyJIh-FuEPSgzCTDPUjjUOnGHxYXWzyCGpfQABmxDHxSbs3U1gkFw4jc55dX_kOMsN-91aSrB8BuOGnntIss7vWp4R_jqoCHZcGbtqkJFkj17PXrtX-7WM-k-IcZ_IUwPtjWaEY5gFnwx7Y=w923-h119-no" height="60"></a> 
+ 
+[![PayPal Donate](https://img.shields.io/badge/donate-PayPal-0070ba.svg?style=flat)](https://paypal.me/sahat) [![Gitter](https://badges.gitter.im/sahat/megaboilerplate.svg)](https://gitter.im/sahat/megaboilerplate)
+[![Build Status](https://travis-ci.org/sahat/megaboilerplate.svg?branch=master)](https://travis-ci.org/sahat/megaboilerplate)
+[![Issues](https://img.shields.io/github/issues/sahat/boilerplate.svg?style=flat)](https://github.com/sahat/boilerplate/issues)
 
-# Mega Boilerplate 
 
-[![PayPal Donate](https://img.shields.io/badge/donate-paypal-0070ba.svg?style=flat)](https://paypal.me/sahat) [![Gitter](https://badges.gitter.im/sahat/megaboilerplate.svg)](https://gitter.im/sahat/megaboilerplate) [![Issues](https://img.shields.io/github/issues/sahat/boilerplate.svg?style=flat)](https://github.com/sahat/boilerplate/issues)
+**Live Demo**: **http://megaboilerplate.com**
 
-**Live Demo**: http://megaboilerplate.com
-
-Mega Boilerplate is a starter project generator that focuses on simplicity and ease of use, while providing you with flexibility of choices. It was inspired by [Hackathon Starter](https://github.com/sahat/hackathon-starter), but unlike it, you are free to customize any part of your stack from web framework and database to CSS preprocessor and client-side JavaScript framework. Currently, generators are primarily limited to Node.js web apps, but I would like to expand it to other platforms and programming languages in the future.
+Mega Boilerplate is a starter project generator that focuses on simplicity and ease of use, while providing you with flexibility of choices. It was inspired by [Hackathon Starter](https://github.com/sahat/hackathon-starter), but unlike it, you are free to customize any part of your stack from web framework and database to CSS preprocessor and client-side JavaScript framework. Currently, generators are primarily limited to Node.js web apps, but I would like to expand it to other platforms and languages in the future.
 
 
 Table of Contents
@@ -42,20 +43,20 @@ Table of Contents
 Features
 --------
 
-- Generate your perfect boilerplate from hundreds of possible permutations!
-- Jade, Handlebars and Nunjucks template engines
-- Sass, LESS, PostCSS and vanilla CSS stylesheets
-- Bootstrap 3.5 and Foundation 6 CSS frameworks
-- Mocha and Jasmine testing frameworks
-- Gulp, Webpack and NPM scripts as build tools
-- PostgreSQL, MySQL, SQLite and MongoDB databases
-- React with server-side rendering and hot reloading, AngularJS and jQuery on the client-side
+- ✓ Generate your perfect boilerplate from hundreds of possible permutations!
+- ✓ Jade, Handlebars and Nunjucks template engines
+- ✓ Sass, LESS, PostCSS and vanilla CSS stylesheets
+- ✓ Bootstrap 3.5 and Foundation 6 CSS frameworks
+- ✓ Mocha and Jasmine testing frameworks
+- ✓ Gulp, Webpack and NPM scripts as build tools
+- ✓ PostgreSQL, MySQL, SQLite and MongoDB databases
+- ✓ React with server-side rendering and hot reloading, AngularJS and jQuery on the client-side
 - **Generated application includes**:
- - Local Authentication using Email and Password
- - OAuth Authentication via Twitter, Facebook, Google, VK (Passport.js and JWT)
- - Flash notifications
- - Contact form (powered by Mailgun)
- - **Account Management**
+ - ✓ Local Authentication using Email and Password
+ - ✓ OAuth Authentication via Twitter, Facebook, Google, VK (Passport.js and JWT)
+ - ✓ Flash notifications
+ - ✓ Contact form (powered by Mailgun)
+ - ✓ **Account Management**
    - Gravatar, Profile Details, Change Password, Forgot Password, Reset Password, Delete Account, Link multiple OAuth strategies to one account
 
 Getting Started
