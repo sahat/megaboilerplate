@@ -429,6 +429,12 @@ class Home extends React.Component {
   }
 
 
+  handleClickDownloadLink(event) {
+    const input = this.refs.downloadLinkInput;
+    $(input).focus();
+    input.setSelectionRange(0, 9999);
+  }
+
   copyDownloadLink(event) {
     const input = this.refs.downloadLinkInput;
 
@@ -559,7 +565,7 @@ class Home extends React.Component {
         <div className="row">
           <div className="col-sm-8 col-sm-offset-2">
             <div className="input-group">
-              <input type="text" ref="downloadLinkInput" className="form-control" defaultValue={state.downloadLinkInputValue} readOnly/>
+              <input type="text" ref="downloadLinkInput" onClick={this.handleClickDownloadLink.bind(this)} className="form-control" defaultValue={state.downloadLinkInputValue} readOnly/>
                 <span className="input-group-btn">
                   <button onClick={this.copyDownloadLink.bind(this)} onMouseOut={this.copyDownloadLinkMouseOut.bind(this)} className="btn btn-default hint--bottom hint--rounded" type="button" data-hint={this.state.copyClipboardText}>
                     <img className="clipboard" src="/img/svg/clippy.svg" width="13" alt="Copy to clipboard"/>
