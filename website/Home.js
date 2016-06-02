@@ -1,6 +1,5 @@
 import haikunate from 'haikunator';
 import React from 'react';
-import { clone } from 'lodash';
 import Header from './Header';
 import Footer from './Footer';
 import Platform from './sections/Platform';
@@ -138,7 +137,7 @@ class Home extends React.Component {
       }
     }
 
-    const data = clone(state);
+    const data = Object.assign({}, state);
     data.appName = haikunate({ tokenLength: 0 });
 
     if (data.jsFramework === 'none') {
@@ -156,10 +155,10 @@ class Home extends React.Component {
     data.reactOptions = data.reactOptions ? Array.from(data.reactOptions) : [];
     data.jsLibraryOptions = data.jsLibraryOptions ? Array.from(data.jsLibraryOptions) : [];
 
-    // Google Analytics event
-    ga('send', 'event', 'Mega Boilerplate', 'Download', data);
+    ga('send', 'event', 'Mega Boilerplate', 'Download', 'Downloads');
 
     if (options.generateDownloadLink) {
+      ga('send', 'event', 'Mega Boilerplate', 'Download', 'Generated Links');
       $.ajax({
         url: '/download',
         method: 'POST',
@@ -203,7 +202,7 @@ class Home extends React.Component {
   }
 
   handleGenerateLibraryName() {
-    const newState = clone(this.state);
+    const newState = Object.assign({}, this.state);
     newState.jsLibraryName = haikunate({ tokenLength: 0 });
     newState.jsLibraryValidationError = null;
     this.setState(newState);
@@ -213,7 +212,7 @@ class Home extends React.Component {
     const name = event.target.name;
     const value = event.target.value;
     const isChecked = event.target.checked;
-    const state = clone(this.state);
+    const state = Object.assign({}, this.state);
     const refs = this.refs;
 
     switch (name) {
@@ -612,7 +611,7 @@ class Home extends React.Component {
     ) : null;
 
     return (
-      <div>
+      <div ref="wrapper">
         <Header />
         <main className="container">
           {settingsCheckboxes}

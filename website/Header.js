@@ -1,4 +1,4 @@
-/* global $ */
+/* global $, moment*/
 
 if (typeof window !== 'undefined') {
   require('velocity-animate');
@@ -6,8 +6,6 @@ if (typeof window !== 'undefined') {
 }
 
 import React from 'react';
-import moment from 'moment';
-import { shuffle } from 'lodash';
 import { VelocityComponent } from 'velocity-react';
 
 const BRAND_LOGO = (
@@ -16,6 +14,26 @@ const BRAND_LOGO = (
     211.9,60.8 158.5,91.9 106.8,62 0.5,123.3 106.8,184.6 213.4,123.3 "/>
   </svg>
 );
+
+const shuffle = (array) => {
+  let counter = array.length;
+
+  // While there are elements in the array
+  while (counter > 0) {
+    // Pick a random index
+    let index = Math.floor(Math.random() * counter);
+
+    // Decrease counter by 1
+    counter--;
+
+    // And swap the last element with it
+    let temp = array[counter];
+    array[counter] = array[index];
+    array[index] = temp;
+  }
+
+  return array;
+};
 
 class Header extends React.Component {
   constructor(props) {

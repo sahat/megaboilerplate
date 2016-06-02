@@ -1,8 +1,4 @@
 import React from 'react';
-import moment from 'moment';
-import { shuffle } from 'lodash';
-import { VelocityComponent } from 'velocity-react';
-
 
 class Demos extends React.Component {
   constructor(props) {
