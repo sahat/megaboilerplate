@@ -171,7 +171,7 @@ export function createZipArchive(res, params) {
     uploadPromise = uploadAndReturnDownloadLink(archive);
   } else {
     archive.pipe(res);
-    res.attachment(`megaboilerplate-${shortid.generate()}.zip`);
+    res.attachment('megaboilerplate-app.zip');
   }
 
   archive.finalize();
