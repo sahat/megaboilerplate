@@ -634,6 +634,12 @@ canvas {
   left: 0;
 }
 
+.facebook-like-button {
+  margin-left: 5px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
 .facebook-share-button {
   margin-left: 5px;
   margin-right: 5px;
@@ -1215,7 +1221,7 @@ canvas {
   /*border: 0;*/
   /*border-radius: 5px;*/
   /*box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02);*/
-  transition: box-shadow .125s linear;
+  transition: box-shadow .15s linear;
 }
 
 .panel:hover {

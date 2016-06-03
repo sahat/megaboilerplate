@@ -48,7 +48,7 @@ const NextSteps = (props) => {
     gettingStartedText += ` When ready to deploy, see <a href="https://github.com/sahat/megaboilerplate#deployment" target="_blank"> ${nameMap[props.deployment]} deployment guide</a>.`
   }
 
-    const learnMap = {
+  const learnMap = {
     express: `<strong>Express</strong>`,
     meteor: `<strong>Meteor</strong>`,
     jekyll: `<strong>Jekyll</strong>`,

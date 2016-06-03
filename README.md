@@ -83,6 +83,8 @@ cd megaboilerplate-app
 npm install
 
 node server.js
+
+# Express server listening on port 3000
 ```
 
 **Note**: If you have selected **Gulp** or **NPM** build tool, you may also need to run `npm run build` command.
@@ -121,7 +123,7 @@ jekyll serve
 - [Middleman](https://middlemanapp.com/) Ruby Gem
 
 ```shell
-cd myproject
+cd megaboilerplate-app
 
 # Install Ruby dependencies
 bundle install

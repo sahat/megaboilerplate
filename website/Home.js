@@ -478,6 +478,12 @@ class Home extends React.Component {
             </label>
           </div>
         </li>
+        <li className="pull-right">
+          <div className="checkbox">
+            <a href="https://www.codementor.io/sahat" target="_blank"><img src="https://cdn.codementor.io/badges/get_help_github.svg" alt="Codementor"/></a>
+          </div>
+        </li>
+
       </ul>
     );
 
@@ -602,7 +608,6 @@ class Home extends React.Component {
       <VelocityComponent runOnMount animation="transition.slideLeftIn" duration={900}>
         <div className="panel" style={{ opacity: 0 }}>
           <div className="panel-body">
-            <p><a href="https://www.codementor.io/sahat" target="_blank"><img src="https://cdn.codementor.io/badges/get_help_github.svg" alt="Codementor"/></a></p>
             <i className="fa fa-calendar"></i> Looking for additional help? <a href="https://calendly.com/sahat" target="_blank">I am available</a> for business consulting. Rates may vary.
           </div>
         </div>

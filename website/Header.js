@@ -293,11 +293,15 @@ class Header extends React.Component {
             <div id="navbar" className="navbar-collapse collapse">
               <ul className="nav navbar-nav navbar-right">
                 <li className="tweet-button">
-                  <a className="twitter-share-button" href="https://twitter.com/intent/tweet" />
+                  <a className="twitter-share-button" href="https://twitter.com/intent/tweet?text=🔥 Mega Boilerplate ★ Handcrafted starter projects, optimized for simplicity and ease of use by @EvNowAndForever." />
+                </li>
+
+                <li className="facebook-like-button">
+                  <div className="fb-like" data-href="http://megaboilerplate.com" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
                 </li>
 
                 <li className="facebook-share-button">
-                  <div className="fb-share-button" data-href="http://www.your-domain.com/your-page.html" data-layout="button_count"></div>
+                  <div className="fb-share-button" data-href="http://megaboilerplate.com" data-layout="button_count"></div>
                 </li>
 
                 <li className="linkedin-button">
@@ -305,7 +309,7 @@ class Header extends React.Component {
                 </li>
 
                 <li className="plusone-button">
-                  <div className="g-plusone" data-size="medium" data-href="http://google.com"></div>
+                  <div className="g-plusone" data-size="medium" data-href="http://megaboilerplate.com"></div>
                 </li>
 
                 <li>
