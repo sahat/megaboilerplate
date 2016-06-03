@@ -28,8 +28,10 @@ export default async function generateJsFrameworkAngularJs(params) {
       set(params.build, ['public', 'js', 'lib', 'satellizer.js'], await getModule('js-framework/angularjs/lib/satellizer.js'));
 
       // Move all third-party libs to "app/vendor"
-      set(params.build, ['app', 'vendor'], get(params.build, ['public', 'js', 'lib']));
-      set(params.build, ['public', 'js'], undefined);
+      if (params.buildTool === 'gulp') {
+        set(params.build, ['app', 'vendor'], get(params.build, ['public', 'js', 'lib']));
+        set(params.build, ['public', 'js'], undefined);
+      }
 
       set(params.build, ['app', 'partials', '404.html'], await getModule('js-framework/angularjs/partials/404.html'));
       set(params.build, ['app', 'partials', 'home.html'], await getModule(`js-framework/angularjs/partials/home-${params.cssFramework}.html`));

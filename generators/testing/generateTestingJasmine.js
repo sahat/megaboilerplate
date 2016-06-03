@@ -20,8 +20,15 @@ export default async function generateTestingJasmine(params) {
         // Client-side tests
         switch (params.jsFramework) {
           case 'angularjs':
-            set(params.build, ['app', 'karma.conf.js'], await getModule('testing/jasmine/angularjs/karma.conf.js'));
-            set(params.build, ['app', 'test', 'unit', 'controllers', 'contact.spec.js'], await getModule('testing/jasmine/angularjs/unit/contact.spec.js'));
+            if (params.buildTool === 'gulp') {
+              set(params.build, ['app', 'karma.conf.js'], await getModule('testing/jasmine/angularjs/karma.conf.js'));
+              set(params.build, ['app', 'test', 'unit', 'controllers', 'contact.spec.js'], await getModule('testing/jasmine/angularjs/unit/contact.spec.js'));
+              await addNpmScriptMemory('test:client', 'karma start app/karma.conf.js --single-run', params);
+            } else {
+              set(params.build, ['karma.conf.js'], await getModule('testing/jasmine/angularjs/karma.conf-nobuild.js'));
+              set(params.build, ['public', 'js', 'test', 'unit', 'controllers', 'contact.spec.js'], await getModule('testing/jasmine/angularjs/unit/contact.spec.js'));
+              await addNpmScriptMemory('test:client', 'karma start --single-run', params);
+            }
             break;
           default:
             break;
@@ -30,7 +37,6 @@ export default async function generateTestingJasmine(params) {
         // NPM scripts for both server and client tests
         await addNpmScriptMemory('test', 'npm run test:server && npm run test:client', params);
         await addNpmScriptMemory('test:server', 'jasmine', params);
-        await addNpmScriptMemory('test:client', 'karma start app/karma.conf.js --single-run', params);
       } else {
         // NPM script only for server tests
         await addNpmScriptMemory('test', 'jasmine', params);
