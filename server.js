@@ -77,8 +77,8 @@ app.use(function(req, res) {
  });
 });
 
-app.listen(app.get('port'), 'localhost', function(err) {
-  console.log(`Express server listening on port ${app.get('port')}`);
+app.listen(app.get('port'), function(err) {
+  console.log(`Express server listening on port ${app.get('port')} in ${app.get('env')} mode`);
 });
 
 process.on('unhandledRejection', function(reason, p) {
