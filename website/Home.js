@@ -676,7 +676,7 @@ class Home extends React.Component {
                   <img src="/img/svg/vk-logo.svg" height="20"/>
                 </a>
                 <a href="#" className="demo-container demo3">
-                  <p><strong>Demo 3</strong> - Full-stack React app</p>
+                  <p><strong>Demo 3</strong> - Full-stack React app (unstyled)</p>
                   <img src="/img/svg/express-logo.png" height="20"/>
                   <img src="/img/svg/nunjucks-logo.png" height="20"/>
                   <img src="/img/svg/cssnext-logo.svg" height="20"/>

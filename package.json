@@ -2,6 +2,7 @@
   "name": "megaboilerplate",
   "private": true,
   "version": "1.0.0",
+  "main": "server.js",
   "scripts": {
     "build": "node ./node_modules/webpack/bin/webpack.js --config webpack.config.prod.js --display-error-details",
     "start": "node server.js",
