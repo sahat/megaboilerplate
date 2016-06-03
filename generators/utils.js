@@ -562,7 +562,9 @@ export function addEnvMemory(params, data) {
 export async function getModule(str) {
   const modulePath = str.split('/');
   if (!get(__modules, modulePath)) {
-    set(__modules, modulePath, await readFile(join(__base, 'generators', modulePath[0], 'modules', ...modulePath.slice(1))));
+    const generatorType = modulePath[0];
+    const fileBuffer = await readFile(join(__base, 'generators', generatorType, 'modules', ...modulePath.slice(1)));
+    set(__modules, modulePath, fileBuffer);
   }
   return get(__modules, modulePath);
 }
