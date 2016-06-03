@@ -103,6 +103,7 @@ class Header extends React.Component {
     let carbonAdsBlocked = this.refs.carbonAdsBlocked;
     let script = document.createElement('script');
     script.async = true;
+    script.defer = true;
     script.type = 'text/javascript';
     script.src = '//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=megaboilerplatecom';
     script.id = '_carbonads_js';
@@ -112,6 +113,7 @@ class Header extends React.Component {
       setTimeout(function() {
         if (!document.getElementById('carbonads')) {
           $(carbonAdsBlocked).html('<i class="fa fa-2x fa-audio-description" /> Please consider disabling your ad blocker on this site');
+          $(carbonAdsContainer).remove();
         }
       }, 1800);
     };
@@ -349,7 +351,7 @@ class Header extends React.Component {
             <span>Don't forget to <i className="fa fa-star"/> on GitHub if you liked this project!</span>
           </div>
 
-          <div ref="carbonAds"></div>
+          <div ref="carbonAds" style={{ height: '120px', margin: '30px auto 20px' }}></div>
 
           <div className="footnote left">¹ Inspired by <a href="https://github.com/sahat/hackathon-starter" target="_blank">Hackathon Starter</a></div>
 
