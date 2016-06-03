@@ -86,7 +86,7 @@ class Header extends React.Component {
       'Gulp', 'Mocha', 'Jasmine', 'Node.js', 'Jade', 'Handlebars', 'Nunjucks', 'Bourbon Neat', 'Sass', 'LESS',
       'Redux', 'React Router', 'ECMAScript 2015', 'Babel', 'React Hot Reloading', 'Browserify', 'Chai', 'Sinon',
       'MongoDB', 'MySQL', 'PostgreSQL', 'SQLite', 'Passport', 'PostCSS', 'Socket.IO', 'Karma', 'OAuth 2.0', 'OAuth 1.0',
-      'JS Library Generator', 'ESLint'
+      'JS Library Generator', 'ESLint', 'Code Coverage'
     ]);
 
     const h1 = this.refs.heroHeading;

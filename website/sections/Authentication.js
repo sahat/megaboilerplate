@@ -51,7 +51,7 @@ class Authentication extends React.Component {
           <input type="checkbox" name="authenticationCheckboxes" value="twitter" onChange={props.handleChange} checked={props.authentication && props.authentication.has('twitter')} />
           <span>Twitter</span>
         </label>
-        <label className="checkbox-inline" title="VKontakte (ВКонтpакте)">
+        <label className="checkbox-inline" title="VKontakte (ВКонтакте)">
           <img className="btn-logo" src="/img/svg/vk-logo.svg" alt="VK" />
           <input type="checkbox" name="authenticationCheckboxes" value="vk" onChange={props.handleChange} checked={props.authentication && props.authentication.has('vk')} />
           <span>VK</span>
