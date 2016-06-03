@@ -83,8 +83,22 @@ export function walkAndRemoveComments(params) {
 }
 
 export function walkAndRemoveCommentsMemory(params) {
+  const fileExt = ['eot', 'ttf', 'otf', 'svg', 'woff', 'woff2', 'jpeg', 'jpg', 'gif', 'png',
+  'sqlite', 'ico'];
+
+  /**
+   * Checks if buffer is a binary file
+   * @param path {Array}
+   * @return Boolean
+   */
+  const isBinaryFile = (path) => {
+    const filename = path.slice(-1)[0];
+    const ext = filename.split('.').pop();
+    return fileExt.includes(ext);
+  };
+
   traverse(params.build).forEach(function() {
-    if (Buffer.isBuffer(this.node)) {
+    if (Buffer.isBuffer(this.node) && !isBinaryFile(this.path)) {
       const buf = removeCodeMemory(this.node, '//=');
       this.update(this.node, true);
       set(params, ['build'].concat(this.path), buf);
