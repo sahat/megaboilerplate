@@ -77,6 +77,7 @@
   "chai": "^3.5.0",
   "chai-http": "^2.0.1",
   "mocha": "^2.4.5",
+  "jasmine": "^2.4.1",
   "fetch-mock": "3.0.2",
   "karma": "^0.13.22",
   "karma-chai": "^0.1.0",
@@ -84,6 +85,7 @@
   "karma-mocha": "^0.2.2",
   "karma-jasmine": "^0.3.7",
   "karma-phantomjs-launcher": "^1.0.0",
+  "phantomjs-prebuilt": "^2.1.7",
 
   "sinon": "^1.17.3",
   "sinon-chai": "^2.8.0",
