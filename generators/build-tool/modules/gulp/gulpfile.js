@@ -1,5 +1,5 @@
 var gulp = require('gulp');
-var gutil = require('gulp-util');
+//= GULP_UTIL_REQUIRE
 var gulpif = require('gulp-if');
 var argv = require('yargs').argv;
 //= JS_FRAMEWORK_GULP_REQUIRE

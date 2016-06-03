@@ -4,13 +4,13 @@ import { getModule, replaceCodeMemory, templateReplaceMemory, addNpmScriptMemory
 export default async function generateGulpBuildTool(params) {
   set(params, ['build', 'gulpfile.js'], await getModule('build-tool/gulp/gulpfile.js'));
 
-  await addNpmScriptMemory('postinstall', 'gulp build', params);
   await addNpmScriptMemory('build', 'gulp build', params);
+  await addNpmScriptMemory('build:production', 'gulp build --production', params);
+  await addNpmScriptMemory('postinstall', 'npm run build:production', params);
   await addNpmScriptMemory('watch', 'gulp', params);
 
   await addNpmPackageMemory('gulp', params, true);
   await addNpmPackageMemory('gulp-if', params, true);
-  await addNpmPackageMemory('gulp-util', params, true);
   await addNpmPackageMemory('yargs', params, true);
   await addNpmPackageMemory('gulp-sourcemaps', params, true);
   await addNpmPackageMemory('gulp-uglify', params, true);
@@ -43,8 +43,10 @@ export default async function generateGulpBuildTool(params) {
 
   switch (params.jsFramework) {
     case 'react':
+      await replaceCodeMemory(params, 'gulpfile.js', 'GULP_UTIL_REQUIRE', await getModule('build-tool/gulp/gutil-require.js'));
       await replaceCodeMemory(params, 'gulpfile.js', 'JS_FRAMEWORK_GULP_REQUIRE', await getModule('build-tool/gulp/react/react-gulp-require.js'));
       await replaceCodeMemory(params, 'gulpfile.js', 'JS_FRAMEWORK_GULP_TASK', await getModule('build-tool/gulp/react/react-gulp-task.js'));
+      await addNpmPackageMemory('gulp-util', params, true);
       await addNpmPackageMemory('vinyl-source-stream', params, true);
       await addNpmPackageMemory('babelify', params, true);
       await addNpmPackageMemory('browserify', params, true);
@@ -61,7 +63,7 @@ export default async function generateGulpBuildTool(params) {
       await addNpmPackageMemory('gulp-concat', params, true);
       await addNpmPackageMemory('gulp-ng-annotate', params, true);
       await addNpmPackageMemory('gulp-angular-templatecache', params, true);
-      buildTasks.push('angular', 'templates');
+      buildTasks.push('angular', 'vendor', 'templates');
       break;
     default:
       break;
