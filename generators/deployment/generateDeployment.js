@@ -1,4 +1,5 @@
-import { addNpmScriptMemory } from '../utils';
+import { set } from 'lodash';
+import { getModule, addNpmScriptMemory } from '../utils';
 
 export default async function generateDeployment(params) {
   switch (params.deployment) {
@@ -11,6 +12,8 @@ export default async function generateDeployment(params) {
       addNpmScriptMemory('postdeploy', 'echo Succesfully deployed to Heroku!', params);
       break;
     case 'azure':
+      set(params.build, ['.deployment'], await getModule('deployment/.deployment'));
+      set(params.build, ['deploy.cmd'], await getModule('deployment/deploy.cmd'));
       break;
     case 'bluemix':
       break;
