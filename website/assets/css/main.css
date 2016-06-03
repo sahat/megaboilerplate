@@ -108,7 +108,7 @@ hr {
   background: url('../img/hero-bg.jpg') 0 50%, linear-gradient(224deg, #2B8BE3 0%, #663FB5 100%);
   background-size: cover;
   /*background-position: 0;*/
-  box-shadow: inset 0 0 50px rgba(0,0,0,0.45);
+  box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.45);
 }
 
 .hero .highlight {
@@ -145,8 +145,7 @@ hr {
   vertical-align: middle;
 }
 
-.btn-outline:hover,
-.btn-outline:focus {
+.btn-outline:hover {
   color: #6c59b4 !important;
   background-color: #fff;
   text-shadow: none;
@@ -215,7 +214,7 @@ label span + i {
   padding: 10px;
   box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.05);
   border-radius: 4px;
-  margin: 30px auto 20px;
+  margin: 20px auto 20px;
 }
 
 .carbon-container {
@@ -350,7 +349,12 @@ i.arrow {
 }
 
 /*Buttons*/
+button {
+  outline: 0 !important;
+}
+
 .btn {
+  position: relative;
   font-size: 13px;
   border-radius: 2px;
   transition: all 0.3s ease;
@@ -358,6 +362,7 @@ i.arrow {
 
 .btn:active, .btn.active {
   box-shadow: none;
+  top: 1px;
 }
 
 .input-group-btn .btn {
@@ -422,9 +427,9 @@ i.arrow {
   border-radius: 2px;
   padding: 0;
   margin-bottom: 10px;
-  box-shadow: 0 2px 6px 0 rgba(0,0,0,.2);
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, .2);
   outline: 0 !important;
-  transition: all .35s cubic-bezier(.25,.25,.315,1.35);
+  transition: all .35s cubic-bezier(.25, .25, .315, 1.35);
 }
 
 .btn-mega:active {
@@ -437,6 +442,7 @@ i.arrow {
   background: #41a46b;
   color: #fff;
 }
+
 .btn-mega.btn-primary:hover,
 .btn-mega.btn-primary:focus {
   border-color: #0a64d6;
@@ -450,13 +456,13 @@ i.arrow {
 
 /*CSS Logos*/
 /*.express-logo {*/
-  /*display: block;*/
-  /*font-size: 32px;*/
-  /*font-weight: 100;*/
-  /*font-family: "Helvetica Neue", "Raleway", Helvetica, Arial, sans-serif;*/
-  /*line-height: 50px;*/
-  /*letter-spacing: 1px;*/
-  /*-webkit-font-smoothing: initial;*/
+/*display: block;*/
+/*font-size: 32px;*/
+/*font-weight: 100;*/
+/*font-family: "Helvetica Neue", "Raleway", Helvetica, Arial, sans-serif;*/
+/*line-height: 50px;*/
+/*letter-spacing: 1px;*/
+/*-webkit-font-smoothing: initial;*/
 /*}*/
 
 .btn-logo {
@@ -514,7 +520,6 @@ i.arrow {
 section {
   /*padding-top: 50px;*/
   padding-bottom: 10px;
-
 }
 
 .subcategory {
@@ -569,7 +574,6 @@ section {
   margin-bottom: 10px;
   transition: all 0.3s;
 }
-
 
 [class^="col-"]:hover .next-steps-icon {
   transform: translateY(-10px);
@@ -1253,7 +1257,7 @@ canvas {
 
 /*Semantic UI starts*/
 
-.ui.header>.image+.content, .ui.header>img+.content {
+.ui.header > .image + .content, .ui.header > img + .content {
   display: inline-block;
   padding-left: 10px;
   font-size: 15px;
@@ -1281,7 +1285,7 @@ h3.ui.header .sub.header, h4.ui.header .sub.header {
   padding: 0;
   margin: 0;
   line-height: 1.2em;
-  color: rgba(0,0,0,.6);
+  color: rgba(0, 0, 0, .6);
 }
 
 .ui.mini.image, .ui.mini.images .image, .ui.mini.images img, .ui.mini.images svg {
@@ -1340,7 +1344,6 @@ h3.ui.header .sub.header, h4.ui.header .sub.header {
 .options img.animated.fast {
   animation-duration: 1000ms;
 }
-
 
 @-webkit-keyframes spin {
   from {
@@ -1484,7 +1487,6 @@ input[type=checkbox].disabled + span::before {
 [type="radio"]:active + span:before {
   box-shadow: 0 0 0 0.125em #1d7cf4;
   background: #1d7cf4;
-
 }
 
 /* the checked style using the :checked pseudo class */
@@ -1521,6 +1523,11 @@ input[type=checkbox].disabled + span::before {
   }
 }
 
+@keyframes zoomIn2 {
+  0% { transform: scale(1.1); opacity: 0 }
+  100% { transform: scale(1); opacity: 1 }
+}
+
 .zoomIn {
   animation: 0.5s 0.2s zoomIn;
 }
@@ -1551,14 +1558,13 @@ code {
   animation: float 2.8s forwards ease infinite;
 }
 
-
 @keyframes float {
   0% {
     transform: translateZ(0)
   }
 
   40% {
-    transform: translate3d(0,-6px,0)
+    transform: translate3d(0, -6px, 0)
   }
 
   to {
@@ -1579,3 +1585,70 @@ code {
     transform: translateZ(0)
   }
 }
+
+/* Live demo and modal styles */
+
+
+.modal {
+  animation: zoomIn .25s ease-out;
+}
+
+.modal-content {
+  border: none;
+  border-radius: 3px;
+}
+
+.modal-body {
+  padding: 10px 0;
+}
+
+.modal-backdrop {
+  background-color: rgba(63, 63, 68, 0.8);
+}
+
+.modal-backdrop.in {
+  opacity: 1;
+}
+
+.modal-content {
+  box-shadow: 0 1px 8px rgba(0, 0, 0, .35), 0 1px 2px rgba(0, 0, 0, .25) !important;
+}
+
+.demo-container {
+  display: block;
+  padding: 10px 15px;
+  border-left: 8px solid;
+  border-color: transparent;
+  transition: all .2s;
+}
+
+.demo-container.demo1:hover {
+  border-color: #dd1b16;
+}
+
+.demo-container.demo2:hover {
+  border-color: #83cd29;
+}
+
+.demo-container.demo3:hover {
+  border-color: #61dafb;
+}
+
+.demo-container.demo4:hover {
+  border-color: #333;
+}
+
+.demo-container.demo5:hover {
+  border-color: #f3c859;
+}
+
+.demo-container img {
+  margin-right: 10px;
+}
+
+.demo-container img:last-child {
+  margin-right: 0;
+}
+
+
+

@@ -343,7 +343,7 @@ class Header extends React.Component {
                 Featuring <span style={{ color: '#fff' }} ref="heroHeading"/>
               </div>
             </VelocityComponent>
-            <a href="/demos" target="_blank" className="btn btn-outline"><i className={'fa fa-' + this.state.browserIcon}/> Live Demo</a> <a href="https://github.com/sahat/megaboilerplate/tree/master/examples" target="_blank" className="btn btn-outline">Code Examples</a>
+            <button type="button" className="btn btn-outline" data-toggle="modal" data-target="#demosModal"><i className={'fa fa-' + this.state.browserIcon}/> Live Demo</button> <a href="https://github.com/sahat/megaboilerplate/tree/master/examples" target="_blank" className="btn btn-outline">Code Examples</a>
           </div>
 
           <div ref="carbonAdsBlocked" className="carbon-ads-blocked"></div>
@@ -355,7 +355,7 @@ class Header extends React.Component {
             <span>Don't forget to <i className="fa fa-star"/> on GitHub if you liked this project!</span>
           </div>
 
-          <div ref="carbonAds" style={{ height: '120px', margin: '30px auto 20px' }}></div>
+          <div ref="carbonAds" style={{ height: '120px', margin: '20px auto 20px' }}></div>
 
           <div className="footnote left">¹ Inspired by <a href="https://github.com/sahat/hackathon-starter" target="_blank">Hackathon Starter</a></div>
 
