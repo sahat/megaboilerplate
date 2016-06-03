@@ -17,6 +17,7 @@ import JsFramework from './sections/JsFramework';
 import Deployment from './sections/Deployment';
 import NextSteps from './sections/NextSteps';
 import { VelocityComponent } from 'velocity-react';
+
 class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -37,7 +38,7 @@ class Home extends React.Component {
         beginner: false,
         disableAutoScroll: disableAutoScroll === 'true',
         copyClipboardText: 'Copy to clipboard',
-        isDownloadLoading: false,
+        isDownloadLoading: false
       });
     } catch (e) {
       console.warn(e);
@@ -532,11 +533,6 @@ class Home extends React.Component {
     const deployment = (state.authentication || state.database === 'none') ? (
       <Deployment {...state} handleChange={this.handleChange}/>
     ) : null;
-    //
-    // const download = state.deployment || state.staticSiteGenerator || state.platform === 'library' ? (
-    //   <button ref="downloadBtn" className="btn btn-block btn-mega btn-success" onClick={this.clickDownload}>Compile and
-    //     Download</button>
-    // ) : null;
 
 
     let generateDownloadLink;
@@ -595,18 +591,18 @@ class Home extends React.Component {
     const downloadText = state.isDownloadLoading ? loadingSvg : (
       <span><i className="fa fa-download"></i> Compile and Download</span>
     );
-    const download = (
+    const download = state.deployment || state.staticSiteGenerator || state.platform === 'library' ? (
       <div>
         <button ref="downloadBtn" className="btn btn-block btn-mega btn-success" onClick={this.clickDownload}>{downloadText}</button>
         {generateDownloadLink}
       </div>
-    );
+    ) : null;
 
     const consulting = (
       <VelocityComponent runOnMount animation="transition.slideLeftIn" duration={900}>
         <div className="panel" style={{ opacity: 0 }}>
           <div className="panel-body">
-            <p><a href="https://www.codementor.io/sahat"><img src="https://cdn.codementor.io/badges/get_help_github.svg" alt="Codementor"/></a></p>
+            <p><a href="https://www.codementor.io/sahat" target="_blank"><img src="https://cdn.codementor.io/badges/get_help_github.svg" alt="Codementor"/></a></p>
             <i className="fa fa-calendar"></i> Looking for additional help? <a href="https://calendly.com/sahat" target="_blank">I am available</a> for business consulting. Rates may vary.
           </div>
         </div>

@@ -7,7 +7,7 @@
 
 **Live Demo**: **http://megaboilerplate.com**
 
-Mega Boilerplate is a starter project generator that focuses on simplicity and ease of use, while providing you with flexibility of choices. It was inspired by [Hackathon Starter](https://github.com/sahat/hackathon-starter), but unlike it, you are free to customize any part of your stack from web framework and database to CSS preprocessor and client-side JavaScript framework. Currently, generators are primarily limited to Node.js web apps, but I would like to expand it to other platforms and languages in the future.
+Mega Boilerplate is a starter project generator that focuses on simplicity and ease of use, while providing you with flexibility of choices. It was heavily inspired by the [Hackathon Starter](https://github.com/sahat/hackathon-starter), but unlike it, you can customize any part of your application stack — from web framework and database to CSS preprocessor and client-side JavaScript framework. Currently, generators are primarily limited to Node.js web apps, but I am planning to expand support for other platforms and languages in the near future.
 
 
 Table of Contents
