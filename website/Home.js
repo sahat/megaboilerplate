@@ -173,6 +173,10 @@ class Home extends React.Component {
         });
         $(this.refs.downloadLinkInput).focus();
       }).fail((jqXHR) => {
+        this.setState({
+          generateDownloadLinkSuccess: false,
+          generateDownloadLinkInProgress: false
+        });
         swal('Server Error', jqXHR.responseText, 'error');
       });
     } else {

@@ -40,7 +40,7 @@ export default async function generateNunjucksTemplateEngine(params) {
 
       // OPTIONAL: Add Socket.IO <script> import
       if (params.frameworkOptions.includes('socketio')) {
-        await replaceCodeMemory(params, 'views/layout.html', 'SOCKETIO_IMPORT', await getModule('template-engine/nunjucks/socketio-import.html'), { indentLevel: 1 });
+        await replaceCodeMemory(params, 'views/layout.html', 'SOCKETIO_IMPORT', await getModule('template-engine/nunjucks/socketio-import.html'));
       }
       break;
     case 'meteor':

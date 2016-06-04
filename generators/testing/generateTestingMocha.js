@@ -31,7 +31,7 @@ export default async function generateTestingMocha(params) {
             addNpmPackageMemory('enzyme', params, true);
             addNpmPackageMemory('react-addons-test-utils', params, true);
 
-            await addNpmScriptMemory('test', 'npm-run-all test:*', params);
+            await addNpmScriptMemory('test', 'npm run test:client && npm run test:server', params);
             await addNpmScriptMemory('test:client', 'mocha test/client --recursive --compilers js:babel-register', params);
             await addNpmScriptMemory('test:server', 'mocha test/server --recursive', params);
             break;

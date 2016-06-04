@@ -59,7 +59,7 @@ export default async function generateCssFrameworkFoundation(params) {
             '_help-text.scss': await getModule('css-framework/foundation/scss/forms/_help-text.scss'),
             '_input-group.scss': await getModule('css-framework/foundation/scss/forms/_input-group.scss'),
             '_label.scss': await getModule('css-framework/foundation/scss/forms/_label.scss'),
-            ' _meter.scss': await getModule('css-framework/foundation/scss/forms/_meter.scss'),
+            '_meter.scss': await getModule('css-framework/foundation/scss/forms/_meter.scss'),
             '_progress.scss': await getModule('css-framework/foundation/scss/forms/_progress.scss'),
             '_range.scss': await getModule('css-framework/foundation/scss/forms/_range.scss'),
             '_select.scss': await getModule('css-framework/foundation/scss/forms/_select.scss'),

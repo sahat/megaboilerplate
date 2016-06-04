@@ -8,10 +8,10 @@ export default async function generateCommonAuthenticationExpress(params) {
 
   if (params.jsFramework) {
     await replaceCodeMemory(params, 'server.js', 'IS_AUTHENTICATED_MIDDLEWARE', await getModule('authentication/common/is-authenticated-jwt.js'));
-    await replaceCodeMemory(params, 'server.js', 'JWT_REQUIRE', await getModule('authentication/common/jwt-require.js'));
+    await replaceCodeMemory(params, 'server.js', 'JWT_REQUIRE', await getModule('authentication/common/jwt-require-server.js'));
     await replaceCodeMemory(params, 'server.js', 'USER_MODEL_REQUIRE', await getModule('authentication/models/user-model-app-require.js'));
     await replaceCodeMemory(params, 'controllers/user.js', 'ENSURE_AUTHENTICATED_MIDDLEWARE', await getModule('authentication/common/ensure-authenticated-jwt.js'));
-    await replaceCodeMemory(params, 'controllers/user.js', 'JWT_REQUIRE', await getModule('authentication/common/jwt-require.js'));
+    await replaceCodeMemory(params, 'controllers/user.js', 'JWT_REQUIRE', await getModule('authentication/common/jwt-require-controller.js'));
     await replaceCodeMemory(params, 'controllers/user.js', 'GENERATE_TOKEN', await getModule('authentication/common/generate-token.js'));
   } else {
     await replaceCodeMemory(params, 'controllers/user.js', 'ENSURE_AUTHENTICATED_MIDDLEWARE', await getModule('authentication/common/ensure-authenticated-passport.js'));

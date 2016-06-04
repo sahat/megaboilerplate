@@ -6,7 +6,8 @@ export default async function generateGoogleAuthenticationExpress(params) {
     await replaceCodeMemory(params, 'controllers/user.js', 'AUTH_GOOGLE_JWT', await getModule('authentication/google/google-jwt.js'));
     
     if (params.jsFramework === 'react') {
-      await replaceCodeMemory(params, 'controllers/user.js', 'AUTH_JWT_CALLBACK', await getModule('authentication/controllers/jwt-callback-render.js'));
+      const isHandlebars = params.templateEngine === 'handlebars' ? '-handlebars' : '';
+      await replaceCodeMemory(params, 'controllers/user.js', 'AUTH_JWT_CALLBACK', await getModule(`authentication/controllers/jwt-callback-render${isHandlebars}.js`));
     } else if (params.jsFramework === 'angularjs') {
       await replaceCodeMemory(params, 'controllers/user.js', 'AUTH_JWT_CALLBACK', await getModule('authentication/controllers/jwt-callback-send.js'));
     }
@@ -39,12 +40,12 @@ export default async function generateGoogleAuthenticationExpress(params) {
 
   if (params.jsFramework) {
     addEnvMemory(params, {
-      GOOGLE_SECRET: 'JdZsIaWhUFIchmC1a_IZzOHb'
+      GOOGLE_SECRET: 'SyXmZcdT6vPFeqcs0jaPhdVP'
     });
   } else {
     addEnvMemory(params, {
-      GOOGLE_ID: '828110519058.apps.googleusercontent.com',
-      GOOGLE_SECRET: 'JdZsIaWhUFIchmC1a_IZzOHb'
+      GOOGLE_ID: '814958990796-p1centjebv1k0htp3am05tfg5k10nl0k.apps.googleusercontent.com',
+      GOOGLE_SECRET: 'SyXmZcdT6vPFeqcs0jaPhdVP'
     });
   }
 

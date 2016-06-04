@@ -6,7 +6,8 @@ export default async function generateFacebookAuthenticationExpress(params) {
     await replaceCodeMemory(params, 'controllers/user.js', 'AUTH_FACEBOOK_JWT', await getModule('authentication/facebook/facebook-jwt.js'));
 
     if (params.jsFramework === 'react') {
-      await replaceCodeMemory(params, 'controllers/user.js', 'AUTH_JWT_CALLBACK', await getModule('authentication/controllers/jwt-callback-render.js'));
+      const isHandlebars = params.templateEngine === 'handlebars' ? '-handlebars' : '';
+      await replaceCodeMemory(params, 'controllers/user.js', 'AUTH_JWT_CALLBACK', await getModule(`authentication/controllers/jwt-callback-render${isHandlebars}.js`));
     } else if (params.jsFramework === 'angularjs') {
       await replaceCodeMemory(params, 'controllers/user.js', 'AUTH_JWT_CALLBACK', await getModule('authentication/controllers/jwt-callback-send.js'));
     }

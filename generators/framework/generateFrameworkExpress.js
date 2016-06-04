@@ -27,7 +27,7 @@ async function generateFrameworkExpress(params) {
   // OPTIONAL: PM2
   if (params.frameworkOptions.includes('pm2')) {
     await addNpmPackageMemory('pm2', params);
-    await addNpmScriptMemory('start-production', 'pm2 start server.js -i 4', params);
+    await addNpmScriptMemory('start:production', 'pm2 start server.js -i 4', params);
   }
 
   // Require contract controller
