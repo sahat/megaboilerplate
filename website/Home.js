@@ -652,48 +652,48 @@ class Home extends React.Component {
               <div className="modal-body">
                   <a href="#" className="demo-container demo1">
                     <p><strong>Demo 1</strong> - MEAN stack</p>
-                    <img src="/img/svg/express-logo.png" height="20"/>
-                    <img src="/img/svg/handlebars-logo.svg" height="20"/>
-                    <img src="/img/svg/foundation-logo.png" height="20"/>
-                    <img src="/img/svg/angularjs-logo.svg" height="20"/>
-                    <img src="/img/svg/gulp-logo.svg" height="20"/>
-                    <img src="/img/svg/jasmine.svg" height="20"/>
-                    <img src="/img/svg/mongodb-logo.svg" height="20"/>
-                    <img src="/img/svg/facebook-logo.svg" height="20"/>
-                    <img src="/img/svg/google-logo.svg" height="20"/>
+                    <img src="/img/svg/node-icon.png" height="25"/>
+                    <img src="/img/svg/handlebars-logo.svg" height="25"/>
+                    <img src="/img/svg/foundation-logo.png" height="25"/>
+                    <img src="/img/svg/angularjs-logo.svg" height="25"/>
+                    <img src="/img/svg/gulp-logo.svg" height="25"/>
+                    <img src="/img/svg/jasmine.svg" height="25"/>
+                    <img src="/img/svg/mongodb-logo.svg" height="25"/>
+                    <img src="/img/svg/facebook-logo.svg" height="25"/>
+                    <img src="/img/svg/google-logo.svg" height="25"/>
                   </a>
                 <a href="#" className="demo-container demo2" data-toggle="popover" data-img="/img/demo2.png">
                   <p><strong>Demo 2</strong> - Traditional Express web app <img src="/img/svg/recommended.svg" alt="Recommended" /></p>
-                  <img src="/img/svg/express-logo.png" height="20"/>
-                  <img src="/img/svg/jade-logo.svg" height="20"/>
-                  <img src="/img/svg/bootstrap-logo.svg" height="20"/>
-                  <img src="/img/svg/sass-logo.svg" height="20"/>
-                  <img src="/img/svg/mocha.svg" height="20"/>
-                  <img src="/img/svg/mongodb-logo.svg" height="20"/>
-                  <img src="/img/svg/facebook-logo.svg" height="20"/>
-                  <img src="/img/svg/google-logo.svg" height="20"/>
-                  <img src="/img/svg/twitter-logo.svg" height="20"/>
-                  <img src="/img/svg/vk-logo.svg" height="20"/>
+                  <img src="/img/svg/node-icon.png" height="25"/>
+                  <img src="/img/svg/jade-logo.svg" height="25"/>
+                  <img src="/img/svg/bootstrap-logo.svg" height="25"/>
+                  <img src="/img/svg/sass-logo.svg" height="25"/>
+                  <img src="/img/svg/mocha.svg" height="25"/>
+                  <img src="/img/svg/mongodb-logo.svg" height="25"/>
+                  <img src="/img/svg/facebook-logo.svg" height="25"/>
+                  <img src="/img/svg/google-logo.svg" height="25"/>
+                  <img src="/img/svg/twitter-logo.svg" height="25"/>
+                  <img src="/img/svg/vk-logo.svg" height="25"/>
                 </a>
                 <a href="#" className="demo-container demo3">
                   <p><strong>Demo 3</strong> - Full-stack React app (unstyled)</p>
-                  <img src="/img/svg/express-logo.png" height="20"/>
-                  <img src="/img/svg/nunjucks-logo.png" height="20"/>
-                  <img src="/img/svg/cssnext-logo.svg" height="20"/>
-                  <img src="/img/svg/postcss.svg" height="20"/>
-                  <img src="/img/svg/react-logo.svg" height="20"/>
-                  <img src="/img/svg/webpack-logo.svg" height="20"/>
-                  <img src="/img/svg/mocha.svg" height="20"/>
-                  <img src="/img/svg/sqlite-logo.svg" height="20"/>
-                  <img src="/img/svg/twitter-logo.svg" height="20"/>
+                  <img src="/img/svg/node-icon.png" height="25"/>
+                  <img src="/img/svg/nunjucks-logo.png" height="25"/>
+                  <img src="/img/svg/cssnext-logo.svg" height="25"/>
+                  <img src="/img/svg/postcss.svg" height="25"/>
+                  <img src="/img/svg/react-logo.svg" height="25"/>
+                  <img src="/img/svg/webpack-logo.svg" height="25"/>
+                  <img src="/img/svg/mocha.svg" height="25"/>
+                  <img src="/img/svg/sqlite-logo.svg" height="25"/>
+                  <img src="/img/svg/twitter-logo.svg" height="25"/>
                 </a>
                 <a href="#" className="demo-container demo4">
                   <p><strong>Demo 4</strong> - Jekyll blog</p>
-                  <img src="/img/svg/jekyll-logo.svg" height="20"/>
+                  <img src="/img/svg/jekyll-logo.svg" height="25"/>
                 </a>
                 <a href="#" className="demo-container demo5">
                   <p><strong>Demo 5</strong> - Middleman static site</p>
-                  <img src="/img/svg/middleman-logo.svg" height="20"/>
+                  <img src="/img/svg/middleman-logo.svg" height="25"/>
                 </a>
               </div>
             </div>
