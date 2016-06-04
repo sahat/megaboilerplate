@@ -85,13 +85,19 @@ class BuildTool extends React.Component {
       }
     }
 
+    const NO_FRAMEWORK = props.jsFramework === 'none';
+    const REACT = props.jsFramework === 'react';
+    const ANGULARJS = props.jsFramework === 'angularjs';
+    const CSS = props.cssPreprocessor === 'css';
+    const POSTCSS = props.cssPreprocessor !== 'postcss';
+
     const recommended = props.beginner ? (
       <span className="hint--top hint--rounded" data-hint="Recommended">
         <img src="/img/svg/recommended.svg" alt="Recommended" />
       </span>
     ) : null;
 
-    const noneRadio = props.jsFramework === 'none' || props.jsFramework === 'angularjs' ? (
+    const noneRadio = NO_FRAMEWORK || ANGULARJS ? (
       <label className="radio-inline">
         <img className="btn-logo" src="/img/svg/none.png" alt="None"/>
         <input type="radio" name="buildToolRadios" value="none" onChange={props.handleChange} checked={props.buildTool === 'none'}/>
@@ -99,7 +105,7 @@ class BuildTool extends React.Component {
       </label>
     ) : null;
 
-    const gulpRadio = props.cssPreprocessor !== 'css' ? (
+    const gulpRadio = !CSS || ANGULARJS || REACT ? (
       <label className="radio-inline">
         <img className="btn-logo" src="/img/svg/gulp-logo.svg" alt="Gulp + Browserify"/>
         <input type="radio" name="buildToolRadios" value="gulp" onChange={props.handleChange} checked={props.buildTool === 'gulp'}/>
@@ -107,7 +113,7 @@ class BuildTool extends React.Component {
       </label>
     ) : null;
 
-    const webpackRadio =  props.jsFramework === 'react' ? (
+    const webpackRadio =  REACT ? (
       <label className="radio-inline">
         <img className="btn-logo" src="/img/svg/webpack-logo.svg" alt="Webpack"/>
         <input type="radio" name="buildToolRadios" value="webpack" onChange={props.handleChange} checked={props.buildTool === 'webpack'}/>
@@ -115,7 +121,7 @@ class BuildTool extends React.Component {
       </label>
     ) : null;
 
-    const npmRadio = props.jsFramework !== 'angularjs' && props.cssPreprocessor !== 'css' && props.cssPreprocessor !== 'postcss' ? (
+    const npmRadio = !ANGULARJS && (!CSS || !POSTCSS || REACT) ? (
       <label className="radio-inline">
         <img className="btn-logo" src="/img/svg/npm-logo.svg" alt="NPM"/>
         <input type="radio" name="buildToolRadios" value="npm" onChange={props.handleChange} checked={props.buildTool === 'npm'}/>
