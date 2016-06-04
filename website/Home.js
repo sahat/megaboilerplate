@@ -315,6 +315,7 @@ class Home extends React.Component {
         }
         state.cssPreprocessor = value;
         state.cssPreprocessorValidationError = null;
+        state.buildTool = null;
         break;
 
       case 'cssPreprocessorOptionsCheckboxes':
@@ -333,6 +334,7 @@ class Home extends React.Component {
         state.jsFramework = value;
         state.jsFrameworkValidationError = null;
         state.testing = null;
+        state.buildTool = null;
         break;
 
       case 'reactOptionsCheckboxes':
@@ -519,8 +521,7 @@ class Home extends React.Component {
       <JsFramework {...state} handleChange={this.handleChange}/>
     ) : null;
 
-    const buildTool = ((state.jsFramework && state.jsFramework !== 'none') || (state.jsFramework && state.cssPreprocessor && state.cssPreprocessor !== 'css'))
-    && state.platform === 'node' ? (
+    const buildTool = (state.jsFramework || (state.jsFramework && state.cssPreprocessor)) && state.platform === 'node' ? (
       <BuildTool {...state} handleChange={this.handleChange}/>
     ) : null;
 
