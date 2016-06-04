@@ -77,9 +77,16 @@ class Header extends React.Component {
 
     this.getLastCommit();
 
-     setTimeout(() => {
-       this.loadCarbonAds();
-     }, 500);
+    // animation priority
+    setTimeout(() => {
+      this.twitterSdk();
+      this.facebookSdk();
+      this.linkedinSdk();
+      this.googleSdk();
+      this.githubSdk();
+      this.loadCarbonAds();
+    }, 1200);
+
      // this.renderConnectedDots();
 
     const strings = shuffle(['Express', 'Middleman', 'Jekyll', 'Meteor', 'React', 'Angular 2', 'Bootstrap', 'Foundation',
@@ -112,18 +119,48 @@ class Header extends React.Component {
     var tryMessage = function() {
       setTimeout(function() {
         if (!document.getElementById('carbonads')) {
-          $(carbonAdsBlocked).html('<i class="fa fa-2x fa-audio-description" /> Please consider disabling your ad blocker on this site');
+          $(carbonAdsBlocked).html('<div class="zoomInBackwards"><i class="fa fa-2x fa-audio-description" /> Please consider disabling your ad blocker on this site</div> ');
           $(carbonAdsContainer).remove();
         }
       }, 1800);
     };
-    if (window.addEventListener) {
-      window.addEventListener('load', tryMessage, false);
-    } else {
-      window.attachEvent('onload', tryMessage);
-    }
 
     tryMessage();
+  }
+
+  twitterSdk() {
+    window.twttr = (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0], t = window.twttr || {};
+      if (d.getElementById(id)) return t;
+      js = d.createElement(s);
+      js.id = id;
+      js.src = 'https://platform.twitter.com/widgets.js';
+      fjs.parentNode.insertBefore(js, fjs);
+      t._e = [];
+      t.ready = function(f) { t._e.push(f); };
+      return t;
+    }(document, 'script', 'twitter-wjs'));
+  }
+
+  facebookSdk() {
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6&appId=980220002068787";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  }
+
+  linkedinSdk() {
+    $.getScript('//platform.linkedin.com/in.js');
+  }
+
+  googleSdk() {
+    $.getScript('http://apis.google.com/js/platform.js?async=true');
+  }
+  githubSdk() {
+    $.getScript('https://buttons.github.io/buttons.js?async=true');
   }
 
   renderConnectedDots() {
@@ -355,7 +392,7 @@ class Header extends React.Component {
             <span>Don't forget to <i className="fa fa-star"/> on GitHub if you liked this project!</span>
           </div>
 
-          <div ref="carbonAds" style={{ height: '120px', margin: '20px auto 20px' }}></div>
+          <div ref="carbonAds"></div>
 
           <div className="footnote left">¹ Inspired by <a href="https://github.com/sahat/hackathon-starter" target="_blank">Hackathon Starter</a></div>
 
