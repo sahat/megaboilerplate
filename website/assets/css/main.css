@@ -1616,10 +1616,23 @@ code {
 
 .demo-container {
   display: block;
-  padding: 10px 15px;
-  border-left: 8px solid;
+  padding: 10px 15px 15px;
+  border-left: 9px solid;
   border-color: transparent;
   transition: all .2s;
+}
+
+.demo-container p > span {
+  background-image: linear-gradient(to bottom, rgba(29, 124, 244, 0) 50%, rgba(29, 124, 244, 0.6) 50%);
+  background-repeat: repeat-x;
+  background-size: 2px 2px;
+  background-position: 0 16px;
+  color: rgb(29, 124, 244);
+
+}
+
+.demo-container:hover {
+  text-decoration: none;
 }
 
 .demo-container.demo1:hover {
