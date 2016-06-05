@@ -805,6 +805,24 @@ canvas {
 
 /*Headings Styles*/
 
+.electron-logo {
+  color: #74b1be;
+}
+
+.electron-logo:hover {
+  color: #9feaf9;
+}
+
+.svg-stroke {
+  stroke: currentColor;
+  stroke-width: 1.2;
+  stroke-linecap: round;
+}
+
+.svg-fill {
+  fill: currentColor;
+}
+
 .node .panel-heading {
   background: #83cd29;
   border-color: #83cd29;
@@ -819,6 +837,17 @@ canvas {
   color: #fff;
   background: #e64c18;
   border-color: transparent;
+}
+
+.electron .panel-heading {
+  color: #74b1be;
+  background:#2f3241;
+  border-color: transparent;
+}
+
+.electron .panel-heading svg {
+  color: #74b1be;
+  fill: currentColor;
 }
 
 .jekyll .panel-heading {
@@ -849,7 +878,7 @@ canvas {
   border-color: transparent;
 }
 
-.library svg {
+.library .panel-heading svg {
   color: #fff;
   fill: currentColor;
 }
@@ -1305,9 +1334,9 @@ h3.ui.header .sub.header, h4.ui.header .sub.header {
   /*padding-bottom: 0;*/
 }
 
-.panel-body .fa {
-  margin-right: 5px;
-}
+/*.panel-body .fa {*/
+  /*margin-right: 5px;*/
+/*}*/
 
 .transparent {
   opacity: 0;
