@@ -586,6 +586,7 @@ footer {
   padding: 20px 0;
   position: relative;
   overflow: hidden;
+  line-height: 24px;
 }
 
 /*Slideshow*/
@@ -1337,6 +1338,10 @@ h3.ui.header .sub.header, h4.ui.header .sub.header {
 /*.panel-body .fa {*/
   /*margin-right: 5px;*/
 /*}*/
+
+strong .fa {
+  font-weight: bold;
+}
 
 .transparent {
   opacity: 0;

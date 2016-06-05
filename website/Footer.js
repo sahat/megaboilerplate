@@ -6,10 +6,12 @@ const Footer = (props) => {
       <div className="panel">
         <div className="panel-body">
           <div className="pull-left">
-            © 2016 <a href="http://sahatyalkabov.com" target="_blank">Sahat Yalkabov</a>. Code licensed under <a href="https://github.com/sahat/megaboilerplate/blob/master/LICENSE" target="_blank">MIT License</a>.
+            <div>© 2016 <a href="http://sahatyalkabov.com" target="_blank">Sahat Yalkabov</a>. Code licensed under <a href="https://github.com/sahat/megaboilerplate/blob/master/LICENSE" target="_blank">MIT License</a>.</div>
+            <div>For general questions, comments and feedback send me an <a href="mailto:sahat@me.com">email</a>.</div>
           </div>
-          <div className="pull-right">
-            <fa className="fa fa-code"></fa> <a href="https://github.com/sahat/megaboilerplate" target="_blank">Source Code</a>
+          <div className="pull-right text-right">
+            <i className="fa fa-code-fork"></i> <a href="https://github.com/sahat/megaboilerplate" target="_blank">Source Code</a>
+            <div><strong><i className="fa fa-code"></i></strong> with <i className="fa fa-heart text-danger"></i> using <strong>Node.js</strong> and <strong>React</strong></div>
           </div>
         </div>
       </div>
