@@ -1,0 +1,60 @@
+@import "typography.global.css";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  color: white;
+  height: 100vh;
+  background-color: #1D1D26;
+  background-image: url("images/img.png");
+  background-size: cover;
+  font-family: 'avenir', Arial, Helvetica, Helvetica Neue;
+  overflow-y: hidden;
+}
+
+h2 {
+  margin: 0;
+  font-size: 2.25rem;
+  font-weight: bold;
+  letter-spacing: -.025em;
+  color: #fff;
+}
+
+p {
+  font-size: 24px;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  color: white;
+  opacity: .75;
+  text-decoration: none;
+}
+
+a:hover {
+  opacity: 1;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  padding: 12px 0 12px 35px;
+  font-family: 'avenir';
+  font-size: 13px;
+  width: 100%;
+  color: #fff;
+  background-color: transparent;
+  letter-spacing: 0.5px;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, .1);
+  outline: none;
+  transition: .2s ease-out;
+}

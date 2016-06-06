@@ -1,0 +1,50 @@
+.container {
+  position: absolute;
+  top: 30%;
+  left: 10px;
+  width: 330px;
+  text-align: center;
+}
+
+.container h2 {
+  font-size: 5rem;
+}
+
+.container a {
+  font-size: 1.4rem;
+}
+
+.username {
+  background-image: url(../images/username.svg);
+  background-position: 0 11px;
+  background-repeat: no-repeat;
+  background-size: 18px;
+}
+
+.password {
+  background-image: url(../images/password.svg);
+  background-position: 0 9px;
+  background-repeat: no-repeat;
+  background-size: 18px;
+}
+
+.login {
+  position: relative;
+  background-color: #8c88ff;
+  font-size: 13px;
+  color: #fff;
+  padding: 15px 0;
+  border: 0;
+  outline: 0;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.login:hover {
+  background-color: #7F7BF2;
+}
+
+.login:active {
+  top: 1px;
+  background-color: #6662D9;
+}

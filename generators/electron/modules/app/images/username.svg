@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="44px" height="45px" viewBox="0 0 44 45" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>username</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="22" cy="22" r="22"></circle>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <path d="M21.975,24.9665552 C25.81125,24.9665552 28.95,21.8240803 28.95,17.9832776 C28.95,14.1424749 25.81125,11 21.975,11 C18.13875,11 15,14.1424749 15,17.9832776 C15,21.8240803 18.13875,24.9665552 21.975,24.9665552 L21.975,24.9665552 Z" id="path-3"></path>
+        <mask id="mask-4" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="13.95" height="13.9665552" fill="white">
+            <use xlink:href="#path-3"></use>
+        </mask>
+        <path d="M38,35.9531773 C38,30.5847826 27.4,28 22,28 C16.6,28 6,30.5847826 6,35.9531773" id="path-5"></path>
+        <mask id="mask-6" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="32" height="7.95317726" fill="white">
+            <use xlink:href="#path-5"></use>
+        </mask>
+    </defs>
+    <g id="do" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.5">
+        <g id="1-Login" transform="translate(-43.000000, -621.000000)">
+            <g id="username" transform="translate(40.000000, 618.000000)">
+                <g transform="translate(0.000000, 0.934833)">
+                    <g id="group" transform="translate(3.000000, 3.000000)" stroke="#FFFFFF" stroke-width="4">
+                        <use id="oval" mask="url(#mask-2)" xlink:href="#path-1"></use>
+                        <use id="shape" mask="url(#mask-4)" xlink:href="#path-3"></use>
+                        <use id="Path" mask="url(#mask-6)" xlink:href="#path-5"></use>
+                    </g>
+                    <rect id="bounds" x="0" y="0" width="50" height="49.3055556"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
