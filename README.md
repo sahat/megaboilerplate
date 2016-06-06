@@ -9,11 +9,9 @@
 
 Mega Boilerplate is a starter project generator that focuses on simplicity and ease of use, while providing you with flexibility of choices. It was heavily inspired by the [Hackathon Starter](https://github.com/sahat/hackathon-starter), but unlike it, you can customize any part of your application stack — from web framework and database to CSS preprocessor and client-side JavaScript framework. Currently, generators are primarily limited to Node.js web apps, but I am planning to expand support for other platforms and languages in the near future.
 
-
 Table of Contents
 -----------------
 
-- [**Features**](#features)
 - [**Getting Started**](#getting-started)
  - [Express](#express)
  - [Meteor](#meteor)
@@ -40,25 +38,6 @@ Table of Contents
 - [**Contributing**](#contributing)
 - [**License**](#license)
 
-Features
---------
-
-- :white_check_mark: Generate your perfect boilerplate from hundreds of possible permutations!
-- :white_check_mark: Jade, Handlebars and Nunjucks template engines
-- :white_check_mark: Sass, LESS, PostCSS and vanilla CSS stylesheets
-- :white_check_mark: Bootstrap 3.5 and Foundation 6 CSS frameworks
-- :white_check_mark: Mocha and Jasmine testing frameworks
-- :white_check_mark: Gulp, Webpack and NPM scripts as build tools
-- :white_check_mark: PostgreSQL, MySQL, SQLite and MongoDB databases
-- :white_check_mark: React with server-side rendering and hot reloading, AngularJS and jQuery on the client-side
-- **Generated application includes**:
- - :white_check_mark: Local Authentication using Email and Password
- - :white_check_mark: OAuth Authentication via Twitter, Facebook, Google, VK (Passport.js and JWT)
- - :white_check_mark: Flash notifications
- - :white_check_mark: Contact form (powered by Mailgun)
- - :white_check_mark: **Account Management**
-   - Gravatar, Profile Details, Change Password, Forgot Password, Reset Password, Delete Account, Link multiple OAuth strategies to one account
-
 Getting Started
 ---------------
 
@@ -77,12 +56,13 @@ Getting Started
 Download and extract the project. Then in your Terminal type the following:
 
 ```shell
-cd megaboilerplate-app
+$ cd megaboilerplate-app
 
 # Install NPM dependencies
-npm install
+$ npm install
 
-node server.js
+# Start the app
+$ node server.js
 
 # Express server listening on port 3000
 ```
@@ -103,10 +83,10 @@ node server.js
 - [Jekyll](https://jekyllrb.com/) Ruby Gem
 
 ```shell
-cd megaboilerplate-app
+$ cd megaboilerplate-app
 
 # Start Jekyll app
-jekyll serve
+$ jekyll serve
 
 # Server address: http://127.0.0.1:4000/
 # Server running... press ctrl-c to stop.
@@ -123,13 +103,13 @@ jekyll serve
 - [Middleman](https://middlemanapp.com/) Ruby Gem
 
 ```shell
-cd megaboilerplate-app
+$ cd megaboilerplate-app
 
 # Install Ruby dependencies
-bundle install
+$ bundle install
 
 # Start Middleman app
-bundle exec middleman
+$ bundle exec middleman
 
 # The Middleman is loading
 # View your site at "http://localhost:4567"
@@ -154,19 +134,19 @@ Install [Homebrew](http://brew.sh/) package manager. Then follow the steps below
 
 ```shell
 # Update Homebrew's package database
-brew update
+$ brew update
 
 # Install MongoDB
-brew install mongodb
+$ brew install mongodb
 
 # Create the data directory
-sudo mkdir -p /data/db
+$ sudo mkdir -p /data/db
 
 # Set permissions for the data directory
-sudo chown -R `whoami` /data/db
+$ sudo chown -R `whoami` /data/db
 
 # Run MongoDB Server
-mongod
+$ mongod
 ```
 
 <img src="http://dc942d419843af05523b-ff74ae13537a01be6cfec5927837dcfe.r14.cf1.rackcdn.com/wp-content/uploads/windows-8-50x50.jpg" height="17"> **Windows**
@@ -179,19 +159,19 @@ mongod
 
 ```shell
 # Import the public key used by the package management system
-sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
+$ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
 
 # Create a source list file for MongoDB
-echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
+$ echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
 
 # Update the repository
-sudo apt-get update
+$ sudo apt-get update
 
 # Install the latest stable version of MongoDB
-sudo apt-get install -y mongodb-org
+$ sudo apt-get install -y mongodb-org
 
 # Start MongoDB service
-sudo service mongod start
+$ sudo service mongod start
 ```
 
 :top: <sub>[**back to top**](#table-of-contents)</sub>
@@ -213,13 +193,13 @@ Install [Homebrew](http://brew.sh/) package manager. Then follow the steps below
 
 ```shell
 # Update Homebrew's package database
-brew update
+$ brew update
 
 # Install MySQL
-brew install mysql
+$ brew install mysql
 
 # Start MySQL Server
-mysql.server start
+$ mysql.server start
 ```
 
 <img src="http://dc942d419843af05523b-ff74ae13537a01be6cfec5927837dcfe.r14.cf1.rackcdn.com/wp-content/uploads/windows-8-50x50.jpg" height="17"> **Windows**
@@ -234,11 +214,11 @@ mysql.server start
 
 ```shell
 # Update the repository
-sudo apt-get update
-sudo apt-get upgrade
+$ sudo apt-get update
+$ sudo apt-get upgrade
 
 # Install MySQL
-sudo apt-get install mysql-server
+$ sudo apt-get install mysql-server
 ```
 
 :top: <sub>[**back to top**](#table-of-contents)</sub>
@@ -260,13 +240,13 @@ Install [Homebrew](http://brew.sh/) package manager. Then follow the steps below
 
 ```shell
 # Update Homebrew's package database
-brew update
+$ brew update
 
 # Install PostgreSQL
-brew install postgres
+$ brew install postgres
 
 # Start PostgreSQL Server
-postgres -D /usr/local/var/postgres
+$ postgres -D /usr/local/var/postgres
 ```
 
 <img src="http://dc942d419843af05523b-ff74ae13537a01be6cfec5927837dcfe.r14.cf1.rackcdn.com/wp-content/uploads/windows-8-50x50.jpg" height="17"> **Windows**
@@ -278,11 +258,11 @@ postgres -D /usr/local/var/postgres
 
 ```shell
 # Update the repository
-sudo apt-get update
-sudo apt-get upgrade
+$ sudo apt-get update
+$ sudo apt-get upgrade
 
 # Install PostgreSQL
-sudo apt-get install postgresql postgresql-contrib
+$ sudo apt-get install postgresql postgresql-contrib
 ```
 
 ### SQLite
