@@ -44,6 +44,7 @@ Getting Started
 ### Prerequisites
 
 - [Node.js 6.0](http://nodejs.org)
+- [Git](https://git-scm.com/)
 - Command Line Tools
  - <img src="http://deluge-torrent.org/images/apple-logo.gif" height="17"> **Mac OS X**: `xcode-select --install`
  - <img src="http://dc942d419843af05523b-ff74ae13537a01be6cfec5927837dcfe.r14.cf1.rackcdn.com/wp-content/uploads/windows-8-50x50.jpg" height="17"> **Windows**: [Visual C++ Build Tools 2015](http://go.microsoft.com/fwlink/?LinkId=691126)
@@ -52,6 +53,7 @@ Getting Started
  - <img src="https://en.opensuse.org/images/b/be/Logo-geeko_head.png" height="17"> **OpenSUSE**: `sudo zypper install --type pattern devel_basis`
 
 ### Express
+<img src="http://blog.newrelic.com/wp-content/uploads/expresslogo.png" height="70px">
 
 Download and extract the project. Then in your Terminal type the following:
 
@@ -76,6 +78,7 @@ $ node server.js
 :top: <sub>[**back to top**](#table-of-contents)</sub>
 
 ### Jekyll
+<img src="http://build.prestashop.com/assets/images/2015/04/jekyll.png" height="70px">
 
 #### Prerequisites
 
@@ -96,6 +99,7 @@ $ jekyll serve
 
 
 ### Middleman
+<img src="https://avatars2.githubusercontent.com/u/1280820?v=3&s=400" height="70px">
 
 #### Prerequisites
 
@@ -127,6 +131,7 @@ $ bundle exec middleman
 :top: <sub>[**back to top**](#table-of-contents)</sub>
 
 ### MongoDB
+<img src="http://s3.amazonaws.com/info-mongodb-com/_com_assets/media/mongodb-logo-rgb.jpeg" height="70px">
 
 <img src="http://deluge-torrent.org/images/apple-logo.gif" height="17"> **Mac OS X**
 
@@ -177,6 +182,7 @@ $ sudo service mongod start
 :top: <sub>[**back to top**](#table-of-contents)</sub>
 
 ### MySQL
+<img src="https://upload.wikimedia.org/wikipedia/en/thumb/6/62/MySQL.svg/640px-MySQL.svg.png" height="70px">
 
 Use database settings below in the `.env` file.
 
@@ -224,6 +230,7 @@ $ sudo apt-get install mysql-server
 :top: <sub>[**back to top**](#table-of-contents)</sub>
 
 ### PostgreSQL
+<img src="http://yiqunc.org/wp-content/uploads/2013/12/postgresql-logo.png" height="70px">
 
 Use database settings below in the `.env` file.
 
@@ -266,6 +273,7 @@ $ sudo apt-get install postgresql postgresql-contrib
 ```
 
 ### SQLite
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/SQLite370.svg/1280px-SQLite370.svg.png" height="70px">
 
 No additional steps required. Package [`sqlite3`](https://www.npmjs.com/package/sqlite3) will be automatically installed during `npm install` in [**Getting Started**](#getting-started).
 
@@ -334,7 +342,7 @@ The new hotness of the web — Universal JavaScript app, powered by [React](http
 
 ### <img src="https://avatars0.githubusercontent.com/u/139426?v=3&s=400" align="top" height="34"> AngularJS App
 
-Your typical MEAN stack (MongoDB, Express, AngularJS, Node). Originally I didn't plan on adding AngularJS 1.x generator, but since I did, I kept it real simple: **no Browserify, no ES6 classes, no AngularJS 1.5 components**. Admittedly, My experience with this framework is limited to a brief encounter in 2014, so I don't know a whole lot about modern AngularJS best practices. I would love your contributions here!
+Your typical MEAN stack (MongoDB, Express, AngularJS, Node.js). Originally, I was not planning on adding AngularJS 1.x generator, especailly with Angular 2 around the corner. So without investing too much time, I kept it real simple: **no Browserify, no ES6 classes, no AngularJS 1.5 components**. Once officially released, Angular 2 generator will be more elaborate with quite a few additional options.
 
 ```
 .
@@ -647,19 +655,34 @@ Deployment
 
 Once you are ready to deploy your app, you will need to create an account with
 a cloud platform to host it. These are not the only choices you have, but they are my top
-picks. From my experience, **Heroku** is the easiest to get started with, it will
-automatically restart your Node.js process when it crashes, zero-downtime
-deployments and custom domain support on free accounts.
+picks.
 
+### Heroku
 <img src="http://blog.exadel.com/wp-content/uploads/2013/10/heroku-Logo-1.jpg" width="200">
 
 - Download and install [Heroku Toolbelt](https://toolbelt.heroku.com/)
-- In terminal, run `heroku login` and enter your Heroku credentials
-- From *your app* directory run `heroku create`
-- Run `heroku addons:create mongolab`.  This will set up the mLab add-on and configure the `MONGOLAB_URI` environment variable in your Heroku app for you.
-- Lastly, do `git push heroku master`.  Done!
+- In Terminal, run `heroku login`, then enter your Heroku credentials
+- Navigate to the **megaboilerplate-app** directory and run the following commands:
+ 1. `git init`
+ 2. `git add .`
+ 3. `git commit -m 'Initial commit'`
+- Then run `heroku create` to create a new Heroku app and link it with your current Git repository
 
-**Note:** To install Heroku add-ons your account must be verified.
+   ```bash
+   Creating app... done, ⬢ floating-mesa-51019
+   https://floating-mesa-51019.herokuapp.com/ | https://git.heroku.com/floating-mesa-51019.git
+   ```
+   
+- **Note**: If you have created a new app via Heroku Dashboard, you can link it with an existing Git repository by running:
+
+    ```bash
+    heroku git:remote -a your-heroku-app-name
+    ```
+- Lastly, run `git push heroku master` and you are done!
+
+:question: For more information, please visit [Getting Started on Heroku with Node.js](https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction).
+
+**TODO:** Deployment instructions for SQL and MongoDB databases.
 
 <img src="http://www.opencloudconf.com/images/openshift_logo.png" width="200">
 
@@ -777,9 +800,7 @@ Changelog
 Contributing
 ------------
 
-Pull requests from beginners and seasoned JavaScript developers are welcome! Mega Boilerplate is already pretty large in scope to be maintained just by one person, so I am asking for your help to contribute where you can, be it a small fix in README or adding a whole new generator type, e.g. Meteor, React Native, Electron.
-
-If you are making changes to the website, run `npm run build` and check in updated version of *bundle.js* into the repository. 
+Pull requests from beginners and seasoned JavaScript developers are welcome! As it stands, Mega Boilerplate is pretty large in scope to be maintained by a single person, so I am asking for your help to contribute where you can, whether it's a small fix in README or adding a whole new generator type, e.g. Meteor, Angular 2, React Native, Electron.
 
 :top: <sub>[**back to top**](#table-of-contents)</sub>
 
