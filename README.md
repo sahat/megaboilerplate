@@ -673,14 +673,15 @@ picks.
    https://floating-mesa-51019.herokuapp.com/ | https://git.heroku.com/floating-mesa-51019.git
    ```
    
-- **Note**: If you have created a new app via Heroku Dashboard, you can link it with an existing Git repository by running:
+- Run `git push heroku master` and you are done!
 
-    ```bash
-    heroku git:remote -a your-heroku-app-name
-    ```
-- Lastly, run `git push heroku master` and you are done!
+**Note**: If you have created a new app via Heroku Dashboard, you can link it with an existing Git repository by running:
 
-:question: For more information, please visit [Getting Started on Heroku with Node.js](https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction).
+```bash
+heroku git:remote -a your-heroku-app-name
+```
+
+For more information, please visit [Getting Started on Heroku with Node.js](https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction).
 
 **TODO:** Deployment instructions for SQL and MongoDB databases.
 
@@ -789,12 +790,12 @@ Despite being such a small library, [Redux](http://redux.js.org/) can be difficu
 Sites Built with Mega Boilerplate
 ---------------------------------
 
-If you have built something using Mega Boilerplate, please enter yourself here by sending a pull request.
+If you have built an app using Mega Boilerplate, please enter yourself here by sending a pull request.
 
 Changelog
 ---------
 
-### 1.0.0 (June 7, 2016)
+### 1.0.0 (June 8, 2016)
 - Initial release.
 
 Contributing
