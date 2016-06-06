@@ -54,6 +54,14 @@ hr {
   width: 100%;
 }
 
+
+.sweet-alert h2 {
+  color: #333;
+}
+.sweet-alert p {
+  font-size: 13px;
+}
+
 .placeholder {
   white-space: pre-wrap;
 }
@@ -1669,6 +1677,8 @@ code {
 }
 
 .demo-container {
+  position: relative;
+  left: -3px;
   display: block;
   padding: 10px 15px 15px;
   border-left: 9px solid;
@@ -1686,6 +1696,7 @@ code {
 }
 
 .demo-container:hover {
+  left: 0;
   text-decoration: none;
 }
 

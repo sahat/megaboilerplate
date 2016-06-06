@@ -37,7 +37,7 @@ export async function download(req, res) {
   } catch (err) {
     console.info(err.stack);
     console.info(params);
-    res.status(500).send(err.message);
+    res.status(500).send({ message: err.message, stack: err.stack });
   }
 
 }

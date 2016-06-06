@@ -177,7 +177,14 @@ class Home extends React.Component {
           generateDownloadLinkSuccess: false,
           generateDownloadLinkInProgress: false
         });
-        swal('Server Error', jqXHR.responseText, 'error');
+        const title = jqXHR.responseJSON.message;
+        const body = encodeURIComponent('\n##### :boom: Error Stack Trace\n' + '\`\`\`js\n' + jqXHR.responseJSON.stack + '\n\`\`\`');
+        swal({
+          title: 'Server Error',
+          text: `${jqXHR.responseJSON.message}<br><strong><a href='https://github.com/sahat/megaboilerplate/issues/new?title=${title}&body=${body}' target="_blank">Report a bug</a></strong>`,
+          type: 'error',
+          html: true
+        });
       });
     } else {
       $.ajax({
@@ -200,7 +207,14 @@ class Home extends React.Component {
           form.submit();
         }
       }).fail((jqXHR) => {
-        swal('Server Error', jqXHR.responseText, 'error');
+        const title = jqXHR.responseJSON.message;
+        const body = encodeURIComponent('\n##### :boom: Error Stack Trace\n' + '\`\`\`js\n' + jqXHR.responseJSON.stack + '\n\`\`\`');
+        swal({
+          title: 'Server Error',
+          text: `${jqXHR.responseJSON.message}<br><strong><a href='https://github.com/sahat/megaboilerplate/issues/new?title=${title}&body=${body}' target="_blank">Report a bug</a></strong>`,
+          type: 'error',
+          html: true
+        });
         this.setState({ isDownloadLoading: false });
       });
     }
@@ -667,7 +681,7 @@ class Home extends React.Component {
                     <img src="/img/svg/facebook-logo.svg" height="25"/>
                     <img src="/img/svg/google-logo.svg" height="25"/>
                   </a>
-                <a href="#" className="demo-container demo2" data-toggle="popover" data-img="/img/demo2.png">
+                <a href="#" className="demo-container demo2">
                   <p><span><strong>Demo 2</strong> - Traditional Express web app</span> <img src="/img/svg/recommended.svg" alt="Recommended" /></p>
                   <img src="/img/svg/node-icon.png" height="25"/>
                   <img src="/img/svg/jade-logo.svg" height="25"/>
