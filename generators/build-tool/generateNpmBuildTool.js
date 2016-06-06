@@ -4,8 +4,9 @@ import { addNpmScriptMemory, addNpmPackageMemory } from '../utils';
 export default async function generateNpmBuildTool(params) {
   await addNpmPackageMemory('npm-run-all', params);
   await addNpmPackageMemory('nodemon', params);
-  await addNpmPackageMemory('build', 'npm-run-all build:*', params);
-  await addNpmPackageMemory('watch', 'npm-run-all --parallel watch:*', params);
+  await addNpmScriptMemory('build', 'npm-run-all build:*', params);
+  await addNpmScriptMemory('watch', 'npm-run-all --parallel watch:*', params);
+  await addNpmScriptMemory('postinstall', 'npm run build', params);
 
   switch (params.cssPreprocessor) {
     case 'sass':
