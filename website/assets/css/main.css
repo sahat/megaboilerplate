@@ -1633,7 +1633,7 @@ code {
 
 
 .modal {
-  animation: zoomIn .25s ease-out;
+  animation: zoomIn .35s ease-out;
 }
 
 .modal-content {
@@ -1678,7 +1678,6 @@ code {
 
 .demo-container {
   position: relative;
-  left: -3px;
   display: block;
   padding: 10px 15px 15px;
   border-left: 9px solid;
@@ -1696,7 +1695,7 @@ code {
 }
 
 .demo-container:hover {
-  left: 0;
+  color: rgb(29, 124, 244);
   text-decoration: none;
 }
 

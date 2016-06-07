@@ -9,7 +9,6 @@ export default async function generateDeployment(params) {
       } else {
         addNpmScriptMemory('deploy', 'git push heroku master', params);
       }
-      addNpmScriptMemory('postdeploy', 'echo Succesfully deployed to Heroku!', params);
       break;
     case 'azure':
       set(params.build, ['.deployment'], await getModule('deployment/.deployment'));

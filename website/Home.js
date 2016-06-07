@@ -503,7 +503,11 @@ class Home extends React.Component {
             <a href="https://www.codementor.io/sahat" target="_blank"><img src="https://cdn.codementor.io/badges/get_help_github.svg" alt="Codementor"/></a>
           </div>
         </li>
-
+        <li className="pull-right">
+          <div className="checkbox">
+            <a href="https://hackhands.com/sahat/" target="_blank"><img src="https://img.shields.io/badge/hack.hands()-expert-00acbd.svg" alt="HackHands"/></a>
+          </div>
+        </li>
       </ul>
     );
 

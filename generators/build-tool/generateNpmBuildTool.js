@@ -30,11 +30,11 @@ export default async function generateNpmBuildTool(params) {
 
   switch (params.jsFramework) {
     case 'react':
-      await addNpmPackageMemory('babelify', params, true);
-      await addNpmPackageMemory('browserify', params, true);
-      await addNpmPackageMemory('watchify', params, true);
-      await addNpmPackageMemory('babel-preset-es2015', params, true);
-      await addNpmPackageMemory('babel-preset-react', params, true);
+      await addNpmPackageMemory('babelify', params);
+      await addNpmPackageMemory('browserify', params);
+      await addNpmPackageMemory('watchify', params);
+      await addNpmPackageMemory('babel-preset-es2015', params);
+      await addNpmPackageMemory('babel-preset-react', params);
       await addNpmScriptMemory('build:js', 'browserify app/main.js -t [ babelify --presets [es2015 react] ] -o public/js/bundle.js', params);
       await addNpmScriptMemory('watch:js', 'watchify app/main.js -t [ babelify --presets [es2015 react] ] -v -o public/js/bundle.js', params);
       break;

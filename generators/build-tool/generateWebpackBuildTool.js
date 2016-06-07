@@ -5,12 +5,12 @@ export default async function genereateWebpackBuildTool(params) {
   set(params, ['build', 'webpack.config.js'], await getModule('build-tool/webpack/webpack.config.js'));
 
   await addNpmScriptMemory('build', 'webpack --display-error-details', params);
-  await addNpmPackageMemory('webpack', params, true);
+  await addNpmPackageMemory('webpack', params);
   await addNpmPackageMemory('webpack-dev-middleware', params, true);
   await addNpmPackageMemory('webpack-hot-middleware', params, true);
-  await addNpmPackageMemory('babel-core', params, true);
-  await addNpmPackageMemory('babel-loader', params, true);
-  await addNpmPackageMemory('babel-preset-es2015', params, true);
+  await addNpmPackageMemory('babel-core', params);
+  await addNpmPackageMemory('babel-loader', params);
+  await addNpmPackageMemory('babel-preset-es2015', params);
 
   switch (params.framework) {
     case 'express':
@@ -50,7 +50,7 @@ export default async function genereateWebpackBuildTool(params) {
       await addNpmPackageMemory('babel-plugin-react-transform', params, true);
       await addNpmPackageMemory('react-transform-hmr', params, true);
       await addNpmPackageMemory('react-transform-catch-errors', params, true);
-      await addNpmPackageMemory('babel-preset-react', params, true);
+      await addNpmPackageMemory('babel-preset-react', params);
       await addNpmPackageMemory('redbox-react', params, true);
       break;
     case 'angularjs':
