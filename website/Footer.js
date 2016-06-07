@@ -15,9 +15,7 @@ const Footer = (props) => {
           </div>
         </div>
       </div>
-
       <a className="twitter-follow-button" href="https://twitter.com/EvNowAndForever">Follow @EvNowAndForever</a>
-
       <a className="github-button" href="https://github.com/sahat"
          data-count-href="/sahat/followers"
          data-count-api="/users/sahat#followers"

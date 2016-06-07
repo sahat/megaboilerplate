@@ -99,7 +99,7 @@ const NextSteps = (props) => {
               <div className="text-center">
                 <img className="next-steps-icon" src="/img/svg/faq.svg" alt="FAQ"/>
                 <p>
-                  See <a href="https://github.com/sahat/megaboilerplate/README.md#faq" target="_blank">FAQ</a> before <a href="https://github.com/sahat/megaboilerplate/issues/new" target="_blank">opening an issue</a> on GitHub. For general questions, please visit the <a href="https://gitter.im/sahat/megaboilerplate" target="_blank">official Gitter chat</a>.
+                  See <a href="https://github.com/sahat/megaboilerplate#faq" target="_blank">FAQ</a> before <a href="https://github.com/sahat/megaboilerplate/issues/new" target="_blank">opening an issue</a> on GitHub. For general questions, please visit the <a href="https://gitter.im/sahat/megaboilerplate" target="_blank">official Gitter chat</a>.
                 </p>
               </div>
             </div>

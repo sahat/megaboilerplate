@@ -705,7 +705,7 @@ a cloud platform to host it. These are not the only choices you have, but they a
 picks.
 
 ### Heroku
-<img src="http://blog.exadel.com/wp-content/uploads/2013/10/heroku-Logo-1.jpg" width="200">
+<img src="https://camo.githubusercontent.com/fb89a03a7dd0393851b9ed3720742b738944d863/687474703a2f2f7265732e636c6f7564696e6172792e636f6d2f646a7a6c356b6d61372f696d6167652f75706c6f61642f76313433373838333435312f4865726f6b755f6c6f676f5f6d6f6b7369702e706e67" width="200">
 
 - Download and install [Heroku Toolbelt](https://toolbelt.heroku.com/)
 - In Terminal, run `heroku login`, then enter your Heroku credentials
