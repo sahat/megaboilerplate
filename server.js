@@ -8,9 +8,9 @@ const React = require('react');
 const ReactDOM = require('react-dom/server');
 const Router = require('react-router');
 const nunjucks = require('nunjucks');
-var postcss = require('postcss-middleware');
-var cssnext = require('postcss-cssnext');
-var atImport = require('postcss-import');
+const postcss = require('postcss-middleware');
+const cssnext = require('postcss-cssnext');
+const atImport = require('postcss-import');
 
 const dotenv = require('dotenv');
 
