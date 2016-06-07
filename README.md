@@ -685,81 +685,38 @@ For more information, please visit [Getting Started on Heroku with Node.js](http
 
 **TODO:** Deployment instructions for SQL and MongoDB databases.
 
-<img src="http://www.opencloudconf.com/images/openshift_logo.png" width="200">
+### Microsoft Azure
+<img src="https://worldvectorlogo.com/logos/microsoft-azure-2.svg" width="200">
 
-- First, install this Ruby gem: `sudo gem install rhc` :gem:
-- Run `rhc login` and enter your OpenShift credentials
-- From your app directory run `rhc app create MyApp nodejs-0.10`
- - **Note:** *MyApp* is the name your app (no spaces)
-- Once that is done, you will be provided with **URL**, **SSH** and **Git Remote** links
-- Visit provided **URL** and you should see the *Welcome to your Node.js application on OpenShift* page
-- Copy and and paste **Git Remote** into `git remote add openshift YOUR_GIT_REMOTE`
-- Before you push your app, you need to do a few modifications to your code
+- Sign in to your account at [Azure Portal](https://portal.azure.com/)
+- Click on <img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAASJAAAAJDZlNmM0YmIyLWZjYWQtNDRjMC05NDAzLTVkNGQ4ZWY4NzcxYw.png" height="17px"> **App Services**, then click on **Add** button
+- Enter an *App name* for your app and create or select an existing *Resource Group*
+- Click on **Create** button and give it 15-20 seconds 
+- Find and select your app under **App Services**
+- In the right-hand **Settings** sidebar, find and click on **Deployment source**
+- Under **Choose Source** select **Local Git Repository**, then press **OK**
+ - Alternatively, you can choose **GitHub** to sync Azure with a GitHub repository for continous deployment
+- Right below **Deployment source**, click on **Deployment credentials** and create new username and password, then hit **Save**
+- Still inside **Settings** sidebar, find and click on **Properties** located under General settings
+- Copy **Git URL**, e.g. `https://username@appname.scm.azurewebsites.net:443/appname.git`
+- Navigate to the **megaboilerplate-app** directory and run the following commands:
+ 1. `git init`
+ 2. `git add .`
+ 3. `git commit -m 'Initial commit'`
+ 4. `git remote add azure https://username@appname.scm.azurewebsites.net:443/appname.git`
+   - **Note**: Use your Git URL from above 
+- Run `git push azure master`, and when prompted, enter your password created under **Deployment credentials**
+- All set!
 
-Add these two lines to `app.js`, just place them anywhere before `app.listen()`:
-```js
-var IP_ADDRESS = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
-var PORT = process.env.OPENSHIFT_NODEJS_PORT || 8080;
-```
-
-Then change `app.listen()` to:
-```js
-app.listen(PORT, IP_ADDRESS,() => {
-  console.log(`Express server listening on port ${PORT} in ${app.settings.env} mode`);
-});
-```
-Add this to `package.json`, after *name* and *version*. This is necessary because, by default, OpenShift looks for `server.js` file. And by specifying `supervisor app.js` it will automatically restart the server when node.js process crashes.
-
-```js
-"main": "app.js",
-"scripts": {
-  "start": "supervisor app.js"
-},
-```
-
-- Finally, you can now push your code to OpenShift by running `git push -f openshift master`
- - **Note:** The first time you run this command, you have to pass `-f` (force) flag because OpenShift creates a dummy server with the welcome page when you create a new Node.js app. Passing `-f` flag will override everything with your *Hackathon Starter* project repository. **Do not** run `git pull` as it will create unnecessary merge conflicts.
-- And you are done!
-
-<img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Windows_Azure_logo.png" width="200">
-
-- Login to [Windows Azure Management Portal](https://manage.windowsazure.com/)
-- Click the **+ NEW** button on the bottom left of the portal
-- Click **COMPUTE**, then **WEB APP**, then **QUICK CREATE**
-- Enter a name for **URL** and select the datacenter **REGION** for your web site
-- Click on **CREATE WEB APP** button
-- Once the web site status changes to *Running*, click on the name of the web site to access the Dashboard
-- At the bottom right of the Quickstart page, select **Set up a deployment from source control**
-- Select **Local Git repository** from the list, and then click the arrow
-- To enable Git publishing, Azure will ask you to create a user name and password
-- Once the Git repository is ready, you will be presented with a **GIT URL**
-- Inside your *Hackathon Starter* directory, run `git remote add azure [Azure Git URL]`
-- To push your changes simply run `git push azure master`
- - **Note:** *You will be prompted for the password you created earlier*
-- On **Deployments** tab of your Windows Azure Web App, you will see the deployment history
-
+### IBM Bluemix
 <img src="http://www.comparethecloud.net/wp-content/uploads/2014/06/ibm-bluemix_pr-030514.jpg" width="200">
 
-- Go to [Codename: Bluemix](http://bluemix.net) to signup for the free trial, or login with your *IBM id*
-- Install [Cloud Foundry CLI](https://github.com/cloudfoundry/cli)
-- Navigate to your **hackathon-starter** directory and then run `cf push [your-app-name] -m 512m` command to deploy the application
- - **Note:** You must specify a unique application name in place of `[your-app-name]`
-- Run `cf create-service mongodb 100 [your-service-name]` to create a [MongoDB service](https://www.ng.bluemix.net/docs/#services/MongoDB/index.html#MongoDB)
-- Run `cf bind-service [your-app-name] [your-service-name]` to associate your application with a service created above
-- Run `cf files [your-app-name] logs/env.log` to see the *environment variables created for MongoDB.
-- Copy the **MongoDB URI** that should look something like the following: `mongodb://68638358-a3c6-42a1-bae9-645b607d55e8:46fb97e6-5ce7-4146-9a5d-d623c64ff1fe@192.155.243.23:10123/db`
-- Then set it as an environment variable for your application by running `cf set-env [your-app-name] MONGODB [your-mongodb-uri]`
-- Run `cf restart [your-app-name]` for the changes to take effect.
-- Visit your starter app at **http://[your-app-name].ng.bluemix.net**
-- Done!
+TODO
 
-**Note:** Alternative directions, including how to setup the project with a DevOps pipeline are available at [http://ibm.biz/hackstart](http://ibm.biz/hackstart).
-A longer version of these instructions with screenshots is available at [http://ibm.biz/hackstart2](http://ibm.biz/hackstart2).
-Also, be sure to check out the [Jump-start your hackathon efforts with DevOps Services and Bluemix](https://www.youtube.com/watch?v=twvyqRnutss) video.
-
+### Digital Ocean
 <img src="https://www.digitalocean.com/assets/images/logos-badges/png/DO_Logo_Vertical_Blue-2c654e19.png" width="200">
 
-### TODO
+TODO
 
 :top: <sub>[**back to top**](#table-of-contents)</sub>
 
