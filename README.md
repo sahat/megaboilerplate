@@ -458,12 +458,16 @@ Learning Resources
 - [SassMe - A Tool for Visualizing SASS Color Functions](http://sassme.arc90.com/)
 - [uiGradients](http://uigradients.com/)
 
+### Express
+- [Creating a Simple RESTful Web App with Node.js, Express, and MongoDB](http://cwbuecheler.com/web/tutorials/2014/restful-web-app-node-express-mongodb/)
+- [How To Implement Password Reset In Node.js](http://sahatyalkabov.com/how-to-implement-password-reset-in-nodejs/)
+
 ### React / Redux
 - [:movie_camera: React in 7 Minutes](https://egghead.io/lessons/react-react-in-7-minutes)
 - [:movie_camera: Getting Started with Redux (30 free videos)](https://egghead.io/series/getting-started-with-redux)
-- [:notebook_with_decorative_cover: Handcrafting an Isomorphic Redux Application](https://medium.com/front-end-developers/handcrafting-an-isomorphic-redux-application-with-love-40ada4468af4#.vft63avyi)
-- [:notebook_with_decorative_cover: Create a character voting app using React, Node.js, MongoDB and Socket.IO](http://sahatyalkabov.com/create-a-character-voting-app-using-react-nodejs-mongodb-and-socketio/)
-- [:notebook_with_decorative_cover: React.js Introduction For People Who Know Just Enough jQuery To Get By](http://reactfordesigners.com/labs/reactjs-introduction-for-people-who-know-just-enough-jquery-to-get-by/)
+- [:book: Create a character voting app using React, Node.js, MongoDB and Socket.IO](http://sahatyalkabov.com/create-a-character-voting-app-using-react-nodejs-mongodb-and-socketio/)
+- [:book: Handcrafting an Isomorphic Redux Application](https://medium.com/front-end-developers/handcrafting-an-isomorphic-redux-application-with-love-40ada4468af4#.vft63avyi)
+- [:book: React.js Introduction For People Who Know Just Enough jQuery To Get By](http://reactfordesigners.com/labs/reactjs-introduction-for-people-who-know-just-enough-jquery-to-get-by/)
 
 ### Performance and SEO
 - [Managing Mobile Performance Optimization](https://www.smashingmagazine.com/2016/03/managing-mobile-performance-optimization)
@@ -471,6 +475,27 @@ Learning Resources
 
 ### AngularJS
 - [John Papa's Angular Style Guide](https://github.com/johnpapa/angular-styleguide/)
+- [Build an Instagram clone with AngularJS, Satellizer, Node.js and MongoDB](http://sahatyalkabov.com/build-an-instagram-clone-using-angularjs-satellizer-nodejs-and-mongodb/)
+- [Create a TV Show Tracker using AngularJS, Node.js and MongoDB](http://sahatyalkabov.com/create-a-tv-show-tracker-using-angularjs-nodejs-and-mongodb/)
+
+### Jekyll
+- [Setting up your GitHub Pages site locally with Jekyll](https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/)
+- [Build A Blog With Jekyll And GitHub Pages](https://www.smashingmagazine.com/2014/08/build-blog-jekyll-github-pages/)
+
+### Middleman
+- [How to Setup a Static Website with Middleman](http://webdesign.tutsplus.com/articles/how-to-setup-a-static-website-with-middleman--cms-25275)
+- [Static Website Generators Reviewed: Jekyll, Middleman, Roots, Hugo](https://www.smashingmagazine.com/2015/11/static-website-generators-jekyll-middleman-roots-hugo-review/)
+
+### JS Library
+- [:movie_camera: How to Write an Open Source JavaScript Library](https://egghead.io/courses/how-to-write-an-open-source-javascript-library)
+
+### Bookshelf.js (SQL ORM)
+- [Bookshelf.js: A Node.js ORM](http://stackabuse.com/bookshelf-js-a-node-js-orm/)
+- [Getting Started with Bookshelf.js](https://joepettit.com/bookshelf-js/)
+
+### Mongoose (MongoDB ODM)
+- [Easily Develop Node.js and MongoDB Apps with Mongoose](https://scotch.io/tutorials/using-mongoosejs-in-node-js-and-mongodb-applications)
+- [Object Modeling in Node.js with Mongoose](https://devcenter.heroku.com/articles/nodejs-mongoose)
 
 :top: <sub>[**back to top**](#table-of-contents)</sub>
 
