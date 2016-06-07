@@ -17,5 +17,5 @@ gulp.task('watch', function() {
   //= JS_FRAMEWORK_GULP_WATCH_INDENT1
 });
 
-gulp.task('build', gulp.parallel('<%= buildTasks %>'));
-gulp.task('default', gulp.parallel('<%= defaultTasks %>'));
+gulp.task('build', ['<%= buildTasks %>']);
+gulp.task('default', ['<%= defaultTasks %>']);

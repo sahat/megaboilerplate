@@ -1,1 +1,1 @@
-gulp.watch('public/css/**/*.less', gulp.series('less'));
+gulp.watch('public/css/**/*.less', ['less']);

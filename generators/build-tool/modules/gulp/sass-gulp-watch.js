@@ -1,1 +1,1 @@
-gulp.watch('public/css/**/*.scss', gulp.series('sass'));
+gulp.watch('public/css/**/*.scss', ['sass']);

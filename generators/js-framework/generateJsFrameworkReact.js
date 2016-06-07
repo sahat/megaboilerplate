@@ -5,7 +5,7 @@ async function generateJsFrameworkReact(params) {
   switch (params.framework) {
     case 'express':
       // .babelrc
-      if (params.testing) {
+      if (params.testing && params.testing !== 'none') {
         set(params, ['build', '.babelrc'], await getModule('js-framework/react/.babelrc-rewire'));
       } else {
         set(params, ['build', '.babelrc'], await getModule('js-framework/react/.babelrc'));
