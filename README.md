@@ -121,6 +121,28 @@ $ bundle exec middleman
 
 :top: <sub>[**back to top**](#table-of-contents)</sub>
 
+### JS Library
+
+This JavaScript library boilerplate was inspired and based on Dan Abramov's [library-boilerplate](https://github.com/gaearon/library-boilerplate) project. The main idea here is you write your code in ES6, which then gets transpiled into CommonJS and UMD builds. Consider [lodash](https://lodash.com/) - popular JavaScript library that supports ES6 `import`, CommonJS `require()` in the Node.js environment and can be used inside a browser via `<script>` tag.
+
+```shell
+$ cd megaboilerplate-app
+
+# Install NPM dependencies
+$ npm install
+
+# ES5 / CommonJS build
+$ npm run build
+
+# UMD build
+$ npm run build:umd
+
+# Run tests
+# npm test
+```
+
+:top: <sub>[**back to top**](#table-of-contents)</sub>
+
 ## Database Setup
 
 - [MongoDB](#mongodb)
