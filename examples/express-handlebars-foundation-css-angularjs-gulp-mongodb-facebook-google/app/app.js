@@ -44,11 +44,12 @@ angular.module('MyApp', ['ngRoute', 'satellizer'])
     $authProvider.facebook({
       url: '/auth/facebook',
       clientId: '980220002068787',
-      redirectUri: 'http://localhost:3000/auth/facebook/callback'
+      redirectUri: window.location.origin + '/auth/facebook/callback'
     });
     $authProvider.google({
       url: '/auth/google',
-      clientId: '631036554609-v5hm2amv4pvico3asfi97f54sc51ji4o.apps.googleusercontent.com'
+      clientId: '814958990796-p1centjebv1k0htp3am05tfg5k10nl0k.apps.googleusercontent.com',
+      redirectUri: window.location.origin + '/auth/google/callback'
     });
 
     function skipIfAuthenticated($location, $auth) {
