@@ -71,12 +71,12 @@ class StaticSiteGenerator extends React.Component {
           {description}
           <div className="radio-group">
             <label className="radio-inline">
-              <img className="btn-logo" src="/img/svg/jekyll-logo.svg" alt="Jekyll"/>
+              <img className="btn-logo" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/jekyll-logo.svg" alt="Jekyll"/>
               <input type="radio" id="jekyllRadio" name="staticSiteGeneratorRadios" value="jekyll" onChange={props.handleChange} checked={props.staticSiteGenerator === 'jekyll'}/>
               <span>Jekyll</span>
             </label>
             <label className="radio-inline">
-              <img className="btn-logo" src="/img/svg/middleman-logo.svg" alt="Middleman"/>
+              <img className="btn-logo" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/middleman-logo.svg" alt="Middleman"/>
               <input type="radio" id="middlemanRadio" name="staticSiteGeneratorRadios" value="middleman" onChange={props.handleChange} checked={props.staticSiteGenerator === 'middleman'}/>
               <span>Middleman</span>
             </label>

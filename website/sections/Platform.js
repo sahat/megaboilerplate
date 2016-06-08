@@ -31,7 +31,7 @@ class Platform extends React.Component {
         <div className="panel-body">
           <div className="radio-group">
             <label className="radio-inline">
-              <img className="btn-logo" src="/img/svg/node-logo.svg" alt="Node.js"/>
+              <img className="btn-logo" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/node-logo.svg" alt="Node.js"/>
               <input type="radio"
                      id="nodeRadio"
                      name="platformRadios"
@@ -41,7 +41,7 @@ class Platform extends React.Component {
               <span>Node.js</span>
             </label>
             <label className="radio-inline">
-              <img className="btn-logo" src="/img/svg/html5-logo.svg" alt="HTML5"/>
+              <img className="btn-logo" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/html5-logo.svg" alt="HTML5"/>
               <input type="radio"
                      id="staticSiteRadio"
                      name="platformRadios"
@@ -51,7 +51,7 @@ class Platform extends React.Component {
               <span>Static Site</span>
             </label>
             <label className="radio-inline">
-              <img className="btn-logo" src="/img/svg/eslint-logo.svg" alt="JavaScript Library"/>
+              <img className="btn-logo" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/eslint-logo.svg" alt="JavaScript Library"/>
               <input type="radio"
                      id="jsLibraryRadio"
                      name="platformRadios"

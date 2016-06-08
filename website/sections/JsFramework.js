@@ -60,7 +60,7 @@ class JsFramework extends React.Component {
       <div>
         <br/>
         <span className="options" onClick={this.toggleAdditionalOptions}>
-          <img className={cx('animated', { fast: state.showOptions })} src="/img/svg/options.svg"/>
+          <img className={cx('animated', { fast: state.showOptions })} src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/options.svg"/>
           <span>React Options</span>
         </span>
         {additionalOptions}
@@ -69,7 +69,7 @@ class JsFramework extends React.Component {
 
     const recommended = props.beginner ? (
       <span className="hint--top hint--rounded" data-hint="Recommended">
-        <img src="/img/svg/recommended.svg" alt="Recommended"/>
+        <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/recommended.svg" alt="Recommended"/>
       </span>
     ) : null;
 
@@ -115,23 +115,23 @@ class JsFramework extends React.Component {
           {description}
           <div className="radio-group">
             <label className="radio-inline">
-              <img className="btn-logo" src="/img/svg/none.png" alt="None"/>
+              <img className="btn-logo" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/none.png" alt="None"/>
               <input type="radio" name="jsFrameworkRadios" value="none" onChange={props.handleChange} checked={props.jsFramework === 'none'}/>
               <span>None</span>
               {recommended}
             </label>
             <label className="radio-inline">
-              <img className="btn-logo" src="/img/svg/react-logo.svg" alt="React"/>
+              <img className="btn-logo" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/react-logo.svg" alt="React"/>
               <input type="radio" name="jsFrameworkRadios" value="react" onChange={props.handleChange} checked={props.jsFramework === 'react'}/>
               <span>React</span>
             </label>
             <label className="radio-inline">
-              <img className="btn-logo" src="/img/svg/angularjs-logo.svg" alt="AngularJS"/>
+              <img className="btn-logo" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/angularjs-logo.svg" alt="AngularJS"/>
               <input type="radio" name="jsFrameworkRadios" value="angularjs" onChange={props.handleChange} checked={props.jsFramework === 'angularjs'}/>
               <span>AngularJS</span>
             </label>
             <label className="radio-inline hint--right hint--rounded" data-hint="ETA after Angular 2 final release">
-              <img className="btn-logo disabled" src="/img/svg/angular2.png" alt="Angular 2"/>
+              <img className="btn-logo disabled" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/angular2.png" alt="Angular 2"/>
               <input type="radio" name="jsFrameworkRadios" value="angular2" disabled/>
               <span>Angular 2</span>
             </label>

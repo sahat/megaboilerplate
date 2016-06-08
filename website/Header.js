@@ -390,14 +390,13 @@ class Header extends React.Component {
           <iframe src="https://ghbtns.com/github-btn.html?user=sahat&repo=megaboilerplate&type=star&count=true&size=large" frameBorder="0" scrolling="0" width="160px" height="30px"></iframe>
 
           <div className="visible-lg">
-            <img className="hero-arrow" src="/img/arrow.png" alt="Arrow"/>
+            <img className="hero-arrow" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/arrow.png" alt="Arrow"/>
             <span>Don't forget to <i className="fa fa-star"/> on GitHub if you liked this project!</span>
           </div>
 
           <div ref="carbonAds"></div>
 
           <div className="footnote left">¹ Inspired by <a href="https://github.com/sahat/hackathon-starter" target="_blank">Hackathon Starter</a></div>
-
           {latestCommit}
         </div>
       </header>

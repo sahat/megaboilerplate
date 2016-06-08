@@ -616,7 +616,7 @@ class Home extends React.Component {
               <input type="text" ref="downloadLinkInput" onClick={this.handleClickDownloadLink.bind(this)} className="form-control" defaultValue={state.downloadLinkInputValue} readOnly/>
                 <span className="input-group-btn">
                   <button onClick={this.copyDownloadLink.bind(this)} onMouseOut={this.copyDownloadLinkMouseOut.bind(this)} className="btn btn-default hint--bottom hint--rounded" type="button" data-hint={this.state.copyClipboardText}>
-                    <img className="clipboard" src="/img/svg/clippy.svg" width="13" alt="Copy to clipboard"/>
+                    <img className="clipboard" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/clippy.svg" width="13" alt="Copy to clipboard"/>
                   </button>
                 </span>
             </div>
@@ -698,49 +698,49 @@ class Home extends React.Component {
               </div>
               <div className="modal-body">
                 <a href="http://megaboilerplate-demo1.azurewebsites.net/" className="demo-container demo1" target="_blank">
-                  <p><span><strong>Demo 1</strong> - Traditional Express web app</span> <img src="/img/svg/recommended.svg" alt="Recommended" /></p>
-                  <img src="/img/svg/node-icon.png" height="25"/>
-                  <img src="/img/svg/jade-logo.svg" height="25"/>
-                  <img src="/img/svg/bootstrap-logo.svg" height="25"/>
-                  <img src="/img/svg/sass-logo.svg" height="25"/>
-                  <img src="/img/svg/mocha.svg" height="25"/>
-                  <img src="/img/svg/mongodb-logo.svg" height="25"/>
-                  <img src="/img/svg/facebook-logo.svg" height="25"/>
-                  <img src="/img/svg/google-logo.svg" height="25"/>
-                  <img src="/img/svg/twitter-logo.svg" height="25"/>
-                  <img src="/img/svg/vk-logo.svg" height="25"/>
+                  <p><span><strong>Demo 1</strong> - Traditional Express web app</span> <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/recommended.svg" alt="Recommended" /></p>
+                  <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/node-icon.png" height="25"/>
+                  <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/jade-logo.svg" height="25"/>
+                  <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/bootstrap-logo.svg" height="25"/>
+                  <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/sass-logo.svg" height="25"/>
+                  <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/mocha.svg" height="25"/>
+                  <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/mongodb-logo.svg" height="25"/>
+                  <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/facebook-logo.svg" height="25"/>
+                  <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/google-logo.svg" height="25"/>
+                  <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/twitter-logo.svg" height="25"/>
+                  <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/vk-logo.svg" height="25"/>
                 </a>
                 <a href="http://megaboilerplate-demo2.azurewebsites.net/" className="demo-container demo2" target="_blank">
                   <p><span><strong>Demo 2</strong> - MEAN stack</span></p>
-                  <img src="/img/svg/node-icon.png" height="25"/>
-                  <img src="/img/svg/handlebars-logo.svg" height="25"/>
-                  <img src="/img/svg/foundation-logo.png" height="25"/>
-                  <img src="/img/svg/angularjs-logo.svg" height="25"/>
-                  <img src="/img/svg/gulp-logo.svg" height="25"/>
-                  <img src="/img/svg/jasmine.svg" height="25"/>
-                  <img src="/img/svg/mongodb-logo.svg" height="25"/>
-                  <img src="/img/svg/facebook-logo.svg" height="25"/>
-                  <img src="/img/svg/google-logo.svg" height="25"/>
+                  <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/node-icon.png" height="25"/>
+                  <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/handlebars-logo.svg" height="25"/>
+                  <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/foundation-logo.png" height="25"/>
+                  <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/angularjs-logo.svg" height="25"/>
+                  <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/gulp-logo.svg" height="25"/>
+                  <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/jasmine.svg" height="25"/>
+                  <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/mongodb-logo.svg" height="25"/>
+                  <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/facebook-logo.svg" height="25"/>
+                  <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/google-logo.svg" height="25"/>
                 </a>
                 <a href="http://megaboilerplate-demo3.azurewebsites.net/" className="demo-container demo3" target="_blank">
                   <p><span><strong>Demo 3</strong> - Full-stack React app (unstyled)</span></p>
-                  <img src="/img/svg/node-icon.png" height="25"/>
-                  <img src="/img/svg/nunjucks-logo.png" height="25"/>
-                  <img src="/img/svg/cssnext-logo.svg" height="25"/>
-                  <img src="/img/svg/postcss.svg" height="25"/>
-                  <img src="/img/svg/react-logo.svg" height="25"/>
-                  <img src="/img/svg/webpack-logo.svg" height="25"/>
-                  <img src="/img/svg/mocha.svg" height="25"/>
-                  <img src="/img/svg/sqlite-logo.svg" height="25"/>
-                  <img src="/img/svg/twitter-logo.svg" height="25"/>
+                  <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/node-icon.png" height="25"/>
+                  <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/nunjucks-logo.png" height="25"/>
+                  <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/cssnext-logo.svg" height="25"/>
+                  <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/postcss.svg" height="25"/>
+                  <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/react-logo.svg" height="25"/>
+                  <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/webpack-logo.svg" height="25"/>
+                  <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/mocha.svg" height="25"/>
+                  <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/sqlite-logo.svg" height="25"/>
+                  <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/twitter-logo.svg" height="25"/>
                 </a>
                 <a href="https://github.com/sahat/megaboilerplate/tree/master/examples/jekyll#mega-boilerplate-jekyll-blog-example" className="demo-container demo4" target="_blank">
                   <p><span><strong>Demo 4</strong> - Jekyll blo</span>g</p>
-                  <img src="/img/svg/jekyll-logo.svg" height="25"/>
+                  <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/jekyll-logo.svg" height="25"/>
                 </a>
                 <a href="https://github.com/sahat/megaboilerplate/tree/master/examples/middleman#mega-boilerplate-middleman-site-example" className="demo-container demo5" target="_blank">
                   <p><span><strong>Demo 5</strong> - Middleman static site</span></p>
-                  <img src="/img/svg/middleman-logo.svg" height="25"/>
+                  <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/middleman-logo.svg" height="25"/>
                 </a>
               </div>
             </div>

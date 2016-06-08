@@ -42,13 +42,13 @@ class CssPreprocessor extends React.Component {
 
     const recommended = props.beginner ? (
       <span className="hint--top hint--rounded" data-hint="Recommended">
-        <img src="/img/svg/recommended.svg" alt="Recommended" />
+        <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/recommended.svg" alt="Recommended" />
       </span>
     ) : null;
 
     const cssRadio = (!BOURBON_NEAT && (NO_CSS_FRAMEWORK || JEKYLL || MIDDLEMAN || BOOTSTRAP || FOUNDATION)) ? (
       <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/css3-logo.svg" alt="CSS"/>
+        <img className="btn-logo" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/css3-logo.svg" alt="CSS"/>
         <input type="radio" name="cssPreprocessorRadios" value="css" onChange={props.handleChange} checked={CSS} />
         <span>None / CSS</span>
         {recommended}
@@ -57,7 +57,7 @@ class CssPreprocessor extends React.Component {
 
     const sassRadio = (NO_CSS_FRAMEWORK || JEKYLL || MIDDLEMAN || BOOTSTRAP || FOUNDATION || BOURBON_NEAT) ? (
       <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/sass-logo.svg" alt="Sass"/>
+        <img className="btn-logo" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/sass-logo.svg" alt="Sass"/>
         <input type="radio" name="cssPreprocessorRadios" value="sass" onChange={props.handleChange} checked={SASS} />
         <span>Sass</span>
       </label>
@@ -65,7 +65,7 @@ class CssPreprocessor extends React.Component {
 
     const lessRadio = (!JEKYLL && !MIDDLEMAN && (NO_CSS_FRAMEWORK || BOOTSTRAP)) ? (
       <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/less-logo.svg" alt="LESS"/>
+        <img className="btn-logo" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/less-logo.svg" alt="LESS"/>
         <input type="radio" name="cssPreprocessorRadios" value="less" onChange={props.handleChange} checked={LESS} />
         <span>LESS</span>
       </label>
@@ -73,7 +73,7 @@ class CssPreprocessor extends React.Component {
 
     const postcssRadio = (!JEKYLL && !MIDDLEMAN && (NO_CSS_FRAMEWORK)) ? (
       <label className="radio-inline">
-        <img className="btn-logo" src="/img/svg/postcss.svg" alt="PostCSS"/>
+        <img className="btn-logo" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/postcss.svg" alt="PostCSS"/>
         <input type="radio" name="cssPreprocessorRadios" value="postcss" onChange={props.handleChange} checked={POSTCSS} />
         <span>PostCSS</span>
       </label>
@@ -107,7 +107,7 @@ class CssPreprocessor extends React.Component {
     const additionalOptionsButton = (BOOTSTRAP || FOUNDATION) && (CSS || LESS || SASS) ? (
       <div>
         <span className="options" onClick={this.toggleAdditionalOptions}>
-          <img className={cx('animated', { fast: state.showOptions })} src="/img/svg/options.svg"/>
+          <img className={cx('animated', { fast: state.showOptions })} src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/options.svg"/>
           <span>{capitalize(props.cssFramework)} Options</span>
         </span>
         {additionalOptions}
