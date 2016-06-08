@@ -500,8 +500,7 @@ class Home extends React.Component {
         </li>
         <li className="pull-right">
           <div className="checkbox">
-            <a href="https://www.codementor.io/sahat" target="_blank"><img src="https://cdn.codementor.io/badges/get_help_github.svg" alt="Codementor"/></a>
-          </div>
+            <a href="https://www.codementor.io/sahatyalkabov?utm_source=github&utm_medium=button&utm_term=sahatyalkabov&utm_campaign=github" target="_blank"><img src="https://cdn.codementor.io/badges/book_session_github.svg" alt="Book session on Codementor"/></a>          </div>
         </li>
         <li className="pull-right">
           <div className="checkbox">
@@ -673,20 +672,8 @@ class Home extends React.Component {
                 <h4 className="modal-title" id="myModalLabel"><i className="fa fa-globe"></i> Live Demos</h4>
               </div>
               <div className="modal-body">
-                  <a href="#" className="demo-container demo1">
-                    <p><span><strong>Demo 1</strong> - MEAN stack</span></p>
-                    <img src="/img/svg/node-icon.png" height="25"/>
-                    <img src="/img/svg/handlebars-logo.svg" height="25"/>
-                    <img src="/img/svg/foundation-logo.png" height="25"/>
-                    <img src="/img/svg/angularjs-logo.svg" height="25"/>
-                    <img src="/img/svg/gulp-logo.svg" height="25"/>
-                    <img src="/img/svg/jasmine.svg" height="25"/>
-                    <img src="/img/svg/mongodb-logo.svg" height="25"/>
-                    <img src="/img/svg/facebook-logo.svg" height="25"/>
-                    <img src="/img/svg/google-logo.svg" height="25"/>
-                  </a>
-                <a href="#" className="demo-container demo2">
-                  <p><span><strong>Demo 2</strong> - Traditional Express web app</span> <img src="/img/svg/recommended.svg" alt="Recommended" /></p>
+                <a href="http://megaboilerplate-demo1.azurewebsites.net/" className="demo-container demo1" target="_blank">
+                  <p><span><strong>Demo 1</strong> - Traditional Express web app</span> <img src="/img/svg/recommended.svg" alt="Recommended" /></p>
                   <img src="/img/svg/node-icon.png" height="25"/>
                   <img src="/img/svg/jade-logo.svg" height="25"/>
                   <img src="/img/svg/bootstrap-logo.svg" height="25"/>
@@ -698,7 +685,21 @@ class Home extends React.Component {
                   <img src="/img/svg/twitter-logo.svg" height="25"/>
                   <img src="/img/svg/vk-logo.svg" height="25"/>
                 </a>
-                <a href="#" className="demo-container demo3">
+
+                <a href="http://megaboilerplate-demo2.azurewebsites.net/" className="demo-container demo2" target="_blank">
+                  <p><span><strong>Demo 2</strong> - MEAN stack</span></p>
+                  <img src="/img/svg/node-icon.png" height="25"/>
+                  <img src="/img/svg/handlebars-logo.svg" height="25"/>
+                  <img src="/img/svg/foundation-logo.png" height="25"/>
+                  <img src="/img/svg/angularjs-logo.svg" height="25"/>
+                  <img src="/img/svg/gulp-logo.svg" height="25"/>
+                  <img src="/img/svg/jasmine.svg" height="25"/>
+                  <img src="/img/svg/mongodb-logo.svg" height="25"/>
+                  <img src="/img/svg/facebook-logo.svg" height="25"/>
+                  <img src="/img/svg/google-logo.svg" height="25"/>
+                </a>
+
+                <a href="http://megaboilerplate-demo3.azurewebsites.net/" className="demo-container demo3" target="_blank">
                   <p><span><strong>Demo 3</strong> - Full-stack React app (unstyled)</span></p>
                   <img src="/img/svg/node-icon.png" height="25"/>
                   <img src="/img/svg/nunjucks-logo.png" height="25"/>
@@ -710,11 +711,11 @@ class Home extends React.Component {
                   <img src="/img/svg/sqlite-logo.svg" height="25"/>
                   <img src="/img/svg/twitter-logo.svg" height="25"/>
                 </a>
-                <a href="#" className="demo-container demo4">
+                <a href="#" className="demo-container demo4" target="_blank">
                   <p><span><strong>Demo 4</strong> - Jekyll blo</span>g</p>
                   <img src="/img/svg/jekyll-logo.svg" height="25"/>
                 </a>
-                <a href="#" className="demo-container demo5">
+                <a href="#" className="demo-container demo5" target="_blank">
                   <p><span><strong>Demo 5</strong> - Middleman static site</span></p>
                   <img src="/img/svg/middleman-logo.svg" height="25"/>
                 </a>

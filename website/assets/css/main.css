@@ -1694,27 +1694,34 @@ code {
 
 }
 
+.demo-container:focus,
 .demo-container:hover {
   color: rgb(29, 124, 244);
   text-decoration: none;
+  outline: none;
 }
 
+.demo-container.demo1:focus,
 .demo-container.demo1:hover {
-  border-color: #dd1b16;
-}
-
-.demo-container.demo2:hover {
   border-color: #83cd29;
 }
 
+.demo-container.demo2:focus,
+.demo-container.demo2:hover {
+  border-color: #dd1b16;
+}
+
+.demo-container.demo3:focus,
 .demo-container.demo3:hover {
   border-color: #61dafb;
 }
 
+.demo-container.demo4:focus,
 .demo-container.demo4:hover {
   border-color: #333;
 }
 
+.demo-container.demo5:focus,
 .demo-container.demo5:hover {
   border-color: #f3c859;
 }
