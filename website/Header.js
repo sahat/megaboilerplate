@@ -81,7 +81,6 @@ class Header extends React.Component {
     setTimeout(() => {
       this.twitterSdk();
       this.facebookSdk();
-      this.linkedinSdk();
       this.googleSdk();
       this.githubSdk();
       this.loadCarbonAds();
@@ -152,10 +151,6 @@ class Header extends React.Component {
       js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6&appId=980220002068787";
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
-  }
-
-  linkedinSdk() {
-    $.getScript('//platform.linkedin.com/in.js');
   }
 
   googleSdk() {

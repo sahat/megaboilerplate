@@ -5,7 +5,7 @@ module.exports = {
   entry: path.join(__dirname,'website', 'main'),
   output: {
     path: path.join(__dirname, 'website', 'assets', 'js'),
-    filename: 'bundle.js',
+    filename: 'bundle.[chunkhash].js',
     publicPath: '/js/'
   },
   resolveLoader: {
