@@ -34,6 +34,13 @@ const reactRoutes = require('./website/routes');
 
 const app = express();
 
+// Webpack build stats
+let stats;
+
+if (app.get('env') === 'production') {
+  stats = require('./stats.json');
+}
+
 app.set('port', process.env.PORT || 4000);
 app.use(compression());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -57,7 +64,6 @@ app.use('/css', postcss({
 }));
 app.use(express.static(path.join(__dirname, 'website', 'assets'), { maxAge: 31557600000 }));
 
-
 app.post('/download', expressRoutes.download);
 
 // React server rendering
@@ -69,7 +75,10 @@ app.use(function(req, res) {
      res.status(302).redirect(redirectLocation.pathname + redirectLocation.search)
    } else if (renderProps) {
      let html = ReactDOM.renderToString(React.createElement(Router.RouterContext, renderProps));
-     let page = nunjucks.render('index.html', { html: html });
+     let page = nunjucks.render('index.html', { 
+       html: html,
+       js: stats ? stats.assetsByChunkName.main : 'bundle.js'
+     });
      res.status(200).send(page);
    } else {
      res.status(404).send('Page Not Found')

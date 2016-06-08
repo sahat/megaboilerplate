@@ -5,7 +5,7 @@ module.exports = {
   entry: path.join(__dirname,'website', 'main'),
   output: {
     path: path.join(__dirname, 'website', 'assets', 'js'),
-    filename: 'bundle.js',
+    filename: 'bundle.[chunkhash].js',
     publicPath: '/js/'
   },
   resolveLoader: {
@@ -23,7 +23,12 @@ module.exports = {
       compressor: {
         warnings: false
       }
-    })
+    }),
+    function() {
+      this.plugin('done', function(stats) {
+        require('fs').writeFileSync(path.join(__dirname, 'stats.json'), JSON.stringify(stats.toJson()));
+      });
+    }
   ],
   module: {
     loaders: [{
