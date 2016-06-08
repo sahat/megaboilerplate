@@ -177,7 +177,7 @@ class Home extends React.Component {
           generateDownloadLinkSuccess: false,
           generateDownloadLinkInProgress: false
         });
-        const title = jqXHR.responseJSON.message;
+        const title = encodeURIComponent(jqXHR.responseJSON.message);
         const body = encodeURIComponent('\n##### :boom: Error Stack Trace\n' + '\`\`\`js\n' + jqXHR.responseJSON.stack + '\n\`\`\`');
         swal({
           title: 'Server Error',
@@ -207,7 +207,7 @@ class Home extends React.Component {
           form.submit();
         }
       }).fail((jqXHR) => {
-        const title = jqXHR.responseJSON.message;
+        const title = encodeURIComponent(jqXHR.responseJSON.message);
         const body = encodeURIComponent('\n##### :boom: Error Stack Trace\n' + '\`\`\`js\n' + jqXHR.responseJSON.stack + '\n\`\`\`');
         swal({
           title: 'Server Error',
