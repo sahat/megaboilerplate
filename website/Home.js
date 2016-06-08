@@ -505,7 +505,7 @@ class Home extends React.Component {
   render() {
     const state = this.state;
     const settingsCheckboxes = (
-      <ul className="list-inline list-unstyled">
+      <ul className="list-inline list-unstyled clearfix">
         <li>
           <div className="checkbox">
             <label>
@@ -669,6 +669,7 @@ class Home extends React.Component {
         <Header />
         <main className="container">
           {settingsCheckboxes}
+          <p className="text-danger"><strong>6/8/2016 Notice</strong>: Due to the high number of boilerplate configurations you may encounter some unexpected problems. Please report any bugs by opening an issue on GitHub.</p>
           <div ref="platform">{platform}</div>
           <div ref="framework">{framework}</div>
           <div ref="staticSiteGenerator">{staticSiteGenerator}</div>
