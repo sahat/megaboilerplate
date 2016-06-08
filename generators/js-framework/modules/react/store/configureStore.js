@@ -8,6 +8,7 @@ export default function configureStore(initialState) {
     initialState,
     //= REDUX_STORE_ENHANCER_INDENT2
   );
+  //= WEBPACK_HOT_REDUCER_INDENT1
 
   return store;
 }
