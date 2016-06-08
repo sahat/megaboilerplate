@@ -1,6 +1,6 @@
 var dotenv = require('dotenv');
 
-dotenv.load();
+dotenv.load({ path: '.env.example' });
 
 module.exports = {
   client: 'sqlite',

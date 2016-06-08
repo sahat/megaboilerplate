@@ -27,6 +27,8 @@
     "morgan": "^1.7.0",
     "nodemailer": "^2.3.0",
     "nunjucks": "^2.4.1",
+    "postcss-cssnext": "^2.6.0",
+    "postcss-import": "^8.1.2",
     "postcss-middleware": "^1.0.0",
     "react": "15.0.2",
     "react-cookie": "^0.4.5",
