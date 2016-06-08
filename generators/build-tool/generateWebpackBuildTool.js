@@ -49,6 +49,7 @@ export default async function genereateWebpackBuildTool(params) {
   switch (params.jsFramework) {
     case 'react':
       await replaceCodeMemory(params, 'webpack.config.js', 'WEBPACK_JAVASCRIPT_LOADER', await getModule('build-tool/webpack/webpack-react-loader.js'));
+      await replaceCodeMemory(params, 'app/store/configureStore.js', 'WEBPACK_HOT_REDUCER', await getModule('build-tool/webpack/webpack-hot-reducer.js'));
       await addNpmPackageMemory('babel-plugin-react-transform', params, true);
       await addNpmPackageMemory('react-transform-hmr', params, true);
       await addNpmPackageMemory('react-transform-catch-errors', params, true);
