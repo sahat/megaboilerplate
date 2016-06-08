@@ -735,10 +735,12 @@ class Home extends React.Component {
                 </a>
                 <a href="https://github.com/sahat/megaboilerplate/tree/master/examples/jekyll#mega-boilerplate-jekyll-blog-example" className="demo-container demo4" target="_blank">
                   <p><span><strong>Demo 4</strong> - Jekyll blo</span>g</p>
+                  <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/ruby-logo.svg" height="25"/>
                   <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/jekyll-logo.svg" height="25"/>
                 </a>
                 <a href="https://github.com/sahat/megaboilerplate/tree/master/examples/middleman#mega-boilerplate-middleman-site-example" className="demo-container demo5" target="_blank">
                   <p><span><strong>Demo 5</strong> - Middleman static site</span></p>
+                  <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/ruby-logo.svg" height="25"/>
                   <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/middleman-logo.svg" height="25"/>
                 </a>
               </div>
