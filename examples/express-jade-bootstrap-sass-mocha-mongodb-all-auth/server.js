@@ -8,13 +8,12 @@ var flash = require('express-flash');
 var bodyParser = require('body-parser');
 var expressValidator = require('express-validator');
 var dotenv = require('dotenv');
-var exphbs = require('express-handlebars');
 var mongoose = require('mongoose');
 var passport = require('passport');
-var less = require('less-middleware');
+var sass = require('node-sass-middleware');
 
 // Load environment variables from .env file
-dotenv.load();
+dotenv.load({ path: '.env.example' });
 
 // Controllers
 var HomeController = require('./controllers/home');
@@ -32,26 +31,11 @@ mongoose.connection.on('error', function() {
   console.log('MongoDB Connection Error. Please make sure that MongoDB is running.');
   process.exit(1);
 });
-var hbs = exphbs.create({
-  defaultLayout: 'main',
-  helpers: {
-    ifeq: function(a, b, options) {
-      if (a === b) {
-        return options.fn(this);
-      }
-      return options.inverse(this);
-    },
-    toJSON : function(object) {
-      return JSON.stringify(object);
-    }
-  }
-});
-
-app.engine('handlebars', hbs.engine);
-app.set('view engine', 'handlebars');
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
 app.set('port', process.env.PORT || 3000);
 app.use(compression());
-app.use(less(path.join(__dirname, 'public')));
+app.use(sass({ src: path.join(__dirname, 'public'), dest: path.join(__dirname, 'public') }));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

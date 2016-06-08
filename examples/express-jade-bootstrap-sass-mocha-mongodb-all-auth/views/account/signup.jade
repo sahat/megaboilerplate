@@ -1,0 +1,38 @@
+extends ../layout
+
+block content
+  .login-container
+    .panel
+      .panel-body
+        if messages.error
+          .alert.alert-danger(role='alert')
+            for error in messages.error
+              div= error.msg
+
+        form(method='POST')
+          legend Create an account
+          .form-group
+            label(for='name') Name
+            input.form-control(type='text', name='name', id='name', placeholder='Name', autofocus=true)
+          .form-group
+            label(for='email') Email
+            input.form-control(type='email', name='email', id='email', placeholder='Email')
+          .form-group
+            label(for='password') Password
+            input.form-control(type='password', name='password', id='password', placeholder='Password')
+          .form-group
+            small.text-muted By signing up, you agree to the <a href="/">Terms of Service</a>.
+          button.btn.btn-success(type='submit') Create an account
+
+        .hr-title
+          span or
+
+        .btn-toolbar.text-center
+          a.btn.btn-facebook(href='/auth/facebook') Sign in with Facebook
+          a.btn.btn-twitter(href='/auth/twitter') Sign in with Twitter
+          a.btn.btn-google(href='/auth/google') Sign in with Google
+          a.btn.btn-vk(href='/auth/vkontakte') Sign in with VK
+
+    p.text-center Already have an account?&nbsp;
+      a(href='/login')
+        strong Log in

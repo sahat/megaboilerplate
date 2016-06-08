@@ -12,6 +12,7 @@ pids
 logs
 results
 tmp
+coverage
 
 # API keys
 .env

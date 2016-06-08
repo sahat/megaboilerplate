@@ -1,9 +1,10 @@
 {
-  "name": "silent-wildflower",
+  "name": "long-cloud",
   "version": "1.0.0",
   "description": "My app description",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "mocha"
   },
   "dependencies": {
     "async": "^1.5.2",
@@ -13,9 +14,9 @@
     "dotenv": "^2.0.0",
     "express": "^4.13.4",
     "express-flash": "0.0.2",
-    "express-handlebars": "^3.0.0",
     "express-session": "^1.2.1",
     "express-validator": "^2.20.4",
+    "jade": "^1.11.0",
     "method-override": "^2.3.5",
     "mongoose": "^4.4.8",
     "morgan": "^1.7.0",
@@ -28,7 +29,13 @@
     "passport-twitter": "^1.0.4",
     "passport-vkontakte": "^0.2.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5",
+    "sinon": "^1.17.3",
+    "sinon-chai": "^2.8.0",
+    "supertest": "^1.2.0"
+  },
   "engines": {
     "node": "6.1.0"
   }

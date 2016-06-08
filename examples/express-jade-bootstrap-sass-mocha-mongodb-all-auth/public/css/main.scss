@@ -1,0 +1,242 @@
+$body-bg: #f4f4f4;
+$line-height-base: 1.57142857;
+$link-color: #1d7cf4;
+$link-hover-decoration: none;
+
+$brand-success: #29b35b;
+$brand-danger: #b61b17;
+
+$font-family-base: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$headings-font-weight: 600;
+
+$alert-info-border: #31708f;
+$alert-success-border: darken($brand-success, 12%);
+$alert-success-text: #fff;
+$alert-success-bg: $brand-success;
+$alert-danger-border: #b61b17;
+$alert-danger-text: #b61b17;
+$alert-danger-bg: #ffcdd2;
+
+$navbar-height: 56px;
+$navbar-default-bg: #fff;
+$navbar-default-border: #e0e0e0;
+$navbar-default-color: #757575;
+$navbar-default-link-color: #262626;
+$navbar-default-link-hover-bg: transparent;
+$navbar-default-link-active-bg: transparent;
+$navbar-default-link-active-color: #262626;
+
+$panel-heading-padding: 20px 30px;
+$panel-body-padding: 30px;
+
+@import url("//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CRaleway:100,300,600,700,800");
+@import "vendor/bootstrap";
+
+// Scaffolding
+// -------------------------
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 44px;
+}
+
+footer {
+  position: absolute;
+  width: 100%;
+  height: 44px;
+  padding: 10px 30px;
+  bottom: 0;
+  background-color: #fff;
+  border-top: 1px solid #e0e0e0;
+}
+
+.login-container {
+  width: 555px;
+  margin: 0 auto;
+}
+
+// Alerts
+// -------------------------
+
+.alert {
+  border-width: 0 0 0 3px;
+}
+
+// Navbar
+// -------------------------
+
+.navbar-default .navbar-nav > li > a {
+  border-bottom: 3px solid transparent;
+  padding-bottom: ($navbar-padding-vertical - 3);
+  transition: all 0.25s;
+  &:hover {
+    border-bottom-color: #bdbdbd;
+  }
+  &.navbar-avatar {
+    padding-top: $navbar-padding-vertical - 4.5;
+    padding-bottom: ($navbar-padding-vertical - 4.5) - 3;
+    img {
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+    }
+  }
+}
+
+.navbar-default .navbar-nav > li.active > a {
+  border-bottom-color: #3f51b5;
+}
+
+// Panels
+// -------------------------
+
+.panel {
+  border: solid 1px rgba(160, 160, 160, 0.3);
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
+}
+
+.panel-heading + .panel-body {
+  padding-top: 0;
+}
+
+.panel-body {
+  h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+  }
+}
+
+.panel-title {
+  font-size: 18px;
+  color: #424242;
+}
+
+// Buttons
+// -------------------------
+
+.btn-toolbar > .btn {
+  float: none;
+  margin-bottom: 5px;
+}
+
+.btn {
+  font-weight: 600;
+  border-radius: 3px;
+  &:focus {
+    outline: 0 !important;
+  }
+}
+
+.btn-default {
+  border-color: #ccc;
+  background: #f5f5f5 linear-gradient(to bottom, #fff, #f5f5f5);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), inset 0 -1px 4px rgba(151, 159, 175, 0.2);
+  &:active {
+    background: darken(#f5f5f5, 6%) linear-gradient(to bottom, darken(#fff, 6%), darken(#f5f5f5, 6%));
+  }
+}
+
+.btn-success {
+  border-color: #208a46;
+  background: #29b35b linear-gradient(to bottom, #2ec866, #29b35b);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.1), inset 0 -1px 4px rgba(32, 138, 70, 0.3);
+  &:active {
+    background: darken(#29b35b, 6%) linear-gradient(to bottom, darken(#2ec866, 6%), darken(#29b35b, 6%));
+  }
+}
+
+.btn-danger {
+  border-color: #8c1512;
+  background: #b61b17 linear-gradient(to bottom, #cc1e1a, #b61b17);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.1), inset 0 -1px 4px rgba(140, 21, 18, 0.3);
+  &:active {
+    background: darken(#b61b17, 6%) linear-gradient(to bottom, darken(#cc1e1a, 6%), darken(#b61b17, 6%));
+  }
+}
+
+.btn-facebook {
+  color: #fff;
+  border-color: #335190;
+  background: #3b5998 linear-gradient(to bottom, #4263a9, #3b5998);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.1), inset 0 -1px 4px rgba(59, 89, 152, 0.3);
+  &:hover,
+  &:focus {
+    color: #fff;
+  }
+}
+
+.btn-twitter {
+  color: #fff;
+  border-color: #009fdb;
+  background: #00aced linear-gradient(to bottom, #05baff, #00aced);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.1), inset 0 -1px 4px rgba(0, 172, 237, 0.3);
+  &:hover,
+  &:focus {
+    color: #fff;
+  }
+}
+
+.btn-google {
+  color: #fff;
+  border-color: #d54331;
+  background: #dd4b39 linear-gradient(to bottom, #e05d4d, #dd4b39);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.1), inset 0 -1px 4px rgba(221, 75, 57, 0.3);
+  &:hover,
+  &:focus {
+    color: #fff;
+  }
+}
+
+.btn-vk {
+  color: #fff;
+  border-color: #4f7192;
+  background: #587ea3 linear-gradient(to bottom, #678aad, #587ea3);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.1), inset 0 -1px 4px rgba(79, 113, 146, 0.3);
+  &:hover,
+  &:focus {
+    color: #fff;
+  }
+}
+
+// Forms
+// -------------------------
+
+textarea {
+  resize: none;
+}
+
+.form-control {
+  height: auto;
+  padding: 8px 12px;
+  border: 2px solid #ebebeb;
+  border-radius: 0;
+  box-shadow: inset 0 1px 2px rgba(150, 160, 175, 0.1), inset 0 1px 15px rgba(150, 160, 175, 0.05);
+}
+
+.form-group > label {
+  text-transform: uppercase;
+  font-size: 13px;
+}
+
+.hr-title {
+  height: auto;
+  margin-top: 20px;
+  border-top: 1px solid;
+  color: #bbb;
+  font-size: 16px;
+  text-align: center;
+  line-height: 20px;
+}
+
+.hr-title span {
+  position: relative;
+  padding: 2px 10px;
+  top: -10px;
+  background-color: #fff;
+  border-radius: 2px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}

@@ -1,0 +1,36 @@
+extends ../layout
+
+block content
+  .login-container
+    .panel
+      .panel-body
+        if messages.error
+          .alert.alert-danger(role='alert')
+            for error in messages.error
+              div= error.msg
+
+        form(method='POST')
+          legend Log In
+          .form-group
+            label.control-label(for='email') Email
+            input.form-control(type='email', name='email', id='email', placeholder='Email', autofocus=true)
+          .form-group
+            label.control-label(for='password') Password
+            input.form-control(type='password', name='password', id='password', placeholder='Password')
+          .form-group
+            a(href='/forgot')
+              strong Forgot your password?
+          button.btn.btn-success(type='submit') Log in
+
+        .hr-title
+          span or
+
+        .btn-toolbar.text-center
+          a.btn.btn-facebook(href='/auth/facebook') Sign in with Facebook
+          a.btn.btn-twitter(href='/auth/twitter') Sign in with Twitter
+          a.btn.btn-google(href='/auth/google') Sign in with Google
+          a.btn.btn-vk(href='/auth/vkontakte') Sign in with VK
+
+    p.text-center Don't have an account?&nbsp;
+      a(href='/signup')
+        strong Sign up
