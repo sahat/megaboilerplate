@@ -25,13 +25,6 @@ const Deployment = (props) => {
         </div>
       );
       break;
-    case 'bluemix':
-      description = (
-        <div>
-          <strong><a href="https://console.ng.bluemix.net/" target="_blank">IBM Bluemix</a></strong> — Free Tier. 512BM RAM, 2 Public IP Addresses, 20 GB External Storage. No credit card required.
-        </div>
-      );
-      break;
     case 'digitalOcean':
       description = (
         <div>
@@ -64,12 +57,7 @@ const Deployment = (props) => {
           <label className="radio-inline">
             <img className="btn-logo" src="/img/svg/azure-logo.svg" height="60" alt="Microsoft Azure"/>
             <input type="radio" name="deploymentRadios" value="azure" onChange={props.handleChange} checked={props.deployment === 'azure'} />
-            <span>Azure</span>
-          </label>
-          <label className="radio-inline">
-            <img className="btn-logo" src="/img/svg/bluemix-logo.svg" alt="IBM Bluemix"/>
-            <input type="radio" name="deploymentRadios" value="bluemix" onChange={props.handleChange} checked={props.deployment === 'bluemix'} />
-            <span>Bluemix</span>
+            <span>Microsoft Azure</span>
           </label>
           <label className="radio-inline">
             <img className="btn-logo" src="/img/svg/do-logo.png" alt="Digital Ocean"/>

@@ -14,8 +14,6 @@ export default async function generateDeployment(params) {
       set(params.build, ['.deployment'], await getModule('deployment/azure-dot-deployment'));
       set(params.build, ['deploy.cmd'], await getModule('deployment/azure-deploy.cmd'));
       break;
-    case 'bluemix':
-      break;
     case 'digitalOcean':
       break;
     default:

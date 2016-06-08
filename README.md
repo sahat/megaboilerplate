@@ -755,11 +755,6 @@ For more information, please visit [Getting Started on Heroku with Node.js](http
 - Run `git push azure master`, and when prompted, enter your password created under **Deployment credentials**
 - All set!
 
-### IBM Bluemix
-<img src="http://www.comparethecloud.net/wp-content/uploads/2014/06/ibm-bluemix_pr-030514.jpg" width="200">
-
-TODO
-
 ### Digital Ocean
 <img src="https://www.digitalocean.com/assets/images/logos-badges/png/DO_Logo_Vertical_Blue-2c654e19.png" width="200">
 

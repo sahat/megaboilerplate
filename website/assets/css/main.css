@@ -1167,17 +1167,6 @@ canvas {
   fill: currentColor;
 }
 
-.bluemix .panel-heading {
-  color: #fff;
-  background: #00a391;
-  border-color: transparent;
-}
-
-.bluemix svg {
-  color: #fff;
-  fill: currentColor;
-}
-
 .gulp .panel-heading {
   color: #fff;
   background: #cf4646;

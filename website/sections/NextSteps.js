@@ -20,7 +20,6 @@ const NextSteps = (props) => {
     sqlite: 'SQLite',
     heroku: 'Heroku',
     azure: 'Microsoft Azure',
-    bluemix: 'IBM Bluemix',
     digitalOcean: 'Digital Ocean'
   };
 
