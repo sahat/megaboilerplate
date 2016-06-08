@@ -4,7 +4,7 @@ import { getModule, addEnvMemory, templateReplaceMemory, addNpmPackageMemory } f
 export default async function generateSqlDatabase(params) {
   switch (params.framework) {
     case 'express':
-      set(params, ['build', 'config', 'knexfile.js'], await getModule('database/sql/knexfile.js'));
+      set(params, ['build', 'knexfile.js'], await getModule('database/sql/knexfile.js'));
       set(params, ['build', 'config', 'bookshelf.js'], await getModule('database/sql/bookshelf.js'));
 
       if (params.database === 'sqlite') {
