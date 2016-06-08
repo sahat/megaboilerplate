@@ -517,6 +517,12 @@ button {
   margin-top: 2px;
 }
 
+.checkbox-inline+.checkbox-inline,
+.radio-inline+.radio-inline {
+    margin-left: 0px;
+    margin-bottom: 30px;
+}
+
 .checkbox-inline {
   margin-top: 10px;
   margin-bottom: 10px;
