@@ -106,7 +106,6 @@ class Header extends React.Component {
 
   loadCarbonAds() {
     let carbonAdsContainer = this.refs.carbonAds;
-    let carbonAdsBlocked = this.refs.carbonAdsBlocked;
     let script = document.createElement('script');
     script.async = true;
     script.defer = true;
@@ -115,18 +114,6 @@ class Header extends React.Component {
     script.id = '_carbonads_js';
     carbonAdsContainer.appendChild(script);
     ga('send', 'event', 'Mega Boilerplate', 'Carbon Ads', 'Loaded');
-
-    var tryMessage = function() {
-      setTimeout(function() {
-        if (!document.getElementById('carbonads')) {
-          $(carbonAdsBlocked).html('<div class="zoomInBackwards"><i class="fa fa-2x fa-audio-description" /> Please consider disabling your ad blocker on this site</div> ');
-          $(carbonAdsContainer).remove();
-          ga('send', 'event', 'Mega Boilerplate', 'Carbon Ads', 'Blocked');
-        }
-      }, 1800);
-    };
-
-    tryMessage();
   }
 
   twitterSdk() {
@@ -379,8 +366,6 @@ class Header extends React.Component {
             </VelocityComponent>
             <button type="button" className="btn btn-outline" data-toggle="modal" data-target="#demosModal"><i className={'fa fa-' + this.state.browserIcon}/> Live Demo</button> <a href="https://github.com/sahat/megaboilerplate/tree/master/examples" target="_blank" className="btn btn-outline">Code Examples</a>
           </div>
-
-          <div ref="carbonAdsBlocked" className="carbon-ads-blocked"></div>
 
           <iframe src="https://ghbtns.com/github-btn.html?user=sahat&repo=megaboilerplate&type=star&count=true&size=large" frameBorder="0" scrolling="0" width="160px" height="30px"></iframe>
 
