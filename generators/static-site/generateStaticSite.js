@@ -1,5 +1,5 @@
-import { join } from 'path';
-import { getModule } from '../../generators/utils';
+import { set } from 'lodash';
+import { getModule, templateReplaceMemory } from '../../generators/utils';
 
 async function generateStaticSite(params) {
   switch (params.staticSiteGenerator) {
@@ -105,6 +105,14 @@ async function generateStaticSite(params) {
       break;
     default:
   }
+
+
+  // Add README.md
+  set(params, ['build', 'README.md'], await getModule('readme/readme-static-site.md'));
+
+  templateReplaceMemory(params, 'README.md', {
+    staticSiteGenerator: params.staticSiteGenerator
+  });
 }
 
 export default generateStaticSite;
