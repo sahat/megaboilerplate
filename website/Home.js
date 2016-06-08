@@ -237,6 +237,9 @@ class Home extends React.Component {
     switch (name) {
       case 'beginner':
         state.beginner = isChecked;
+        if (isChecked) {
+          ga('send', 'event', 'Mega Boilerplate', 'Site Options', 'Beginner');
+        }
         break;
 
       case 'platformRadios':
@@ -248,6 +251,7 @@ class Home extends React.Component {
             }
           }
         }
+        ga('send', 'event', 'Mega Boilerplate', 'Platform', value);
         state.platform = value;
         if (!state.disableAutoScroll) {
           $(refs.platform).velocity('scroll');
@@ -259,6 +263,7 @@ class Home extends React.Component {
         if (!state.staticSiteGenerator && !state.disableAutoScroll) {
           $(refs.staticSiteGenerator).velocity('scroll');
         }
+        ga('send', 'event', 'Mega Boilerplate', 'Static Site', value);
         state.staticSiteGenerator = value;
         state.staticSiteGeneratorValidationError = null;
         break;
@@ -267,6 +272,7 @@ class Home extends React.Component {
         state.jsLibraryOptions = state.jsLibraryOptions || new Set();
         if (isChecked) {
           state.jsLibraryOptions.add(value);
+          ga('send', 'event', 'Mega Boilerplate', 'JS Library', value);
         } else {
           state.jsLibraryOptions.delete(value);
         }
@@ -288,12 +294,14 @@ class Home extends React.Component {
 
       case 'jsLibraryLicenseRadios':
         state.jsLibraryLicense = value;
+        ga('send', 'event', 'Mega Boilerplate', 'JS Library', value);
         break;
 
       case 'frameworkRadios':
         if (!state.framework && !state.disableAutoScroll) {
           $(refs.framework).velocity('scroll');
         }
+        ga('send', 'event', 'Mega Boilerplate', 'Framework', value);
         state.framework = value;
         state.frameworkValidationError = null;
 
@@ -303,6 +311,7 @@ class Home extends React.Component {
         state.frameworkOptions = state.frameworkOptions || new Set();
         if (isChecked) {
           state.frameworkOptions.add(value);
+          ga('send', 'event', 'Mega Boilerplate', 'Framework', value);
         } else {
           state.frameworkOptions.delete(value);
         }
@@ -312,8 +321,9 @@ class Home extends React.Component {
         if (!state.templateEngine && !state.disableAutoScroll) {
           $(refs.templateEngine).velocity('scroll');
         }
-        state.templateEngineValidationError = null;
+        ga('send', 'event', 'Mega Boilerplate', 'Template Engine', value);
         state.templateEngine = value;
+        state.templateEngineValidationError = null;
         break;
 
       case 'cssFrameworkRadios':
@@ -323,14 +333,16 @@ class Home extends React.Component {
         if (state.cssPreprocessor) {
           state.cssPreprocessor = null;
         }
-        state.cssFrameworkValidationError = null;
+        ga('send', 'event', 'Mega Boilerplate', 'CSS Framework', value);
         state.cssFramework = value;
+        state.cssFrameworkValidationError = null;
         break;
 
       case 'cssPreprocessorRadios':
         if (!state.cssPreprocessor && !state.disableAutoScroll) {
           $(refs.cssPreprocessor).velocity('scroll');
         }
+        ga('send', 'event', 'Mega Boilerplate', 'CSS Preprocessor', value);
         state.cssPreprocessor = value;
         state.cssPreprocessorValidationError = null;
         state.buildTool = null;
@@ -340,6 +352,7 @@ class Home extends React.Component {
         state.cssPreprocessorOptions = state.cssPreprocessorOptions || new Set();
         if (isChecked) {
           state.cssPreprocessorOptions.add(value);
+          ga('send', 'event', 'Mega Boilerplate', 'CSS Preprocessor', value);
         } else {
           state.cssPreprocessorOptions.delete(value);
         }
@@ -349,6 +362,7 @@ class Home extends React.Component {
         if (!state.jsFramework && !state.disableAutoScroll) {
           $(refs.jsFramework).velocity('scroll');
         }
+        ga('send', 'event', 'Mega Boilerplate', 'JS Framework', value);
         state.jsFramework = value;
         state.jsFrameworkValidationError = null;
         state.testing = null;
@@ -359,6 +373,7 @@ class Home extends React.Component {
         state.reactOptions = state.reactOptions || new Set();
         if (isChecked) {
           state.reactOptions.add(value);
+          ga('send', 'event', 'Mega Boilerplate', 'JS Framework', value);
         } else {
           state.reactOptions.delete(value);
         }
@@ -368,6 +383,7 @@ class Home extends React.Component {
         if (!state.buildTool && !state.disableAutoScroll) {
           $(refs.buildTool).velocity('scroll');
         }
+        ga('send', 'event', 'Mega Boilerplate', 'Build Tool', value);
         state.buildTool = value;
         state.buildToolValidationError = null;
         break;
@@ -376,6 +392,7 @@ class Home extends React.Component {
         if (!state.testing && !state.disableAutoScroll) {
           $(refs.testing).velocity('scroll');
         }
+        ga('send', 'event', 'Mega Boilerplate', 'Testing', value);
         state.testing = value;
         state.testingValidationError = null;
         break;
@@ -387,6 +404,7 @@ class Home extends React.Component {
         if (value === 'none' && state.authentication) {
           state.authentication.clear();
         }
+        ga('send', 'event', 'Mega Boilerplate', 'Database', value);
         state.database = value;
         state.authenticationValidationError = null;
         state.databaseValidationError = null;
@@ -402,6 +420,8 @@ class Home extends React.Component {
         );
 
         if (isChecked) {
+          ga('send', 'event', 'Mega Boilerplate', 'Authentication', value);
+
           if (value === 'none') {
             state.authentication.clear();
           } else {
@@ -421,6 +441,7 @@ class Home extends React.Component {
         if (!state.deployment && !state.disableAutoScroll) {
           $(refs.deployment).velocity('scroll');
         }
+        ga('send', 'event', 'Mega Boilerplate', 'Deployment', value);
         state.deployment = value;
         break;
 
@@ -435,6 +456,9 @@ class Home extends React.Component {
   }
 
   handleDisableAutoScroll(event) {
+    if (event.target.checked) {
+      ga('send', 'event', 'Mega Boilerplate', 'Site Options', 'Disable Auto-Scroll');
+    }
     this.setState({ disableAutoScroll: event.target.checked });
     try {
       localStorage.setItem('disableAutoScroll', event.target.checked);

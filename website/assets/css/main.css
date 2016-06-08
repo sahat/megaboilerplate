@@ -594,7 +594,7 @@ footer {
   padding: 20px 0;
   position: relative;
   overflow: hidden;
-  line-height: 24px;
+  /*line-height: 24px;*/
 }
 
 /*Slideshow*/

@@ -115,12 +115,14 @@ class Header extends React.Component {
     script.src = '//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=megaboilerplatecom';
     script.id = '_carbonads_js';
     carbonAdsContainer.appendChild(script);
+    ga('send', 'event', 'Mega Boilerplate', 'Carbon Ads', 'Loaded');
 
     var tryMessage = function() {
       setTimeout(function() {
         if (!document.getElementById('carbonads')) {
           $(carbonAdsBlocked).html('<div class="zoomInBackwards"><i class="fa fa-2x fa-audio-description" /> Please consider disabling your ad blocker on this site</div> ');
           $(carbonAdsContainer).remove();
+          ga('send', 'event', 'Mega Boilerplate', 'Carbon Ads', 'Blocked');
         }
       }, 1800);
     };
