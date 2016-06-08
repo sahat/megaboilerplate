@@ -696,7 +696,7 @@ class Home extends React.Component {
                 <h4 className="modal-title" id="myModalLabel"><i className="fa fa-globe"></i> Live Demos</h4>
               </div>
               <div className="modal-body">
-                <a href="http://megaboilerplate-demo1.azurewebsites.net/" className="demo-container demo1" target="_blank">
+                <a href="https://megaboilerplate-example-1.herokuapp.com/ " className="demo-container demo1" target="_blank">
                   <p><span><strong>Demo 1</strong> - Traditional Express web app</span> <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/recommended.svg" alt="Recommended" /></p>
                   <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/node-icon.png" height="25"/>
                   <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/jade-logo.svg" height="25"/>
@@ -709,7 +709,7 @@ class Home extends React.Component {
                   <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/twitter-logo.svg" height="25"/>
                   <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/vk-logo.svg" height="25"/>
                 </a>
-                <a href="http://megaboilerplate-demo2.azurewebsites.net/" className="demo-container demo2" target="_blank">
+                <a href="https://megaboilerplate-example-2.herokuapp.com/ " className="demo-container demo2" target="_blank">
                   <p><span><strong>Demo 2</strong> - MEAN stack</span></p>
                   <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/node-icon.png" height="25"/>
                   <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/handlebars-logo.svg" height="25"/>
@@ -721,7 +721,7 @@ class Home extends React.Component {
                   <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/facebook-logo.svg" height="25"/>
                   <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/google-logo.svg" height="25"/>
                 </a>
-                <a href="http://megaboilerplate-demo3.azurewebsites.net/" className="demo-container demo3" target="_blank">
+                <a href="https://megaboilerplate-example-3.herokuapp.com/ " className="demo-container demo3" target="_blank">
                   <p><span><strong>Demo 3</strong> - Full-stack React app (unstyled)</span></p>
                   <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/node-icon.png" height="25"/>
                   <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/nunjucks-logo.png" height="25"/>
