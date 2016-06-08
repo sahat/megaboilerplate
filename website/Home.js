@@ -685,7 +685,6 @@ class Home extends React.Component {
                   <img src="/img/svg/twitter-logo.svg" height="25"/>
                   <img src="/img/svg/vk-logo.svg" height="25"/>
                 </a>
-
                 <a href="http://megaboilerplate-demo2.azurewebsites.net/" className="demo-container demo2" target="_blank">
                   <p><span><strong>Demo 2</strong> - MEAN stack</span></p>
                   <img src="/img/svg/node-icon.png" height="25"/>
@@ -698,7 +697,6 @@ class Home extends React.Component {
                   <img src="/img/svg/facebook-logo.svg" height="25"/>
                   <img src="/img/svg/google-logo.svg" height="25"/>
                 </a>
-
                 <a href="http://megaboilerplate-demo3.azurewebsites.net/" className="demo-container demo3" target="_blank">
                   <p><span><strong>Demo 3</strong> - Full-stack React app (unstyled)</span></p>
                   <img src="/img/svg/node-icon.png" height="25"/>
@@ -711,11 +709,11 @@ class Home extends React.Component {
                   <img src="/img/svg/sqlite-logo.svg" height="25"/>
                   <img src="/img/svg/twitter-logo.svg" height="25"/>
                 </a>
-                <a href="#" className="demo-container demo4" target="_blank">
+                <a href="https://github.com/sahat/megaboilerplate/tree/master/examples/jekyll#mega-boilerplate-jekyll-blog-example" className="demo-container demo4" target="_blank">
                   <p><span><strong>Demo 4</strong> - Jekyll blo</span>g</p>
                   <img src="/img/svg/jekyll-logo.svg" height="25"/>
                 </a>
-                <a href="#" className="demo-container demo5" target="_blank">
+                <a href="https://github.com/sahat/megaboilerplate/tree/master/examples/middleman#mega-boilerplate-middleman-site-example" className="demo-container demo5" target="_blank">
                   <p><span><strong>Demo 5</strong> - Middleman static site</span></p>
                   <img src="/img/svg/middleman-logo.svg" height="25"/>
                 </a>
