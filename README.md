@@ -46,7 +46,7 @@ Getting Started
 - [Node.js 6.0](http://nodejs.org)
 - [Git](https://git-scm.com/)
 - Command Line Tools
- - <img src="http://deluge-torrent.org/images/apple-logo.gif" height="17"> **Mac OS X**: `xcode-select --install`
+ - <img src="http://deluge-torrent.org/images/apple-logo.gif" height="17"> **Mac OS X**: [Xcode](https://developer.apple.com/xcode/download/) or `xcode-select --install`
  - <img src="http://dc942d419843af05523b-ff74ae13537a01be6cfec5927837dcfe.r14.cf1.rackcdn.com/wp-content/uploads/windows-8-50x50.jpg" height="17"> **Windows**: [Visual C++ Build Tools 2015](http://go.microsoft.com/fwlink/?LinkId=691126)
  - <img src="https://lh5.googleusercontent.com/-2YS1ceHWyys/AAAAAAAAAAI/AAAAAAAAAAc/0LCb_tsTvmU/s46-c-k/photo.jpg" height="17"> **Ubuntu**: `sudo apt-get install build-essential`
  - <img src="http://i1-news.softpedia-static.com/images/extra/LINUX/small/slw218news1.png" height="17"> **Fedora**: `sudo dnf groupinstall "Development Tools"`
@@ -123,7 +123,7 @@ $ bundle exec middleman
 
 ### JS Library
 
-This JavaScript library boilerplate was inspired and based on Dan Abramov's [library-boilerplate](https://github.com/gaearon/library-boilerplate) project. The main idea here is you write your code in ES6, which then gets transpiled into CommonJS and UMD builds. Consider [lodash](https://lodash.com/) - popular JavaScript library that supports ES6 `import`, CommonJS `require()` in the Node.js environment and can be used inside a browser via `<script>` tag.
+This JavaScript library boilerplate was inspired and based on Dan Abramov's [library-boilerplate](https://github.com/gaearon/library-boilerplate) project. The main idea here is you write your code in ES6, which then gets transpiled into CommonJS and UMD builds. Consider [lodash](https://lodash.com/) as an example - a very popular JavaScript library that supports ES6 `import`, CommonJS `require()` and can be used inside a browser via `<script>` tag.
 
 ```shell
 $ cd megaboilerplate-app
@@ -138,7 +138,7 @@ $ npm run build
 $ npm run build:umd
 
 # Run tests
-# npm test
+$ npm test
 ```
 
 :top: <sub>[**back to top**](#table-of-contents)</sub>
@@ -730,7 +730,7 @@ heroku git:remote -a your-heroku-app-name
 
 For more information, please visit [Getting Started on Heroku with Node.js](https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction).
 
-**TODO:** Deployment instructions for SQL and MongoDB databases.
+**TODO:** Deployment instructions for SQL and MongoDB databases. (Heroku PostgresL, Compose, MongoLab)
 
 ### Microsoft Azure
 <img src="https://worldvectorlogo.com/logos/microsoft-azure-2.svg" width="200">
