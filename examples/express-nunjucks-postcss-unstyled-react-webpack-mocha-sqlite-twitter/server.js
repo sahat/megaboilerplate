@@ -103,7 +103,7 @@ app.post('/forgot', UserController.forgotPost);
 app.post('/reset/:token', UserController.resetPost);
 app.get('/unlink/:provider', UserController.ensureAuthenticated, UserController.unlink);
 app.post('/auth/twitter', UserController.authTwitter);
-app.post('/auth/twitter/callback', UserController.authTwitterCallback);
+app.get('/auth/twitter/callback', UserController.authTwitterCallback);
 
 // React server rendering
 app.use(function(req, res) {

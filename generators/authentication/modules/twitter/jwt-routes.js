@@ -1,2 +1,2 @@
 app.post('/auth/twitter', UserController.authTwitter);
-app.post('/auth/twitter/callback', UserController.authTwitterCallback);
+app.get('/auth/twitter/callback', UserController.authTwitterCallback);

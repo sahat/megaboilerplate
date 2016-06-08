@@ -70,7 +70,7 @@ form button[type="submit"] {
   color: var(--info);
 }
 
-.avatar {
+.avatar img {
   margin-right: 5px;
   border-radius: 50%;
   width: 30px;
