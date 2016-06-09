@@ -1029,6 +1029,17 @@ canvas {
   fill: currentColor;
 }
 
+.stylus .panel-heading {
+  color: #fff;
+  background: #ff6347;
+  border-color: transparent;
+}
+
+.stylus svg {
+  color: #fff;
+  fill: currentColor;
+}
+
 .cssnext .panel-heading {
   color: #fff;
   background: linear-gradient(160deg, rgba(115, 64, 196, .9), rgba(49, 142, 223, .9));
