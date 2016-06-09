@@ -14,7 +14,7 @@ const Deployment = (props) => {
     case 'heroku':
       description = (
         <div>
-          <strong><a href="https://www.heroku.com/" target="_blank">Heroku</a></strong> — Free Tier. 512MB RAM, 1 web/1 worker, sleeps after 30 min of inactivity, must sleep 6 hours in a 24 hour period. No credit card required.
+          <strong><a href="https://www.heroku.com/" target="_blank">Heroku</a></strong> — Free Tier. 512MB RAM, 1 web/1 worker, sleeps after 30 min of inactivity, includes 1000 hours of activity. No credit card required.
         </div>
       );
       break;
