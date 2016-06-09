@@ -10,7 +10,9 @@ const Footer = (props) => {
             <div>For general questions, comments and feedback send me an <a href="mailto:sahat@me.com">email</a>.</div>
           </div>
           <div className="pull-right text-right">
-            <i className="fa fa-code-fork"></i> <a href="https://github.com/sahat/megaboilerplate" target="_blank">Source Code</a>
+            <a href="https://github.com/sahat/megaboilerplate#changelog" target="_blank">Changelog</a>
+            {' · '}
+            <a href="https://github.com/sahat/megaboilerplate" target="_blank">Source Code</a>
             <div><strong><i className="fa fa-code"></i></strong> with <i className="fa fa-heart text-danger"></i> using <strong>Node.js</strong> and <strong>React</strong></div>
           </div>
         </div>
