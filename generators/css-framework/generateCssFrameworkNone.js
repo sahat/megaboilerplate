@@ -23,6 +23,11 @@ export default async function generateCssFrameworkNone(params) {
       set(params.build, ['public', 'css', 'flexboxgrid.css'], await getModule('css-framework/none/flexboxgrid.css'));
       set(params.build, ['public', 'css', 'main.css'], await getModule('css-framework/none/main-postcss.css'));
       break;
+    case 'stylus':
+      set(params.build, ['public', 'css', 'normalize.styl'], await getModule('css-framework/none/normalize.styl'));
+      set(params.build, ['public', 'css', 'flexboxgrid.styl'], await getModule('css-framework/none/flexboxgrid.styl'));
+      set(params.build, ['public', 'css', 'main.styl'], await getModule('css-framework/none/main.styl'));
+      break;
     default:
       break;
   }
