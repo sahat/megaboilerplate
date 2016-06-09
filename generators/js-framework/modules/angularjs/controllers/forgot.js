@@ -12,5 +12,5 @@ angular.module('MyApp')
             error: Array.isArray(response.data) ? response.data : [response.data]
           };
         });
-    }
+    };
   });
