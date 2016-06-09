@@ -63,6 +63,8 @@
   "less": "^2.7.1",
   "less-middleware": "^2.1.0",
   "postcss-middleware": "^1.0.0",
+  "express-stylus": "^0.1.0",
+  "nib": "^1.1.0",
   "watchify": "^3.7.0",
   "yargs": "^4.3.2",
   "webpack": "^1.12.14",

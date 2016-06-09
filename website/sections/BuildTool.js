@@ -82,6 +82,16 @@ class BuildTool extends React.Component {
             </div>
           );
           break;
+        case 'stylus':
+          cssPreprocessorNote = (
+            <div>
+              <img className="info-icon" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/info.svg" alt="Note"/>
+              <span>Stylus will be compiled via <a href="https://github.com/dogancelik/express-stylus" target="_blank">express-stylus</a> package.</span>
+            </div>
+          );
+          break;
+        default:
+          break;
       }
     }
 

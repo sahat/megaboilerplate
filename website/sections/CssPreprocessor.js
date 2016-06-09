@@ -39,6 +39,7 @@ class CssPreprocessor extends React.Component {
     const SASS = props.cssPreprocessor === 'sass';
     const LESS = props.cssPreprocessor === 'less';
     const POSTCSS = props.cssPreprocessor === 'postcss';
+    const STYLUS = props.cssPreprocessor === 'stylus';
 
     const recommended = props.beginner ? (
       <span className="hint--top hint--rounded" data-hint="Recommended">
@@ -79,6 +80,13 @@ class CssPreprocessor extends React.Component {
       </label>
     ) : null;
 
+    const stylusRadio = (!JEKYLL && !MIDDLEMAN && (NO_CSS_FRAMEWORK)) ? (
+      <label className="radio-inline">
+        <img className="btn-logo" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/stylus-logo.svg" alt="Stylus"/>
+        <input type="radio" name="cssPreprocessorRadios" value="stylus" onChange={props.handleChange} checked={STYLUS} />
+        <span>Stylus</span>
+      </label>
+    ) : null;
 
     const minifiedCssAdditionalOption = CSS ? (
       <VelocityComponent runOnMount animation="transition.slideUpIn" duration={700}>
@@ -90,6 +98,7 @@ class CssPreprocessor extends React.Component {
         </div>
       </VelocityComponent>
     ) : null;
+
     const additionalOptions = state.showOptions ? (
       <div>
         {minifiedCssAdditionalOption}
@@ -137,6 +146,7 @@ class CssPreprocessor extends React.Component {
             {sassRadio}
             {lessRadio}
             {postcssRadio}
+            {stylusRadio}
           </div>
           <VelocityTransitionGroup enter={{ animation: 'transition.fadeIn', duration: 1000 }}>
             {additionalOptionsButton}
