@@ -464,6 +464,7 @@ Learning Resources
 ### React / Redux
 - [:movie_camera: React in 7 Minutes](https://egghead.io/lessons/react-react-in-7-minutes)
 - [:movie_camera: Getting Started with Redux (30 free videos)](https://egghead.io/series/getting-started-with-redux)
+- [:movie_camera: Building React Applications with Idiomatic Redux (27 free videos)](https://egghead.io/courses/building-react-applications-with-idiomatic-redux)
 - [:book: Create a character voting app using React, Node.js, MongoDB and Socket.IO](http://sahatyalkabov.com/create-a-character-voting-app-using-react-nodejs-mongodb-and-socketio/)
 - [:book: Handcrafting an Isomorphic Redux Application](https://medium.com/front-end-developers/handcrafting-an-isomorphic-redux-application-with-love-40ada4468af4#.vft63avyi)
 - [:book: React.js Introduction For People Who Know Just Enough jQuery To Get By](http://reactfordesigners.com/labs/reactjs-introduction-for-people-who-know-just-enough-jquery-to-get-by/)
