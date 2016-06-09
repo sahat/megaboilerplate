@@ -1,4 +1,5 @@
 import { slugify, getModule, replaceCodeMemory, templateReplaceMemory, addNpmScriptMemory, addNpmPackageMemory } from '../utils';
+import { set } from 'lodash';
 
 async function generateJsLibrary(params) {
   const author = params.jsLibraryAuthor || 'Author name';
@@ -31,6 +32,17 @@ async function generateJsLibrary(params) {
     'README.md': await getModule('js-library/README.md'),
     'webpack.config.js': await getModule('js-library/webpack.config.js')
   };
+
+  // Add README.md
+  set(params, ['build', 'README.md'], await getModule('readme/readme-js-library.md'));
+
+  templateReplaceMemory(params, 'README.md', {
+    eslint: options.includes('eslint'),
+    travis: options.includes('travis'),
+    coverage: options.includes('coverage'),
+    badges: options.includes('badges'),
+    license: params.jsLibraryLicense
+  });
 
   templateReplaceMemory(params, 'examples/browser.html', {
     name: libraryName

@@ -20,6 +20,12 @@ export default async function generateNoneBuildTool(params) {
       await addNpmPackageMemory('postcss-cssnext', params);
       await addNpmPackageMemory('postcss-import', params);
       break;
+    case 'stylus':
+      await replaceCodeMemory(params, 'server.js', 'CSS_PREPROCESSOR_MIDDLEWARE_REQUIRE', await getModule('build-tool/none/stylus-middleware-require.js'));
+      await replaceCodeMemory(params, 'server.js', 'CSS_PREPROCESSOR_MIDDLEWARE', await getModule('build-tool/none/stylus-middleware.js'));
+      await addNpmPackageMemory('express-stylus', params);
+      await addNpmPackageMemory('nib', params);
+      break;
     default:
       break;
   }

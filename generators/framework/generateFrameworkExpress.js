@@ -1,5 +1,6 @@
 import { randomBytes } from 'crypto';
 import { getModule, addEnvMemory, templateReplaceMemory, replaceCodeMemory, addNpmScriptMemory, addNpmPackageMemory } from '../utils';
+import { set } from 'lodash';
 
 async function generateFrameworkExpress(params) {
   params.build = {
@@ -11,6 +12,22 @@ async function generateFrameworkExpress(params) {
     'package.json': await getModule('framework/express/package.json'),
     'server.js': await getModule('framework/express/server.js')
   };
+
+  // Add README.md
+  set(params, ['build', 'README.md'], await getModule('readme/readme-nodejs.md'));
+  templateReplaceMemory(params, 'README.md', {
+    platform: params.platform,
+    framework: params.framework,
+    templateEngine: params.templateEngine,
+    cssFramework: params.cssFramework,
+    cssPreprocessor: params.cssPreprocessor,
+    jsFramework: params.jsFramework,
+    buildTool: params.buildTool,
+    testing: params.testing,
+    database: params.database,
+    authentication: params.authentication,
+    deployment: params.deployment
+  });
 
   // Update app name in package.json
   templateReplaceMemory(params, 'package.json', { name: params.appName });

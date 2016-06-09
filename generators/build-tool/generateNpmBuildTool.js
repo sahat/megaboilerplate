@@ -24,6 +24,12 @@ export default async function generateNpmBuildTool(params) {
     //   await addNpmScript('build:css', 'postcss --use postcss-import --use cssnext public/css/main.css > public/css/main.css', params);
     //   await addNpmScript('watch:css', 'nodemon -e css -w public/css -x npm run build:css', params);
     //   break;
+    case 'stylus':
+      await addNpmPackageMemory('stylus', params);
+      await addNpmPackageMemory('nib', params);
+      await addNpmScriptMemory('build:css', 'stylus -u nib public/css/main.styl', params);
+      await addNpmScriptMemory('watch:css', 'stylus -w -u nib public/css/main.styl', params);
+      break;
     default:
       break;
   }

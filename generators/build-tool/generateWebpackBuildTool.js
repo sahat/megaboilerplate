@@ -42,6 +42,12 @@ export default async function genereateWebpackBuildTool(params) {
       await addNpmPackageMemory('postcss-cssnext', params);
       await addNpmPackageMemory('postcss-import', params);
       break;
+    case 'stylus':
+      await replaceCodeMemory(params, 'server.js', 'CSS_PREPROCESSOR_MIDDLEWARE_REQUIRE', await getModule('build-tool/none/stylus-middleware-require.js'));
+      await replaceCodeMemory(params, 'server.js', 'CSS_PREPROCESSOR_MIDDLEWARE', await getModule('build-tool/none/stylus-middleware.js'));
+      await addNpmPackageMemory('express-stylus', params);
+      await addNpmPackageMemory('nib', params);
+      break;
     default:
       break;
   }
@@ -49,6 +55,7 @@ export default async function genereateWebpackBuildTool(params) {
   switch (params.jsFramework) {
     case 'react':
       await replaceCodeMemory(params, 'webpack.config.js', 'WEBPACK_JAVASCRIPT_LOADER', await getModule('build-tool/webpack/webpack-react-loader.js'));
+      await replaceCodeMemory(params, 'app/store/configureStore.js', 'WEBPACK_HOT_REDUCER', await getModule('build-tool/webpack/webpack-hot-reducer.js'));
       await addNpmPackageMemory('babel-plugin-react-transform', params, true);
       await addNpmPackageMemory('react-transform-hmr', params, true);
       await addNpmPackageMemory('react-transform-catch-errors', params, true);
