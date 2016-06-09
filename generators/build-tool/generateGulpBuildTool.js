@@ -37,6 +37,14 @@ export default async function generateGulpBuildTool(params) {
       await addNpmPackageMemory('gulp-less', params);
       buildTasks.push('less');
       break;
+    case 'stylus':
+      await replaceCodeMemory(params, 'gulpfile.js', 'CSS_PREPROCESSOR_GULP_REQUIRE', await getModule('build-tool/gulp/stylus-gulp-require.js'));
+      await replaceCodeMemory(params, 'gulpfile.js', 'CSS_PREPROCESSOR_GULP_TASK', await getModule('build-tool/gulp/stylus-gulp-task.js'));
+      await replaceCodeMemory(params, 'gulpfile.js', 'CSS_PREPROCESSOR_GULP_WATCH', await getModule('build-tool/gulp/stylus-gulp-watch.js'));
+      await addNpmPackageMemory('gulp-stylus', params);
+      await addNpmPackageMemory('nib', params);
+      buildTasks.push('stylus');
+      break;
     default:
       break;
   }
