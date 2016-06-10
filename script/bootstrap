@@ -1,0 +1,7 @@
+#!/usr/bin/env node
+/*   eslint strict: [0] */
+'use strict';
+// File to run function to bootstrap boilerplate
+const bootstrap = require('../generators/util/bootstrap');
+// Run
+bootstrap();
