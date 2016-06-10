@@ -1,4 +1,4 @@
-user.then(function(user) {
+user.fetch().then(function(user) {
   if ('password' in req.body) {
     res.send({ msg: 'Your password has been changed.' });
   } else {
