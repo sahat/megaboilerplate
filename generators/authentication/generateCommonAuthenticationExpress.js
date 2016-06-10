@@ -97,11 +97,11 @@ export default async function generateCommonAuthenticationExpress(params) {
       if (params.jsFramework) {
         await replaceCodeMemory(params, 'server.js', 'IS_AUTHENTICATION_USER_QUERY', await getModule('authentication/common/is-authenticated-jwt-sql.js'));
         await replaceCodeMemory(params, 'controllers/user.js', 'USER_LOGIN_POST', await getModule('authentication/controllers/sql/user-login-jwt-post.js'), { indentLevel: 1 });
-        await replaceCodeMemory(params, 'controllers/user.js', 'PROFILE_UPDATE_RESPONSE', await getModule('authentication/controllers/responses/json/profile-update-response-sql.js'), { indentLevel: 2 });
+        await replaceCodeMemory(params, 'controllers/user.js', 'PROFILE_UPDATE_RESPONSE', await getModule('authentication/controllers/responses/json/profile-update-response-sql.js'), { indentLevel: 1 });
       } else {
         await replaceCodeMemory(params, 'server.js', 'USER_HELPER_MIDDLEWARE', await getModule('authentication/common/user-middleware-sql.js'));
         await replaceCodeMemory(params, 'config/passport.js', 'PASSPORT_DESERIALIZER', await getModule('authentication/common/passport-deserializer-sql.js'));
-        await replaceCodeMemory(params, 'controllers/user.js', 'PROFILE_UPDATE_RESPONSE', await getModule('authentication/controllers/responses/session/profile-update-response-sql.js'), { indentLevel: 2 });
+        await replaceCodeMemory(params, 'controllers/user.js', 'PROFILE_UPDATE_RESPONSE', await getModule('authentication/controllers/responses/session/profile-update-response-sql.js'), { indentLevel: 1 });
       }
       break;
     default:
