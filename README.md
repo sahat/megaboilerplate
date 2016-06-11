@@ -802,6 +802,21 @@ If you have built an app using Mega Boilerplate, please enter yourself here by s
 Changelog
 ---------
 
+### 1.1.0 (June 10, 2016)
+- Added Stylus CSS preprocessor support when no CSS Framework is selected.
+- Generate `README.md` for each boilerplate with selected choices.
+- Enabled Webpack hot module replacement for Redux reducers.
+- Updated React 15.0.2 to 15.1.0.
+- Removed unused lodash require() in the user controller.
+- Improved responsive design of login and signup container (Bootstrap).
+- Fixed indentation inside profile update controller (SQL).
+- Hide `password` field when calling `toJSON()` method on user model (Bookshelf.js / SQL).
+- Fixed a bug where an error was thrown after user updates their profile (SQL only).
+- Fixed invalid file path for Bootstrap CSS/JS imports inside `layout.jade`.
+- `knexfile.js` is no longer generated twice.
+- Updated Redux learning resources section in README.
+- Added special instructions to "Obtaining API Keys" section for React / AngularJS.
+
 ### 1.0.0 (June 8, 2016)
 - Initial release.
 
