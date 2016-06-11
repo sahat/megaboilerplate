@@ -1,2 +1,2 @@
-app.post('/auth/facebook', UserController.authFacebook);
-app.get('/auth/facebook/callback', UserController.authFacebookCallback);
+app.post('/auth/facebook', userController.authFacebook);
+app.get('/auth/facebook/callback', userController.authFacebookCallback);

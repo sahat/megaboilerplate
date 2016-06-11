@@ -1,2 +1,2 @@
-app.post('/auth/google', UserController.authGoogle);
-app.get('/auth/google/callback', UserController.authGoogleCallback);
+app.post('/auth/google', userController.authGoogle);
+app.get('/auth/google/callback', userController.authGoogleCallback);

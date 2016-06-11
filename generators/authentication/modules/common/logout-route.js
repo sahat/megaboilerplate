@@ -1,1 +1,1 @@
-app.get('/logout', UserController.logout);
+app.get('/logout', userController.logout);

@@ -1,2 +1,2 @@
-app.get('/contact', ContactController.contactGet);
-app.post('/contact', ContactController.contactPost);
+app.get('/contact', contactController.contactGet);
+app.post('/contact', contactController.contactPost);

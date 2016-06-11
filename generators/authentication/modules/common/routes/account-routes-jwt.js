@@ -1,2 +1,2 @@
-app.put('/account', UserController.ensureAuthenticated, UserController.accountPut);
-app.delete('/account', UserController.ensureAuthenticated, UserController.accountDelete);
+app.put('/account', userController.ensureAuthenticated, userController.accountPut);
+app.delete('/account', userController.ensureAuthenticated, userController.accountDelete);

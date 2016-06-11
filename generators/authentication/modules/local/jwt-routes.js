@@ -1,4 +1,4 @@
-app.post('/signup', UserController.signupPost);
-app.post('/login', UserController.loginPost);
-app.post('/forgot', UserController.forgotPost);
-app.post('/reset/:token', UserController.resetPost);
+app.post('/signup', userController.signupPost);
+app.post('/login', userController.loginPost);
+app.post('/forgot', userController.forgotPost);
+app.post('/reset/:token', userController.resetPost);

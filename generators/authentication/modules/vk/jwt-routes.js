@@ -1,2 +1,2 @@
-app.post('/auth/vkontakte', UserController.authVkontakte);
-app.get('/auth/vkontakte/callback', UserController.authVkontakteCallback);
+app.post('/auth/vkontakte', userController.authVkontakte);
+app.get('/auth/vkontakte/callback', userController.authVkontakteCallback);

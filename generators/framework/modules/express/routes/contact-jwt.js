@@ -1,1 +1,1 @@
-app.post('/contact', ContactController.contactPost);
+app.post('/contact', contactController.contactPost);

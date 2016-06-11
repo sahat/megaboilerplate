@@ -1,1 +1,1 @@
-app.get('/unlink/:provider', UserController.ensureAuthenticated, UserController.unlink);
+app.get('/unlink/:provider', userController.ensureAuthenticated, userController.unlink);
