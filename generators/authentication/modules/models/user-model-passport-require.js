@@ -1,2 +1,2 @@
 
-var User = require('../models/user');
+var User = require('../models/User');

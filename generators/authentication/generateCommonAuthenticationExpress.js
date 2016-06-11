@@ -59,7 +59,7 @@ export default async function generateCommonAuthenticationExpress(params) {
   switch (params.database) {
     case 'mongodb':
       // User model
-      set(params.build, ['models', 'user.js'], await getModule('authentication/models/mongodb/user.js'));
+      set(params.build, ['models', 'User.js'], await getModule('authentication/models/mongodb/user.js'));
 
       await replaceCodeMemory(params, 'controllers/user.js', 'USER_SIGNUP_POST', await getModule('authentication/controllers/mongodb/user-signup-post.js'), { indentLevel: 1 });
       await replaceCodeMemory(params, 'controllers/user.js', 'USER_ACCOUNT_PUT', await getModule('authentication/controllers/mongodb/user-account-put.js'), { indentLevel: 1 });
@@ -83,7 +83,7 @@ export default async function generateCommonAuthenticationExpress(params) {
     case 'sqlite':
     case 'postgresql':
       // User model and migrations
-      set(params.build, ['models', 'user.js'], await getModule('authentication/models/sql/user.js'));
+      set(params.build, ['models', 'User.js'], await getModule('authentication/models/sql/user.js'));
       set(params.build, ['migrations', '20160315161907_users.js'], await getModule('authentication/migrations/20160315161907_users.js'));
 
       await replaceCodeMemory(params, 'controllers/user.js', 'USER_SIGNUP_POST', await getModule('authentication/controllers/sql/user-signup-post.js'), { indentLevel: 1 });
