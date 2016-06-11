@@ -1,4 +1,4 @@
-<div className="login-container">
+<div className="login-container container">
   <div className="panel">
     <div className="panel-body">
       <Messages messages={this.props.messages}/>
