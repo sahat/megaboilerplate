@@ -404,6 +404,8 @@ To use any of the included OAuth providers (e.g. Facebook, Twitter, Google), you
 - Click on the **Settings** tab, then click on **+ Add Platform** button.
 - Select **Website**, then enter `http://localhost:3000/auth/callback` in the **Site URL**.
 
+**Note**: If you are using React or AngularJS, copy and paste **App Secret** into `.env` file and **App ID** into *app/actions/oauth.js* (React) and *app/app.js* (AngularJS).
+
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/1000px-Google_2015_logo.svg.png" width="200">
 - Go to [Google Cloud Console](https://cloud.google.com/console/project)
 - Click on **Create project** button.
@@ -417,8 +419,10 @@ To use any of the included OAuth providers (e.g. Facebook, Twitter, Google), you
  - **Authorized redirect URIs**: `http://localhost:3000/auth/google/callback`
 - Click on **Create** button.
 - Copy and paste **client ID** and **client secret** keys into `.env` file:
- - `GOOGLE_ID='YOUR_CLIENT_ID'`
- - `GOOGLE_SECRET='YOUR_CLIENT_SECRET'`
+  - `GOOGLE_ID='YOUR_CLIENT_ID'`
+  - `GOOGLE_SECRET='YOUR_CLIENT_SECRET'`
+
+**Note**: If you are using React or AngularJS, copy and paste **client secret** into `.env` file and **client ID** into *app/actions/oauth.js* (React) and *app/app.js* (AngularJS).
 
 <img src="https://g.twimg.com/ios_homescreen_icon.png" width="75">
 - Go to [Twitter Application Management](https://apps.twitter.com/).
@@ -433,6 +437,8 @@ To use any of the included OAuth providers (e.g. Facebook, Twitter, Google), you
  - `TWITTER_ID='YOUR_CONSUMER_KEY'`
  - `TWITTER_SECRET='YOUR_CONSUMER_SECRET'`
 
+**Note**: If you are using React or AngularJS, copy and paste **Consumer Secret** into `.env` file and **Consumer Key** into *app/actions/oauth.js* (React) and *app/app.js* (AngularJS).
+
 <img src="https://cdn2.iconfinder.com/data/icons/social-flat-buttons-3/512/vkontakte-256.png" height="75">
 - Go to [Developers | VK](http://new.vk.com/dev)
 - Click on **Create an Application** button.
@@ -446,6 +452,8 @@ To use any of the included OAuth providers (e.g. Facebook, Twitter, Google), you
 - Copy and paste **Application ID** and **Secure key** into `.env` file:
  - `VK_ID='YOUR_APPLICATION_ID'`
  - `VK_SECRET='YOUR_SECURE_KEY'`
+
+**Note**: If you are using React or AngularJS, copy and paste **Secure key** into `.env` file and **Application ID** into *app/actions/oauth.js* (React) and *app/app.js* (AngularJS).
 
 :top: <sub>[**back to top**](#table-of-contents)</sub>
 
