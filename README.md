@@ -402,7 +402,7 @@ To use any of the included OAuth providers (e.g. Facebook, Twitter, Google), you
  - `FACEBOOK_ID='YOUR_APP_ID'`
  - `FACEBOOK_SECRET='YOUR_APP_SECRET'`
 - Click on the **Settings** tab, then click on **+ Add Platform** button.
-- Select **Website**, then enter `http://localhost:3000/auth/callback` in the **Site URL**.
+- Select **Website**, then enter `http://localhost:3000/auth/facebook/callback` in the **Site URL**.
 
 **Note**: If you are using React or AngularJS, copy and paste **App Secret** into `.env` file and **App ID** into *app/actions/oauth.js* (React) and *app/app.js* (AngularJS).
 
