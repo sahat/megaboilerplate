@@ -33,6 +33,13 @@ class StaticSiteGenerator extends React.Component {
           </div>
         );
         break;
+      case 'metalsmith':
+        description = (
+          <div>
+            <strong><a href="http://www.metalsmith.io/" target="_blank">Metalsmith</a></strong> — An extremely simple, pluggable static site generator.
+          </div>
+        );
+        break;
       default:
         description = <div className="placeholder"> </div>;
     }
@@ -79,6 +86,11 @@ class StaticSiteGenerator extends React.Component {
               <img className="btn-logo" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/middleman-logo.svg" alt="Middleman"/>
               <input type="radio" id="middlemanRadio" name="staticSiteGeneratorRadios" value="middleman" onChange={props.handleChange} checked={props.staticSiteGenerator === 'middleman'}/>
               <span>Middleman</span>
+            </label>
+            <label className="radio-inline hint--top hint--rounded" data-hint="Coming soon (https://github.com/sahat/megaboilerplate/issues/113)">
+              <img className="btn-logo disabled" src="/img/svg/metalsmith-logo.svg" alt="Metalsmith"/>
+              <input type="radio" id="metalsmithRadio" name="staticSiteGeneratorRadios" value="metalsmith" onChange={props.handleChange} checked={props.staticSiteGenerator === 'metalsmith'} disabled/>
+              <span>Metalsmith</span>
             </label>
           </div>
           {note}

@@ -886,6 +886,17 @@ canvas {
   fill: currentColor;
 }
 
+.metalsmith .panel-heading {
+  color: #4c515f;
+  background: #ededed;
+  border-color: transparent;
+}
+
+.metalsmith svg {
+  color: #4c515f;
+  fill: currentColor;
+}
+
 .library .panel-heading {
   color: #fff;
   background: #6464E2;
