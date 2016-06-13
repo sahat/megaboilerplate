@@ -1,8 +1,12 @@
 # <a href="http://megaboilerplate.com"><img src="http://i.imgur.com/UNyLl3s.png" height="60"></a> 
  
-[![PayPal Donate](https://img.shields.io/badge/donate-PayPal-0070ba.svg?style=flat)](https://paypal.me/sahat) [![Gitter](https://badges.gitter.im/sahat/megaboilerplate.svg)](https://gitter.im/sahat/megaboilerplate)
+[![PayPal Donate](https://img.shields.io/badge/donate-PayPal-0070ba.svg?style=flat)](https://paypal.me/sahat)
+[![OpenCollective](https://opencollective.com/megaboilerplate/backers/badge.svg)](#backers) 
+[![OpenCollective](https://opencollective.com/megaboilerplate/sponsors/badge.svg)](#sponsors)
+[![Gitter](https://badges.gitter.im/sahat/megaboilerplate.svg)](https://gitter.im/sahat/megaboilerplate)
 [![Build Status](https://travis-ci.org/sahat/megaboilerplate.svg?branch=master)](https://travis-ci.org/sahat/megaboilerplate)
 [![Codementor](https://cdn.codementor.io/badges/get_help_github.svg)](https://www.codementor.io/sahatyalkabov)
+
 
 **Live Demo**: **http://megaboilerplate.com**
 
@@ -793,6 +797,79 @@ Despite being such a small library, [Redux](http://redux.js.org/) can be difficu
 | **Container** | So-called smart components that are aware of Redux, whereas traditional components are now considered dumb components, which are not aware of Redux; they just render markup with given props. I intentionally combined containers and components into simply — *components* for the sake of simplicity.
 
 :top: <sub>[**back to faq**](#faq)</sub>
+
+Backers
+-------
+Support us with a monthly donation and help us continue our activities. [[Become a backer](https://opencollective.com/megaboilerplate#backer)]
+
+<a href="https://opencollective.com/megaboilerplate/backer/0/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/backer/0/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/backer/1/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/backer/1/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/backer/2/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/backer/2/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/backer/3/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/backer/3/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/backer/4/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/backer/4/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/backer/5/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/backer/5/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/backer/6/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/backer/6/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/backer/7/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/backer/7/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/backer/8/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/backer/8/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/backer/9/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/backer/9/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/backer/10/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/backer/10/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/backer/11/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/backer/11/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/backer/12/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/backer/12/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/backer/13/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/backer/13/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/backer/14/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/backer/14/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/backer/15/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/backer/15/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/backer/16/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/backer/16/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/backer/17/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/backer/17/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/backer/18/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/backer/18/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/backer/19/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/backer/19/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/backer/20/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/backer/20/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/backer/21/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/backer/21/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/backer/22/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/backer/22/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/backer/23/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/backer/23/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/backer/24/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/backer/24/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/backer/25/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/backer/25/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/backer/26/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/backer/26/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/backer/27/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/backer/27/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/backer/28/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/backer/28/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/backer/29/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/backer/29/avatar.svg"></a>
+
+
+Sponsors
+--------
+Become a sponsor and get your logo on our website and on our README on Github with a link to your site. [[Become a sponsor](https://opencollective.com/megaboilerplate#sponsor)]
+
+<a href="https://opencollective.com/megaboilerplate/sponsor/0/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/sponsor/0/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/sponsor/1/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/sponsor/1/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/sponsor/2/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/sponsor/2/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/sponsor/3/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/sponsor/3/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/sponsor/4/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/sponsor/4/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/sponsor/5/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/sponsor/5/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/sponsor/6/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/sponsor/6/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/sponsor/7/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/sponsor/7/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/sponsor/8/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/sponsor/8/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/sponsor/9/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/sponsor/9/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/sponsor/10/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/sponsor/10/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/sponsor/11/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/sponsor/11/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/sponsor/12/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/sponsor/12/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/sponsor/13/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/sponsor/13/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/sponsor/14/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/sponsor/14/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/sponsor/15/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/sponsor/15/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/sponsor/16/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/sponsor/16/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/sponsor/17/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/sponsor/17/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/sponsor/18/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/sponsor/18/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/sponsor/19/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/sponsor/19/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/sponsor/20/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/sponsor/20/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/sponsor/21/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/sponsor/21/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/sponsor/22/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/sponsor/22/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/sponsor/23/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/sponsor/23/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/sponsor/24/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/sponsor/24/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/sponsor/25/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/sponsor/25/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/sponsor/26/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/sponsor/26/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/sponsor/27/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/sponsor/27/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/sponsor/28/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/sponsor/28/avatar.svg"></a>
+<a href="https://opencollective.com/megaboilerplate/sponsor/29/website" target="_blank"><img src="https://opencollective.com/megaboilerplate/sponsor/29/avatar.svg"></a>
+
+
 
 Sites Built with Mega Boilerplate
 ---------------------------------
