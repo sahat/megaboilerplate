@@ -17,7 +17,7 @@
   - [ ] Other: put-it-here
 - Framework:
   - [ ] Express
-  - [ ] Jenkyll
+  - [ ] Jekyll
   - [ ] Middleman
   - [ ] Custom JS library configuration
   - [ ] Meteor
