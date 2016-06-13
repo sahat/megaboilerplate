@@ -45,16 +45,10 @@ class Testing extends React.Component {
       note = <div className="placeholder"> </div>;
     }
 
-    const mochaRadio = props.jsFramework !== 'angularjs' ? (
+    const mochaRadio = (
       <label className="radio-inline">
         <img className="btn-logo" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/mocha.svg" alt="Mocha"/>
         <input type="radio" name="testingRadios" value="mocha" onChange={props.handleChange} checked={props.testing === 'mocha'}/>
-        <span>Mocha</span>
-      </label>
-    ) : (
-      <label className="radio-inline hint--top hint--rounded" data-hint="Coming soon">
-        <img className="btn-logo disabled" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/mocha.svg" alt="Mocha"/>
-        <input type="radio" name="testingRadios" value="mocha" onChange={props.handleChange} checked={props.testing === 'mocha'} disabled/>
         <span>Mocha</span>
       </label>
     );
@@ -71,7 +65,7 @@ class Testing extends React.Component {
         <input type="radio" name="testingRadios" value="jasmine" onChange={props.handleChange} checked={props.testing === 'jasmine'} disabled/>
         <span>Jasmine</span>
       </label>
-    )
+    );
 
     const validationError = props.testingValidationError ? (
       <div className="text-danger"><i className="fa fa-warning"></i> {props.testingValidationError}</div>

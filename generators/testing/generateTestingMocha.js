@@ -1,5 +1,5 @@
 import { set } from 'lodash';
-import { getModule, addNpmScriptMemory, addNpmPackageMemory } from '../utils';
+import { getModule, addNpmScriptMemory, addNpmPackageMemory, replaceCodeMemory } from '../utils';
 
 export default async function generateTestingMocha(params) {
   switch (params.framework) {
@@ -36,14 +36,33 @@ export default async function generateTestingMocha(params) {
             await addNpmScriptMemory('test:server', 'mocha test/server --recursive', params);
             break;
           case 'angularjs':
+            if (params.buildTool === 'gulp') {
+              set(params.build, ['app', 'karma.conf.js'], await getModule('testing/angularjs/karma.conf.js'));
+              set(params.build, ['app', 'test', 'unit', 'controllers', 'contact.test.js'], await getModule('testing/mocha/angularjs/unit/contact.test.js'));
+              await addNpmScriptMemory('test:client', 'karma start app/karma.conf.js --single-run', params);
+            } else {
+              set(params.build, ['karma.conf.js'], await getModule('testing/angularjs/karma.conf-nobuild.js'));
+              set(params.build, ['public', 'js', 'test', 'unit', 'controllers', 'contact.test.js'], await getModule('testing/mocha/angularjs/unit/contact.test.js'));
+              await addNpmScriptMemory('test:client', 'karma start --single-run', params);
+            }
+
+            await replaceCodeMemory(params, 'app/karma.conf.js', 'KARMA_TESTS', await getModule('testing/angularjs/karma-tests-mocha.js'));
+            await replaceCodeMemory(params, 'app/karma.conf.js', 'KARMA_PLUGINS', await getModule('testing/angularjs/karma-plugins-mocha.js'));
+            await replaceCodeMemory(params, 'app/karma.conf.js', 'KARMA_FRAMEWORKS', await getModule('testing/angularjs/karma-frameworks-mocha.js'));
+
             await addNpmPackageMemory('karma', params, true);
             await addNpmPackageMemory('karma-chai', params, true);
             await addNpmPackageMemory('karma-coverage', params, true);
             await addNpmPackageMemory('karma-mocha', params, true);
+            await addNpmPackageMemory('karma-phantomjs-launcher', params, true);
+            await addNpmPackageMemory('phantomjs-prebuilt', params, true);
             break;
           default:
             break;
         }
+        // NPM scripts for both server and client tests
+        await addNpmScriptMemory('test', 'npm run test:server && npm run test:client', params);
+        await addNpmScriptMemory('test:server', 'mocha --recursive', params);
       } else {
         // Server-side tests
         set(params, ['build', 'test', 'app.test.js'], await getModule('testing/mocha/app.test.js'));

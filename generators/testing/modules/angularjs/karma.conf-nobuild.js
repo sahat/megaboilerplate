@@ -12,20 +12,16 @@ module.exports = function(config) {
       'public/js/controllers/*.js',
       'public/js/services/*.js',
       // Unit tests
-      'public/js/test/unit/**/*.spec.js'
+      //= KARMA_TESTS_INDENT3
     ],
 
     autoWatch: true,
 
-    frameworks: ['jasmine'],
+    //= KARMA_FRAMEWORKS_INDENT2
 
     browsers: ['PhantomJS'],
 
-    plugins: [
-      'karma-phantomjs-launcher',
-      'karma-jasmine',
-      'karma-coverage'
-    ],
+    //= KARMA_PLUGINS_INDENT2
 
     reporters: ['progress', 'coverage'],
 

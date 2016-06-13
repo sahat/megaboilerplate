@@ -1,0 +1,1 @@
+frameworks: ['jasmine'],

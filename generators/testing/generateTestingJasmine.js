@@ -1,5 +1,5 @@
 import { set } from 'lodash';
-import { getModule, addNpmScriptMemory, addNpmPackageMemory } from '../utils';
+import { getModule, addNpmScriptMemory, addNpmPackageMemory, replaceCodeMemory } from '../utils';
 
 export default async function generateTestingJasmine(params) {
   switch (params.framework) {
@@ -21,14 +21,18 @@ export default async function generateTestingJasmine(params) {
         switch (params.jsFramework) {
           case 'angularjs':
             if (params.buildTool === 'gulp') {
-              set(params.build, ['app', 'karma.conf.js'], await getModule('testing/jasmine/angularjs/karma.conf.js'));
+              set(params.build, ['app', 'karma.conf.js'], await getModule('testing/angularjs/karma.conf.js'));
               set(params.build, ['app', 'test', 'unit', 'controllers', 'contact.spec.js'], await getModule('testing/jasmine/angularjs/unit/contact.spec.js'));
               await addNpmScriptMemory('test:client', 'karma start app/karma.conf.js --single-run', params);
             } else {
-              set(params.build, ['karma.conf.js'], await getModule('testing/jasmine/angularjs/karma.conf-nobuild.js'));
+              set(params.build, ['karma.conf.js'], await getModule('testing/angularjs/karma.conf-nobuild.js'));
               set(params.build, ['public', 'js', 'test', 'unit', 'controllers', 'contact.spec.js'], await getModule('testing/jasmine/angularjs/unit/contact.spec.js'));
               await addNpmScriptMemory('test:client', 'karma start --single-run', params);
             }
+            
+            await replaceCodeMemory(params, 'app/karma.conf.js', 'KARMA_TESTS', await getModule('testing/angularjs/karma-tests-jasmine.js'));
+            await replaceCodeMemory(params, 'app/karma.conf.js', 'KARMA_PLUGINS', await getModule('testing/angularjs/karma-plugins-jasmine.js'));
+            await replaceCodeMemory(params, 'app/karma.conf.js', 'KARMA_FRAMEWORKS', await getModule('testing/angularjs/karma-frameworks-jasmine.js'));
             break;
           default:
             break;
