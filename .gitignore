@@ -38,7 +38,4 @@ Thumbs.db
 .env
 
 # Bundled scripts
-website/assets/js/bundle.*.js
-
-# Stats
-stats.json
+website/assets/js/bundle*.js
