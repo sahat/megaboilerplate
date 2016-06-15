@@ -14,6 +14,10 @@ export default async function generateTestingMocha(params) {
         // Server-side tests
         set(params, ['build', 'test', 'server', 'app.test.js'], await getModule('testing/mocha/app.test-json.js'));
 
+        // Default NPM scripts for both server and client tests
+        await addNpmScriptMemory('test', 'npm run test:server && npm run test:client', params);
+        await addNpmScriptMemory('test:server', 'mocha --recursive', params);
+
         // Client-side tests
         switch (params.jsFramework) {
           case 'react':
@@ -33,7 +37,7 @@ export default async function generateTestingMocha(params) {
 
             await addNpmScriptMemory('test', 'npm run test:client && npm run test:server', params);
             await addNpmScriptMemory('test:client', 'mocha test/client --recursive --compilers js:babel-register', params);
-            await addNpmScriptMemory('test:server', 'mocha test/server --recursive', params);
+            await addNpmScriptMemory('test:server', 'mocha test/server --recursive --compilers js:babel-register', params);
             break;
           case 'angularjs':
             if (params.buildTool === 'gulp') {
@@ -60,9 +64,6 @@ export default async function generateTestingMocha(params) {
           default:
             break;
         }
-        // NPM scripts for both server and client tests
-        await addNpmScriptMemory('test', 'npm run test:server && npm run test:client', params);
-        await addNpmScriptMemory('test:server', 'mocha --recursive', params);
       } else {
         // Server-side tests
         set(params, ['build', 'test', 'app.test.js'], await getModule('testing/mocha/app.test.js'));
