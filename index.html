@@ -13,7 +13,7 @@
   <link rel="dns-prefetch" href="http://connect.facebook.net">
   <link rel="dns-prefetch" href="http://platform.linkedin.com">
 
-  <title>Mega Boilerplate ★ Handcrafted starter projects, optimized for simplicity and ease of use</title>
+  <title>Mega Boilerplate - Handcrafted starter projects, optimized for simplicity and ease of use</title>
   <meta property='og:title' content="Mega Boilerplate">
   <meta name='twitter:title' content="Mega Boilerplate">
   <meta name="twitter:creator" content="@EvNowAndForever">
@@ -43,25 +43,19 @@
   <meta name="msapplication-TileImage" content="/mstile-144x144.png">
   <meta name="theme-color" content="#ffffff">
 
-  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Raleway:300,700|Open+Sans:400,600,700">
-  <!--<link rel="stylesheet" href="/css/main.css">-->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://megaboilerplate.blob.core.windows.net/megaboilerplate/css/main.css">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Raleway:300,700|Open+Sans:400,600,700">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/main.css?{{cacheBust}}">
 </head>
 <body>
   <div id="root">{{html|safe}}</div>
-
-  <!-- Facebook SDK -->
   <div id="fb-root"></div>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   <script>window.jQuery || document.write('<script src="/js/jquery.min.js"><\/script>')</script>
-  <!--<script src="/js/modal.js"></script>-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/1.1.1/typed.min.js"></script>
-  <!--<script src="/js/typed.min.js"></script>-->
-  <script src="/js/{{ js }}"></script>
-  <!--<script src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/bundle.bdd4dc59b3f1cf785ea0.js"></script>-->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/typed.js/1.1.1/typed.min.js"></script>
+  <script src="/js/bundle.js?{{cacheBust}}"></script>
 
   <!-- Google Analytics -->
   <script>

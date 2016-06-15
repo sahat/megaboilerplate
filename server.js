@@ -34,17 +34,17 @@ const reactRoutes = require('./website/routes');
 
 const app = express();
 
-// Webpack build stats
-let stats;
-
-if (app.get('env') === 'production') {
-  stats = require('./stats.json');
-}
-
 app.set('port', process.env.PORT || 4000);
 app.use(compression());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use('/css', postcss({
+  src: function(req) {
+    return path.join(__dirname, 'website', 'assets', 'css', req.path);
+  },
+  plugins: [atImport(), cssnext()]
+}));
+
 if (app.get('env') === 'development') {
   const webpack = require('webpack');
   const config = require('./webpack.config');
@@ -56,15 +56,14 @@ if (app.get('env') === 'development') {
   app.use(require('webpack-hot-middleware')(compiler));
   app.use(logger('dev'));
 }
-app.use('/css', postcss({
-  src: function(req) {
-    return path.join(__dirname, 'website', 'assets', 'css', req.path);
-  },
-  plugins: [atImport(), cssnext()]
-}));
+
 app.use(express.static(path.join(__dirname, 'website', 'assets'), { maxAge: 31557600000 }));
 
+// Routes
 app.post('/download', expressRoutes.download);
+
+// Append numeric string to main.css and bundle.js
+const cacheBust = Date.now();
 
 // React server rendering
 app.use(function(req, res) {
@@ -77,7 +76,7 @@ app.use(function(req, res) {
      let html = ReactDOM.renderToString(React.createElement(Router.RouterContext, renderProps));
      let page = nunjucks.render('index.html', { 
        html: html,
-       js: stats ? stats.assetsByChunkName.main : 'bundle.js'
+       cacheBust: cacheBust
      });
      res.status(200).send(page);
    } else {
