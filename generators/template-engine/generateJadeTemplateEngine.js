@@ -30,7 +30,7 @@ export default async function generateJadeTemplateEngine(params) {
 
         // If authentication is checked: add log in, sign up, logout links to the header
         if (params.authentication.length) {
-          const headerAuthIndent = { none: 2, bootstrap: 3, foundation: 3 };
+          const headerAuthIndent = { none: 2, bootstrap: 3, foundation: 2 };
           await replaceCodeMemory(params, 'views/includes/header.jade', 'HEADER_AUTH', await getModule(`template-engine/jade/views/header-auth-${params.cssFramework}.jade`), {
             indentLevel: headerAuthIndent[params.cssFramework]
           });
