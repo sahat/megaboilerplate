@@ -36,3 +36,6 @@ bower_components
 Thumbs.db
 
 .env
+
+# Bundled scripts
+website/assets/js/bundle*.js
