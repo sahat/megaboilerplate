@@ -57,7 +57,7 @@ export default async function generateJsFrameworkAngularJs(params) {
         
         // Initialize Foundation JS components
         if (params.cssFramework === 'foundation') {
-          await replaceCodeMemory(params, 'app/partials/header.html', 'FOUNDATION_INIT', await getModule('css-framework/foundation/foundation-init.js'));
+          await replaceCodeMemory(params, 'app/controllers/header.js', 'FOUNDATION_INIT', await getModule('css-framework/foundation/foundation-init.js'));
         }
       }
       break;

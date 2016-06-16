@@ -10,7 +10,7 @@ return (
     </div>
     <div id="responsive-menu">
       <div className="top-bar-left">
-        <ul className="menu">
+        <ul className="vertical medium-horizontal menu">
           <li><IndexLink to="/" activeClassName="active">Home</IndexLink></li>
           <li><Link to="/contact" activeClassName="active">Contact</Link></li>
         </ul>
