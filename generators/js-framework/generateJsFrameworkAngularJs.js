@@ -54,6 +54,11 @@ export default async function generateJsFrameworkAngularJs(params) {
         await replaceCodeMemory(params, 'app/partials/header.html', 'HEADER_AUTH', await getModule(`js-framework/angularjs/partials/header-auth-${params.cssFramework}.html`), {
           indentLevel: headerAuthIndent[params.cssFramework]
         });
+        
+        // Initialize Foundation JS components
+        if (params.cssFramework === 'foundation') {
+          await replaceCodeMemory(params, 'app/partials/header.html', 'FOUNDATION_INIT', await getModule('css-framework/foundation/foundation-init.js'));
+        }
       }
       break;
     case 'meteor':

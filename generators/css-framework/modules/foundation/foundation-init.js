@@ -1,0 +1,3 @@
+
+// Initialize Foundation
+$(document).foundation();

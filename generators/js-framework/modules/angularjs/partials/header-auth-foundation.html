@@ -1,11 +1,11 @@
 <div ng-if="isAuthenticated()" class="top-bar-right">
-  <ul class="menu">
+  <ul class="vertical medium-horizontal menu">
     <li><a href="/account" ng-class="{ active: isActive('/account')}">My Account</a></li>
     <li><a href="#" ng-click="logout()">Logout</a></li>
   </ul>
 </div>
 <div ng-if="!isAuthenticated()" class="top-bar-right">
-  <ul class="menu">
+  <ul class="vertical medium-horizontal menu">
     <li><a href="/login" ng-class="{ active: isActive('/login')}">Log in</a></li>
     <li><a href="/signup" ng-class="{ active: isActive('/signup')}">Sign up</a></li>
   </ul>

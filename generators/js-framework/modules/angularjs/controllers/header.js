@@ -13,4 +13,5 @@ angular.module('MyApp')
       delete $window.localStorage.user;
       $location.path('/');
     };
+    //= FOUNDATION_INIT_INDENT2
   });

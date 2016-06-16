@@ -25,6 +25,11 @@ export default async function generateJsFrameworkNone(params) {
       } else {
         set(params.build, ['public', 'js', 'main.js'], await getModule('js-framework/none/main.js'));
       }
+
+      // Initialize Foundation JS components
+      if (params.cssFramework === 'foundation') {
+        await replaceCodeMemory(params, 'public/js/main.js', 'FOUNDATION_INIT', await getModule('css-framework/foundation/foundation-init.js'));
+      }
       break;
     case 'meteor':
       break;

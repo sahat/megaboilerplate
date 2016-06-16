@@ -60,6 +60,13 @@ async function generateJsFrameworkReact(params) {
         await replaceCodeMemory(params, 'app/components/Header.js', 'HEADER_AUTH_REFERENCE', await getModule('js-framework/react/components/Header-auth-reference.js'));
       }
 
+      // Initialize Foundation JS components
+      if (params.cssFramework === 'foundation') {
+        await replaceCodeMemory(params, 'app/components/Header.js', 'FOUNDATION_INIT', await getModule('css-framework/foundation/foundation-init-react.js'), {
+          trailingBlankLine: true
+        });
+      }
+
       // Copy Redux actions, reducers, store
       set(params.build, ['app', 'actions', 'contact.js'], await getModule('js-framework/react/actions/contact.js'));
 
