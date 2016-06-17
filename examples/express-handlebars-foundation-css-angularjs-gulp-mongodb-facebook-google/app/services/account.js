@@ -1,5 +1,5 @@
 angular.module('MyApp')
-  .factory('Account', function($http) {
+  .factory('Account', function($http, $location) {
     return {
       updateProfile: function(data) {
         return $http.put('/account', data);
@@ -14,7 +14,8 @@ angular.module('MyApp')
         return $http.post('/forgot', data);
       },
       resetPassword: function(data) {
-        return $http.post('/reset', data);
+        const resetUrl = $location.path();
+        return $http.post(resetUrl, data);
       }
     };
   });
