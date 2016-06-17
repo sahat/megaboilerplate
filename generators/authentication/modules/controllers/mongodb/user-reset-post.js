@@ -8,8 +8,6 @@ User.findOne({ passwordResetToken: req.params.token })
     user.passwordResetToken = undefined;
     user.passwordResetExpires = undefined;
     user.save(function(err) {
-      req.logIn(user, function(err) {
-        done(err, user);
-      });
+      //= USER_RESET_POST_SUCCESS_INDENT6
     });
   });

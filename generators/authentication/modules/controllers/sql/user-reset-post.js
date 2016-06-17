@@ -9,8 +9,6 @@ new User({ passwordResetToken: req.params.token })
     user.set('passwordResetToken', null);
     user.set('passwordResetExpires', null);
     user.save(user.changed, { patch: true }).then(function() {
-      req.logIn(user, function(err) {
-        done(err, user.toJSON());
-      });
+      //= USER_RESET_POST_SUCCESS_INDENT5
     });
   });

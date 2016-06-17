@@ -73,10 +73,12 @@ export default async function generateCommonAuthenticationExpress(params) {
         await replaceCodeMemory(params, 'server.js', 'IS_AUTHENTICATION_USER_QUERY', await getModule('authentication/common/is-authenticated-jwt-mongodb.js'));
         await replaceCodeMemory(params, 'controllers/user.js', 'USER_LOGIN_POST', await getModule('authentication/controllers/mongodb/user-login-jwt-post.js'), { indentLevel: 1 });
         await replaceCodeMemory(params, 'controllers/user.js', 'PROFILE_UPDATE_RESPONSE', await getModule('authentication/controllers/responses/json/profile-update-response-mongodb.js'), { indentLevel: 3 });
+        await replaceCodeMemory(params, 'controllers/user.js', 'USER_RESET_POST_SUCCESS', await getModule('authentication/controllers/responses/json/user-reset-post-success-mongodb.js'));
       } else {
         await replaceCodeMemory(params, 'server.js', 'USER_HELPER_MIDDLEWARE', await getModule('authentication/common/user-middleware-mongodb.js'));
         await replaceCodeMemory(params, 'config/passport.js', 'PASSPORT_DESERIALIZER', await getModule('authentication/common/passport-deserializer.js'));
         await replaceCodeMemory(params, 'controllers/user.js', 'PROFILE_UPDATE_RESPONSE', await getModule('authentication/controllers/responses/session/profile-update-response-mongodb.js'), { indentLevel: 3 });
+        await replaceCodeMemory(params, 'controllers/user.js', 'USER_RESET_POST_SUCCESS', await getModule('authentication/controllers/responses/session/user-reset-post-success-mongodb.js'));
       }
       break;
     case 'mysql':
@@ -98,10 +100,12 @@ export default async function generateCommonAuthenticationExpress(params) {
         await replaceCodeMemory(params, 'server.js', 'IS_AUTHENTICATION_USER_QUERY', await getModule('authentication/common/is-authenticated-jwt-sql.js'));
         await replaceCodeMemory(params, 'controllers/user.js', 'USER_LOGIN_POST', await getModule('authentication/controllers/sql/user-login-jwt-post.js'), { indentLevel: 1 });
         await replaceCodeMemory(params, 'controllers/user.js', 'PROFILE_UPDATE_RESPONSE', await getModule('authentication/controllers/responses/json/profile-update-response-sql.js'), { indentLevel: 1 });
+        await replaceCodeMemory(params, 'controllers/user.js', 'USER_RESET_POST_SUCCESS', await getModule('authentication/controllers/responses/json/user-reset-post-success-sql.js'));
       } else {
         await replaceCodeMemory(params, 'server.js', 'USER_HELPER_MIDDLEWARE', await getModule('authentication/common/user-middleware-sql.js'));
         await replaceCodeMemory(params, 'config/passport.js', 'PASSPORT_DESERIALIZER', await getModule('authentication/common/passport-deserializer-sql.js'));
         await replaceCodeMemory(params, 'controllers/user.js', 'PROFILE_UPDATE_RESPONSE', await getModule('authentication/controllers/responses/session/profile-update-response-sql.js'), { indentLevel: 1 });
+        await replaceCodeMemory(params, 'controllers/user.js', 'USER_RESET_POST_SUCCESS', await getModule('authentication/controllers/responses/session/user-reset-post-success-sql.js'));
       }
       break;
     default:
@@ -121,7 +125,7 @@ export default async function generateCommonAuthenticationExpress(params) {
     await replaceCodeMemory(params, 'controllers/user.js', 'FORGOT_POST_SUCCESS', await getModule('authentication/controllers/responses/json/forgot-post-success.js'), { indentLevel: 4 });
     await replaceCodeMemory(params, 'controllers/user.js', 'RESET_POST_VALIDATION_ERROR', await getModule('authentication/controllers/responses/json/common-validation-error.js'), { indentLevel: 3 });
     await replaceCodeMemory(params, 'controllers/user.js', 'RESET_POST_INVALID_TOKEN_ERROR', await getModule('authentication/controllers/responses/json/reset-post-invalid-token-error.js'));
-    await replaceCodeMemory(params, 'controllers/user.js', 'RESET_POST_SUCCESS', await getModule('authentication/controllers/responses/json/reset-post-success.js'), { indentLevel: 3 });
+    await replaceCodeMemory(params, 'controllers/user.js', 'RESET_POST_SUCCESS', await getModule('authentication/controllers/responses/json/reset-post-success.js'), { indentLevel: 4 });
   } else {
     await replaceCodeMemory(params, 'controllers/user.js', 'SIGNUP_VALIDATION_ERROR', await getModule('authentication/controllers/responses/session/signup-validation-error.js'), { indentLevel: 2 });
     await replaceCodeMemory(params, 'controllers/user.js', 'SIGNUP_EMAIL_ALREADY_EXISTS', await getModule('authentication/controllers/responses/session/signup-email-already-exists.js'), { indentLevel: 3 });
