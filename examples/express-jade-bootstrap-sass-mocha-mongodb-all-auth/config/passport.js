@@ -74,7 +74,7 @@ passport.use(new FacebookStrategy({
             name: profile.name.givenName + ' ' + profile.name.familyName,
             email: profile._json.email,
             gender: profile._json.gender,
-            location: profile._json.location.name,
+            location: profile._json.location && profile._json.location.name,
             picture: 'https://graph.facebook.com/' + profile.id + '/picture?type=large',
             facebook: profile.id
           });

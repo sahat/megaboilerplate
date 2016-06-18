@@ -46,7 +46,7 @@ passport.use(new FacebookStrategy({
             user.set('name', profile.name.givenName + ' ' + profile.name.familyName);
             user.set('email', profile._json.email);
             user.set('gender', profile._json.gender);
-            user.set('location', profile._json.location.name);
+            user.set('location', profile._json.location && profile._json.location.name);
             user.set('picture', 'https://graph.facebook.com/' + profile.id + '/picture?type=large');
             user.set('facebook', profile.id);
             user.save().then(function(user) {
