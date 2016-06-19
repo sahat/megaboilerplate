@@ -30,8 +30,8 @@ gulp.task('templates', function() {
 });
 
 gulp.task('watch', function() {
-  gulp.watch('app/views/**/*.html', gulp.series('templates'));
-  gulp.watch('app/**/*.js', gulp.series('angular'));
+  gulp.watch('app/views/**/*.html', ['templates']);
+  gulp.watch('app/**/*.js', ['angular']);
 });
 
 gulp.task('build', gulp.parallel('angular', 'templates'));
