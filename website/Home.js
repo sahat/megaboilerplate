@@ -124,8 +124,8 @@ class Home extends React.Component {
 
     // Show download button spinner
     if (!options.generateDownloadLink) {
-     this.setState({ isDownloadLoading: true });
-   }
+      this.setState({ isDownloadLoading: true });
+    }
 
     // Show next steps component
     this.setState({ showNextSteps: true });
@@ -432,7 +432,9 @@ class Home extends React.Component {
           }
           state.authenticationValidationError = null;
         } else {
-          if (value === 'email' && requiresEmail) { return; }
+          if (value === 'email' && requiresEmail) {
+            return;
+          }
           state.authentication.delete(value);
         }
         break;
@@ -462,7 +464,7 @@ class Home extends React.Component {
     this.setState({ disableAutoScroll: event.target.checked });
     try {
       localStorage.setItem('disableAutoScroll', event.target.checked);
-    } catch(e) {
+    } catch (e) {
       console.warn(e);
     }
   }
@@ -509,7 +511,7 @@ class Home extends React.Component {
         <li>
           <div className="checkbox">
             <label>
-              <input type="checkbox" name="beginner" value="beginner" onChange={this.handleChange} checked={state.beginner} />
+              <input type="checkbox" name="beginner" value="beginner" onChange={this.handleChange} checked={state.beginner}/>
               <span>Beginner</span>
             </label>
           </div>
@@ -524,7 +526,8 @@ class Home extends React.Component {
         </li>
         <li className="pull-right">
           <div className="checkbox">
-            <a href="https://www.codementor.io/sahatyalkabov?utm_source=github&utm_medium=button&utm_term=sahatyalkabov&utm_campaign=github" target="_blank"><img src="https://cdn.codementor.io/badges/book_session_github.svg" alt="Book session on Codementor"/></a>          </div>
+            <a href="https://www.codementor.io/sahatyalkabov?utm_source=github&utm_medium=button&utm_term=sahatyalkabov&utm_campaign=github" target="_blank"><img src="https://cdn.codementor.io/badges/book_session_github.svg" alt="Book session on Codementor"/></a>
+          </div>
         </li>
       </ul>
     );
@@ -557,7 +560,7 @@ class Home extends React.Component {
       <CssPreprocessor {...state} handleChange={this.handleChange}/>
     ) : null;
 
-    const jsFramework = state.cssPreprocessor  && state.platform === 'node' ? (
+    const jsFramework = state.cssPreprocessor && state.platform === 'node' ? (
       <JsFramework {...state} handleChange={this.handleChange}/>
     ) : null;
 
@@ -593,12 +596,12 @@ class Home extends React.Component {
         <path fill={loadingSvgColor} d="M26.013,10.047l1.654-2.866c-2.198-1.272-4.743-2.012-7.466-2.012h0v3.312h0
           C22.32,8.481,24.301,9.057,26.013,10.047z">
           <animateTransform attributeType="xml"
-            attributeName="transform"
-            type="rotate"
-            from="0 20 20"
-            to="360 20 20"
-            dur="0.5s"
-            repeatCount="indefinite"/>
+                            attributeName="transform"
+                            type="rotate"
+                            from="0 20 20"
+                            to="360 20 20"
+                            dur="0.5s"
+                            repeatCount="indefinite"/>
         </path>
       </svg>
     );
@@ -631,7 +634,10 @@ class Home extends React.Component {
       );
     } else {
       generateDownloadLink = (
-        <p onClick={this.handleGenerateDownloadLink.bind(this)} className="text-center">or <a href="#" type="button">Generate Download Link</a></p>
+        <div>
+          {/*<p onClick={this.handleGenerateDownloadLink.bind(this)} className="text-center">or <a href="#" type="button">Generate Download Link</a></p>*/}
+          <p className="text-center">or Generate Download Link (temporarily disabled)</p>
+        </div>
       );
     }
 
@@ -649,7 +655,9 @@ class Home extends React.Component {
       <VelocityComponent runOnMount animation="transition.slideLeftIn" duration={900}>
         <div className="panel" style={{ opacity: 0 }}>
           <div className="panel-body">
-            <i className="fa fa-calendar"></i> Looking for additional help? <a href="https://calendly.com/sahat" target="_blank">I am available</a> for business consulting. Rates may vary.
+            <i className="fa fa-calendar"></i> Looking for additional help?
+            <a href="https://calendly.com/sahat" target="_blank">I am available</a> for business consulting. Rates may
+            vary.
           </div>
         </div>
       </VelocityComponent>
@@ -687,12 +695,15 @@ class Home extends React.Component {
           <div className="modal-dialog" role="document">
             <div className="modal-content">
               <div className="modal-header">
-                <button type="button" className="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                <button type="button" className="close" data-dismiss="modal"><span aria-hidden="true">&times;</span>
+                </button>
                 <h4 className="modal-title" id="myModalLabel"><i className="fa fa-globe"></i> Live Demos</h4>
               </div>
               <div className="modal-body">
                 <a href="http://megaboilerplate-demo1.azurewebsites.net/" className="demo-container demo1" target="_blank">
-                  <p><span><strong>Demo 1</strong> - Traditional Express web app</span> <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/recommended.svg" alt="Recommended" /></p>
+                  <p><span><strong>Demo 1</strong> - Traditional Express web app</span>
+                    <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/recommended.svg" alt="Recommended"/>
+                  </p>
                   <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/node-icon.png" height="25"/>
                   <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/jade-logo.svg" height="25"/>
                   <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/bootstrap-logo.svg" height="25"/>
