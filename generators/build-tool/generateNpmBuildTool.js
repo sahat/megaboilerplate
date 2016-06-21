@@ -1,5 +1,5 @@
 import { set } from 'lodash';
-import { addNpmScriptMemory, addNpmPackageMemory } from '../utils';
+import { getModule, addNpmScriptMemory, addNpmPackageMemory } from '../utils';
 
 export default async function generateNpmBuildTool(params) {
   await addNpmPackageMemory('npm-run-all', params);
@@ -43,6 +43,9 @@ export default async function generateNpmBuildTool(params) {
       await addNpmPackageMemory('babel-preset-react', params);
       await addNpmScriptMemory('build:js', 'browserify app/main.js -t [ babelify --presets [es2015 react] ] -o public/js/bundle.js', params);
       await addNpmScriptMemory('watch:js', 'watchify app/main.js -t [ babelify --presets [es2015 react] ] -v -o public/js/bundle.js', params);
+
+      // Create empty js directory
+      set(params, ['build', 'public', 'js', '.gitkeep'], await getModule('build-tool/npm/.gitkeep'));
       break;
     default:
       break;
