@@ -21,7 +21,8 @@ class Authentication extends React.Component {
         props.authentication.has('facebook') ||
         props.authentication.has('google') ||
         props.authentication.has('twitter') ||
-        props.authentication.has('vk')
+        props.authentication.has('vk') ||
+        props.authentication.has('github')
       );
 
     let authenticationCheckboxes = !notSupportedNoDatabase ? (
@@ -55,6 +56,11 @@ class Authentication extends React.Component {
           <img className="btn-logo" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/vk-logo.svg" alt="VK" />
           <input type="checkbox" name="authenticationCheckboxes" value="vk" onChange={props.handleChange} checked={props.authentication && props.authentication.has('vk')} />
           <span>VK</span>
+        </label>
+        <label className="checkbox-inline">
+          <img className="btn-logo" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/github-logo.svg" alt="Github" />
+          <input type="checkbox" name="authenticationCheckboxes" value="github" onChange={props.handleChange} checked={props.authentication && props.authentication.has('github')} />
+          <span>Github</span>
         </label>
       </div>
     ) : null;

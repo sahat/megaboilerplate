@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux'
 import { login } from '../../actions/auth';
-import { facebookLogin, twitterLogin, googleLogin, vkLogin } from '../../actions/oauth';
+import { facebookLogin, twitterLogin, googleLogin, vkLogin, githubLogin } from '../../actions/oauth';
 import Messages from '../Messages';
 
 class Login extends React.Component {
@@ -34,6 +34,10 @@ class Login extends React.Component {
 
   handleVk() {
     this.props.dispatch(vkLogin())
+  }
+
+  handleGithub() {
+    this.props.dispatch(githubLogin())
   }
 
   render() {

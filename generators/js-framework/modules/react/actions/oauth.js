@@ -7,6 +7,7 @@ import { browserHistory } from 'react-router';
 //= TWITTER_LOGIN_ACTION
 //= GOOGLE_LOGIN_ACTION
 //= VK_LOGIN_ACTION
+//= GITHUB_LOGIN_ACTION
 
 // Link account
 export function link(provider) {
@@ -15,6 +16,7 @@ export function link(provider) {
     //= TWITTER_LINK_ACTION_INDENT2
     //= GOOGLE_LINK_ACTION_INDENT2
     //= VK_LINK_ACTION_INDENT2
+    //= GITHUB_LINK_ACTION_INDENT2
     default:
       return {
         type: 'LINK_FAILURE',

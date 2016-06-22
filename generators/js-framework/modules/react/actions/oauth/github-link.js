@@ -1,0 +1,2 @@
+case 'github':
+  return githubLogin();

@@ -161,3 +161,4 @@ exports.resetPost = function(req, res, next) {
 //= AUTH_GOOGLE_JWT
 //= AUTH_TWITTER_JWT
 //= AUTH_VK_JWT
+//= AUTH_GITHUB_JWT
