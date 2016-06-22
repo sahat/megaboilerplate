@@ -78,6 +78,10 @@ hr {
   vertical-align: sub;
 }
 
+.text-normal {
+  color: #333;
+}
+
 .text-danger {
   color: #db2828;
 }
