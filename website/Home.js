@@ -72,12 +72,6 @@ class Home extends React.Component {
         frameworkValidationError: 'Please select a framework.',
         generateDownloadLinkInProgress: false
       });
-    } else if (state.platform === 'node' && !state.templateEngine) {
-      console.info('Please select a template engine.');
-      return this.setState({
-        templateEngineValidationError: 'Please select a template engine.',
-        generateDownloadLinkInProgress: false
-      });
     } else if (state.platform === 'node' && !state.cssFramework) {
       console.info('Please select a CSS framework.');
       return this.setState({
@@ -94,6 +88,13 @@ class Home extends React.Component {
       console.info('Please make a selection.');
       return this.setState({
         jsFrameworkValidationError: 'Please make a selection.',
+        generateDownloadLinkInProgress: false
+      });
+
+    } else if (state.platform === 'node' && !state.templateEngine) {
+      console.info('Please select a template engine.');
+      return this.setState({
+        templateEngineValidationError: 'Please select a template engine.',
         generateDownloadLinkInProgress: false
       });
     } else if (state.platform === 'node' && state.jsFramework !== 'none' && !state.buildTool) {
@@ -548,11 +549,7 @@ class Home extends React.Component {
       <Framework {...state} handleChange={this.handleChange}/>
     ) : null;
 
-    const templateEngine = state.framework ? (
-      <TemplateEngine {...state} handleChange={this.handleChange}/>
-    ) : null;
-
-    const cssFramework = state.templateEngine ? (
+    const cssFramework = state.framework ? (
       <CssFramework {...state} handleChange={this.handleChange}/>
     ) : null;
 
@@ -562,6 +559,10 @@ class Home extends React.Component {
 
     const jsFramework = state.cssPreprocessor && state.platform === 'node' ? (
       <JsFramework {...state} handleChange={this.handleChange}/>
+    ) : null;
+
+    const templateEngine = state.jsFramework && state.jsFramework !== 'angularjs' ? (
+      <TemplateEngine {...state} handleChange={this.handleChange}/>
     ) : null;
 
     const buildTool = (state.jsFramework || (state.jsFramework && state.cssPreprocessor)) && state.platform === 'node' ? (
@@ -676,10 +677,10 @@ class Home extends React.Component {
           <div ref="framework">{framework}</div>
           <div ref="staticSiteGenerator">{staticSiteGenerator}</div>
           <div ref="jsLibrary">{jsLibrary}</div>
-          <div ref="templateEngine">{templateEngine}</div>
           <div ref="cssFramework">{cssFramework}</div>
           <div ref="cssPreprocessor">{cssPreprocessor}</div>
           <div ref="jsFramework">{jsFramework}</div>
+          <div ref="templateEngine">{templateEngine}</div>
           <div ref="buildTool">{buildTool}</div>
           <div ref="testing">{testing}</div>
           <div ref="database">{database}</div>
