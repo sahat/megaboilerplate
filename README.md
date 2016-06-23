@@ -471,6 +471,8 @@ To use any of the included OAuth providers (e.g. Facebook, Twitter, Google), you
   - `GITHUB_ID='YOUR_CLIENT_ID'`
   - `GITHUB_SECRET='YOUR_CLIENT_SECRET'`
 
+**Note**: If you are using React or AngularJS, copy and paste **client secret** into `.env` file and **client ID** into *app/actions/oauth.js* (React) and *app/app.js* (AngularJS).
+
 :top: <sub>[**back to top**](#table-of-contents)</sub>
 
 Learning Resources
