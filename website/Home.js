@@ -91,7 +91,7 @@ class Home extends React.Component {
         generateDownloadLinkInProgress: false
       });
 
-    } else if (state.platform === 'node' && !state.templateEngine) {
+    } else if (state.platform === 'node' && !state.templateEngine && state.jsFramework !== 'angularjs') {
       console.info('Please select a template engine.');
       return this.setState({
         templateEngineValidationError: 'Please select a template engine.',
