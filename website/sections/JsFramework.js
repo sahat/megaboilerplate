@@ -83,13 +83,6 @@ class JsFramework extends React.Component {
             Router</a> and server-side rendering.</span>
         </div>
       );
-    } else if (props.jsFramework === 'angularjs') {
-      note = (
-        <div>
-          <strong>Note: </strong>
-          <span>Your choice of template engine above will have no effect since the AngularJS app comes with its own templates.</span>
-        </div>
-      )
     } else {
       note = <div className="placeholder"> </div>;
     }
