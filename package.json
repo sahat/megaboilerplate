@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "archiver": "^1.0.0",
+    "aws-sdk": "^2.4.2",
     "azure-storage": "^1.0.1",
     "babel-core": "^6.9.1",
     "babel-eslint": "^6.0.4",

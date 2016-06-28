@@ -17,7 +17,7 @@ const writeJson = Promise.promisify(fs.writeJson);
 const stat = Promise.promisify(fs.stat);
 const mkdirs = Promise.promisify(fs.mkdirs);
 const traverse = require('traverse');
-const azure = require('azure-storage');
+const AWS = require('aws-sdk');
 const stream = require('stream');
 const schedule = require('node-schedule');
 const moment = require('moment');
@@ -84,7 +84,7 @@ export function walkAndRemoveComments(params) {
 
 export function walkAndRemoveCommentsMemory(params) {
   const fileExt = ['eot', 'ttf', 'otf', 'svg', 'woff', 'woff2', 'jpeg', 'jpg', 'gif', 'png',
-  'sqlite', 'ico'];
+    'sqlite', 'ico'];
 
   /**
    * Checks if buffer is a binary file
@@ -97,7 +97,7 @@ export function walkAndRemoveCommentsMemory(params) {
     return fileExt.includes(ext);
   };
 
-  traverse(params.build).forEach(function() {
+  traverse(params.build).forEach(function () {
     if (Buffer.isBuffer(this.node) && !isBinaryFile(this.path)) {
       const buf = removeCodeMemory(this.node, '//=');
       this.update(this.node, true);
@@ -119,35 +119,27 @@ export async function exists(filepath) {
 }
 
 function uploadAndReturnDownloadLink(archive) {
-  const blobService = azure.createBlobService();
-
+  const blobName = `megaboilerplate-${shortid.generate()}.zip`;
   return new Promise((resolve, reject) => {
-    blobService.createContainerIfNotExists('megaboilerplate', { publicAccessLevel: 'blob' }, function(error, result, response) {
-      if (error) {
-        return reject(error)
-      }
-      const container = 'archive';
-      const blobName = `megaboilerplate-${shortid.generate()}.zip`;
-
-      const writeStream = blobService.createWriteStreamToBlockBlob(container, blobName, archive.pointer(), function(error, result, response) {
-        if (error) {
-          return reject(error);
+    var s3 = new AWS.S3();
+    s3.createBucket({ Bucket: 'myBucket'}, function() {
+      var params = {
+        Bucket: process.env.S3_BUCKET,
+        Key: blobName ,
+        Body: archive,
+        ContentLength: archive.pointer(),
+        ACL: 'public-read'
+      };
+      s3.putObject(params, function(err, data) {
+        if (err) {
+          console.log(err);
+          return reject(err);
         }
-
-        resolve(`https://megaboilerplate.blob.core.windows.net/${container}/${blobName}`);
-
-        // schedule for deletion
-        const date = moment().add(24, 'hours').toDate();
-        schedule.scheduleJob(date, function(){
-          blobService.deleteBlobIfExists(container, blobName, (errorOrResult) => {
-            // do nothing
-          });
-        });
+        console.log('Successfully uploaded data to S3');
+        resolve(`https://s3.amazonaws.com/${process.env.S3_BUCKET}/${blobName}`);
       });
-
-      archive.pipe(writeStream);
     });
-  });
+  })
 }
 
 export function createZipArchive(res, params) {
@@ -155,11 +147,11 @@ export function createZipArchive(res, params) {
 
   let uploadPromise;
 
-  archive.on('error', function(err) {
+  archive.on('error', function (err) {
     res.status(500).send(err.message);
   });
 
-  archive.on('end', function() {
+  archive.on('end', function () {
     if (params.generateDownloadLink) {
       uploadPromise.then((link) => {
         res.send({ link: link });
@@ -174,7 +166,7 @@ export function createZipArchive(res, params) {
 
   });
 
-  traverse(params.build).forEach(function() {
+  traverse(params.build).forEach(function () {
     if (Buffer.isBuffer(this.node)) {
       archive.append(this.node, { name: this.path.join('/') });
       this.update(this.node, true);
@@ -219,7 +211,7 @@ export async function addNpmPackage(pkgName, params, isDev) {
 
   // Sort dependencies alphabetically in package.json
   packageObj.dependencies = sortJson(packageObj.dependencies);
-  
+
   if (packageObj.devDependencies) {
     packageObj.devDependencies = sortJson(packageObj.devDependencies);
   }
@@ -329,7 +321,7 @@ export async function removeCode(srcFile, subStr) {
     } else if (line.includes(emptyClassName)) {
       array[index] = line.split(emptyClassName).join('');
     }
-    
+
     if (line.includes(subStr)) {
       array[index] = null;
     }
@@ -358,7 +350,7 @@ export function removeCodeMemory(src, templateString) {
       array[index] = null;
     }
   });
-  
+
   array = array.filter((value) => {
     return value !== null;
   });
@@ -418,7 +410,7 @@ export async function replaceCode(srcFile, subStr, newSrcFile, opts) {
     const isMatch = re.test(line);
 
     // Preserve whitespace if it detects //_ token
-    if (line.indexOf('//_') > - 1) {
+    if (line.indexOf('//_') > -1) {
       array[index] = '';
     }
 

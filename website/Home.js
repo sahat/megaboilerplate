@@ -636,8 +636,7 @@ class Home extends React.Component {
     } else {
       generateDownloadLink = (
         <div>
-          {/*<p onClick={this.handleGenerateDownloadLink.bind(this)} className="text-center">or <a href="#" type="button">Generate Download Link</a></p>*/}
-          <p className="text-center">or Generate Download Link (temporarily disabled)</p>
+          <p onClick={this.handleGenerateDownloadLink.bind(this)} className="text-center">or <a href="#" type="button">Generate Download Link</a></p>
         </div>
       );
     }
@@ -758,9 +757,10 @@ class Home extends React.Component {
           <div ref="authentication">{authentication}</div>
           <div ref="deployment">{deployment}</div>
           <div ref="consulting">{consulting}</div>
-          <div ref="openCollective">{openCollective}</div>
           <div ref="download">{download}</div>
           <div ref="nextSteps">{nextSteps}</div>
+          <div ref="openCollective">{openCollective}</div>
+
         </main>
         <Footer />
 
