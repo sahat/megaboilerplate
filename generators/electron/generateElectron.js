@@ -1,4 +1,3 @@
-import { randomBytes } from 'crypto';
 import { getModule, addEnvMemory, templateReplaceMemory, replaceCodeMemory, addNpmScriptMemory, addNpmPackageMemory } from '../utils';
 import { set } from 'lodash';
 
@@ -43,22 +42,22 @@ async function generateElectron(params) {
     },
     test: {
       actions: {
-        'counter.spec.js': await getModule('electron/app/test/actions/counter.spec.js')
+        'counter.spec.js': await getModule('electron/test/actions/counter.spec.js')
       },
       components: {
-        'Counter.spec.js': await getModule('electron/app/test/components/Counter.spec.js')
+        'Counter.spec.js': await getModule('electron/test/components/Counter.spec.js')
       },
       containers: {
-        'CounterPage.spec.js': await getModule('electron/app/test/containers/CounterPage.spec.js')
+        'CounterPage.spec.js': await getModule('electron/test/containers/CounterPage.spec.js')
 
       },
       reducers: {
-        'counter.spec.js': await getModule('electron/app/test/reducers/counter.spec.js')
+        'counter.spec.js': await getModule('electron/test/reducers/counter.spec.js')
       },
-      '.eslintrc': await getModule('electron/app/test/.eslintrc'),
-      'e2e.js': await getModule('electron/app/test/e2e.js'),
-      'example.js': await getModule('electron/app/test/example.js'),
-      'setup.js': await getModule('electron/app/test/setup.js')
+      '.eslintrc': await getModule('electron/test/.eslintrc'),
+      'e2e.js': await getModule('electron/test/e2e.js'),
+      'example.js': await getModule('electron/test/example.js'),
+      'setup.js': await getModule('electron/test/setup.js')
     },
     '.babelrc': await getModule('electron/.babelrc'),
     '.gitignore': await getModule('electron/.gitignore'),
@@ -72,7 +71,6 @@ async function generateElectron(params) {
     'webpack.config.electron.js': await getModule('electron/webpack.config.electron.js'),
     'webpack.config.node.js': await getModule('electron/webpack.config.node.js'),
     'webpack.config.production.js': await getModule('electron/webpack.config.production.js')
-
   };
 }
 

@@ -23,6 +23,20 @@ class Platform extends React.Component {
       }
     }
 
+    let platformNote;
+
+    switch (props.platform) {
+      case 'electron':
+        platformNote = (
+          <div>
+            Boilerplate inspired by <strong>@chentsulin</strong>'s <a href="https://github.com/chentsulin/electron-react-boilerplate" target="_blank">electron-react-boilerplate</a>.
+          </div>
+        );
+        break;
+      default:
+        break;
+    }
+
     return (
       <div ref="platform" className={cx('zoomInBackwards panel', props.platform)}>
         <div className="panel-heading">
@@ -78,6 +92,7 @@ class Platform extends React.Component {
               <span>Electron</span>
             </label>
           </div>
+          {platformNote}
           {validationError}
         </div>
       </div>

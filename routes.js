@@ -1,4 +1,5 @@
 import generateFramework from './generators/framework/generateFramework';
+import generateElectron from './generators/electron/generateElectron';
 import generateJsLibrary from './generators/js-library/generateJsLibrary';
 import generateStaticSite from './generators/static-site/generateStaticSite';
 import generateTemplateEngine from './generators/template-engine/generateTemplateEngine';
@@ -14,12 +15,13 @@ import { walkAndRemoveCommentsMemory, createZipArchive } from './generators/util
 
 export async function download(req, res) {
   const params = req.body;
-
   try {
     if (params.platform === 'library') {
       await generateJsLibrary(params);
     } else if (params.platform === 'html5') {
       await generateStaticSite(params);
+    } else if (params.platform === 'electron') {
+      await generateElectron(params);
     } else {
       await generateFramework(params);
       await generateTemplateEngine(params);

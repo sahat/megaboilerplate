@@ -655,7 +655,7 @@ class Home extends React.Component {
       <VelocityComponent runOnMount animation="transition.slideLeftIn" duration={900}>
         <div className="panel" style={{ opacity: 0 }}>
           <div className="panel-body">
-            <i className="fa fa-calendar"></i> Looking for additional help?
+            <i className="fa fa-calendar"></i> Looking for additional help?&nbsp;
             <a href="https://calendly.com/sahat" target="_blank">I am available</a> for business consulting. Rates may
             vary.
           </div>
