@@ -644,7 +644,7 @@ class Home extends React.Component {
     const downloadText = state.isDownloadLoading ? loadingSvg : (
       <span><i className="fa fa-download"></i> Compile and Download</span>
     );
-    const download = state.deployment || state.staticSiteGenerator || state.platform === 'library' ? (
+    const download = state.deployment || state.staticSiteGenerator || state.platform === 'library' || state.platform === 'electron' ? (
       <div>
         <button ref="downloadBtn" className="btn btn-block btn-mega btn-success" onClick={this.clickDownload}>{downloadText}</button>
         {generateDownloadLink}
