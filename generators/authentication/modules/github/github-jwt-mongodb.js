@@ -4,8 +4,7 @@ if (req.isAuthenticated()) {
       return res.status(409).send({ msg: 'There is already an existing account linked with Github that belongs to you.' });
     }
     user = req.user;
-    user.name = user.name || profile.login;
-    user.gender = profile.gender;
+    user.name = user.name || profile.name;
     user.picture = user.picture || profile.avatar_url;
     user.location = user.location || profile.location;
     user.github = profile.id;
@@ -20,9 +19,8 @@ if (req.isAuthenticated()) {
       return res.send({ token: generateToken(user), user: user });
     }
     user = new User({
-      name: profile.login,
+      name: profile.name,
       email: profile.email,
-      gender: profile.gender,
       picture: profile.avatar_url,
       location: profile.location,
       github: profile.id

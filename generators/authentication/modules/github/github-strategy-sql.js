@@ -18,8 +18,7 @@ passport.use(new GithubStrategy({
           .fetch()
           .then(function(user) {
             user.set('name', user.get('name') || profile.displayName);
-            user.set('gender', user.get('gender') || profile._json.gender);
-            user.set('picture', user.get('picture') || profile._json.image.url);
+            user.set('picture', user.get('picture') || profile._json.avatar_url);
             user.set('github', profile.id);
             user.save(user.changed, { patch: true }).then(function() {
               req.flash('success', { msg: 'Your Github account has been linked.' });
@@ -43,10 +42,9 @@ passport.use(new GithubStrategy({
             }
             user = new User();
             user.set('name', profile.displayName);
-            user.set('email', profile.emails[0].value);
-            user.set('gender', profile._json.gender);
+            user.set('email', profile.email);
             user.set('location', profile._json.location);
-            user.set('picture', profile._json.image.url);
+            user.set('picture', profile._json.avatar_url);
             user.set('github', profile.id);
             user.save().then(function(user) {
               done(null, user);

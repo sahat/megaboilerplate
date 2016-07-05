@@ -13,9 +13,8 @@ passport.use(new GithubStrategy({
       } else {
         User.findById(req.user.id, function(err, user) {
           user.name = user.name || profile.displayName;
-          user.gender = user.gender || profile._json.gender;
-          user.picture = user.picture || profile._json.image.url;
-          user.google = profile.id;
+          user.picture = user.picture || profile._json.avatar_url;
+          user.github = profile.id;
           user.save(function(err) {
             req.flash('success', { msg: 'Your Github account has been linked.' });
             done(err, user);
@@ -35,10 +34,9 @@ passport.use(new GithubStrategy({
         } else {
           var newUser = new User({
             name: profile.displayName,
-            email: profile.emails[0].value,
-            gender: profile._json.gender,
+            email: profile._json.email,
             location: profile._json.location,
-            picture: profile._json.image.url,
+            picture: profile._json.avatar_url,
             github: profile.id
           });
           newUser.save(function(err) {
