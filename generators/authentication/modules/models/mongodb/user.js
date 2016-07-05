@@ -50,6 +50,14 @@ userSchema.virtual('gravatar').get(function() {
   return 'https://gravatar.com/avatar/' + md5 + '?s=200&d=retro';
 });
 
+userSchema.options.toJSON = {
+  transform: function(doc, ret, options) {
+    delete ret.password;
+    delete ret.passwordResetToken;
+    delete ret.passwordResetExpires;
+  }
+};
+
 var User = mongoose.model('User', userSchema);
 
 module.exports = User;
