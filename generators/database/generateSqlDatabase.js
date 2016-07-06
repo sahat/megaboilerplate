@@ -1,5 +1,5 @@
 import { set } from 'lodash';
-import { getModule, addEnvMemory, templateReplaceMemory, addNpmPackageMemory } from '../utils';
+import { getModule, addEnvMemory, replaceCodeMemory, templateReplaceMemory, addNpmPackageMemory } from '../utils';
 
 export default async function generateSqlDatabase(params) {
   switch (params.framework) {
@@ -16,12 +16,21 @@ export default async function generateSqlDatabase(params) {
 
       templateReplaceMemory(params, 'knexfile.js', { dialect: params.database });
 
-      addEnvMemory(params, {
-        DB_HOST: 'localhost',
-        DB_USER: 'root',
-        DB_PASSWORD: '',
-        DB_NAME: 'megaboilerplate'
-      });
+      // Use Postgres database connection string if Heroku is checked
+      if (params.deployment === 'heroku' && params.database === 'postgresql') {
+        addEnvMemory(params, {
+          DATABASE_URL: 'postgres://root@localhost:5432/megaboilerplate'
+        });
+        await replaceCodeMemory(params, 'knexfile.js', 'KNEX_CONNECTION', await getModule('database/sql/knexfile-connection-string.js'));
+      } else {
+        addEnvMemory(params, {
+          DB_HOST: 'localhost',
+          DB_USER: 'root',
+          DB_PASSWORD: '',
+          DB_NAME: 'megaboilerplate'
+        });
+        await replaceCodeMemory(params, 'knexfile.js', 'KNEX_CONNECTION', await getModule('database/sql/knexfile-connection-options.js'));
+      }
 
       if (params.database === 'mysql') {
         addNpmPackageMemory('mysql', params);
