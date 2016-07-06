@@ -5,6 +5,7 @@ export default async function genereateWebpackBuildTool(params) {
   set(params, ['build', 'webpack.config.js'], await getModule('build-tool/webpack/webpack.config.js'));
 
   await addNpmScriptMemory('build', 'webpack --display-error-details', params);
+  await addNpmScriptMemory('postinstall', 'npm run build', params);
   await addNpmPackageMemory('webpack', params);
   await addNpmPackageMemory('webpack-dev-middleware', params, true);
   await addNpmPackageMemory('webpack-hot-middleware', params, true);
