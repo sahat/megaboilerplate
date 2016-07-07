@@ -10,7 +10,7 @@ if (req.isAuthenticated()) {
       user.set('gender', user.get('gender') || profile.gender);
       user.set('picture', user.get('picture') || profile.picture.replace('sz=50', 'sz=200'));
       user.set('location', user.get('location') || profile.location);
-      user.set('google', profile.id);
+      user.set('google', profile.sub);
       user.save(user.changed, { patch: true }).then(function() {
         res.send({ token: generateToken(user), user: user });
       });
