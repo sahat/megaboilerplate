@@ -155,6 +155,7 @@ function exchangeCodeForToken({ oauthData, config, window, interval, dispatch })
     return fetch(config.url, {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
+      credentials: 'same-origin', // By default, fetch won't send any cookies to the server
       body: JSON.stringify(data)
     }).then((response) => {
       if (response.ok) {
