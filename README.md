@@ -742,7 +742,13 @@ heroku git:remote -a your-heroku-app-name
 
 For more information, please visit [Getting Started on Heroku with Node.js](https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction).
 
-**TODO:** Deployment instructions for SQL and MongoDB databases. (Heroku PostgresL, Compose, MongoLab)
+#### Heroku + PostgreSQL
+
+Connecting to a [Heroku Postgres](https://postgres.heroku.com) database from outside of the Heroku network requires SSL. Furthermore, connection string given by Heroku (`DATABASE_URL`) does not have `"?ssl=true"` parameter by default.
+
+The simplest solution is to add `PGSSLMODE=require` config var in the Heroku dashboard or via CLI: `heroku config:set PGSSLMODE=require`.
+
+**TODO:** Deployment instructions for SQL and MongoDB databases. (~~Heroku Postgres~~, Compose, MongoLab)
 
 ### Microsoft Azure
 <img src="https://worldvectorlogo.com/logos/microsoft-azure-2.svg" width="200">
