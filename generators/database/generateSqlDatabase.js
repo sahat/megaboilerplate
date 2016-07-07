@@ -14,7 +14,14 @@ export default async function generateSqlDatabase(params) {
         set(params, ['build', 'knexfile.js'], await getModule('database/sql/knexfile.js'));
       }
 
-      templateReplaceMemory(params, 'knexfile.js', { dialect: params.database });
+      // Set knex.js SQL dialect
+      let dialect;
+      if (params.database === 'postgresql') {
+        dialect = 'pg';
+      } else {
+        dialect = params.database;
+      }
+      templateReplaceMemory(params, 'knexfile.js', { dialect: dialect });
 
       // Use Postgres database connection string if Heroku is checked
       if (params.deployment === 'heroku' && params.database === 'postgresql') {
