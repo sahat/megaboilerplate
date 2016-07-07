@@ -7,7 +7,7 @@ new User({
     //= SIGNUP_SUCCESS_RESPONSE_INDENT4
   })
   .catch(function(err) {
-    if (err.code === 'ER_DUP_ENTRY') {
+    if (err.code === 'ER_DUP_ENTRY' || err.code === '23505') {
       //= SIGNUP_EMAIL_ALREADY_EXISTS_INDENT4
     }
   });
