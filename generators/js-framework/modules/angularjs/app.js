@@ -1,3 +1,4 @@
+(function() {
 angular.module('MyApp', ['ngRoute'<%= satellizer %>])
   .config(function($routeProvider, $locationProvider, $authProvider) {
     $locationProvider.html5Mode(true);
@@ -62,3 +63,4 @@ angular.module('MyApp', ['ngRoute'<%= satellizer %>])
       $rootScope.currentUser = JSON.parse($window.localStorage.user);
     }
   });
+})();
