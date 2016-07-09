@@ -87,7 +87,12 @@
     "webpack-dev-middleware": "^1.6.1",
     "webpack-hot-middleware": "^2.10.0"
   },
+  "devEngines": {
+    "node": ">=6.x",
+    "npm": ">=3.8"
+  },
   "engines": {
-    "node": "Electron app description"
+    "node": ">=6.x",
+    "npm": ">=3.8"
   }
 }
