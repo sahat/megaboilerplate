@@ -142,6 +142,15 @@ footer {
   }
 }
 
+.button.github {
+  background-color: #444;
+  transition: background-color 0.25s ease-out, color 0.25s ease-out;
+  &:hover,
+  &:focus {
+    background-color: scale-color(#444, $lightness: -15%)
+  }
+}
+
 // Top bar
 // -------------------------
 

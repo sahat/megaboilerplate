@@ -28,12 +28,12 @@ class Authentication extends React.Component {
     let authenticationCheckboxes = !notSupportedNoDatabase ? (
       <div className="radio-group">
         <label className="checkbox-inline">
-          <img className="btn-logo" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/none.png" alt="None" />
+          <img className="btn-logo" src="/img/svg/none.png" alt="None" />
           <input type="checkbox" name="authenticationCheckboxes" value="none" onChange={props.handleChange} checked={props.authentication && props.authentication.size === 0}  />
           <span>None</span>
         </label>
         <label className={cx('checkbox-inline', { 'locked': isEmailRequired })}>
-          <img className="btn-logo" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/email-logo.svg" height="60" alt="Email" />
+          <img className="btn-logo" src="/img/svg/email-logo.svg" height="60" alt="Email" />
           <input type="checkbox" name="authenticationCheckboxes" value="email" onChange={props.handleChange} checked={props.authentication && props.authentication.has('email') || isEmailRequired} />
           <span>Email</span>
         </label>
@@ -43,12 +43,12 @@ class Authentication extends React.Component {
           <span>Facebook</span>
         </label>
         <label className="checkbox-inline">
-          <img className="btn-logo" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/google-logo.svg" alt="Google" />
+          <img className="btn-logo" src="/img/svg/google-logo.svg" alt="Google" />
           <input type="checkbox" name="authenticationCheckboxes" value="google" onChange={props.handleChange} checked={props.authentication && props.authentication.has('google')} />
           <span>Google</span>
         </label>
         <label className="checkbox-inline">
-          <img className="btn-logo" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/twitter-logo.svg" alt="Twitter" />
+          <img className="btn-logo" src="/img/svg/twitter-logo.svg" alt="Twitter" />
           <input type="checkbox" name="authenticationCheckboxes" value="twitter" onChange={props.handleChange} checked={props.authentication && props.authentication.has('twitter')} />
           <span>Twitter</span>
         </label>
@@ -58,7 +58,7 @@ class Authentication extends React.Component {
           <span>GitHub</span>
         </label>
         <label className="checkbox-inline" title="VKontakte (ВКонтакте)">
-          <img className="btn-logo" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/vk-logo.svg" alt="VK" />
+          <img className="btn-logo" src="/img/svg/vk-logo.svg" alt="VK" />
           <input type="checkbox" name="authenticationCheckboxes" value="vk" onChange={props.handleChange} checked={props.authentication && props.authentication.has('vk')} />
           <span>VK</span>
         </label>
