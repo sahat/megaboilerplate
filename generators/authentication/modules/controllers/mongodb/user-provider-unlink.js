@@ -12,6 +12,9 @@ User.findById(req.user.id, function(err, user) {
     case 'vk':
       user.vk = undefined;
       break;
+    case 'github':
+        user.github = undefined;
+      break;      
     default:
       //= PROVIDER_UNLINK_ERROR
   }

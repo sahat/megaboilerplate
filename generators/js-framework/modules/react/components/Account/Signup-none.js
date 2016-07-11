@@ -24,6 +24,7 @@
   //= SIGN_IN_WITH_TWITTER_INDENT4
   //= SIGN_IN_WITH_GOOGLE_INDENT4
   //= SIGN_IN_WITH_VK_INDENT4
+  //= SIGN_IN_WITH_GITHUB_INDENT4
 
   <p>Already have an account? <Link to="/login">Log in</Link></p>
 </div>

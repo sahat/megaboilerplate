@@ -44,6 +44,7 @@ angular.module('MyApp', ['ngRoute'<%= satellizer %>])
     //= SATELLIZER_GOOGLE_CONFIG_INDENT2
     //= SATELLIZER_TWITTER_CONFIG_INDENT2
     //= SATELLIZER_VK_CONFIG_INDENT2
+    //= SATELLIZER_GITHUB_CONFIG_INDENT2
 
     function skipIfAuthenticated($location, $auth) {
       if ($auth.isAuthenticated()) {

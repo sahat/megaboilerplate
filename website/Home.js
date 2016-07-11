@@ -417,7 +417,8 @@ class Home extends React.Component {
         const requiresEmail = (
           state.authentication.has('facebook') ||
           state.authentication.has('google') ||
-          state.authentication.has('twitter')
+          state.authentication.has('twitter') ||
+          state.authentication.has('github')
         );
 
         if (isChecked) {
@@ -427,7 +428,7 @@ class Home extends React.Component {
             state.authentication.clear();
           } else {
             state.authentication.add(value);
-            if (value === 'facebook' || value === 'google' || value === 'twitter') {
+            if (value === 'facebook' || value === 'google' || value === 'twitter' || value === 'github') {
               state.authentication.add('email');
             }
           }

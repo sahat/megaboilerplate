@@ -145,7 +145,8 @@ export default async function generateCommonAuthenticationExpress(params) {
   const isUsingOauth = (
     params.authentication.includes('facebook') ||
     params.authentication.includes('twitter') ||
-    params.authentication.includes('google')
+    params.authentication.includes('google') ||
+    params.authentication.includes('github')
   );
 
   switch (params.templateEngine) {

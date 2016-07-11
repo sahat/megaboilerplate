@@ -115,6 +115,7 @@
   "passport-google-oauth": "^1.0.0",
   "passport-twitter": "^1.0.4",
   "passport-vkontakte": "^0.2.1",
+  "passport-github": "^1.1.0",
   "async": "^1.5.2",
   "bcrypt-nodejs": "^0.0.3",
   "nodemailer": "^2.3.0",

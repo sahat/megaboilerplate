@@ -22,6 +22,7 @@ var userSchema = new mongoose.Schema({
   facebook: String,
   twitter: String,
   google: String,
+  github: String,
   vk: String
 }, schemaOptions);
 
