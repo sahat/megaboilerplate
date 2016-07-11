@@ -52,15 +52,15 @@ class Authentication extends React.Component {
           <input type="checkbox" name="authenticationCheckboxes" value="twitter" onChange={props.handleChange} checked={props.authentication && props.authentication.has('twitter')} />
           <span>Twitter</span>
         </label>
+        <label className="checkbox-inline">
+          <img className="btn-logo" src="/img/svg/github-logo2.svg" alt="Github" />
+          <input type="checkbox" name="authenticationCheckboxes" value="github" onChange={props.handleChange} checked={props.authentication && props.authentication.has('github')} />
+          <span>GitHub</span>
+        </label>
         <label className="checkbox-inline" title="VKontakte (ВКонтакте)">
           <img className="btn-logo" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/vk-logo.svg" alt="VK" />
           <input type="checkbox" name="authenticationCheckboxes" value="vk" onChange={props.handleChange} checked={props.authentication && props.authentication.has('vk')} />
           <span>VK</span>
-        </label>
-        <label className="checkbox-inline">
-          <img className="btn-logo" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/github-logo.svg" alt="Github" />
-          <input type="checkbox" name="authenticationCheckboxes" value="github" onChange={props.handleChange} checked={props.authentication && props.authentication.has('github')} />
-          <span>Github</span>
         </label>
       </div>
     ) : null;
