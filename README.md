@@ -459,6 +459,20 @@ To use any of the included OAuth providers (e.g. Facebook, Twitter, Google), you
 
 **Note**: If you are using React or AngularJS, copy and paste **Secure key** into `.env` file and **Application ID** into *app/actions/oauth.js* (React) and *app/app.js* (AngularJS).
 
+<img src="https://upload.wikimedia.org/wikipedia/commons/2/24/GitHub_logo_2013_padded.svg" width="200">
+- Go to [Github Developer Applications Settings](https://github.com/settings/developers)
+- Click on **Register a new application** button.
+- Fill out required fields.
+ - **Application Name**
+ - **Homepage URL**
+ - **Callback URL**: `http://127.0.0.1:3000/auth/github/callback`
+- Click on **Register application**
+- Copy and paste **client ID** and **client secret** keys into `.env` file:
+  - `GITHUB_ID='YOUR_CLIENT_ID'`
+  - `GITHUB_SECRET='YOUR_CLIENT_SECRET'`
+
+**Note**: If you are using React or AngularJS, copy and paste **client secret** into `.env` file and **client ID** into *app/actions/oauth.js* (React) and *app/app.js* (AngularJS).
+
 :top: <sub>[**back to top**](#table-of-contents)</sub>
 
 Learning Resources

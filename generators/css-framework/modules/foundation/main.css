@@ -104,6 +104,16 @@ footer {
   background-color: #4b6b8b;
 }
 
+.button.github {
+  background-color: #444;
+  transition: background-color 0.25s ease-out, color 0.25s ease-out;
+}
+
+.button.github:hover,
+.button.github:focus {
+  background-color: #262626;
+}
+
 /* Top bar
 /* ------------------------- */
 

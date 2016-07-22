@@ -2,6 +2,7 @@
 //= TWITTER_LINK_INDENT2
 //= GOOGLE_LINK_INDENT2
 //= VK_LINK_INDENT2
+//= GITHUB_LINK_INDENT2
 
 return (
   <div className="container">
@@ -42,6 +43,7 @@ return (
     //= TWITTER_LINK_REFERENCE_INDENT4
     //= GOOGLE_LINK_REFERENCE_INDENT4
     //= VK_LINK_REFERENCE_INDENT4
+    //= GITHUB_LINK_REFERENCE_INDENT4
 
     <h4>Delete Account</h4>
     <form onSubmit={this.handleDeleteAccount.bind(this)}>

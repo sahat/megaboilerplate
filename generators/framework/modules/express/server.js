@@ -60,6 +60,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //= GOOGLE_ROUTES
 //= TWITTER_ROUTES
 //= VK_ROUTES
+//= GITHUB_ROUTES
 //= REACT_SERVER_RENDERING
 //= ANGULARJS_ROUTES
 

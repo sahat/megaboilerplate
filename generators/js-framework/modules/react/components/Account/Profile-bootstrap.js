@@ -2,6 +2,7 @@
 //= TWITTER_LINK_INDENT2
 //= GOOGLE_LINK_INDENT2
 //= VK_LINK_INDENT2
+//= GITHUB_LINK_INDENT2
 
 return (
   <div className="container">
@@ -93,6 +94,7 @@ return (
               //= TWITTER_LINK_REFERENCE_INDENT9
               //= GOOGLE_LINK_REFERENCE_INDENT9
               //= VK_LINK_REFERENCE_INDENT9
+              //= GITHUB_LINK_REFERENCE_INDENT9
             </div>
           </div>
         </div>

@@ -4,6 +4,7 @@ import generateFacebookAuthentication from './generateFacebookAuthentication';
 import generateGoogleAuthentication from './generateGoogleAuthentication';
 import generateTwitterAuthentication from './generateTwitterAuthentication';
 import generateVkAuthentication from './generateVkAuthentication';
+import generateGithubAuthentication from './generateGithubAuthentication';
 
 export default async function generateAuthentication(params) {
   if (params.authentication.length) {
@@ -28,5 +29,9 @@ export default async function generateAuthentication(params) {
     if (params.authentication.includes('vk')) {
       await generateVkAuthentication(params);
     }
+
+    if (params.authentication.includes('github')) {
+      await generateGithubAuthentication(params);
+    }    
   }
 }
