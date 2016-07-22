@@ -44,7 +44,7 @@ function ContactCtrl($scope, $rootScope, $location, $window, $auth, Account) {
           });
     }
 
-    function link() {
+    function link(provider) {
         $auth.link(provider)
           .then(function(response) {
             $scope.messages = {
@@ -59,7 +59,7 @@ function ContactCtrl($scope, $rootScope, $location, $window, $auth, Account) {
           });
     }
 
-    function unlink() {
+    function unlink(provider) {
         $auth.unlink(provider)
           .then(function() {
             $scope.messages = {

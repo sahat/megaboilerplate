@@ -24,7 +24,7 @@ function SignupCtrl($scope, $rootScope, $location, $window, $auth) {
           });
     }
 
-    function authenticate() {
+    function authenticate(provider) {
         $auth.authenticate(provider)
           .then(function(response) {
             $rootScope.currentUser = response.data.user;
