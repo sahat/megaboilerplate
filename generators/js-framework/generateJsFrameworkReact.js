@@ -139,6 +139,8 @@ async function generateJsFrameworkReact(params) {
   await addNpmPackageMemory('redux', params);
   await addNpmPackageMemory('react-redux', params);
   await addNpmPackageMemory('redux-thunk', params);
+  await addNpmPackageMemory('redux-logger', params);
+  await addNpmPackageMemory('redux-promise', params);
   await addNpmPackageMemory('whatwg-fetch', params);
   if (params.authentication.length) {
     await addNpmPackageMemory('react-cookie', params);

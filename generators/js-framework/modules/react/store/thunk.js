@@ -1,1 +1,1 @@
-applyMiddleware(thunk)
+applyMiddleware(thunk, promise, logger)
