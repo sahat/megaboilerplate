@@ -100,7 +100,7 @@
   "supertest": "^1.2.0",
   "redux-mock-store": "^1.0.2",
   "babel-register": "^6.8.0",
-  "babel-plugin-rewire": "^1.0.0-rc-3",
+  "babel-plugin-rewire": "1.0.0-rc-3",
   "enzyme": "^2.3.0",
   "react-addons-test-utils": "^15.0.2",
 
