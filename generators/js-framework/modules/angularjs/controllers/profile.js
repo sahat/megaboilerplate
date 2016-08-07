@@ -1,10 +1,10 @@
 (function() {
 angular.module('MyApp')
-    .controller('ContactCtrl', ContactCtrl);
+    .controller('ProfileCtrl', ProfileCtrl);
 
-ContactCtrl.$inject = ['$scope', '$rootScope', '$location', '$window', '$auth', 'Account'];
+ProfileCtrl.$inject = ['$scope', '$rootScope', '$location', '$window', '$auth', 'Account'];
 
-function ContactCtrl($scope, $rootScope, $location, $window, $auth, Account) {
+function ProfileCtrl($scope, $rootScope, $location, $window, $auth, Account) {
     var ctrl = this;
     ctrl.updateProfile = updateProfile;
     ctrl.changePassword = changePassword;
