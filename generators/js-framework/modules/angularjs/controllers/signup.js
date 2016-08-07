@@ -5,11 +5,8 @@ angular.module('MyApp')
 SignupCtrl.$inject = ['$scope', '$rootScope', '$location', '$window', '$auth'];
 
 function SignupCtrl($scope, $rootScope, $location, $window, $auth) {
-    var ctrl = this;
-    ctrl.signup = signup;
-    ctrl.authenticate = authenticate;
 
-    function signup() {
+    $scope.signup = function(){
         $auth.signup($scope.user)
           .then(function(response) {
             $auth.setToken(response);
@@ -24,7 +21,7 @@ function SignupCtrl($scope, $rootScope, $location, $window, $auth) {
           });
     }
 
-    function authenticate(provider) {
+    $scope.authenticate = function(provider){
         $auth.authenticate(provider)
           .then(function(response) {
             $rootScope.currentUser = response.data.user;
