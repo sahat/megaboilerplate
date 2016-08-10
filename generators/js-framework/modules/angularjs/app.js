@@ -14,16 +14,19 @@ angular.module('MyApp', ['ngRoute'<%= satellizer %>])
       .when('/login', {
         templateUrl: 'partials/login.html',
         controller: 'LoginCtrl',
+        controllerAs: 'login',
         resolve: { skipIfAuthenticated: skipIfAuthenticated }
       })
       .when('/signup', {
         templateUrl: 'partials/signup.html',
         controller: 'SignupCtrl',
+        controllerAs: 'signUp',
         resolve: { skipIfAuthenticated: skipIfAuthenticated }
       })
       .when('/account', {
         templateUrl: 'partials/profile.html',
         controller: 'ProfileCtrl',
+        controllerAs: 'profile',
         resolve: { loginRequired: loginRequired }
       })
       .when('/forgot', {

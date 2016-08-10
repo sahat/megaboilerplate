@@ -1,4 +1,4 @@
-<ul ng-if="isAuthenticated()" class="nav navbar-nav navbar-right">
+<ul ng-if="header.isAuthenticated()" class="nav navbar-nav navbar-right">
   <li class="dropdown">
     <a href="#" data-toggle="dropdown" class="navbar-avatar dropdown-toggle">
       <img ng-src="{{currentUser.picture || currentUser.gravatar}}"> {{currentUser.name || currentUser.email || currentUser.id}} <i class="caret"></i>
@@ -10,7 +10,7 @@
     </ul>
   </li>
 </ul>
-<ul ng-if="!isAuthenticated()" class="nav navbar-nav navbar-right">
-  <li ng-class="{ active: isActive('/login')}"><a href="/login">Log in</a></li>
-  <li ng-class="{ active: isActive('/signup')}"><a href="/signup">Sign up</a></li>
+<ul ng-if="!header.isAuthenticated()" class="nav navbar-nav navbar-right">
+  <li ng-class="{ active: header.isActive('/login')}"><a href="/login">Log in</a></li>
+  <li ng-class="{ active: header.isActive('/signup')}"><a href="/signup">Sign up</a></li>
 </ul>

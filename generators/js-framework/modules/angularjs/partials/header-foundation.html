@@ -1,4 +1,4 @@
-<div ng-controller="HeaderCtrl" class="top-bar">
+<div ng-controller="HeaderCtrl as header" class="top-bar">
   <div class="top-bar-title">
     <span data-responsive-toggle="responsive-menu" data-hide-for="medium">
       <span class="menu-icon light" data-toggle></span>
@@ -8,8 +8,8 @@
   <div id="responsive-menu">
     <div class="top-bar-left">
       <ul class="vertical medium-horizontal menu">
-        <li><a href="/" ng-class="{ active: isActive('/')}">Home</a></li>
-        <li><a href="/contact" ng-class="{ active: isActive('/contact')}">Contact</a></li>
+        <li><a href="/" ng-class="{ active: header.isActive('/')}">Home</a></li>
+        <li><a href="/contact" ng-class="{ active: header.isActive('/contact')}">Contact</a></li>
       </ul>
     </div>
     //= HEADER_AUTH
