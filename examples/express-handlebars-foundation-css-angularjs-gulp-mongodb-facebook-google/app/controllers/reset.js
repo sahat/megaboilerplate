@@ -1,6 +1,8 @@
 angular.module('MyApp')
   .controller('ResetCtrl', function($scope, Account) {
-    Account.forgotPassword($scope.user)
+    
+    $scope.resetPassword = function() {
+      Account.forgotPassword($scope.user)
       .then(function(response) {
         $scope.messages = {
           success: [response.data]
@@ -11,4 +13,6 @@ angular.module('MyApp')
           error: Array.isArray(response.data) ? response.data : [response.data]
         };
       });
+    }
+    
   });
