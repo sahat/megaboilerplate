@@ -1,18 +1,18 @@
 <div class="container login-container">
   <div class="panel">
     <div class="panel-body">
-      <div ng-if="messages.error" role="alert" class="alert alert-danger">
-        <div ng-repeat="error in messages.error">{{error.msg}}</div>
+      <div ng-if="login.messages.error" role="alert" class="alert alert-danger">
+        <div ng-repeat="error in login.messages.error">{{error.msg}}</div>
       </div>
-      <form ng-submit="login()">
+      <form ng-submit="login.login()">
         <legend>Log In</legend>
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="email" name="email" id="email" placeholder="Email" class="form-control" ng-model="user.email" autofocus>
+          <input type="email" name="email" id="email" placeholder="Email" class="form-control" ng-model="login.user.email" autofocus>
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" name="password" id="password" placeholder="Password" class="form-control" ng-model="user.password">
+          <input type="password" name="password" id="password" placeholder="Password" class="form-control" ng-model="login.user.password">
         </div>
         <div class="form-group"><a href="/forgot"><strong>Forgot your password?</strong></a></div>
         <button type="submit" class="btn btn-success">Log in</button>

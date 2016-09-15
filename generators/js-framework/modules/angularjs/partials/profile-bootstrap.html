@@ -1,53 +1,53 @@
 <div class="container">
   <div class="panel">
     <div class="panel-body">
-      <div ng-if="messages.error" role="alert" class="alert alert-danger">
-        <div ng-repeat="error in messages.error">{{error.msg}}</div>
+      <div ng-if="profile.messages.error" role="alert" class="alert alert-danger">
+        <div ng-repeat="error in profile.messages.error">{{error.msg}}</div>
       </div>
-      <div ng-if="messages.success" role="alert" class="alert alert-success">
-        <div ng-repeat="success in messages.success">{{success.msg}}</div>
+      <div ng-if="profile.messages.success" role="alert" class="alert alert-success">
+        <div ng-repeat="success in profile.messages.success">{{success.msg}}</div>
       </div>
-      <form ng-submit="updateProfile()" class="form-horizontal">
+      <form ng-submit="profile.updateProfile()" class="form-horizontal">
         <legend>Profile Information</legend>
         <div class="form-group">
           <label for="email" class="col-sm-3">Email</label>
           <div class="col-sm-7">
-            <input type="email" name="email" id="email" class="form-control" ng-model="profile.email">
+            <input type="email" name="email" id="email" class="form-control" ng-model="profile.profile.email">
           </div>
         </div>
         <div class="form-group">
           <label for="name" class="col-sm-3">Name</label>
           <div class="col-sm-7">
-            <input type="text" name="name" id="name" class="form-control" ng-model="profile.name">
+            <input type="text" name="name" id="name" class="form-control" ng-model="profile.profile.name">
           </div>
         </div>
         <div class="form-group">
           <label class="col-sm-3">Gender</label>
           <div class="col-sm-4">
             <label class="radio-inline radio col-sm-4">
-              <input type="radio" name="gender" value="male" ng-checked="profile.gender === 'male'"><span>Male</span>
+              <input type="radio" name="gender" value="male" ng-checked="profile.profile.gender === 'male'"><span>Male</span>
             </label>
             <label class="radio-inline col-sm-4">
-              <input type="radio" name="gender" value="female" ng-checked="profile.gender === 'female'"><span>Female</span>
+              <input type="radio" name="gender" value="female" ng-checked="profile.profile.gender === 'female'"><span>Female</span>
             </label>
           </div>
         </div>
         <div class="form-group">
           <label for="location" class="col-sm-3">Location</label>
           <div class="col-sm-7">
-            <input type="text" name="location" id="location" class="form-control" ng-model="profile.location">
+            <input type="text" name="location" id="location" class="form-control" ng-model="profile.profile.location">
           </div>
         </div>
         <div class="form-group">
           <label for="website" class="col-sm-3">Website</label>
           <div class="col-sm-7">
-            <input type="text" name="website" id="website" class="form-control" ng-model="profile.website">
+            <input type="text" name="website" id="website" class="form-control" ng-model="profile.profile.website">
           </div>
         </div>
         <div class="form-group">
           <label class="col-sm-3">Gravatar</label>
           <div class="col-sm-4">
-            <img ng-src="{{profile.gravatar}}" class="profile" width="100" height="100">
+            <img ng-src="{{profile.profile.gravatar}}" class="profile" width="100" height="100">
           </div>
         </div>
         <div class="form-group">
@@ -60,18 +60,18 @@
   </div>
   <div class="panel">
     <div class="panel-body">
-      <form ng-submit="changePassword()" class="form-horizontal">
+      <form ng-submit="profile.changePassword()" class="form-horizontal">
         <legend>Change Password</legend>
         <div class="form-group">
           <label for="password" class="col-sm-3">New Password</label>
           <div class="col-sm-7">
-            <input type="password" name="password" id="password" class="form-control" ng-model="profile.password">
+            <input type="password" name="password" id="password" class="form-control" ng-model="profile.profile.password">
           </div>
         </div>
         <div class="form-group">
           <label for="confirm" class="col-sm-3">Confirm Password</label>
           <div class="col-sm-7">
-            <input type="password" name="confirm" id="confirm" class="form-control" ng-model="profile.confirm">
+            <input type="password" name="confirm" id="confirm" class="form-control" ng-model="profile.profile.confirm">
           </div>
         </div>
         <div class="form-group">
@@ -100,7 +100,7 @@
   </div>
   <div class="panel">
     <div class="panel-body">
-      <form ng-submit="deleteAccount()" class="form-horizontal">
+      <form ng-submit="profile.deleteAccount()" class="form-horizontal">
         <legend>Delete Account</legend>
         <div class="form-group">
           <p class="col-sm-offset-3 col-sm-9">You can delete your account, but keep in mind this action is irreversible.</p>

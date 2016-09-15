@@ -1,10 +1,10 @@
 (function() {
 angular.module('MyApp')
-    .controller('ContactCtrl', ContactCtrl);
+    .controller('ProfileCtrl', ProfileCtrl);
 
-ContactCtrl.$inject = ['$scope', '$rootScope', '$location', '$window', '$auth', 'Account'];
+ProfileCtrl.$inject = ['$rootScope', '$location', '$window', '$auth', 'Account'];
 
-function ContactCtrl($scope, $rootScope, $location, $window, $auth, Account) {
+function ProfileCtrl($rootScope, $location, $window, $auth, Account) {
     var ctrl = this;
     ctrl.updateProfile = updateProfile;
     ctrl.changePassword = changePassword;
@@ -12,33 +12,33 @@ function ContactCtrl($scope, $rootScope, $location, $window, $auth, Account) {
     ctrl.unlink = unlink;
     ctrl.deleteAccount = deleteAccount;
     ctrl.unlink = unlink;
-    $scope.profile = $rootScope.currentUser;
+    ctrl.profile = $rootScope.currentUser;
 
     function updateProfile() {
-        Account.updateProfile($scope.profile)
+        Account.updateProfile(ctrl.profile)
           .then(function(response) {
             $rootScope.currentUser = response.data.user;
             $window.localStorage.user = JSON.stringify(response.data.user);
-            $scope.messages = {
+            ctrl.messages = {
               success: [response.data]
             };
           })
           .catch(function(response) {
-            $scope.messages = {
+            ctrl.messages = {
               error: Array.isArray(response.data) ? response.data : [response.data]
             };
           });
     }
 
     function changePassword() {
-        Account.changePassword($scope.profile)
+        Account.changePassword(ctrl.profile)
           .then(function(response) {
-            $scope.messages = {
+            ctrl.messages = {
               success: [response.data]
             };
           })
           .catch(function(response) {
-            $scope.messages = {
+            ctrl.messages = {
               error: Array.isArray(response.data) ? response.data : [response.data]
             };
           });
@@ -47,13 +47,13 @@ function ContactCtrl($scope, $rootScope, $location, $window, $auth, Account) {
     function link(provider) {
         $auth.link(provider)
           .then(function(response) {
-            $scope.messages = {
+            ctrl.messages = {
               success: [response.data]
             };
           })
           .catch(function(response) {
             $window.scrollTo(0, 0);
-            $scope.messages = {
+            ctrl.messages = {
               error: [response.data]
             };
           });
@@ -62,19 +62,19 @@ function ContactCtrl($scope, $rootScope, $location, $window, $auth, Account) {
     function unlink(provider) {
         $auth.unlink(provider)
           .then(function() {
-            $scope.messages = {
+            ctrl.messages = {
               success: [response.data]
             };
           })
           .catch(function(response) {
-            $scope.messages = {
+            ctrl.messages = {
               error: [response.data]
             };
           });
     }
 
     function deleteAccount() {
-        $scope.deleteAccount = function() {
+        ctrl.deleteAccount = function() {
           Account.deleteAccount()
             .then(function() {
               $auth.logout();
@@ -82,7 +82,7 @@ function ContactCtrl($scope, $rootScope, $location, $window, $auth, Account) {
               $location.path('/');
             })
             .catch(function(response) {
-              $scope.messages = {
+              ctrl.messages = {
                 error: [response.data]
               };
             });
