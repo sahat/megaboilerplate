@@ -48,7 +48,7 @@ class BuildTool extends React.Component {
     if (props.buildTool && props.buildTool === 'none' && props.jsFramework === 'react') {
       reactNote = (
         <p>
-          <img className="info-icon" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/info.svg" alt="Note"/>
+          <img className="info-icon" src="http://megaboilerplate.com/img/svg/info.svg" alt="Note"/>
           <span>React <a href="https://www.smashingmagazine.com/2015/04/react-to-the-future-with-isomorphic-apps/#isomorphic-javascript" target="_blank">server-side rendering</a> is enabled only when using a build tool.</span>
         </p>
       );
@@ -61,7 +61,7 @@ class BuildTool extends React.Component {
         case 'sass':
           cssPreprocessorNote = (
             <div>
-              <img className="info-icon" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/info.svg" alt="Note"/>
+              <img className="info-icon" src="http://megaboilerplate.com/img/svg/info.svg" alt="Note"/>
               <span>Sass will be compiled via <a href="https://github.com/sass/node-sass-middleware" target="_blank">node-sass-middleware</a> package.</span>
             </div>
           );
@@ -69,7 +69,7 @@ class BuildTool extends React.Component {
         case 'less':
           cssPreprocessorNote = (
             <div>
-              <img className="info-icon" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/info.svg" alt="Note"/>
+              <img className="info-icon" src="http://megaboilerplate.com/img/svg/info.svg" alt="Note"/>
               <span>LESS will be compiled via <a href="https://github.com/emberfeather/less.js-middleware" target="_blank">less.js-middleware</a> package.</span>
             </div>
           );
@@ -77,7 +77,7 @@ class BuildTool extends React.Component {
         case 'postcss':
           cssPreprocessorNote = (
             <div>
-              <img className="info-icon" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/info.svg" alt="Note"/>
+              <img className="info-icon" src="http://megaboilerplate.com/img/svg/info.svg" alt="Note"/>
               <span>PostCSS will be compiled via <a href="https://github.com/jedmao/postcss-middleware" target="_blank">postcss-middleware</a> package.</span>
             </div>
           );
@@ -85,7 +85,7 @@ class BuildTool extends React.Component {
         case 'stylus':
           cssPreprocessorNote = (
             <div>
-              <img className="info-icon" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/info.svg" alt="Note"/>
+              <img className="info-icon" src="http://megaboilerplate.com/img/svg/info.svg" alt="Note"/>
               <span>Stylus will be compiled via <a href="https://github.com/dogancelik/express-stylus" target="_blank">express-stylus</a> package.</span>
             </div>
           );
@@ -103,13 +103,13 @@ class BuildTool extends React.Component {
 
     const recommended = props.beginner ? (
       <span className="hint--top hint--rounded" data-hint="Recommended">
-        <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/recommended.svg" alt="Recommended" />
+        <img src="http://megaboilerplate.com/img/svg/recommended.svg" alt="Recommended" />
       </span>
     ) : null;
 
     const noneRadio = NO_FRAMEWORK || ANGULARJS ? (
       <label className="radio-inline">
-        <img className="btn-logo" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/none.png" alt="None"/>
+        <img className="btn-logo" src="http://megaboilerplate.com/img/svg/none.png" alt="None"/>
         <input type="radio" name="buildToolRadios" value="none" onChange={props.handleChange} checked={props.buildTool === 'none'}/>
         <span>None</span>
       </label>
@@ -117,7 +117,7 @@ class BuildTool extends React.Component {
 
     const gulpRadio = !CSS || ANGULARJS || REACT ? (
       <label className="radio-inline">
-        <img className="btn-logo" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/gulp-logo.svg" alt="Gulp + Browserify"/>
+        <img className="btn-logo" src="http://megaboilerplate.com/img/svg/gulp-logo.svg" alt="Gulp + Browserify"/>
         <input type="radio" name="buildToolRadios" value="gulp" onChange={props.handleChange} checked={props.buildTool === 'gulp'}/>
         <span>Gulp + Browserify</span>
       </label>
@@ -125,7 +125,7 @@ class BuildTool extends React.Component {
 
     const webpackRadio =  REACT ? (
       <label className="radio-inline">
-        <img className="btn-logo" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/webpack-logo.svg" alt="Webpack"/>
+        <img className="btn-logo" src="http://megaboilerplate.com/img/svg/webpack-logo.svg" alt="Webpack"/>
         <input type="radio" name="buildToolRadios" value="webpack" onChange={props.handleChange} checked={props.buildTool === 'webpack'}/>
         <span>Webpack</span>
       </label>
@@ -133,7 +133,7 @@ class BuildTool extends React.Component {
 
     const npmRadio = !ANGULARJS && (!CSS || !POSTCSS || REACT) ? (
       <label className="radio-inline">
-        <img className="btn-logo" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/npm-logo.svg" alt="NPM"/>
+        <img className="btn-logo" src="http://megaboilerplate.com/img/svg/npm-logo.svg" alt="NPM"/>
         <input type="radio" name="buildToolRadios" value="npm" onChange={props.handleChange} checked={props.buildTool === 'npm'}/>
         <span>NPM</span>
         {recommended}

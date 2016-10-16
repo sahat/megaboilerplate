@@ -616,7 +616,7 @@ class Home extends React.Component {
               <input type="text" ref="downloadLinkInput" onClick={this.handleClickDownloadLink.bind(this)} className="form-control" defaultValue={state.downloadLinkInputValue} readOnly/>
                 <span className="input-group-btn">
                   <button onClick={this.copyDownloadLink.bind(this)} onMouseOut={this.copyDownloadLinkMouseOut.bind(this)} className="btn btn-default hint--bottom hint--rounded" type="button" data-hint={this.state.copyClipboardText}>
-                    <img className="clipboard" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/clippy.svg" width="13" alt="Copy to clipboard"/>
+                    <img className="clipboard" src="http://megaboilerplate.com/img/svg/clippy.svg" width="13" alt="Copy to clipboard"/>
                   </button>
                 </span>
             </div>
@@ -691,7 +691,7 @@ class Home extends React.Component {
               <div className="modal-body">
                 <a href="http://megaboilerplate-demo1.azurewebsites.net/" className="demo-container demo1" target="_blank">
                   <p><span><strong>Demo 1</strong> - Traditional Express web app</span>
-                    <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/recommended.svg" alt="Recommended"/>
+                    <img src="http://megaboilerplate.com/img/svg/recommended.svg" alt="Recommended"/>
                   </p>
                   <span className="text-normal">Node - Jade - Bootstrap - Sass - Mocha - MongoBD - Facebook - Google - Twitter - VK</span>
                 </a>
