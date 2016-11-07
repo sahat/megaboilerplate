@@ -31,7 +31,7 @@ class Platform extends React.Component {
         <div className="panel-body">
           <div className="radio-group">
             <label className="radio-inline">
-              <img className="btn-logo" src="/megaboilerplate/img/svg/node-logo.svg" alt="Node.js"/>
+              <img className="btn-logo" src="/img/svg/node-logo.svg" alt="Node.js"/>
               <input type="radio"
                      id="nodeRadio"
                      name="platformRadios"
