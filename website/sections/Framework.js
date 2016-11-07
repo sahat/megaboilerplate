@@ -46,7 +46,7 @@ class Framework extends React.Component {
 
     const recommended = props.beginner ? (
       <span className="hint--top hint--rounded" data-hint="Recommended">
-        <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/recommended.svg" alt="Recommended" />
+        <img src="/img/svg/recommended.svg" alt="Recommended" />
       </span>
     ) : null;
 
@@ -74,7 +74,7 @@ class Framework extends React.Component {
     const additionalOptionsButton = props.framework === 'express' ? (
       <div>
         <span className="options" onClick={this.toggleAdditionalOptions}>
-          <img className={cx('animated', { fast: state.showOptions })} src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/options.svg"/>
+          <img className={cx('animated', { fast: state.showOptions })} src="/img/svg/options.svg"/>
           <span>Express Options</span>
         </span>
         {additionalOptions}
@@ -84,13 +84,13 @@ class Framework extends React.Component {
     const nodeFrameworks = props.platform === 'node' ? (
       <div className="radio-group">
         <label className="radio-inline">
-          <img className="btn-logo express" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/express-logo.png" alt="Express"/>
+          <img className="btn-logo express" src="/img/svg/express-logo.png" alt="Express"/>
           <input type="radio" id="expressRadio" name="frameworkRadios" value="express" onChange={props.handleChange} checked={props.framework === 'express'}/>
           <span>Express</span>
           {recommended}
         </label>
         <label className="radio-inline hint--top hint--rounded" data-hint="Coming soon">
-          <img className="btn-logo disabled" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/meteor-logo.png" alt="Meteor"/>
+          <img className="btn-logo disabled" src="/img/svg/meteor-logo.png" alt="Meteor"/>
           <input type="radio" name="frameworkRadios" value="meteor" disabled/>
           <span>Meteor</span>
         </label>

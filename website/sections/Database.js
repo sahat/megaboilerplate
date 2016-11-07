@@ -56,7 +56,7 @@ class Database extends React.Component {
 
     const recommended = props.beginner ? (
       <span className="hint--top hint--rounded" data-hint="Recommended">
-        <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/recommended.svg" alt="Recommended" />
+        <img src="/img/svg/recommended.svg" alt="Recommended" />
       </span>
     ) : null;
 
@@ -81,36 +81,31 @@ class Database extends React.Component {
           {description}
           <div className="radio-group">
             <label className="radio-inline">
-              <img className="btn-logo" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/none.png" alt="None" />
+              <img className="btn-logo" src="/img/svg/none.png" alt="None" />
               <input type="radio" name="databaseRadios" value="none" onChange={props.handleChange} checked={props.database === 'none'} />
               <span>None</span>
             </label>
             <label className="radio-inline">
-              <img className="btn-logo" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/mongodb-logo.svg" alt="MongoDB" />
+              <img className="btn-logo" src="/img/svg/mongodb-logo.svg" alt="MongoDB" />
               <input type="radio" name="databaseRadios" value="mongodb" onChange={props.handleChange} checked={props.database === 'mongodb'} />
               <span>MongoDB</span>
               {recommended}
             </label>
             <label className="radio-inline">
-              <img className="btn-logo" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/mysql-logo.svg" alt="MySQL" />
+              <img className="btn-logo" src="/img/svg/mysql-logo.svg" alt="MySQL" />
               <input type="radio" name="databaseRadios" value="mysql" onChange={props.handleChange} checked={props.database === 'mysql'} />
               <span>MySQL</span>
             </label>
             <label className="radio-inline">
-              <img className="btn-logo" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/postgresql-logo.svg" alt="PostgreSQL" />
+              <img className="btn-logo" src="/img/svg/postgresql-logo.svg" alt="PostgreSQL" />
               <input type="radio" name="databaseRadios" value="postgresql" onChange={props.handleChange} checked={props.database === 'postgresql'} />
               <span>PostgreSQL</span>
             </label>
             <label className="radio-inline">
-              <img className="btn-logo" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/sqlite-logo.svg" alt="SQLite3" />
+              <img className="btn-logo" src="/img/svg/sqlite-logo.svg" alt="SQLite3" />
               <input type="radio" name="databaseRadios" value="sqlite" onChange={props.handleChange} checked={props.database === 'sqlite'} />
               <span>SQLite</span>
             </label>
-            {/*<label className="hidden radio-inline hint--top hint--rounded" data-hint="Coming soon">
-              <img className="btn-logo disabled" src="/img/svg/rethinkdb-logo.svg" alt="RethinkDB" />
-              <input type="radio" name="databaseRadios" value="rethinkdb" onChange={props.handleChange} checked={props.database === 'rethinkdb'} disabled />
-              <span>RethinkDB</span>
-            </label>*/}
           </div>
           {validationError}
         </div>

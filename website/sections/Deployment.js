@@ -45,22 +45,22 @@ const Deployment = (props) => {
         {description}
         <div className="radio-group">
           <label className="radio-inline">
-            <img className="btn-logo" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/none.png" alt="None" />
+            <img className="btn-logo" src="/img/svg/none.png" alt="None" />
             <input type="radio" name="deploymentRadios" value="none" onChange={props.handleChange} checked={props.deployment === 'none'} />
             <span>None</span>
           </label>
           <label className="radio-inline">
-            <img className="btn-logo" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/heroku-logo.svg" height="60" alt="Heroku"/>
+            <img className="btn-logo" src="/img/svg/heroku-logo.svg" height="60" alt="Heroku"/>
             <input type="radio" name="deploymentRadios" value="heroku" onChange={props.handleChange} checked={props.deployment === 'heroku'} />
             <span>Heroku</span>
           </label>
           <label className="radio-inline">
-            <img className="btn-logo" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/azure-logo.svg" height="60" alt="Microsoft Azure"/>
+            <img className="btn-logo" src="/img/svg/azure-logo.svg" height="60" alt="Microsoft Azure"/>
             <input type="radio" name="deploymentRadios" value="azure" onChange={props.handleChange} checked={props.deployment === 'azure'} />
             <span>Microsoft Azure</span>
           </label>
           <label className="radio-inline">
-            <img className="btn-logo" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/do-logo.png" alt="Digital Ocean"/>
+            <img className="btn-logo" src="/img/svg/do-logo.png" alt="Digital Ocean"/>
             <input type="radio" name="deploymentRadios" value="digitalOcean" onChange={props.handleChange} checked={props.deployment === 'digitalOcean'} />
             <span>Digital Ocean</span>
           </label>

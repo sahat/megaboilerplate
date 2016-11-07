@@ -45,7 +45,7 @@ class CssFramework extends React.Component {
 
     const recommended = props.beginner ? (
       <span className="hint--top hint--rounded" data-hint="Recommended">
-        <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/recommended.svg" alt="Recommended" />
+        <img src="/img/svg/recommended.svg" alt="Recommended" />
       </span>
     ) : null;
 
@@ -77,18 +77,18 @@ class CssFramework extends React.Component {
           {description}
           <div className="radio-group">
             <label className="radio-inline">
-              <img className="btn-logo" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/none.png" alt="None"/>
+              <img className="btn-logo" src="/img/svg/none.png" alt="None"/>
               <input type="radio" name="cssFrameworkRadios" value="none" onChange={props.handleChange} checked={NO_CSS_FRAMEWORK}/>
               <span>None</span>
             </label>
             <label className="radio-inline">
-              <img className="btn-logo" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/bootstrap-logo.svg" alt="Bootstrap"/>
+              <img className="btn-logo" src="/img/svg/bootstrap-logo.svg" alt="Bootstrap"/>
               <input type="radio" name="cssFrameworkRadios" value="bootstrap" onChange={props.handleChange} checked={BOOTSTRAP}/>
               <span>Bootstrap</span>
               {recommended}
             </label>
             <label className="radio-inline">
-              <img className="btn-logo" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/foundation-logo.png" alt="Foundation"/>
+              <img className="btn-logo" src="/img/svg/foundation-logo.png" alt="Foundation"/>
               <input type="radio" name="cssFrameworkRadios" value="foundation" onChange={props.handleChange} checked={FOUNDATION}/>
               <span>Foundation</span>
             </label>

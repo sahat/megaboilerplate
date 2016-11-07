@@ -47,7 +47,7 @@ class Testing extends React.Component {
 
     const mochaRadio = (
       <label className="radio-inline">
-        <img className="btn-logo" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/mocha.svg" alt="Mocha"/>
+        <img className="btn-logo" src="/img/svg/mocha.svg" alt="Mocha"/>
         <input type="radio" name="testingRadios" value="mocha" onChange={props.handleChange} checked={props.testing === 'mocha'}/>
         <span>Mocha</span>
       </label>
@@ -55,13 +55,13 @@ class Testing extends React.Component {
 
     const jasmineRadio = props.jsFramework === 'angularjs' ? (
       <label className="radio-inline">
-        <img className="btn-logo" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/jasmine.svg" alt="Jasmine"/>
+        <img className="btn-logo" src="/img/svg/jasmine.svg" alt="Jasmine"/>
         <input type="radio" name="testingRadios" value="jasmine" onChange={props.handleChange} checked={props.testing === 'jasmine'}/>
         <span>Jasmine</span>
       </label>
     ) : (
       <label className="radio-inline hint--top hint--rounded" data-hint="Coming soon">
-        <img className="btn-logo disabled" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/jasmine.svg" alt="Jasmine"/>
+        <img className="btn-logo disabled" src="/img/svg/jasmine.svg" alt="Jasmine"/>
         <input type="radio" name="testingRadios" value="jasmine" onChange={props.handleChange} checked={props.testing === 'jasmine'} disabled/>
         <span>Jasmine</span>
       </label>
@@ -88,7 +88,7 @@ class Testing extends React.Component {
           {description}
           <div className="radio-group">
             <label className="radio-inline">
-              <img className="btn-logo" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/none.png" alt="None"/>
+              <img className="btn-logo" src="/img/svg/none.png" alt="None"/>
               <input type="radio" name="testingRadios" value="none" onChange={props.handleChange} checked={props.testing === 'none'}/>
               <span>None</span>
             </label>

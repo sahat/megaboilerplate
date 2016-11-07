@@ -38,7 +38,7 @@ class Authentication extends React.Component {
           <span>Email</span>
         </label>
         <label className="checkbox-inline">
-          <img className="btn-logo" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/facebook-logo.svg" alt="Facebook" />
+          <img className="btn-logo" src="/img/svg/facebook-logo.svg" alt="Facebook" />
           <input type="checkbox" name="authenticationCheckboxes" value="facebook" onChange={props.handleChange} checked={props.authentication && props.authentication.has('facebook')}  />
           <span>Facebook</span>
         </label>

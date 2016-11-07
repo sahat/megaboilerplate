@@ -25,24 +25,24 @@ class TemplateEngine extends React.Component {
 
     let recommended = props.beginner ? (
       <span className="hint--top hint--rounded" data-hint="Recommended">
-        <img src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/recommended.svg" alt="Recommended" />
+        <img src="/img/svg/recommended.svg" alt="Recommended" />
       </span>
     ) : null;
 
     const nodeTemplateEngines = (props.platform === 'node') ? (
       <div className="radio-group">
         <label className="radio-inline">
-          <img className="btn-logo" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/jade-logo.svg" height="60" alt="Jade"/>
+          <img className="btn-logo" src="/img/svg/jade-logo.svg" height="60" alt="Jade"/>
           <input type="radio" name="templateEngineRadios" value="jade" onChange={props.handleChange} checked={props.templateEngine === 'jade'}/>
           <span>Jade</span>
         </label>
         <label className="radio-inline">
-          <img className="btn-logo" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/handlebars-logo.svg" alt="Handlebars"/>
+          <img className="btn-logo" src="/img/svg/handlebars-logo.svg" alt="Handlebars"/>
           <input type="radio" name="templateEngineRadios" value="handlebars" onChange={props.handleChange} checked={props.templateEngine === 'handlebars'}/>
           <span>Handlebars</span>
         </label>
         <label className="radio-inline">
-          <img className="btn-logo" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/nunjucks-logo.png" alt="Nunjucks"/>
+          <img className="btn-logo" src="/img/svg/nunjucks-logo.png" alt="Nunjucks"/>
           <input type="radio" name="templateEngineRadios" value="nunjucks" onChange={props.handleChange} checked={props.templateEngine === 'nunjucks'}/>
           <span>Nunjucks</span>
           {recommended}

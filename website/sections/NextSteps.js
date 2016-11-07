@@ -80,7 +80,7 @@ const NextSteps = (props) => {
           <VelocityComponent runOnMount animation="transition.slideUpIn" duration={900} delay={1500}>
             <div className="col-xs-4" style={{ opacity: 0 }}>
               <div className="text-center">
-                <img className="next-steps-icon" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/rocket.svg" alt="Getting Started"/>
+                <img className="next-steps-icon" src="/img/svg/rocket.svg" alt="Getting Started"/>
                 <p dangerouslySetInnerHTML={{ __html: gettingStartedText }}/>
               </div>
             </div>
@@ -88,7 +88,7 @@ const NextSteps = (props) => {
           <VelocityComponent runOnMount animation="transition.slideUpIn" duration={900} delay={1800}>
             <div className="col-xs-4 separator" style={{ opacity: 0 }}>
               <div className="text-center">
-                <img className="next-steps-icon" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/learn.svg" alt="Learn"/>
+                <img className="next-steps-icon" src="/img/svg/learn.svg" alt="Learn"/>
                 <p dangerouslySetInnerHTML={{ __html: learningText }}/>
               </div>
             </div>
@@ -96,7 +96,7 @@ const NextSteps = (props) => {
           <VelocityComponent runOnMount animation="transition.slideUpIn" duration={900} delay={2100}>
             <div className="col-xs-4" style={{ opacity: 0 }}>
               <div className="text-center">
-                <img className="next-steps-icon" src="https://megaboilerplate.blob.core.windows.net/megaboilerplate/img/svg/faq.svg" alt="FAQ"/>
+                <img className="next-steps-icon" src="/img/svg/faq.svg" alt="FAQ"/>
                 <p>
                   See <a href="https://github.com/sahat/megaboilerplate#faq" target="_blank">FAQ</a> before <a href="https://github.com/sahat/megaboilerplate/issues/new" target="_blank">opening an issue</a> on GitHub. For general questions, please visit the <a href="https://gitter.im/sahat/megaboilerplate" target="_blank">official Gitter chat</a>.
                 </p>
