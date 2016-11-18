@@ -46,9 +46,9 @@ app.use(expressValidator());
 //= SESSION_MIDDLEWARE
 //= PASSPORT_MIDDLEWARE
 //= USER_HELPER_MIDDLEWARE
-app.use(express.static(path.join(__dirname, 'public')));
 //= IS_AUTHENTICATED_MIDDLEWARE
 //= WEBPACK_MIDDLEWARE
+app.use(express.static(path.join(__dirname, 'public')));
 
 //= HOME_ROUTE
 //= CONTACT_ROUTE
