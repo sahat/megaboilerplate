@@ -1,5 +1,6 @@
 import haikunate from 'haikunator';
 import React from 'react';
+import swal from 'sweetalert2';
 import Header from './Header';
 import Footer from './Footer';
 import Platform from './sections/Platform';
@@ -29,9 +30,6 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
-    // require it here to avoid "window is not defined" error during server-side rendering
-    const swal = require('sweetalert');
-
     try {
       const disableAutoScroll = localStorage.getItem('disableAutoScroll');
       this.setState({
@@ -182,9 +180,8 @@ class Home extends React.Component {
         const body = encodeURIComponent('\n##### :boom: Error Stack Trace\n' + '\`\`\`js\n' + jqXHR.responseJSON.stack + '\n\`\`\`');
         swal({
           title: 'Server Error',
-          text: `${jqXHR.responseJSON.message}<br><strong><a href='https://github.com/sahat/megaboilerplate/issues/new?title=${title}&body=${body}' target="_blank">Report a bug</a></strong>`,
-          type: 'error',
-          html: true
+          html: `${jqXHR.responseJSON.message}<br><strong><a href='https://github.com/sahat/megaboilerplate/issues/new?title=${title}&body=${body}' target="_blank">Report a bug</a></strong>`,
+          type: 'error'
         });
       });
     } else {
@@ -212,9 +209,8 @@ class Home extends React.Component {
         const body = encodeURIComponent('\n##### :boom: Error Stack Trace\n' + '\`\`\`js\n' + jqXHR.responseJSON.stack + '\n\`\`\`');
         swal({
           title: 'Server Error',
-          text: `${jqXHR.responseJSON.message}<br><strong><a href='https://github.com/sahat/megaboilerplate/issues/new?title=${title}&body=${body}' target="_blank">Report a bug</a></strong>`,
-          type: 'error',
-          html: true
+          html: `${jqXHR.responseJSON.message}<br><strong><a href='https://github.com/sahat/megaboilerplate/issues/new?title=${title}&body=${body}' target="_blank">Report a bug</a></strong>`,
+          type: 'error'
         });
         this.setState({ isDownloadLoading: false });
       });

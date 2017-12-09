@@ -50,7 +50,7 @@
     "react-transform-hmr": "^1.0.4",
     "redbox-react": "^1.3.0",
     "shortid": "^2.2.6",
-    "sweetalert": "^1.1.3",
+    "sweetalert2": "^7.0.9",
     "traverse": "^0.6.6",
     "velocity": "^0.7.2",
     "velocity-react": "^1.1.5",
