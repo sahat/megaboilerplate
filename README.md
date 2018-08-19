@@ -1,14 +1,7 @@
-# <a href="http://megaboilerplate.com"><img src="http://i.imgur.com/UNyLl3s.png" height="60"></a> 
+<img src="http://i.imgur.com/UNyLl3s.png" height="60">
  
-[![PayPal Donate](https://img.shields.io/badge/donate-PayPal-0070ba.svg?style=flat)](https://paypal.me/sahat)
-[![OpenCollective](https://opencollective.com/megaboilerplate/backers/badge.svg)](#backers) 
-[![OpenCollective](https://opencollective.com/megaboilerplate/sponsors/badge.svg)](#sponsors)
 [![Gitter](https://badges.gitter.im/sahat/megaboilerplate.svg)](https://gitter.im/sahat/megaboilerplate)
 [![Build Status](https://travis-ci.org/sahat/megaboilerplate.svg?branch=master)](https://travis-ci.org/sahat/megaboilerplate)
-[![Codementor](https://cdn.codementor.io/badges/get_help_github.svg)](https://www.codementor.io/sahatyalkabov)
-
-
-**Live Demo**: **http://megaboilerplate.com**
 
 Mega Boilerplate is a starter project generator that focuses on simplicity and ease of use, while providing you with flexibility of choices. It was heavily inspired by the [Hackathon Starter](https://github.com/sahat/hackathon-starter), but unlike it, you can customize any part of your application stack — from web framework and database to CSS preprocessor and client-side JavaScript framework. Currently, generators are primarily limited to Node.js web apps, but I am planning to expand support for other platforms and languages in the near future.
 
