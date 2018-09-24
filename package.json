@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "archiver": "^1.1.0",
-    "aws-sdk": "^2.6.2",
+    "aws-sdk": "^2.320.0",
     "azure-storage": "^2.10.1",
     "babel-core": "^6.14.0",
     "babel-eslint": "^6.1.2",
@@ -38,13 +38,14 @@
     "morgan": "^1.7.0",
     "node-schedule": "^1.1.1",
     "nunjucks": "^2.5.2",
-    "pm2": "^3.1.2",
+    "pm2": "^3.1.3",
     "postcss-cssnext": "^2.8.0",
     "postcss-import": "^8.1.2",
     "postcss-middleware": "^1.1.2",
     "raw-loader": "^0.5.1",
-    "react": "^15.3",
-    "react-dom": "15.3",
+    "react": "^15.6.2",
+    "react-dom": "^15.6.2",
+    "react-redux": "^5.0.7",
     "react-router": "^2.8.1",
     "react-transform-catch-errors": "^1.0.2",
     "react-transform-hmr": "^1.0.4",
@@ -56,7 +57,7 @@
     "velocity-react": "^1.1.5",
     "webpack": "^1.13.2",
     "webpack-dev-middleware": "^1.7.0",
-    "webpack-hot-middleware": "^2.12.2"
+    "webpack-hot-middleware": "^2.24.2"
   },
   "babel": {
     "presets": [
