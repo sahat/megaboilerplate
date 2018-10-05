@@ -180,12 +180,23 @@ export default async function generateCssFrameworkBootstrap(params) {
     set(params.build, ['public', 'js', 'lib', 'bootstrap.js'], await getModule('css-framework/bootstrap/js/bootstrap.js'));
     set(params.build, ['public', 'js', 'lib', 'jquery.js'], await getModule('css-framework/jquery/jquery.js'));
   }
+  
+  if (params.cssPreprocessor == 'sass') {
+	set(params.build, ['public', 'fonts', 'bootstrap', 'glyphicons-halflings-regular.eot'], await getModule('css-framework/bootstrap/fonts//glyphicons-halflings-regular.eot'));
+	set(params.build, ['public', 'fonts', 'bootstrap', 'glyphicons-halflings-regular.svg'], await getModule('css-framework/bootstrap/fonts//glyphicons-halflings-regular.svg'));
+	set(params.build, ['public', 'fonts', 'bootstrap', 'glyphicons-halflings-regular.ttf'], await getModule('css-framework/bootstrap/fonts//glyphicons-halflings-regular.ttf'));
+	set(params.build, ['public', 'fonts', 'bootstrap', 'glyphicons-halflings-regular.woff'], await getModule('css-framework/bootstrap/fonts//glyphicons-halflings-regular.woff'));
+	set(params.build, ['public', 'fonts', 'bootstrap', 'glyphicons-halflings-regular.woff2'], await getModule('css-framework/bootstrap/fonts//glyphicons-halflings-regular.woff2'));  
+  }
+  else{
+	set(params.build, ['public', 'fonts', 'glyphicons-halflings-regular.eot'], await getModule('css-framework/bootstrap/fonts//glyphicons-halflings-regular.eot'));
+	set(params.build, ['public', 'fonts', 'glyphicons-halflings-regular.svg'], await getModule('css-framework/bootstrap/fonts//glyphicons-halflings-regular.svg'));
+	set(params.build, ['public', 'fonts', 'glyphicons-halflings-regular.ttf'], await getModule('css-framework/bootstrap/fonts//glyphicons-halflings-regular.ttf'));
+	set(params.build, ['public', 'fonts', 'glyphicons-halflings-regular.woff'], await getModule('css-framework/bootstrap/fonts//glyphicons-halflings-regular.woff'));
+	set(params.build, ['public', 'fonts', 'glyphicons-halflings-regular.woff2'], await getModule('css-framework/bootstrap/fonts//glyphicons-halflings-regular.woff2'));  
+  }
 
-  set(params.build, ['public', 'fonts', 'glyphicons-halflings-regular.eot'], await getModule('css-framework/bootstrap/fonts//glyphicons-halflings-regular.eot'));
-  set(params.build, ['public', 'fonts', 'glyphicons-halflings-regular.svg'], await getModule('css-framework/bootstrap/fonts//glyphicons-halflings-regular.svg'));
-  set(params.build, ['public', 'fonts', 'glyphicons-halflings-regular.ttf'], await getModule('css-framework/bootstrap/fonts//glyphicons-halflings-regular.ttf'));
-  set(params.build, ['public', 'fonts', 'glyphicons-halflings-regular.woff'], await getModule('css-framework/bootstrap/fonts//glyphicons-halflings-regular.woff'));
-  set(params.build, ['public', 'fonts', 'glyphicons-halflings-regular.woff2'], await getModule('css-framework/bootstrap/fonts//glyphicons-halflings-regular.woff2'));
+  
 
   const htmlJsImport = params.cssPreprocessorOptions.includes('minifiedCss') ?
     await getModule('css-framework/bootstrap/html-js-min-import.html') :
