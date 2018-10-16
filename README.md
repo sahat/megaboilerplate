@@ -389,80 +389,85 @@ Obtaining API Keys
 
 To use any of the included OAuth providers (e.g. Facebook, Twitter, Google), you will need to obtain API keys. I have included "throw-away" API keys for all OAuth providers to get you up and running quickly, but be sure to update them with your own keys.
 
-<img src="http://www.doit.ba/img/facebook.jpg" width="200">
-- Go to [Facebook Developers](https://developers.facebook.com/).
-- Click on **My Apps** dropdown, then select **Add a New App**.
-- Select **Website** platform, then click on **Skip and Create App ID** button.
-- Enter a **name** and choose a **category** for your app.
-- Click on **Create App ID** button.
-- Copy and paste **App ID** and **App Secret** keys into `.env` file:
- - `FACEBOOK_ID='YOUR_APP_ID'`
- - `FACEBOOK_SECRET='YOUR_APP_SECRET'`
-- Click on the **Settings** tab, then click on **+ Add Platform** button.
-- Select **Website**, then enter `http://localhost:3000/auth/facebook/callback` in the **Site URL**.
+<img src="http://www.doit.ba/img/facebook.jpg" width="200">  
+
+- Go to [Facebook Developers](https://developers.facebook.com/).  
+- Click on **My Apps** dropdown, then select **Add a New App**.  
+- Select **Website** platform, then click on **Skip and Create App ID** button.  
+- Enter a **name** and choose a **category** for your app.  
+- Click on **Create App ID** button.  
+- Copy and paste **App ID** and **App Secret** keys into `.env` file:  
+ - `FACEBOOK_ID='YOUR_APP_ID'`  
+ - `FACEBOOK_SECRET='YOUR_APP_SECRET'`  
+- Click on the **Settings** tab, then click on **+ Add Platform** button.  
+- Select **Website**, then enter `http://localhost:3000/auth/facebook/callback` in the **Site URL**.  
 
 **Note**: If you are using React or AngularJS, copy and paste **App Secret** into `.env` file and **App ID** into *app/actions/oauth.js* (React) and *app/app.js* (AngularJS).
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/1000px-Google_2015_logo.svg.png" width="200">
-- Go to [Google Cloud Console](https://cloud.google.com/console/project)
-- Click on **Create project** button.
-- Enter a **Project name**, then click on **Create** button.
-- Click on **Use Google APIs** (Enable and manage APIs) panel.
-- Click on **Credentials** tab in the sidebar.
-- Client on **Create credentials** dropdown, then select **OAuth client ID**.
-- Select or enter the following:
- - **Application type**: `Web application`
- - **Authorized JavaScript origins**: `http://localhost:3000`
- - **Authorized redirect URIs**: `http://localhost:3000/auth/google/callback`
-- Click on **Create** button.
-- Copy and paste **client ID** and **client secret** keys into `.env` file:
-  - `GOOGLE_ID='YOUR_CLIENT_ID'`
-  - `GOOGLE_SECRET='YOUR_CLIENT_SECRET'`
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/1000px-Google_2015_logo.svg.png" width="200">  
+
+- Go to [Google Cloud Console](https://cloud.google.com/console/project)  
+- Click on **Create project** button.  
+- Enter a **Project name**, then click on **Create** button.  
+- Click on **Use Google APIs** (Enable and manage APIs) panel.  
+- Click on **Credentials** tab in the sidebar.  
+- Client on **Create credentials** dropdown, then select **OAuth client ID**.  
+- Select or enter the following:  
+ - **Application type**: `Web application`  
+ - **Authorized JavaScript origins**: `http://localhost:3000`  
+ - **Authorized redirect URIs**: `http://localhost:3000/auth/google/callback`  
+- Click on **Create** button.  
+- Copy and paste **client ID** and **client secret** keys into `.env` file:  
+  - `GOOGLE_ID='YOUR_CLIENT_ID'`  
+  - `GOOGLE_SECRET='YOUR_CLIENT_SECRET'`  
 
 **Note**: If you are using React or AngularJS, copy and paste **client secret** into `.env` file and **client ID** into *app/actions/oauth.js* (React) and *app/app.js* (AngularJS).
 
-<img src="https://g.twimg.com/ios_homescreen_icon.png" width="75">
-- Go to [Twitter Application Management](https://apps.twitter.com/).
-- Click on **Create New App** button.
-- Fill out required fields.
- - **Callback URL**: `http://127.0.0.1:3000/auth/twitter/callback`
-- Go to **Settings** tab.
-- Click on **Allow this application to be used to Sign in with Twitter** checkbox.
-- Click on **Update Settings** button.
-- Go to **Keys and Access Tokens** tab.
-- Copy and paste **Consumer Key** and **Consumer Secret** keys into `.env` file:
- - `TWITTER_ID='YOUR_CONSUMER_KEY'`
- - `TWITTER_SECRET='YOUR_CONSUMER_SECRET'`
+<img src="https://g.twimg.com/ios_homescreen_icon.png" width="75">  
+
+- Go to [Twitter Application Management](https://apps.twitter.com/).  
+- Click on **Create New App** button.  
+- Fill out required fields.  
+ - **Callback URL**: `http://127.0.0.1:3000/auth/twitter/callback`  
+- Go to **Settings** tab.  
+- Click on **Allow this application to be used to Sign in with Twitter** checkbox.  
+- Click on **Update Settings** button.  
+- Go to **Keys and Access Tokens** tab.  
+- Copy and paste **Consumer Key** and **Consumer Secret** keys into `.env` file:  
+ - `TWITTER_ID='YOUR_CONSUMER_KEY'`  
+ - `TWITTER_SECRET='YOUR_CONSUMER_SECRET'`  
 
 **Note**: If you are using React or AngularJS, copy and paste **Consumer Secret** into `.env` file and **Consumer Key** into *app/actions/oauth.js* (React) and *app/app.js* (AngularJS).
 
-<img src="https://cdn2.iconfinder.com/data/icons/social-flat-buttons-3/512/vkontakte-256.png" height="75">
-- Go to [Developers | VK](http://new.vk.com/dev)
-- Click on **Create an Application** button.
-- Enter a **Title** and select a **Category** (Website), then click on **Connect Application** button.
-- Confirm activation code via your mobile number.
-- Click on **Settings** tab in the sidebar.
-- Select or enter the following:
- - **Application status**: `Application on and visible to all`
- - **Site address**: `http://localhost:3000`
- - **Authorized redirect URI**: `http://localhost:3000/auth/vkontakte/callback`
-- Copy and paste **Application ID** and **Secure key** into `.env` file:
- - `VK_ID='YOUR_APPLICATION_ID'`
- - `VK_SECRET='YOUR_SECURE_KEY'`
+<img src="https://cdn2.iconfinder.com/data/icons/social-flat-buttons-3/512/vkontakte-256.png" height="75">  
+
+- Go to [Developers | VK](http://new.vk.com/dev)  
+- Click on **Create an Application** button.  
+- Enter a **Title** and select a **Category** (Website), then click on **Connect Application** button.  
+- Confirm activation code via your mobile number.  
+- Click on **Settings** tab in the sidebar.  
+- Select or enter the following:  
+ - **Application status**: `Application on and visible to all`  
+ - **Site address**: `http://localhost:3000`  
+ - **Authorized redirect URI**: `http://localhost:3000/auth/vkontakte/callback`  
+- Copy and paste **Application ID** and **Secure key** into `.env` file:  
+ - `VK_ID='YOUR_APPLICATION_ID'`  
+ - `VK_SECRET='YOUR_SECURE_KEY'`  
 
 **Note**: If you are using React or AngularJS, copy and paste **Secure key** into `.env` file and **Application ID** into *app/actions/oauth.js* (React) and *app/app.js* (AngularJS).
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/2/24/GitHub_logo_2013_padded.svg" width="200">
-- Go to [Github Developer Applications Settings](https://github.com/settings/developers)
-- Click on **Register a new application** button.
-- Fill out required fields.
- - **Application Name**
- - **Homepage URL**
- - **Callback URL**: `http://127.0.0.1:3000/auth/github/callback`
-- Click on **Register application**
-- Copy and paste **client ID** and **client secret** keys into `.env` file:
-  - `GITHUB_ID='YOUR_CLIENT_ID'`
-  - `GITHUB_SECRET='YOUR_CLIENT_SECRET'`
+<img src="https://upload.wikimedia.org/wikipedia/commons/2/24/GitHub_logo_2013_padded.svg" width="200">  
+
+- Go to [Github Developer Applications Settings](https://github.com/settings/developers)  
+- Click on **Register a new application** button.  
+- Fill out required fields.  
+ - **Application Name**  
+ - **Homepage URL**  
+ - **Callback URL**: `http://127.0.0.1:3000/auth/github/callback`  
+- Click on **Register application**  
+- Copy and paste **client ID** and **client secret** keys into `.env` file:  
+  - `GITHUB_ID='YOUR_CLIENT_ID'`  
+  - `GITHUB_SECRET='YOUR_CLIENT_SECRET'`  
 
 **Note**: If you are using React or AngularJS, copy and paste **client secret** into `.env` file and **client ID** into *app/actions/oauth.js* (React) and *app/app.js* (AngularJS).
 
