@@ -18,7 +18,7 @@
     "express-validator": "^2.20.4",
     "jade": "^1.11.0",
     "method-override": "^2.3.5",
-    "mongoose": "^4.4.8",
+    "mongoose": "^5.7.7",
     "morgan": "^1.7.0",
     "node-sass-middleware": "^0.9.7",
     "nodemailer": "^2.3.0",
