@@ -38,11 +38,13 @@ GEM
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
     erubis (2.7.0)
+    eventmachine (1.2.0.1)
     eventmachine (1.2.0.1-x64-mingw32)
     execjs (2.6.0)
     fast_blank (1.0.0)
     fastimage (1.9.0)
       addressable (~> 2.3.5)
+    ffi (1.9.10)
     ffi (1.9.10-x64-mingw32)
     haml (4.0.7)
       tilt
@@ -100,6 +102,8 @@ GEM
     mini_portile2 (2.0.0)
     minitest (5.8.4)
     multi_json (1.11.2)
+    nokogiri (1.6.7.2)
+      mini_portile2 (~> 2.0.0.rc2)
     nokogiri (1.6.7.2-x64-mingw32)
       mini_portile2 (~> 2.0.0.rc2)
     padrino-helpers (0.13.1)
@@ -109,7 +113,7 @@ GEM
     padrino-support (0.13.1)
       activesupport (>= 3.1)
     parallel (1.8.0)
-    rack (1.6.4)
+    rack (1.6.12)
     rack-livereload (0.3.16)
       rack
     rack-test (0.6.3)
@@ -130,6 +134,7 @@ GEM
       nokogiri (~> 1.3)
 
 PLATFORMS
+  ruby
   x64-mingw32
 
 DEPENDENCIES
