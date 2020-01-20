@@ -13,7 +13,7 @@
     "aws-sdk": "^2.322.0",
     "azure-storage": "^2.10.3",
     "babel-core": "^6.14.0",
-    "babel-eslint": "^6.1.2",
+    "babel-eslint": "^9.0.0",
     "babel-loader": "^6.2.5",
     "babel-plugin-react-transform": "^2.0.2",
     "babel-polyfill": "^6.13.0",
