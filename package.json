@@ -25,7 +25,7 @@
     "brew": "0.0.8",
     "classnames": "^2.2.5",
     "compression": "^1.6.2",
-    "cpy": "^4.0.1",
+    "cpy": "^8.0.0",
     "dotenv": "^8.2.0",
     "eslint": "^3.5.0",
     "eslint-config-airbnb": "^11.1.0",
