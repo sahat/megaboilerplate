@@ -9,7 +9,7 @@
     "postinstall": "npm run build"
   },
   "dependencies": {
-    "archiver": "^1.1.0",
+    "archiver": "^4.0.1",
     "aws-sdk": "^2.606.0",
     "azure-storage": "^2.10.3",
     "babel-core": "^6.14.0",
