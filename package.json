@@ -73,6 +73,6 @@
   "devDependencies": {
     "@architect/sandbox": "^1.10.0",
     "chai": "^3.5.0",
-    "mocha": "^7.0.1"
+    "mocha": "^8.0.1"
   }
 }
